@@ -190,6 +190,8 @@ export type NewsItem = {
 export type NewsCompany = {
   company_id: string;
   name: string;
+  sector?: string | null;
+  ticker?: string | null;
   n_items: number;
   controversy: number;
   positive: number;

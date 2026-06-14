@@ -126,13 +126,14 @@ def load_news(conn) -> dict:
     """Read the latest news snapshot from the DB (used by /api/news)."""
     companies = []
     for n in conn.execute(
-            "SELECT nw.*, u.name AS cname FROM news nw "
+            "SELECT nw.*, u.name AS cname, u.sector AS sector, u.ticker AS ticker FROM news nw "
             "LEFT JOIN universe u ON u.company_id = nw.company_id ORDER BY nw.company_id"):
         cid = n["company_id"]
         heads = [{"title": h["title"], "url": h["url"], "label": h["label"]}
                  for h in conn.execute(
                      "SELECT * FROM news_headlines WHERE company_id=?", (cid,))]
-        companies.append({"company_id": cid, "name": n["cname"] or cid, "n_items": n["n_items"],
+        companies.append({"company_id": cid, "name": n["cname"] or cid,
+                          "sector": n["sector"], "ticker": n["ticker"], "n_items": n["n_items"],
                           "controversy": n["controversy"], "positive": n["positive"],
                           "sentiment": n["sentiment"], "fetched_at": n["fetched_at"],
                           "headlines": heads})
