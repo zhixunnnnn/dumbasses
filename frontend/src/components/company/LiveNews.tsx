@@ -4,6 +4,7 @@ import { api, useApi } from "../../lib/api";
 const LABEL_COLOR: Record<string, string> = {
   controversy: "#ec6a5e",
   positive: "#3ecf8e",
+  stock: "#6ea8fe",
   neutral: "#9a968e",
 };
 

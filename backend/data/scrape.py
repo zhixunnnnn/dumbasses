@@ -64,23 +64,43 @@ def scrape_prices(conn, offline: bool = False) -> int:
 
 _NEWS_JS = """
 () => {
+  // ONLY real Bing News card titles — avoids grabbing 'no results' placeholder text.
   const out = [];
   document.querySelectorAll('a.title').forEach(a => {
-    const t=(a.innerText||'').trim(); if(t) out.push({title:t, url:a.href});
+    const t=(a.innerText||'').trim();
+    if(t && t.length>15) out.push({title:t, url:a.href});
   });
-  if(out.length===0){
-    document.querySelectorAll('a').forEach(a=>{const t=(a.innerText||'').trim();
-      if(t.length>45 && out.length<15) out.push({title:t, url:a.href});});
-  }
-  return out.slice(0,15);
+  return out.slice(0, 20);
 }
 """
 
+_NO_RESULT = ["didn't find", "did not find", "no se han encontrado", "no results",
+              "check your spelling", "n'a trouvé aucun"]
+
+# We keep ONLY company-specific ESG news and stock/market news. Everything else
+# (generic ESG think-pieces, unrelated articles that merely matched the keyword) is dropped.
+_COMPANY_ALIASES = {
+    "U96": ["sembcorp"], "BN4": ["keppel"], "F34": ["wilmar"],
+    "C6L": ["singapore airlines", "sia "], "D05": ["dbs"], "O39": ["ocbc"],
+    "U11": ["uob", "united overseas bank"], "9CI": ["capitaland"],
+    "C09": ["city developments", "cdl"], "Z74": ["singtel", "singapore telecom"],
+}
+
+_ESG_KW = ["esg", "sustainab", "emission", "carbon", "climate", "governance", "renewable",
+           "net zero", "net-zero", "green", "decarbon", "diversity", "controvers",
+           "deforestation", "pollution", "transition", "scope 1", "scope 2", "tcfd"]
+_STOCK_KW = ["stock", "shares", "shareholder", "share price", "earnings", "results", "profit",
+             "revenue", "dividend", "target price", "upgrade", "downgrade", "analyst", "guidance",
+             "quarter", "q1", "q2", "q3", "q4", "outperform", "underperform", "rating",
+             "market cap", "buyback", "valuation", "deal", "stake", "acquisition", "merger",
+             "listed", "sgx:", "ipo"]
+
 _CONTROVERSY = ["lawsuit", "fine", "fined", "probe", "scandal", "deforestation", "breach",
                 "penalt", "violation", "pollution", "spill", "abuse", "greenwash", "sued",
-                "allegation", "investigat", "boycott", "haze"]
-_POSITIVE = ["renewable", "net zero", "net-zero", "decarbon", "green bond", "sustainab",
-             "award", "verified", "solar", "wind", "recycl", "emission", "esg leader", "transition"]
+                "allegation", "investigat", "boycott", "haze", "downgrade", "plunge", "slump"]
+_POSITIVE = ["renewable", "net zero", "net-zero", "decarbon", "green bond", "award", "solar",
+             "wind", "recycl", "verified", "upgrade", "outperform", "record", "wins", "win ",
+             "profit", "growth"]
 
 
 def _log_scrape(conn, source: str, status: str, rows: int) -> None:
@@ -121,13 +141,30 @@ def load_news(conn) -> dict:
             "last_run": log["last_run"] if log else None, "companies": companies}
 
 
-def _classify(title: str) -> str:
+def _relevant_label(title: str, cid: str):
+    """Keep ONLY headlines that (a) actually name the company and (b) are ESG- or
+    stock-topical. Returns the label, or None to DROP (generic/irrelevant noise)."""
     t = title.lower()
+    if any(x in t for x in _NO_RESULT):
+        return None                                   # Bing 'no results' placeholder -> drop
+    if not any(a in t for a in _COMPANY_ALIASES.get(cid, [])):
+        return None                                   # not about this company -> drop
+    is_esg = any(k in t for k in _ESG_KW)
+    is_stock = any(k in t for k in _STOCK_KW)
+    if not (is_esg or is_stock):
+        return None                                   # not ESG/stock related -> drop
     if any(k in t for k in _CONTROVERSY):
         return "controversy"
-    if any(k in t for k in _POSITIVE):
+    if is_esg and any(k in t for k in _POSITIVE):
         return "positive"
+    if is_stock:
+        return "stock"
     return "neutral"
+
+
+def _bing_url(query: str) -> str:
+    from urllib.parse import quote
+    return f"https://www.bing.com/news/search?q={quote(query)}"
 
 
 def scrape_news(conn, offline: bool = False) -> dict:
@@ -135,20 +172,34 @@ def scrape_news(conn, offline: bool = False) -> dict:
     results = []
     for r in rows:
         cid, name = r["company_id"], r["name"]
-        q = f"{name} ESG sustainability controversy".replace(" ", "%20")
-        url = f"https://www.bing.com/news/search?q={q}"
-        items = brightdata.browser_collect("bing_news", cid, url, _NEWS_JS,
-                                           ttl=7 * 86400, offline=offline) or []
-        cls = [{"title": i["title"], "url": i.get("url"), "label": _classify(i["title"])} for i in items]
-        ncon = sum(1 for c in cls if c["label"] == "controversy")
-        npos = sum(1 for c in cls if c["label"] == "positive")
-        sentiment = (npos - ncon)
-        results.append({"company_id": cid, "name": name, "n_items": len(cls),
+        # broad queries for recall; the relevance + topical filter keeps only
+        # company-named ESG / stock headlines.
+        queries = {
+            "esg": f"{name} sustainability",
+            "stock": f"{name} stock earnings results",
+        }
+        kept, seen = [], set()
+        for tag, q in queries.items():
+            items = brightdata.browser_collect("bing_news", f"{cid}_{tag}", _bing_url(q), _NEWS_JS,
+                                               ttl=7 * 86400, offline=offline) or []
+            for it in items:
+                title = (it.get("title") or "").strip()
+                label = _relevant_label(title, cid)
+                if not label:
+                    continue
+                key = title.lower()[:80]
+                if key in seen:
+                    continue
+                seen.add(key)
+                kept.append({"title": title, "url": it.get("url"), "label": label})
+        ncon = sum(1 for c in kept if c["label"] == "controversy")
+        npos = sum(1 for c in kept if c["label"] == "positive")
+        nstk = sum(1 for c in kept if c["label"] == "stock")
+        sentiment = npos - ncon
+        results.append({"company_id": cid, "name": name, "n_items": len(kept),
                         "controversy": ncon, "positive": npos, "sentiment": sentiment,
-                        "headlines": cls[:6]})
-        sample = next((c["title"] for c in cls if c["label"] == "controversy"),
-                      cls[0]["title"] if cls else "—")
-        print(f"  {cid:4} {name:24} items={len(cls):2d} contro={ncon} pos={npos}  e.g. “{sample[:60]}”")
+                        "headlines": kept[:8]})
+        print(f"  {cid:4} {name:24} kept={len(kept):2d} (esg+/-={npos}/{ncon}, stock={nstk})")
     fetched_at = dt.datetime.utcnow().isoformat(timespec="seconds")
     store_news(conn, results, fetched_at)                       # persist in the DB (durable)
     _log_scrape(conn, "news", "ok", sum(r["n_items"] for r in results))

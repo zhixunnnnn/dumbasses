@@ -102,10 +102,12 @@ python -m backend.data.scrape --check     # validate credentials with one reques
 python -m backend.data.scrape --news      # live news/controversy per company (Bing News)
 ```
 
-`--news` pulls real, current headlines via the **Bright Data Scraping Browser** and **persists
-them in the DB** (`news`, `news_headlines`, `scrape_log` tables) — so they survive restarts and
-are **never re-scraped** until the next refresh. They surface as a **Live news signal** panel on
-each company page (marked current, outside the 2019–2023 evidence window). Robots-restricted
+`--news` pulls real, current headlines via the **Bright Data Scraping Browser** (one ESG query +
+one stock/market query per company) and **filters to company-specific ESG and stock news only** —
+anything that doesn't name the company or isn't ESG/stock-topical is dropped. Results are
+**persisted in the DB** (`news`, `news_headlines`, `scrape_log`) so they survive restarts and are
+**never re-scraped** until the next refresh, and surface on the **Live News page** and a per-company
+**Live news signal** panel (marked current, outside the 2019–2023 evidence window). Robots-restricted
 sources (e.g. Yahoo prices) are skipped by design.
 
 ### Weekly refresh (Monday-morning cadence)

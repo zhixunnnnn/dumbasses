@@ -6,6 +6,7 @@ import { useNavigation } from "../../navigation/NavigationContext";
 const LABEL_COLOR: Record<string, string> = {
   controversy: "#ec6a5e",
   positive: "#3ecf8e",
+  stock: "#6ea8fe",
   neutral: "#9a968e",
 };
 
@@ -64,6 +65,9 @@ export default function NewsPage() {
   const totalItems = companies.reduce((s, c) => s + c.n_items, 0);
   const totalControversy = companies.reduce((s, c) => s + c.controversy, 0);
   const totalPositive = companies.reduce((s, c) => s + c.positive, 0);
+  const totalStock = companies.reduce(
+    (s, c) => s + c.headlines.filter((h) => h.label === "stock").length, 0,
+  );
 
   return (
     <div className="mx-auto max-w-[1100px] space-y-5 p-5 md:p-7">
@@ -80,8 +84,9 @@ export default function NewsPage() {
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Stat value={companies.length} label="companies tracked" />
-          <Stat value={totalItems} label="headlines this week" />
-          <Stat value={totalPositive} label="positive signals" accent="#3ecf8e" />
+          <Stat value={totalItems} label="ESG + stock headlines" />
+          <Stat value={totalPositive} label="positive ESG" accent="#3ecf8e" />
+          <Stat value={totalStock} label="stock / market" accent="#6ea8fe" />
           <Stat value={totalControversy} label="controversy flags" accent="#ec6a5e" />
         </div>
         <div className="mt-3 flex gap-4 text-[11px] text-faint">
