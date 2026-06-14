@@ -95,7 +95,7 @@ class FakeCompanyNewsWebTools:
             ],
         }
 
-    async def fetch_url(self, url: str):
+    async def fetch_url(self, url: str, max_chars: int = 0):
         return {
             "title": "Amazon Sustainability Report",
             "url": url,
@@ -111,6 +111,8 @@ class FakeBrightDataResponse:
     def __init__(self, status_code: int, text: str) -> None:
         self.status_code = status_code
         self.text = text
+        self.content = text.encode("utf-8")
+        self.headers = {"content-type": "text/html; charset=utf-8"}
         self.url = "https://api.brightdata.com/request"
         self.request = httpx.Request("POST", self.url)
 

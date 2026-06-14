@@ -65,11 +65,55 @@ class OpenAILLMClient:
         return data.get("claims", [])
 
 
+class OpenRouterLLMClient:
+    """Live extraction via OpenRouter (OpenAI-compatible). Cheap models, one key.
+
+    Model is configurable with ESG_EXTRACTION_MODEL; defaults to a cheap, capable
+    instruction model. Reuses OPENROUTER_API_KEY (already used by the assistant).
+    """
+
+    name = "openrouter"
+
+    def __init__(self, model: str | None = None):
+        from openai import OpenAI  # lazy import
+
+        self.model = model or os.environ.get("ESG_EXTRACTION_MODEL", "deepseek/deepseek-chat")
+        self.client = OpenAI(
+            base_url="https://openrouter.ai/api/v1",
+            api_key=os.environ.get("OPENROUTER_API_KEY"),
+        )
+
+    def extract(self, text: str) -> list[dict]:
+        import json
+
+        prompt = (
+            "Extract atomic ESG claims from the sustainability-report excerpt. "
+            "One statement = one claim. For each, copy the EXACT verbatim sentence "
+            "from the text into `source_sentence` (do not paraphrase). "
+            "Return JSON: {\"claims\":[{\"text\":...,\"source_sentence\":...,\"source_page\":1}]}.\n\n"
+            f"EXCERPT:\n{text}"
+        )
+        resp = self.client.chat.completions.create(
+            model=self.model,
+            response_format={"type": "json_object"},
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0,
+        )
+        data = json.loads(resp.choices[0].message.content or "{}")
+        return data.get("claims", [])
+
+
 def get_default_client(offline: bool = True) -> LLMClient:
-    """Offline or no key -> deterministic mock. Online + key -> live OpenAI."""
-    if not offline and os.environ.get("OPENAI_API_KEY"):
-        try:
-            return OpenAILLMClient()
-        except Exception:
-            return MockLLMClient()
+    """Offline or no key -> deterministic mock. Online -> OpenRouter, then OpenAI."""
+    if not offline:
+        if os.environ.get("OPENROUTER_API_KEY"):
+            try:
+                return OpenRouterLLMClient()
+            except Exception:
+                pass
+        if os.environ.get("OPENAI_API_KEY"):
+            try:
+                return OpenAILLMClient()
+            except Exception:
+                return MockLLMClient()
     return MockLLMClient()

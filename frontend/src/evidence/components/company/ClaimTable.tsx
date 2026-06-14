@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Quote } from "lucide-react";
+import { ExternalLink, Quote, Radio } from "lucide-react";
 import type { ClaimRow } from "../../types";
 import { TOPIC_LABEL } from "../../lib/ui";
 import { StateBadge } from "../common/badges";
@@ -7,18 +7,38 @@ import { StateBadge } from "../common/badges";
 export default function ClaimTable({
   claims,
   absent,
+  live,
+  sourceUrl,
+  sourceTitle,
 }: {
   claims: ClaimRow[];
   absent: { topic_id: string; state: string }[];
+  live?: boolean;
+  sourceUrl?: string;
+  sourceTitle?: string;
 }) {
   const [open, setOpen] = useState<number | null>(null);
   return (
     <div className="rounded-xl border border-hairline bg-surface shadow-panel">
-      <div className="border-b border-hairline px-4 py-3">
-        <h3 className="text-sm font-semibold text-txt">Claims &amp; evidence</h3>
-        <p className="text-[11px] text-faint">
-          Each claim verified against the most authoritative source. Absence lowers confidence, never the score.
-        </p>
+      <div className="flex items-start justify-between gap-3 border-b border-hairline px-4 py-3">
+        <div>
+          <h3 className="text-sm font-semibold text-txt">Claims &amp; evidence</h3>
+          <p className="text-[11px] text-faint">
+            Each claim verified against the most authoritative source. Absence lowers confidence, never the score.
+          </p>
+        </div>
+        {live && sourceUrl && (
+          <a
+            href={sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+            title={sourceTitle || "Source report"}
+            className="flex shrink-0 items-center gap-1.5 rounded-full border border-pos/30 bg-pos/10 px-2.5 py-1 text-[10px] font-semibold text-pos transition hover:bg-pos/15"
+          >
+            <Radio size={11} /> LIVE · from report
+            <ExternalLink size={11} />
+          </a>
+        )}
       </div>
       <div className="divide-y divide-hairline/60">
         {claims.map((c, i) => (
@@ -43,7 +63,21 @@ export default function ClaimTable({
                   “{c.source_sentence}”
                   {c.source_doc && (
                     <span className="ml-1 not-italic text-faint">
-                      — {c.source_doc}{c.source_page ? `, p.${c.source_page}` : ""}
+                      —{" "}
+                      {c.source_url ? (
+                        <a
+                          href={c.source_url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-0.5 text-pos hover:underline"
+                        >
+                          {c.source_doc}
+                          <ExternalLink size={10} />
+                        </a>
+                      ) : (
+                        c.source_doc
+                      )}
+                      {c.source_page ? `, p.${c.source_page}` : ""}
                     </span>
                   )}
                 </p>

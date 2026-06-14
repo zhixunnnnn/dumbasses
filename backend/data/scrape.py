@@ -138,7 +138,7 @@ def load_news(conn) -> dict:
                           "sentiment": n["sentiment"], "fetched_at": n["fetched_at"],
                           "headlines": heads})
     log = conn.execute("SELECT * FROM scrape_log WHERE source='news'").fetchone()
-    return {"source": "Bright Data Scraping Browser · Bing News",
+    return {"source": "Bright Data SERP · web news",
             "last_run": log["last_run"] if log else None, "companies": companies}
 
 
@@ -169,23 +169,36 @@ def _bing_url(query: str) -> str:
 
 
 def scrape_news(conn, offline: bool = False) -> dict:
+    # Offline = don't hit the network; just serve whatever snapshot is already stored.
+    if offline:
+        return load_news(conn)
+
+    import asyncio
+
+    from backend.app.agent import WebTools
+
     rows = conn.execute("SELECT company_id, name FROM universe WHERE scope='demo'").fetchall()
-    results = []
-    for r in rows:
-        cid, name = r["company_id"], r["name"]
-        # broad queries for recall; the relevance + topical filter keeps only
+    web = WebTools()  # uses the working Bright Data SERP/Web Unlocker zone from .env
+
+    async def collect_one(cid: str, name: str) -> dict:
+        # Broad queries for recall; the relevance + topical filter keeps only
         # company-named ESG / stock headlines.
-        queries = {
-            "esg": f"{name} sustainability",
-            "stock": f"{name} stock earnings results",
-        }
+        queries = [
+            f"{name} sustainability ESG news",
+            f"{name} stock earnings results news",
+        ]
         kept, seen = [], set()
-        for tag, q in queries.items():
-            items = brightdata.browser_collect("bing_news", f"{cid}_{tag}", _bing_url(q), _NEWS_JS,
-                                               ttl=7 * 86400, offline=offline) or []
-            for it in items:
+        for q in queries:
+            try:
+                res = await web.search(q, max_results=10)
+            except Exception:
+                continue
+            for it in res.get("results", []):
                 title = (it.get("title") or "").strip()
-                label = _relevant_label(title, cid)
+                if not title:
+                    continue
+                # classify on title + snippet for recall; store the title as the headline
+                label = _relevant_label(f"{title} {it.get('snippet') or ''}", cid)
                 if not label:
                     continue
                 key = title.lower()[:80]
@@ -196,15 +209,21 @@ def scrape_news(conn, offline: bool = False) -> dict:
         ncon = sum(1 for c in kept if c["label"] == "controversy")
         npos = sum(1 for c in kept if c["label"] == "positive")
         nstk = sum(1 for c in kept if c["label"] == "stock")
-        sentiment = npos - ncon
-        results.append({"company_id": cid, "name": name, "n_items": len(kept),
-                        "controversy": ncon, "positive": npos, "sentiment": sentiment,
-                        "headlines": kept[:8]})
         print(f"  {cid:4} {name:24} kept={len(kept):2d} (esg+/-={npos}/{ncon}, stock={nstk})")
+        return {"company_id": cid, "name": name, "n_items": len(kept),
+                "controversy": ncon, "positive": npos, "sentiment": npos - ncon,
+                "headlines": kept[:8]}
+
+    async def collect_all() -> list[dict]:
+        return await asyncio.gather(
+            *[collect_one(r["company_id"], r["name"]) for r in rows]
+        )
+
+    results = asyncio.run(collect_all())
     fetched_at = dt.datetime.utcnow().isoformat(timespec="seconds")
     store_news(conn, results, fetched_at)                       # persist in the DB (durable)
     _log_scrape(conn, "news", "ok", sum(r["n_items"] for r in results))
-    out = {"source": "Bright Data Scraping Browser · Bing News", "last_run": fetched_at,
+    out = {"source": "Bright Data SERP · web news", "last_run": fetched_at,
            "companies": results}
     (config.OUT_DIR / "news.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), "utf-8")
     print(f"  -> stored {len(results)} companies in DB + wrote {config.OUT_DIR / 'news.json'}")

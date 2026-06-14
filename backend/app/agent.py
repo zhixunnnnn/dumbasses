@@ -210,6 +210,86 @@ def extract_text(html: str, max_chars: int = 8000) -> str:
     return parser.text()[:max_chars]
 
 
+# Reports (PDFs, long HTML disclosures) need a much larger window than news pages.
+DEFAULT_FETCH_CHARS = 8000
+REPORT_FETCH_CHARS = 24000
+
+
+def looks_like_pdf(url: str, content_type: str | None, content: bytes | None) -> bool:
+    path = urlparse(url).path.lower()
+    if path.endswith(".pdf"):
+        return True
+    if content_type and "application/pdf" in content_type.lower():
+        return True
+    if content and content[:5] == b"%PDF-":
+        return True
+    return False
+
+
+def extract_pdf_text(data: bytes, max_chars: int = REPORT_FETCH_CHARS) -> str:
+    """Extract readable text from PDF bytes. Tries PyMuPDF, then pypdf."""
+    text = _extract_pdf_pymupdf(data, max_chars) or _extract_pdf_pypdf(data, max_chars)
+    if not text:
+        return ""
+    cleaned = re.sub(r"[ \t]+", " ", text)
+    cleaned = re.sub(r"\n{3,}", "\n\n", cleaned).strip()
+    return cleaned[:max_chars]
+
+
+def _extract_pdf_pymupdf(data: bytes, max_chars: int) -> str:
+    try:
+        import fitz  # PyMuPDF
+    except Exception:
+        return ""
+    try:
+        doc = fitz.open(stream=data, filetype="pdf")
+    except Exception:
+        return ""
+    parts: list[str] = []
+    total = 0
+    try:
+        for page in doc:
+            page_text = page.get_text("text") or ""
+            if not page_text.strip():
+                continue
+            parts.append(page_text)
+            total += len(page_text)
+            if total >= max_chars:
+                break
+    except Exception:
+        return "\n".join(parts)
+    finally:
+        doc.close()
+    return "\n".join(parts)
+
+
+def _extract_pdf_pypdf(data: bytes, max_chars: int) -> str:
+    try:
+        from io import BytesIO
+
+        from pypdf import PdfReader
+    except Exception:
+        return ""
+    try:
+        reader = PdfReader(BytesIO(data))
+    except Exception:
+        return ""
+    parts: list[str] = []
+    total = 0
+    for page in reader.pages:
+        try:
+            page_text = page.extract_text() or ""
+        except Exception:
+            continue
+        if not page_text.strip():
+            continue
+        parts.append(page_text)
+        total += len(page_text)
+        if total >= max_chars:
+            break
+    return "\n".join(parts)
+
+
 def extract_links(html: str, base_url: str, max_results: int) -> list[AssistantSource]:
     parser = LinkExtractor(base_url)
     parser.feed(html)
@@ -299,32 +379,60 @@ class WebTools:
             "BRIGHTDATA_WEB_UNLOCKER_ZONE",
             "BRIGHT_DATA_WEB_UNLOCKER_ZONE",
         ) or ("web_unlocker1" if self.bright_data_keys else None)
+        # Dedicated Bright Data SERP zone gives clean, structured search results
+        # (Google with brd_json=1) for far better discovery/coverage than scraping
+        # a DuckDuckGo HTML page. Falls back to the unlocker zone, then DuckDuckGo.
+        self.bright_data_serp_zone = env_first(
+            "BRIGHTDATA_SERP_ZONE",
+            "BRIGHT_DATA_SERP_ZONE",
+        ) or ("serp_api1" if self.bright_data_keys else None)
 
-    async def fetch_url(self, url: str) -> dict[str, Any]:
-        fetched = await self._fetch_html(url)
-        html = fetched["html"]
+    async def fetch_url(
+        self,
+        url: str,
+        max_chars: int = DEFAULT_FETCH_CHARS,
+    ) -> dict[str, Any]:
+        raw = await self._fetch_raw(url)
+        if looks_like_pdf(raw["url"], raw.get("content_type"), raw.get("content")):
+            text = extract_pdf_text(raw["content"], max_chars=max(max_chars, REPORT_FETCH_CHARS))
+            return {
+                "url": raw["url"],
+                "source": f"{raw['source']}+pdf",
+                "text": text,
+                "title": pdf_title_from_url(raw["url"]),
+                "content_type": "application/pdf",
+            }
+        html = raw["text"]
         return {
-            "url": fetched["url"],
-            "source": fetched["source"],
-            "text": extract_text(html),
-            "title": title_from_html(html) or fetched["url"],
+            "url": raw["url"],
+            "source": raw["source"],
+            "text": extract_text(html, max_chars=max_chars),
+            "title": title_from_html(html) or raw["url"],
+            "content_type": raw.get("content_type") or "text/html",
         }
 
     async def _fetch_html(self, url: str) -> dict[str, str]:
+        raw = await self._fetch_raw(url)
+        return {"url": raw["url"], "source": raw["source"], "html": raw["text"]}
+
+    async def _fetch_raw(self, url: str) -> dict[str, Any]:
         safe_url = require_public_url(url)
-        async with httpx.AsyncClient(timeout=45.0, follow_redirects=True) as client:
+        async with httpx.AsyncClient(timeout=60.0, follow_redirects=True) as client:
             if self.bright_data_keys and self.bright_data_zone:
                 try:
-                    response, key_index = await self._fetch_with_bright_data_keys(
+                    response, key_index = await self._request_brightdata(
                         client,
                         safe_url,
+                        self.bright_data_zone,
                     )
                     source = "bright_data" if key_index == 0 else "bright_data_fallback"
                     response.raise_for_status()
                     return {
                         "url": safe_url,
                         "source": source,
-                        "html": response.text,
+                        "content": response.content,
+                        "text": response.text,
+                        "content_type": response.headers.get("content-type", ""),
                     }
                 except Exception:
                     if os.environ.get("BRIGHTDATA_STRICT") == "1":
@@ -340,7 +448,9 @@ class WebTools:
             return {
                 "url": str(response.url),
                 "source": source,
-                "html": response.text,
+                "content": response.content,
+                "text": response.text,
+                "content_type": response.headers.get("content-type", ""),
             }
 
     async def _fetch_native(
@@ -359,10 +469,11 @@ class WebTools:
             },
         )
 
-    async def _fetch_with_bright_data_keys(
+    async def _request_brightdata(
         self,
         client: httpx.AsyncClient,
-        safe_url: str,
+        url: str,
+        zone: str,
     ) -> tuple[httpx.Response, int]:
         last_response: httpx.Response | None = None
         for index, key in enumerate(self.bright_data_keys):
@@ -373,14 +484,16 @@ class WebTools:
                     "Content-Type": "application/json",
                 },
                 json={
-                    "zone": self.bright_data_zone,
-                    "url": safe_url,
+                    "zone": zone,
+                    "url": url,
                     "format": "raw",
                 },
             )
             last_response = response
+            # Keys may belong to different accounts/zones, so fail over to the
+            # next key on ANY non-2xx (quota, auth, or zone-not-found 400s).
             if (
-                response.status_code in BRIGHT_DATA_FALLBACK_STATUSES
+                not (200 <= response.status_code < 300)
                 and index < len(self.bright_data_keys) - 1
             ):
                 continue
@@ -390,7 +503,17 @@ class WebTools:
         return last_response, len(self.bright_data_keys) - 1
 
     async def search(self, query: str, max_results: int = 5) -> dict[str, Any]:
-        max_results = max(1, min(max_results, 8))
+        max_results = max(1, min(max_results, 10))
+        # 1) Bright Data SERP (Google, structured JSON) — best discovery/coverage.
+        if self.bright_data_keys and self.bright_data_serp_zone:
+            try:
+                serp = await self._search_brightdata_serp(query, max_results)
+                if serp["results"]:
+                    return serp
+            except Exception:
+                if os.environ.get("BRIGHTDATA_STRICT") == "1":
+                    raise
+        # 2) Fallback: DuckDuckGo HTML (fetched via unlocker/native).
         search_url = f"https://duckduckgo.com/html/?q={quote_plus(query)}"
         fetched = await self._fetch_html(search_url)
         html = fetched["html"]
@@ -403,12 +526,73 @@ class WebTools:
             "text": extract_text(html, max_chars=5000),
         }
 
+    async def _search_brightdata_serp(
+        self,
+        query: str,
+        max_results: int,
+    ) -> dict[str, Any]:
+        num = min(max(max_results * 2, 10), 30)
+        serp_url = (
+            "https://www.google.com/search?"
+            f"q={quote_plus(query)}&num={num}&brd_json=1"
+        )
+        async with httpx.AsyncClient(timeout=60.0, follow_redirects=True) as client:
+            response, _ = await self._request_brightdata(
+                client,
+                serp_url,
+                self.bright_data_serp_zone,
+            )
+            response.raise_for_status()
+            data = response.json()  # raises if the zone isn't SERP (-> caller falls back)
+
+        organic = data.get("organic") or data.get("organic_results") or []
+        results: list[AssistantSource] = []
+        seen: set[str] = set()
+        for item in organic:
+            url = item.get("link") or item.get("url") or item.get("href")
+            if not url:
+                continue
+            normalized = normalize_search_url(str(url))
+            parsed = urlparse(normalized)
+            if parsed.scheme not in {"http", "https"}:
+                continue
+            key = normalized.split("#", 1)[0]
+            if key in seen:
+                continue
+            seen.add(key)
+            title = str(item.get("title") or normalized)[:160]
+            snippet = item.get("description") or item.get("snippet") or item.get("desc")
+            results.append(
+                AssistantSource(
+                    title=title,
+                    url=normalized,
+                    snippet=str(snippet)[:300] if snippet else None,
+                    source="bright_data_serp",
+                ),
+            )
+            if len(results) >= max_results:
+                break
+        return {
+            "query": query,
+            "search_url": serp_url,
+            "source": "bright_data_serp",
+            "results": [link.model_dump() for link in results],
+            "text": "",
+        }
+
 
 def title_from_html(html: str) -> str | None:
     match = re.search(r"<title[^>]*>(.*?)</title>", html, flags=re.I | re.S)
     if not match:
         return None
     return re.sub(r"\s+", " ", match.group(1)).strip()[:160]
+
+
+def pdf_title_from_url(url: str) -> str:
+    name = urlparse(url).path.rsplit("/", 1)[-1] or url
+    name = re.sub(r"\.pdf$", "", name, flags=re.I)
+    name = re.sub(r"[-_]+", " ", name).strip()
+    return (name or url)[:160]
 
 
 def make_system_prompt(page_context: dict[str, Any]) -> str:
@@ -968,7 +1152,7 @@ async def collect_company_esg_news(
             break
         enriched = candidate
         try:
-            fetched = await web_tools.fetch_url(candidate.url)
+            fetched = await web_tools.fetch_url(candidate.url, max_chars=REPORT_FETCH_CHARS)
             text = str(fetched.get("text") or "")
             snippet = evidence_snippet(text, aliases=aliases) or candidate.snippet
             enriched = AssistantSource(
@@ -1061,15 +1245,19 @@ def company_esg_news_queries(
 ) -> list[str]:
     quoted_company = f'"{company}"'
     queries = [
+        f"{quoted_company} sustainability report 2024 filetype:pdf",
+        f"{quoted_company} ESG report filetype:pdf",
         f"{quoted_company} ESG news sustainability controversy 2025 2026",
         f"{quoted_company} sustainability report ESG climate emissions governance",
         f"{quoted_company} ESG controversy climate governance news",
         f"{quoted_company} net zero emissions sustainability targets",
     ]
-    if ticker:
-        queries.append(f'"{ticker}" "{company}" ESG news sustainability')
     if domain:
+        # Prefer the company's own domain for the primary disclosure (the report itself).
+        queries.insert(0, f"site:{domain} sustainability OR ESG report filetype:pdf")
         queries.insert(1, f"site:{domain} sustainability ESG report {quoted_company}")
+    if ticker:
+        queries.append(f'"{ticker}" "{company}" ESG sustainability report')
     return queries
 
 
@@ -1149,7 +1337,11 @@ def source_reliability_score(source: AssistantSource, domain: str | None = None)
     score = 0
     if domain and host.endswith(domain.lower().removeprefix("www.")):
         score += 50
-    if any(term in haystack for term in ("sustainability report", "annual report")):
+    # A PDF on the company's own domain is almost certainly the primary report.
+    is_pdf = urlparse(source.url).path.lower().endswith(".pdf")
+    if is_pdf:
+        score += 25
+    if any(term in haystack for term in ("sustainability report", "annual report", "esg report")):
         score += 20
     if any(
         trusted in host

@@ -178,6 +178,7 @@ export type ClaimRow = {
   text: string;
   source_sentence: string | null;
   source_doc: string | null;
+  source_url?: string | null;
   source_page: number | null;
   weight: number;
 };
@@ -219,6 +220,12 @@ export type CompanyDetail = {
   witness: Witness;
   compliance: Compliance;
   forecast: Forecast;
-  claims: { claims: ClaimRow[]; absent: { topic_id: string; state: string }[] };
+  claims: {
+    claims: ClaimRow[];
+    absent: { topic_id: string; state: string }[];
+    live?: boolean;
+    source_url?: string;
+    source_title?: string;
+  };
   peers: { id: string; name: string; evidence_total: number | null }[];
 };

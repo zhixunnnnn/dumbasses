@@ -157,7 +157,13 @@ export default function CompanyPage({ id }: { id: string }) {
         <PriceWitness witness={witness} series={series} />
       </div>
 
-      <ClaimTable claims={claims.claims} absent={claims.absent} />
+      <ClaimTable
+        claims={claims.claims}
+        absent={claims.absent}
+        live={claims.live}
+        sourceUrl={claims.source_url}
+        sourceTitle={claims.source_title}
+      />
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <ComplianceGap compliance={compliance} />
