@@ -82,6 +82,7 @@ class Dataset:
     events: list[EventRow]
     regulations: list[RegulationRow]
     reg_compliance: list[RegComplianceRow]
+    news_sentiment: dict[str, int] = field(default_factory=dict)   # live Bright Data signal
 
     # ---- convenience accessors -------------------------------------------------
     def demo_ids(self) -> list[str]:
@@ -147,6 +148,9 @@ def load(db_path=None) -> Dataset:
                    for r in conn.execute("SELECT * FROM regulations")]
     reg_compliance = [RegComplianceRow(r["company_id"], r["reg_id"], r["year"], r["status"], r["evidence_ref"])
                       for r in conn.execute("SELECT * FROM reg_compliance")]
+    news_sentiment = {r["company_id"]: (r["sentiment"] or 0)
+                      for r in conn.execute("SELECT company_id, sentiment FROM news")}
     conn.close()
 
-    return Dataset(companies, raters, prices, fundamentals, documents, evidence, events, regulations, reg_compliance)
+    return Dataset(companies, raters, prices, fundamentals, documents, evidence, events,
+                   regulations, reg_compliance, news_sentiment)

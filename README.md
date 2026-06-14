@@ -26,8 +26,11 @@ what they are *becoming*.
 - **Trust Meter** — divergence across MSCI / Sustainalytics / S&P (normalised, Sustainalytics
   inverted). High divergence = low trust.
 - **Compliance gap** — SGX / ISSB / MAS / ASEAN-Taxonomy disclosure status, effective-year gated.
-- **ESG forecast** — an *explainable* next-year prediction from **leading** alt-data signals (never
+- **ESG forecast** — an *explainable* next-year prediction from **leading** alt-data signals
+  (rater divergence, hiring, compliance trajectory, **live Bright Data news sentiment** — never
   the lagged score), labelled **HYPOTHESIS** with feature attribution.
+- **News page** — a dedicated feed of what the market is saying per company (scraped weekly via
+  Bright Data), each headline a click-through to the source article.
 
 Every score, flag and pin has a **“why?”** drill-down that resolves to the source sentence (or, for
 the forecast, its feature contributions).

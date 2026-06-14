@@ -24,7 +24,8 @@ from .normalize import consensus, normalize_raters
 from .regulations import compliance_gap
 from .score import evidence_score
 
-FEATURES = ["divergence", "consensus", "compliance_gap", "hiring_cum", "controversy_cum", "pe", "div_yield"]
+FEATURES = ["divergence", "consensus", "compliance_gap", "hiring_cum", "controversy_cum",
+            "news_sentiment", "pe", "div_yield"]
 
 
 @dataclass
@@ -48,11 +49,14 @@ def _features_at(ds: Dataset, cid: str, year: int, pcts_cache: dict) -> Optional
     hiring = sum(1 for e in events if e.type == "hiring_surge")
     contro = sum(1 for e in events if e.type == "controversy")
     fund = ds.fundamentals.get(cid, {}).get("2023", {})
+    # live Bright Data news sentiment — a current leading signal (broadcast across years,
+    # like the fundamentals snapshot); 0 when no news has been scraped.
+    news = float(ds.news_sentiment.get(cid, 0))
     return [
         div if div is not None else 0.0,
         cons if cons is not None else 50.0,
         cg if cg is not None else 0.0,
-        float(hiring), float(contro),
+        float(hiring), float(contro), news,
         float(fund.get("pe") or 12.0), float(fund.get("dividend_yield") or 3.0),
     ]
 

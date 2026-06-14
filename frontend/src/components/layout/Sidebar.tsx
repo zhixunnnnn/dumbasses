@@ -1,9 +1,13 @@
-import { LayoutDashboard, ShieldCheck, Microscope, Scale, FlaskConical } from "lucide-react";
-import { useNavigation } from "../../navigation/NavigationContext";
+import { LayoutDashboard, ShieldCheck, Microscope, Scale, FlaskConical, Newspaper } from "lucide-react";
+import { useNavigation, type RouteName } from "../../navigation/NavigationContext";
+
+const NAV: { key: Extract<RouteName, "dashboard" | "news">; label: string; icon: React.ReactNode }[] = [
+  { key: "dashboard", label: "Momentum Screener", icon: <LayoutDashboard size={17} /> },
+  { key: "news", label: "Live News", icon: <Newspaper size={17} /> },
+];
 
 export default function Sidebar() {
   const { route, navigate } = useNavigation();
-  const isActive = route.name === "dashboard";
 
   return (
     <aside className="hidden w-60 shrink-0 flex-col border-r border-hairline bg-surface px-3 py-5 md:flex">
@@ -21,17 +25,21 @@ export default function Sidebar() {
         <p className="px-2 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-faint">
           Workspace
         </p>
-        <button
-          onClick={() => navigate({ name: "dashboard" })}
-          className={`flex items-center gap-2.5 rounded-md px-2 py-1.5 text-sm transition ${
-            isActive ? "bg-raised text-txt" : "text-muted hover:bg-raised/60 hover:text-txt"
-          }`}
-        >
-          <span className={isActive ? "text-pos" : "text-faint"}>
-            <LayoutDashboard size={17} />
-          </span>
-          Momentum Screener
-        </button>
+        {NAV.map((item) => {
+          const isActive = route.name === item.key;
+          return (
+            <button
+              key={item.key}
+              onClick={() => navigate({ name: item.key })}
+              className={`flex items-center gap-2.5 rounded-md px-2 py-1.5 text-sm transition ${
+                isActive ? "bg-raised text-txt" : "text-muted hover:bg-raised/60 hover:text-txt"
+              }`}
+            >
+              <span className={isActive ? "text-pos" : "text-faint"}>{item.icon}</span>
+              {item.label}
+            </button>
+          );
+        })}
       </nav>
 
       <div className="mt-6 flex flex-col gap-2.5 px-2">

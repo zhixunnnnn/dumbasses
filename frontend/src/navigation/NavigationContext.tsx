@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 
-export type Route = { name: "dashboard" } | { name: "company"; id: string };
+export type Route = { name: "dashboard" } | { name: "company"; id: string } | { name: "news" };
 export type RouteName = Route["name"];
 
 type NavigationValue = {
