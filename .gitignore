@@ -8,10 +8,3 @@ __pycache__
 .DS_Store
 .claude
 backend/tests/.tmp
-
-# generated engine artifacts (all regenerable: seed -> pipeline)
-backend/cache/
-backend/out/
-backend/models/
-backend/data/esg.db
-backend/data/sample_workbook.xlsx

@@ -1,0 +1,61 @@
+{
+  "rows": [
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Keppel has achieved an 87.6% reduction in Scope 1 and 2 emissions compared to their 2020 baseline.",
+      "source_sentence": "As at end-2025, we have achieved an 87.6% reduction in Scope 1 and 2 emissions compared to our 2020 baseline and are on track to meet our target of achieving net zero Scope 1 and 2 emissions well ahead of 2050.",
+      "source_doc": "keppel sustainability report 2025",
+      "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
+      "source_page": 1,
+      "weight": 0.3
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Keppel’s Scope 3 emissions in 2025 amounted to about 6.7 million tCO2e.",
+      "source_sentence": "Our Scope 3 emissions in 2025 amounted to about 6.7 million tCO2e, which was higher than 2024, mainly due to higher gas sales and one-off accounting for the divestment of an office complex in India.",
+      "source_doc": "keppel sustainability report 2025",
+      "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
+      "source_page": 1,
+      "weight": 0.3
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Keppel contributed 1.12 million tCO2e in avoided emissions from various projects in 2025.",
+      "source_sentence": "In 2025, we contributed 1.12 million tCO2e in avoided emissions from various Keppel projects, including the waste-to-energy plant that we operate in Qatar, and the upgrade of the Keppel Merlimau Cogen Plant in Singapore.",
+      "source_doc": "keppel sustainability report 2025",
+      "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
+      "source_page": 1,
+      "weight": 0.3
+    },
+    {
+      "topic_id": "water_management",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Keppel reduced water withdrawal and waste generation in absolute and intensity terms compared to the 2023 base year.",
+      "source_sentence": "Beyond carbon emissions, Keppel also reduced our water withdrawal and waste generation, both in absolute and intensity terms, compared to the 2023 base year.",
+      "source_doc": "keppel sustainability report 2025",
+      "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "workforce_safety",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Keppel achieved zero fatalities across their operations in 2025.",
+      "source_sentence": "Reflecting Keppel’s focus on safety, we achieved zero fatalities across our operations in 2025.",
+      "source_doc": "keppel sustainability report 2025",
+      "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    }
+  ],
+  "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
+  "source_title": "keppel sustainability report 2025"
+}

@@ -1,0 +1,61 @@
+{
+  "rows": [
+    {
+      "topic_id": "energy_transition",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Energy companies play a transformative role in an inclusive energy transition.",
+      "source_sentence": "Energy companies play a transformative role in an inclusive energy transition.",
+      "source_doc": "sci sustainability report 2024",
+      "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.25
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Conversely, we also have opportunities to drive the growth and development of low-carbon solutions to enable the global energy transition.",
+      "source_sentence": "Conversely, we also have opportunities to drive the growth and development of low-carbon solutions to enable the global energy transition.",
+      "source_doc": "sci sustainability report 2024",
+      "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.3
+    },
+    {
+      "topic_id": "workforce_safety",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "These risks include corruption, non-compliance with laws, as well as health and safety.",
+      "source_sentence": "These risks include corruption, non-compliance with laws, as well as health and safety.",
+      "source_doc": "sci sustainability report 2024",
+      "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "energy_transition",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "In line with our purpose to drive the energy transition, we have adopted SDG 7 (Affordable and Clean Energy) and SDG 13 (Climate Action) as our priority SDGs.",
+      "source_sentence": "In line with our purpose to drive the energy transition, we have adopted SDG 7 (Affordable and Clean Energy) and SDG 13 (Climate Action) as our priority SDGs.",
+      "source_doc": "sci sustainability report 2024",
+      "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.25
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "These include health and safety indicators, as well as environmental indicators such as GHG emissions intensity and gross installed renewable energy capacity.",
+      "source_sentence": "These include health and safety indicators, as well as environmental indicators such as GHG emissions intensity and gross installed renewable energy capacity.",
+      "source_doc": "sci sustainability report 2024",
+      "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.3
+    }
+  ],
+  "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+  "source_title": "sci sustainability report 2024"
+}

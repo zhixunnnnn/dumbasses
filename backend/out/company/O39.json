@@ -1,0 +1,5025 @@
+{
+  "company": {
+    "company_id": "O39",
+    "ticker": "O39.SI",
+    "name": "OCBC",
+    "country": "Singapore",
+    "exchange": "SGX",
+    "sector": "Financials",
+    "sasb_industry": "Commercial Banks",
+    "scope": "demo"
+  },
+  "evidence": {
+    "company_id": "O39",
+    "year": 2023,
+    "total": 87.5,
+    "pillars": {
+      "E": 100.0,
+      "S": 50.0,
+      "G": 100.0
+    },
+    "confidence": 0.658,
+    "absent_topics": [],
+    "trace": {
+      "label": "Evidence Score 2023",
+      "value": 87.5,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "Pillar E",
+          "value": 100.0,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "financed_emissions (w=0.25, credit=1.0)",
+              "value": 100.0,
+              "contribution": 0.25,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": [
+                {
+                  "label": "[VERIFIED] In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets ",
+                  "value": null,
+                  "contribution": 0.25,
+                  "source_sentence": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
+                  "source_doc": "O39-SR2023",
+                  "source_page": 1,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Pillar S",
+          "value": 50.0,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "financial_inclusion (w=0.15, credit=0.5)",
+              "value": 50.0,
+              "contribution": 0.075,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": [
+                {
+                  "label": "[ASSERTED] In FY2023, OCBC broadened financial inclusion programmes for underserved SME customers.",
+                  "value": null,
+                  "contribution": 0.075,
+                  "source_sentence": "In FY2023, OCBC broadened financial inclusion programmes for underserved SME customers.",
+                  "source_doc": "O39-SR2023",
+                  "source_page": 1,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "employee_diversity (w=0.1, credit=0.5)",
+              "value": 50.0,
+              "contribution": 0.05,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": [
+                {
+                  "label": "[ASSERTED] In FY2023, OCBC increased gender diversity with more women in leadership roles.",
+                  "value": null,
+                  "contribution": 0.05,
+                  "source_sentence": "In FY2023, OCBC increased gender diversity with more women in leadership roles.",
+                  "source_doc": "O39-SR2023",
+                  "source_page": 1,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Pillar G",
+          "value": 100.0,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "business_ethics (w=0.2, credit=1.0)",
+              "value": 100.0,
+              "contribution": 0.2,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": [
+                {
+                  "label": "[VERIFIED] In FY2023, OCBC strengthened its anti-corruption code of conduct and board ethics oversigh",
+                  "value": null,
+                  "contribution": 0.2,
+                  "source_sentence": "In FY2023, OCBC strengthened its anti-corruption code of conduct and board ethics oversight.",
+                  "source_doc": "O39-SR2023",
+                  "source_page": 1,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "data_security (w=0.15, credit=1.0)",
+              "value": 100.0,
+              "contribution": 0.15,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": [
+                {
+                  "label": "[VERIFIED] In FY2023, OCBC invested in cybersecurity controls to prevent customer data breach inciden",
+                  "value": null,
+                  "contribution": 0.15,
+                  "source_sentence": "In FY2023, OCBC invested in cybersecurity controls to prevent customer data breach incidents.",
+                  "source_doc": "O39-SR2023",
+                  "source_page": 1,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "systemic_risk (w=0.15, credit=1.0)",
+              "value": 100.0,
+              "contribution": 0.15,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": [
+                {
+                  "label": "[VERIFIED] In FY2023, OCBC maintained capital adequacy well above regulatory minimums under stress te",
+                  "value": null,
+                  "contribution": 0.15,
+                  "source_sentence": "In FY2023, OCBC maintained capital adequacy well above regulatory minimums under stress test scenarios.",
+                  "source_doc": "O39-SR2023",
+                  "source_page": 1,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "series": [
+    {
+      "year": 2019,
+      "total": 80.0,
+      "pillars": {
+        "E": 100.0,
+        "S": 50.0,
+        "G": 85.0
+      },
+      "confidence": 0.6
+    },
+    {
+      "year": 2020,
+      "total": 87.5,
+      "pillars": {
+        "E": 100.0,
+        "S": 50.0,
+        "G": 100.0
+      },
+      "confidence": 0.658
+    },
+    {
+      "year": 2021,
+      "total": 87.5,
+      "pillars": {
+        "E": 100.0,
+        "S": 50.0,
+        "G": 100.0
+      },
+      "confidence": 0.658
+    },
+    {
+      "year": 2022,
+      "total": 87.5,
+      "pillars": {
+        "E": 100.0,
+        "S": 50.0,
+        "G": 100.0
+      },
+      "confidence": 0.658
+    },
+    {
+      "year": 2023,
+      "total": 87.5,
+      "pillars": {
+        "E": 100.0,
+        "S": 50.0,
+        "G": 100.0
+      },
+      "confidence": 0.658
+    }
+  ],
+  "raters": {
+    "company_id": "O39",
+    "msci_pct": 68.75,
+    "sp_pct": 41.67,
+    "sustainalytics_pct": 61.11,
+    "consensus": 57.18,
+    "divergence": 27.08
+  },
+  "signal": {
+    "company_id": "O39",
+    "proof_up": true,
+    "opinion_flat": false,
+    "price_flat": true,
+    "is_underpriced_improver": false,
+    "evidence_gap": -1.62,
+    "momentum": 1.5,
+    "esg_today": 57.18,
+    "quadrant": "FUTURE_LEADERS",
+    "trace": {
+      "label": "Underpriced Improver signal",
+      "value": null,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "proof_up=True (evidence momentum 1.5/yr, verified-driven)",
+          "value": 1.5,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "Evidence Score 2023",
+              "value": 87.5,
+              "contribution": null,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": [
+                {
+                  "label": "Pillar E",
+                  "value": 100.0,
+                  "contribution": null,
+                  "source_sentence": null,
+                  "source_doc": null,
+                  "source_page": null,
+                  "children": [
+                    {
+                      "label": "financed_emissions (w=0.25, credit=1.0)",
+                      "value": 100.0,
+                      "contribution": 0.25,
+                      "source_sentence": null,
+                      "source_doc": null,
+                      "source_page": null,
+                      "children": [
+                        {
+                          "label": "[VERIFIED] In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets ",
+                          "value": null,
+                          "contribution": 0.25,
+                          "source_sentence": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
+                          "source_doc": "O39-SR2023",
+                          "source_page": 1,
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "Pillar S",
+                  "value": 50.0,
+                  "contribution": null,
+                  "source_sentence": null,
+                  "source_doc": null,
+                  "source_page": null,
+                  "children": [
+                    {
+                      "label": "financial_inclusion (w=0.15, credit=0.5)",
+                      "value": 50.0,
+                      "contribution": 0.075,
+                      "source_sentence": null,
+                      "source_doc": null,
+                      "source_page": null,
+                      "children": [
+                        {
+                          "label": "[ASSERTED] In FY2023, OCBC broadened financial inclusion programmes for underserved SME customers.",
+                          "value": null,
+                          "contribution": 0.075,
+                          "source_sentence": "In FY2023, OCBC broadened financial inclusion programmes for underserved SME customers.",
+                          "source_doc": "O39-SR2023",
+                          "source_page": 1,
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "label": "employee_diversity (w=0.1, credit=0.5)",
+                      "value": 50.0,
+                      "contribution": 0.05,
+                      "source_sentence": null,
+                      "source_doc": null,
+                      "source_page": null,
+                      "children": [
+                        {
+                          "label": "[ASSERTED] In FY2023, OCBC increased gender diversity with more women in leadership roles.",
+                          "value": null,
+                          "contribution": 0.05,
+                          "source_sentence": "In FY2023, OCBC increased gender diversity with more women in leadership roles.",
+                          "source_doc": "O39-SR2023",
+                          "source_page": 1,
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "Pillar G",
+                  "value": 100.0,
+                  "contribution": null,
+                  "source_sentence": null,
+                  "source_doc": null,
+                  "source_page": null,
+                  "children": [
+                    {
+                      "label": "business_ethics (w=0.2, credit=1.0)",
+                      "value": 100.0,
+                      "contribution": 0.2,
+                      "source_sentence": null,
+                      "source_doc": null,
+                      "source_page": null,
+                      "children": [
+                        {
+                          "label": "[VERIFIED] In FY2023, OCBC strengthened its anti-corruption code of conduct and board ethics oversigh",
+                          "value": null,
+                          "contribution": 0.2,
+                          "source_sentence": "In FY2023, OCBC strengthened its anti-corruption code of conduct and board ethics oversight.",
+                          "source_doc": "O39-SR2023",
+                          "source_page": 1,
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "label": "data_security (w=0.15, credit=1.0)",
+                      "value": 100.0,
+                      "contribution": 0.15,
+                      "source_sentence": null,
+                      "source_doc": null,
+                      "source_page": null,
+                      "children": [
+                        {
+                          "label": "[VERIFIED] In FY2023, OCBC invested in cybersecurity controls to prevent customer data breach inciden",
+                          "value": null,
+                          "contribution": 0.15,
+                          "source_sentence": "In FY2023, OCBC invested in cybersecurity controls to prevent customer data breach incidents.",
+                          "source_doc": "O39-SR2023",
+                          "source_page": 1,
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "label": "systemic_risk (w=0.15, credit=1.0)",
+                      "value": 100.0,
+                      "contribution": 0.15,
+                      "source_sentence": null,
+                      "source_doc": null,
+                      "source_page": null,
+                      "children": [
+                        {
+                          "label": "[VERIFIED] In FY2023, OCBC maintained capital adequacy well above regulatory minimums under stress te",
+                          "value": null,
+                          "contribution": 0.15,
+                          "source_sentence": "In FY2023, OCBC maintained capital adequacy well above regulatory minimums under stress test scenarios.",
+                          "source_doc": "O39-SR2023",
+                          "source_page": 1,
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "opinion_flat=False (divergence=27.08, consensus 51.39->57.18)",
+          "value": 27.08,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "price_flat=True (stock vs STI over the improvement window)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "evidence_gap=-1.62 (evidence 55.56 - consensus 57.18)",
+          "value": -1.62,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        }
+      ]
+    }
+  },
+  "witness": {
+    "company_id": "O39",
+    "candles": [
+      {
+        "week_date": "2019-01-04",
+        "open": 11.0,
+        "high": 11.098,
+        "low": 10.886,
+        "close": 11.061,
+        "volume": 2938339.0
+      },
+      {
+        "week_date": "2019-01-11",
+        "open": 11.061,
+        "high": 11.347,
+        "low": 10.951,
+        "close": 11.211,
+        "volume": 6433768.0
+      },
+      {
+        "week_date": "2019-01-18",
+        "open": 11.211,
+        "high": 11.646,
+        "low": 11.178,
+        "close": 11.345,
+        "volume": 6733219.0
+      },
+      {
+        "week_date": "2019-01-25",
+        "open": 11.345,
+        "high": 11.379,
+        "low": 11.217,
+        "close": 11.357,
+        "volume": 6900319.0
+      },
+      {
+        "week_date": "2019-02-01",
+        "open": 11.357,
+        "high": 11.385,
+        "low": 11.241,
+        "close": 11.283,
+        "volume": 7966971.0
+      },
+      {
+        "week_date": "2019-02-08",
+        "open": 11.283,
+        "high": 11.965,
+        "low": 11.224,
+        "close": 11.625,
+        "volume": 6447930.0
+      },
+      {
+        "week_date": "2019-02-15",
+        "open": 11.625,
+        "high": 11.752,
+        "low": 11.143,
+        "close": 11.227,
+        "volume": 2505407.0
+      },
+      {
+        "week_date": "2019-02-22",
+        "open": 11.227,
+        "high": 12.169,
+        "low": 11.133,
+        "close": 12.072,
+        "volume": 3681213.0
+      },
+      {
+        "week_date": "2019-03-01",
+        "open": 12.072,
+        "high": 12.374,
+        "low": 11.753,
+        "close": 12.293,
+        "volume": 1807951.0
+      },
+      {
+        "week_date": "2019-03-08",
+        "open": 12.293,
+        "high": 12.533,
+        "low": 12.215,
+        "close": 12.486,
+        "volume": 7599337.0
+      },
+      {
+        "week_date": "2019-03-15",
+        "open": 12.486,
+        "high": 12.684,
+        "low": 12.246,
+        "close": 12.33,
+        "volume": 5131590.0
+      },
+      {
+        "week_date": "2019-03-22",
+        "open": 12.33,
+        "high": 12.64,
+        "low": 12.177,
+        "close": 12.232,
+        "volume": 3127299.0
+      },
+      {
+        "week_date": "2019-03-29",
+        "open": 12.232,
+        "high": 12.312,
+        "low": 12.053,
+        "close": 12.262,
+        "volume": 7296677.0
+      },
+      {
+        "week_date": "2019-04-05",
+        "open": 12.262,
+        "high": 12.415,
+        "low": 12.167,
+        "close": 12.177,
+        "volume": 2687329.0
+      },
+      {
+        "week_date": "2019-04-12",
+        "open": 12.177,
+        "high": 12.312,
+        "low": 11.468,
+        "close": 11.823,
+        "volume": 1640446.0
+      },
+      {
+        "week_date": "2019-04-19",
+        "open": 11.823,
+        "high": 12.032,
+        "low": 11.689,
+        "close": 11.935,
+        "volume": 5439453.0
+      },
+      {
+        "week_date": "2019-04-26",
+        "open": 11.935,
+        "high": 12.605,
+        "low": 11.853,
+        "close": 12.442,
+        "volume": 3596116.0
+      },
+      {
+        "week_date": "2019-05-03",
+        "open": 12.442,
+        "high": 12.731,
+        "low": 11.934,
+        "close": 12.667,
+        "volume": 8899651.0
+      },
+      {
+        "week_date": "2019-05-10",
+        "open": 12.667,
+        "high": 13.2,
+        "low": 12.168,
+        "close": 13.125,
+        "volume": 1780431.0
+      },
+      {
+        "week_date": "2019-05-17",
+        "open": 13.125,
+        "high": 13.767,
+        "low": 12.903,
+        "close": 13.511,
+        "volume": 1102602.0
+      },
+      {
+        "week_date": "2019-05-24",
+        "open": 13.511,
+        "high": 13.562,
+        "low": 12.92,
+        "close": 13.35,
+        "volume": 8309665.0
+      },
+      {
+        "week_date": "2019-05-31",
+        "open": 13.35,
+        "high": 13.458,
+        "low": 12.61,
+        "close": 12.825,
+        "volume": 1894993.0
+      },
+      {
+        "week_date": "2019-06-07",
+        "open": 12.825,
+        "high": 13.03,
+        "low": 12.697,
+        "close": 12.949,
+        "volume": 3507227.0
+      },
+      {
+        "week_date": "2019-06-14",
+        "open": 12.949,
+        "high": 13.11,
+        "low": 12.576,
+        "close": 12.857,
+        "volume": 5095091.0
+      },
+      {
+        "week_date": "2019-06-21",
+        "open": 12.857,
+        "high": 13.383,
+        "low": 12.797,
+        "close": 13.157,
+        "volume": 3861066.0
+      },
+      {
+        "week_date": "2019-06-28",
+        "open": 13.157,
+        "high": 13.372,
+        "low": 12.819,
+        "close": 12.944,
+        "volume": 8220970.0
+      },
+      {
+        "week_date": "2019-07-05",
+        "open": 12.944,
+        "high": 13.86,
+        "low": 12.665,
+        "close": 13.753,
+        "volume": 2362709.0
+      },
+      {
+        "week_date": "2019-07-12",
+        "open": 13.753,
+        "high": 14.488,
+        "low": 13.574,
+        "close": 13.911,
+        "volume": 5135998.0
+      },
+      {
+        "week_date": "2019-07-19",
+        "open": 13.911,
+        "high": 14.544,
+        "low": 13.848,
+        "close": 14.396,
+        "volume": 8352798.0
+      },
+      {
+        "week_date": "2019-07-26",
+        "open": 14.396,
+        "high": 14.657,
+        "low": 14.166,
+        "close": 14.6,
+        "volume": 1412811.0
+      },
+      {
+        "week_date": "2019-08-02",
+        "open": 14.6,
+        "high": 14.989,
+        "low": 14.219,
+        "close": 14.242,
+        "volume": 6509867.0
+      },
+      {
+        "week_date": "2019-08-09",
+        "open": 14.242,
+        "high": 14.641,
+        "low": 13.699,
+        "close": 13.917,
+        "volume": 7110919.0
+      },
+      {
+        "week_date": "2019-08-16",
+        "open": 13.917,
+        "high": 14.344,
+        "low": 13.728,
+        "close": 14.139,
+        "volume": 3814423.0
+      },
+      {
+        "week_date": "2019-08-23",
+        "open": 14.139,
+        "high": 14.372,
+        "low": 13.66,
+        "close": 13.816,
+        "volume": 2193795.0
+      },
+      {
+        "week_date": "2019-08-30",
+        "open": 13.816,
+        "high": 14.73,
+        "low": 13.425,
+        "close": 14.357,
+        "volume": 8810046.0
+      },
+      {
+        "week_date": "2019-09-06",
+        "open": 14.357,
+        "high": 14.468,
+        "low": 14.021,
+        "close": 14.215,
+        "volume": 8650442.0
+      },
+      {
+        "week_date": "2019-09-13",
+        "open": 14.215,
+        "high": 14.476,
+        "low": 13.817,
+        "close": 14.213,
+        "volume": 8625625.0
+      },
+      {
+        "week_date": "2019-09-20",
+        "open": 14.213,
+        "high": 14.662,
+        "low": 14.001,
+        "close": 14.417,
+        "volume": 1974650.0
+      },
+      {
+        "week_date": "2019-09-27",
+        "open": 14.417,
+        "high": 14.521,
+        "low": 14.25,
+        "close": 14.409,
+        "volume": 6735212.0
+      },
+      {
+        "week_date": "2019-10-04",
+        "open": 14.409,
+        "high": 14.554,
+        "low": 14.0,
+        "close": 14.204,
+        "volume": 4356531.0
+      },
+      {
+        "week_date": "2019-10-11",
+        "open": 14.204,
+        "high": 14.893,
+        "low": 14.084,
+        "close": 14.683,
+        "volume": 6173742.0
+      },
+      {
+        "week_date": "2019-10-18",
+        "open": 14.683,
+        "high": 14.843,
+        "low": 14.418,
+        "close": 14.606,
+        "volume": 7521246.0
+      },
+      {
+        "week_date": "2019-10-25",
+        "open": 14.606,
+        "high": 15.074,
+        "low": 14.273,
+        "close": 14.912,
+        "volume": 4818811.0
+      },
+      {
+        "week_date": "2019-11-01",
+        "open": 14.912,
+        "high": 15.039,
+        "low": 14.426,
+        "close": 14.865,
+        "volume": 2168551.0
+      },
+      {
+        "week_date": "2019-11-08",
+        "open": 14.865,
+        "high": 15.58,
+        "low": 14.764,
+        "close": 15.516,
+        "volume": 5377050.0
+      },
+      {
+        "week_date": "2019-11-15",
+        "open": 15.516,
+        "high": 15.524,
+        "low": 14.858,
+        "close": 15.163,
+        "volume": 2372101.0
+      },
+      {
+        "week_date": "2019-11-22",
+        "open": 15.163,
+        "high": 15.277,
+        "low": 15.007,
+        "close": 15.113,
+        "volume": 3156981.0
+      },
+      {
+        "week_date": "2019-11-29",
+        "open": 15.113,
+        "high": 15.633,
+        "low": 15.086,
+        "close": 15.612,
+        "volume": 8596695.0
+      },
+      {
+        "week_date": "2019-12-06",
+        "open": 15.612,
+        "high": 16.152,
+        "low": 15.582,
+        "close": 16.048,
+        "volume": 7839152.0
+      },
+      {
+        "week_date": "2019-12-13",
+        "open": 16.048,
+        "high": 16.385,
+        "low": 15.934,
+        "close": 16.136,
+        "volume": 5883998.0
+      },
+      {
+        "week_date": "2019-12-20",
+        "open": 16.136,
+        "high": 16.842,
+        "low": 15.924,
+        "close": 16.57,
+        "volume": 1471828.0
+      },
+      {
+        "week_date": "2019-12-27",
+        "open": 16.57,
+        "high": 16.689,
+        "low": 16.46,
+        "close": 16.676,
+        "volume": 3794107.0
+      },
+      {
+        "week_date": "2020-01-03",
+        "open": 16.676,
+        "high": 17.496,
+        "low": 16.635,
+        "close": 17.353,
+        "volume": 4267694.0
+      },
+      {
+        "week_date": "2020-01-10",
+        "open": 17.353,
+        "high": 18.131,
+        "low": 17.25,
+        "close": 17.939,
+        "volume": 1262891.0
+      },
+      {
+        "week_date": "2020-01-17",
+        "open": 17.939,
+        "high": 18.068,
+        "low": 17.126,
+        "close": 17.259,
+        "volume": 3655458.0
+      },
+      {
+        "week_date": "2020-01-24",
+        "open": 17.259,
+        "high": 17.7,
+        "low": 17.181,
+        "close": 17.685,
+        "volume": 5782589.0
+      },
+      {
+        "week_date": "2020-01-31",
+        "open": 17.685,
+        "high": 19.576,
+        "low": 17.621,
+        "close": 19.185,
+        "volume": 6923299.0
+      },
+      {
+        "week_date": "2020-02-07",
+        "open": 19.185,
+        "high": 19.395,
+        "low": 18.436,
+        "close": 18.657,
+        "volume": 5589344.0
+      },
+      {
+        "week_date": "2020-02-14",
+        "open": 18.657,
+        "high": 19.291,
+        "low": 18.617,
+        "close": 19.148,
+        "volume": 3318517.0
+      },
+      {
+        "week_date": "2020-02-21",
+        "open": 19.148,
+        "high": 20.245,
+        "low": 18.856,
+        "close": 19.872,
+        "volume": 7127952.0
+      },
+      {
+        "week_date": "2020-02-28",
+        "open": 19.872,
+        "high": 20.557,
+        "low": 19.63,
+        "close": 19.798,
+        "volume": 4453154.0
+      },
+      {
+        "week_date": "2020-03-06",
+        "open": 19.798,
+        "high": 19.989,
+        "low": 19.33,
+        "close": 19.532,
+        "volume": 3027998.0
+      },
+      {
+        "week_date": "2020-03-13",
+        "open": 19.532,
+        "high": 20.174,
+        "low": 19.051,
+        "close": 19.893,
+        "volume": 2175288.0
+      },
+      {
+        "week_date": "2020-03-20",
+        "open": 19.893,
+        "high": 20.224,
+        "low": 19.384,
+        "close": 19.451,
+        "volume": 7989884.0
+      },
+      {
+        "week_date": "2020-03-27",
+        "open": 19.451,
+        "high": 19.833,
+        "low": 18.25,
+        "close": 18.317,
+        "volume": 7193872.0
+      },
+      {
+        "week_date": "2020-04-03",
+        "open": 18.317,
+        "high": 18.531,
+        "low": 17.879,
+        "close": 17.882,
+        "volume": 3607643.0
+      },
+      {
+        "week_date": "2020-04-10",
+        "open": 17.882,
+        "high": 18.336,
+        "low": 17.353,
+        "close": 17.638,
+        "volume": 6980736.0
+      },
+      {
+        "week_date": "2020-04-17",
+        "open": 17.638,
+        "high": 17.886,
+        "low": 16.382,
+        "close": 16.458,
+        "volume": 3585505.0
+      },
+      {
+        "week_date": "2020-04-24",
+        "open": 16.458,
+        "high": 17.171,
+        "low": 16.412,
+        "close": 16.919,
+        "volume": 5185337.0
+      },
+      {
+        "week_date": "2020-05-01",
+        "open": 16.919,
+        "high": 16.936,
+        "low": 16.516,
+        "close": 16.762,
+        "volume": 6941224.0
+      },
+      {
+        "week_date": "2020-05-08",
+        "open": 16.762,
+        "high": 17.552,
+        "low": 16.402,
+        "close": 17.43,
+        "volume": 1578809.0
+      },
+      {
+        "week_date": "2020-05-15",
+        "open": 17.43,
+        "high": 17.66,
+        "low": 16.266,
+        "close": 16.481,
+        "volume": 4472202.0
+      },
+      {
+        "week_date": "2020-05-22",
+        "open": 16.481,
+        "high": 17.016,
+        "low": 16.408,
+        "close": 16.932,
+        "volume": 3557029.0
+      },
+      {
+        "week_date": "2020-05-29",
+        "open": 16.932,
+        "high": 17.159,
+        "low": 16.393,
+        "close": 16.83,
+        "volume": 1398520.0
+      },
+      {
+        "week_date": "2020-06-05",
+        "open": 16.83,
+        "high": 17.395,
+        "low": 16.43,
+        "close": 17.203,
+        "volume": 1024164.0
+      },
+      {
+        "week_date": "2020-06-12",
+        "open": 17.203,
+        "high": 17.248,
+        "low": 16.505,
+        "close": 16.605,
+        "volume": 5563992.0
+      },
+      {
+        "week_date": "2020-06-19",
+        "open": 16.605,
+        "high": 16.75,
+        "low": 16.523,
+        "close": 16.561,
+        "volume": 5572740.0
+      },
+      {
+        "week_date": "2020-06-26",
+        "open": 16.561,
+        "high": 16.688,
+        "low": 16.034,
+        "close": 16.197,
+        "volume": 1156787.0
+      },
+      {
+        "week_date": "2020-07-03",
+        "open": 16.197,
+        "high": 16.274,
+        "low": 15.358,
+        "close": 15.369,
+        "volume": 6942096.0
+      },
+      {
+        "week_date": "2020-07-10",
+        "open": 15.369,
+        "high": 15.596,
+        "low": 15.31,
+        "close": 15.404,
+        "volume": 1712845.0
+      },
+      {
+        "week_date": "2020-07-17",
+        "open": 15.404,
+        "high": 15.542,
+        "low": 15.155,
+        "close": 15.241,
+        "volume": 1426142.0
+      },
+      {
+        "week_date": "2020-07-24",
+        "open": 15.241,
+        "high": 15.45,
+        "low": 15.18,
+        "close": 15.407,
+        "volume": 6331848.0
+      },
+      {
+        "week_date": "2020-07-31",
+        "open": 15.407,
+        "high": 16.187,
+        "low": 15.185,
+        "close": 15.827,
+        "volume": 1862235.0
+      },
+      {
+        "week_date": "2020-08-07",
+        "open": 15.827,
+        "high": 16.176,
+        "low": 15.492,
+        "close": 15.829,
+        "volume": 8671117.0
+      },
+      {
+        "week_date": "2020-08-14",
+        "open": 15.829,
+        "high": 16.043,
+        "low": 15.481,
+        "close": 15.728,
+        "volume": 6130482.0
+      },
+      {
+        "week_date": "2020-08-21",
+        "open": 15.728,
+        "high": 15.729,
+        "low": 15.217,
+        "close": 15.374,
+        "volume": 8233805.0
+      },
+      {
+        "week_date": "2020-08-28",
+        "open": 15.374,
+        "high": 15.621,
+        "low": 15.223,
+        "close": 15.245,
+        "volume": 1579041.0
+      },
+      {
+        "week_date": "2020-09-04",
+        "open": 15.245,
+        "high": 15.514,
+        "low": 15.154,
+        "close": 15.163,
+        "volume": 8347372.0
+      },
+      {
+        "week_date": "2020-09-11",
+        "open": 15.163,
+        "high": 15.851,
+        "low": 15.106,
+        "close": 15.791,
+        "volume": 1689110.0
+      },
+      {
+        "week_date": "2020-09-18",
+        "open": 15.791,
+        "high": 16.908,
+        "low": 15.716,
+        "close": 16.423,
+        "volume": 2926505.0
+      },
+      {
+        "week_date": "2020-09-25",
+        "open": 16.423,
+        "high": 16.593,
+        "low": 15.526,
+        "close": 15.79,
+        "volume": 7134494.0
+      },
+      {
+        "week_date": "2020-10-02",
+        "open": 15.79,
+        "high": 15.863,
+        "low": 15.091,
+        "close": 15.367,
+        "volume": 8568843.0
+      },
+      {
+        "week_date": "2020-10-09",
+        "open": 15.367,
+        "high": 15.517,
+        "low": 14.212,
+        "close": 14.454,
+        "volume": 2007608.0
+      },
+      {
+        "week_date": "2020-10-16",
+        "open": 14.454,
+        "high": 14.499,
+        "low": 13.781,
+        "close": 14.035,
+        "volume": 3259207.0
+      },
+      {
+        "week_date": "2020-10-23",
+        "open": 14.035,
+        "high": 14.036,
+        "low": 13.366,
+        "close": 13.499,
+        "volume": 8786550.0
+      },
+      {
+        "week_date": "2020-10-30",
+        "open": 13.499,
+        "high": 13.551,
+        "low": 12.967,
+        "close": 13.248,
+        "volume": 6851483.0
+      },
+      {
+        "week_date": "2020-11-06",
+        "open": 13.248,
+        "high": 13.609,
+        "low": 12.956,
+        "close": 13.237,
+        "volume": 3684578.0
+      },
+      {
+        "week_date": "2020-11-13",
+        "open": 13.237,
+        "high": 13.267,
+        "low": 13.114,
+        "close": 13.15,
+        "volume": 5671082.0
+      },
+      {
+        "week_date": "2020-11-20",
+        "open": 13.15,
+        "high": 13.288,
+        "low": 12.545,
+        "close": 12.894,
+        "volume": 4544197.0
+      },
+      {
+        "week_date": "2020-11-27",
+        "open": 12.894,
+        "high": 13.052,
+        "low": 12.607,
+        "close": 13.035,
+        "volume": 1085619.0
+      },
+      {
+        "week_date": "2020-12-04",
+        "open": 13.035,
+        "high": 13.356,
+        "low": 12.973,
+        "close": 13.267,
+        "volume": 6480657.0
+      },
+      {
+        "week_date": "2020-12-11",
+        "open": 13.267,
+        "high": 13.52,
+        "low": 12.56,
+        "close": 12.636,
+        "volume": 8162285.0
+      },
+      {
+        "week_date": "2020-12-18",
+        "open": 12.636,
+        "high": 12.965,
+        "low": 12.036,
+        "close": 12.179,
+        "volume": 7363567.0
+      },
+      {
+        "week_date": "2020-12-25",
+        "open": 12.179,
+        "high": 12.884,
+        "low": 12.162,
+        "close": 12.709,
+        "volume": 1069330.0
+      },
+      {
+        "week_date": "2021-01-01",
+        "open": 12.709,
+        "high": 12.936,
+        "low": 12.633,
+        "close": 12.881,
+        "volume": 4378012.0
+      },
+      {
+        "week_date": "2021-01-08",
+        "open": 12.881,
+        "high": 13.463,
+        "low": 12.758,
+        "close": 13.235,
+        "volume": 8221156.0
+      },
+      {
+        "week_date": "2021-01-15",
+        "open": 13.235,
+        "high": 13.528,
+        "low": 13.151,
+        "close": 13.29,
+        "volume": 4349147.0
+      },
+      {
+        "week_date": "2021-01-22",
+        "open": 13.29,
+        "high": 13.424,
+        "low": 12.807,
+        "close": 12.87,
+        "volume": 3195633.0
+      },
+      {
+        "week_date": "2021-01-29",
+        "open": 12.87,
+        "high": 12.905,
+        "low": 12.364,
+        "close": 12.755,
+        "volume": 7962488.0
+      },
+      {
+        "week_date": "2021-02-05",
+        "open": 12.755,
+        "high": 13.017,
+        "low": 12.556,
+        "close": 12.613,
+        "volume": 5194658.0
+      },
+      {
+        "week_date": "2021-02-12",
+        "open": 12.613,
+        "high": 12.81,
+        "low": 12.347,
+        "close": 12.419,
+        "volume": 2491321.0
+      },
+      {
+        "week_date": "2021-02-19",
+        "open": 12.419,
+        "high": 13.037,
+        "low": 12.302,
+        "close": 12.839,
+        "volume": 8365835.0
+      },
+      {
+        "week_date": "2021-02-26",
+        "open": 12.839,
+        "high": 13.181,
+        "low": 12.834,
+        "close": 12.998,
+        "volume": 2139652.0
+      },
+      {
+        "week_date": "2021-03-05",
+        "open": 12.998,
+        "high": 13.104,
+        "low": 12.167,
+        "close": 12.563,
+        "volume": 1499765.0
+      },
+      {
+        "week_date": "2021-03-12",
+        "open": 12.563,
+        "high": 12.894,
+        "low": 12.553,
+        "close": 12.753,
+        "volume": 3309267.0
+      },
+      {
+        "week_date": "2021-03-19",
+        "open": 12.753,
+        "high": 12.92,
+        "low": 12.359,
+        "close": 12.689,
+        "volume": 5564905.0
+      },
+      {
+        "week_date": "2021-03-26",
+        "open": 12.689,
+        "high": 13.053,
+        "low": 12.507,
+        "close": 12.797,
+        "volume": 5868530.0
+      },
+      {
+        "week_date": "2021-04-02",
+        "open": 12.797,
+        "high": 13.151,
+        "low": 12.466,
+        "close": 12.767,
+        "volume": 7613265.0
+      },
+      {
+        "week_date": "2021-04-09",
+        "open": 12.767,
+        "high": 12.92,
+        "low": 12.175,
+        "close": 12.193,
+        "volume": 4158453.0
+      },
+      {
+        "week_date": "2021-04-16",
+        "open": 12.193,
+        "high": 12.782,
+        "low": 12.022,
+        "close": 12.563,
+        "volume": 2114411.0
+      },
+      {
+        "week_date": "2021-04-23",
+        "open": 12.563,
+        "high": 12.625,
+        "low": 12.368,
+        "close": 12.62,
+        "volume": 6519991.0
+      },
+      {
+        "week_date": "2021-04-30",
+        "open": 12.62,
+        "high": 12.777,
+        "low": 12.413,
+        "close": 12.557,
+        "volume": 1476801.0
+      },
+      {
+        "week_date": "2021-05-07",
+        "open": 12.557,
+        "high": 12.839,
+        "low": 11.91,
+        "close": 12.04,
+        "volume": 7193567.0
+      },
+      {
+        "week_date": "2021-05-14",
+        "open": 12.04,
+        "high": 12.478,
+        "low": 11.718,
+        "close": 11.955,
+        "volume": 2727641.0
+      },
+      {
+        "week_date": "2021-05-21",
+        "open": 11.955,
+        "high": 12.266,
+        "low": 11.868,
+        "close": 12.077,
+        "volume": 4789463.0
+      },
+      {
+        "week_date": "2021-05-28",
+        "open": 12.077,
+        "high": 12.093,
+        "low": 11.709,
+        "close": 11.944,
+        "volume": 4052370.0
+      },
+      {
+        "week_date": "2021-06-04",
+        "open": 11.944,
+        "high": 12.752,
+        "low": 11.836,
+        "close": 12.741,
+        "volume": 4583031.0
+      },
+      {
+        "week_date": "2021-06-11",
+        "open": 12.741,
+        "high": 12.907,
+        "low": 12.496,
+        "close": 12.839,
+        "volume": 7568329.0
+      },
+      {
+        "week_date": "2021-06-18",
+        "open": 12.839,
+        "high": 12.991,
+        "low": 12.696,
+        "close": 12.862,
+        "volume": 7009615.0
+      },
+      {
+        "week_date": "2021-06-25",
+        "open": 12.862,
+        "high": 12.967,
+        "low": 12.598,
+        "close": 12.652,
+        "volume": 6099307.0
+      },
+      {
+        "week_date": "2021-07-02",
+        "open": 12.652,
+        "high": 12.702,
+        "low": 12.49,
+        "close": 12.513,
+        "volume": 4841153.0
+      },
+      {
+        "week_date": "2021-07-09",
+        "open": 12.513,
+        "high": 12.619,
+        "low": 11.708,
+        "close": 11.886,
+        "volume": 7469140.0
+      },
+      {
+        "week_date": "2021-07-16",
+        "open": 11.886,
+        "high": 12.352,
+        "low": 11.604,
+        "close": 12.094,
+        "volume": 3073083.0
+      },
+      {
+        "week_date": "2021-07-23",
+        "open": 12.094,
+        "high": 12.26,
+        "low": 11.753,
+        "close": 11.78,
+        "volume": 8594204.0
+      },
+      {
+        "week_date": "2021-07-30",
+        "open": 11.78,
+        "high": 11.961,
+        "low": 11.48,
+        "close": 11.92,
+        "volume": 2276470.0
+      },
+      {
+        "week_date": "2021-08-06",
+        "open": 11.92,
+        "high": 11.943,
+        "low": 11.186,
+        "close": 11.267,
+        "volume": 4323880.0
+      },
+      {
+        "week_date": "2021-08-13",
+        "open": 11.267,
+        "high": 11.335,
+        "low": 11.021,
+        "close": 11.072,
+        "volume": 1541403.0
+      },
+      {
+        "week_date": "2021-08-20",
+        "open": 11.072,
+        "high": 11.19,
+        "low": 10.915,
+        "close": 10.947,
+        "volume": 5793361.0
+      },
+      {
+        "week_date": "2021-08-27",
+        "open": 10.947,
+        "high": 11.252,
+        "low": 10.945,
+        "close": 10.982,
+        "volume": 5862342.0
+      },
+      {
+        "week_date": "2021-09-03",
+        "open": 10.982,
+        "high": 11.191,
+        "low": 10.452,
+        "close": 10.46,
+        "volume": 8641572.0
+      },
+      {
+        "week_date": "2021-09-10",
+        "open": 10.46,
+        "high": 10.542,
+        "low": 9.81,
+        "close": 10.161,
+        "volume": 8649303.0
+      },
+      {
+        "week_date": "2021-09-17",
+        "open": 10.161,
+        "high": 10.272,
+        "low": 10.143,
+        "close": 10.175,
+        "volume": 5210298.0
+      },
+      {
+        "week_date": "2021-09-24",
+        "open": 10.175,
+        "high": 10.437,
+        "low": 9.907,
+        "close": 10.315,
+        "volume": 5906798.0
+      },
+      {
+        "week_date": "2021-10-01",
+        "open": 10.315,
+        "high": 10.679,
+        "low": 10.275,
+        "close": 10.586,
+        "volume": 6539289.0
+      },
+      {
+        "week_date": "2021-10-08",
+        "open": 10.586,
+        "high": 11.076,
+        "low": 10.576,
+        "close": 11.043,
+        "volume": 4172290.0
+      },
+      {
+        "week_date": "2021-10-15",
+        "open": 11.043,
+        "high": 11.234,
+        "low": 10.891,
+        "close": 10.897,
+        "volume": 4520289.0
+      },
+      {
+        "week_date": "2021-10-22",
+        "open": 10.897,
+        "high": 11.169,
+        "low": 10.551,
+        "close": 10.715,
+        "volume": 2684668.0
+      },
+      {
+        "week_date": "2021-10-29",
+        "open": 10.715,
+        "high": 11.109,
+        "low": 10.537,
+        "close": 11.074,
+        "volume": 7132869.0
+      },
+      {
+        "week_date": "2021-11-05",
+        "open": 11.074,
+        "high": 11.297,
+        "low": 10.266,
+        "close": 10.304,
+        "volume": 3626141.0
+      },
+      {
+        "week_date": "2021-11-12",
+        "open": 10.304,
+        "high": 10.398,
+        "low": 9.924,
+        "close": 10.183,
+        "volume": 7253925.0
+      },
+      {
+        "week_date": "2021-11-19",
+        "open": 10.183,
+        "high": 10.43,
+        "low": 10.108,
+        "close": 10.391,
+        "volume": 6555663.0
+      },
+      {
+        "week_date": "2021-11-26",
+        "open": 10.391,
+        "high": 10.501,
+        "low": 9.707,
+        "close": 9.82,
+        "volume": 8179638.0
+      },
+      {
+        "week_date": "2021-12-03",
+        "open": 9.82,
+        "high": 10.109,
+        "low": 9.798,
+        "close": 10.068,
+        "volume": 6669410.0
+      },
+      {
+        "week_date": "2021-12-10",
+        "open": 10.068,
+        "high": 10.27,
+        "low": 9.843,
+        "close": 10.09,
+        "volume": 2264106.0
+      },
+      {
+        "week_date": "2021-12-17",
+        "open": 10.09,
+        "high": 10.374,
+        "low": 9.999,
+        "close": 10.225,
+        "volume": 7309146.0
+      },
+      {
+        "week_date": "2021-12-24",
+        "open": 10.225,
+        "high": 10.524,
+        "low": 9.833,
+        "close": 9.851,
+        "volume": 5513523.0
+      },
+      {
+        "week_date": "2021-12-31",
+        "open": 9.851,
+        "high": 10.304,
+        "low": 9.734,
+        "close": 10.177,
+        "volume": 5781720.0
+      },
+      {
+        "week_date": "2022-01-07",
+        "open": 10.177,
+        "high": 10.344,
+        "low": 9.836,
+        "close": 9.926,
+        "volume": 7239807.0
+      },
+      {
+        "week_date": "2022-01-14",
+        "open": 9.926,
+        "high": 10.016,
+        "low": 9.242,
+        "close": 9.557,
+        "volume": 3430392.0
+      },
+      {
+        "week_date": "2022-01-21",
+        "open": 9.557,
+        "high": 9.659,
+        "low": 9.354,
+        "close": 9.481,
+        "volume": 8183766.0
+      },
+      {
+        "week_date": "2022-01-28",
+        "open": 9.481,
+        "high": 9.505,
+        "low": 9.116,
+        "close": 9.233,
+        "volume": 2362773.0
+      },
+      {
+        "week_date": "2022-02-04",
+        "open": 9.233,
+        "high": 9.24,
+        "low": 8.803,
+        "close": 8.897,
+        "volume": 7888471.0
+      },
+      {
+        "week_date": "2022-02-11",
+        "open": 8.897,
+        "high": 9.23,
+        "low": 8.853,
+        "close": 9.05,
+        "volume": 2857002.0
+      },
+      {
+        "week_date": "2022-02-18",
+        "open": 9.05,
+        "high": 9.396,
+        "low": 8.864,
+        "close": 9.215,
+        "volume": 2119634.0
+      },
+      {
+        "week_date": "2022-02-25",
+        "open": 9.215,
+        "high": 9.228,
+        "low": 9.089,
+        "close": 9.105,
+        "volume": 3732130.0
+      },
+      {
+        "week_date": "2022-03-04",
+        "open": 9.105,
+        "high": 9.381,
+        "low": 8.732,
+        "close": 9.005,
+        "volume": 3892562.0
+      },
+      {
+        "week_date": "2022-03-11",
+        "open": 9.005,
+        "high": 9.554,
+        "low": 8.794,
+        "close": 9.331,
+        "volume": 4534646.0
+      },
+      {
+        "week_date": "2022-03-18",
+        "open": 9.331,
+        "high": 9.545,
+        "low": 9.259,
+        "close": 9.278,
+        "volume": 6695072.0
+      },
+      {
+        "week_date": "2022-03-25",
+        "open": 9.278,
+        "high": 9.326,
+        "low": 9.04,
+        "close": 9.056,
+        "volume": 3564350.0
+      },
+      {
+        "week_date": "2022-04-01",
+        "open": 9.056,
+        "high": 9.132,
+        "low": 8.948,
+        "close": 8.989,
+        "volume": 5630629.0
+      },
+      {
+        "week_date": "2022-04-08",
+        "open": 8.989,
+        "high": 9.601,
+        "low": 8.974,
+        "close": 9.268,
+        "volume": 5567922.0
+      },
+      {
+        "week_date": "2022-04-15",
+        "open": 9.268,
+        "high": 9.858,
+        "low": 9.197,
+        "close": 9.743,
+        "volume": 3416191.0
+      },
+      {
+        "week_date": "2022-04-22",
+        "open": 9.743,
+        "high": 10.091,
+        "low": 9.689,
+        "close": 9.939,
+        "volume": 1885784.0
+      },
+      {
+        "week_date": "2022-04-29",
+        "open": 9.939,
+        "high": 10.142,
+        "low": 9.782,
+        "close": 9.964,
+        "volume": 5818738.0
+      },
+      {
+        "week_date": "2022-05-06",
+        "open": 9.964,
+        "high": 10.266,
+        "low": 9.738,
+        "close": 10.201,
+        "volume": 7343728.0
+      },
+      {
+        "week_date": "2022-05-13",
+        "open": 10.201,
+        "high": 10.696,
+        "low": 10.177,
+        "close": 10.66,
+        "volume": 4667813.0
+      },
+      {
+        "week_date": "2022-05-20",
+        "open": 10.66,
+        "high": 10.897,
+        "low": 10.457,
+        "close": 10.767,
+        "volume": 8507156.0
+      },
+      {
+        "week_date": "2022-05-27",
+        "open": 10.767,
+        "high": 11.267,
+        "low": 10.648,
+        "close": 11.05,
+        "volume": 3079145.0
+      },
+      {
+        "week_date": "2022-06-03",
+        "open": 11.05,
+        "high": 11.298,
+        "low": 10.931,
+        "close": 11.095,
+        "volume": 8349281.0
+      },
+      {
+        "week_date": "2022-06-10",
+        "open": 11.095,
+        "high": 11.344,
+        "low": 11.053,
+        "close": 11.058,
+        "volume": 4097005.0
+      },
+      {
+        "week_date": "2022-06-17",
+        "open": 11.058,
+        "high": 11.273,
+        "low": 10.914,
+        "close": 10.981,
+        "volume": 7771341.0
+      },
+      {
+        "week_date": "2022-06-24",
+        "open": 10.981,
+        "high": 11.319,
+        "low": 10.889,
+        "close": 11.292,
+        "volume": 1247405.0
+      },
+      {
+        "week_date": "2022-07-01",
+        "open": 11.292,
+        "high": 11.664,
+        "low": 11.162,
+        "close": 11.379,
+        "volume": 6653639.0
+      },
+      {
+        "week_date": "2022-07-08",
+        "open": 11.379,
+        "high": 11.857,
+        "low": 11.161,
+        "close": 11.741,
+        "volume": 8694938.0
+      },
+      {
+        "week_date": "2022-07-15",
+        "open": 11.741,
+        "high": 12.017,
+        "low": 11.479,
+        "close": 11.799,
+        "volume": 3642052.0
+      },
+      {
+        "week_date": "2022-07-22",
+        "open": 11.799,
+        "high": 12.477,
+        "low": 11.61,
+        "close": 12.301,
+        "volume": 6610181.0
+      },
+      {
+        "week_date": "2022-07-29",
+        "open": 12.301,
+        "high": 12.612,
+        "low": 11.974,
+        "close": 12.18,
+        "volume": 3069136.0
+      },
+      {
+        "week_date": "2022-08-05",
+        "open": 12.18,
+        "high": 12.376,
+        "low": 11.662,
+        "close": 11.964,
+        "volume": 6472490.0
+      },
+      {
+        "week_date": "2022-08-12",
+        "open": 11.964,
+        "high": 12.005,
+        "low": 11.646,
+        "close": 11.753,
+        "volume": 5031493.0
+      },
+      {
+        "week_date": "2022-08-19",
+        "open": 11.753,
+        "high": 12.209,
+        "low": 11.262,
+        "close": 11.306,
+        "volume": 5241357.0
+      },
+      {
+        "week_date": "2022-08-26",
+        "open": 11.306,
+        "high": 11.934,
+        "low": 11.202,
+        "close": 11.488,
+        "volume": 6016334.0
+      },
+      {
+        "week_date": "2022-09-02",
+        "open": 11.488,
+        "high": 11.755,
+        "low": 10.979,
+        "close": 11.013,
+        "volume": 3256577.0
+      },
+      {
+        "week_date": "2022-09-09",
+        "open": 11.013,
+        "high": 11.242,
+        "low": 11.013,
+        "close": 11.131,
+        "volume": 2353187.0
+      },
+      {
+        "week_date": "2022-09-16",
+        "open": 11.131,
+        "high": 11.695,
+        "low": 10.953,
+        "close": 11.456,
+        "volume": 3502183.0
+      },
+      {
+        "week_date": "2022-09-23",
+        "open": 11.456,
+        "high": 12.163,
+        "low": 11.067,
+        "close": 11.728,
+        "volume": 6451425.0
+      },
+      {
+        "week_date": "2022-09-30",
+        "open": 11.728,
+        "high": 12.329,
+        "low": 11.502,
+        "close": 11.601,
+        "volume": 4367793.0
+      },
+      {
+        "week_date": "2022-10-07",
+        "open": 11.601,
+        "high": 12.225,
+        "low": 11.462,
+        "close": 11.934,
+        "volume": 6470594.0
+      },
+      {
+        "week_date": "2022-10-14",
+        "open": 11.934,
+        "high": 12.231,
+        "low": 11.715,
+        "close": 11.86,
+        "volume": 8850209.0
+      },
+      {
+        "week_date": "2022-10-21",
+        "open": 11.86,
+        "high": 11.869,
+        "low": 11.785,
+        "close": 11.857,
+        "volume": 6364375.0
+      },
+      {
+        "week_date": "2022-10-28",
+        "open": 11.857,
+        "high": 12.107,
+        "low": 11.294,
+        "close": 11.626,
+        "volume": 7766151.0
+      },
+      {
+        "week_date": "2022-11-04",
+        "open": 11.626,
+        "high": 11.686,
+        "low": 10.852,
+        "close": 11.189,
+        "volume": 5242744.0
+      },
+      {
+        "week_date": "2022-11-11",
+        "open": 11.189,
+        "high": 11.74,
+        "low": 10.999,
+        "close": 11.602,
+        "volume": 2326770.0
+      },
+      {
+        "week_date": "2022-11-18",
+        "open": 11.602,
+        "high": 11.697,
+        "low": 11.512,
+        "close": 11.542,
+        "volume": 7570614.0
+      },
+      {
+        "week_date": "2022-11-25",
+        "open": 11.542,
+        "high": 11.707,
+        "low": 11.071,
+        "close": 11.1,
+        "volume": 5484666.0
+      },
+      {
+        "week_date": "2022-12-02",
+        "open": 11.1,
+        "high": 11.603,
+        "low": 11.002,
+        "close": 11.467,
+        "volume": 6868339.0
+      },
+      {
+        "week_date": "2022-12-09",
+        "open": 11.467,
+        "high": 11.868,
+        "low": 11.367,
+        "close": 11.557,
+        "volume": 5237096.0
+      },
+      {
+        "week_date": "2022-12-16",
+        "open": 11.557,
+        "high": 11.713,
+        "low": 11.477,
+        "close": 11.617,
+        "volume": 6985376.0
+      },
+      {
+        "week_date": "2022-12-23",
+        "open": 11.617,
+        "high": 11.988,
+        "low": 11.27,
+        "close": 11.969,
+        "volume": 6705378.0
+      },
+      {
+        "week_date": "2022-12-30",
+        "open": 11.969,
+        "high": 12.131,
+        "low": 11.256,
+        "close": 11.351,
+        "volume": 7477380.0
+      },
+      {
+        "week_date": "2023-01-06",
+        "open": 11.351,
+        "high": 11.357,
+        "low": 11.196,
+        "close": 11.209,
+        "volume": 2148208.0
+      },
+      {
+        "week_date": "2023-01-13",
+        "open": 11.209,
+        "high": 11.342,
+        "low": 10.294,
+        "close": 10.407,
+        "volume": 6148616.0
+      },
+      {
+        "week_date": "2023-01-20",
+        "open": 10.407,
+        "high": 10.415,
+        "low": 9.817,
+        "close": 10.075,
+        "volume": 6121017.0
+      },
+      {
+        "week_date": "2023-01-27",
+        "open": 10.075,
+        "high": 10.49,
+        "low": 9.907,
+        "close": 10.206,
+        "volume": 8423413.0
+      },
+      {
+        "week_date": "2023-02-03",
+        "open": 10.206,
+        "high": 10.872,
+        "low": 10.195,
+        "close": 10.773,
+        "volume": 2955848.0
+      },
+      {
+        "week_date": "2023-02-10",
+        "open": 10.773,
+        "high": 10.911,
+        "low": 10.693,
+        "close": 10.704,
+        "volume": 8422643.0
+      },
+      {
+        "week_date": "2023-02-17",
+        "open": 10.704,
+        "high": 10.987,
+        "low": 10.427,
+        "close": 10.582,
+        "volume": 7792129.0
+      },
+      {
+        "week_date": "2023-02-24",
+        "open": 10.582,
+        "high": 10.831,
+        "low": 10.04,
+        "close": 10.345,
+        "volume": 2308755.0
+      },
+      {
+        "week_date": "2023-03-03",
+        "open": 10.345,
+        "high": 10.419,
+        "low": 10.136,
+        "close": 10.26,
+        "volume": 7397083.0
+      },
+      {
+        "week_date": "2023-03-10",
+        "open": 10.26,
+        "high": 10.294,
+        "low": 10.23,
+        "close": 10.273,
+        "volume": 7722616.0
+      },
+      {
+        "week_date": "2023-03-17",
+        "open": 10.273,
+        "high": 10.424,
+        "low": 10.23,
+        "close": 10.241,
+        "volume": 1238692.0
+      },
+      {
+        "week_date": "2023-03-24",
+        "open": 10.241,
+        "high": 10.426,
+        "low": 9.933,
+        "close": 10.093,
+        "volume": 1331333.0
+      },
+      {
+        "week_date": "2023-03-31",
+        "open": 10.093,
+        "high": 11.032,
+        "low": 10.018,
+        "close": 10.716,
+        "volume": 2185434.0
+      },
+      {
+        "week_date": "2023-04-07",
+        "open": 10.716,
+        "high": 10.987,
+        "low": 10.642,
+        "close": 10.863,
+        "volume": 4008016.0
+      },
+      {
+        "week_date": "2023-04-14",
+        "open": 10.863,
+        "high": 11.203,
+        "low": 10.674,
+        "close": 11.152,
+        "volume": 1459680.0
+      },
+      {
+        "week_date": "2023-04-21",
+        "open": 11.152,
+        "high": 11.408,
+        "low": 10.733,
+        "close": 10.961,
+        "volume": 3626336.0
+      },
+      {
+        "week_date": "2023-04-28",
+        "open": 10.961,
+        "high": 11.054,
+        "low": 10.483,
+        "close": 10.573,
+        "volume": 2689319.0
+      },
+      {
+        "week_date": "2023-05-05",
+        "open": 10.573,
+        "high": 10.776,
+        "low": 10.571,
+        "close": 10.742,
+        "volume": 2968145.0
+      },
+      {
+        "week_date": "2023-05-12",
+        "open": 10.742,
+        "high": 10.935,
+        "low": 10.618,
+        "close": 10.924,
+        "volume": 5780035.0
+      },
+      {
+        "week_date": "2023-05-19",
+        "open": 10.924,
+        "high": 11.779,
+        "low": 10.784,
+        "close": 11.42,
+        "volume": 4936934.0
+      },
+      {
+        "week_date": "2023-05-26",
+        "open": 11.42,
+        "high": 11.602,
+        "low": 11.254,
+        "close": 11.432,
+        "volume": 6150484.0
+      },
+      {
+        "week_date": "2023-06-02",
+        "open": 11.432,
+        "high": 11.668,
+        "low": 11.209,
+        "close": 11.345,
+        "volume": 4094904.0
+      },
+      {
+        "week_date": "2023-06-09",
+        "open": 11.345,
+        "high": 11.377,
+        "low": 10.863,
+        "close": 10.993,
+        "volume": 7435339.0
+      },
+      {
+        "week_date": "2023-06-16",
+        "open": 10.993,
+        "high": 11.354,
+        "low": 10.515,
+        "close": 10.607,
+        "volume": 2089370.0
+      },
+      {
+        "week_date": "2023-06-23",
+        "open": 10.607,
+        "high": 10.649,
+        "low": 10.226,
+        "close": 10.257,
+        "volume": 6822556.0
+      },
+      {
+        "week_date": "2023-06-30",
+        "open": 10.257,
+        "high": 10.685,
+        "low": 9.956,
+        "close": 10.579,
+        "volume": 8151485.0
+      },
+      {
+        "week_date": "2023-07-07",
+        "open": 10.579,
+        "high": 10.669,
+        "low": 9.858,
+        "close": 10.33,
+        "volume": 5116666.0
+      },
+      {
+        "week_date": "2023-07-14",
+        "open": 10.33,
+        "high": 10.386,
+        "low": 10.208,
+        "close": 10.359,
+        "volume": 7256719.0
+      },
+      {
+        "week_date": "2023-07-21",
+        "open": 10.359,
+        "high": 10.554,
+        "low": 10.258,
+        "close": 10.31,
+        "volume": 1962763.0
+      },
+      {
+        "week_date": "2023-07-28",
+        "open": 10.31,
+        "high": 10.475,
+        "low": 9.994,
+        "close": 10.104,
+        "volume": 5938454.0
+      },
+      {
+        "week_date": "2023-08-04",
+        "open": 10.104,
+        "high": 10.345,
+        "low": 10.042,
+        "close": 10.125,
+        "volume": 3532198.0
+      },
+      {
+        "week_date": "2023-08-11",
+        "open": 10.125,
+        "high": 10.129,
+        "low": 9.28,
+        "close": 9.332,
+        "volume": 6722920.0
+      },
+      {
+        "week_date": "2023-08-18",
+        "open": 9.332,
+        "high": 9.369,
+        "low": 9.263,
+        "close": 9.279,
+        "volume": 5788240.0
+      },
+      {
+        "week_date": "2023-08-25",
+        "open": 9.279,
+        "high": 9.747,
+        "low": 9.232,
+        "close": 9.457,
+        "volume": 4756488.0
+      },
+      {
+        "week_date": "2023-09-01",
+        "open": 9.457,
+        "high": 9.542,
+        "low": 8.808,
+        "close": 8.923,
+        "volume": 4614303.0
+      },
+      {
+        "week_date": "2023-09-08",
+        "open": 8.923,
+        "high": 9.007,
+        "low": 8.428,
+        "close": 8.578,
+        "volume": 7118252.0
+      },
+      {
+        "week_date": "2023-09-15",
+        "open": 8.578,
+        "high": 8.803,
+        "low": 8.454,
+        "close": 8.461,
+        "volume": 8182897.0
+      },
+      {
+        "week_date": "2023-09-22",
+        "open": 8.461,
+        "high": 8.88,
+        "low": 8.189,
+        "close": 8.787,
+        "volume": 6225212.0
+      },
+      {
+        "week_date": "2023-09-29",
+        "open": 8.787,
+        "high": 8.823,
+        "low": 8.542,
+        "close": 8.638,
+        "volume": 3406864.0
+      },
+      {
+        "week_date": "2023-10-06",
+        "open": 8.638,
+        "high": 8.905,
+        "low": 8.022,
+        "close": 8.355,
+        "volume": 6115818.0
+      },
+      {
+        "week_date": "2023-10-13",
+        "open": 8.355,
+        "high": 8.711,
+        "low": 8.263,
+        "close": 8.445,
+        "volume": 3277375.0
+      },
+      {
+        "week_date": "2023-10-20",
+        "open": 8.445,
+        "high": 8.564,
+        "low": 8.2,
+        "close": 8.303,
+        "volume": 7115609.0
+      },
+      {
+        "week_date": "2023-10-27",
+        "open": 8.303,
+        "high": 8.516,
+        "low": 8.11,
+        "close": 8.294,
+        "volume": 1012539.0
+      },
+      {
+        "week_date": "2023-11-03",
+        "open": 8.294,
+        "high": 8.902,
+        "low": 8.136,
+        "close": 8.895,
+        "volume": 3518268.0
+      },
+      {
+        "week_date": "2023-11-10",
+        "open": 8.895,
+        "high": 9.321,
+        "low": 8.691,
+        "close": 9.136,
+        "volume": 3807592.0
+      },
+      {
+        "week_date": "2023-11-17",
+        "open": 9.136,
+        "high": 9.311,
+        "low": 8.57,
+        "close": 8.845,
+        "volume": 1385614.0
+      },
+      {
+        "week_date": "2023-11-24",
+        "open": 8.845,
+        "high": 8.882,
+        "low": 8.649,
+        "close": 8.819,
+        "volume": 1899717.0
+      },
+      {
+        "week_date": "2023-12-01",
+        "open": 8.819,
+        "high": 8.859,
+        "low": 8.253,
+        "close": 8.41,
+        "volume": 6229592.0
+      },
+      {
+        "week_date": "2023-12-08",
+        "open": 8.41,
+        "high": 8.528,
+        "low": 8.338,
+        "close": 8.456,
+        "volume": 6026038.0
+      },
+      {
+        "week_date": "2023-12-15",
+        "open": 8.456,
+        "high": 8.713,
+        "low": 8.281,
+        "close": 8.405,
+        "volume": 5073727.0
+      },
+      {
+        "week_date": "2023-12-22",
+        "open": 8.405,
+        "high": 8.511,
+        "low": 8.404,
+        "close": 8.481,
+        "volume": 4933874.0
+      },
+      {
+        "week_date": "2023-12-29",
+        "open": 8.481,
+        "high": 8.703,
+        "low": 8.23,
+        "close": 8.684,
+        "volume": 6936490.0
+      }
+    ],
+    "band": [
+      {
+        "start_date": "2020-01-03",
+        "end_date": "2021-01-01",
+        "slope": 7.5,
+        "start_score": 80.0,
+        "end_score": 87.5
+      }
+    ],
+    "pins": [
+      {
+        "date": "2020-01-03",
+        "type": "emissions_verified",
+        "label": "Emissions verified by CDP (2019)",
+        "trace_ref": {
+          "label": "Emissions verified by CDP (2019)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": "CDP record corroborating financed_emissions (2019)",
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        }
+      },
+      {
+        "date": "2021-01-01",
+        "type": "emissions_verified",
+        "label": "Emissions verified by CDP (2020)",
+        "trace_ref": {
+          "label": "Emissions verified by CDP (2020)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": "CDP record corroborating financed_emissions (2020)",
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        }
+      },
+      {
+        "date": "2021-12-31",
+        "type": "emissions_verified",
+        "label": "Emissions verified by CDP (2021)",
+        "trace_ref": {
+          "label": "Emissions verified by CDP (2021)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": "CDP record corroborating financed_emissions (2021)",
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        }
+      },
+      {
+        "date": "2022-12-30",
+        "type": "emissions_verified",
+        "label": "Emissions verified by CDP (2022)",
+        "trace_ref": {
+          "label": "Emissions verified by CDP (2022)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": "CDP record corroborating financed_emissions (2022)",
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        }
+      },
+      {
+        "date": "2023-12-29",
+        "type": "emissions_verified",
+        "label": "Emissions verified by CDP (2023)",
+        "trace_ref": {
+          "label": "Emissions verified by CDP (2023)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": "CDP record corroborating financed_emissions (2023)",
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        }
+      }
+    ],
+    "benchmark": [
+      {
+        "week_date": "2019-01-04",
+        "open": 3200.0,
+        "high": 3247.518,
+        "low": 3166.457,
+        "close": 3243.2,
+        "volume": 3977652.0
+      },
+      {
+        "week_date": "2019-01-11",
+        "open": 3243.2,
+        "high": 3392.301,
+        "low": 3178.925,
+        "close": 3368.575,
+        "volume": 3082653.0
+      },
+      {
+        "week_date": "2019-01-18",
+        "open": 3368.575,
+        "high": 3413.612,
+        "low": 3257.463,
+        "close": 3280.045,
+        "volume": 5150652.0
+      },
+      {
+        "week_date": "2019-01-25",
+        "open": 3280.045,
+        "high": 3320.285,
+        "low": 3256.675,
+        "close": 3297.238,
+        "volume": 5526116.0
+      },
+      {
+        "week_date": "2019-02-01",
+        "open": 3297.238,
+        "high": 3328.973,
+        "low": 3217.467,
+        "close": 3250.189,
+        "volume": 5582038.0
+      },
+      {
+        "week_date": "2019-02-08",
+        "open": 3250.189,
+        "high": 3375.596,
+        "low": 3245.082,
+        "close": 3280.774,
+        "volume": 3377433.0
+      },
+      {
+        "week_date": "2019-02-15",
+        "open": 3280.774,
+        "high": 3332.626,
+        "low": 3240.203,
+        "close": 3316.46,
+        "volume": 7160372.0
+      },
+      {
+        "week_date": "2019-02-22",
+        "open": 3316.46,
+        "high": 3318.955,
+        "low": 3213.026,
+        "close": 3245.916,
+        "volume": 7309113.0
+      },
+      {
+        "week_date": "2019-03-01",
+        "open": 3245.916,
+        "high": 3266.374,
+        "low": 3240.547,
+        "close": 3257.64,
+        "volume": 6098253.0
+      },
+      {
+        "week_date": "2019-03-08",
+        "open": 3257.64,
+        "high": 3280.535,
+        "low": 3202.728,
+        "close": 3250.757,
+        "volume": 7170717.0
+      },
+      {
+        "week_date": "2019-03-15",
+        "open": 3250.757,
+        "high": 3253.575,
+        "low": 3196.811,
+        "close": 3205.897,
+        "volume": 3741691.0
+      },
+      {
+        "week_date": "2019-03-22",
+        "open": 3205.897,
+        "high": 3260.246,
+        "low": 3155.534,
+        "close": 3191.292,
+        "volume": 8895597.0
+      },
+      {
+        "week_date": "2019-03-29",
+        "open": 3191.292,
+        "high": 3205.28,
+        "low": 3086.713,
+        "close": 3109.406,
+        "volume": 2014108.0
+      },
+      {
+        "week_date": "2019-04-05",
+        "open": 3109.406,
+        "high": 3177.726,
+        "low": 3020.673,
+        "close": 3046.602,
+        "volume": 3524904.0
+      },
+      {
+        "week_date": "2019-04-12",
+        "open": 3046.602,
+        "high": 3180.681,
+        "low": 3030.366,
+        "close": 3113.28,
+        "volume": 1553312.0
+      },
+      {
+        "week_date": "2019-04-19",
+        "open": 3113.28,
+        "high": 3139.105,
+        "low": 3038.425,
+        "close": 3103.942,
+        "volume": 2219740.0
+      },
+      {
+        "week_date": "2019-04-26",
+        "open": 3103.942,
+        "high": 3297.747,
+        "low": 3061.101,
+        "close": 3270.109,
+        "volume": 6324849.0
+      },
+      {
+        "week_date": "2019-05-03",
+        "open": 3270.109,
+        "high": 3311.714,
+        "low": 3218.02,
+        "close": 3243.705,
+        "volume": 2684513.0
+      },
+      {
+        "week_date": "2019-05-10",
+        "open": 3243.705,
+        "high": 3304.905,
+        "low": 3222.669,
+        "close": 3265.158,
+        "volume": 3377309.0
+      },
+      {
+        "week_date": "2019-05-17",
+        "open": 3265.158,
+        "high": 3268.267,
+        "low": 3197.361,
+        "close": 3209.946,
+        "volume": 4933229.0
+      },
+      {
+        "week_date": "2019-05-24",
+        "open": 3209.946,
+        "high": 3311.65,
+        "low": 3202.816,
+        "close": 3274.288,
+        "volume": 1488767.0
+      },
+      {
+        "week_date": "2019-05-31",
+        "open": 3274.288,
+        "high": 3298.247,
+        "low": 3197.06,
+        "close": 3206.269,
+        "volume": 8186858.0
+      },
+      {
+        "week_date": "2019-06-07",
+        "open": 3206.269,
+        "high": 3209.153,
+        "low": 3025.948,
+        "close": 3106.224,
+        "volume": 1551686.0
+      },
+      {
+        "week_date": "2019-06-14",
+        "open": 3106.224,
+        "high": 3184.691,
+        "low": 3063.652,
+        "close": 3161.762,
+        "volume": 7585081.0
+      },
+      {
+        "week_date": "2019-06-21",
+        "open": 3161.762,
+        "high": 3172.892,
+        "low": 3081.35,
+        "close": 3092.914,
+        "volume": 3930158.0
+      },
+      {
+        "week_date": "2019-06-28",
+        "open": 3092.914,
+        "high": 3108.929,
+        "low": 3079.421,
+        "close": 3095.379,
+        "volume": 5221262.0
+      },
+      {
+        "week_date": "2019-07-05",
+        "open": 3095.379,
+        "high": 3147.599,
+        "low": 3088.028,
+        "close": 3129.608,
+        "volume": 4429580.0
+      },
+      {
+        "week_date": "2019-07-12",
+        "open": 3129.608,
+        "high": 3226.263,
+        "low": 3115.963,
+        "close": 3213.107,
+        "volume": 3140335.0
+      },
+      {
+        "week_date": "2019-07-19",
+        "open": 3213.107,
+        "high": 3226.098,
+        "low": 3035.862,
+        "close": 3063.671,
+        "volume": 8077631.0
+      },
+      {
+        "week_date": "2019-07-26",
+        "open": 3063.671,
+        "high": 3117.373,
+        "low": 3037.915,
+        "close": 3089.735,
+        "volume": 5010113.0
+      },
+      {
+        "week_date": "2019-08-02",
+        "open": 3089.735,
+        "high": 3193.506,
+        "low": 3087.186,
+        "close": 3143.108,
+        "volume": 1396107.0
+      },
+      {
+        "week_date": "2019-08-09",
+        "open": 3143.108,
+        "high": 3212.787,
+        "low": 3086.574,
+        "close": 3175.474,
+        "volume": 8708526.0
+      },
+      {
+        "week_date": "2019-08-16",
+        "open": 3175.474,
+        "high": 3207.505,
+        "low": 3112.745,
+        "close": 3127.025,
+        "volume": 3142621.0
+      },
+      {
+        "week_date": "2019-08-23",
+        "open": 3127.025,
+        "high": 3178.315,
+        "low": 3105.937,
+        "close": 3113.619,
+        "volume": 1342803.0
+      },
+      {
+        "week_date": "2019-08-30",
+        "open": 3113.619,
+        "high": 3125.604,
+        "low": 3076.548,
+        "close": 3088.771,
+        "volume": 5869427.0
+      },
+      {
+        "week_date": "2019-09-06",
+        "open": 3088.771,
+        "high": 3170.705,
+        "low": 3024.394,
+        "close": 3082.037,
+        "volume": 6939601.0
+      },
+      {
+        "week_date": "2019-09-13",
+        "open": 3082.037,
+        "high": 3204.193,
+        "low": 3064.824,
+        "close": 3183.335,
+        "volume": 4998962.0
+      },
+      {
+        "week_date": "2019-09-20",
+        "open": 3183.335,
+        "high": 3212.873,
+        "low": 3092.156,
+        "close": 3117.565,
+        "volume": 1757367.0
+      },
+      {
+        "week_date": "2019-09-27",
+        "open": 3117.565,
+        "high": 3253.887,
+        "low": 3115.405,
+        "close": 3220.948,
+        "volume": 4276968.0
+      },
+      {
+        "week_date": "2019-10-04",
+        "open": 3220.948,
+        "high": 3299.068,
+        "low": 3169.004,
+        "close": 3278.169,
+        "volume": 5112439.0
+      },
+      {
+        "week_date": "2019-10-11",
+        "open": 3278.169,
+        "high": 3315.155,
+        "low": 3140.969,
+        "close": 3165.223,
+        "volume": 8646675.0
+      },
+      {
+        "week_date": "2019-10-18",
+        "open": 3165.223,
+        "high": 3200.695,
+        "low": 3073.949,
+        "close": 3122.198,
+        "volume": 5921464.0
+      },
+      {
+        "week_date": "2019-10-25",
+        "open": 3122.198,
+        "high": 3238.173,
+        "low": 3104.093,
+        "close": 3168.583,
+        "volume": 4821437.0
+      },
+      {
+        "week_date": "2019-11-01",
+        "open": 3168.583,
+        "high": 3185.439,
+        "low": 3128.571,
+        "close": 3147.403,
+        "volume": 1625392.0
+      },
+      {
+        "week_date": "2019-11-08",
+        "open": 3147.403,
+        "high": 3199.133,
+        "low": 3126.602,
+        "close": 3180.408,
+        "volume": 6252471.0
+      },
+      {
+        "week_date": "2019-11-15",
+        "open": 3180.408,
+        "high": 3228.295,
+        "low": 3147.128,
+        "close": 3192.104,
+        "volume": 3385596.0
+      },
+      {
+        "week_date": "2019-11-22",
+        "open": 3192.104,
+        "high": 3235.775,
+        "low": 3065.911,
+        "close": 3115.545,
+        "volume": 2517412.0
+      },
+      {
+        "week_date": "2019-11-29",
+        "open": 3115.545,
+        "high": 3162.691,
+        "low": 3045.164,
+        "close": 3145.667,
+        "volume": 7203698.0
+      },
+      {
+        "week_date": "2019-12-06",
+        "open": 3145.667,
+        "high": 3170.846,
+        "low": 3110.09,
+        "close": 3155.96,
+        "volume": 3955871.0
+      },
+      {
+        "week_date": "2019-12-13",
+        "open": 3155.96,
+        "high": 3170.168,
+        "low": 2967.363,
+        "close": 3075.486,
+        "volume": 6151967.0
+      },
+      {
+        "week_date": "2019-12-20",
+        "open": 3075.486,
+        "high": 3116.124,
+        "low": 3021.746,
+        "close": 3053.144,
+        "volume": 2292522.0
+      },
+      {
+        "week_date": "2019-12-27",
+        "open": 3053.144,
+        "high": 3058.216,
+        "low": 3038.416,
+        "close": 3049.98,
+        "volume": 7948011.0
+      },
+      {
+        "week_date": "2020-01-03",
+        "open": 3049.98,
+        "high": 3069.787,
+        "low": 2854.393,
+        "close": 2922.702,
+        "volume": 1685062.0
+      },
+      {
+        "week_date": "2020-01-10",
+        "open": 2922.702,
+        "high": 2934.554,
+        "low": 2826.759,
+        "close": 2836.649,
+        "volume": 4622851.0
+      },
+      {
+        "week_date": "2020-01-17",
+        "open": 2836.649,
+        "high": 2844.698,
+        "low": 2764.307,
+        "close": 2802.914,
+        "volume": 1115415.0
+      },
+      {
+        "week_date": "2020-01-24",
+        "open": 2802.914,
+        "high": 2827.839,
+        "low": 2710.778,
+        "close": 2763.068,
+        "volume": 6641434.0
+      },
+      {
+        "week_date": "2020-01-31",
+        "open": 2763.068,
+        "high": 2892.845,
+        "low": 2743.215,
+        "close": 2873.749,
+        "volume": 2828099.0
+      },
+      {
+        "week_date": "2020-02-07",
+        "open": 2873.749,
+        "high": 2905.181,
+        "low": 2824.995,
+        "close": 2843.729,
+        "volume": 4586005.0
+      },
+      {
+        "week_date": "2020-02-14",
+        "open": 2843.729,
+        "high": 2855.369,
+        "low": 2806.474,
+        "close": 2833.076,
+        "volume": 8799569.0
+      },
+      {
+        "week_date": "2020-02-21",
+        "open": 2833.076,
+        "high": 2887.792,
+        "low": 2826.355,
+        "close": 2886.513,
+        "volume": 1744508.0
+      },
+      {
+        "week_date": "2020-02-28",
+        "open": 2886.513,
+        "high": 3009.971,
+        "low": 2846.408,
+        "close": 2979.149,
+        "volume": 1815101.0
+      },
+      {
+        "week_date": "2020-03-06",
+        "open": 2979.149,
+        "high": 2997.793,
+        "low": 2924.632,
+        "close": 2966.94,
+        "volume": 1112405.0
+      },
+      {
+        "week_date": "2020-03-13",
+        "open": 2966.94,
+        "high": 2991.583,
+        "low": 2939.293,
+        "close": 2945.342,
+        "volume": 1254487.0
+      },
+      {
+        "week_date": "2020-03-20",
+        "open": 2945.342,
+        "high": 3033.139,
+        "low": 2943.125,
+        "close": 3016.13,
+        "volume": 1269732.0
+      },
+      {
+        "week_date": "2020-03-27",
+        "open": 3016.13,
+        "high": 3025.582,
+        "low": 2980.284,
+        "close": 3018.799,
+        "volume": 4697092.0
+      },
+      {
+        "week_date": "2020-04-03",
+        "open": 3018.799,
+        "high": 3055.96,
+        "low": 2909.654,
+        "close": 2934.026,
+        "volume": 5961858.0
+      },
+      {
+        "week_date": "2020-04-10",
+        "open": 2934.026,
+        "high": 3005.047,
+        "low": 2910.052,
+        "close": 2998.335,
+        "volume": 6750616.0
+      },
+      {
+        "week_date": "2020-04-17",
+        "open": 2998.335,
+        "high": 3021.42,
+        "low": 2936.903,
+        "close": 3016.905,
+        "volume": 2807925.0
+      },
+      {
+        "week_date": "2020-04-24",
+        "open": 3016.905,
+        "high": 3130.331,
+        "low": 2994.542,
+        "close": 3107.894,
+        "volume": 6809256.0
+      },
+      {
+        "week_date": "2020-05-01",
+        "open": 3107.894,
+        "high": 3142.599,
+        "low": 3028.526,
+        "close": 3137.722,
+        "volume": 8449282.0
+      },
+      {
+        "week_date": "2020-05-08",
+        "open": 3137.722,
+        "high": 3184.614,
+        "low": 3085.028,
+        "close": 3147.191,
+        "volume": 6829986.0
+      },
+      {
+        "week_date": "2020-05-15",
+        "open": 3147.191,
+        "high": 3168.807,
+        "low": 3124.414,
+        "close": 3150.629,
+        "volume": 1423357.0
+      },
+      {
+        "week_date": "2020-05-22",
+        "open": 3150.629,
+        "high": 3168.119,
+        "low": 3112.845,
+        "close": 3158.513,
+        "volume": 1773602.0
+      },
+      {
+        "week_date": "2020-05-29",
+        "open": 3158.513,
+        "high": 3177.979,
+        "low": 3078.795,
+        "close": 3169.258,
+        "volume": 6259372.0
+      },
+      {
+        "week_date": "2020-06-05",
+        "open": 3169.258,
+        "high": 3295.928,
+        "low": 3101.45,
+        "close": 3266.796,
+        "volume": 6083798.0
+      },
+      {
+        "week_date": "2020-06-12",
+        "open": 3266.796,
+        "high": 3418.073,
+        "low": 3254.343,
+        "close": 3400.604,
+        "volume": 7730664.0
+      },
+      {
+        "week_date": "2020-06-19",
+        "open": 3400.604,
+        "high": 3427.416,
+        "low": 3397.071,
+        "close": 3402.327,
+        "volume": 3834983.0
+      },
+      {
+        "week_date": "2020-06-26",
+        "open": 3402.327,
+        "high": 3409.663,
+        "low": 3372.851,
+        "close": 3381.487,
+        "volume": 4188189.0
+      },
+      {
+        "week_date": "2020-07-03",
+        "open": 3381.487,
+        "high": 3484.58,
+        "low": 3379.288,
+        "close": 3483.996,
+        "volume": 6544773.0
+      },
+      {
+        "week_date": "2020-07-10",
+        "open": 3483.996,
+        "high": 3696.317,
+        "low": 3480.865,
+        "close": 3664.561,
+        "volume": 8659495.0
+      },
+      {
+        "week_date": "2020-07-17",
+        "open": 3664.561,
+        "high": 3671.309,
+        "low": 3491.928,
+        "close": 3561.234,
+        "volume": 2843327.0
+      },
+      {
+        "week_date": "2020-07-24",
+        "open": 3561.234,
+        "high": 3614.1,
+        "low": 3524.393,
+        "close": 3540.334,
+        "volume": 7069628.0
+      },
+      {
+        "week_date": "2020-07-31",
+        "open": 3540.334,
+        "high": 3648.104,
+        "low": 3422.611,
+        "close": 3646.114,
+        "volume": 3286644.0
+      },
+      {
+        "week_date": "2020-08-07",
+        "open": 3646.114,
+        "high": 3768.423,
+        "low": 3618.538,
+        "close": 3746.896,
+        "volume": 8770719.0
+      },
+      {
+        "week_date": "2020-08-14",
+        "open": 3746.896,
+        "high": 3804.029,
+        "low": 3708.556,
+        "close": 3770.505,
+        "volume": 5113627.0
+      },
+      {
+        "week_date": "2020-08-21",
+        "open": 3770.505,
+        "high": 3954.651,
+        "low": 3721.374,
+        "close": 3912.961,
+        "volume": 6041926.0
+      },
+      {
+        "week_date": "2020-08-28",
+        "open": 3912.961,
+        "high": 3934.574,
+        "low": 3894.907,
+        "close": 3898.233,
+        "volume": 3391228.0
+      },
+      {
+        "week_date": "2020-09-04",
+        "open": 3898.233,
+        "high": 3930.914,
+        "low": 3840.249,
+        "close": 3895.349,
+        "volume": 2828519.0
+      },
+      {
+        "week_date": "2020-09-11",
+        "open": 3895.349,
+        "high": 4175.707,
+        "low": 3876.272,
+        "close": 4122.527,
+        "volume": 1686537.0
+      },
+      {
+        "week_date": "2020-09-18",
+        "open": 4122.527,
+        "high": 4124.739,
+        "low": 3888.014,
+        "close": 3914.746,
+        "volume": 5708481.0
+      },
+      {
+        "week_date": "2020-09-25",
+        "open": 3914.746,
+        "high": 4098.814,
+        "low": 3904.174,
+        "close": 4014.369,
+        "volume": 5880757.0
+      },
+      {
+        "week_date": "2020-10-02",
+        "open": 4014.369,
+        "high": 4040.52,
+        "low": 3861.384,
+        "close": 3897.423,
+        "volume": 7817049.0
+      },
+      {
+        "week_date": "2020-10-09",
+        "open": 3897.423,
+        "high": 3898.694,
+        "low": 3809.039,
+        "close": 3895.756,
+        "volume": 2818782.0
+      },
+      {
+        "week_date": "2020-10-16",
+        "open": 3895.756,
+        "high": 4005.522,
+        "low": 3878.609,
+        "close": 3911.787,
+        "volume": 6169583.0
+      },
+      {
+        "week_date": "2020-10-23",
+        "open": 3911.787,
+        "high": 4004.633,
+        "low": 3849.976,
+        "close": 3980.903,
+        "volume": 7358341.0
+      },
+      {
+        "week_date": "2020-10-30",
+        "open": 3980.903,
+        "high": 4143.576,
+        "low": 3956.346,
+        "close": 4108.516,
+        "volume": 3616212.0
+      },
+      {
+        "week_date": "2020-11-06",
+        "open": 4108.516,
+        "high": 4175.627,
+        "low": 4049.578,
+        "close": 4173.46,
+        "volume": 6190791.0
+      },
+      {
+        "week_date": "2020-11-13",
+        "open": 4173.46,
+        "high": 4186.197,
+        "low": 4096.728,
+        "close": 4117.683,
+        "volume": 4557207.0
+      },
+      {
+        "week_date": "2020-11-20",
+        "open": 4117.683,
+        "high": 4190.233,
+        "low": 4064.633,
+        "close": 4078.058,
+        "volume": 8270895.0
+      },
+      {
+        "week_date": "2020-11-27",
+        "open": 4078.058,
+        "high": 4155.704,
+        "low": 4006.742,
+        "close": 4102.692,
+        "volume": 2238958.0
+      },
+      {
+        "week_date": "2020-12-04",
+        "open": 4102.692,
+        "high": 4210.699,
+        "low": 4028.725,
+        "close": 4160.075,
+        "volume": 8750794.0
+      },
+      {
+        "week_date": "2020-12-11",
+        "open": 4160.075,
+        "high": 4253.982,
+        "low": 4096.016,
+        "close": 4223.574,
+        "volume": 2828231.0
+      },
+      {
+        "week_date": "2020-12-18",
+        "open": 4223.574,
+        "high": 4278.203,
+        "low": 4176.71,
+        "close": 4257.458,
+        "volume": 7085510.0
+      },
+      {
+        "week_date": "2020-12-25",
+        "open": 4257.458,
+        "high": 4262.215,
+        "low": 4105.06,
+        "close": 4132.081,
+        "volume": 6492373.0
+      },
+      {
+        "week_date": "2021-01-01",
+        "open": 4132.081,
+        "high": 4302.438,
+        "low": 4111.457,
+        "close": 4300.426,
+        "volume": 4515510.0
+      },
+      {
+        "week_date": "2021-01-08",
+        "open": 4300.426,
+        "high": 4382.214,
+        "low": 4287.118,
+        "close": 4321.235,
+        "volume": 5019387.0
+      },
+      {
+        "week_date": "2021-01-15",
+        "open": 4321.235,
+        "high": 4329.382,
+        "low": 4264.218,
+        "close": 4313.79,
+        "volume": 6715644.0
+      },
+      {
+        "week_date": "2021-01-22",
+        "open": 4313.79,
+        "high": 4334.836,
+        "low": 4241.339,
+        "close": 4245.208,
+        "volume": 3433550.0
+      },
+      {
+        "week_date": "2021-01-29",
+        "open": 4245.208,
+        "high": 4280.13,
+        "low": 4234.558,
+        "close": 4264.655,
+        "volume": 6022682.0
+      },
+      {
+        "week_date": "2021-02-05",
+        "open": 4264.655,
+        "high": 4291.334,
+        "low": 4183.776,
+        "close": 4272.551,
+        "volume": 5225009.0
+      },
+      {
+        "week_date": "2021-02-12",
+        "open": 4272.551,
+        "high": 4324.788,
+        "low": 4234.924,
+        "close": 4316.321,
+        "volume": 6902512.0
+      },
+      {
+        "week_date": "2021-02-19",
+        "open": 4316.321,
+        "high": 4416.586,
+        "low": 4264.722,
+        "close": 4404.253,
+        "volume": 1112174.0
+      },
+      {
+        "week_date": "2021-02-26",
+        "open": 4404.253,
+        "high": 4500.052,
+        "low": 4399.214,
+        "close": 4437.606,
+        "volume": 4136639.0
+      },
+      {
+        "week_date": "2021-03-05",
+        "open": 4437.606,
+        "high": 4501.615,
+        "low": 4418.273,
+        "close": 4444.727,
+        "volume": 3981380.0
+      },
+      {
+        "week_date": "2021-03-12",
+        "open": 4444.727,
+        "high": 4685.227,
+        "low": 4379.63,
+        "close": 4621.42,
+        "volume": 8621841.0
+      },
+      {
+        "week_date": "2021-03-19",
+        "open": 4621.42,
+        "high": 4666.749,
+        "low": 4374.249,
+        "close": 4462.691,
+        "volume": 4914229.0
+      },
+      {
+        "week_date": "2021-03-26",
+        "open": 4462.691,
+        "high": 4533.562,
+        "low": 4372.462,
+        "close": 4457.792,
+        "volume": 2854168.0
+      },
+      {
+        "week_date": "2021-04-02",
+        "open": 4457.792,
+        "high": 4475.979,
+        "low": 4294.896,
+        "close": 4358.539,
+        "volume": 7049310.0
+      },
+      {
+        "week_date": "2021-04-09",
+        "open": 4358.539,
+        "high": 4405.471,
+        "low": 4219.829,
+        "close": 4264.102,
+        "volume": 3623625.0
+      },
+      {
+        "week_date": "2021-04-16",
+        "open": 4264.102,
+        "high": 4278.103,
+        "low": 4184.7,
+        "close": 4193.903,
+        "volume": 7424791.0
+      },
+      {
+        "week_date": "2021-04-23",
+        "open": 4193.903,
+        "high": 4252.178,
+        "low": 4174.256,
+        "close": 4227.0,
+        "volume": 6292962.0
+      },
+      {
+        "week_date": "2021-04-30",
+        "open": 4227.0,
+        "high": 4406.671,
+        "low": 4189.307,
+        "close": 4366.781,
+        "volume": 4599963.0
+      },
+      {
+        "week_date": "2021-05-07",
+        "open": 4366.781,
+        "high": 4475.805,
+        "low": 4325.155,
+        "close": 4389.764,
+        "volume": 1105527.0
+      },
+      {
+        "week_date": "2021-05-14",
+        "open": 4389.764,
+        "high": 4447.047,
+        "low": 4292.954,
+        "close": 4307.402,
+        "volume": 8219718.0
+      },
+      {
+        "week_date": "2021-05-21",
+        "open": 4307.402,
+        "high": 4457.278,
+        "low": 4241.442,
+        "close": 4426.514,
+        "volume": 4071537.0
+      },
+      {
+        "week_date": "2021-05-28",
+        "open": 4426.514,
+        "high": 4429.116,
+        "low": 4313.671,
+        "close": 4371.224,
+        "volume": 2617503.0
+      },
+      {
+        "week_date": "2021-06-04",
+        "open": 4371.224,
+        "high": 4381.602,
+        "low": 4285.599,
+        "close": 4331.692,
+        "volume": 2384367.0
+      },
+      {
+        "week_date": "2021-06-11",
+        "open": 4331.692,
+        "high": 4470.39,
+        "low": 4255.208,
+        "close": 4408.255,
+        "volume": 3177569.0
+      },
+      {
+        "week_date": "2021-06-18",
+        "open": 4408.255,
+        "high": 4465.21,
+        "low": 4358.812,
+        "close": 4378.957,
+        "volume": 8964876.0
+      },
+      {
+        "week_date": "2021-06-25",
+        "open": 4378.957,
+        "high": 4493.665,
+        "low": 4373.007,
+        "close": 4417.32,
+        "volume": 6600729.0
+      },
+      {
+        "week_date": "2021-07-02",
+        "open": 4417.32,
+        "high": 4463.062,
+        "low": 4376.204,
+        "close": 4392.749,
+        "volume": 5441025.0
+      },
+      {
+        "week_date": "2021-07-09",
+        "open": 4392.749,
+        "high": 4424.133,
+        "low": 4355.225,
+        "close": 4410.597,
+        "volume": 5628165.0
+      },
+      {
+        "week_date": "2021-07-16",
+        "open": 4410.597,
+        "high": 4534.326,
+        "low": 4347.96,
+        "close": 4530.639,
+        "volume": 1522098.0
+      },
+      {
+        "week_date": "2021-07-23",
+        "open": 4530.639,
+        "high": 4606.873,
+        "low": 4302.968,
+        "close": 4366.656,
+        "volume": 4004501.0
+      },
+      {
+        "week_date": "2021-07-30",
+        "open": 4366.656,
+        "high": 4464.78,
+        "low": 4358.885,
+        "close": 4434.976,
+        "volume": 6437360.0
+      },
+      {
+        "week_date": "2021-08-06",
+        "open": 4434.976,
+        "high": 4511.05,
+        "low": 4363.635,
+        "close": 4469.639,
+        "volume": 1529455.0
+      },
+      {
+        "week_date": "2021-08-13",
+        "open": 4469.639,
+        "high": 4470.831,
+        "low": 4386.416,
+        "close": 4427.722,
+        "volume": 5071378.0
+      },
+      {
+        "week_date": "2021-08-20",
+        "open": 4427.722,
+        "high": 4440.932,
+        "low": 4273.945,
+        "close": 4328.215,
+        "volume": 4304445.0
+      },
+      {
+        "week_date": "2021-08-27",
+        "open": 4328.215,
+        "high": 4346.718,
+        "low": 4262.569,
+        "close": 4266.503,
+        "volume": 7617836.0
+      },
+      {
+        "week_date": "2021-09-03",
+        "open": 4266.503,
+        "high": 4286.594,
+        "low": 4239.601,
+        "close": 4260.795,
+        "volume": 8139196.0
+      },
+      {
+        "week_date": "2021-09-10",
+        "open": 4260.795,
+        "high": 4335.354,
+        "low": 4224.134,
+        "close": 4308.591,
+        "volume": 7101992.0
+      },
+      {
+        "week_date": "2021-09-17",
+        "open": 4308.591,
+        "high": 4402.279,
+        "low": 4264.506,
+        "close": 4400.967,
+        "volume": 8390975.0
+      },
+      {
+        "week_date": "2021-09-24",
+        "open": 4400.967,
+        "high": 4602.768,
+        "low": 4389.652,
+        "close": 4602.21,
+        "volume": 7861760.0
+      },
+      {
+        "week_date": "2021-10-01",
+        "open": 4602.21,
+        "high": 4628.94,
+        "low": 4577.313,
+        "close": 4615.605,
+        "volume": 6876286.0
+      },
+      {
+        "week_date": "2021-10-08",
+        "open": 4615.605,
+        "high": 4814.609,
+        "low": 4604.707,
+        "close": 4749.117,
+        "volume": 1312378.0
+      },
+      {
+        "week_date": "2021-10-15",
+        "open": 4749.117,
+        "high": 4778.57,
+        "low": 4546.128,
+        "close": 4611.801,
+        "volume": 1013834.0
+      },
+      {
+        "week_date": "2021-10-22",
+        "open": 4611.801,
+        "high": 4684.511,
+        "low": 4568.842,
+        "close": 4627.391,
+        "volume": 1419158.0
+      },
+      {
+        "week_date": "2021-10-29",
+        "open": 4627.391,
+        "high": 4846.693,
+        "low": 4586.508,
+        "close": 4777.766,
+        "volume": 8213594.0
+      },
+      {
+        "week_date": "2021-11-05",
+        "open": 4777.766,
+        "high": 5010.058,
+        "low": 4752.517,
+        "close": 4936.261,
+        "volume": 1050096.0
+      },
+      {
+        "week_date": "2021-11-12",
+        "open": 4936.261,
+        "high": 5038.218,
+        "low": 4867.441,
+        "close": 5016.881,
+        "volume": 8913750.0
+      },
+      {
+        "week_date": "2021-11-19",
+        "open": 5016.881,
+        "high": 5046.18,
+        "low": 4903.904,
+        "close": 5038.767,
+        "volume": 4973852.0
+      },
+      {
+        "week_date": "2021-11-26",
+        "open": 5038.767,
+        "high": 5072.771,
+        "low": 4915.263,
+        "close": 4951.418,
+        "volume": 8606782.0
+      },
+      {
+        "week_date": "2021-12-03",
+        "open": 4951.418,
+        "high": 5156.384,
+        "low": 4826.055,
+        "close": 5089.776,
+        "volume": 4504984.0
+      },
+      {
+        "week_date": "2021-12-10",
+        "open": 5089.776,
+        "high": 5219.639,
+        "low": 5087.08,
+        "close": 5185.555,
+        "volume": 4798120.0
+      },
+      {
+        "week_date": "2021-12-17",
+        "open": 5185.555,
+        "high": 5259.772,
+        "low": 5004.694,
+        "close": 5065.094,
+        "volume": 2912891.0
+      },
+      {
+        "week_date": "2021-12-24",
+        "open": 5065.094,
+        "high": 5146.986,
+        "low": 5041.533,
+        "close": 5135.514,
+        "volume": 7704026.0
+      },
+      {
+        "week_date": "2021-12-31",
+        "open": 5135.514,
+        "high": 5203.552,
+        "low": 5106.021,
+        "close": 5118.346,
+        "volume": 6110263.0
+      },
+      {
+        "week_date": "2022-01-07",
+        "open": 5118.346,
+        "high": 5185.622,
+        "low": 4969.774,
+        "close": 4974.516,
+        "volume": 7081039.0
+      },
+      {
+        "week_date": "2022-01-14",
+        "open": 4974.516,
+        "high": 4987.836,
+        "low": 4939.257,
+        "close": 4961.381,
+        "volume": 7362825.0
+      },
+      {
+        "week_date": "2022-01-21",
+        "open": 4961.381,
+        "high": 5190.472,
+        "low": 4956.06,
+        "close": 5139.83,
+        "volume": 6350397.0
+      },
+      {
+        "week_date": "2022-01-28",
+        "open": 5139.83,
+        "high": 5286.136,
+        "low": 5097.043,
+        "close": 5226.308,
+        "volume": 2275843.0
+      },
+      {
+        "week_date": "2022-02-04",
+        "open": 5226.308,
+        "high": 5301.252,
+        "low": 4995.17,
+        "close": 5047.74,
+        "volume": 1032173.0
+      },
+      {
+        "week_date": "2022-02-11",
+        "open": 5047.74,
+        "high": 5051.619,
+        "low": 4873.722,
+        "close": 4886.196,
+        "volume": 3762740.0
+      },
+      {
+        "week_date": "2022-02-18",
+        "open": 4886.196,
+        "high": 5061.441,
+        "low": 4881.188,
+        "close": 5007.821,
+        "volume": 4726548.0
+      },
+      {
+        "week_date": "2022-02-25",
+        "open": 5007.821,
+        "high": 5090.115,
+        "low": 4909.869,
+        "close": 4947.15,
+        "volume": 7470051.0
+      },
+      {
+        "week_date": "2022-03-04",
+        "open": 4947.15,
+        "high": 4967.793,
+        "low": 4727.288,
+        "close": 4826.117,
+        "volume": 2833848.0
+      },
+      {
+        "week_date": "2022-03-11",
+        "open": 4826.117,
+        "high": 4880.145,
+        "low": 4794.003,
+        "close": 4850.786,
+        "volume": 5236041.0
+      },
+      {
+        "week_date": "2022-03-18",
+        "open": 4850.786,
+        "high": 4919.895,
+        "low": 4613.525,
+        "close": 4681.143,
+        "volume": 6547835.0
+      },
+      {
+        "week_date": "2022-03-25",
+        "open": 4681.143,
+        "high": 4788.852,
+        "low": 4656.247,
+        "close": 4684.319,
+        "volume": 2238021.0
+      },
+      {
+        "week_date": "2022-04-01",
+        "open": 4684.319,
+        "high": 4740.832,
+        "low": 4541.44,
+        "close": 4565.051,
+        "volume": 3171416.0
+      },
+      {
+        "week_date": "2022-04-08",
+        "open": 4565.051,
+        "high": 4755.252,
+        "low": 4532.048,
+        "close": 4685.556,
+        "volume": 2157071.0
+      },
+      {
+        "week_date": "2022-04-15",
+        "open": 4685.556,
+        "high": 4778.033,
+        "low": 4532.973,
+        "close": 4590.104,
+        "volume": 8931419.0
+      },
+      {
+        "week_date": "2022-04-22",
+        "open": 4590.104,
+        "high": 4687.203,
+        "low": 4533.608,
+        "close": 4681.584,
+        "volume": 4964356.0
+      },
+      {
+        "week_date": "2022-04-29",
+        "open": 4681.584,
+        "high": 4698.459,
+        "low": 4585.75,
+        "close": 4641.305,
+        "volume": 2669660.0
+      },
+      {
+        "week_date": "2022-05-06",
+        "open": 4641.305,
+        "high": 4668.74,
+        "low": 4563.501,
+        "close": 4620.975,
+        "volume": 6840559.0
+      },
+      {
+        "week_date": "2022-05-13",
+        "open": 4620.975,
+        "high": 4870.055,
+        "low": 4559.897,
+        "close": 4850.618,
+        "volume": 2818486.0
+      },
+      {
+        "week_date": "2022-05-20",
+        "open": 4850.618,
+        "high": 5111.277,
+        "low": 4815.768,
+        "close": 5072.692,
+        "volume": 1538036.0
+      },
+      {
+        "week_date": "2022-05-27",
+        "open": 5072.692,
+        "high": 5122.386,
+        "low": 4975.535,
+        "close": 4981.658,
+        "volume": 5487519.0
+      },
+      {
+        "week_date": "2022-06-03",
+        "open": 4981.658,
+        "high": 5006.704,
+        "low": 4920.205,
+        "close": 4939.345,
+        "volume": 6907893.0
+      },
+      {
+        "week_date": "2022-06-10",
+        "open": 4939.345,
+        "high": 5011.762,
+        "low": 4932.722,
+        "close": 4992.433,
+        "volume": 3396149.0
+      },
+      {
+        "week_date": "2022-06-17",
+        "open": 4992.433,
+        "high": 5287.814,
+        "low": 4985.741,
+        "close": 5243.149,
+        "volume": 2436311.0
+      },
+      {
+        "week_date": "2022-06-24",
+        "open": 5243.149,
+        "high": 5248.926,
+        "low": 5219.751,
+        "close": 5221.212,
+        "volume": 6538758.0
+      },
+      {
+        "week_date": "2022-07-01",
+        "open": 5221.212,
+        "high": 5255.294,
+        "low": 5136.28,
+        "close": 5194.979,
+        "volume": 7541722.0
+      },
+      {
+        "week_date": "2022-07-08",
+        "open": 5194.979,
+        "high": 5238.853,
+        "low": 5033.221,
+        "close": 5180.654,
+        "volume": 8689350.0
+      },
+      {
+        "week_date": "2022-07-15",
+        "open": 5180.654,
+        "high": 5437.903,
+        "low": 5138.653,
+        "close": 5399.305,
+        "volume": 6449585.0
+      },
+      {
+        "week_date": "2022-07-22",
+        "open": 5399.305,
+        "high": 5587.291,
+        "low": 5365.606,
+        "close": 5565.141,
+        "volume": 2908637.0
+      },
+      {
+        "week_date": "2022-07-29",
+        "open": 5565.141,
+        "high": 5929.672,
+        "low": 5537.053,
+        "close": 5755.195,
+        "volume": 6409072.0
+      },
+      {
+        "week_date": "2022-08-05",
+        "open": 5755.195,
+        "high": 5791.356,
+        "low": 5656.152,
+        "close": 5697.85,
+        "volume": 7386959.0
+      },
+      {
+        "week_date": "2022-08-12",
+        "open": 5697.85,
+        "high": 5767.174,
+        "low": 5583.251,
+        "close": 5651.269,
+        "volume": 7655975.0
+      },
+      {
+        "week_date": "2022-08-19",
+        "open": 5651.269,
+        "high": 5721.478,
+        "low": 5639.487,
+        "close": 5717.846,
+        "volume": 4534172.0
+      },
+      {
+        "week_date": "2022-08-26",
+        "open": 5717.846,
+        "high": 5932.537,
+        "low": 5650.348,
+        "close": 5888.9,
+        "volume": 3363420.0
+      },
+      {
+        "week_date": "2022-09-02",
+        "open": 5888.9,
+        "high": 5904.84,
+        "low": 5815.416,
+        "close": 5895.028,
+        "volume": 2101701.0
+      },
+      {
+        "week_date": "2022-09-09",
+        "open": 5895.028,
+        "high": 5965.029,
+        "low": 5804.124,
+        "close": 5840.179,
+        "volume": 6175449.0
+      },
+      {
+        "week_date": "2022-09-16",
+        "open": 5840.179,
+        "high": 5895.352,
+        "low": 5820.009,
+        "close": 5866.685,
+        "volume": 7427147.0
+      },
+      {
+        "week_date": "2022-09-23",
+        "open": 5866.685,
+        "high": 5936.456,
+        "low": 5818.714,
+        "close": 5844.832,
+        "volume": 3583195.0
+      },
+      {
+        "week_date": "2022-09-30",
+        "open": 5844.832,
+        "high": 5905.077,
+        "low": 5748.542,
+        "close": 5793.147,
+        "volume": 5410920.0
+      },
+      {
+        "week_date": "2022-10-07",
+        "open": 5793.147,
+        "high": 5976.772,
+        "low": 5525.857,
+        "close": 5612.436,
+        "volume": 5821872.0
+      },
+      {
+        "week_date": "2022-10-14",
+        "open": 5612.436,
+        "high": 5626.925,
+        "low": 5436.997,
+        "close": 5549.25,
+        "volume": 3133308.0
+      },
+      {
+        "week_date": "2022-10-21",
+        "open": 5549.25,
+        "high": 5616.635,
+        "low": 5403.659,
+        "close": 5505.038,
+        "volume": 8004375.0
+      },
+      {
+        "week_date": "2022-10-28",
+        "open": 5505.038,
+        "high": 5645.313,
+        "low": 5493.5,
+        "close": 5520.151,
+        "volume": 2150965.0
+      },
+      {
+        "week_date": "2022-11-04",
+        "open": 5520.151,
+        "high": 5566.207,
+        "low": 5489.443,
+        "close": 5526.77,
+        "volume": 4676100.0
+      },
+      {
+        "week_date": "2022-11-11",
+        "open": 5526.77,
+        "high": 5629.498,
+        "low": 5485.169,
+        "close": 5500.18,
+        "volume": 4015372.0
+      },
+      {
+        "week_date": "2022-11-18",
+        "open": 5500.18,
+        "high": 5570.553,
+        "low": 5496.628,
+        "close": 5514.012,
+        "volume": 8267030.0
+      },
+      {
+        "week_date": "2022-11-25",
+        "open": 5514.012,
+        "high": 5537.938,
+        "low": 5435.982,
+        "close": 5517.439,
+        "volume": 8890647.0
+      },
+      {
+        "week_date": "2022-12-02",
+        "open": 5517.439,
+        "high": 5654.657,
+        "low": 5464.388,
+        "close": 5609.282,
+        "volume": 6716258.0
+      },
+      {
+        "week_date": "2022-12-09",
+        "open": 5609.282,
+        "high": 5770.368,
+        "low": 5569.867,
+        "close": 5754.863,
+        "volume": 2977467.0
+      },
+      {
+        "week_date": "2022-12-16",
+        "open": 5754.863,
+        "high": 5922.138,
+        "low": 5724.792,
+        "close": 5892.225,
+        "volume": 5072643.0
+      },
+      {
+        "week_date": "2022-12-23",
+        "open": 5892.225,
+        "high": 5899.572,
+        "low": 5729.839,
+        "close": 5751.883,
+        "volume": 5832239.0
+      },
+      {
+        "week_date": "2022-12-30",
+        "open": 5751.883,
+        "high": 5822.454,
+        "low": 5684.937,
+        "close": 5788.059,
+        "volume": 2737115.0
+      },
+      {
+        "week_date": "2023-01-06",
+        "open": 5788.059,
+        "high": 6055.221,
+        "low": 5692.873,
+        "close": 5929.687,
+        "volume": 6892275.0
+      },
+      {
+        "week_date": "2023-01-13",
+        "open": 5929.687,
+        "high": 6187.689,
+        "low": 5843.376,
+        "close": 6181.12,
+        "volume": 4867348.0
+      },
+      {
+        "week_date": "2023-01-20",
+        "open": 6181.12,
+        "high": 6275.934,
+        "low": 6173.328,
+        "close": 6221.94,
+        "volume": 4789118.0
+      },
+      {
+        "week_date": "2023-01-27",
+        "open": 6221.94,
+        "high": 6240.26,
+        "low": 6166.254,
+        "close": 6197.527,
+        "volume": 8787406.0
+      },
+      {
+        "week_date": "2023-02-03",
+        "open": 6197.527,
+        "high": 6286.487,
+        "low": 6128.214,
+        "close": 6145.064,
+        "volume": 1430996.0
+      },
+      {
+        "week_date": "2023-02-10",
+        "open": 6145.064,
+        "high": 6232.262,
+        "low": 6057.143,
+        "close": 6221.071,
+        "volume": 8831866.0
+      },
+      {
+        "week_date": "2023-02-17",
+        "open": 6221.071,
+        "high": 6347.782,
+        "low": 6163.007,
+        "close": 6328.724,
+        "volume": 6239758.0
+      },
+      {
+        "week_date": "2023-02-24",
+        "open": 6328.724,
+        "high": 6452.135,
+        "low": 6192.955,
+        "close": 6405.03,
+        "volume": 8425384.0
+      },
+      {
+        "week_date": "2023-03-03",
+        "open": 6405.03,
+        "high": 6452.638,
+        "low": 6116.975,
+        "close": 6181.365,
+        "volume": 2220813.0
+      },
+      {
+        "week_date": "2023-03-10",
+        "open": 6181.365,
+        "high": 6349.878,
+        "low": 6168.276,
+        "close": 6334.889,
+        "volume": 2079607.0
+      },
+      {
+        "week_date": "2023-03-17",
+        "open": 6334.889,
+        "high": 6364.752,
+        "low": 6196.768,
+        "close": 6317.648,
+        "volume": 3071265.0
+      },
+      {
+        "week_date": "2023-03-24",
+        "open": 6317.648,
+        "high": 6473.455,
+        "low": 6246.037,
+        "close": 6259.378,
+        "volume": 6476930.0
+      },
+      {
+        "week_date": "2023-03-31",
+        "open": 6259.378,
+        "high": 6272.882,
+        "low": 6108.63,
+        "close": 6173.914,
+        "volume": 1568046.0
+      },
+      {
+        "week_date": "2023-04-07",
+        "open": 6173.914,
+        "high": 6220.332,
+        "low": 6093.912,
+        "close": 6150.716,
+        "volume": 2302979.0
+      },
+      {
+        "week_date": "2023-04-14",
+        "open": 6150.716,
+        "high": 6210.727,
+        "low": 5903.077,
+        "close": 5956.826,
+        "volume": 7622569.0
+      },
+      {
+        "week_date": "2023-04-21",
+        "open": 5956.826,
+        "high": 6061.386,
+        "low": 5643.289,
+        "close": 5736.002,
+        "volume": 5060367.0
+      },
+      {
+        "week_date": "2023-04-28",
+        "open": 5736.002,
+        "high": 5903.71,
+        "low": 5608.223,
+        "close": 5902.569,
+        "volume": 5692800.0
+      },
+      {
+        "week_date": "2023-05-05",
+        "open": 5902.569,
+        "high": 5991.89,
+        "low": 5744.501,
+        "close": 5781.233,
+        "volume": 6163217.0
+      },
+      {
+        "week_date": "2023-05-12",
+        "open": 5781.233,
+        "high": 6053.91,
+        "low": 5725.421,
+        "close": 5990.583,
+        "volume": 3809881.0
+      },
+      {
+        "week_date": "2023-05-19",
+        "open": 5990.583,
+        "high": 6136.339,
+        "low": 5823.665,
+        "close": 5951.269,
+        "volume": 1292891.0
+      },
+      {
+        "week_date": "2023-05-26",
+        "open": 5951.269,
+        "high": 6169.837,
+        "low": 5863.905,
+        "close": 6161.912,
+        "volume": 6518570.0
+      },
+      {
+        "week_date": "2023-06-02",
+        "open": 6161.912,
+        "high": 6224.815,
+        "low": 6134.244,
+        "close": 6136.637,
+        "volume": 4163587.0
+      },
+      {
+        "week_date": "2023-06-09",
+        "open": 6136.637,
+        "high": 6173.589,
+        "low": 6098.791,
+        "close": 6125.999,
+        "volume": 3904839.0
+      },
+      {
+        "week_date": "2023-06-16",
+        "open": 6125.999,
+        "high": 6247.076,
+        "low": 6019.968,
+        "close": 6104.807,
+        "volume": 5293074.0
+      },
+      {
+        "week_date": "2023-06-23",
+        "open": 6104.807,
+        "high": 6217.892,
+        "low": 6033.545,
+        "close": 6141.684,
+        "volume": 6431145.0
+      },
+      {
+        "week_date": "2023-06-30",
+        "open": 6141.684,
+        "high": 6263.148,
+        "low": 5969.685,
+        "close": 5974.183,
+        "volume": 2458812.0
+      },
+      {
+        "week_date": "2023-07-07",
+        "open": 5974.183,
+        "high": 6286.484,
+        "low": 5958.087,
+        "close": 6228.418,
+        "volume": 4583566.0
+      },
+      {
+        "week_date": "2023-07-14",
+        "open": 6228.418,
+        "high": 6339.925,
+        "low": 6165.434,
+        "close": 6303.807,
+        "volume": 8728000.0
+      },
+      {
+        "week_date": "2023-07-21",
+        "open": 6303.807,
+        "high": 6407.165,
+        "low": 6279.964,
+        "close": 6399.612,
+        "volume": 2533509.0
+      },
+      {
+        "week_date": "2023-07-28",
+        "open": 6399.612,
+        "high": 6425.465,
+        "low": 6368.595,
+        "close": 6405.455,
+        "volume": 5834146.0
+      },
+      {
+        "week_date": "2023-08-04",
+        "open": 6405.455,
+        "high": 6573.726,
+        "low": 6397.312,
+        "close": 6518.412,
+        "volume": 1193548.0
+      },
+      {
+        "week_date": "2023-08-11",
+        "open": 6518.412,
+        "high": 6924.769,
+        "low": 6446.972,
+        "close": 6830.378,
+        "volume": 7996325.0
+      },
+      {
+        "week_date": "2023-08-18",
+        "open": 6830.378,
+        "high": 6902.1,
+        "low": 6767.236,
+        "close": 6821.405,
+        "volume": 1579682.0
+      },
+      {
+        "week_date": "2023-08-25",
+        "open": 6821.405,
+        "high": 6916.506,
+        "low": 6738.024,
+        "close": 6794.917,
+        "volume": 4214413.0
+      },
+      {
+        "week_date": "2023-09-01",
+        "open": 6794.917,
+        "high": 6803.977,
+        "low": 6771.685,
+        "close": 6784.307,
+        "volume": 4884945.0
+      },
+      {
+        "week_date": "2023-09-08",
+        "open": 6784.307,
+        "high": 6815.932,
+        "low": 6705.621,
+        "close": 6807.348,
+        "volume": 6138997.0
+      },
+      {
+        "week_date": "2023-09-15",
+        "open": 6807.348,
+        "high": 6883.265,
+        "low": 6771.518,
+        "close": 6880.354,
+        "volume": 7824526.0
+      },
+      {
+        "week_date": "2023-09-22",
+        "open": 6880.354,
+        "high": 6986.254,
+        "low": 6877.879,
+        "close": 6889.213,
+        "volume": 4781417.0
+      },
+      {
+        "week_date": "2023-09-29",
+        "open": 6889.213,
+        "high": 6978.006,
+        "low": 6828.72,
+        "close": 6858.893,
+        "volume": 2942213.0
+      },
+      {
+        "week_date": "2023-10-06",
+        "open": 6858.893,
+        "high": 7026.056,
+        "low": 6704.692,
+        "close": 6842.599,
+        "volume": 8739395.0
+      },
+      {
+        "week_date": "2023-10-13",
+        "open": 6842.599,
+        "high": 7026.294,
+        "low": 6828.352,
+        "close": 6981.963,
+        "volume": 1898458.0
+      },
+      {
+        "week_date": "2023-10-20",
+        "open": 6981.963,
+        "high": 7495.469,
+        "low": 6874.78,
+        "close": 7367.393,
+        "volume": 8223311.0
+      },
+      {
+        "week_date": "2023-10-27",
+        "open": 7367.393,
+        "high": 7498.0,
+        "low": 7357.753,
+        "close": 7403.644,
+        "volume": 1029828.0
+      },
+      {
+        "week_date": "2023-11-03",
+        "open": 7403.644,
+        "high": 7802.396,
+        "low": 7320.827,
+        "close": 7784.732,
+        "volume": 4449342.0
+      },
+      {
+        "week_date": "2023-11-10",
+        "open": 7784.732,
+        "high": 7955.783,
+        "low": 7757.801,
+        "close": 7929.088,
+        "volume": 2550851.0
+      },
+      {
+        "week_date": "2023-11-17",
+        "open": 7929.088,
+        "high": 8038.343,
+        "low": 7532.766,
+        "close": 7726.277,
+        "volume": 3103356.0
+      },
+      {
+        "week_date": "2023-11-24",
+        "open": 7726.277,
+        "high": 7832.096,
+        "low": 7595.306,
+        "close": 7684.698,
+        "volume": 1403894.0
+      },
+      {
+        "week_date": "2023-12-01",
+        "open": 7684.698,
+        "high": 7768.881,
+        "low": 7416.384,
+        "close": 7459.489,
+        "volume": 1193147.0
+      },
+      {
+        "week_date": "2023-12-08",
+        "open": 7459.489,
+        "high": 7472.446,
+        "low": 7293.424,
+        "close": 7343.042,
+        "volume": 5394111.0
+      },
+      {
+        "week_date": "2023-12-15",
+        "open": 7343.042,
+        "high": 7479.055,
+        "low": 7321.628,
+        "close": 7469.614,
+        "volume": 4477717.0
+      },
+      {
+        "week_date": "2023-12-22",
+        "open": 7469.614,
+        "high": 7742.308,
+        "low": 7404.017,
+        "close": 7517.794,
+        "volume": 4889330.0
+      },
+      {
+        "week_date": "2023-12-29",
+        "open": 7517.794,
+        "high": 7809.777,
+        "low": 7414.914,
+        "close": 7730.983,
+        "volume": 1569304.0
+      }
+    ],
+    "flat": {
+      "stock_return": -25.77,
+      "sti_return": 47.14,
+      "rel_return": -72.91,
+      "is_flat": true
+    }
+  },
+  "compliance": {
+    "company_id": "O39",
+    "score": 0.0,
+    "met": [
+      {
+        "reg_id": "SGX-711B",
+        "name": "SGX Sustainability Reporting (Comply-or-Explain)",
+        "status": "MET",
+        "evidence_ref": null
+      },
+      {
+        "reg_id": "SGX-CLIMATE",
+        "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
+        "status": "MET",
+        "evidence_ref": null
+      },
+      {
+        "reg_id": "MAS-ENRM",
+        "name": "MAS Guidelines on Environmental Risk Management",
+        "status": "MET",
+        "evidence_ref": null
+      },
+      {
+        "reg_id": "ASEAN-TAXO",
+        "name": "ASEAN Taxonomy for Sustainable Finance",
+        "status": "MET",
+        "evidence_ref": null
+      }
+    ],
+    "partial": [],
+    "missing": [],
+    "not_in_force": [
+      {
+        "reg_id": "ISSB-S2",
+        "name": "IFRS S2 / ISSB Climate-related Disclosures",
+        "status": "NA",
+        "evidence_ref": null
+      }
+    ],
+    "trace": {
+      "label": "Compliance gap",
+      "value": 0.0,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET",
+          "value": null,
+          "contribution": null,
+          "source_sentence": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "SGX Mandatory Climate Reporting (TCFD-aligned) — MET",
+          "value": null,
+          "contribution": null,
+          "source_sentence": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "IFRS S2 / ISSB Climate-related Disclosures — not yet in force (2025)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "MAS Guidelines on Environmental Risk Management — MET",
+          "value": null,
+          "contribution": null,
+          "source_sentence": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "ASEAN Taxonomy for Sustainable Finance — MET",
+          "value": null,
+          "contribution": null,
+          "source_sentence": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        }
+      ]
+    }
+  },
+  "forecast": {
+    "company_id": "O39",
+    "predicted_score": 81.15,
+    "horizon_years": 1,
+    "ci_low": 77.28,
+    "ci_high": 85.02,
+    "feature_contributions": [
+      {
+        "feature": "pe",
+        "value": 9.0,
+        "contribution": -4.476
+      },
+      {
+        "feature": "hiring_cum",
+        "value": 0.0,
+        "contribution": -1.252
+      },
+      {
+        "feature": "consensus",
+        "value": 57.18,
+        "contribution": 0.837
+      },
+      {
+        "feature": "div_yield",
+        "value": 3.39,
+        "contribution": 0.825
+      },
+      {
+        "feature": "controversy_cum",
+        "value": 0.0,
+        "contribution": 0.29
+      },
+      {
+        "feature": "divergence",
+        "value": 27.08,
+        "contribution": -0.083
+      },
+      {
+        "feature": "compliance_gap",
+        "value": 0.0,
+        "contribution": 0.0
+      },
+      {
+        "feature": "news_sentiment",
+        "value": 0.0,
+        "contribution": 0.0
+      }
+    ],
+    "val_error": 3.873,
+    "hypothesis": true,
+    "trace": {
+      "label": "Forecast 2024 = 81.1 (HYPOTHESIS, test MAE=3.87)",
+      "value": 81.15,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "pe=9.0",
+          "value": null,
+          "contribution": -4.476,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "hiring_cum=0.0",
+          "value": null,
+          "contribution": -1.252,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "consensus=57.18",
+          "value": null,
+          "contribution": 0.837,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "div_yield=3.39",
+          "value": null,
+          "contribution": 0.825,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "controversy_cum=0.0",
+          "value": null,
+          "contribution": 0.29,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "divergence=27.08",
+          "value": null,
+          "contribution": -0.083,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "compliance_gap=0.0",
+          "value": null,
+          "contribution": 0.0,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "news_sentiment=0.0",
+          "value": null,
+          "contribution": 0.0,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        }
+      ]
+    }
+  },
+  "claims": {
+    "claims": [
+      {
+        "topic_id": "financed_emissions",
+        "pillar": "E",
+        "state": "VERIFIED",
+        "text": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets ",
+        "source_sentence": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
+        "source_doc": "O39-SR2023",
+        "source_page": 1,
+        "weight": 0.25
+      },
+      {
+        "topic_id": "business_ethics",
+        "pillar": "G",
+        "state": "VERIFIED",
+        "text": "In FY2023, OCBC strengthened its anti-corruption code of conduct and board ethics oversigh",
+        "source_sentence": "In FY2023, OCBC strengthened its anti-corruption code of conduct and board ethics oversight.",
+        "source_doc": "O39-SR2023",
+        "source_page": 1,
+        "weight": 0.2
+      },
+      {
+        "topic_id": "data_security",
+        "pillar": "G",
+        "state": "VERIFIED",
+        "text": "In FY2023, OCBC invested in cybersecurity controls to prevent customer data breach inciden",
+        "source_sentence": "In FY2023, OCBC invested in cybersecurity controls to prevent customer data breach incidents.",
+        "source_doc": "O39-SR2023",
+        "source_page": 1,
+        "weight": 0.15
+      },
+      {
+        "topic_id": "systemic_risk",
+        "pillar": "G",
+        "state": "VERIFIED",
+        "text": "In FY2023, OCBC maintained capital adequacy well above regulatory minimums under stress te",
+        "source_sentence": "In FY2023, OCBC maintained capital adequacy well above regulatory minimums under stress test scenarios.",
+        "source_doc": "O39-SR2023",
+        "source_page": 1,
+        "weight": 0.15
+      },
+      {
+        "topic_id": "financial_inclusion",
+        "pillar": "S",
+        "state": "ASSERTED",
+        "text": "In FY2023, OCBC broadened financial inclusion programmes for underserved SME customers.",
+        "source_sentence": "In FY2023, OCBC broadened financial inclusion programmes for underserved SME customers.",
+        "source_doc": "O39-SR2023",
+        "source_page": 1,
+        "weight": 0.15
+      },
+      {
+        "topic_id": "employee_diversity",
+        "pillar": "S",
+        "state": "ASSERTED",
+        "text": "In FY2023, OCBC increased gender diversity with more women in leadership roles.",
+        "source_sentence": "In FY2023, OCBC increased gender diversity with more women in leadership roles.",
+        "source_doc": "O39-SR2023",
+        "source_page": 1,
+        "weight": 0.1
+      }
+    ],
+    "absent": []
+  },
+  "peers": [
+    {
+      "id": "D05",
+      "name": "DBS Group",
+      "evidence_total": 95.0
+    },
+    {
+      "id": "U11",
+      "name": "UOB",
+      "evidence_total": 87.5
+    }
+  ]
+}

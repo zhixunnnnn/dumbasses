@@ -1,0 +1,105 @@
+{
+  "rows": [
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "In addition to our focus on large corporates, we doubled down on our efforts to help SMEs in their sustainability efforts.",
+      "source_sentence": "In addition to our focus on large corporates, we doubled down on our efforts to help SMEs in their sustainability efforts.",
+      "source_doc": "dbs sr2024",
+      "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "We leveraged the work of past years including several strategic partnerships with industry leaders in markets like India and Hong Kong, and translated these into financing solutions for our SME customers.",
+      "source_sentence": "We leveraged the work of past years including several strategic partnerships with industry leaders in markets like India and Hong Kong, and translated these into financing solutions for our SME customers.",
+      "source_doc": "dbs sr2024",
+      "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Overall, we almost doubled our sustainable finance volumes to Mid-Cap and SME customers last year.",
+      "source_sentence": "Overall, we almost doubled our sustainable finance volumes to Mid-Cap and SME customers last year.",
+      "source_doc": "dbs sr2024",
+      "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "Complementing all these efforts on client engagement, we also further strengthened our ESG risk management capabilities and governance.",
+      "source_sentence": "Complementing all these efforts on client engagement, we also further strengthened our ESG risk management capabilities and governance.",
+      "source_doc": "dbs sr2024",
+      "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "We launched a new accredited training programme to equip relationship managers and credit risk managers with the skills to integrate ESG principles into client strategy and financial risk assessments.",
+      "source_sentence": "We launched a new accredited training programme to equip relationship managers and credit risk managers with the skills to integrate ESG principles into client strategy and financial risk assessments.",
+      "source_doc": "dbs sr2024",
+      "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "We started to leverage Gen AI for data analytics and ESG risk management processes.",
+      "source_sentence": "We started to leverage Gen AI for data analytics and ESG risk management processes.",
+      "source_doc": "dbs sr2024",
+      "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "We also continued providing inclusive financial services to underserved communities.",
+      "source_sentence": "We also continued providing inclusive financial services to underserved communities.",
+      "source_doc": "dbs sr2024",
+      "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "employee_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "While there has been debate on the topic of Diversity, Equity and Inclusion (DEI), especially in the United States, our belief remains unchanged.",
+      "source_sentence": "While there has been debate on the topic of Diversity, Equity and Inclusion (DEI), especially in the United States, our belief remains unchanged.",
+      "source_doc": "dbs sr2024",
+      "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "employee_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "In 2024, we already committed SGD 98.1 million in funding to support multi-year programmes focussed on two key themes, providing essential needs and fostering inclusion, while additionally granting SGD 4.5 million to Businesses for Impact.",
+      "source_sentence": "In 2024, we already committed SGD 98.1 million in funding to support multi-year programmes focussed on two key themes, providing essential needs and fostering inclusion, while additionally granting SGD 4.5 million to Businesses for Impact.",
+      "source_doc": "dbs sr2024",
+      "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    }
+  ],
+  "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+  "source_title": "dbs sr2024"
+}

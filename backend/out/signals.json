@@ -1,0 +1,53 @@
+[
+  {
+    "id": "U96",
+    "name": "Sembcorp Industries",
+    "ticker": "U96.SI",
+    "sector": "Utilities",
+    "country": "Singapore",
+    "evidence_total": 88.89,
+    "confidence": 0.603,
+    "consensus": 17.5,
+    "divergence": 28.94,
+    "evidence_gap": 18.21,
+    "momentum": 6.666,
+    "quadrant": "HIDDEN_WINNERS",
+    "is_underpriced_improver": true,
+    "compliance_score": 0.0,
+    "forecast": 87.72
+  },
+  {
+    "id": "BN4",
+    "name": "Keppel Ltd",
+    "ticker": "BN4.SI",
+    "sector": "Industrials",
+    "country": "Singapore",
+    "evidence_total": 94.44,
+    "confidence": 0.693,
+    "consensus": 14.64,
+    "divergence": 16.98,
+    "evidence_gap": 74.65,
+    "momentum": 6.387,
+    "quadrant": "HIDDEN_WINNERS",
+    "is_underpriced_improver": true,
+    "compliance_score": 0.0,
+    "forecast": 89.6
+  },
+  {
+    "id": "U11",
+    "name": "UOB",
+    "ticker": "U11.SI",
+    "sector": "Financials",
+    "country": "Singapore",
+    "evidence_total": 87.5,
+    "confidence": 0.658,
+    "consensus": 44.21,
+    "divergence": 43.75,
+    "evidence_gap": 11.35,
+    "momentum": 2.25,
+    "quadrant": "HIDDEN_WINNERS",
+    "is_underpriced_improver": true,
+    "compliance_score": 0.0,
+    "forecast": 81.59
+  }
+]
