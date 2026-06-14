@@ -1,23 +1,19 @@
-from fastapi import FastAPI
+"""FastAPI layer — serves the precomputed ESG Evidence Engine JSON to the dashboard.
+
+UI-independent engine -> JSON in backend/out/ -> these endpoints. On startup, if the
+output is missing it is built offline (zero network), so `uvicorn app.main:app` just works.
+"""
+from __future__ import annotations
+
+import json
+
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 
+from backend.engine import config
+from backend.engine.pipeline import build
 
-class Product(BaseModel):
-    name: str
-    value: int
-    change: str
-
-
-class Portfolio(BaseModel):
-    customer_count: int
-    transaction_volume: int
-    risk_score: int
-    uptime: str
-    products: list[Product]
-
-
-app = FastAPI(title="PolyFintech 2026 API", version="0.1.0")
+app = FastAPI(title="ESG Evidence Engine API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -28,22 +24,45 @@ app.add_middleware(
 )
 
 
+@app.on_event("startup")
+def _ensure_built() -> None:
+    # one-command run: seed the DB if empty, then precompute the dashboard JSON (offline).
+    from backend.engine import ingest
+
+    if not ingest.load().companies:
+        from backend.data.seed import build as seed_build
+        seed_build()
+    if not (config.OUT_DIR / "companies.json").exists():
+        build(offline=True)
+
+
+def _read(rel: str):
+    path = config.OUT_DIR / rel
+    if not path.exists():
+        raise HTTPException(status_code=404, detail=f"{rel} not found — run the pipeline")
+    return json.loads(path.read_text("utf-8"))
+
+
 @app.get("/api/health")
 def health() -> dict[str, str]:
-    return {"status": "ok", "service": "polyfintech2026"}
+    return {"status": "ok", "service": "esg-evidence-engine"}
 
 
-@app.get("/api/portfolio", response_model=Portfolio)
-def portfolio() -> Portfolio:
-    return Portfolio(
-        customer_count=12840,
-        transaction_volume=4280000,
-        risk_score=18,
-        uptime="99.98%",
-        products=[
-            Product(name="Digital Wallets", value=1820000, change="+18.4%"),
-            Product(name="SME Lending", value=1410000, change="+11.2%"),
-            Product(name="Cross-border Pay", value=1050000, change="+9.7%"),
-        ],
-    )
+@app.get("/api/companies")
+def companies():
+    return _read("companies.json")
 
+
+@app.get("/api/matrix")
+def matrix():
+    return _read("matrix.json")
+
+
+@app.get("/api/signals")
+def signals():
+    return _read("signals.json")
+
+
+@app.get("/api/company/{company_id}")
+def company(company_id: str):
+    return _read(f"company/{company_id}.json")

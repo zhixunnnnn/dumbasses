@@ -7,3 +7,10 @@ __pycache__
 .env
 .DS_Store
 .claude
+
+# generated engine artifacts (all regenerable: seed -> pipeline)
+backend/cache/
+backend/out/
+backend/models/
+backend/data/esg.db
+backend/data/sample_workbook.xlsx

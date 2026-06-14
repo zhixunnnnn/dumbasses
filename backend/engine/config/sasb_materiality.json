@@ -1,0 +1,72 @@
+{
+  "_comment": "Industry -> material SASB/ISSB topics with weights (sum=1.0 per industry). THE ONLY place weights live. domain routes verification authority.",
+  "Commercial Banks": {
+    "topics": [
+      {"topic_id": "financed_emissions", "pillar": "E", "weight": 0.25, "domain": "climate", "keywords": ["financed emissions", "green financing", "sustainable loans", "net zero portfolio"]},
+      {"topic_id": "business_ethics", "pillar": "G", "weight": 0.20, "domain": "governance", "keywords": ["anti-corruption", "code of conduct", "ethics", "whistleblow"]},
+      {"topic_id": "data_security", "pillar": "G", "weight": 0.15, "domain": "governance", "keywords": ["cybersecurity", "data breach", "data protection"]},
+      {"topic_id": "systemic_risk", "pillar": "G", "weight": 0.15, "domain": "governance", "keywords": ["capital adequacy", "stress test", "systemic", "risk management"]},
+      {"topic_id": "financial_inclusion", "pillar": "S", "weight": 0.15, "domain": "labour", "keywords": ["financial inclusion", "underserved", "access to finance", "SME"]},
+      {"topic_id": "employee_diversity", "pillar": "S", "weight": 0.10, "domain": "labour", "keywords": ["diversity", "gender", "inclusion", "women in leadership"]}
+    ]
+  },
+  "Real Estate": {
+    "topics": [
+      {"topic_id": "energy_management", "pillar": "E", "weight": 0.25, "domain": "climate", "keywords": ["energy efficiency", "green building", "BCA Green Mark", "LEED"]},
+      {"topic_id": "ghg_emissions", "pillar": "E", "weight": 0.20, "domain": "climate", "keywords": ["scope 1", "scope 2", "carbon", "emissions"]},
+      {"topic_id": "climate_resilience", "pillar": "E", "weight": 0.20, "domain": "climate", "keywords": ["climate risk", "flood", "physical risk", "resilience", "TCFD"]},
+      {"topic_id": "business_ethics", "pillar": "G", "weight": 0.15, "domain": "governance", "keywords": ["governance", "ethics", "board independence"]},
+      {"topic_id": "water_management", "pillar": "E", "weight": 0.10, "domain": "climate", "keywords": ["water", "recycled water", "water intensity"]},
+      {"topic_id": "tenant_sustainability", "pillar": "S", "weight": 0.10, "domain": "labour", "keywords": ["green lease", "tenant engagement", "wellbeing"]}
+    ]
+  },
+  "Electric Utilities & Power Generators": {
+    "topics": [
+      {"topic_id": "ghg_emissions", "pillar": "E", "weight": 0.30, "domain": "climate", "keywords": ["scope 1", "carbon", "emissions intensity", "CO2"]},
+      {"topic_id": "energy_transition", "pillar": "E", "weight": 0.25, "domain": "climate", "keywords": ["renewables", "solar", "wind", "green energy", "decarbonisation", "transition"]},
+      {"topic_id": "workforce_safety", "pillar": "S", "weight": 0.15, "domain": "labour", "keywords": ["safety", "lost time injury", "fatalities", "occupational health"]},
+      {"topic_id": "air_quality", "pillar": "E", "weight": 0.10, "domain": "climate", "keywords": ["air quality", "NOx", "SOx", "particulate"]},
+      {"topic_id": "water_management", "pillar": "E", "weight": 0.10, "domain": "climate", "keywords": ["water withdrawal", "cooling water"]},
+      {"topic_id": "grid_resiliency", "pillar": "G", "weight": 0.10, "domain": "governance", "keywords": ["grid", "reliability", "supply security"]}
+    ]
+  },
+  "Airlines": {
+    "topics": [
+      {"topic_id": "ghg_emissions", "pillar": "E", "weight": 0.35, "domain": "climate", "keywords": ["carbon", "emissions", "scope 1", "SAF", "sustainable aviation fuel", "CORSIA"]},
+      {"topic_id": "fuel_efficiency", "pillar": "E", "weight": 0.20, "domain": "climate", "keywords": ["fuel efficiency", "fleet renewal", "fuel burn"]},
+      {"topic_id": "labor_relations", "pillar": "S", "weight": 0.20, "domain": "labour", "keywords": ["labour", "union", "crew", "collective"]},
+      {"topic_id": "safety_management", "pillar": "S", "weight": 0.15, "domain": "labour", "keywords": ["safety", "incident", "IOSA"]},
+      {"topic_id": "business_ethics", "pillar": "G", "weight": 0.10, "domain": "governance", "keywords": ["governance", "ethics", "anti-bribery"]}
+    ]
+  },
+  "Agricultural Products": {
+    "topics": [
+      {"topic_id": "land_use_deforestation", "pillar": "E", "weight": 0.25, "domain": "supply_chain", "keywords": ["deforestation", "NDPE", "no deforestation", "land use", "peat"]},
+      {"topic_id": "supply_chain_traceability", "pillar": "S", "weight": 0.20, "domain": "supply_chain", "keywords": ["traceability", "RSPO", "certified", "supplier audit", "smallholder"]},
+      {"topic_id": "ghg_emissions", "pillar": "E", "weight": 0.15, "domain": "climate", "keywords": ["emissions", "carbon", "scope 1"]},
+      {"topic_id": "water_management", "pillar": "E", "weight": 0.10, "domain": "climate", "keywords": ["water", "effluent", "mill"]},
+      {"topic_id": "food_safety", "pillar": "S", "weight": 0.10, "domain": "labour", "keywords": ["food safety", "quality", "recall"]},
+      {"topic_id": "workforce_health_safety", "pillar": "S", "weight": 0.10, "domain": "labour", "keywords": ["worker safety", "labour rights", "forced labour"]},
+      {"topic_id": "business_ethics", "pillar": "G", "weight": 0.10, "domain": "governance", "keywords": ["governance", "ethics", "grievance"]}
+    ]
+  },
+  "Telecommunication Services": {
+    "topics": [
+      {"topic_id": "data_privacy_security", "pillar": "G", "weight": 0.30, "domain": "governance", "keywords": ["data privacy", "cybersecurity", "customer data", "breach"]},
+      {"topic_id": "energy_management", "pillar": "E", "weight": 0.20, "domain": "climate", "keywords": ["energy", "network energy", "data centre", "renewable energy"]},
+      {"topic_id": "ghg_emissions", "pillar": "E", "weight": 0.15, "domain": "climate", "keywords": ["emissions", "carbon", "scope 2", "net zero"]},
+      {"topic_id": "product_access", "pillar": "S", "weight": 0.15, "domain": "labour", "keywords": ["digital inclusion", "connectivity", "access", "affordability"]},
+      {"topic_id": "competitive_behavior", "pillar": "G", "weight": 0.10, "domain": "governance", "keywords": ["competition", "anti-competitive", "fair pricing"]},
+      {"topic_id": "workforce_diversity", "pillar": "S", "weight": 0.10, "domain": "labour", "keywords": ["diversity", "reskilling", "digital skills"]}
+    ]
+  },
+  "Default": {
+    "topics": [
+      {"topic_id": "ghg_emissions", "pillar": "E", "weight": 0.30, "domain": "climate", "keywords": ["carbon", "emissions", "net zero", "scope 1", "scope 2"]},
+      {"topic_id": "business_ethics", "pillar": "G", "weight": 0.20, "domain": "governance", "keywords": ["ethics", "governance", "anti-corruption"]},
+      {"topic_id": "workforce", "pillar": "S", "weight": 0.20, "domain": "labour", "keywords": ["safety", "diversity", "labour", "training"]},
+      {"topic_id": "resource_use", "pillar": "E", "weight": 0.15, "domain": "climate", "keywords": ["energy", "water", "waste", "circular"]},
+      {"topic_id": "data_governance", "pillar": "G", "weight": 0.15, "domain": "governance", "keywords": ["data", "cyber", "privacy", "risk management"]}
+    ]
+  }
+}
