@@ -26,7 +26,7 @@ export default function CandlestickChart({ candles, height = 240 }: Props) {
   return (
     <svg
       viewBox={`0 0 ${width} ${height}`}
-      className="w-full text-white"
+      className="w-full text-txt"
       role="img"
       aria-label="Candlestick chart"
     >

@@ -4,19 +4,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        canvas: "#161514",
-        surface: "#1e1d1b",
-        raised: "#26241f",
-        hairline: "rgba(255,255,255,0.08)",
-        txt: "#ededeb",
-        muted: "#9a968e",
-        faint: "#6a665f",
-        pos: "#3ecf8e",
-        neg: "#ef6f63",
-        leaders: "#3ecf8e",
-        profit: "#e0b24a",
-        purpose: "#4cc4d4",
-        laggards: "#ec6a5e",
+        canvas: "rgb(var(--color-canvas) / <alpha-value>)",
+        surface: "rgb(var(--color-surface) / <alpha-value>)",
+        raised: "rgb(var(--color-raised) / <alpha-value>)",
+        hairline: "rgb(var(--color-hairline) / <alpha-value>)",
+        txt: "rgb(var(--color-txt) / <alpha-value>)",
+        muted: "rgb(var(--color-muted) / <alpha-value>)",
+        faint: "rgb(var(--color-faint) / <alpha-value>)",
+        pos: "rgb(var(--color-pos) / <alpha-value>)",
+        neg: "rgb(var(--color-neg) / <alpha-value>)",
+        leaders: "rgb(var(--color-leaders) / <alpha-value>)",
+        profit: "rgb(var(--color-profit) / <alpha-value>)",
+        purpose: "rgb(var(--color-purpose) / <alpha-value>)",
+        laggards: "rgb(var(--color-laggards) / <alpha-value>)",
       },
       fontFamily: {
         mono: [
@@ -28,8 +28,8 @@ export default {
         ],
       },
       boxShadow: {
-        panel: "0 1px 0 rgba(255,255,255,0.03), 0 12px 32px rgba(0,0,0,0.35)",
-        float: "0 18px 48px rgba(0,0,0,0.55)",
+        panel: "var(--shadow-panel)",
+        float: "var(--shadow-float)",
       },
       keyframes: {
         "fade-up": {

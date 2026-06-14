@@ -34,7 +34,7 @@ export default function LineChart({
   return (
     <svg
       viewBox={`0 0 ${width} ${height}`}
-      className="w-full text-white"
+      className="w-full text-txt"
       preserveAspectRatio="none"
       role="img"
     >

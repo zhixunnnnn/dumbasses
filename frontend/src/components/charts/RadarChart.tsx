@@ -25,7 +25,7 @@ export default function RadarChart({
   const shape = data.map((d, i) => at(d.value, i).join(",")).join(" ");
 
   return (
-    <svg viewBox={`0 0 ${size} ${size}`} className="w-full text-white" role="img">
+    <svg viewBox={`0 0 ${size} ${size}`} className="w-full text-txt" role="img">
       {[0.25, 0.5, 0.75, 1].map((ring) => (
         <polygon
           key={ring}

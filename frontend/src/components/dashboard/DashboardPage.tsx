@@ -18,6 +18,7 @@ import RatingHistogram from "./RatingHistogram";
 import ControversyFeed from "./ControversyFeed";
 import DeltaBadge from "../common/DeltaBadge";
 import Reveal from "../common/Reveal";
+import { usePublishAssistantPageContext } from "../chat/PageContext";
 
 const indexCandles = buildIndexCandles();
 
@@ -44,6 +45,30 @@ export default function DashboardPage() {
   const indexClose = indexCandles[indexCandles.length - 1].close;
   const indexDelta =
     ((indexClose - indexCandles[0].open) / indexCandles[0].open) * 100;
+  const pageContext = useMemo(
+    () => ({
+      route: "dashboard",
+      title: "Sustainability Matrix",
+      totalCompanies: COMPANIES.length,
+      visibleCompanies: filtered.length,
+      filters,
+      stats: stats.map(({ label, value, delta }) => ({ label, value, delta })),
+      quadrantCounts,
+      signalLeaders: leaders.map(({ company, insight, delta }) => ({
+        name: company.name,
+        ticker: company.ticker,
+        sector: company.sector,
+        region: company.region,
+        esgScore: company.esgScore,
+        financialScore: company.financialScore,
+        insight,
+        delta,
+      })),
+      visibleSample: filtered.slice(0, 12).map(summaryForAssistant),
+    }),
+    [filtered, filters, leaders, quadrantCounts, stats],
+  );
+  usePublishAssistantPageContext(pageContext);
 
   return (
     <div className="mx-auto max-w-[1320px] px-5 py-6 sm:px-8">
@@ -181,6 +206,22 @@ export default function DashboardPage() {
       </footer>
     </div>
   );
+}
+
+function summaryForAssistant(company: Company) {
+  return {
+    name: company.name,
+    ticker: company.ticker,
+    sector: company.sector,
+    region: company.region,
+    grade: company.grade,
+    quadrant: company.quadrant,
+    esgScore: company.esgScore,
+    financialScore: company.financialScore,
+    momentum: company.momentum,
+    carbonIntensity: company.esgMetrics.carbonIntensity,
+    domain: company.domain,
+  };
 }
 
 function Legend() {

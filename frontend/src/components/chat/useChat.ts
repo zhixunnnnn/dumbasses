@@ -1,108 +1,520 @@
-import { useCallback, useRef, useState } from "react";
-import { COMPANIES } from "../../data/companies";
-import { buildSignalLeaders } from "../../data/signals";
-import { QUADRANTS } from "../../lib/quadrant";
-import { signedPercent } from "../../lib/format";
+import {
+  createContext,
+  createElement,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import type { AssistantPageContext } from "./PageContext";
 
 export type ChatRole = "user" | "assistant";
+
+export type ChatSource = {
+  title: string;
+  url: string;
+  snippet?: string | null;
+  source: string;
+};
+
+export type ReferenceArticle = {
+  title: string;
+  url: string;
+  snippet?: string | null;
+  source: string;
+  kind: string;
+  reason?: string | null;
+};
+
+export type ToolResult = {
+  name: string;
+  status: "ok" | "error";
+  summary: string;
+  sourceCount: number;
+};
+
+export type WorkflowStep = {
+  label: string;
+  status: "ok" | "error" | "running";
+  detail: string;
+  toolName?: string | null;
+};
+
+export type ReportArtifact = {
+  title: string;
+  markdown: string;
+  generatedAt: string;
+};
 
 export type ChatMessage = {
   id: string;
   role: ChatRole;
   content: string;
+  sources?: ChatSource[];
+  referenceArticles?: ReferenceArticle[];
+  toolResults?: ToolResult[];
+  workflowSteps?: WorkflowStep[];
+  report?: ReportArtifact | null;
+  model?: string;
+};
+
+export type ChatSessionSummary = {
+  id: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  messageCount: number;
+};
+
+export type ChatSurface = "page" | "floating";
+
+type ConversationApi = {
+  messages: ChatMessage[];
+  activeSessionId: string | null;
+  pending: boolean;
+  activeWorkflowSteps: WorkflowStep[];
+  createSession: () => Promise<void>;
+  selectSession: (sessionId: string) => Promise<void>;
+  send: (raw: string, pageContext: AssistantPageContext) => Promise<void>;
+  stop: () => void;
+  startNewChat: () => void;
+};
+
+type ChatContextValue = {
+  sessions: ChatSessionSummary[];
+  page: ConversationApi;
+  floating: ConversationApi;
+  deleteSession: (sessionId: string) => Promise<void>;
 };
 
 const WELCOME: ChatMessage = {
   id: "welcome",
   role: "assistant",
   content:
-    "I'm your ESG research copilot. Ask me about leaders, laggards, carbon intensity, a sector, or a specific ticker.",
+    "I'm your ESG research agent. I can use the dashboard context, scrape public web pages, and produce source-backed reports.",
 };
 
-function topByEsg() {
-  return [...COMPANIES].sort((a, b) => b.esgScore - a.esgScore)[0];
-}
+const ChatContext = createContext<ChatContextValue | null>(null);
 
-function answer(prompt: string): string {
-  const text = prompt.toLowerCase();
+export function ChatProvider({ children }: { children: ReactNode }) {
+  const [sessions, setSessions] = useState<ChatSessionSummary[]>([]);
 
-  const ticker = COMPANIES.find((c) =>
-    text.includes(c.ticker.toLowerCase()),
+  const upsertSession = useCallback((session: ChatSessionSummary) => {
+    setSessions((current) => {
+      const without = current.filter((item) => item.id !== session.id);
+      return [session, ...without].sort(
+        (a, b) =>
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+      );
+    });
+  }, []);
+
+  const loadSessions = useCallback(async () => {
+    const response = await fetch("/api/assistant/sessions");
+    if (!response.ok) {
+      throw new Error(`Failed to load chat sessions (${response.status})`);
+    }
+    const data: ChatSessionSummary[] = await response.json();
+    setSessions(data);
+    return data;
+  }, []);
+
+  // The full-page assistant continues the most recent saved chat.
+  const page = useConversation("page", {
+    autoload: true,
+    loadSessions,
+    upsertSession,
+  });
+  // The floating copilot always starts a fresh chat scoped to the current
+  // page, but persists to the same session store so it shows up in the
+  // full-page chat history.
+  const floating = useConversation("floating", {
+    autoload: false,
+    loadSessions,
+    upsertSession,
+  });
+
+  const deleteSession = useCallback(
+    async (sessionId: string) => {
+      const response = await fetch(`/api/assistant/sessions/${sessionId}`, {
+        method: "DELETE",
+      });
+      if (!response.ok && response.status !== 404) {
+        throw new Error(`Failed to delete chat session (${response.status})`);
+      }
+      setSessions((current) => current.filter((item) => item.id !== sessionId));
+      if (page.activeSessionId === sessionId) page.startNewChat();
+      if (floating.activeSessionId === sessionId) floating.startNewChat();
+    },
+    [page, floating],
   );
-  if (ticker) {
-    return `${ticker.name} (${ticker.ticker}) sits in the ${
-      QUADRANTS[ticker.quadrant].title
-    } quadrant with an ESG score of ${ticker.esgScore} (grade ${
-      ticker.grade
-    }) and a financial score of ${ticker.financialScore}. Momentum is ${signedPercent(
-      ticker.momentum,
-    )} with carbon intensity at ${ticker.esgMetrics.carbonIntensity} tCO₂e/$M.`;
-  }
 
-  if (text.includes("leader")) {
-    const leaders = COMPANIES.filter((c) => c.quadrant === "leaders");
-    const best = topByEsg();
-    return `There are ${leaders.length} companies in the Leaders quadrant — high ESG and strong returns. ${best.name} tops the universe at ESG ${best.esgScore}. These names tend to pair low carbon intensity with above-median return on equity.`;
-  }
+  const value = useMemo(
+    () => ({ sessions, page, floating, deleteSession }),
+    [sessions, page, floating, deleteSession],
+  );
 
-  if (text.includes("laggard") || text.includes("risk")) {
-    const laggards = COMPANIES.filter((c) => c.quadrant === "laggards");
-    return `${laggards.length} companies fall into the Laggards quadrant — weak on both ESG and financial performance. These typically carry the highest controversy flags and elevated debt-to-equity ratios, so they screen out of most sustainable mandates.`;
-  }
-
-  if (text.includes("carbon") || text.includes("emission")) {
-    const cleanest = [...COMPANIES].sort(
-      (a, b) => a.esgMetrics.carbonIntensity - b.esgMetrics.carbonIntensity,
-    )[0];
-    return `${cleanest.name} runs the lowest carbon intensity in the universe at ${cleanest.esgMetrics.carbonIntensity} tCO₂e/$M, with ${cleanest.esgMetrics.renewableEnergyPct}% renewable energy. Across the book, emissions are trending lower as higher-ESG names compound their advantage.`;
-  }
-
-  if (text.includes("momentum") || text.includes("mover")) {
-    const movers = buildSignalLeaders(COMPANIES, 3);
-    const list = movers
-      .map((m) => `${m.company.ticker} ${signedPercent(m.delta)}`)
-      .join(", ");
-    return `Top ESG momentum this quarter: ${list}. Momentum breadth is positive, meaning more than half the universe improved its composite score.`;
-  }
-
-  return "I can break down the matrix by quadrant, surface momentum leaders, compare carbon intensity, or profile any of the 300 companies. Try asking about 'leaders', 'carbon', or a specific ticker.";
+  return createElement(ChatContext.Provider, { value }, children);
 }
 
-export function useChat() {
+function useConversation(
+  surface: ChatSurface,
+  opts: {
+    autoload: boolean;
+    loadSessions: () => Promise<ChatSessionSummary[]>;
+    upsertSession: (session: ChatSessionSummary) => void;
+  },
+): ConversationApi {
+  const { autoload, loadSessions, upsertSession } = opts;
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME]);
+  const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const [activeWorkflowSteps, setActiveWorkflowSteps] = useState<WorkflowStep[]>(
+    [],
+  );
   const counter = useRef(0);
+  const messagesRef = useRef<ChatMessage[]>([WELCOME]);
+  const initialized = useRef(false);
+  const abortRef = useRef<AbortController | null>(null);
 
   const nextId = () => {
     counter.current += 1;
-    return `m${counter.current}`;
+    return `${surface}-m${counter.current}`;
   };
 
-  const send = useCallback((raw: string) => {
-    const content = raw.trim();
-    if (!content) return;
-    const userMessage: ChatMessage = {
-      id: nextId(),
-      role: "user",
-      content,
+  const commitMessages = (next: ChatMessage[]) => {
+    messagesRef.current = next;
+    setMessages(next);
+  };
+
+  const loadSession = useCallback(
+    async (sessionId: string) => {
+      const response = await fetch(`/api/assistant/sessions/${sessionId}`);
+      if (!response.ok) {
+        throw new Error(`Failed to load chat session (${response.status})`);
+      }
+      const data = await response.json();
+      setActiveSessionId(data.session.id);
+      upsertSession(data.session);
+      commitMessages(withWelcome(data.messages ?? []));
+    },
+    [upsertSession],
+  );
+
+  const createSession = useCallback(async () => {
+    if (pending) return;
+    const session = await createSessionRemote();
+    upsertSession(session);
+    setActiveSessionId(session.id);
+    commitMessages([WELCOME]);
+  }, [pending, upsertSession]);
+
+  const selectSession = useCallback(
+    async (sessionId: string) => {
+      if (pending || sessionId === activeSessionId) return;
+      await loadSession(sessionId);
+    },
+    [activeSessionId, loadSession, pending],
+  );
+
+  // Drop the active session and reset to an empty chat without touching the
+  // backend. Used by the floating copilot so each open starts fresh.
+  const startNewChat = useCallback(() => {
+    if (pending) return;
+    setActiveSessionId(null);
+    setActiveWorkflowSteps([]);
+    commitMessages([WELCOME]);
+  }, [pending]);
+
+  useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
+    if (!autoload) return;
+    let cancelled = false;
+
+    async function initialize() {
+      try {
+        const loadedSessions = await loadSessions();
+        if (cancelled) return;
+        if (loadedSessions.length > 0) {
+          await loadSession(loadedSessions[0].id);
+          return;
+        }
+        setActiveSessionId(null);
+        commitMessages([WELCOME]);
+      } catch {
+        if (!cancelled) {
+          commitMessages([WELCOME]);
+        }
+      }
+    }
+
+    void initialize();
+    return () => {
+      cancelled = true;
     };
-    setMessages((prev) => [...prev, userMessage]);
-    setPending(true);
-    window.setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        { id: nextId(), role: "assistant", content: answer(content) },
-      ]);
-      setPending(false);
-    }, 480);
+  }, [autoload, loadSession, loadSessions]);
+
+  const send = useCallback(
+    async (raw: string, pageContext: AssistantPageContext) => {
+      const content = raw.trim();
+      if (!content || pending) return;
+      let sessionId = activeSessionId;
+      if (!sessionId) {
+        const session = await createSessionRemote();
+        sessionId = session.id;
+        upsertSession(session);
+        setActiveSessionId(session.id);
+      }
+
+      const userMessage: ChatMessage = {
+        id: nextId(),
+        role: "user",
+        content,
+      };
+      const requestMessages = [
+        ...persistedMessages(messagesRef.current),
+        userMessage,
+      ];
+      commitMessages(withWelcome(requestMessages));
+      setPending(true);
+      setActiveWorkflowSteps([]);
+      const controller = new AbortController();
+      abortRef.current = controller;
+
+      try {
+        const response = await fetch("/api/assistant/chat/stream", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            messages: requestMessages.map(({ role, content }) => ({
+              role,
+              content,
+            })),
+            pageContext,
+            sessionId,
+          }),
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Assistant request failed (${response.status})`);
+        }
+        if (!response.body) {
+          throw new Error("Assistant stream did not return a readable body.");
+        }
+
+        const data = await readAssistantStream(response, (step) => {
+          setActiveWorkflowSteps((prev) => [...prev, step]);
+        });
+        if (data.session) {
+          upsertSession(data.session);
+        } else {
+          void loadSessions();
+        }
+        const assistantMessage: ChatMessage = {
+          id: nextId(),
+          role: "assistant",
+          content: data.response.message?.content ?? "No response returned.",
+          sources: data.response.sources ?? [],
+          referenceArticles: data.response.referenceArticles ?? [],
+          toolResults: data.response.toolResults ?? [],
+          workflowSteps: data.response.workflowSteps ?? [],
+          report: data.response.report ?? null,
+        };
+        commitMessages(withWelcome([...requestMessages, assistantMessage]));
+      } catch (error) {
+        if (
+          controller.signal.aborted ||
+          (error instanceof DOMException && error.name === "AbortError")
+        ) {
+          const stoppedMessage: ChatMessage = {
+            id: nextId(),
+            role: "assistant",
+            content: "Generation stopped.",
+          };
+          commitMessages(withWelcome([...requestMessages, stoppedMessage]));
+        } else {
+          const assistantMessage: ChatMessage = {
+            id: nextId(),
+            role: "assistant",
+            content:
+              error instanceof Error
+                ? error.message
+                : "The assistant request failed.",
+            toolResults: [
+              {
+                name: "assistant",
+                status: "error",
+                summary: "Backend request failed.",
+                sourceCount: 0,
+              },
+            ],
+          };
+          commitMessages(withWelcome([...requestMessages, assistantMessage]));
+        }
+      } finally {
+        abortRef.current = null;
+        setPending(false);
+        setActiveWorkflowSteps([]);
+      }
+    },
+    [activeSessionId, loadSessions, pending, upsertSession],
+  );
+
+  const stop = useCallback(() => {
+    abortRef.current?.abort();
   }, []);
 
-  return { messages, pending, send };
+  return useMemo(
+    () => ({
+      messages,
+      activeSessionId,
+      pending,
+      activeWorkflowSteps,
+      createSession,
+      selectSession,
+      send,
+      stop,
+      startNewChat,
+    }),
+    [
+      messages,
+      activeSessionId,
+      pending,
+      activeWorkflowSteps,
+      createSession,
+      selectSession,
+      send,
+      stop,
+      startNewChat,
+    ],
+  );
 }
 
-export const SUGGESTIONS = [
-  "Who are the ESG leaders?",
-  "Lowest carbon intensity?",
-  "Top ESG momentum movers",
-  "Profile the laggards",
+export function useChat(surface: ChatSurface = "page") {
+  const ctx = useContext(ChatContext);
+  if (!ctx) {
+    throw new Error("useChat must be used within ChatProvider");
+  }
+  const conversation = surface === "floating" ? ctx.floating : ctx.page;
+  return {
+    ...conversation,
+    sessions: ctx.sessions,
+    deleteSession: ctx.deleteSession,
+  };
+}
+
+async function createSessionRemote() {
+  const response = await fetch("/api/assistant/sessions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title: "New ESG chat" }),
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to create chat session (${response.status})`);
+  }
+  return (await response.json()) as ChatSessionSummary;
+}
+
+function withWelcome(messages: ChatMessage[]) {
+  return [WELCOME, ...messages.filter((message) => message.id !== WELCOME.id)];
+}
+
+function persistedMessages(messages: ChatMessage[]) {
+  return messages.filter((message) => message.id !== WELCOME.id);
+}
+
+async function readAssistantStream(
+  response: Response,
+  onWorkflowStep: (step: WorkflowStep) => void,
+) {
+  const reader = response.body?.getReader();
+  if (!reader) {
+    throw new Error("Assistant stream could not be read.");
+  }
+
+  const decoder = new TextDecoder();
+  let buffer = "";
+  let finalPayload: any = null;
+  let finalSession: ChatSessionSummary | null = null;
+
+  while (true) {
+    const { value, done } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop() ?? "";
+
+    for (const line of lines) {
+      const event = parseStreamEvent(line);
+      if (!event) continue;
+      if (event.type === "workflow" && event.step) {
+        onWorkflowStep(event.step);
+      }
+      if (event.type === "final" && event.response) {
+        finalPayload = event.response;
+        finalSession = event.session ?? null;
+      }
+      if (event.type === "error") {
+        throw new Error(event.message ?? "Assistant stream failed.");
+      }
+    }
+  }
+
+  if (buffer.trim()) {
+    const event = parseStreamEvent(buffer);
+    if (event?.type === "workflow" && event.step) {
+      onWorkflowStep(event.step);
+    }
+    if (event?.type === "final" && event.response) {
+      finalPayload = event.response;
+      finalSession = event.session ?? null;
+    }
+    if (event?.type === "error") {
+      throw new Error(event.message ?? "Assistant stream failed.");
+    }
+  }
+
+  if (!finalPayload) {
+    throw new Error("Assistant stream ended without a final response.");
+  }
+  return { response: finalPayload, session: finalSession };
+}
+
+function parseStreamEvent(line: string) {
+  const trimmed = line.trim();
+  if (!trimmed) return null;
+  try {
+    return JSON.parse(trimmed);
+  } catch {
+    return null;
+  }
+}
+
+// Page-scoped prompts for the floating copilot, which always has a concrete
+// page (company/sector) in context.
+export const CONTEXT_SUGGESTIONS = [
+  "Summarize what I am looking at",
+  "Explain this ESG score with sources",
+  "Find recent ESG news for this view",
+  "Scrape this company's website",
+  "Generate a report from this page",
 ];
+
+// Universe-wide prompts for the full-page assistant, which has no single
+// page in view.
+export const UNIVERSE_SUGGESTIONS = [
+  "Compare two companies' ESG scores",
+  "Which companies lead ESG in a sector?",
+  "How are ESG scores calculated?",
+  "Summarize recent ESG regulation",
+  "Generate an ESG report on a company",
+];
+
+export function suggestionsForSurface(surface: ChatSurface) {
+  return surface === "floating" ? CONTEXT_SUGGESTIONS : UNIVERSE_SUGGESTIONS;
+}

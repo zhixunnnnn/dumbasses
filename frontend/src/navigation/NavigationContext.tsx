@@ -3,6 +3,9 @@ import { createContext, useCallback, useContext, useMemo, useState } from "react
 export type Route =
   | { name: "dashboard" }
   | { name: "assistant" }
+  | { name: "explore" }
+  | { name: "watchlists" }
+  | { name: "settings" }
   | { name: "company"; id: string };
 
 export type RouteName = Route["name"];

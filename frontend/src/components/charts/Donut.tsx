@@ -24,7 +24,7 @@ export default function Donut({
       <svg
         viewBox={`0 0 ${size} ${size}`}
         style={{ width: size, height: size }}
-        className="shrink-0 text-white"
+        className="shrink-0 text-txt"
         role="img"
       >
         <circle

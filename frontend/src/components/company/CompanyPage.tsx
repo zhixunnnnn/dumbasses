@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   ArrowLeft,
   AlertTriangle,
@@ -25,6 +25,7 @@ import {
 import DeltaBadge from "../common/DeltaBadge";
 import CompanyLogo from "../common/CompanyLogo";
 import Reveal from "../common/Reveal";
+import { usePublishAssistantPageContext } from "../chat/PageContext";
 
 const TREND_TABS = [
   { key: "candles", label: "Price action" },
@@ -38,6 +39,44 @@ export default function CompanyPage({ id }: { id: string }) {
   const company = COMPANY_BY_ID[id];
   const { goBack, openCompany } = useNavigation();
   const [trend, setTrend] = useState<TrendKey>("candles");
+  const pageContext = useMemo(() => {
+    if (!company) {
+      return { route: "company", title: "Company not found", companyId: id };
+    }
+    return {
+      route: "company",
+      title: `${company.name} (${company.ticker})`,
+      activeTrend: trend,
+      company: {
+        name: company.name,
+        ticker: company.ticker,
+        sector: company.sector,
+        region: company.region,
+        domain: company.domain,
+        grade: company.grade,
+        quadrant: company.quadrant,
+        esgScore: company.esgScore,
+        financialScore: company.financialScore,
+        momentum: company.momentum,
+        marketCap: company.marketCap,
+        profile: company.profile,
+        financials: company.financials,
+        esgMetrics: company.esgMetrics,
+        pillars: company.pillars,
+        scope: company.scope,
+        controversies: company.controversies,
+      },
+      peers: peersOf(company, COMPANIES).map((peer) => ({
+        name: peer.name,
+        ticker: peer.ticker,
+        grade: peer.grade,
+        esgScore: peer.esgScore,
+        financialScore: peer.financialScore,
+        domain: peer.domain,
+      })),
+    };
+  }, [company, id, trend]);
+  usePublishAssistantPageContext(pageContext);
 
   if (!company) {
     return (
@@ -453,7 +492,7 @@ function StatTable({ rows }: { rows: [string, string][] }) {
       <table className="w-full text-sm">
         <tbody>
           {rows.map(([k, v], i) => (
-            <tr key={k} className={i % 2 === 0 ? "" : "bg-white/[0.015]"}>
+            <tr key={k} className={i % 2 === 0 ? "" : "bg-raised/25"}>
               <td className="px-4 py-2.5 text-muted">{k}</td>
               <td className="px-4 py-2.5 text-right font-mono font-medium tabular-nums text-txt">
                 {v}

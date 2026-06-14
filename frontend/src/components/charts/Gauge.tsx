@@ -20,7 +20,7 @@ export default function Gauge({
       <svg
         viewBox={`0 0 ${size} ${size}`}
         style={{ width: size, height: size }}
-        className="text-white"
+        className="text-txt"
         role="img"
       >
         <circle

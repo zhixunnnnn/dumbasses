@@ -37,7 +37,11 @@ export default function ChipToggle<T extends string>({
             {opt.color && (
               <span
                 className="h-2 w-2 rounded-full"
-                style={{ background: active ? "#00000055" : opt.color }}
+                style={{
+                  background: active
+                    ? "rgb(var(--color-canvas) / 0.55)"
+                    : opt.color,
+                }}
               />
             )}
             {opt.label}

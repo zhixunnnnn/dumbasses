@@ -61,7 +61,7 @@ export default function ScatterMatrix({
     >
       <svg
         viewBox={`0 0 ${VIEW.w} ${VIEW.h}`}
-        className="h-full w-full text-white"
+        className="h-full w-full text-txt"
         role="img"
         aria-label="ESG versus financial performance matrix"
       >
@@ -124,7 +124,7 @@ export default function ScatterMatrix({
                     r={dotRadius(c.marketCap) / (zoomed ? zoom.scale : 1)}
                     fill={gradeColor[c.grade]}
                     fillOpacity={isHovered || isSelected ? 1 : 0.78}
-                    stroke={isHovered || isSelected ? "#ffffff" : "transparent"}
+                    stroke={isHovered || isSelected ? "rgb(var(--color-surface))" : "transparent"}
                     strokeWidth={1.4 / zoom.scale}
                     className={zoomed ? "cursor-pointer" : ""}
                     onMouseEnter={() => setHovered(c)}
@@ -203,7 +203,7 @@ export default function ScatterMatrix({
                   fill={meta.accent}
                   style={{
                     paintOrder: "stroke",
-                    stroke: "#0d0c0b",
+                    stroke: "var(--chart-contrast-stroke)",
                     strokeWidth: 5,
                     strokeLinejoin: "round",
                   }}
@@ -215,10 +215,10 @@ export default function ScatterMatrix({
                   y={r.y + r.height / 2 + 13}
                   textAnchor="middle"
                   className="text-[11px] font-medium"
-                  fill="#b6b1a8"
+                  fill="var(--chart-soft-label)"
                   style={{
                     paintOrder: "stroke",
-                    stroke: "#0d0c0b",
+                    stroke: "var(--chart-contrast-stroke)",
                     strokeWidth: 4,
                     strokeLinejoin: "round",
                   }}

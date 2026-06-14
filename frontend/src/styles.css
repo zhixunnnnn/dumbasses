@@ -4,9 +4,47 @@
 
 :root {
   color-scheme: dark;
+  --color-canvas: 22 21 20;
+  --color-surface: 30 29 27;
+  --color-raised: 38 36 31;
+  --color-hairline: 61 58 52;
+  --color-txt: 237 237 235;
+  --color-muted: 154 150 142;
+  --color-faint: 106 102 95;
+  --color-pos: 62 207 142;
+  --color-neg: 239 111 99;
+  --color-leaders: 62 207 142;
+  --color-profit: 224 178 74;
+  --color-purpose: 76 196 212;
+  --color-laggards: 236 106 94;
+  --chart-contrast-stroke: #0d0c0b;
+  --chart-soft-label: #b6b1a8;
+  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.03), 0 12px 32px rgb(0 0 0 / 0.35);
+  --shadow-float: 0 18px 48px rgb(0 0 0 / 0.55);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --color-canvas: 244 241 235;
+  --color-surface: 250 248 244;
+  --color-raised: 232 226 216;
+  --color-hairline: 209 201 187;
+  --color-txt: 33 31 28;
+  --color-muted: 96 88 77;
+  --color-faint: 133 124 111;
+  --color-pos: 25 142 94;
+  --color-neg: 199 77 63;
+  --color-leaders: 25 142 94;
+  --color-profit: 166 115 31;
+  --color-purpose: 30 137 154;
+  --color-laggards: 199 77 63;
+  --chart-contrast-stroke: #f4f1eb;
+  --chart-soft-label: #5f584d;
+  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.78), 0 14px 32px rgb(82 70 50 / 0.12);
+  --shadow-float: 0 20px 52px rgb(82 70 50 / 0.20);
 }
 
 html,
@@ -17,8 +55,10 @@ body,
 }
 
 body {
-  background: #161514;
-  color: #ededeb;
+  background:
+    radial-gradient(circle at top left, rgb(var(--color-surface) / 0.42), transparent 30rem),
+    rgb(var(--color-canvas));
+  color: rgb(var(--color-txt));
   -webkit-font-smoothing: antialiased;
 }
 
@@ -36,14 +76,14 @@ select {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(var(--color-muted) / 0.22);
   border-radius: 999px;
   border: 3px solid transparent;
   background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgb(var(--color-muted) / 0.34);
   background-clip: padding-box;
 }
 
@@ -65,8 +105,8 @@ input[type="range"].dual::-webkit-slider-thumb {
   height: 15px;
   width: 15px;
   border-radius: 50%;
-  background: #ededeb;
-  border: 2px solid #3ecf8e;
+  background: rgb(var(--color-txt));
+  border: 2px solid rgb(var(--color-pos));
   cursor: pointer;
   margin-top: -1px;
 }
@@ -76,8 +116,8 @@ input[type="range"].dual::-moz-range-thumb {
   height: 15px;
   width: 15px;
   border-radius: 50%;
-  background: #ededeb;
-  border: 2px solid #3ecf8e;
+  background: rgb(var(--color-txt));
+  border: 2px solid rgb(var(--color-pos));
   cursor: pointer;
 }
 
