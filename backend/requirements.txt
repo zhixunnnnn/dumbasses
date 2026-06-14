@@ -1,8 +1,21 @@
+# --- ESG research assistant (chat / agent) ---
 fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.13.4
 httpx==0.28.1
 langchain==1.3.9
 langchain-openrouter==0.2.3
 langgraph==1.2.5
-uvicorn[standard]==0.34.0
-pydantic==2.13.4
 
+# --- ESG Evidence Engine (scoring / signal / witness / forecast / news) ---
+pandas>=2.0
+openpyxl>=3.1
+scikit-learn>=1.3
+joblib>=1.3
+numpy>=1.24
+openai>=1.0
+yfinance>=0.2
+requests>=2.31
+playwright>=1.40      # Bright Data Scraping Browser over CDP (no local browser needed)
+apscheduler>=3.10     # weekly Monday refresh of live signals
+pytest>=8.0

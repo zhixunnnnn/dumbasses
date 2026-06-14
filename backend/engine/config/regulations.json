@@ -1,0 +1,50 @@
+{
+  "_comment": "Public SG/ASEAN disclosure regimes. effective_year gates applicability: a reg not yet in force in a reporting year is NA/readiness-gap, NEVER a violation (T9). 'scope' restricts which companies it binds.",
+  "regulations": [
+    {
+      "reg_id": "SGX-711B",
+      "jurisdiction": "SG",
+      "name": "SGX Sustainability Reporting (Comply-or-Explain)",
+      "scope": "SGX-listed",
+      "requirement": "Annual sustainability report on material ESG factors with a board statement.",
+      "effective_year": 2017,
+      "disclosure_keywords": ["sustainability report", "material esg", "board statement", "GRI"]
+    },
+    {
+      "reg_id": "SGX-CLIMATE",
+      "jurisdiction": "SG",
+      "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
+      "scope": "SGX-listed",
+      "requirement": "TCFD-aligned climate disclosures including Scope 1 and Scope 2 emissions.",
+      "effective_year": 2023,
+      "disclosure_keywords": ["TCFD", "climate-related", "scope 1", "scope 2", "transition risk"]
+    },
+    {
+      "reg_id": "ISSB-S2",
+      "jurisdiction": "SG",
+      "name": "IFRS S2 / ISSB Climate-related Disclosures",
+      "scope": "SGX-listed",
+      "requirement": "ISSB-aligned climate disclosures incl. Scope 3 roadmap and scenario analysis.",
+      "effective_year": 2025,
+      "disclosure_keywords": ["ISSB", "IFRS S2", "scope 3", "scenario analysis"]
+    },
+    {
+      "reg_id": "MAS-ENRM",
+      "jurisdiction": "SG",
+      "name": "MAS Guidelines on Environmental Risk Management",
+      "scope": "MAS-FI",
+      "requirement": "Board-level environmental risk governance and disclosure for financial institutions.",
+      "effective_year": 2022,
+      "disclosure_keywords": ["environmental risk management", "MAS guidelines", "board oversight", "climate risk"]
+    },
+    {
+      "reg_id": "ASEAN-TAXO",
+      "jurisdiction": "ASEAN",
+      "name": "ASEAN Taxonomy for Sustainable Finance",
+      "scope": "ASEAN-listed",
+      "requirement": "Classification/alignment of activities against the ASEAN Taxonomy.",
+      "effective_year": 2023,
+      "disclosure_keywords": ["ASEAN Taxonomy", "taxonomy alignment", "green classification"]
+    }
+  ]
+}

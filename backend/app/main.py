@@ -1,9 +1,23 @@
+"""Unified FastAPI layer.
+
+Serves two feature sets from one server:
+  * ESG research assistant — chat sessions, streaming agent, reports (app.agent / app.chat_history)
+  * ESG Evidence Engine — precomputed scoring/signal/witness JSON + live news (backend.engine / backend.data)
+
+Run from the repo root so the absolute ``backend.*`` engine imports resolve:
+    uvicorn backend.app.main:app --reload --port 8000
+"""
+from __future__ import annotations
+
 import json
 
 from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
+
+from backend.engine import config
+from backend.engine.pipeline import build
 
 from .agent import AssistantRequest, AssistantResponse, OpenRouterAgent
 from .chat_history import (
@@ -28,7 +42,7 @@ class Portfolio(BaseModel):
     products: list[Product]
 
 
-app = FastAPI(title="PolyFintech 2026 API", version="0.1.0")
+app = FastAPI(title="PolyFintech 2026 API", version="1.0.0")
 agent = OpenRouterAgent()
 chat_history = ChatHistoryStore()
 
@@ -41,9 +55,52 @@ app.add_middleware(
 )
 
 
+# --------------------------------------------------------------------------- #
+# ESG Evidence Engine — build precomputed JSON on startup, then serve it.
+# --------------------------------------------------------------------------- #
+@app.on_event("startup")
+def _ensure_built() -> None:
+    # one-command run: seed the DB if empty, then precompute the dashboard JSON (offline).
+    from backend.engine import ingest
+
+    if not ingest.load().companies:
+        from backend.data.seed import build as seed_build
+        seed_build()
+    if not (config.OUT_DIR / "companies.json").exists():
+        build(offline=True)
+    _start_weekly_scheduler()
+
+
+def _start_weekly_scheduler() -> None:
+    """Refresh Bright Data signals every Monday; catch up on startup if >7 days stale.
+    Both run in background threads so they never block the server (or crash it)."""
+    import threading
+
+    from backend.data.weekly import run_weekly
+
+    threading.Thread(target=run_weekly, daemon=True).start()  # startup catch-up (no-op if fresh)
+    try:
+        from apscheduler.schedulers.background import BackgroundScheduler
+        from apscheduler.triggers.cron import CronTrigger
+
+        sched = BackgroundScheduler(daemon=True)
+        sched.add_job(lambda: run_weekly(force=True), CronTrigger(day_of_week="mon", hour=6))
+        sched.start()
+        print("Weekly Bright Data refresh scheduled (Mondays 06:00).")
+    except Exception as exc:  # noqa: BLE001
+        print(f"Weekly scheduler not started ({type(exc).__name__}); run `python -m backend.data.weekly`.")
+
+
+def _read(rel: str):
+    path = config.OUT_DIR / rel
+    if not path.exists():
+        raise HTTPException(status_code=404, detail=f"{rel} not found — run the pipeline")
+    return json.loads(path.read_text("utf-8"))
+
+
 @app.get("/api/health")
 def health() -> dict[str, str]:
-    return {"status": "ok", "service": "polyfintech2026"}
+    return {"status": "ok", "service": "polyfintech-esg"}
 
 
 @app.get("/api/portfolio", response_model=Portfolio)
@@ -61,6 +118,42 @@ def portfolio() -> Portfolio:
     )
 
 
+@app.get("/api/companies")
+def companies():
+    return _read("companies.json")
+
+
+@app.get("/api/matrix")
+def matrix():
+    return _read("matrix.json")
+
+
+@app.get("/api/signals")
+def signals():
+    return _read("signals.json")
+
+
+@app.get("/api/company/{company_id}")
+def company(company_id: str):
+    return _read(f"company/{company_id}.json")
+
+
+@app.get("/api/news")
+def news():
+    """Live news/controversy scraped via Bright Data, served from the DB (durable)."""
+    from backend.engine.db import bootstrap
+    from backend.data.scrape import load_news
+
+    conn = bootstrap()
+    try:
+        return load_news(conn)
+    finally:
+        conn.close()
+
+
+# --------------------------------------------------------------------------- #
+# ESG research assistant — chat sessions + streaming agent.
+# --------------------------------------------------------------------------- #
 @app.get("/api/assistant/sessions", response_model=list[ChatSessionSummary])
 def assistant_sessions() -> list[ChatSessionSummary]:
     return chat_history.list_sessions()

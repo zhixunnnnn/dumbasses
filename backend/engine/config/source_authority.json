@@ -1,0 +1,9 @@
+{
+  "_comment": "domain -> authoritative/specialist sources for verification. Specialist present can RAISE credit; absent changes NOTHING (asymmetric rule).",
+  "domains": {
+    "climate": {"authorities": ["CDP", "assured_emissions"], "specialist": true},
+    "governance": {"authorities": ["regulator", "board_filings", "ISS"], "specialist": false},
+    "supply_chain": {"authorities": ["EcoVadis", "customs", "controversies"], "specialist": true},
+    "labour": {"authorities": ["regulator_penalties", "unions", "news"], "specialist": false}
+  }
+}
