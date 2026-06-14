@@ -1,8 +1,10 @@
 import {
+  Activity,
   BookMarked,
   Compass,
   LayoutDashboard,
   Leaf,
+  Newspaper,
   Settings,
   Sparkles,
 } from "lucide-react";
@@ -11,7 +13,7 @@ import { useNavigation } from "../../navigation/NavigationContext";
 import type { RouteName } from "../../navigation/NavigationContext";
 
 type MobileNavItem = {
-  key: Exclude<RouteName, "company">;
+  key: Exclude<RouteName, "company" | "evidenceCompany">;
   label: string;
   icon: React.ReactNode;
 };
@@ -19,6 +21,8 @@ type MobileNavItem = {
 const MOBILE_NAV: MobileNavItem[] = [
   { key: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={16} /> },
   { key: "assistant", label: "AI Assistant", icon: <Sparkles size={16} /> },
+  { key: "evidence", label: "Evidence Engine", icon: <Activity size={16} /> },
+  { key: "news", label: "Live News", icon: <Newspaper size={16} /> },
   { key: "explore", label: "Explore", icon: <Compass size={16} /> },
   { key: "watchlists", label: "Watchlists", icon: <BookMarked size={16} /> },
   { key: "settings", label: "Settings", icon: <Settings size={16} /> },
@@ -27,7 +31,11 @@ const MOBILE_NAV: MobileNavItem[] = [
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const { route, navigate } = useNavigation();
   const routeKey =
-    route.name === "company" ? `company-${route.id}` : route.name;
+    route.name === "company"
+      ? `company-${route.id}`
+      : route.name === "evidenceCompany"
+        ? `evidenceCompany-${route.id}`
+        : route.name;
   return (
     <div className="flex h-screen overflow-hidden bg-canvas text-txt">
       <Sidebar />

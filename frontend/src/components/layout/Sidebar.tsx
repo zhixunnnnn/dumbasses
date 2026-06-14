@@ -5,6 +5,8 @@ import {
   Compass,
   BookMarked,
   Settings,
+  Activity,
+  Newspaper,
 } from "lucide-react";
 import {
   useNavigation,
@@ -12,7 +14,7 @@ import {
 } from "../../navigation/NavigationContext";
 
 type NavItem = {
-  key: Exclude<RouteName, "company">;
+  key: Exclude<RouteName, "company" | "evidenceCompany">;
   label: string;
   icon: React.ReactNode;
 };
@@ -20,6 +22,11 @@ type NavItem = {
 const PRIMARY: NavItem[] = [
   { key: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={17} /> },
   { key: "assistant", label: "AI Assistant", icon: <Sparkles size={17} /> },
+];
+
+const ENGINE: NavItem[] = [
+  { key: "evidence", label: "Evidence Engine", icon: <Activity size={17} /> },
+  { key: "news", label: "Live News", icon: <Newspaper size={17} /> },
 ];
 
 const BROWSE: NavItem[] = [
@@ -48,6 +55,20 @@ export default function Sidebar() {
           Workspace
         </p>
         {PRIMARY.map((item) => (
+          <NavButton
+            key={item.key}
+            item={item}
+            active={route.name === item.key}
+            onClick={() => navigate({ name: item.key })}
+          />
+        ))}
+      </nav>
+
+      <nav className="mt-6 flex flex-col gap-0.5">
+        <p className="px-2 pb-1.5 text-[10px] font-semibold uppercase tracking-wider text-faint">
+          Evidence engine
+        </p>
+        {ENGINE.map((item) => (
           <NavButton
             key={item.key}
             item={item}

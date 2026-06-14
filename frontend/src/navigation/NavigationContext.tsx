@@ -6,7 +6,10 @@ export type Route =
   | { name: "explore" }
   | { name: "watchlists" }
   | { name: "settings" }
-  | { name: "company"; id: string };
+  | { name: "company"; id: string }
+  | { name: "evidence" }
+  | { name: "news" }
+  | { name: "evidenceCompany"; id: string };
 
 export type RouteName = Route["name"];
 
