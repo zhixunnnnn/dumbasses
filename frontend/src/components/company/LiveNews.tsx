@@ -20,7 +20,8 @@ export default function LiveNews({ companyId }: { companyId: string }) {
           <div>
             <h3 className="text-sm font-semibold text-txt">Live news signal</h3>
             <p className="text-[11px] text-faint">
-              Scraped via <span className="text-purpose">Bright Data</span> · Bing News (current, outside the 2019–2023 evidence window)
+              Scraped via <span className="text-purpose">Bright Data</span> · Bing News · refreshed
+              weekly (Mondays){entry.fetched_at ? ` · last ${entry.fetched_at.slice(0, 10)}` : ""}
             </p>
           </div>
         </div>

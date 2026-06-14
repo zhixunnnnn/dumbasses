@@ -10,4 +10,5 @@ openai>=1.0
 yfinance>=0.2
 requests>=2.31
 playwright>=1.40      # Bright Data Scraping Browser over CDP (no local browser needed)
+apscheduler>=3.10     # weekly Monday refresh of live signals
 pytest>=8.0

@@ -98,6 +98,31 @@ CREATE TABLE IF NOT EXISTS reg_compliance (
     evidence_ref TEXT,
     PRIMARY KEY (company_id, reg_id, year)
 );
+
+-- live alternative data (scraped via Bright Data, refreshed weekly) ----------
+CREATE TABLE IF NOT EXISTS news (
+    company_id  TEXT PRIMARY KEY,
+    fetched_at  TEXT,
+    n_items     INTEGER,
+    controversy INTEGER,
+    positive    INTEGER,
+    sentiment   INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS news_headlines (
+    company_id TEXT,
+    fetched_at TEXT,
+    title      TEXT,
+    url        TEXT,
+    label      TEXT
+);
+
+CREATE TABLE IF NOT EXISTS scrape_log (
+    source      TEXT PRIMARY KEY,
+    last_run    TEXT,
+    last_status TEXT,
+    rows        INTEGER
+);
 """
 
 TABLES = [

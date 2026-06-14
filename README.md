@@ -96,12 +96,30 @@ Browser zone is used over CDP). Everything routes through `engine/brightdata.py`
 
 ```bash
 python -m backend.data.scrape --check     # validate credentials with one request
-python -m backend.data.scrape --news      # live news/controversy per company (Bing News) -> out/news.json
+python -m backend.data.scrape --news      # live news/controversy per company (Bing News)
 ```
 
-`--news` pulls real, current headlines via the **Bright Data Scraping Browser** and surfaces them
-as a **Live news signal** panel on each company page (clearly marked as current, outside the
-2019–2023 evidence window). Robots-restricted sources (e.g. Yahoo prices) are skipped by design.
+`--news` pulls real, current headlines via the **Bright Data Scraping Browser** and **persists
+them in the DB** (`news`, `news_headlines`, `scrape_log` tables) — so they survive restarts and
+are **never re-scraped** until the next refresh. They surface as a **Live news signal** panel on
+each company page (marked current, outside the 2019–2023 evidence window). Robots-restricted
+sources (e.g. Yahoo prices) are skipped by design.
+
+### Weekly refresh (Monday-morning cadence)
+
+Investors act on Monday, so the live signals refresh **weekly**. A refresh runs only if the last
+successful run was ≥ 7 days ago; otherwise the DB snapshot is served with no re-scrape.
+
+```bash
+python -m backend.data.weekly            # refresh now if stale, else use the DB
+python -m backend.data.weekly --force    # force a refresh now
+python -m backend.data.weekly --daemon   # blocking scheduler: every Monday 06:00
+```
+
+The FastAPI app also schedules this in-process (APScheduler, Mondays 06:00) and does a stale
+catch-up on startup — both in background threads, so they never block or crash the server. For a
+real deployment, point **Windows Task Scheduler** / **cron** at `python -m backend.data.weekly`
+every Monday. The `--news` cache and the DB together mean a given week is scraped at most once.
 
 ---
 

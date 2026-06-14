@@ -190,9 +190,10 @@ export type NewsCompany = {
   controversy: number;
   positive: number;
   sentiment: number;
+  fetched_at?: string | null;
   headlines: NewsItem[];
 };
-export type NewsData = { source?: string; companies: NewsCompany[] };
+export type NewsData = { source?: string; last_run?: string | null; companies: NewsCompany[] };
 
 export type CompanyDetail = {
   company: {

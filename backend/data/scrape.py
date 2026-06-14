@@ -83,6 +83,44 @@ _POSITIVE = ["renewable", "net zero", "net-zero", "decarbon", "green bond", "sus
              "award", "verified", "solar", "wind", "recycl", "emission", "esg leader", "transition"]
 
 
+def _log_scrape(conn, source: str, status: str, rows: int) -> None:
+    conn.execute("INSERT OR REPLACE INTO scrape_log VALUES (?,?,?,?)",
+                 (source, dt.datetime.utcnow().isoformat(timespec="seconds"), status, rows))
+    conn.commit()
+
+
+def store_news(conn, results: list[dict], fetched_at: str) -> None:
+    """Persist a news snapshot in the DB so it survives restarts and isn't re-scraped."""
+    for r in results:
+        cid = r["company_id"]
+        conn.execute("INSERT OR REPLACE INTO news VALUES (?,?,?,?,?,?)",
+                     (cid, fetched_at, r["n_items"], r["controversy"], r["positive"], r["sentiment"]))
+        conn.execute("DELETE FROM news_headlines WHERE company_id=?", (cid,))
+        for h in r["headlines"]:
+            conn.execute("INSERT INTO news_headlines VALUES (?,?,?,?,?)",
+                         (cid, fetched_at, h["title"], h.get("url"), h["label"]))
+    conn.commit()
+
+
+def load_news(conn) -> dict:
+    """Read the latest news snapshot from the DB (used by /api/news)."""
+    companies = []
+    for n in conn.execute(
+            "SELECT nw.*, u.name AS cname FROM news nw "
+            "LEFT JOIN universe u ON u.company_id = nw.company_id ORDER BY nw.company_id"):
+        cid = n["company_id"]
+        heads = [{"title": h["title"], "url": h["url"], "label": h["label"]}
+                 for h in conn.execute(
+                     "SELECT * FROM news_headlines WHERE company_id=?", (cid,))]
+        companies.append({"company_id": cid, "name": n["cname"] or cid, "n_items": n["n_items"],
+                          "controversy": n["controversy"], "positive": n["positive"],
+                          "sentiment": n["sentiment"], "fetched_at": n["fetched_at"],
+                          "headlines": heads})
+    log = conn.execute("SELECT * FROM scrape_log WHERE source='news'").fetchone()
+    return {"source": "Bright Data Scraping Browser · Bing News",
+            "last_run": log["last_run"] if log else None, "companies": companies}
+
+
 def _classify(title: str) -> str:
     t = title.lower()
     if any(k in t for k in _CONTROVERSY):
@@ -111,9 +149,13 @@ def scrape_news(conn, offline: bool = False) -> dict:
         sample = next((c["title"] for c in cls if c["label"] == "controversy"),
                       cls[0]["title"] if cls else "—")
         print(f"  {cid:4} {name:24} items={len(cls):2d} contro={ncon} pos={npos}  e.g. “{sample[:60]}”")
-    out = {"source": "Bright Data Scraping Browser · Bing News", "companies": results}
+    fetched_at = dt.datetime.utcnow().isoformat(timespec="seconds")
+    store_news(conn, results, fetched_at)                       # persist in the DB (durable)
+    _log_scrape(conn, "news", "ok", sum(r["n_items"] for r in results))
+    out = {"source": "Bright Data Scraping Browser · Bing News", "last_run": fetched_at,
+           "companies": results}
     (config.OUT_DIR / "news.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), "utf-8")
-    print(f"  -> wrote {config.OUT_DIR / 'news.json'}")
+    print(f"  -> stored {len(results)} companies in DB + wrote {config.OUT_DIR / 'news.json'}")
     return out
 
 
