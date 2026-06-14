@@ -1,0 +1,65 @@
+import { useState } from "react";
+import { Quote } from "lucide-react";
+import type { ClaimRow } from "../../types";
+import { TOPIC_LABEL } from "../../lib/ui";
+import { StateBadge } from "../common/badges";
+
+export default function ClaimTable({
+  claims,
+  absent,
+}: {
+  claims: ClaimRow[];
+  absent: { topic_id: string; state: string }[];
+}) {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="rounded-xl border border-hairline bg-surface shadow-panel">
+      <div className="border-b border-hairline px-4 py-3">
+        <h3 className="text-sm font-semibold text-txt">Claims &amp; evidence</h3>
+        <p className="text-[11px] text-faint">
+          Each claim verified against the most authoritative source. Absence lowers confidence, never the score.
+        </p>
+      </div>
+      <div className="divide-y divide-hairline/60">
+        {claims.map((c, i) => (
+          <div key={i}>
+            <button
+              onClick={() => setOpen(open === i ? null : i)}
+              className="flex w-full items-start gap-3 px-4 py-2.5 text-left transition hover:bg-raised/40"
+            >
+              <StateBadge state={c.state} />
+              <div className="min-w-0 flex-1">
+                <p className="text-[12.5px] leading-snug text-txt">{c.text}</p>
+                <p className="mt-0.5 text-[10px] text-faint">
+                  {TOPIC_LABEL(c.topic_id)} · pillar {c.pillar} · weight {c.weight}
+                </p>
+              </div>
+              <Quote size={13} className="mt-0.5 shrink-0 text-faint" />
+            </button>
+            {open === i && c.source_sentence && (
+              <div className="mx-4 mb-3 flex gap-2 rounded-md border border-pos/25 bg-pos/[0.06] px-3 py-2">
+                <Quote size={12} className="mt-0.5 shrink-0 text-pos" />
+                <p className="text-[12px] italic leading-snug text-muted">
+                  “{c.source_sentence}”
+                  {c.source_doc && (
+                    <span className="ml-1 not-italic text-faint">
+                      — {c.source_doc}{c.source_page ? `, p.${c.source_page}` : ""}
+                    </span>
+                  )}
+                </p>
+              </div>
+            )}
+          </div>
+        ))}
+        {absent.map((a) => (
+          <div key={a.topic_id} className="flex items-center gap-3 px-4 py-2.5 opacity-70">
+            <StateBadge state="ABSENT" />
+            <p className="text-[12.5px] text-faint">
+              {TOPIC_LABEL(a.topic_id)} — <span className="italic">material topic, undisclosed</span>
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
