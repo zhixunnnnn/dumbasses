@@ -19,7 +19,12 @@ from pydantic import BaseModel
 from backend.engine import config
 from backend.engine.pipeline import build
 
-from .agent import AssistantRequest, AssistantResponse, OpenRouterAgent
+from .agent import (
+    AssistantRequest,
+    AssistantResponse,
+    OpenRouterAgent,
+    collect_company_esg_news,
+)
 from .chat_history import (
     ChatHistoryStore,
     ChatSessionDetail,
@@ -149,6 +154,37 @@ def news():
         return load_news(conn)
     finally:
         conn.close()
+
+
+@app.get("/api/esg-news/company")
+async def company_esg_news(
+    company: str,
+    ticker: str | None = None,
+    domain: str | None = None,
+    max_results: int = 8,
+):
+    """Live company-specific ESG/news evidence for any company in the UI universe."""
+    result = await collect_company_esg_news(
+        web_tools=agent.web_tools,
+        company=company,
+        ticker=ticker,
+        domain=domain,
+        max_results=max_results,
+    )
+    return {
+        "company": company,
+        "ticker": ticker,
+        "domain": domain,
+        "queries": result["queries"],
+        "errors": result["errors"],
+        "sources": [
+            source.model_dump(by_alias=True) for source in result["sources"]
+        ],
+        "referenceArticles": [
+            article.model_dump(by_alias=True)
+            for article in result["reference_articles"]
+        ],
+    }
 
 
 # --------------------------------------------------------------------------- #

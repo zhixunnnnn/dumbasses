@@ -8,6 +8,7 @@ from backend.app.agent import (
     OpenRouterAgent,
     WebTools,
     build_langchain_tools,
+    collect_company_esg_news,
     emit_workflow_step,
     extract_tool_artifacts,
     require_public_url,
@@ -72,6 +73,38 @@ class EmitsWorkflowLangChainAgent:
 class EmptySearchWebTools:
     async def search(self, query: str, max_results: int = 5):
         return {"query": query, "results": []}
+
+
+class FakeCompanyNewsWebTools:
+    async def search(self, query: str, max_results: int = 5):
+        return {
+            "query": query,
+            "results": [
+                {
+                    "title": "Amazon ESG report outlines carbon and governance progress",
+                    "url": "https://sustainability.aboutamazon.com/report",
+                    "snippet": "Amazon sustainability report covers carbon, emissions, and governance.",
+                    "source": "search",
+                },
+                {
+                    "title": "Unrelated Tesla sustainability news",
+                    "url": "https://example.com/tesla-esg",
+                    "snippet": "Tesla carbon emissions update.",
+                    "source": "search",
+                },
+            ],
+        }
+
+    async def fetch_url(self, url: str):
+        return {
+            "title": "Amazon Sustainability Report",
+            "url": url,
+            "source": "native_fetch",
+            "text": (
+                "Amazon sustainability report discusses ESG governance, "
+                "carbon emissions, renewable energy, and supply chain progress."
+            ),
+        }
 
 
 class FakeBrightDataResponse:
@@ -287,6 +320,7 @@ def test_langchain_toolkit_includes_dedicated_esg_research_tool():
     tool_names = {tool.name for tool in build_langchain_tools(object())}
 
     assert "research_esg_scoring" in tool_names
+    assert "research_company_esg_news" in tool_names
 
 
 def test_esg_research_tool_returns_curated_fallback_references_when_search_is_empty():
@@ -301,6 +335,62 @@ def test_esg_research_tool_returns_curated_fallback_references_when_search_is_em
     assert parsed["status"] == "ok"
     assert len(parsed["referenceArticles"]) >= 3
     assert parsed["referenceArticles"][0]["kind"] == "methodology"
+
+
+def test_company_esg_news_collector_filters_and_enriches_company_sources():
+    result = asyncio.run(
+        collect_company_esg_news(
+            web_tools=FakeCompanyNewsWebTools(),
+            company="Amazon",
+            ticker="AMZN",
+            domain="amazon.com",
+            max_results=4,
+        )
+    )
+
+    assert len(result["sources"]) == 1
+    assert result["sources"][0].url == "https://sustainability.aboutamazon.com/report"
+    assert "carbon emissions" in result["sources"][0].snippet
+    assert result["reference_articles"][0].kind == "company_report"
+    assert "Amazon" in result["reference_articles"][0].reason
+
+
+def test_webtools_uses_default_brightdata_zone_when_key_exists(monkeypatch):
+    zones: list[str] = []
+
+    class FakeAsyncClient:
+        def __init__(self, *args, **kwargs) -> None:
+            pass
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, *args) -> None:
+            pass
+
+        async def post(self, url, headers, json):
+            zones.append(json["zone"])
+            return FakeBrightDataResponse(
+                200,
+                "<html><title>Default Zone OK</title><body>Loaded.</body></html>",
+            )
+
+    for name in (
+        "BRIGHTDATA_ZONE",
+        "BRIGHT_DATA_ZONE",
+        "BRIGHTDATA_WEB_UNLOCKER_ZONE",
+        "BRIGHT_DATA_WEB_UNLOCKER_ZONE",
+    ):
+        monkeypatch.delenv(name, raising=False)
+    monkeypatch.setenv("BRIGHTDATA_API_KEY", "primary-key")
+    monkeypatch.delenv("BRIGHTDATA_API_KEY_FALLBACK", raising=False)
+    monkeypatch.setattr(agent_module.httpx, "AsyncClient", FakeAsyncClient)
+
+    result = asyncio.run(WebTools().fetch_url("https://example.com"))
+
+    assert zones == ["web_unlocker1"]
+    assert result["source"] == "bright_data"
+    assert result["url"] == "https://example.com"
 
 
 def test_webtools_falls_back_to_second_brightdata_key_on_quota_failure(monkeypatch):

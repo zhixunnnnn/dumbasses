@@ -298,7 +298,7 @@ class WebTools:
             "BRIGHT_DATA_ZONE",
             "BRIGHTDATA_WEB_UNLOCKER_ZONE",
             "BRIGHT_DATA_WEB_UNLOCKER_ZONE",
-        )
+        ) or ("web_unlocker1" if self.bright_data_keys else None)
 
     async def fetch_url(self, url: str) -> dict[str, Any]:
         fetched = await self._fetch_html(url)
@@ -314,29 +314,50 @@ class WebTools:
         safe_url = require_public_url(url)
         async with httpx.AsyncClient(timeout=45.0, follow_redirects=True) as client:
             if self.bright_data_keys and self.bright_data_zone:
-                response, key_index = await self._fetch_with_bright_data_keys(
-                    client,
-                    safe_url,
-                )
-                source = "bright_data" if key_index == 0 else "bright_data_fallback"
-            else:
-                response = await client.get(
-                    safe_url,
-                    headers={
-                        "User-Agent": (
-                            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                            "AppleWebKit/537.36 (KHTML, like Gecko) "
-                            "Chrome/125.0 Safari/537.36"
-                        )
-                    },
-                )
-                source = "native_fetch"
+                try:
+                    response, key_index = await self._fetch_with_bright_data_keys(
+                        client,
+                        safe_url,
+                    )
+                    source = "bright_data" if key_index == 0 else "bright_data_fallback"
+                    response.raise_for_status()
+                    return {
+                        "url": safe_url,
+                        "source": source,
+                        "html": response.text,
+                    }
+                except Exception:
+                    if os.environ.get("BRIGHTDATA_STRICT") == "1":
+                        raise
+
+            response = await self._fetch_native(client, safe_url)
+            source = (
+                "native_fetch_after_bright_data_error"
+                if self.bright_data_keys and self.bright_data_zone
+                else "native_fetch"
+            )
             response.raise_for_status()
             return {
                 "url": str(response.url),
                 "source": source,
                 "html": response.text,
             }
+
+    async def _fetch_native(
+        self,
+        client: httpx.AsyncClient,
+        safe_url: str,
+    ) -> httpx.Response:
+        return await client.get(
+            safe_url,
+            headers={
+                "User-Agent": (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) "
+                    "Chrome/125.0 Safari/537.36"
+                )
+            },
+        )
 
     async def _fetch_with_bright_data_keys(
         self,
@@ -401,6 +422,12 @@ def make_system_prompt(page_context: dict[str, Any]) -> str:
         "Formatting rules: do not use emojis, decorative icons, or raw ASCII art. "
         "Use clean markdown headings, short paragraphs, bullets, and simple tables "
         "only when a table improves readability.\n\n"
+        "Prefer the current page_context company over older chat history when the "
+        "user says this company, their, it, the selected company, or asks from a "
+        "company page. "
+        "Use research_company_esg_news when the user asks for current ESG news, "
+        "recent sustainability developments, controversies, why a company score is "
+        "high or low, or source-backed company ESG context. "
         "Use web_search or scrape_url when the user asks for current, latest, live, "
         "source-backed, regulatory, news, or webpage-specific information. Cite URLs "
         "you used in the answer. For public webpage scraping, never mention API keys "
@@ -725,6 +752,79 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
         )
 
     @tool
+    async def research_company_esg_news(
+        company: str,
+        ticker: str | None = None,
+        domain: str | None = None,
+        max_results: int = 8,
+    ) -> str:
+        """Collect reliable company-specific ESG news, sustainability reports, controversies, and source references."""
+        try:
+            result = await collect_company_esg_news(
+                web_tools=web_tools,
+                company=company,
+                ticker=ticker,
+                domain=domain,
+                max_results=max_results,
+            )
+        except Exception as exc:
+            summary = (
+                f"Company ESG/news collection failed for: {company}. "
+                f"{safe_error_summary(exc)}"
+            )
+            emit_workflow_step(
+                label="Collected company ESG news",
+                status="error",
+                detail=summary,
+                tool_name="research_company_esg_news",
+            )
+            return json.dumps(
+                {
+                    "tool": "research_company_esg_news",
+                    "status": "error",
+                    "summary": summary,
+                    "sources": [],
+                    "referenceArticles": [],
+                    "result": {"company": company},
+                },
+                ensure_ascii=False,
+            )
+
+        sources = result["sources"]
+        articles = result["reference_articles"]
+        status = "ok" if sources else "error"
+        summary = (
+            f"Collected {len(sources)} company ESG/news references for: {company}"
+            if sources
+            else f"No reliable company-specific ESG/news references found for: {company}"
+        )
+        emit_workflow_step(
+            label="Collected company ESG news",
+            status=status,
+            detail=summary,
+            tool_name="research_company_esg_news",
+        )
+        return json.dumps(
+            {
+                "tool": "research_company_esg_news",
+                "status": status,
+                "summary": summary,
+                "sources": [source.model_dump(by_alias=True) for source in sources],
+                "referenceArticles": [
+                    article.model_dump(by_alias=True) for article in articles
+                ],
+                "result": {
+                    "company": company,
+                    "ticker": ticker,
+                    "domain": domain,
+                    "queries": result["queries"],
+                    "errors": result["errors"],
+                },
+            },
+            ensure_ascii=False,
+        )
+
+    @tool
     async def research_esg_scoring(
         topic: str = "ESG score methodology",
         company: str | None = None,
@@ -815,7 +915,280 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
             ensure_ascii=False,
         )
 
-    return [web_search, scrape_url, research_esg_scoring]
+    return [web_search, scrape_url, research_company_esg_news, research_esg_scoring]
+
+
+async def collect_company_esg_news(
+    web_tools: WebTools,
+    company: str,
+    ticker: str | None = None,
+    domain: str | None = None,
+    max_results: int = 8,
+) -> dict[str, Any]:
+    company = company.strip()
+    if not company:
+        raise ValueError("Company name is required.")
+    max_results = max(2, min(max_results, 10))
+    queries = company_esg_news_queries(company=company, ticker=ticker, domain=domain)
+    aliases = company_aliases(company=company, ticker=ticker)
+    candidates: list[AssistantSource] = []
+    seen: set[str] = set()
+    errors: list[str] = []
+
+    for query in queries:
+        if len(candidates) >= max_results * 3:
+            break
+        try:
+            result = await web_tools.search(query=query, max_results=6)
+        except Exception as exc:
+            errors.append(f"{query}: {safe_error_summary(exc)}")
+            continue
+        for item in result.get("results", []):
+            source = AssistantSource(**item)
+            key = source.url.split("#", 1)[0]
+            if key in seen:
+                continue
+            if not is_company_specific_source(source, aliases=aliases, domain=domain):
+                continue
+            if not is_esg_news_source(source):
+                continue
+            seen.add(key)
+            candidates.append(source)
+
+    ranked_candidates = sorted(
+        candidates,
+        key=lambda source: source_reliability_score(source, domain=domain),
+        reverse=True,
+    )
+    sources: list[AssistantSource] = []
+    articles: list[ReferenceArticle] = []
+
+    for candidate in ranked_candidates:
+        if len(sources) >= max_results:
+            break
+        enriched = candidate
+        try:
+            fetched = await web_tools.fetch_url(candidate.url)
+            text = str(fetched.get("text") or "")
+            snippet = evidence_snippet(text, aliases=aliases) or candidate.snippet
+            enriched = AssistantSource(
+                title=str(fetched.get("title") or candidate.title),
+                url=str(fetched.get("url") or candidate.url),
+                snippet=snippet,
+                source=str(fetched.get("source") or candidate.source),
+            )
+        except Exception as exc:
+            errors.append(f"{candidate.url}: {safe_error_summary(exc)}")
+
+        if not is_company_specific_source(enriched, aliases=aliases, domain=domain):
+            continue
+        kind = classify_company_esg_news_kind(enriched)
+        sources.append(enriched)
+        articles.append(
+            ReferenceArticle(
+                title=enriched.title,
+                url=enriched.url,
+                snippet=enriched.snippet,
+                source=source_name_from_url(enriched.url) or enriched.source,
+                kind=kind,
+                reason=company_news_reason(kind, company=company),
+            )
+        )
+
+    return {
+        "queries": queries,
+        "sources": sources,
+        "reference_articles": articles,
+        "errors": errors,
+    }
+
+
+ESG_NEWS_TERMS = {
+    "esg",
+    "sustainability",
+    "sustainable",
+    "climate",
+    "carbon",
+    "emissions",
+    "renewable",
+    "net zero",
+    "net-zero",
+    "governance",
+    "board",
+    "diversity",
+    "labour",
+    "labor",
+    "human rights",
+    "supply chain",
+    "controversy",
+    "controversies",
+    "lawsuit",
+    "fine",
+    "probe",
+    "investigation",
+    "greenwashing",
+    "deforestation",
+    "pollution",
+    "safety",
+    "sustainability report",
+    "annual report",
+}
+
+COMPANY_SUFFIXES = {
+    "inc",
+    "incorporated",
+    "corp",
+    "corporation",
+    "co",
+    "company",
+    "group",
+    "holdings",
+    "holding",
+    "ltd",
+    "limited",
+    "plc",
+    "sa",
+    "ag",
+    "nv",
+    "se",
+}
+
+
+def company_esg_news_queries(
+    company: str,
+    ticker: str | None = None,
+    domain: str | None = None,
+) -> list[str]:
+    quoted_company = f'"{company}"'
+    queries = [
+        f"{quoted_company} ESG news sustainability controversy 2025 2026",
+        f"{quoted_company} sustainability report ESG climate emissions governance",
+        f"{quoted_company} ESG controversy climate governance news",
+        f"{quoted_company} net zero emissions sustainability targets",
+    ]
+    if ticker:
+        queries.append(f'"{ticker}" "{company}" ESG news sustainability')
+    if domain:
+        queries.insert(1, f"site:{domain} sustainability ESG report {quoted_company}")
+    return queries
+
+
+def company_aliases(company: str, ticker: str | None = None) -> list[str]:
+    normalized = normalize_text(company)
+    aliases = [normalized]
+    words = [
+        word
+        for word in re.split(r"\s+", normalized)
+        if word and word not in COMPANY_SUFFIXES
+    ]
+    if len(words) >= 2:
+        aliases.append(" ".join(words))
+    if words:
+        aliases.append(words[0])
+    if ticker:
+        ticker_clean = normalize_text(ticker.split(".", 1)[0])
+        if len(ticker_clean) >= 2:
+            aliases.append(ticker_clean)
+    out: list[str] = []
+    for alias in aliases:
+        if alias and alias not in out:
+            out.append(alias)
+    return out
+
+
+def normalize_text(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", value.lower()).strip()
+
+
+def is_company_specific_source(
+    source: AssistantSource,
+    aliases: list[str],
+    domain: str | None = None,
+) -> bool:
+    haystack = normalize_text(
+        " ".join([source.title, source.url, source.snippet or ""]),
+    )
+    if domain:
+        host = urlparse(source.url).hostname or ""
+        clean_domain = domain.lower().removeprefix("www.")
+        if host.lower().removeprefix("www.").endswith(clean_domain):
+            return True
+    return any(alias and alias in haystack for alias in aliases)
+
+
+def is_esg_news_source(source: AssistantSource) -> bool:
+    haystack = normalize_text(
+        " ".join([source.title, source.url, source.snippet or ""]),
+    )
+    return any(normalize_text(term) in haystack for term in ESG_NEWS_TERMS)
+
+
+def evidence_snippet(text: str, aliases: list[str], max_chars: int = 360) -> str | None:
+    compact_text = re.sub(r"\s+", " ", text).strip()
+    if not compact_text:
+        return None
+    lowered = compact_text.lower()
+    terms = aliases + list(ESG_NEWS_TERMS)
+    positions = [
+        lowered.find(term)
+        for term in terms
+        if term and lowered.find(term) >= 0
+    ]
+    start = max(0, min(positions) - 80) if positions else 0
+    snippet = compact_text[start : start + max_chars].strip()
+    if start > 0:
+        snippet = f"...{snippet}"
+    if start + max_chars < len(compact_text):
+        snippet = f"{snippet}..."
+    return snippet
+
+
+def source_reliability_score(source: AssistantSource, domain: str | None = None) -> int:
+    host = (urlparse(source.url).hostname or "").lower().removeprefix("www.")
+    haystack = normalize_text(" ".join([source.title, source.url, source.snippet or ""]))
+    score = 0
+    if domain and host.endswith(domain.lower().removeprefix("www.")):
+        score += 50
+    if any(term in haystack for term in ("sustainability report", "annual report")):
+        score += 20
+    if any(
+        trusted in host
+        for trusted in (
+            "reuters.com",
+            "apnews.com",
+            "bloomberg.com",
+            "ft.com",
+            "sec.gov",
+            "msci.com",
+            "spglobal.com",
+            "sustainalytics.com",
+        )
+    ):
+        score += 15
+    if any(year in haystack for year in ("2026", "2025", "2024")):
+        score += 8
+    return score
+
+
+def classify_company_esg_news_kind(source: AssistantSource) -> str:
+    haystack = normalize_text(" ".join([source.title, source.url, source.snippet or ""]))
+    if any(term in haystack for term in ("lawsuit", "fine", "probe", "investigation", "controversy", "greenwashing")):
+        return "controversy"
+    if any(term in haystack for term in ("sustainability report", "annual report", "esg report")):
+        return "company_report"
+    if any(term in haystack for term in ("rating", "score", "msci", "sustainalytics", "sp global")):
+        return "rating_context"
+    return "company_news"
+
+
+def company_news_reason(kind: str, company: str) -> str:
+    if kind == "controversy":
+        return f"Flags controversy or risk context that may affect {company}'s ESG perception."
+    if kind == "company_report":
+        return f"Primary company disclosure for {company}'s sustainability targets and metrics."
+    if kind == "rating_context":
+        return f"Adds external rating or methodology context for interpreting {company}."
+    return f"Company-specific ESG or sustainability news about {company}."
 
 
 def esg_research_queries(topic: str, company: str | None = None) -> list[str]:
@@ -1051,6 +1424,7 @@ def workflow_label_for_tool(tool_name: str) -> str:
     labels = {
         "web_search": "Searched web",
         "scrape_url": "Scraped page",
+        "research_company_esg_news": "Collected company ESG news",
         "research_esg_scoring": "Collected ESG references",
         "agent_recovery": "Recovered agent run",
     }
