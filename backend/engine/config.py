@@ -6,10 +6,27 @@ Every magic number that affects a surfaced result lives here so it is auditable
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 # ----- paths -------------------------------------------------------------------
 BACKEND_DIR = Path(__file__).resolve().parent.parent          # .../backend
+
+
+def _load_dotenv() -> None:
+    """Minimal .env loader (no dependency). Secrets stay in backend/.env (git-ignored)."""
+    env = BACKEND_DIR / ".env"
+    if not env.exists():
+        return
+    for line in env.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, val = line.split("=", 1)
+        os.environ.setdefault(key.strip(), val.strip().strip('"').strip("'"))
+
+
+_load_dotenv()
 ENGINE_DIR = BACKEND_DIR / "engine"
 CONFIG_DIR = ENGINE_DIR / "config"
 DATA_DIR = BACKEND_DIR / "data"

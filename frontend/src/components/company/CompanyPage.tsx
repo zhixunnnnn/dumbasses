@@ -11,6 +11,7 @@ import ClaimTable from "./ClaimTable";
 import ComplianceGap from "./ComplianceGap";
 import ForecastCard from "./ForecastCard";
 import TrustMeter from "./TrustMeter";
+import LiveNews from "./LiveNews";
 
 function node(label: string, value: number | null, children: TraceNode[] = []): TraceNode {
   return { label, value, contribution: null, source_sentence: null, source_doc: null, source_page: null, children };
@@ -162,6 +163,8 @@ export default function CompanyPage({ id }: { id: string }) {
         <ComplianceGap compliance={compliance} />
         <ForecastCard forecast={forecast} />
       </div>
+
+      <LiveNews companyId={id} />
 
       {/* peers */}
       {peers.length > 0 && (

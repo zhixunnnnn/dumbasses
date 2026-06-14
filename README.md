@@ -87,6 +87,22 @@ used to (re)extract claims; results are cached, so the demo never depends on a l
 - **Missing data is `null` / “N.A.”, never fabricated** (enforced by test **T7**). Caches live in
   `backend/cache/`; precomputed JSON in `backend/out/`; the trained model in `backend/models/`.
 
+### Live Bright Data scraping
+
+Credentials go in `backend/.env` (git-ignored — see `backend/.env.example`):
+`BRIGHTDATA_API_KEY` + `BRIGHTDATA_ZONE` (Web Unlocker) **or** `BRIGHTDATA_PROXY` (a Scraping
+Browser zone is used over CDP). Everything routes through `engine/brightdata.py` with a mandatory
+**cache + STALE fallback** — a failed scrape never crashes the pipeline.
+
+```bash
+python -m backend.data.scrape --check     # validate credentials with one request
+python -m backend.data.scrape --news      # live news/controversy per company (Bing News) -> out/news.json
+```
+
+`--news` pulls real, current headlines via the **Bright Data Scraping Browser** and surfaces them
+as a **Live news signal** panel on each company page (clearly marked as current, outside the
+2019–2023 evidence window). Robots-restricted sources (e.g. Yahoo prices) are skipped by design.
+
 ---
 
 ## Architecture / module map

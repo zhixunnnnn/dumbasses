@@ -182,6 +182,18 @@ export type ClaimRow = {
   weight: number;
 };
 
+export type NewsItem = { title: string; url: string | null; label: "controversy" | "positive" | "neutral" };
+export type NewsCompany = {
+  company_id: string;
+  name: string;
+  n_items: number;
+  controversy: number;
+  positive: number;
+  sentiment: number;
+  headlines: NewsItem[];
+};
+export type NewsData = { source?: string; companies: NewsCompany[] };
+
 export type CompanyDetail = {
   company: {
     company_id: string;

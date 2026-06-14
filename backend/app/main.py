@@ -66,3 +66,10 @@ def signals():
 @app.get("/api/company/{company_id}")
 def company(company_id: str):
     return _read(f"company/{company_id}.json")
+
+
+@app.get("/api/news")
+def news():
+    """Live news/controversy scraped via Bright Data (empty until `scrape --news` runs)."""
+    path = config.OUT_DIR / "news.json"
+    return json.loads(path.read_text("utf-8")) if path.exists() else {"companies": []}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { CompanyDetail, CompanyRow, MatrixPoint } from "../types";
+import type { CompanyDetail, CompanyRow, MatrixPoint, NewsData } from "../types";
 
 const BASE = "/api";
 
@@ -14,6 +14,7 @@ export const api = {
   matrix: () => getJSON<MatrixPoint[]>("/matrix"),
   signals: () => getJSON<CompanyRow[]>("/signals"),
   company: (id: string) => getJSON<CompanyDetail>(`/company/${id}`),
+  news: () => getJSON<NewsData>("/news"),
 };
 
 type AsyncState<T> = { data: T | null; loading: boolean; error: string | null };
