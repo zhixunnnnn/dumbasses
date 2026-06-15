@@ -111,7 +111,7 @@ export default function CompanyPage({ id }: { id: string }) {
         <Leg ok={signal.price_flat} label="price_flat (market hasn't reacted)" />
         <span className="ml-1 text-[12px] text-muted">→</span>
         {signal.is_underpriced_improver
-          ? <span className="text-[12px] font-semibold text-pos">YES — the gap the market missed</span>
+          ? <span className="text-[12px] font-semibold text-pos">(the gap the market missed)</span>
           : <span className="text-[12px] text-faint">not all three legs met</span>}
       </div>
 
