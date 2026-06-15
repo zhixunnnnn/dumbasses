@@ -5174,57 +5174,38 @@
   },
   "forecast": {
     "company_id": "U11",
-    "predicted_score": 72.72,
+    "predicted_score": 68.87,
     "horizon_years": 1,
-    "ci_low": 51.8,
-    "ci_high": 93.65,
+    "ci_low": 57.67,
+    "ci_high": 80.07,
     "feature_contributions": [
       {
         "feature": "divergence",
         "value": 50.0,
-        "contribution": -5.721
+        "contribution": -5.792
       },
       {
         "feature": "div_yield",
         "value": 4.69,
-        "contribution": -3.5
-      },
-      {
-        "feature": "pe",
-        "value": 15.9,
-        "contribution": 1.603
-      },
-      {
-        "feature": "controversy_cum",
-        "value": 0.0,
-        "contribution": 0.616
-      },
-      {
-        "feature": "consensus",
-        "value": 46.3,
-        "contribution": -0.206
-      },
-      {
-        "feature": "news_sentiment",
-        "value": 1.0,
-        "contribution": -0.143
+        "contribution": -2.667
       },
       {
         "feature": "hiring_cum",
         "value": 0.0,
-        "contribution": -0.114
+        "contribution": 1.076
       },
       {
-        "feature": "compliance_gap",
-        "value": 0.0,
-        "contribution": 0.0
+        "feature": "news_sentiment",
+        "value": 1.0,
+        "contribution": 0.61
       }
     ],
-    "val_error": 20.923,
+    "val_error": 11.201,
+    "directional_accuracy": 0.81,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 72.7 (HYPOTHESIS, test MAE=20.92)",
-      "value": 72.72,
+      "label": "Forecast 2024 = 68.9 (HYPOTHESIS, LOO MAE=11.2, directional 81%)",
+      "value": 68.87,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -5233,7 +5214,7 @@
         {
           "label": "divergence=50.0",
           "value": null,
-          "contribution": -5.721,
+          "contribution": -5.792,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5242,43 +5223,7 @@
         {
           "label": "div_yield=4.69",
           "value": null,
-          "contribution": -3.5,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "pe=15.9",
-          "value": null,
-          "contribution": 1.603,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "controversy_cum=0.0",
-          "value": null,
-          "contribution": 0.616,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "consensus=46.3",
-          "value": null,
-          "contribution": -0.206,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "news_sentiment=1.0",
-          "value": null,
-          "contribution": -0.143,
+          "contribution": -2.667,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5287,16 +5232,16 @@
         {
           "label": "hiring_cum=0.0",
           "value": null,
-          "contribution": -0.114,
+          "contribution": 1.076,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": []
         },
         {
-          "label": "compliance_gap=0.0",
+          "label": "news_sentiment=1.0",
           "value": null,
-          "contribution": 0.0,
+          "contribution": 0.61,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

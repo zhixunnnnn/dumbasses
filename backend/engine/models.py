@@ -145,6 +145,7 @@ class Forecast(BaseModel):
     ci_high: Optional[float] = None
     feature_contributions: list[FeatureContribution] = Field(default_factory=list)
     val_error: Optional[float] = None        # honest test-set MAE
+    directional_accuracy: Optional[float] = None  # LOO-CV: % of up/down calls correct
     hypothesis: bool = True
     trace: TraceNode
 

@@ -198,6 +198,7 @@ export type Forecast = {
   ci_high: number | null;
   feature_contributions: FeatureContribution[];
   val_error: number | null;
+  directional_accuracy?: number | null;
   hypothesis: boolean;
   trace: TraceNode;
 };

@@ -939,6 +939,7 @@ def _engine_company_payload(company: str) -> dict | None:
             "ci_low": fc.get("ci_low"),
             "ci_high": fc.get("ci_high"),
             "validation_mae": fc.get("val_error"),
+            "directional_accuracy": fc.get("directional_accuracy"),
             "is_hypothesis": fc.get("hypothesis", True),
             "top_drivers": drivers,
         },

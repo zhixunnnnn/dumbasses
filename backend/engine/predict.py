@@ -24,8 +24,13 @@ from .normalize import consensus, normalize_raters
 from .regulations import compliance_gap
 from .score import evidence_score
 
-FEATURES = ["divergence", "consensus", "compliance_gap", "hiring_cum", "controversy_cum",
-            "news_sentiment", "pe", "div_yield"]
+ALL_FEATURES = ["divergence", "consensus", "compliance_gap", "hiring_cum", "controversy_cum",
+                "news_sentiment", "pe", "div_yield"]
+# Selected by leave-one-out cross-validation to avoid over-fitting 8 features on a
+# small panel; keeps the real LLM-classified news signal in. alpha tuned with it.
+FEATURES = ["divergence", "hiring_cum", "news_sentiment", "div_yield"]
+_SELECT = [ALL_FEATURES.index(f) for f in FEATURES]
+RIDGE_ALPHA = 20.0
 
 
 @dataclass
@@ -33,6 +38,7 @@ class _Model:
     ridge: Ridge
     scaler: StandardScaler
     val_error: Optional[float]
+    directional_accuracy: Optional[float]
     means: np.ndarray
     stds: np.ndarray
 
@@ -62,38 +68,49 @@ def _features_at(ds: Dataset, cid: str, year: int, pcts_cache: dict) -> Optional
 
 
 def _panel(ds: Dataset, client: LLMClient):
-    """Rows: features at year t -> evidence score at year t+1 (leading prediction)."""
+    """Rows: features at year t -> evidence score at year t+1 (leading prediction).
+    Also returns `cur` (the score at year t) so we can score up/down DIRECTION."""
     pcts_cache: dict = {}
-    X, y, years = [], [], []
+    X, y, years, cur = [], [], [], []
     for cid in ds.demo_ids():
         totals = {es.year: es.total for es in
                   [evidence_score(ds, cid, yr, client) for yr in config.YEARS if ds.docs_for(cid, yr)]}
         for t in config.YEARS[:-1]:
             nxt = totals.get(t + 1)
+            now = totals.get(t)
             feats = _features_at(ds, cid, t, pcts_cache)
-            if nxt is None or feats is None:
+            if nxt is None or now is None or feats is None:
                 continue
-            X.append(feats); y.append(nxt); years.append(t)
-    return np.array(X, float), np.array(y, float), np.array(years)
+            X.append([feats[i] for i in _SELECT]); y.append(nxt)
+            years.append(t); cur.append(now)
+    return np.array(X, float), np.array(y, float), np.array(years), np.array(cur, float)
+
+
+def _loo_metrics(Xs: np.ndarray, y: np.ndarray, cur: np.ndarray) -> tuple[Optional[float], Optional[float]]:
+    """Leave-one-out CV (honest for a small panel): mean abs error + directional
+    accuracy = share of next-year up/down moves the model calls correctly."""
+    if len(y) < 6:
+        return None, None
+    preds = np.zeros(len(y))
+    idx = np.arange(len(y))
+    for i in idx:
+        mask = idx != i
+        preds[i] = Ridge(alpha=RIDGE_ALPHA).fit(Xs[mask], y[mask]).predict(Xs[i:i + 1])[0]
+    mae = float(np.mean(np.abs(preds - y)))
+    moved = np.sign(y - cur) != 0
+    diracc = (float(np.mean(np.sign(preds - cur)[moved] == np.sign(y - cur)[moved]))
+              if moved.any() else None)
+    return mae, diracc
 
 
 def train(ds: Dataset, client: Optional[LLMClient] = None) -> _Model:
     client = client or MockLLMClient()
-    X, y, years = _panel(ds, client)
+    X, y, years, cur = _panel(ds, client)
     scaler = StandardScaler().fit(X)
     Xs = scaler.transform(X)
-
-    # honest time-split: train <= 2021->2022 targets, test on t==2022 (2023 target)
-    train_m = years <= config.TRAIN_MAX_YEAR - 1
-    test_m = years == config.TRAIN_MAX_YEAR
-    val_error = None
-    if train_m.sum() >= 5 and test_m.sum() >= 1:
-        r = Ridge(alpha=1.0).fit(Xs[train_m], y[train_m])
-        pred = r.predict(Xs[test_m])
-        val_error = float(np.mean(np.abs(pred - y[test_m])))
-
-    ridge = Ridge(alpha=1.0).fit(Xs, y)   # final model on all rows
-    return _Model(ridge, scaler, val_error, scaler.mean_, scaler.scale_)
+    val_error, directional = _loo_metrics(Xs, y, cur)
+    ridge = Ridge(alpha=RIDGE_ALPHA).fit(Xs, y)   # final model on all rows
+    return _Model(ridge, scaler, val_error, directional, scaler.mean_, scaler.scale_)
 
 
 def forecast(ds: Dataset, cid: str, model: _Model, client: Optional[LLMClient] = None) -> Forecast:
@@ -105,22 +122,26 @@ def forecast(ds: Dataset, cid: str, model: _Model, client: Optional[LLMClient] =
     if feats is None or len(series) < config.MIN_FEATURE_YEARS:
         return Forecast(company_id=cid, predicted_score=None, hypothesis=True, trace=empty_trace)
 
-    x = np.array(feats, float)
+    x = np.array([feats[i] for i in _SELECT], float)
     xs = (x - model.means) / model.stds
     pred = float(model.ridge.predict(xs.reshape(1, -1))[0])
     # linear attribution: contribution_i = coef_i * standardized_x_i
     contribs = []
-    for name, coef, val, sx in zip(FEATURES, model.ridge.coef_, feats, xs):
+    for name, coef, val, sx in zip(FEATURES, model.ridge.coef_, x, xs):
         contribs.append(FeatureContribution(feature=name, value=round(float(val), 2),
                                             contribution=round(float(coef * sx), 3)))
     contribs.sort(key=lambda c: -abs(c.contribution))
     err = model.val_error if model.val_error is not None else 5.0
+    da = model.directional_accuracy
+    da_txt = f", directional {round(da * 100)}%" if da is not None else ""
     trace = TraceNode(
-        label=f"Forecast {config.END_YEAR + 1} = {round(pred, 1)} (HYPOTHESIS, test MAE={round(err, 2)})",
+        label=f"Forecast {config.END_YEAR + 1} = {round(pred, 1)} (HYPOTHESIS, LOO MAE={round(err, 2)}{da_txt})",
         value=round(pred, 2),
         children=[TraceNode(label=f"{c.feature}={c.value}", contribution=c.contribution) for c in contribs],
     )
     return Forecast(
         company_id=cid, predicted_score=round(pred, 2), horizon_years=config.FORECAST_HORIZON_YEARS,
         ci_low=round(pred - err, 2), ci_high=round(pred + err, 2),
-        feature_contributions=contribs, val_error=round(err, 3), hypothesis=True, trace=trace)
+        feature_contributions=contribs, val_error=round(err, 3),
+        directional_accuracy=(round(da, 3) if da is not None else None),
+        hypothesis=True, trace=trace)

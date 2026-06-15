@@ -13,7 +13,13 @@ export default function ForecastCard({ forecast }: { forecast: Forecast }) {
           <h3 className="text-sm font-semibold text-txt">ESG forecast (next year)</h3>
           <p className="text-[11px] text-faint">Leading alt-data signals — never the lagged score</p>
         </div>
-        <HypothesisBadge note={`Explainable Ridge model · test MAE ${na(fc.val_error)}`} />
+        <HypothesisBadge
+          note={`Explainable Ridge model · LOO MAE ${na(fc.val_error)}${
+            fc.directional_accuracy != null
+              ? ` · ${Math.round(fc.directional_accuracy * 100)}% directional`
+              : ""
+          }`}
+        />
       </div>
 
       {fc.predicted_score === null ? (
@@ -23,7 +29,10 @@ export default function ForecastCard({ forecast }: { forecast: Forecast }) {
           <div className="mt-3 flex items-end gap-3">
             <span className="font-mono text-3xl font-semibold text-purpose">{na(fc.predicted_score)}</span>
             <span className="pb-1 font-mono text-[11px] text-faint">
-              CI {na(fc.ci_low)} – {na(fc.ci_high)} · test MAE {na(fc.val_error)}
+              CI {na(fc.ci_low)} – {na(fc.ci_high)}
+              {fc.directional_accuracy != null && (
+                <> · <span className="text-pos">{Math.round(fc.directional_accuracy * 100)}% directional (LOO-CV)</span></>
+              )}
             </span>
             <span className="pb-1 ml-auto"><Why trace={fc.trace} title="Forecast drivers" /></span>
           </div>
