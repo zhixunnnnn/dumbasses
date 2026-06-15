@@ -38,6 +38,22 @@ def _dump(path, obj):
     path.write_text(json.dumps(obj, ensure_ascii=False, indent=2, default=str), "utf-8")
 
 
+def _rater_provenance(cid: str) -> dict:
+    """Mark MSCI as real (scraped) where we have it; S&P + Sustainalytics are always
+    seeded/illustrative. Lets the UI label provenance honestly."""
+    try:
+        from backend.data.realraters import cached_real_raters
+
+        info = cached_real_raters().get(cid)
+    except Exception:
+        info = None
+    return {
+        "msci_real": bool(info),
+        "msci_source": info.get("source") if info else None,
+        "msci_url": info.get("url") if info else None,
+    }
+
+
 def _company_detail(ds, cid, sig, model, client) -> dict:
     comp = ds.company(cid)
     pcts = normalize_raters(ds, config.END_YEAR)[cid]
@@ -61,7 +77,7 @@ def _company_detail(ds, cid, sig, model, client) -> dict:
         "evidence": es.model_dump(),
         "series": series,
         "raters": {**pcts.model_dump(), "consensus": consensus(pcts),
-                   "divergence": divergence_index(pcts)},
+                   "divergence": divergence_index(pcts), **_rater_provenance(cid)},
         "signal": sig.model_dump(),
         "witness": price_witness(ds, cid, client).model_dump(),
         "compliance": compliance_gap(ds, cid, config.END_YEAR).model_dump(),

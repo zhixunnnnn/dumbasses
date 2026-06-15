@@ -364,21 +364,24 @@
   ],
   "raters": {
     "company_id": "D05",
-    "msci_pct": 68.75,
+    "msci_pct": 50.0,
     "sp_pct": 91.67,
     "sustainalytics_pct": 83.33,
-    "consensus": 81.25,
-    "divergence": 22.92
+    "consensus": 75.0,
+    "divergence": 41.67,
+    "msci_real": true,
+    "msci_source": "KnowESG",
+    "msci_url": "https://knowesg.com/esg-ratings/dbs"
   },
   "signal": {
     "company_id": "D05",
     "proof_up": false,
-    "opinion_flat": false,
+    "opinion_flat": true,
     "price_flat": null,
     "is_underpriced_improver": false,
-    "evidence_gap": -64.58,
+    "evidence_gap": -58.33,
     "momentum": -6.5,
-    "esg_today": 81.25,
+    "esg_today": 75.0,
     "quadrant": "OVERRATED",
     "trace": {
       "label": "Underpriced Improver signal",
@@ -688,8 +691,8 @@
           ]
         },
         {
-          "label": "opinion_flat=False (divergence=22.92, consensus 60.65->81.25)",
-          "value": 22.92,
+          "label": "opinion_flat=True (divergence=41.67, consensus 60.65->75.0)",
+          "value": 41.67,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -706,8 +709,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-64.58 (evidence 16.67 - consensus 81.25)",
-          "value": -64.58,
+          "label": "evidence_gap=-58.33 (evidence 16.67 - consensus 75.0)",
+          "value": -58.33,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -5076,15 +5079,15 @@
   },
   "forecast": {
     "company_id": "D05",
-    "predicted_score": 81.83,
+    "predicted_score": 76.97,
     "horizon_years": 1,
-    "ci_low": 60.91,
-    "ci_high": 102.76,
+    "ci_low": 56.04,
+    "ci_high": 97.89,
     "feature_contributions": [
       {
-        "feature": "consensus",
-        "value": 81.25,
-        "contribution": 1.613
+        "feature": "divergence",
+        "value": 41.67,
+        "contribution": -3.703
       },
       {
         "feature": "news_sentiment",
@@ -5092,9 +5095,9 @@
         "contribution": -1.572
       },
       {
-        "feature": "divergence",
-        "value": 22.92,
-        "contribution": 0.839
+        "feature": "consensus",
+        "value": 75.0,
+        "contribution": 1.288
       },
       {
         "feature": "pe",
@@ -5125,17 +5128,17 @@
     "val_error": 20.923,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 81.8 (HYPOTHESIS, test MAE=20.92)",
-      "value": 81.83,
+      "label": "Forecast 2024 = 77.0 (HYPOTHESIS, test MAE=20.92)",
+      "value": 76.97,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
-          "label": "consensus=81.25",
+          "label": "divergence=41.67",
           "value": null,
-          "contribution": 1.613,
+          "contribution": -3.703,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5151,9 +5154,9 @@
           "children": []
         },
         {
-          "label": "divergence=22.92",
+          "label": "consensus=75.0",
           "value": null,
-          "contribution": 0.839,
+          "contribution": 1.288,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

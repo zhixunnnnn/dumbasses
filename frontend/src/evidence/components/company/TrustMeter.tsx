@@ -48,6 +48,23 @@ export default function TrustMeter({ raters }: { raters: Raters }) {
         </div>
         <span className="text-[11px] font-medium" style={{ color: trust.color }}>{trust.label}</span>
       </div>
+      <p className="mt-1.5 text-[10px] leading-snug text-faint">
+        {raters.msci_real ? (
+          <>
+            MSCI:{" "}
+            {raters.msci_url ? (
+              <a href={raters.msci_url} target="_blank" rel="noreferrer" className="text-pos hover:underline">
+                real ({raters.msci_source || "external"})
+              </a>
+            ) : (
+              <span className="text-pos">real ({raters.msci_source || "external"})</span>
+            )}{" "}
+            · S&amp;P &amp; Sustainalytics: illustrative
+          </>
+        ) : (
+          <>Rater scores illustrative (for demo)</>
+        )}
+      </p>
     </div>
   );
 }

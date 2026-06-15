@@ -400,11 +400,14 @@
   ],
   "raters": {
     "company_id": "U11",
-    "msci_pct": 68.75,
+    "msci_pct": 75.0,
     "sp_pct": 25.0,
     "sustainalytics_pct": 38.89,
-    "consensus": 44.21,
-    "divergence": 43.75
+    "consensus": 46.3,
+    "divergence": 50.0,
+    "msci_real": true,
+    "msci_source": "KnowESG",
+    "msci_url": "https://knowesg.com/esg-ratings/united-overseas-bank-ltd"
   },
   "signal": {
     "company_id": "U11",
@@ -412,9 +415,9 @@
     "opinion_flat": true,
     "price_flat": true,
     "is_underpriced_improver": true,
-    "evidence_gap": 39.12,
+    "evidence_gap": 37.03,
     "momentum": 2.5,
-    "esg_today": 44.21,
+    "esg_today": 46.3,
     "quadrant": "HIDDEN_WINNERS",
     "trace": {
       "label": "Underpriced Improver signal",
@@ -760,8 +763,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=43.75, consensus 42.13->44.21)",
-          "value": 43.75,
+          "label": "opinion_flat=True (divergence=50.0, consensus 42.13->46.3)",
+          "value": 50.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -778,8 +781,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=39.12 (evidence 83.33 - consensus 44.21)",
-          "value": 39.12,
+          "label": "evidence_gap=37.03 (evidence 83.33 - consensus 46.3)",
+          "value": 37.03,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -5156,15 +5159,15 @@
   },
   "forecast": {
     "company_id": "U11",
-    "predicted_score": 72.7,
+    "predicted_score": 71.29,
     "horizon_years": 1,
-    "ci_low": 51.78,
-    "ci_high": 93.62,
+    "ci_low": 50.37,
+    "ci_high": 92.22,
     "feature_contributions": [
       {
         "feature": "divergence",
-        "value": 43.75,
-        "contribution": -4.207
+        "value": 50.0,
+        "contribution": -5.721
       },
       {
         "feature": "div_yield",
@@ -5188,8 +5191,8 @@
       },
       {
         "feature": "consensus",
-        "value": 44.21,
-        "contribution": -0.315
+        "value": 46.3,
+        "contribution": -0.206
       },
       {
         "feature": "hiring_cum",
@@ -5205,17 +5208,17 @@
     "val_error": 20.923,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 72.7 (HYPOTHESIS, test MAE=20.92)",
-      "value": 72.7,
+      "label": "Forecast 2024 = 71.3 (HYPOTHESIS, test MAE=20.92)",
+      "value": 71.29,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
-          "label": "divergence=43.75",
+          "label": "divergence=50.0",
           "value": null,
-          "contribution": -4.207,
+          "contribution": -5.721,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5258,9 +5261,9 @@
           "children": []
         },
         {
-          "label": "consensus=44.21",
+          "label": "consensus=46.3",
           "value": null,
-          "contribution": -0.315,
+          "contribution": -0.206,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

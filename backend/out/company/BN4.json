@@ -535,11 +535,14 @@
   ],
   "raters": {
     "company_id": "BN4",
-    "msci_pct": 20.83,
+    "msci_pct": 91.67,
     "sp_pct": 3.85,
     "sustainalytics_pct": 19.23,
-    "consensus": 14.64,
-    "divergence": 16.98
+    "consensus": 38.25,
+    "divergence": 87.82,
+    "msci_real": true,
+    "msci_source": "KnowESG",
+    "msci_url": "https://knowesg.com/esg-ratings/keppel-corporation-ltd"
   },
   "signal": {
     "company_id": "BN4",
@@ -547,9 +550,9 @@
     "opinion_flat": true,
     "price_flat": true,
     "is_underpriced_improver": true,
-    "evidence_gap": 31.79,
+    "evidence_gap": 8.18,
     "momentum": 4.75,
-    "esg_today": 14.64,
+    "esg_today": 38.25,
     "quadrant": "HIDDEN_WINNERS",
     "trace": {
       "label": "Underpriced Improver signal",
@@ -1030,8 +1033,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=16.98, consensus 14.64->14.64)",
-          "value": 16.98,
+          "label": "opinion_flat=True (divergence=87.82, consensus 14.64->38.25)",
+          "value": 87.82,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -1048,8 +1051,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=31.79 (evidence 46.43 - consensus 14.64)",
-          "value": 31.79,
+          "label": "evidence_gap=8.18 (evidence 46.43 - consensus 38.25)",
+          "value": 8.18,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -5516,25 +5519,20 @@
   },
   "forecast": {
     "company_id": "BN4",
-    "predicted_score": 81.5,
+    "predicted_score": 65.57,
     "horizon_years": 1,
-    "ci_low": 60.58,
-    "ci_high": 102.43,
+    "ci_low": 44.65,
+    "ci_high": 86.5,
     "feature_contributions": [
+      {
+        "feature": "divergence",
+        "value": 87.82,
+        "contribution": -14.882
+      },
       {
         "feature": "div_yield",
         "value": 4.59,
         "contribution": -3.142
-      },
-      {
-        "feature": "divergence",
-        "value": 16.98,
-        "contribution": 2.278
-      },
-      {
-        "feature": "consensus",
-        "value": 14.64,
-        "contribution": -1.853
       },
       {
         "feature": "pe",
@@ -5552,6 +5550,11 @@
         "contribution": 0.649
       },
       {
+        "feature": "consensus",
+        "value": 38.25,
+        "contribution": -0.625
+      },
+      {
         "feature": "controversy_cum",
         "value": 0.0,
         "contribution": 0.616
@@ -5565,35 +5568,26 @@
     "val_error": 20.923,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 81.5 (HYPOTHESIS, test MAE=20.92)",
-      "value": 81.5,
+      "label": "Forecast 2024 = 65.6 (HYPOTHESIS, test MAE=20.92)",
+      "value": 65.57,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
+          "label": "divergence=87.82",
+          "value": null,
+          "contribution": -14.882,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
           "label": "div_yield=4.59",
           "value": null,
           "contribution": -3.142,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "divergence=16.98",
-          "value": null,
-          "contribution": 2.278,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "consensus=14.64",
-          "value": null,
-          "contribution": -1.853,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5621,6 +5615,15 @@
           "label": "hiring_cum=2.0",
           "value": null,
           "contribution": 0.649,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "consensus=38.25",
+          "value": null,
+          "contribution": -0.625,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

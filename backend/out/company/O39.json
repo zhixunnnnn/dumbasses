@@ -256,11 +256,14 @@
   ],
   "raters": {
     "company_id": "O39",
-    "msci_pct": 68.75,
+    "msci_pct": 75.0,
     "sp_pct": 41.67,
     "sustainalytics_pct": 61.11,
-    "consensus": 57.18,
-    "divergence": 27.08
+    "consensus": 59.26,
+    "divergence": 33.33,
+    "msci_real": true,
+    "msci_source": "KnowESG",
+    "msci_url": "https://knowesg.com/esg-ratings/ocbc-bank"
   },
   "signal": {
     "company_id": "O39",
@@ -268,9 +271,9 @@
     "opinion_flat": true,
     "price_flat": true,
     "is_underpriced_improver": false,
-    "evidence_gap": -51.62,
+    "evidence_gap": -53.7,
     "momentum": -5.5,
-    "esg_today": 57.18,
+    "esg_today": 59.26,
     "quadrant": "OVERRATED",
     "trace": {
       "label": "Underpriced Improver signal",
@@ -472,8 +475,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=27.08, consensus 51.39->57.18)",
-          "value": 27.08,
+          "label": "opinion_flat=True (divergence=33.33, consensus 51.39->59.26)",
+          "value": 33.33,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -490,8 +493,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-51.62 (evidence 5.56 - consensus 57.18)",
-          "value": -51.62,
+          "label": "evidence_gap=-53.7 (evidence 5.56 - consensus 59.26)",
+          "value": -53.7,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -4868,15 +4871,20 @@
   },
   "forecast": {
     "company_id": "O39",
-    "predicted_score": 80.8,
+    "predicted_score": 79.39,
     "horizon_years": 1,
-    "ci_low": 59.88,
-    "ci_high": 101.72,
+    "ci_low": 58.47,
+    "ci_high": 100.32,
     "feature_contributions": [
       {
         "feature": "pe",
         "value": 9.0,
         "contribution": -2.524
+      },
+      {
+        "feature": "divergence",
+        "value": 33.33,
+        "contribution": -1.683
       },
       {
         "feature": "news_sentiment",
@@ -4895,13 +4903,8 @@
       },
       {
         "feature": "consensus",
-        "value": 57.18,
-        "contribution": 0.361
-      },
-      {
-        "feature": "divergence",
-        "value": 27.08,
-        "contribution": -0.169
+        "value": 59.26,
+        "contribution": 0.469
       },
       {
         "feature": "hiring_cum",
@@ -4917,8 +4920,8 @@
     "val_error": 20.923,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 80.8 (HYPOTHESIS, test MAE=20.92)",
-      "value": 80.8,
+      "label": "Forecast 2024 = 79.4 (HYPOTHESIS, test MAE=20.92)",
+      "value": 79.39,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -4928,6 +4931,15 @@
           "label": "pe=9.0",
           "value": null,
           "contribution": -2.524,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "divergence=33.33",
+          "value": null,
+          "contribution": -1.683,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4961,18 +4973,9 @@
           "children": []
         },
         {
-          "label": "consensus=57.18",
+          "label": "consensus=59.26",
           "value": null,
-          "contribution": 0.361,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "divergence=27.08",
-          "value": null,
-          "contribution": -0.169,
+          "contribution": 0.469,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

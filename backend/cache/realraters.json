@@ -1,0 +1,37 @@
+{
+  "C6L": {
+    "msci": "A",
+    "url": "https://knowesg.com/esg-ratings/singapore-airlines",
+    "source": "KnowESG"
+  },
+  "O39": {
+    "msci": "AA",
+    "url": "https://knowesg.com/esg-ratings/ocbc-bank",
+    "source": "KnowESG"
+  },
+  "BN4": {
+    "msci": "AAA",
+    "url": "https://knowesg.com/esg-ratings/keppel-corporation-ltd",
+    "source": "KnowESG"
+  },
+  "F34": {
+    "msci": "A",
+    "url": "https://knowesg.com/esg-ratings/wilmar-international-ltd",
+    "source": "KnowESG"
+  },
+  "D05": {
+    "msci": "A",
+    "url": "https://knowesg.com/esg-ratings/dbs",
+    "source": "KnowESG"
+  },
+  "U11": {
+    "msci": "AA",
+    "url": "https://knowesg.com/esg-ratings/united-overseas-bank-ltd",
+    "source": "KnowESG"
+  },
+  "9CI": {
+    "msci": "AAA",
+    "url": "https://knowesg.com/esg-ratings/capitaland-investment-ltd",
+    "source": "KnowESG"
+  }
+}

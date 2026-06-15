@@ -557,7 +557,10 @@
     "sp_pct": 93.75,
     "sustainalytics_pct": 93.75,
     "consensus": 88.69,
-    "divergence": 15.18
+    "divergence": 15.18,
+    "msci_real": true,
+    "msci_source": "KnowESG",
+    "msci_url": "https://knowesg.com/esg-ratings/capitaland-investment-ltd"
   },
   "signal": {
     "company_id": "9CI",

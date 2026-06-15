@@ -537,11 +537,14 @@
   ],
   "raters": {
     "company_id": "F34",
-    "msci_pct": 14.29,
+    "msci_pct": 57.14,
     "sp_pct": 10.0,
     "sustainalytics_pct": 70.0,
-    "consensus": 31.43,
-    "divergence": 60.0
+    "consensus": 45.71,
+    "divergence": 60.0,
+    "msci_real": true,
+    "msci_source": "KnowESG",
+    "msci_url": "https://knowesg.com/esg-ratings/wilmar-international-ltd"
   },
   "signal": {
     "company_id": "F34",
@@ -549,9 +552,9 @@
     "opinion_flat": true,
     "price_flat": true,
     "is_underpriced_improver": true,
-    "evidence_gap": 54.28,
+    "evidence_gap": 40.0,
     "momentum": 6.0,
-    "esg_today": 31.43,
+    "esg_today": 45.71,
     "quadrant": "HIDDEN_WINNERS",
     "trace": {
       "label": "Underpriced Improver signal",
@@ -1032,7 +1035,7 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=60.0, consensus 38.57->31.43)",
+          "label": "opinion_flat=True (divergence=60.0, consensus 38.57->45.71)",
           "value": 60.0,
           "contribution": null,
           "source_sentence": null,
@@ -1050,8 +1053,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=54.28 (evidence 85.71 - consensus 31.43)",
-          "value": 54.28,
+          "label": "evidence_gap=40.0 (evidence 85.71 - consensus 45.71)",
+          "value": 40.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -5442,10 +5445,10 @@
   },
   "forecast": {
     "company_id": "F34",
-    "predicted_score": 61.83,
+    "predicted_score": 62.58,
     "horizon_years": 1,
-    "ci_low": 40.91,
-    "ci_high": 82.76,
+    "ci_low": 41.65,
+    "ci_high": 83.5,
     "feature_contributions": [
       {
         "feature": "controversy_cum",
@@ -5468,14 +5471,14 @@
         "contribution": 1.014
       },
       {
-        "feature": "consensus",
-        "value": 31.43,
-        "contribution": -0.98
-      },
-      {
         "feature": "pe",
         "value": 13.7,
         "contribution": 0.287
+      },
+      {
+        "feature": "consensus",
+        "value": 45.71,
+        "contribution": -0.236
       },
       {
         "feature": "hiring_cum",
@@ -5491,8 +5494,8 @@
     "val_error": 20.923,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 61.8 (HYPOTHESIS, test MAE=20.92)",
-      "value": 61.83,
+      "label": "Forecast 2024 = 62.6 (HYPOTHESIS, test MAE=20.92)",
+      "value": 62.58,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -5535,18 +5538,18 @@
           "children": []
         },
         {
-          "label": "consensus=31.43",
+          "label": "pe=13.7",
           "value": null,
-          "contribution": -0.98,
+          "contribution": 0.287,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": []
         },
         {
-          "label": "pe=13.7",
+          "label": "consensus=45.71",
           "value": null,
-          "contribution": 0.287,
+          "contribution": -0.236,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

@@ -126,6 +126,11 @@ def load(db_path=None) -> Dataset:
     }
     raters = [RaterRow(r["company_id"], r["year"], r["msci_letter"], r["sustainalytics_risk"], r["sp_global"])
               for r in conn.execute("SELECT * FROM rater_scores")]
+    try:  # overlay real MSCI (latest year) from cache; no-op if unavailable
+        from backend.data.realraters import overlay as _overlay_raters
+        raters = _overlay_raters(raters, lambda cid: companies[cid].ticker)
+    except Exception:
+        pass
 
     prices: dict[str, list[Candle]] = {}
     for r in conn.execute("SELECT * FROM prices ORDER BY company_id, week_date"):

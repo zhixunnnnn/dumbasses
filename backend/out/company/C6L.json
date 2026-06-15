@@ -345,11 +345,14 @@
   ],
   "raters": {
     "company_id": "C6L",
-    "msci_pct": 70.83,
+    "msci_pct": 62.5,
     "sp_pct": 57.69,
     "sustainalytics_pct": 65.38,
-    "consensus": 64.63,
-    "divergence": 13.14
+    "consensus": 61.86,
+    "divergence": 7.69,
+    "msci_real": true,
+    "msci_source": "KnowESG",
+    "msci_url": "https://knowesg.com/esg-ratings/singapore-airlines"
   },
   "signal": {
     "company_id": "C6L",
@@ -357,9 +360,9 @@
     "opinion_flat": false,
     "price_flat": true,
     "is_underpriced_improver": false,
-    "evidence_gap": -61.06,
+    "evidence_gap": -58.29,
     "momentum": 0.25,
-    "esg_today": 64.63,
+    "esg_today": 61.86,
     "quadrant": "FUTURE_LEADERS",
     "trace": {
       "label": "Underpriced Improver signal",
@@ -650,8 +653,8 @@
           ]
         },
         {
-          "label": "opinion_flat=False (divergence=13.14, consensus 41.03->64.63)",
-          "value": 13.14,
+          "label": "opinion_flat=False (divergence=7.69, consensus 41.03->61.86)",
+          "value": 7.69,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -668,8 +671,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-61.06 (evidence 3.57 - consensus 64.63)",
-          "value": -61.06,
+          "label": "evidence_gap=-58.29 (evidence 3.57 - consensus 61.86)",
+          "value": -58.29,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -5116,20 +5119,20 @@
   },
   "forecast": {
     "company_id": "C6L",
-    "predicted_score": 82.09,
+    "predicted_score": 83.26,
     "horizon_years": 1,
-    "ci_low": 61.16,
-    "ci_high": 103.01,
+    "ci_low": 62.34,
+    "ci_high": 104.19,
     "feature_contributions": [
+      {
+        "feature": "divergence",
+        "value": 7.69,
+        "contribution": 4.528
+      },
       {
         "feature": "div_yield",
         "value": 4.86,
         "contribution": -4.109
-      },
-      {
-        "feature": "divergence",
-        "value": 13.14,
-        "contribution": 3.208
       },
       {
         "feature": "news_sentiment",
@@ -5142,11 +5145,6 @@
         "contribution": -1.926
       },
       {
-        "feature": "consensus",
-        "value": 64.63,
-        "contribution": 0.748
-      },
-      {
         "feature": "hiring_cum",
         "value": 2.0,
         "contribution": 0.649
@@ -5157,6 +5155,11 @@
         "contribution": 0.616
       },
       {
+        "feature": "consensus",
+        "value": 61.86,
+        "contribution": 0.604
+      },
+      {
         "feature": "compliance_gap",
         "value": 0.0,
         "contribution": 0.0
@@ -5165,26 +5168,26 @@
     "val_error": 20.923,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 82.1 (HYPOTHESIS, test MAE=20.92)",
-      "value": 82.09,
+      "label": "Forecast 2024 = 83.3 (HYPOTHESIS, test MAE=20.92)",
+      "value": 83.26,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
-          "label": "div_yield=4.86",
+          "label": "divergence=7.69",
           "value": null,
-          "contribution": -4.109,
+          "contribution": 4.528,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": []
         },
         {
-          "label": "divergence=13.14",
+          "label": "div_yield=4.86",
           "value": null,
-          "contribution": 3.208,
+          "contribution": -4.109,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5209,15 +5212,6 @@
           "children": []
         },
         {
-          "label": "consensus=64.63",
-          "value": null,
-          "contribution": 0.748,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
           "label": "hiring_cum=2.0",
           "value": null,
           "contribution": 0.649,
@@ -5230,6 +5224,15 @@
           "label": "controversy_cum=0.0",
           "value": null,
           "contribution": 0.616,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "consensus=61.86",
+          "value": null,
+          "contribution": 0.604,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

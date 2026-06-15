@@ -43,10 +43,9 @@ export function QuadrantBadge({ q }: { q: QuadrantKey | null }) {
   const meta = QUADRANT[q];
   return (
     <span
-      className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-[11px] font-medium"
+      className="inline-flex items-center rounded-md px-1.5 py-0.5 text-[11px] font-medium"
       style={{ color: meta.color, backgroundColor: `${meta.color}1a` }}
     >
-      <span>{meta.emoji}</span>
       {meta.label}
     </span>
   );

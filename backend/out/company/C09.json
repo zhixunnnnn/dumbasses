@@ -395,7 +395,10 @@
     "sp_pct": 81.25,
     "sustainalytics_pct": 81.25,
     "consensus": 68.45,
-    "divergence": 38.39
+    "divergence": 38.39,
+    "msci_real": false,
+    "msci_source": null,
+    "msci_url": null
   },
   "signal": {
     "company_id": "C09",

@@ -24,14 +24,14 @@
     "country": "Singapore",
     "evidence_total": 80.0,
     "confidence": 0.39,
-    "consensus": 14.64,
-    "divergence": 16.98,
-    "evidence_gap": 31.79,
+    "consensus": 38.25,
+    "divergence": 87.82,
+    "evidence_gap": 8.18,
     "momentum": 4.75,
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
     "compliance_score": 0.0,
-    "forecast": 81.5
+    "forecast": 65.57
   },
   {
     "id": "F34",
@@ -41,14 +41,14 @@
     "country": "Singapore",
     "evidence_total": 90.0,
     "confidence": 0.383,
-    "consensus": 31.43,
+    "consensus": 45.71,
     "divergence": 60.0,
-    "evidence_gap": 54.28,
+    "evidence_gap": 40.0,
     "momentum": 6.0,
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
     "compliance_score": 0.667,
-    "forecast": 61.83
+    "forecast": 62.58
   },
   {
     "id": "C6L",
@@ -58,14 +58,14 @@
     "country": "Singapore",
     "evidence_total": 73.75,
     "confidence": 0.405,
-    "consensus": 64.63,
-    "divergence": 13.14,
-    "evidence_gap": -61.06,
+    "consensus": 61.86,
+    "divergence": 7.69,
+    "evidence_gap": -58.29,
     "momentum": 0.25,
     "quadrant": "FUTURE_LEADERS",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 82.09
+    "forecast": 83.26
   },
   {
     "id": "D05",
@@ -75,14 +75,14 @@
     "country": "Singapore",
     "evidence_total": 55.0,
     "confidence": 0.371,
-    "consensus": 81.25,
-    "divergence": 22.92,
-    "evidence_gap": -64.58,
+    "consensus": 75.0,
+    "divergence": 41.67,
+    "evidence_gap": -58.33,
     "momentum": -6.5,
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 81.83
+    "forecast": 76.97
   },
   {
     "id": "O39",
@@ -92,14 +92,14 @@
     "country": "Singapore",
     "evidence_total": 52.5,
     "confidence": 0.356,
-    "consensus": 57.18,
-    "divergence": 27.08,
-    "evidence_gap": -51.62,
+    "consensus": 59.26,
+    "divergence": 33.33,
+    "evidence_gap": -53.7,
     "momentum": -5.5,
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 80.8
+    "forecast": 79.39
   },
   {
     "id": "U11",
@@ -109,14 +109,14 @@
     "country": "Singapore",
     "evidence_total": 88.75,
     "confidence": 0.392,
-    "consensus": 44.21,
-    "divergence": 43.75,
-    "evidence_gap": 39.12,
+    "consensus": 46.3,
+    "divergence": 50.0,
+    "evidence_gap": 37.03,
     "momentum": 2.5,
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
     "compliance_score": 0.0,
-    "forecast": 72.7
+    "forecast": 71.29
   },
   {
     "id": "9CI",

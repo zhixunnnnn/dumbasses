@@ -83,6 +83,9 @@ export type Raters = {
   sustainalytics_pct: number | null;
   consensus: number | null;
   divergence: number | null;
+  msci_real?: boolean;
+  msci_source?: string | null;
+  msci_url?: string | null;
 };
 
 export type Signal = {

@@ -503,7 +503,10 @@
     "sp_pct": 1.06,
     "sustainalytics_pct": 30.0,
     "consensus": 17.5,
-    "divergence": 28.94
+    "divergence": 28.94,
+    "msci_real": false,
+    "msci_source": null,
+    "msci_url": null
   },
   "signal": {
     "company_id": "U96",

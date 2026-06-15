@@ -332,7 +332,10 @@
     "sp_pct": 58.33,
     "sustainalytics_pct": 78.57,
     "consensus": 68.97,
-    "divergence": 20.24
+    "divergence": 20.24,
+    "msci_real": false,
+    "msci_source": null,
+    "msci_url": null
   },
   "signal": {
     "company_id": "Z74",
