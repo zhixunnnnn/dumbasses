@@ -24,7 +24,7 @@
       {
         "reg_id": "SGX-CLIMATE",
         "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
-        "status": "PARTIAL"
+        "status": "MET"
       },
       {
         "reg_id": "ASEAN-TAXO",
@@ -86,7 +86,7 @@
     "momentum": -1.334,
     "quadrant": "VALUE_TRAPS",
     "is_underpriced_improver": false,
-    "compliance_score": 0.667,
+    "compliance_score": 0.333,
     "forecast": 73.2,
     "regulations": [
       {
@@ -97,7 +97,7 @@
       {
         "reg_id": "SGX-CLIMATE",
         "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
-        "status": "MISSING"
+        "status": "PARTIAL"
       },
       {
         "reg_id": "ASEAN-TAXO",

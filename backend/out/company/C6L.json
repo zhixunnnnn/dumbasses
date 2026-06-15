@@ -4778,7 +4778,10 @@
         "reg_id": "SGX-711B",
         "name": "SGX Sustainability Reporting (Comply-or-Explain)",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "partial": [
@@ -4786,7 +4789,10 @@
         "reg_id": "ASEAN-TAXO",
         "name": "ASEAN Taxonomy for Sustainable Finance",
         "status": "PARTIAL",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "missing": [],
@@ -4795,7 +4801,10 @@
         "reg_id": "ISSB-S2",
         "name": "IFRS S2 / ISSB Climate-related Disclosures",
         "status": "NA",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "trace": {

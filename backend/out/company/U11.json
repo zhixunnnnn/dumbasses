@@ -4725,25 +4725,37 @@
         "reg_id": "SGX-711B",
         "name": "SGX Sustainability Reporting (Comply-or-Explain)",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": "https://www.scribd.com/document/851288534/Uob-Sustainability-Report-2023",
+        "source_excerpt": "The UOB Sustainability Report 2023 outlines the bank's commitment to creating long-term value and achieving net zero emissions by 2050, while adhering to the GRI Standards for sustainability reporting.",
+        "scraped": true
       },
       {
         "reg_id": "SGX-CLIMATE",
         "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": "https://www.uobgroup.com/assets/web-resources/sustainability/pdf/tcfd.pdf",
+        "source_excerpt": "Disclose Scope 1, Scope 2, and, if appropriate, Scope 3 GHG emissions, 6-8, 20-21, 88-95, 105, 114-115 and the related risks. Describe the targets used by the organisation to manage climate-related 6-8, …",
+        "scraped": true
       },
       {
         "reg_id": "MAS-ENRM",
         "name": "MAS Guidelines on Environmental Risk Management",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": "https://www.uobgroup.com/assets/web-resources/sustainability/pdf/tcfd-report-2022.pdf",
+        "source_excerpt": "Amid the growing call for companies to demonstrate their prudent management of climate risk as well as demonstrate their commitment to net zero emissions by 2050, UOB announced our net zero …",
+        "scraped": true
       },
       {
         "reg_id": "ASEAN-TAXO",
         "name": "ASEAN Taxonomy for Sustainable Finance",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "partial": [],
@@ -4753,7 +4765,10 @@
         "reg_id": "ISSB-S2",
         "name": "IFRS S2 / ISSB Climate-related Disclosures",
         "status": "NA",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "trace": {
@@ -4765,20 +4780,20 @@
       "source_page": null,
       "children": [
         {
-          "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET",
+          "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET (live)",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, UOB expanded sustainable financing and set interim financed emissions targets toward net zero.",
-          "source_doc": null,
+          "source_sentence": "The UOB Sustainability Report 2023 outlines the bank's commitment to creating long-term value and achieving net zero emissions by 2050, while adhering to the GRI Standards for sustainability reporting.",
+          "source_doc": "https://www.scribd.com/document/851288534/Uob-Sustainability-Report-2023",
           "source_page": null,
           "children": []
         },
         {
-          "label": "SGX Mandatory Climate Reporting (TCFD-aligned) — MET",
+          "label": "SGX Mandatory Climate Reporting (TCFD-aligned) — MET (live)",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, UOB expanded sustainable financing and set interim financed emissions targets toward net zero.",
-          "source_doc": null,
+          "source_sentence": "Disclose Scope 1, Scope 2, and, if appropriate, Scope 3 GHG emissions, 6-8, 20-21, 88-95, 105, 114-115 and the related risks. Describe the targets used by the organisation to manage climate-related 6-8, …",
+          "source_doc": "https://www.uobgroup.com/assets/web-resources/sustainability/pdf/tcfd.pdf",
           "source_page": null,
           "children": []
         },
@@ -4792,11 +4807,11 @@
           "children": []
         },
         {
-          "label": "MAS Guidelines on Environmental Risk Management — MET",
+          "label": "MAS Guidelines on Environmental Risk Management — MET (live)",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, UOB expanded sustainable financing and set interim financed emissions targets toward net zero.",
-          "source_doc": null,
+          "source_sentence": "Amid the growing call for companies to demonstrate their prudent management of climate risk as well as demonstrate their commitment to net zero emissions by 2050, UOB announced our net zero …",
+          "source_doc": "https://www.uobgroup.com/assets/web-resources/sustainability/pdf/tcfd-report-2022.pdf",
           "source_page": null,
           "children": []
         },

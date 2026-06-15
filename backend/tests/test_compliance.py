@@ -40,3 +40,39 @@ def test_T9_unknown_status_excluded_from_denominator():
     assert "R_UNKNOWN" not in ids                     # unknown never counted
     # denominator = MET + MISSING = 2, one missing -> 0.5 (R_FUTURE & R_UNKNOWN excluded)
     assert cg.score == 0.5
+
+
+# --- scraped reg_evidence overlay (live compliance proof) --------------------
+from backend.engine.ingest import RegEvidenceRow  # noqa: E402
+
+
+def _ds_overlay(seed_status, ev_status):
+    comp = make_company("BANK", sector="Financials", industry="Commercial Banks")
+    regs = [RegulationRow("R1", "SG", "SGX Reg", "SGX-listed", "disclose", 2017)]
+    rows = [RegComplianceRow("BANK", "R1", YEAR, seed_status, "BANK-SR")] if seed_status else []
+    doc = DocumentRow("BANK", "BANK-SR", "SR", YEAR, None, 1, "In FY2023 the bank disclosed climate.")
+    ds = make_dataset(companies=[comp], regulations=regs, reg_compliance=rows, documents=[doc])
+    if ev_status is not None:
+        ds.reg_evidence[("BANK", "R1")] = RegEvidenceRow(
+            "BANK", "R1", ev_status, 2, "https://uobgroup.com/report",
+            "Discloses Scope 1 and Scope 2 emissions.", "2026-01-01", "bing_web")
+    return ds
+
+
+def test_scraped_evidence_upgrades_and_attaches_proof():
+    cg = compliance_gap(_ds_overlay("PARTIAL", "MET"), "BANK", YEAR)
+    met = {r.reg_id: r for r in cg.met}
+    assert "R1" in met and met["R1"].scraped is True
+    assert met["R1"].source_url and met["R1"].source_excerpt
+
+
+def test_scraped_evidence_never_downgrades():
+    cg = compliance_gap(_ds_overlay("MET", "PARTIAL"), "BANK", YEAR)
+    assert "R1" in {r.reg_id for r in cg.met}          # stays MET (not downgraded)
+    assert "R1" not in {r.reg_id for r in cg.partial}
+
+
+def test_no_scraped_evidence_falls_back_to_seed():
+    cg = compliance_gap(_ds_overlay("PARTIAL", None), "BANK", YEAR)
+    r = {x.reg_id: x for x in cg.partial}["R1"]
+    assert r.scraped is False and r.source_url is None

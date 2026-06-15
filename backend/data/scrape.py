@@ -230,6 +230,171 @@ def scrape_news(conn, offline: bool = False) -> dict:
     return out
 
 
+# ---------------------------------------------------------------------------
+# ESG regulation compliance — scrape REAL proof per company×regulation via the
+# Bright Data Scraping Browser (the working path on this account's zone; the
+# token SERP / Web-Unlocker API is not enabled here).
+#   * reg_source:   a real source link/excerpt per regime (provenance).
+#   * reg_evidence: match each applicable, in-force regulation's disclosure
+#     keywords against the company's REAL web-search result snippets; the
+#     matching snippet + its source link become the proof. Found -> MET/PARTIAL;
+#     not surfaced -> UNKNOWN (NULL -> falls back to the seed). Snippet absence
+#     is NOT proof of non-compliance, so we never invent MISSING from a snippet.
+# ---------------------------------------------------------------------------
+_WEB_JS = """
+() => {
+  const out = [];
+  document.querySelectorAll('li.b_algo').forEach(li => {
+    const a = li.querySelector('h2 a');
+    const p = li.querySelector('.b_caption p, p');
+    if (a && a.href) out.push({title:(a.innerText||'').trim(), url:a.href,
+                               snippet:(p?p.innerText:'').trim()});
+  });
+  return out.slice(0, 10);
+}
+"""
+
+
+def _bing_web_url(query: str) -> str:
+    from urllib.parse import quote
+    return f"https://www.bing.com/search?q={quote(query)}"
+
+
+def _resolve_bing_url(href):
+    """Bing wraps result links in /ck/a redirects; decode the real destination."""
+    if not href or "bing.com/ck/a" not in href:
+        return href
+    import base64
+    from urllib.parse import parse_qs, urlparse
+    u = (parse_qs(urlparse(href).query).get("u") or [""])[0]
+    if u.startswith("a1"):
+        try:
+            b = u[2:] + "=" * (-len(u[2:]) % 4)
+            return base64.urlsafe_b64decode(b).decode("utf-8", "ignore")
+        except Exception:  # noqa: BLE001
+            return href
+    return href
+
+
+def _company_relevant(it: dict, aliases: list[str]) -> bool:
+    blob = f"{it.get('title','')} {it.get('url','')} {it.get('snippet','')}".lower()
+    return any(a in blob for a in aliases)
+
+
+def _reg_applies(r: dict, sector: str, is_fi: bool, is_sgx: bool) -> bool:
+    sectors = r.get("applies_to_sectors") or []
+    if sectors:
+        return sector in sectors
+    if r["scope"] == "MAS-FI":
+        return is_fi
+    if r["scope"].startswith("SGX"):
+        return is_sgx
+    if r["scope"].startswith("ASEAN"):
+        return True
+    return True
+
+
+def store_reg_source(conn, rows: list[dict], fetched_at: str) -> None:
+    for r in rows:
+        conn.execute("INSERT OR REPLACE INTO reg_source VALUES (?,?,?,?)",
+                     (r["reg_id"], r.get("source_url"), r.get("source_excerpt"), fetched_at))
+    conn.commit()
+
+
+def store_reg_evidence(conn, rows: list[dict], fetched_at: str) -> None:
+    for r in rows:
+        conn.execute("INSERT OR REPLACE INTO reg_evidence VALUES (?,?,?,?,?,?,?,?)",
+                     (r["company_id"], r["reg_id"], r.get("status"), r.get("matched"),
+                      r.get("source_url"), r.get("source_excerpt"), fetched_at, r.get("source")))
+    conn.commit()
+
+
+def load_reg_evidence(conn) -> dict:
+    rows = [dict(r) for r in conn.execute(
+        "SELECT * FROM reg_evidence ORDER BY company_id, reg_id")]
+    srcs = {r["reg_id"]: dict(r) for r in conn.execute("SELECT * FROM reg_source")}
+    log = conn.execute("SELECT * FROM scrape_log WHERE source='regulations'").fetchone()
+    return {"source": "Bright Data Scraping Browser · web search",
+            "last_run": log["last_run"] if log else None, "evidence": rows, "reg_source": srcs}
+
+
+def scrape_regulations(conn, offline: bool = False) -> dict:
+    if offline:                                  # serve the stored snapshot, no network
+        return load_reg_evidence(conn)
+
+    from backend.engine import config as _cfg
+
+    regs = _cfg.load_json("regulations.json")["regulations"]
+    companies = conn.execute(
+        "SELECT company_id, name, sector, country, sasb_industry FROM universe "
+        "WHERE scope='demo'").fetchall()
+
+    # 1) regulation provenance — one web search per regime -> a real source link.
+    src_rows = []
+    for r in regs:
+        items = brightdata.browser_collect(
+            "reg_source", r["reg_id"],
+            _bing_web_url(f"{r['name']} {r['jurisdiction']} requirements"),
+            _WEB_JS, ttl=30 * 86400, offline=offline) or []
+        top = items[0] if items else None
+        src_rows.append({"reg_id": r["reg_id"],
+                         "source_url": _resolve_bing_url(top.get("url")) if top else None,
+                         "source_excerpt": (top.get("snippet") or top.get("title")) if top else None})
+
+    # 2) per-company proof — search the company's ESG disclosures, then match each
+    #    applicable in-force regulation's keywords against the REAL result snippets.
+    ev_rows = []
+    for c in companies:
+        cid, name, sector = c["company_id"], c["name"], c["sector"]
+        is_fi = c["sasb_industry"] == "Commercial Banks"
+        is_sgx = c["country"] == "Singapore"
+        applicable = [r for r in regs
+                      if _reg_applies(r, sector, is_fi, is_sgx)
+                      and config.END_YEAR >= r["effective_year"]]
+        if not applicable:
+            continue
+        aliases = _COMPANY_ALIASES.get(cid, [name.lower()])
+        query = (f"{name} sustainability report TCFD climate scope 1 scope 2 "
+                 "ISSB emissions governance")
+        results = brightdata.browser_collect(
+            "reg_company", cid, _bing_web_url(query), _WEB_JS,
+            ttl=30 * 86400, offline=offline) or []
+        pool = [it for it in results if _company_relevant(it, aliases)] or results
+
+        comp = []
+        for r in applicable:
+            kws = r.get("disclosure_keywords", [])
+            best, best_m = None, 0
+            for it in pool:
+                blob = f"{it.get('title', '')} {it.get('snippet', '')}".lower()
+                m = sum(1 for k in kws if k.lower() in blob)
+                if m > best_m:
+                    best, best_m = it, m
+            if best and best_m > 0:
+                status = "MET" if best_m >= 2 else "PARTIAL"
+                url = _resolve_bing_url(best.get("url"))
+                excerpt = (best.get("snippet") or best.get("title") or "")[:280]
+                source = "bing_web"
+            else:
+                status, url, excerpt, source = None, None, None, None   # UNKNOWN -> seed
+            comp.append((r["reg_id"], status))
+            ev_rows.append({"company_id": cid, "reg_id": r["reg_id"], "status": status,
+                            "matched": best_m, "source_url": url, "source_excerpt": excerpt,
+                            "source": source})
+        summary = ", ".join(f"{rid}={s or 'UNKNOWN'}" for rid, s in comp)
+        n_res = sum(1 for _, s in comp if s)
+        print(f"  {cid:4} {name:24} results={len(results):2d} resolved={n_res}  {summary}")
+
+    fetched_at = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
+    store_reg_source(conn, src_rows, fetched_at)
+    store_reg_evidence(conn, ev_rows, fetched_at)
+    n_def = sum(1 for r in ev_rows if r["status"] in ("MET", "PARTIAL", "MISSING"))
+    _log_scrape(conn, "regulations", "ok", n_def)
+    print(f"  -> stored {len(ev_rows)} (company×reg) proofs ({n_def} resolved) + "
+          f"{len(src_rows)} reg sources in DB")
+    return load_reg_evidence(conn)
+
+
 def check() -> bool:
     if not brightdata.available():
         print("No Bright Data credentials found in backend/.env "
@@ -248,6 +413,7 @@ def main():
     ap.add_argument("--check", action="store_true")
     ap.add_argument("--prices", action="store_true")
     ap.add_argument("--news", action="store_true")
+    ap.add_argument("--regulations", action="store_true")
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--offline", action="store_true")
     args = ap.parse_args()
@@ -264,6 +430,9 @@ def main():
     if args.news or args.all:
         print("Scraping live news/controversy via Bright Data Scraping Browser…")
         scrape_news(conn, offline=args.offline)
+    if args.regulations or args.all:
+        print("Scraping ESG regulation compliance proof via Bright Data (deep)…")
+        scrape_regulations(conn, offline=args.offline)
     conn.close()
     print("Done. Recompute with: python -m backend.engine.pipeline")
 

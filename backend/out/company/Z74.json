@@ -4795,13 +4795,19 @@
         "reg_id": "SGX-711B",
         "name": "SGX Sustainability Reporting (Comply-or-Explain)",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": "https://www.singtel.com/about-us/sustainability/sustainability-reports",
+        "source_excerpt": "Our Sustainability Reports present and discuss aspects of our sustainability strategies, policies and performance relating to environmental, social, governance and economic issues. It also charts the …",
+        "scraped": true
       },
       {
         "reg_id": "ASEAN-TAXO",
         "name": "ASEAN Taxonomy for Sustainable Finance",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "partial": [],
@@ -4811,7 +4817,10 @@
         "reg_id": "ISSB-S2",
         "name": "IFRS S2 / ISSB Climate-related Disclosures",
         "status": "NA",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "trace": {
@@ -4823,11 +4832,11 @@
       "source_page": null,
       "children": [
         {
-          "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET",
+          "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET (live)",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, Singtel reinforced data privacy and cybersecurity for customer data.",
-          "source_doc": null,
+          "source_sentence": "Our Sustainability Reports present and discuss aspects of our sustainability strategies, policies and performance relating to environmental, social, governance and economic issues. It also charts the …",
+          "source_doc": "https://www.singtel.com/about-us/sustainability/sustainability-reports",
           "source_page": null,
           "children": []
         },

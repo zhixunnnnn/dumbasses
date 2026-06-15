@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { ArrowUpDown, Scale } from "lucide-react";
+import { ArrowUpDown, ExternalLink, Scale } from "lucide-react";
 import type { CompanyRow, RegQuality, RegulationInfo } from "../../types";
 import { na, signed } from "../../lib/ui";
 import { api, useApi } from "../../lib/api";
@@ -124,6 +124,17 @@ export default function ScreenerTable({ rows }: { rows: CompanyRow[] }) {
               {regInfo.n_missing > 0 && <span className="text-neg">· {regInfo.n_missing} MISSING </span>}
               {regInfo.n_na > 0 && <span>· {regInfo.n_na} N.A.</span>}
             </span>
+            {regInfo.n_scraped > 0 && (
+              <span className="text-pos" title="Companies verified against their published report (live)">
+                {regInfo.n_scraped} live-verified
+              </span>
+            )}
+            {regInfo.source_url && (
+              <a href={regInfo.source_url} target="_blank" rel="noreferrer"
+                className="inline-flex items-center gap-1 text-muted underline-offset-2 hover:text-pos hover:underline">
+                regulation source <ExternalLink size={10} />
+              </a>
+            )}
           </p>
         </div>
       )}

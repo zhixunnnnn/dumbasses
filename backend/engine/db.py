@@ -123,6 +123,30 @@ CREATE TABLE IF NOT EXISTS scrape_log (
     last_status TEXT,
     rows        INTEGER
 );
+
+-- scraped regulation provenance (a real source link/excerpt per regime) -------
+CREATE TABLE IF NOT EXISTS reg_source (
+    reg_id         TEXT PRIMARY KEY,
+    source_url     TEXT,
+    source_excerpt TEXT,
+    fetched_at     TEXT
+);
+
+-- scraped, CURRENT per-company compliance proof (layered over the seed; the
+-- engine prefers this when present). status MISSING is only set when an
+-- authoritative document was actually retrieved and the disclosure was absent;
+-- if no document could be retrieved the status is NULL (UNKNOWN -> excluded).
+CREATE TABLE IF NOT EXISTS reg_evidence (
+    company_id     TEXT,
+    reg_id         TEXT,
+    status         TEXT,        -- MET | PARTIAL | MISSING | NULL(unknown)
+    matched        INTEGER,     -- # of disclosure keywords found
+    source_url     TEXT,
+    source_excerpt TEXT,
+    fetched_at     TEXT,
+    source         TEXT,
+    PRIMARY KEY (company_id, reg_id)
+);
 """
 
 TABLES = [

@@ -121,12 +121,18 @@ def build(offline: bool = True, retrain: bool = False) -> dict:
     reg_catalog = []
     for r in ds.regulations:
         t = reg_tally[r.reg_id]
+        src = ds.reg_source.get(r.reg_id)
+        n_scraped = sum(1 for (_cid, rid), ev in ds.reg_evidence.items()
+                        if rid == r.reg_id and ev.status in ("MET", "PARTIAL", "MISSING"))
         reg_catalog.append({
             "reg_id": r.reg_id, "name": r.name, "jurisdiction": r.jurisdiction,
             "scope": r.scope, "requirement": r.requirement, "effective_year": r.effective_year,
             "applies_to": _applies_to_text(r, sectors_map),
             "n_applicable": t["MET"] + t["PARTIAL"] + t["MISSING"] + t["NA"],
             "n_met": t["MET"], "n_partial": t["PARTIAL"], "n_missing": t["MISSING"], "n_na": t["NA"],
+            "n_scraped": n_scraped,
+            "source_url": src.source_url if src else None,
+            "source_excerpt": src.source_excerpt if src else None,
         })
 
     improvers = [r for r in companies if r["is_underpriced_improver"]]

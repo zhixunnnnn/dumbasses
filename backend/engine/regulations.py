@@ -16,6 +16,7 @@ from .models import ComplianceGap, RegStatus, TraceNode
 from .trace import leaf
 
 _SENT = re.compile(r"(?<=[.!?])\s+")
+_RANK = {"MISSING": 0, "PARTIAL": 1, "MET": 2}   # compliance ordering
 
 
 @functools.lru_cache(maxsize=1)
@@ -82,15 +83,35 @@ def compliance_gap(ds: Dataset, cid: str, year: int = config.END_YEAR) -> Compli
             not_in_force.append(rs)
             children.append(TraceNode(label=f"{reg.name} — not yet in force ({reg.effective_year})"))
             continue
+        # Combine the deterministic seed status with LIVE scraped evidence (real
+        # source link + verbatim excerpt). Snippet-level evidence can CONFIRM or
+        # UPGRADE a company but must never downgrade it on a thin snippet, so the
+        # displayed status is the BETTER of the two; the scraped proof is attached
+        # whenever a real source was found. No scraped MISSING (snippet absence is
+        # not proof of non-compliance) — MISSING only comes from the curated seed.
         row = comp_rows.get(reg.reg_id)
-        status = row.status if row else None
+        seed_status = row.status if row else None
+        ev = ds.reg_evidence_for(cid, reg.reg_id) if year == config.END_YEAR else None
+        ev_status = ev.status if ev else None
+        ranked = [s for s in (seed_status, ev_status) if s in _RANK]
+        status = max(ranked, key=_RANK.__getitem__) if ranked else None
+        proof = ev if (ev and ev.source_url) else None
+
         if status in ("MET", "PARTIAL"):
-            sent = _disclosure_sentence(ds, cid, year, kw.get(reg.reg_id, []))
-            node = leaf(f"{reg.name} — {status}", sent or reg.requirement)
-            children.append(node)
-            (met if status == "MET" else partial).append(rs.model_copy(update={"status": status}))
+            upd = {"status": status}
+            if proof:
+                upd.update(scraped=True, source_url=proof.source_url, source_excerpt=proof.source_excerpt)
+                children.append(leaf(f"{reg.name} — {status} (live)",
+                                     proof.source_excerpt or reg.requirement, doc=proof.source_url))
+            else:
+                sent = _disclosure_sentence(ds, cid, year, kw.get(reg.reg_id, []))
+                children.append(leaf(f"{reg.name} — {status}", sent or reg.requirement))
+            (met if status == "MET" else partial).append(rs.model_copy(update=upd))
         elif status == "MISSING":
-            missing.append(rs.model_copy(update={"status": "MISSING"}))
+            upd = {"status": "MISSING"}
+            if proof:
+                upd.update(scraped=True, source_url=proof.source_url, source_excerpt=proof.source_excerpt)
+            missing.append(rs.model_copy(update=upd))
             children.append(TraceNode(label=f"{reg.name} — MISSING (required, undisclosed)"))
         # status None (unknown) -> excluded entirely (never counted as MISSING)
 

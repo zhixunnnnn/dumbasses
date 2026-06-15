@@ -69,6 +69,9 @@ export type RegulationInfo = {
   n_partial: number;
   n_missing: number;
   n_na: number;
+  n_scraped: number;
+  source_url: string | null;
+  source_excerpt: string | null;
 };
 
 export type MatrixPoint = {
@@ -163,6 +166,9 @@ export type RegStatus = {
   name: string;
   status: RegQuality;
   evidence_ref: string | null;
+  source_url?: string | null;
+  source_excerpt?: string | null;
+  scraped?: boolean;
 };
 
 export type Compliance = {

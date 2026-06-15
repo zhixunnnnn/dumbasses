@@ -4759,21 +4759,30 @@
         "reg_id": "SGX-711B",
         "name": "SGX Sustainability Reporting (Comply-or-Explain)",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": "https://www.sustainabilityreports.com/sembcorp-industries/2024/sustainability-report",
+        "source_excerpt": "1 de ene de 2024 · The report highlights Sembcorp's progress in its energy transition, growing its gross installed renewable energy capacity to 13.1GW in 2024. It details a reduction in absolute GHG …",
+        "scraped": true
+      },
+      {
+        "reg_id": "SGX-CLIMATE",
+        "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
+        "status": "MET",
+        "evidence_ref": null,
+        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+        "source_excerpt": "Our climate-related financial disclosures, which were mandatory with effect from financial year 2023, are guided by the recommendations of the Task Force on Climate-related Financial Disclosures (TCFD). …",
+        "scraped": true
       }
     ],
     "partial": [
       {
-        "reg_id": "SGX-CLIMATE",
-        "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
-        "status": "PARTIAL",
-        "evidence_ref": null
-      },
-      {
         "reg_id": "ASEAN-TAXO",
         "name": "ASEAN Taxonomy for Sustainable Finance",
         "status": "PARTIAL",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "missing": [],
@@ -4782,7 +4791,10 @@
         "reg_id": "ISSB-S2",
         "name": "IFRS S2 / ISSB Climate-related Disclosures",
         "status": "NA",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "trace": {
@@ -4794,20 +4806,20 @@
       "source_page": null,
       "children": [
         {
-          "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET",
+          "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET (live)",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, Sembcorp Industries improved grid reliability and supply security.",
-          "source_doc": null,
+          "source_sentence": "1 de ene de 2024 · The report highlights Sembcorp's progress in its energy transition, growing its gross installed renewable energy capacity to 13.1GW in 2024. It details a reduction in absolute GHG …",
+          "source_doc": "https://www.sustainabilityreports.com/sembcorp-industries/2024/sustainability-report",
           "source_page": null,
           "children": []
         },
         {
-          "label": "SGX Mandatory Climate Reporting (TCFD-aligned) — PARTIAL",
+          "label": "SGX Mandatory Climate Reporting (TCFD-aligned) — MET (live)",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity.",
-          "source_doc": null,
+          "source_sentence": "Our climate-related financial disclosures, which were mandatory with effect from financial year 2023, are guided by the recommendations of the Task Force on Climate-related Financial Disclosures (TCFD). …",
+          "source_doc": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
           "source_page": null,
           "children": []
         },
