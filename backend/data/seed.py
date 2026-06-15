@@ -349,12 +349,17 @@ def _insert_compliance(conn, c, regs):
     cid = c["id"]
     is_fi = c["industry"] == "Commercial Banks"
     is_sgx = c["country"] == "Singapore"
+    sector = c["sector"]
     for year in config.YEARS:
         for r in regs:
-            # applicability gate (scope + effective year)
-            if r["scope"] == "MAS-FI" and not is_fi:
+            # applicability gate (sector targeting > scope) + effective year
+            sectors = r.get("applies_to_sectors") or []
+            if sectors:
+                if sector not in sectors:
+                    continue
+            elif r["scope"] == "MAS-FI" and not is_fi:
                 continue
-            if r["scope"].startswith("SGX") and not is_sgx:
+            elif r["scope"].startswith("SGX") and not is_sgx:
                 continue
             if year < r["effective_year"]:
                 status = "NA"           # not in force yet -> readiness gap, never violation

@@ -101,6 +101,9 @@ class RegStatus(BaseModel):
     name: str
     status: Quality
     evidence_ref: Optional[str] = None
+    source_url: Optional[str] = None        # scraped proof link (when verified live)
+    source_excerpt: Optional[str] = None    # verbatim sentence from the source
+    scraped: bool = False                   # True = backed by live scraped evidence
 
 
 class ComplianceGap(BaseModel):

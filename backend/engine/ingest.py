@@ -72,6 +72,26 @@ class RegComplianceRow:
 
 
 @dataclass
+class RegSourceRow:
+    reg_id: str
+    source_url: Optional[str]
+    source_excerpt: Optional[str]
+    fetched_at: Optional[str]
+
+
+@dataclass
+class RegEvidenceRow:
+    company_id: str
+    reg_id: str
+    status: Optional[str]          # MET | PARTIAL | MISSING | None (unknown)
+    matched: Optional[int]
+    source_url: Optional[str]
+    source_excerpt: Optional[str]
+    fetched_at: Optional[str]
+    source: Optional[str]
+
+
+@dataclass
 class Dataset:
     companies: dict[str, Company]
     raters: list[RaterRow]
@@ -83,6 +103,9 @@ class Dataset:
     regulations: list[RegulationRow]
     reg_compliance: list[RegComplianceRow]
     news_sentiment: dict[str, int] = field(default_factory=dict)   # live Bright Data signal
+    # scraped, current compliance proof keyed by (company_id, reg_id), + reg provenance
+    reg_evidence: dict[tuple[str, str], RegEvidenceRow] = field(default_factory=dict)
+    reg_source: dict[str, RegSourceRow] = field(default_factory=dict)
 
     # ---- convenience accessors -------------------------------------------------
     def demo_ids(self) -> list[str]:
@@ -110,6 +133,9 @@ class Dataset:
 
     def compliance_for(self, cid: str) -> list[RegComplianceRow]:
         return [r for r in self.reg_compliance if r.company_id == cid]
+
+    def reg_evidence_for(self, cid: str, reg_id: str) -> Optional[RegEvidenceRow]:
+        return self.reg_evidence.get((cid, reg_id))
 
 
 def load(db_path=None) -> Dataset:
@@ -155,7 +181,15 @@ def load(db_path=None) -> Dataset:
                       for r in conn.execute("SELECT * FROM reg_compliance")]
     news_sentiment = {r["company_id"]: (r["sentiment"] or 0)
                       for r in conn.execute("SELECT company_id, sentiment FROM news")}
+
+    reg_evidence = {(r["company_id"], r["reg_id"]):
+                    RegEvidenceRow(r["company_id"], r["reg_id"], r["status"], r["matched"],
+                                   r["source_url"], r["source_excerpt"], r["fetched_at"], r["source"])
+                    for r in conn.execute("SELECT * FROM reg_evidence")}
+    reg_source = {r["reg_id"]: RegSourceRow(r["reg_id"], r["source_url"], r["source_excerpt"],
+                                            r["fetched_at"])
+                  for r in conn.execute("SELECT * FROM reg_source")}
     conn.close()
 
     return Dataset(companies, raters, prices, fundamentals, documents, evidence, events,
-                   regulations, reg_compliance, news_sentiment)
+                   regulations, reg_compliance, news_sentiment, reg_evidence, reg_source)

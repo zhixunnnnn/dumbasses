@@ -4782,25 +4782,37 @@
         "reg_id": "SGX-711B",
         "name": "SGX Sustainability Reporting (Comply-or-Explain)",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": "https://www.ocbc.com/group/sustainability/sustainability-reports.page",
+        "source_excerpt": "Explore OCBC comprehensive Sustainability Reports for 2023. Discover our commitment to sustainability and responsible business practices.",
+        "scraped": true
       },
       {
         "reg_id": "SGX-CLIMATE",
         "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": "https://www.marketscreener.com/quote/stock/OVERSEA-CHINESE-BANKING-C-6491130/news/Oversea-Chinese-Banking-OCBC-Sustainability-Report-2024-English-49428806/",
+        "source_excerpt": "Mar 25, 2025 · In addition to adhering to the TCFD Recommendations and aligning with regulatory and industry requirements, this Sustainability Report was prepared with reference to the International …",
+        "scraped": true
       },
       {
         "reg_id": "MAS-ENRM",
         "name": "MAS Guidelines on Environmental Risk Management",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       },
       {
         "reg_id": "ASEAN-TAXO",
         "name": "ASEAN Taxonomy for Sustainable Finance",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "partial": [],
@@ -4810,7 +4822,10 @@
         "reg_id": "ISSB-S2",
         "name": "IFRS S2 / ISSB Climate-related Disclosures",
         "status": "NA",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "trace": {
@@ -4822,20 +4837,20 @@
       "source_page": null,
       "children": [
         {
-          "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET",
+          "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET (live)",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
-          "source_doc": null,
+          "source_sentence": "Explore OCBC comprehensive Sustainability Reports for 2023. Discover our commitment to sustainability and responsible business practices.",
+          "source_doc": "https://www.ocbc.com/group/sustainability/sustainability-reports.page",
           "source_page": null,
           "children": []
         },
         {
-          "label": "SGX Mandatory Climate Reporting (TCFD-aligned) — MET",
+          "label": "SGX Mandatory Climate Reporting (TCFD-aligned) — MET (live)",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
-          "source_doc": null,
+          "source_sentence": "Mar 25, 2025 · In addition to adhering to the TCFD Recommendations and aligning with regulatory and industry requirements, this Sustainability Report was prepared with reference to the International …",
+          "source_doc": "https://www.marketscreener.com/quote/stock/OVERSEA-CHINESE-BANKING-C-6491130/news/Oversea-Chinese-Banking-OCBC-Sustainability-Report-2024-English-49428806/",
           "source_page": null,
           "children": []
         },

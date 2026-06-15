@@ -4268,19 +4268,19 @@
         "reg_id": "SGX-711B",
         "name": "SGX Sustainability Reporting (Comply-or-Explain)",
         "status": "MET",
-        "evidence_ref": null
-      },
-      {
-        "reg_id": "SGX-CLIMATE",
-        "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
-        "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": "https://www.marketscreener.com/quote/stock/CAPITALAND-INVESTMENT-LIM-126877817/news/CapitaLand-Investment-Sustainability-Report-2024-50125203/",
+        "source_excerpt": "Jun 2, 2025 · With TCFD subsumed into ISSB, CLI has been preparing for the ISSB standards relating to climate reporting with some IFRS S2 references made in this report. CLI has conducted three …",
+        "scraped": true
       },
       {
         "reg_id": "ASEAN-TAXO",
         "name": "ASEAN Taxonomy for Sustainable Finance",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "partial": [],
@@ -4290,7 +4290,10 @@
         "reg_id": "ISSB-S2",
         "name": "IFRS S2 / ISSB Climate-related Disclosures",
         "status": "NA",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "trace": {
@@ -4302,20 +4305,11 @@
       "source_page": null,
       "children": [
         {
-          "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET",
+          "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET (live)",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, CapitaLand Investment improved energy efficiency across its green building portfolio.",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "SGX Mandatory Climate Reporting (TCFD-aligned) — MET",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "In FY2023, CapitaLand Investment reduced Scope 1 and Scope 2 carbon emissions intensity.",
-          "source_doc": null,
+          "source_sentence": "Jun 2, 2025 · With TCFD subsumed into ISSB, CLI has been preparing for the ISSB standards relating to climate reporting with some IFRS S2 references made in this report. CLI has conducted three …",
+          "source_doc": "https://www.marketscreener.com/quote/stock/CAPITALAND-INVESTMENT-LIM-126877817/news/CapitaLand-Investment-Sustainability-Report-2024-50125203/",
           "source_page": null,
           "children": []
         },

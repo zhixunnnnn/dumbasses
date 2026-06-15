@@ -15,8 +15,9 @@
       "jurisdiction": "SG",
       "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
       "scope": "SGX-listed",
-      "requirement": "TCFD-aligned climate disclosures including Scope 1 and Scope 2 emissions.",
+      "requirement": "TCFD-aligned climate disclosures incl. Scope 1 and Scope 2 emissions. Phased rollout: mandatory from FY2023 for Financials, Agriculture/Food & Forest Products, and Energy; other sectors followed from FY2024.",
       "effective_year": 2023,
+      "applies_to_sectors": ["Financials", "Consumer Staples", "Utilities"],
       "disclosure_keywords": ["TCFD", "climate-related", "scope 1", "scope 2", "transition risk"]
     },
     {

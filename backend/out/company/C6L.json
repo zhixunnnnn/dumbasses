@@ -4988,21 +4988,21 @@
         "reg_id": "SGX-711B",
         "name": "SGX Sustainability Reporting (Comply-or-Explain)",
         "status": "MET",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "partial": [
       {
-        "reg_id": "SGX-CLIMATE",
-        "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
-        "status": "PARTIAL",
-        "evidence_ref": null
-      },
-      {
         "reg_id": "ASEAN-TAXO",
         "name": "ASEAN Taxonomy for Sustainable Finance",
         "status": "PARTIAL",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "missing": [],
@@ -5011,7 +5011,10 @@
         "reg_id": "ISSB-S2",
         "name": "IFRS S2 / ISSB Climate-related Disclosures",
         "status": "NA",
-        "evidence_ref": null
+        "evidence_ref": null,
+        "source_url": null,
+        "source_excerpt": null,
+        "scraped": false
       }
     ],
     "trace": {
@@ -5024,15 +5027,6 @@
       "children": [
         {
           "label": "SGX Sustainability Reporting (Comply-or-Explain) — MET",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "In FY2023, Singapore Airlines reduced Scope 1 and Scope 2 carbon emissions intensity.",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "SGX Mandatory Climate Reporting (TCFD-aligned) — PARTIAL",
           "value": null,
           "contribution": null,
           "source_sentence": "In FY2023, Singapore Airlines reduced Scope 1 and Scope 2 carbon emissions intensity.",

@@ -14,7 +14,24 @@
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
     "compliance_score": 0.0,
-    "forecast": 65.57
+    "forecast": 65.57,
+    "regulations": [
+      {
+        "reg_id": "SGX-711B",
+        "name": "SGX Sustainability Reporting (Comply-or-Explain)",
+        "status": "MET"
+      },
+      {
+        "reg_id": "ASEAN-TAXO",
+        "name": "ASEAN Taxonomy for Sustainable Finance",
+        "status": "MET"
+      },
+      {
+        "reg_id": "ISSB-S2",
+        "name": "IFRS S2 / ISSB Climate-related Disclosures",
+        "status": "NA"
+      }
+    ]
   },
   {
     "id": "F34",
@@ -30,7 +47,29 @@
     "momentum": 3.3,
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
-    "compliance_score": 0.667,
-    "forecast": 62.58
+    "compliance_score": 0.333,
+    "forecast": 62.58,
+    "regulations": [
+      {
+        "reg_id": "SGX-711B",
+        "name": "SGX Sustainability Reporting (Comply-or-Explain)",
+        "status": "MET"
+      },
+      {
+        "reg_id": "SGX-CLIMATE",
+        "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
+        "status": "PARTIAL"
+      },
+      {
+        "reg_id": "ASEAN-TAXO",
+        "name": "ASEAN Taxonomy for Sustainable Finance",
+        "status": "MISSING"
+      },
+      {
+        "reg_id": "ISSB-S2",
+        "name": "IFRS S2 / ISSB Climate-related Disclosures",
+        "status": "NA"
+      }
+    ]
   }
 ]

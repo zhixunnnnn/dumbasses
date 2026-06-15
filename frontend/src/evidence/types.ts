@@ -31,6 +31,12 @@ export type Candle = {
   volume?: number | null;
 };
 
+export type RegCell = {
+  reg_id: string;
+  name: string;
+  status: RegQuality;
+};
+
 export type CompanyRow = {
   id: string;
   name: string;
@@ -47,6 +53,25 @@ export type CompanyRow = {
   is_underpriced_improver: boolean;
   compliance_score: number | null;
   forecast: number | null;
+  regulations?: RegCell[] | null;
+};
+
+export type RegulationInfo = {
+  reg_id: string;
+  name: string;
+  jurisdiction: string;
+  scope: string;
+  requirement: string;
+  effective_year: number;
+  applies_to: string;
+  n_applicable: number;
+  n_met: number;
+  n_partial: number;
+  n_missing: number;
+  n_na: number;
+  n_scraped: number;
+  source_url: string | null;
+  source_excerpt: string | null;
 };
 
 export type MatrixPoint = {
@@ -144,6 +169,9 @@ export type RegStatus = {
   name: string;
   status: RegQuality;
   evidence_ref: string | null;
+  source_url?: string | null;
+  source_excerpt?: string | null;
+  scraped?: boolean;
 };
 
 export type Compliance = {

@@ -38,6 +38,20 @@ def _dump(path, obj):
     path.write_text(json.dumps(obj, ensure_ascii=False, indent=2, default=str), "utf-8")
 
 
+def _applies_to_text(reg, sectors_map) -> str:
+    """Human-readable 'who this regulation binds', for the catalog/filter tooltip."""
+    sectors = sectors_map.get(reg.reg_id) or []
+    if sectors:
+        return ", ".join(sectors)
+    if reg.scope == "MAS-FI":
+        return "Financial institutions"
+    if reg.scope.startswith("SGX"):
+        return "All SGX-listed"
+    if reg.scope.startswith("ASEAN"):
+        return "ASEAN-listed"
+    return "All"
+
+
 def _rater_provenance(cid: str) -> dict:
     """Mark MSCI as real (scraped) where we have it; S&P + Sustainalytics are always
     seeded/illustrative. Lets the UI label provenance honestly."""
@@ -94,6 +108,10 @@ def build(offline: bool = True, retrain: bool = False) -> dict:
     sigs = compute_all(ds, client)
     pcts = normalize_raters(ds, config.END_YEAR)
 
+    sectors_map = {r["reg_id"]: r.get("applies_to_sectors", [])
+                   for r in config.load_json("regulations.json")["regulations"]}
+    reg_tally = {r.reg_id: {"MET": 0, "PARTIAL": 0, "MISSING": 0, "NA": 0} for r in ds.regulations}
+
     companies, matrix = [], []
     for cid in ds.demo_ids():
         comp = ds.company(cid)
@@ -101,6 +119,12 @@ def build(offline: bool = True, retrain: bool = False) -> dict:
         es = evidence_score(ds, cid, config.END_YEAR, client)
         cg = compliance_gap(ds, cid, config.END_YEAR)
         fc = forecast(ds, cid, model, client)
+        # flatten the applicable regs (+ status) onto the row so the Screener can filter
+        # by regulation without an extra round-trip. not_in_force -> status "NA".
+        reg_cells = []
+        for rs in (cg.met + cg.partial + cg.missing + cg.not_in_force):
+            reg_cells.append({"reg_id": rs.reg_id, "name": rs.name, "status": rs.status})
+            reg_tally[rs.reg_id][rs.status] += 1
         row = {
             "id": cid, "name": comp.name, "ticker": comp.ticker, "sector": comp.sector,
             "country": comp.country, "evidence_total": es.total, "confidence": es.confidence,
@@ -108,6 +132,7 @@ def build(offline: bool = True, retrain: bool = False) -> dict:
             "evidence_gap": sig.evidence_gap, "momentum": sig.momentum, "quadrant": sig.quadrant,
             "is_underpriced_improver": sig.is_underpriced_improver,
             "compliance_score": cg.score, "forecast": fc.predicted_score,
+            "regulations": reg_cells,
         }
         companies.append(row)
         matrix.append({"id": cid, "name": comp.name, "x": sig.esg_today, "y": sig.momentum,
@@ -115,12 +140,31 @@ def build(offline: bool = True, retrain: bool = False) -> dict:
                        "is_underpriced_improver": sig.is_underpriced_improver})
         _dump(config.OUT_DIR / "company" / f"{cid}.json", _company_detail(ds, cid, sig, model, client))
 
+    # regulation registry/catalog: metadata + how many demo names each regime binds and their status
+    reg_catalog = []
+    for r in ds.regulations:
+        t = reg_tally[r.reg_id]
+        src = ds.reg_source.get(r.reg_id)
+        n_scraped = sum(1 for (_cid, rid), ev in ds.reg_evidence.items()
+                        if rid == r.reg_id and ev.status in ("MET", "PARTIAL", "MISSING"))
+        reg_catalog.append({
+            "reg_id": r.reg_id, "name": r.name, "jurisdiction": r.jurisdiction,
+            "scope": r.scope, "requirement": r.requirement, "effective_year": r.effective_year,
+            "applies_to": _applies_to_text(r, sectors_map),
+            "n_applicable": t["MET"] + t["PARTIAL"] + t["MISSING"] + t["NA"],
+            "n_met": t["MET"], "n_partial": t["PARTIAL"], "n_missing": t["MISSING"], "n_na": t["NA"],
+            "n_scraped": n_scraped,
+            "source_url": src.source_url if src else None,
+            "source_excerpt": src.source_excerpt if src else None,
+        })
+
     improvers = [r for r in companies if r["is_underpriced_improver"]]
     _dump(config.OUT_DIR / "companies.json", companies)
     _dump(config.OUT_DIR / "matrix.json", matrix)
     _dump(config.OUT_DIR / "signals.json", improvers)
+    _dump(config.OUT_DIR / "regulations.json", reg_catalog)
     return {"companies": len(companies), "improvers": len(improvers),
-            "model_val_error": model.val_error}
+            "regulations": len(reg_catalog), "model_val_error": model.val_error}
 
 
 def main():
