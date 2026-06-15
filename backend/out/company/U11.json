@@ -408,10 +408,10 @@
   },
   "signal": {
     "company_id": "U11",
-    "proof_up": false,
+    "proof_up": true,
     "opinion_flat": true,
     "price_flat": true,
-    "is_underpriced_improver": false,
+    "is_underpriced_improver": true,
     "evidence_gap": 39.12,
     "momentum": 2.5,
     "esg_today": 44.21,
@@ -425,7 +425,7 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=False (evidence momentum 2.5/yr, verified-driven)",
+          "label": "proof_up=True (evidence momentum 2.5/yr, verified-driven)",
           "value": 2.5,
           "contribution": null,
           "source_sentence": null,

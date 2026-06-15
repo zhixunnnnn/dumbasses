@@ -1,5 +1,22 @@
 [
   {
+    "id": "BN4",
+    "name": "Keppel Ltd",
+    "ticker": "BN4.SI",
+    "sector": "Industrials",
+    "country": "Singapore",
+    "evidence_total": 80.0,
+    "confidence": 0.39,
+    "consensus": 14.64,
+    "divergence": 16.98,
+    "evidence_gap": 31.79,
+    "momentum": 4.75,
+    "quadrant": "HIDDEN_WINNERS",
+    "is_underpriced_improver": true,
+    "compliance_score": 0.0,
+    "forecast": 81.5
+  },
+  {
     "id": "F34",
     "name": "Wilmar International",
     "ticker": "F34.SI",
@@ -15,5 +32,22 @@
     "is_underpriced_improver": true,
     "compliance_score": 0.667,
     "forecast": 61.83
+  },
+  {
+    "id": "U11",
+    "name": "UOB",
+    "ticker": "U11.SI",
+    "sector": "Financials",
+    "country": "Singapore",
+    "evidence_total": 88.75,
+    "confidence": 0.392,
+    "consensus": 44.21,
+    "divergence": 43.75,
+    "evidence_gap": 39.12,
+    "momentum": 2.5,
+    "quadrant": "HIDDEN_WINNERS",
+    "is_underpriced_improver": true,
+    "compliance_score": 0.0,
+    "forecast": 72.7
   }
 ]

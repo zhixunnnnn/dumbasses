@@ -29,7 +29,7 @@
     "evidence_gap": 31.79,
     "momentum": 4.75,
     "quadrant": "HIDDEN_WINNERS",
-    "is_underpriced_improver": false,
+    "is_underpriced_improver": true,
     "compliance_score": 0.0,
     "forecast": 81.5
   },
@@ -114,7 +114,7 @@
     "evidence_gap": 39.12,
     "momentum": 2.5,
     "quadrant": "HIDDEN_WINNERS",
-    "is_underpriced_improver": false,
+    "is_underpriced_improver": true,
     "compliance_score": 0.0,
     "forecast": 72.7
   },

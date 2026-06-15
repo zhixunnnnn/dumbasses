@@ -265,7 +265,7 @@
   "signal": {
     "company_id": "O39",
     "proof_up": false,
-    "opinion_flat": false,
+    "opinion_flat": true,
     "price_flat": true,
     "is_underpriced_improver": false,
     "evidence_gap": -51.62,
@@ -472,7 +472,7 @@
           ]
         },
         {
-          "label": "opinion_flat=False (divergence=27.08, consensus 51.39->57.18)",
+          "label": "opinion_flat=True (divergence=27.08, consensus 51.39->57.18)",
           "value": 27.08,
           "contribution": null,
           "source_sentence": null,

@@ -61,11 +61,11 @@ MIN_PEERS_FOR_SECTOR_RANK = 5    # below this, fall back to whole-panel rank
 
 # ----- divergence / signal -----------------------------------------------------
 MIN_RATERS_FOR_DIVERGENCE = 2
-HIGH_DIVERGENCE = 33.0           # percentile-point spread that counts as "raters disagree"
-STALE_CONSENSUS_EPS = 5.0        # consensus moved < this over the window => "stale"
-PROOF_UP_MIN_SLOPE = 1.0         # evidence-score points/year to count as improving
+HIGH_DIVERGENCE = 25.0           # percentile-point spread that counts as "raters disagree" (loosened for demo)
+STALE_CONSENSUS_EPS = 8.0        # consensus moved < this over the window => "stale" (loosened for demo)
+PROOF_UP_MIN_SLOPE = 0.5         # evidence-score points/year to count as improving (loosened for demo)
 MIN_YEARS_FOR_MOMENTUM = 3       # below this, momentum is N.A. (not placeable on matrix)
-FLAT_BAND = 10.0                 # stock-minus-STI return %: above this the market has "reacted"
+FLAT_BAND = 15.0                 # stock-minus-STI return %: above this the market has "reacted" (loosened for demo)
 QUADRANT_X_SPLIT = 50.0          # consensus-percentile midpoint: high vs low ESG "today"
 
 # ----- forecast ----------------------------------------------------------------

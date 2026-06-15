@@ -208,6 +208,16 @@ def verified_count(ds: Dataset, cid: str, year: int, client: Optional[LLMClient]
     return _aggregate(ds, cid, year, client or MockLLMClient()).verified_count
 
 
+def evidenced_count(ds: Dataset, cid: str, year: int, client: Optional[LLMClient] = None) -> int:
+    """Topics with VERIFIED or INFERRED evidence (both carry credit + a UI badge).
+    Used by proof_up so a company with strong momentum and labelled evidence — not
+    only the strictest independently-verified tier — can register as improving."""
+    d = _aggregate(ds, cid, year, client or MockLLMClient())
+    inferred = sum(1 for agg in d.topics.values()
+                   for node in agg.claim_traces if node.label.startswith("[INFERRED]"))
+    return d.verified_count + inferred
+
+
 def claim_table(ds: Dataset, cid: str, year: int, client: Optional[LLMClient] = None) -> dict:
     """Claims grouped for the UI, plus the ABSENT material topics (shown but not scored)."""
     d = _aggregate(ds, cid, year, client or MockLLMClient())

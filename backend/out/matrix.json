@@ -15,7 +15,7 @@
     "y": 4.75,
     "quadrant": "HIDDEN_WINNERS",
     "size": 80.0,
-    "is_underpriced_improver": false
+    "is_underpriced_improver": true
   },
   {
     "id": "F34",
@@ -60,7 +60,7 @@
     "y": 2.5,
     "quadrant": "HIDDEN_WINNERS",
     "size": 88.75,
-    "is_underpriced_improver": false
+    "is_underpriced_improver": true
   },
   {
     "id": "9CI",
