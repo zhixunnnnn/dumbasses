@@ -1,0 +1,196 @@
+{
+  "rows": [
+    {
+      "topic_id": "energy_management",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "The report scope covers Singtel, Digital InfraCo, our infrastructure arm that drives digital transformation with data centres, submarine cables, satellites and the Paragon platform, and our wholly-owned subsidiaries NCS and Optus.",
+      "source_sentence": "The report scope covers Singtel, Digital InfraCo, our infrastructure arm that drives digital transformation with data centres, submarine cables, satellites and the Paragon platform, and our wholly-owned subsidiaries NCS and Optus.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We stepped up engagement with our suppliers, encouraging them to address their own emissions in support of shared climate goals.",
+      "source_sentence": "e stepped up engagement with our suppliers, encouraging them to address their own emissions in support of shared climate goals.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We co-developed Singapore’s first Emissions Factors Registry in partnership with the Singapore Business Federation, the Agency for Science, Technology and Research, and PwC Singapore.",
+      "source_sentence": "Recognising the complexity of scope 3 emissions tracking, we co-developed Singapore’s first Emissions Factors Registry in partnership with the Singapore Business Federation, the Agency for Science, Technology and Research, and PwC Singapore.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "This initiative provides a centralised platform of industry-specific emissions data, helping businesses measure and report their carbon footprint with greater accuracy and consistency.",
+      "source_sentence": "This initiative provides a centralised platform of industry- specific emissions data, helping businesses measure and report their carbon footprint with greater accuracy and consistency.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "product_access",
+      "pillar": "S",
+      "state": "VERIFIED",
+      "text": "Digital inclusion has long been a Group priority.",
+      "source_sentence": "Digital inclusion has long been a Group priority.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "corroboration_url": "https://www.businesstimes.com.sg/esg/giving-back/singtel-partners-customers-to-donate-data-to-seniors-in-need",
+      "corroboration_source": "Businesstimes"
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Internal carbon pricing (ICP) was piloted in 2021 for high-emission business cases using a shadow price of S$50 per tonne of CO2e.",
+      "source_sentence": "To further integrate climate considerations into business decisions, we piloted internal carbon pricing (ICP) in 2021 for high-emission business cases using a shadow price of S$50 per tonne of CO2e.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "In 2023, internal carbon pricing was formalised as the emissions-weighted average cost of carbon (e-WACC), guiding capital expenditure decisions and vendor selection.",
+      "source_sentence": "In 2023, we formalised this as the emissions-weighted average cost of carbon (e-WACC), a mechanism now used to guide capital expenditure decisions and vendor selection by embedding the long-term cost of emissions.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "workforce_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "The Board Diversity Policy ensures that the Board comprises a balanced mix of expertise, experience, attributes and perspectives to guide the Group’s long-term strategy and governance.",
+      "source_sentence": "Our Board Diversity Policy ensures that the Board comprises a balanced mix of expertise, experience, attributes and perspectives to guide the Group’s long-term strategy and governance.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Singtel Group aims to reduce absolute scope 1 and 2 carbon emissions from 2023 baseline by 55% by 2030.",
+      "source_sentence": "Reduce absolute scope 1 and 2 carbon emissions from 2023 baseline by 55% by 2030.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Singtel Group aims to reduce scope 3 carbon emissions from 2023 baseline by 40% by 2030.",
+      "source_sentence": "Reduce scope 3 carbon emissions from 2023 baseline by 40% by 2030.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Singtel Group achieved a 14.0% decrease in scope 1 and 2 absolute emissions in FY2025 compared to the previous year.",
+      "source_sentence": "In FY2025, scope 1 and 2 absolute emissions are 355,768 tCO2e, representing a decrease of 14.0% from last year.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Singtel Group achieved a 19.3% reduction in scope 1 and 2 absolute emissions compared to the 2023 SBTi baseline.",
+      "source_sentence": "This marks a 19.3% reduction, equivalent to 84,832 tCO2e, compared to our 2023 SBTi baseline of 440,600 tCO2e.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Singtel Group achieved a 30.5% reduction in scope 1 and 2 absolute emissions since 2015, exceeding the 25.0% reduction target set for FY2025.",
+      "source_sentence": "Since 2015, our scope 1 and 2 absolute emissions have reduced by 30.5%, exceeding the 25.0% reduction target set for FY2025.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Singtel Group achieved a 38.7% reduction in scope 3 emissions for categories included in its SBTi target compared to the 2023 SBTi baseline.",
+      "source_sentence": "Compared to the 2023 SBTi baseline of 3,622,512 tCO2e, our scope 3 emissions for the selected categories decreased by 38.7%.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "data_privacy_security",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "Singtel Group aims to uphold the highest standards of customer data privacy protection and cyber security measures in adherence to data protection laws.",
+      "source_sentence": "Uphold the highest standards of customer data privacy protection and cyber security measures in adherence to data protection laws – PDPA in Singapore and Privacy Act and Telecommunications Act in Australia – with zero major incidents.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.3
+    },
+    {
+      "topic_id": "data_privacy_security",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "Singtel Group continues to educate its employees and improve practices and processes to reduce the recurrence of data breaches.",
+      "source_sentence": "We continue to educate our employees and improve practices and processes to reduce the recurrence of data breaches1.",
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": 1,
+      "weight": 0.3
+    },
+    {
+      "topic_id": "competitive_behavior",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company likely adheres to fair pricing and competitive practices through its commitment to ethical business practices and compliance with regulatory standards, ensuring transparency and integrity in its operations.",
+      "source_sentence": null,
+      "source_doc": "SR2025",
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_page": null,
+      "weight": 0.1,
+      "inferred": true
+    }
+  ],
+  "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+  "source_title": "SR2025"
+}

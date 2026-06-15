@@ -1,0 +1,272 @@
+{
+  "rows": [
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "VERIFIED",
+      "text": "Founded on our ethos, ‘Conserving as We Construct’ for three decades, CDL prioritises sustainable construction practices, incorporating low-carbon and energy-efficient technologies in the way we design, build and manage our buildings.",
+      "source_sentence": "Founded on our ethos, ‘Conserving as We Construct’ for three decades, CDL prioritises sustainable construction practices, incorporating low-carbon and energy-efficient technologies in the way we design, build and manage our buildings.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2,
+      "corroboration_url": "https://worldgbc.org/signatory/cdl/",
+      "corroboration_source": "Worldgbc"
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Cooling and decarbonising by greening will be our strategic focus as we move towards a nature-positive future, by actively monitoring our processes and mitigating nature-related risks.",
+      "source_sentence": "Cooling and decarbonising by greening will be our strategic focus as we move towards a nature-positive future, by actively monitoring our processes and mitigating nature-related risks.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "climate_resilience",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "By taking responsibility for our impact, we continue to build stakeholder confidence and long-term resilience for our business.",
+      "source_sentence": "By taking responsibility for our impact, we continue to build stakeholder confidence and long-term resilience for our business.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "energy_management",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Achieved BCA Green Mark Platinum SLE awards for City House, Palais Renaissance, The Orie, Norwood Grand and Union Square Residences",
+      "source_sentence": "Achieved BCA Green Mark Platinum SLE awards for City House, Palais Renaissance, The Orie, Norwood Grand and Union Square Residences",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.25
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Launched CDL SME Supplier Decarbonisation Queen Bee Programme with partners to empower our supply chain towards a low-carbon future",
+      "source_sentence": "Launched CDL SME Supplier Decarbonisation Queen Bee Programme with partners to empower our supply chain towards a low-carbon future",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "energy_management",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "129 BCA Green Mark certifications for our developments and office interiors* – one of the leading private developers with most awarded BCA Green Mark Platinum certificates",
+      "source_sentence": "129 BCA Green Mark certifications for our developments and office interiors* – one of the leading private developers with most awarded BCA Green Mark Platinum certificates",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.25
+    },
+    {
+      "topic_id": "tenant_sustainability",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "First Singapore real estate company to roll out Green Lease campaign in 2014, in partnership with Tuas Power and supported by BCA, and first to launch the City Green Tenant Bonus Programme in 2024; achieved 100% retail and office tenant participation in CDL Green Lease Partnership Programme since 2017",
+      "source_sentence": "First Singapore real estate company to roll out Green Lease campaign in 2014, in partnership with Tuas Power and supported by BCA, and first to launch the City Green Tenant Bonus Programme in 2024; achieved 100% retail and office tenant participation in CDL Green Lease Partnership Programme since 2017",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "energy_management",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "First Singapore real estate developer to sign World Green Building Council’s (WorldGBC) Net Zero Carbon Buildings Commitment",
+      "source_sentence": "First Singapore real estate developer to sign World Green Building Council’s (WorldGBC) Net Zero Carbon Buildings Commitment",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.25
+    },
+    {
+      "topic_id": "water_management",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Maintained Double ‘A’s in CDP for climate change (since 2018) and water security (since 2019)",
+      "source_sentence": "Maintained Double ‘A’s in CDP for climate change (since 2018) and water security (since 2019)",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "climate_resilience",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Regulators, investors, insurers and banks are progressively using sustainability criteria alongside financial performance to evaluate companies’ long-term resilience and prospects.",
+      "source_sentence": "Regulators, investors, insurers and banks are progressively using sustainability criteria alongside financial performance to evaluate companies’ long-term resilience and prospects.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "water_management",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We maintained our position on 14 international benchmarks and achieved double ‘A’s in the 2024 CDP A List for corporate climate action and water security.",
+      "source_sentence": "We maintained our position on 14 international benchmarks and achieved double ‘A’s in the 2024 CDP A List for corporate climate action and water security.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "climate_resilience",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Maintaining Supply Chain and Operational Resilience Amidst ongoing global uncertainties, challenges and shifting priorities, CDL remains steadfast in integrating sustainability principles into our business model and future-ready strategy.",
+      "source_sentence": "Maintaining Supply Chain and Operational Resilience Amidst ongoing global uncertainties, challenges and shifting priorities, CDL remains steadfast in integrating sustainability principles into our business model and future-ready strategy.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Businesses play a crucial role in the global endeavour to achieve net-zero emissions and protect nature.",
+      "source_sentence": "Businesses play a crucial role in the global endeavour to achieve net-zero emissions and protect nature.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "climate_resilience",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "The health of our planet is inextricably linked to the resilience of our people, economies and businesses.",
+      "source_sentence": "The health of our planet is inextricably linked to the resilience of our people, economies and businesses.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "In September 2024, the Singapore Exchange Regulation (SGX RegCo) announced that beginning with financial year (FY) 2025, all listed issuers will be required to report their Scope 1 and Scope 2 greenhouse gases (GHG) emissions, incorporating the climate-related requirements aligned with the International Financial Reporting Standards (IFRS) Sustainability Disclosure Standards issued by the International Sustainability Standards Board (ISSB).",
+      "source_sentence": "In September 2024, the Singapore Exchange Regulation (SGX RegCo) announced that beginning with financial year (FY) 2025, all listed issuers will be required to report their Scope 1 and Scope 2 greenhouse gases (GHG) emissions, incorporating the climate-related requirements aligned with the International Financial Reporting Standards (IFRS) Sustainability Disclosure Standards issued by the International Sustainability Standards Board (ISSB).",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Larger issuers by market capitalisation will likely need to report Scope 3 GHG emissions from FY2026.",
+      "source_sentence": "Larger issuers by market capitalisation will likely need to report Scope 3 GHG emissions from FY2026.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We have been pragmatically integrating sustainability solutions into our GET (Growth, Enhancement and Transformation) strategy, focusing on four key sustainability pillars – Integration, Innovation, Investment and Impact – with four key deliverables: “Decarbonisation”, “Digitalisation and Innovation”, “Disclosure and Communication”, and “Defence through mitigation and adaptation”.",
+      "source_sentence": "We have been pragmatically integrating sustainability solutions into our GET (Growth, Enhancement and Transformation) strategy, focusing on four key sustainability pillars – Integration, Innovation, Investment and Impact – with four key deliverables: “Decarbonisation”, “Digitalisation and Innovation”, “Disclosure and Communication”, and “Defence through mitigation and adaptation”.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Implemented a carbon sequestration and activation system for Ready Mixed Concrete for the clubhouse structures at Copen Grand.",
+      "source_sentence": "At our Executive Condominium (EC) project, Copen Grand, we implemented a carbon sequestration and activation system for Ready Mixed Concrete for the clubhouse structures.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "The concrete at Copen Grand has up to 80% cement replacement and uses carbon dioxide to enhance the properties of the concrete.",
+      "source_sentence": "The concrete has up to 80% cement replacement and uses carbon dioxide to enhance the properties of the concrete.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Replaced diesel-powered generators at Irwell Hill Residences project site with an energy storage system, reducing construction-related carbon emissions by up to 80%.",
+      "source_sentence": "In 2022, we replaced diesel-powered generators at our Irwell Hill Residences project site with an energy storage system, reducing construction-related carbon emissions by up to 80%.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "climate_resilience",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "The ‘We Love Our Planet’ exhibition highlighted the indispensable role of nature and biodiversity in supporting ecosystem resilience and addressing the climate crisis.",
+      "source_sentence": "This exhibition highlighted the indispensable role of nature and biodiversity in supporting ecosystem resilience and addressing the climate crisis.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "business_ethics",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "CDL integrates sustainability at the highest governance level to enable strategic oversight of ESG issues for long-term value creation.",
+      "source_sentence": "At CDL, integrating sustainability at the highest governance level enables strategic oversight of ESG issues for long-term value creation.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "business_ethics",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "CDL’s sustainability governance, management and disclosures are in line with or ahead of global best practices and SGX RegCo’s mandate on climate disclosures and board supervision.",
+      "source_sentence": "The Company’s sustainability governance, management and disclosures are in line with or ahead of the global best practices and SGX RegCo’s mandate on climate disclosures and board supervision.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "business_ethics",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "30% of CDL’s ExCo members’ remuneration is contingent on hitting the Group’s ESG targets, with respective weightages for Environmental, Governance and Social targets.",
+      "source_sentence": "30% of our ExCo members’ remuneration is contingent on hitting the Group’s ESG targets, with a respective weightage of 5% for Environmental, 10% for Governance targets and 15% for Social targets.",
+      "source_doc": "CDL ISR 2025",
+      "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    }
+  ],
+  "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+  "source_title": "CDL ISR 2025"
+}

@@ -33,6 +33,7 @@ export const QUADRANT: Record<
 export const STATE_COLOR: Record<VerifyState, string> = {
   VERIFIED: "#3ecf8e",
   ASSERTED: "#e0b24a",
+  INFERRED: "#a78bfa",
   ABSENT: "#6a665f",
 };
 

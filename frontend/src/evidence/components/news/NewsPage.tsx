@@ -102,7 +102,7 @@ function CompanyCard({ c, headlines, q, onOpen }: {
 }
 
 export default function NewsPage() {
-  const { openCompany } = useNavigation();
+  const { navigate } = useNavigation();
   const { data, loading, error } = useApi(api.news, []);
   const [q, setQ] = useState("");
   const [sector, setSector] = useState("All");
@@ -214,7 +214,13 @@ export default function NewsPage() {
       ) : (
         <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
           {view.map(({ c, shown }) => (
-            <CompanyCard key={c.company_id} c={c} headlines={shown} q={query} onOpen={openCompany} />
+            <CompanyCard
+              key={c.company_id}
+              c={c}
+              headlines={shown}
+              q={query}
+              onOpen={(id) => navigate({ name: "evidenceCompany", id })}
+            />
           ))}
         </div>
       )}

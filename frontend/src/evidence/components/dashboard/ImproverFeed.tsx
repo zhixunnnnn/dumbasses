@@ -5,7 +5,7 @@ import { ImproverPill } from "../common/badges";
 import { useNavigation } from "../../navigation/NavigationContext";
 
 export default function ImproverFeed({ rows }: { rows: CompanyRow[] }) {
-  const { openCompany } = useNavigation();
+  const { navigate } = useNavigation();
   const improvers = rows
     .filter((r) => r.is_underpriced_improver)
     .sort((a, b) => (b.evidence_gap ?? 0) - (a.evidence_gap ?? 0));
@@ -24,7 +24,7 @@ export default function ImproverFeed({ rows }: { rows: CompanyRow[] }) {
           <p className="px-2 py-6 text-center text-[12px] text-faint">No underpriced improvers right now.</p>
         )}
         {improvers.map((r) => (
-          <button key={r.id} onClick={() => openCompany(r.id)}
+          <button key={r.id} onClick={() => navigate({ name: "evidenceCompany", id: r.id })}
             className="group w-full rounded-lg border border-hairline bg-canvas/40 p-3 text-left transition hover:border-pos/40">
             <div className="flex items-center justify-between">
               <div className="min-w-0">

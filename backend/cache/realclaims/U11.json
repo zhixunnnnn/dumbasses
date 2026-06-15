@@ -1,0 +1,282 @@
+{
+  "rows": [
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "UOB’s report is prepared in accordance with SGX Mainboard Listing Rules 711A and 711B, Practice Notes 7.6, SGX Core ESG Metrics, GRI Standards 2021, GRI G4 Financial Services Sector Disclosures, MAS Guidelines on Environmental Risk Management, and ABS Guidelines on Responsible Financing.",
+      "source_sentence": "This report is approved by the UOB Board of Directors and is prepared in accordance with: • the Singapore Exchange (SGX) Securities Trading Limited Mainboard Listing Rules 711A and 711B on Sustainability Reporting, as well as Practice Notes 7.6 Sustainability Reporting Guide; • the SGX Core ESG Metrics published in December 2021 and updated in April 2023; • the Global Reporting Initiative (GRI) Standards 2021 by the Global Sustainability Standards Board; • the GRI G4 Financial Services Sector Disclosures document issued in 2008 and refreshed in May 2013; • the Monetary Authority of Singapore’s (MAS) Guidelines on Environmental Risk Management for Banks published in December 2020; and • the Guidelines on Responsible Financing issued in October 2015 (revised June 2018) by The Association of Banks in Singapore.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "business_ethics",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "This entails respect for the environment, human rights, labour rights, decent work and economic growth, data privacy and business ethics.",
+      "source_sentence": "This entails respect for the environment, human rights, labour rights, decent work and economic growth, data privacy and business ethics.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "business_ethics",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "We are committed to contributing to the 17 United Nations Sustainable Development Goals (UN SDGs) and integrating the United Nations Global Compact’s (UNGC) Ten Principles in the areas of human rights, labour, environment and anti-corruption into our culture, business strategy and daily operations.",
+      "source_sentence": "We are committed to contributing to the 17 United Nations Sustainable Development Goals (UN SDGs) and integrating the United Nations Global Compact’s (UNGC) Ten Principles in the areas of human rights, labour, environment and anti-corruption into our culture, business strategy and daily operations.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "Climate risk is identified, assessed, managed and monitored through our Group Environmental Risk Management Framework, which is approved by the Board Risk Management Committee.",
+      "source_sentence": "Climate risk is identified, assessed, managed and monitored through our Group Environmental Risk Management Framework, which is approved by the Board Risk Management Committee.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "We manage credit risk associated with climate and ESG risk through our Group Responsible Financing Policy, which covers risk identification, assessment, mitigation and monitoring.",
+      "source_sentence": "We manage credit risk associated with climate and ESG risk through our Group Responsible Financing Policy, which covers risk identification, assessment, mitigation and monitoring.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "We conduct stress testing through a physical scenario, a transition scenario and a combined scenario of both.",
+      "source_sentence": "We conduct stress testing through a physical scenario, a transition scenario and a combined scenario of both.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "UOB manages both short-term and long-term liquidity implications of climate risk through stress testing.",
+      "source_sentence": "UOB manages both short-term and long-term liquidity implications of climate risk through stress testing.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "We plan to undertake a climate risk assessment of our own global real estate portfolio, focusing on floods and heat waves in 2025.",
+      "source_sentence": "We plan to undertake a climate risk assessment of our own global real estate portfolio, focusing on floods and heat waves in 2025.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "We will continue to strengthen our understanding of the manifestations of climate risk in non-credit risk types and will direct our efforts towards strengthening our risk management approach.",
+      "source_sentence": "As such, we will continue to strengthen our understanding of the manifestations of climate risk in non-credit risk types and will direct our efforts towards strengthening our risk management approach.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "We are committed to continuing our engagement with regulators, industry associations and climate specialists, as well as actively participating in and supporting various initiatives, such as the Singapore Sustainable Finance Association (SSFA), to improve our capabilities in climate risk management.",
+      "source_sentence": "We are committed to continuing our engagement with regulators, industry associations and climate specialists, as well as actively participating in and supporting various initiatives, such as the Singapore Sustainable Finance Association (SSFA), to improve our capabilities in climate risk management.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "We will closely monitor international developments such as the UN Climate Change Conference, the Basel Committee on Banking Supervision’s (BCBS) initiative on climate risk management, as well as new initiatives by the NGFS and local regulators.",
+      "source_sentence": "Further, as our business and operations span multiple jurisdictions, we will closely monitor international developments such as the UN Climate Change Conference, the Basel Committee on Banking Supervision’s (BCBS) initiative on climate risk management, as well as new initiatives by the NGFS and local regulators.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financed_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We used 2021 data as our baseline when assessing financed emissions intensities across our priority sectors and setting our targets.",
+      "source_sentence": "We used 2021 data as our baseline when assessing financed emissions intensities across our priority sectors and setting our targets.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.25
+    },
+    {
+      "topic_id": "financed_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We do not apply an internal carbon price on our financed emissions, which make up a majority of our emissions profile, as we deploy other levers such as our granular sectoral plans and sustainable finance to support the decarbonisation of our customers.",
+      "source_sentence": "We do not apply an internal carbon price on our financed emissions, which make up a majority of our emissions profile, as we deploy other levers such as our granular sectoral plans and sustainable finance to support the decarbonisation of our customers.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.25
+    },
+    {
+      "topic_id": "employee_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "UOB seeks to contribute to halting and reversing biodiversity loss by 2030 and living in harmony with nature by 2050.",
+      "source_sentence": "As a commercial bank with the power to mobilise private capital, we seek to play our role in contributing to and supporting activities that align with the Kunming-Montreal Global Biodiversity Framework’s vision of halting and reversing biodiversity loss by 2030 and living in harmony with nature by 2050.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "employee_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "The Global Biodiversity Framework sets a clear mandate for nature- and biodiversity-related financial decision-making.",
+      "source_sentence": "The Global Biodiversity Framework is a global agreement that takes a similar approach to the Paris Agreement to set a clear mandate for nature- and biodiversity-related financial decision-making9.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "UOB conducted a double materiality assessment to understand nature risks material to its business.",
+      "source_sentence": "To better understand the nature risks material to our business, we conducted a double materiality assessment of our portfolio, examining:",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "UOB’s double materiality assessment examines the impacts of its economic activities on natural capital.",
+      "source_sentence": "the impacts of our economic activities, defined as the economic activities we finance, on natural capital;",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "UOB’s double materiality assessment examines the dependencies of its economic activities on natural capital.",
+      "source_sentence": "the dependencies of those economic activities on natural capital.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "employee_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "UOB is contextualising materiality by location using the Biodiversity Risk Filter developed by WWF.",
+      "source_sentence": "We are therefore making efforts to contextualise materiality by location, using the Biodiversity Risk Filter11 developed by the WWF.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "The Biodiversity Risk Filter allows the assessment of nature at a regional level.",
+      "source_sentence": "The tool allows the assessment of nature at a regional level.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Nature risk assessment can extend its evaluation of impacts and dependencies both upstream and downstream.",
+      "source_sentence": "Just as climate risk assessment extends the measurement of GHG emissions to activities up and down the supply chain (Scope 3 emissions), nature risk assessment can also extend its evaluation of impacts and dependencies both upstream and downstream.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "The assessment of UOB’s corporate loan portfolio involves identifying material upstream and downstream activities for priority sectors.",
+      "source_sentence": "The assessment of our corporate loan portfolio involves identifying an appropriate list of material upstream and downstream activities for each of our priority sectors, ensuring we have a holistic picture of their nature risks.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "UOB used the ENCORE tool for its assessment of dependencies and impacts of its corporate loan portfolio.",
+      "source_sentence": "We used the ENCORE (Exploring Natural Capital Opportunities, Risks and Exposure) tool10 for our assessment of dependencies and impacts of our corporate loan portfolio.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "UOB augmented its sector materiality assessment with geographical and value chain analysis.",
+      "source_sentence": "We then augmented our sector materiality assessment with both a geographical analysis and a value chain analysis, where relevant.",
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "data_security",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company likely addresses data security through robust cybersecurity frameworks, regular employee training, and advanced technologies to prevent data breaches and ensure data protection.",
+      "source_sentence": null,
+      "source_doc": "uob sustainability report 2024",
+      "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+      "source_page": null,
+      "weight": 0.15,
+      "inferred": true
+    }
+  ],
+  "source_url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf",
+  "source_title": "uob sustainability report 2024"
+}

@@ -600,8 +600,10 @@ def make_system_prompt(page_context: dict[str, Any]) -> str:
     return (
         "You are the PolyFintech ESG Intelligence agent. You answer in concise, "
         "decision-useful prose for analysts using an ESG and financial dashboard.\n\n"
-        "You know the current page context from this JSON. Treat the dashboard data "
-        "as illustrative unless the user asks for live web corroboration.\n"
+        "You know the current page context from this JSON. Treat Evidence Engine "
+        "page context as the app's current model output, backed by local scoring "
+        "logic, Bright Data news/report inputs, rater fields, and market-price "
+        "signals. If context comes from a legacy/generated page, say so explicitly.\n"
         f"{context_json}\n\n"
         "Formatting rules: do not use emojis, decorative icons, or raw ASCII art. "
         "Use clean markdown headings, short paragraphs, bullets, and simple tables "
@@ -618,9 +620,10 @@ def make_system_prompt(page_context: dict[str, Any]) -> str:
         "or internal credentials. When the user asks how ESG scores are calculated, "
         "explained, justified, validated, or compared to outside sources, call "
         "research_esg_scoring first. Explain that the current app score is "
-        "illustrative/hardcoded unless a live scoring engine is explicitly added; "
-        "do not imply the collected references generated the dashboard score. Use "
-        "the references to explain common ESG scoring inputs such as sector "
+        "computed by the app's local ML/formula pipeline using report claims, "
+        "SASB materiality weights, rater consensus, Bright Data news sentiment, "
+        "and price-witness signals; do not describe it as an external ESG score "
+        "API. Use the references to explain common ESG scoring inputs such as sector "
         "materiality, disclosures, controversies/news, governance, environmental "
         "and social indicators, provider-specific weighting, and uncertainty. If "
         "the user asks for a report, produce a complete "
@@ -654,7 +657,19 @@ class OpenRouterAgent:
 
     async def run(self, request: AssistantRequest) -> AssistantResponse:
         if not self.api_key:
-            raise HTTPException(status_code=500, detail="OPENROUTER_API_KEY is not configured.")
+            # Graceful fallback: no API key -> the dashboard still runs on cached/
+            # seeded data; only live chat is unavailable. Return a normal message
+            # instead of a 500 so the UI degrades cleanly.
+            return self._response(
+                "The research assistant isn't configured on this deployment "
+                "(no OPENROUTER_API_KEY). The dashboard is running on cached data; "
+                "add an OpenRouter key to backend/.env to enable live chat.",
+                [],
+                [ToolResult(name="assistant", status="error",
+                            summary="No OPENROUTER_API_KEY configured.", source_count=0)],
+                [],
+                [],
+            )
         if not request.messages:
             raise HTTPException(status_code=400, detail="At least one message is required.")
 

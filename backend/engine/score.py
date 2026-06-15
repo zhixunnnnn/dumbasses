@@ -22,7 +22,11 @@ from .sasb import map_to_sasb, topics_for
 from .trace import leaf
 from .verify import verify
 
-CREDIT = {"VERIFIED": config.CREDIT_VERIFIED, "ASSERTED": config.CREDIT_ASSERTED}
+CREDIT = {
+    "VERIFIED": config.CREDIT_VERIFIED,
+    "ASSERTED": config.CREDIT_ASSERTED,
+    "INFERRED": config.CREDIT_INFERRED,
+}
 
 
 @dataclass
@@ -56,6 +60,48 @@ def _aggregate(ds: Dataset, cid: str, year: int, client: LLMClient) -> ScoreDeta
     topics: dict[str, TopicAgg] = {}
     confidences: list[float] = []
     verified_count = 0
+    live_rows = _live_claim_rows(cid, year)
+
+    if live_rows:
+        for row in live_rows:
+            topic = material.get(str(row.get("topic_id") or ""))
+            if not topic:
+                continue
+            state = str(row.get("state") or "ASSERTED")
+            credit = CREDIT.get(state, config.CREDIT_ASSERTED)
+            agg = topics.get(topic["topic_id"])
+            if agg is None:
+                agg = TopicAgg(
+                    topic_id=topic["topic_id"],
+                    pillar=topic["pillar"],
+                    weight=float(topic["weight"]),
+                    credit=0.0,
+                    verified=0,
+                    asserted=0,
+                )
+                topics[topic["topic_id"]] = agg
+            agg.credit = min(1.0, agg.credit + credit)
+            if state == "VERIFIED":
+                agg.verified += 1
+                verified_count += 1
+                confidences.append(0.9)
+            elif state == "INFERRED":
+                agg.asserted += 1
+                confidences.append(0.2)  # inferred = low confidence (it's an estimate)
+            else:
+                agg.asserted += 1
+                confidences.append(0.4)
+            text = str(row.get("text") or row.get("source_sentence") or "")
+            source_sentence = str(row.get("source_sentence") or text)
+            agg.claim_traces.append(leaf(
+                f"[{state}] {text[:90]}",
+                source_sentence,
+                doc=row.get("source_doc") or row.get("source_url"),
+                page=row.get("source_page"),
+                contribution=float(topic["weight"]) * credit,
+            ))
+        absent = [tid for tid in material if tid not in topics]
+        return ScoreDetail(cid, year, topics, absent, total_material_weight, confidences, verified_count)
 
     for doc in ds.docs_for(cid, year):
         for claim in extract_claims(doc, client):
@@ -86,11 +132,27 @@ def _aggregate(ds: Dataset, cid: str, year: int, client: LLMClient) -> ScoreDeta
     return ScoreDetail(cid, year, topics, absent, total_material_weight, confidences, verified_count)
 
 
-def _ratio(aggs: list[TopicAgg]) -> Optional[float]:
-    w = sum(a.weight for a in aggs)
-    if w <= 0:
+def _live_claim_rows(cid: str, year: int) -> list[dict] | None:
+    if year != config.END_YEAR:
         return None
-    return round(100.0 * sum(a.weight * a.credit for a in aggs) / w, 2)
+    try:
+        from backend.data.realclaims import cached_claims_for
+
+        payload = cached_claims_for(cid)
+    except Exception:
+        return None
+    rows = (payload or {}).get("claims") or []
+    return rows or None
+
+
+def _coverage_ratio(aggs: list[TopicAgg], total_weight: float) -> Optional[float]:
+    """Score = evidenced weight*credit over TOTAL material weight, so undisclosed
+    (ABSENT) material topics count as zeros and pull the score down — instead of
+    being excluded. A company that discloses 1 of 5 material topics no longer
+    scores 100; it scores in proportion to how much it actually evidenced."""
+    if total_weight <= 0:
+        return None
+    return round(100.0 * sum(a.weight * a.credit for a in aggs) / total_weight, 2)
 
 
 def evidence_score(ds: Dataset, cid: str, year: int, client: Optional[LLMClient] = None) -> EvidenceScore:
@@ -98,8 +160,15 @@ def evidence_score(ds: Dataset, cid: str, year: int, client: Optional[LLMClient]
     d = _aggregate(ds, cid, year, client)
     covered = list(d.topics.values())
 
-    total = _ratio(covered)
-    pillars = {p: _ratio([a for a in covered if a.pillar == p]) for p in ("E", "S", "G")}
+    material = topics_for(ds.company(cid).sasb_industry)
+    pillar_weight = {
+        p: sum(t["weight"] for t in material if t["pillar"] == p) for p in ("E", "S", "G")
+    }
+    total = _coverage_ratio(covered, d.total_material_weight)
+    pillars = {
+        p: _coverage_ratio([a for a in covered if a.pillar == p], pillar_weight[p])
+        for p in ("E", "S", "G")
+    }
 
     covered_weight = sum(a.weight for a in covered)
     coverage = (covered_weight / d.total_material_weight) if d.total_material_weight else 0.0

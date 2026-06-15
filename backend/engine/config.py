@@ -14,16 +14,16 @@ BACKEND_DIR = Path(__file__).resolve().parent.parent          # .../backend
 
 
 def _load_dotenv() -> None:
-    """Minimal .env loader (no dependency). Secrets stay in backend/.env (git-ignored)."""
-    env = BACKEND_DIR / ".env"
-    if not env.exists():
-        return
-    for line in env.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
+    """Minimal .env loader (no dependency). Secrets stay git-ignored."""
+    for env in (BACKEND_DIR.parent / ".env", BACKEND_DIR / ".env"):
+        if not env.exists():
             continue
-        key, val = line.split("=", 1)
-        os.environ.setdefault(key.strip(), val.strip().strip('"').strip("'"))
+        for line in env.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, val = line.split("=", 1)
+            os.environ.setdefault(key.strip(), val.strip().strip('"').strip("'"))
 
 
 _load_dotenv()
@@ -47,8 +47,9 @@ WINDOW_END = "2023-12-29"        # last Friday of the window
 STI_ID = "_STI"                  # reserved company_id for the benchmark series
 
 # ----- credit & scoring --------------------------------------------------------
-CREDIT_VERIFIED = 1.0            # full credit
-CREDIT_ASSERTED = 0.5           # partial credit
+CREDIT_VERIFIED = 1.0            # full credit (independently corroborated)
+CREDIT_ASSERTED = 0.5           # partial credit (company-disclosed)
+CREDIT_INFERRED = 0.25          # low credit (LLM estimate for an undisclosed topic — labelled)
 # absence never enters the score (it only lowers confidence) — see score.py / T3
 
 # ----- normalization -----------------------------------------------------------

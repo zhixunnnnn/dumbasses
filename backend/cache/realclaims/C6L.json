@@ -1,0 +1,230 @@
+{
+  "rows": [
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "VERIFIED",
+      "text": "The SIA Group’s sustainability strategy focuses on the three key pillars of decarbonisation, resource management, and creating a positive impact on society, with our ambition to achieve net zero carbon emissions from operations by 2050 at the heart of this journey.",
+      "source_sentence": "The SIA Group’s sustainability strategy focuses on the three key pillars of decarbonisation, resource management, and creating a positive impact on society, with our ambition to achieve net zero carbon emissions from operations by 2050 at the heart of this journey.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35,
+      "corroboration_url": "https://www.supplychainbrain.com/articles/42033-singapore-airlines-flags-climate-related-costs-as-emissions-rise",
+      "corroboration_source": "Supplychainbrain"
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "The airline industry’s key near-term decarbonisation lever is replacing older generation aircraft with modern fuel-efficient models, which emit significantly less carbon thanks to their latest technology airframes and engines.",
+      "source_sentence": "The airline industry’s key near-term decarbonisation lever is replacing older generation aircraft with modern fuel-efficient models, which emit significantly less carbon thanks to their latest technology airframes and engines.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Our upcoming Airbus A350F freighters will consume around 40% less fuel than SIA’s existing Boeing 747-400Fs on similar missions, supporting more efficient cargo operations while reducing emissions by an estimated 400,000 tonnes annually.",
+      "source_sentence": "Our upcoming Airbus A350F freighters will consume around 40% less fuel than SIA’s existing Boeing 747-400Fs on similar missions, supporting more efficient cargo operations while reducing emissions by an estimated 400,000 tonnes annually.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We partner with governments, regulators, aircraft and engine manufacturers, fuel producers, and other stakeholders to create conditions for the affordable and efficient scaling up of SAF use, both in Singapore and around the world.",
+      "source_sentence": "We partner with governments, regulators, aircraft and engine manufacturers, fuel producers, and other stakeholders to create conditions for the affordable and efficient scaling up of SAF use, both in Singapore and around the world.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "As a member of the Association of Asia Pacific Airlines (AAPA), SIA helped secure a joint commitment from its airlines to replace 5% of their total fuel consumption with SAF by 2030.",
+      "source_sentence": "As a member of the Association of Asia Pacific Airlines (AAPA), SIA helped secure a joint commitment from its airlines to replace 5% of their total fuel consumption with SAF by 2030.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "During the financial year, we purchased 2,000 tonnes of neat SAF from Neste.",
+      "source_sentence": "During the financial year, we purchased 2,000 tonnes of neat SAF from Neste.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We also signed a Memorandum of Understanding with Aether Fuels to explore new sources of neat SAF derived from carbon feedstock using their proprietary technology.",
+      "source_sentence": "We also signed a Memorandum of Understanding with Aether Fuels to explore new sources of neat SAF derived from carbon feedstock using their proprietary technology.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "business_ethics",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "In adherence to Rule 711B of the SGX Listing Manual, SIA’s Internal Audit Division conducted a review of the Group’s sustainability reporting process in FY2024/25 to further strengthen its governance framework, internal controls, processes, and systems.",
+      "source_sentence": "In adherence to Rule 711B of the SGX Listing Manual, SIA’s Internal Audit Division conducted a review of the Group’s sustainability reporting process in FY2024/25 to further strengthen its governance framework, internal controls, processes, and systems.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Furthermore, SIA and Scoot’s flight emissions data undergo external assurance by an accredited verifier to meet the Carbon Offset and Reduction Scheme for International Aviation (CORSIA) standards set by the International Civil Aviation Organization (ICAO), as well as those under the EU and the UK’s Emissions Trading System (ETS).",
+      "source_sentence": "Furthermore, SIA and Scoot’s flight emissions data undergo external assurance by an accredited verifier to meet the Carbon Offset and Reduction Scheme for International Aviation (CORSIA) standards set by the International Civil Aviation Organization (ICAO), as well as those under the EU and the UK’s Emissions Trading System (ETS).",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "labor_relations",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Since 2018, SIA has been supporting the UN Global Compact (UNGC) corporate responsibility initiative and its principles in the areas of human rights, labour, environment, and anti-corruption.",
+      "source_sentence": "Since 2018, SIA has been supporting the UN Global Compact (UNGC) corporate responsibility initiative and its principles in the areas of human rights, labour, environment, and anti-corruption.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "The SIA Group pledges to achieve net zero carbon emissions from its operations by 2050.",
+      "source_sentence": "The SIA Group pledges to achieve net zero carbon emissions from its operations by 2050.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "SIA becomes the first airline to sign the Global SAF declaration, committing to accelerate the development, production, and consumption of SAF.",
+      "source_sentence": "SIA becomes the first airline to sign the Global SAF declaration, committing to accelerate the development, production, and consumption of SAF.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "SIA and Scoot announce their target to replace 5% of their total fuel requirements with SAF by 2030.",
+      "source_sentence": "SIA and Scoot announce their target to replace 5% of their total fuel requirements with SAF by 2030.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "The SIA Group signs an agreement with Neste to purchase 1,000 tonnes of neat SAF.",
+      "source_sentence": "The SIA Group signs an agreement with Neste to purchase 1,000 tonnes of neat SAF.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "The SIA Group purchases 1,000 tonnes of CORSIA-certified neat SAF from Neste.",
+      "source_sentence": "The SIA Group purchases 1,000 tonnes of CORSIA-certified neat SAF from Neste.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "business_ethics",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "It steers the Management in ensuring that SIA’s long-term value creation is achieved with environmental, social, and governance (ESG) factors as guiding principles at all times.",
+      "source_sentence": "It steers the Management in ensuring that SIA’s long-term value creation is achieved with environmental, social, and governance (ESG) factors as guiding principles at all times.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Ms Lee has led various sustainability initiatives on behalf of the Group, most notably the pilot with the CAAS and Temasek to study and operationalise the deployment of SAF in Singapore.",
+      "source_sentence": "Ms Lee has led various sustainability initiatives on behalf of the Group, most notably the pilot with the CAAS and Temasek to study and operationalise the deployment of SAF in Singapore.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.35
+    },
+    {
+      "topic_id": "labor_relations",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Collaborating closely with the Singapore government, authorities, unions, and trade associations.",
+      "source_sentence": "Collaborating closely with the Singapore government, authorities, unions, and trade associations.",
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "safety_management",
+      "pillar": "S",
+      "state": "INFERRED",
+      "text": "The company likely maintains rigorous safety protocols and incident reporting systems, aligned with IOSA standards, to ensure operational safety and compliance.",
+      "source_sentence": null,
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": null,
+      "weight": 0.15,
+      "inferred": true
+    },
+    {
+      "topic_id": "fuel_efficiency",
+      "pillar": "E",
+      "state": "INFERRED",
+      "text": "The company likely prioritizes fuel efficiency through fleet renewal and operational optimization, leveraging modern aircraft and technologies to reduce fuel burn and emissions.",
+      "source_sentence": null,
+      "source_doc": "sustainabilityreport2425",
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+      "source_page": null,
+      "weight": 0.2,
+      "inferred": true
+    }
+  ],
+  "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
+  "source_title": "sustainabilityreport2425"
+}

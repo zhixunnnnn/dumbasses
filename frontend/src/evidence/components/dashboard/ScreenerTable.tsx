@@ -18,7 +18,7 @@ const COLS: { key: Key; label: string; hint: string; lowerBetter?: boolean }[] =
 ];
 
 export default function ScreenerTable({ rows }: { rows: CompanyRow[] }) {
-  const { openCompany } = useNavigation();
+  const { navigate } = useNavigation();
   const [sort, setSort] = useState<{ key: Key; desc: boolean }>({ key: "evidence_gap", desc: true });
   const [improversOnly, setImproversOnly] = useState(false);
 
@@ -69,7 +69,7 @@ export default function ScreenerTable({ rows }: { rows: CompanyRow[] }) {
           <tbody>
             {sorted.map((r) => (
               <tr key={r.id}
-                onClick={() => openCompany(r.id)}
+                onClick={() => navigate({ name: "evidenceCompany", id: r.id })}
                 className="cursor-pointer border-b border-hairline/60 transition hover:bg-raised/50">
                 <td className="px-4 py-2.5">
                   <div className="flex items-center gap-2">

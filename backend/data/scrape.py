@@ -16,18 +16,118 @@ honest outcome. `python -m backend.data.seed` always restores the deterministic 
 from __future__ import annotations
 
 import argparse
+import csv
 import datetime as dt
+from io import StringIO
 import json
 
 from backend.engine import brightdata, config
 from backend.engine.db import bootstrap
 
 YF_CHART = "https://query1.finance.yahoo.com/v8/finance/chart/{sym}?interval=1wk&period1={p1}&period2={p2}"
+MW_DOWNLOAD = (
+    "https://www.marketwatch.com/investing/stock/{sym}/downloaddatapartial?"
+    "startdate=01/01/{start}%2000:00:00&enddate=12/31/{end}%2023:59:59"
+    "&daterange=custom&frequency=p7d&csvdownload=true&downloadpartial=false"
+    "&newdates=false&countrycode=sg"
+)
 
 
 def _demo_tickers(conn) -> list[tuple[str, str]]:
     rows = conn.execute("SELECT company_id, ticker FROM universe WHERE scope='demo'").fetchall()
     return [(r["company_id"], r["ticker"]) for r in rows] + [(config.STI_ID, "^STI")]
+
+
+def _float_cell(value: str | None) -> float | None:
+    if value is None:
+        return None
+    cleaned = value.replace(",", "").strip().strip('"')
+    if not cleaned or cleaned == "-":
+        return None
+    return float(cleaned)
+
+
+def _int_cell(value: str | None) -> int | None:
+    parsed = _float_cell(value)
+    return int(parsed) if parsed is not None else None
+
+
+def _provider_error(body: str) -> bool:
+    text = body.lstrip()[:240].lower()
+    return text.startswith("request failed") or "bad_endpoint" in text
+
+
+def _parse_yahoo_prices(body: str) -> list[tuple[str, float, float, float, float, int | None]]:
+    if _provider_error(body):
+        raise ValueError("Bright Data provider returned an endpoint error")
+    res = json.loads(body)["chart"]["result"][0]
+    ts = res["timestamp"]
+    q = res["indicators"]["quote"][0]
+    vols = q.get("volume") or [None] * len(ts)
+    rows = []
+    for i, t in enumerate(ts):
+        o, h, l, c = q["open"][i], q["high"][i], q["low"][i], q["close"][i]
+        if None in (o, h, l, c):
+            continue
+        d = dt.datetime.fromtimestamp(t, dt.UTC).date().isoformat()
+        rows.append((d, round(o, 3), round(h, 3), round(l, 3), round(c, 3), vols[i]))
+    return rows
+
+
+def _fetch_native_yahoo(url: str) -> str | None:
+    import requests
+
+    try:
+        response = requests.get(
+            url,
+            headers={
+                "User-Agent": (
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
+                )
+            },
+            timeout=30,
+        )
+        response.raise_for_status()
+        return response.text
+    except Exception:
+        return None
+
+
+def _marketwatch_symbol(sym: str) -> str | None:
+    if sym.startswith("^"):
+        return None
+    base = sym.split(".", 1)[0].strip().lower()
+    return base or None
+
+
+def _parse_marketwatch_prices(body: str) -> list[tuple[str, float, float, float, float, int | None]]:
+    if _provider_error(body):
+        raise ValueError("Bright Data provider returned an endpoint error")
+    rows = []
+    reader = csv.DictReader(StringIO(body))
+    required = {"Date", "Open", "High", "Low", "Close", "Volume"}
+    if not reader.fieldnames or not required.issubset(set(reader.fieldnames)):
+        raise ValueError("MarketWatch CSV did not include OHLCV columns")
+    for item in reader:
+        o = _float_cell(item.get("Open"))
+        h = _float_cell(item.get("High"))
+        l = _float_cell(item.get("Low"))
+        c = _float_cell(item.get("Close"))
+        if None in (o, h, l, c):
+            continue
+        date = dt.datetime.strptime(item["Date"], "%m/%d/%Y").date().isoformat()
+        rows.append((date, round(o, 3), round(h, 3), round(l, 3), round(c, 3), _int_cell(item.get("Volume"))))
+    rows.sort(key=lambda row: row[0])
+    return rows
+
+
+def _insert_price_rows(conn, cid: str, rows: list[tuple[str, float, float, float, float, int | None]]) -> None:
+    conn.execute("DELETE FROM prices WHERE company_id=?", (cid,))
+    conn.executemany(
+        "INSERT OR REPLACE INTO prices VALUES (?,?,?,?,?,?,?)",
+        [(cid, *row) for row in rows],
+    )
 
 
 def scrape_prices(conn, offline: bool = False) -> int:
@@ -37,27 +137,54 @@ def scrape_prices(conn, offline: bool = False) -> int:
     for cid, sym in _demo_tickers(conn):
         url = YF_CHART.format(sym=sym.replace("^", "%5E"), p1=p1, p2=p2)
         body = brightdata.fetch_or_cache("yahoo_prices", sym, url, ttl=7 * 86400, offline=offline)
-        if not body:
-            print(f"  {sym:8} no data")
-            continue
+        rows: list[tuple[str, float, float, float, float, int | None]] = []
+        source = "Yahoo"
+        errors = []
         try:
-            res = json.loads(body)["chart"]["result"][0]
-            ts = res["timestamp"]
-            q = res["indicators"]["quote"][0]
-            vols = q.get("volume") or [None] * len(ts)
-            rows = 0
-            for i, t in enumerate(ts):
-                o, h, l, c = q["open"][i], q["high"][i], q["low"][i], q["close"][i]
-                if None in (o, h, l, c):
-                    continue
-                d = dt.datetime.utcfromtimestamp(t).date().isoformat()
-                conn.execute("INSERT OR REPLACE INTO prices VALUES (?,?,?,?,?,?,?)",
-                             (cid, d, round(o, 3), round(h, 3), round(l, 3), round(c, 3), vols[i]))
-                rows += 1
-            total += rows
-            print(f"  {sym:8} {rows:4d} weekly bars")
+            if body:
+                rows = _parse_yahoo_prices(body)
+            else:
+                errors.append("Yahoo returned no body")
         except Exception as exc:  # noqa: BLE001
-            print(f"  {sym:8} parse failed: {type(exc).__name__}: {exc}")
+            errors.append(f"Yahoo {type(exc).__name__}: {exc}")
+
+        if not rows and not offline:
+            try:
+                native_body = _fetch_native_yahoo(url)
+                if native_body:
+                    rows = _parse_yahoo_prices(native_body)
+                    source = "Yahoo native fallback"
+                else:
+                    errors.append("Yahoo native fallback returned no body")
+            except Exception as exc:  # noqa: BLE001
+                errors.append(f"Yahoo native fallback {type(exc).__name__}: {exc}")
+
+        if not rows:
+            mw_sym = _marketwatch_symbol(sym)
+            if mw_sym:
+                mw_url = MW_DOWNLOAD.format(sym=mw_sym, start=config.START_YEAR, end=config.END_YEAR)
+                mw_body = brightdata.fetch_or_cache(
+                    "marketwatch_prices",
+                    sym,
+                    mw_url,
+                    ttl=7 * 86400,
+                    offline=offline,
+                )
+                try:
+                    if mw_body:
+                        rows = _parse_marketwatch_prices(mw_body)
+                        source = "MarketWatch CSV"
+                    else:
+                        errors.append("MarketWatch returned no body")
+                except Exception as exc:  # noqa: BLE001
+                    errors.append(f"MarketWatch {type(exc).__name__}: {exc}")
+
+        if rows:
+            _insert_price_rows(conn, cid, rows)
+            total += len(rows)
+            print(f"  {sym:8} {len(rows):4d} weekly bars ({source})")
+        else:
+            print(f"  {sym:8} no valid price rows ({'; '.join(errors)})")
     conn.commit()
     return total
 
@@ -138,7 +265,7 @@ def load_news(conn) -> dict:
                           "sentiment": n["sentiment"], "fetched_at": n["fetched_at"],
                           "headlines": heads})
     log = conn.execute("SELECT * FROM scrape_log WHERE source='news'").fetchone()
-    return {"source": "Bright Data SERP · web news",
+    return {"source": "Bright Data Request API - Bing News",
             "last_run": log["last_run"] if log else None, "companies": companies}
 
 
@@ -178,7 +305,7 @@ def scrape_news(conn, offline: bool = False) -> dict:
     from backend.app.agent import WebTools
 
     rows = conn.execute("SELECT company_id, name FROM universe WHERE scope='demo'").fetchall()
-    web = WebTools()  # uses the working Bright Data SERP/Web Unlocker zone from .env
+    web = WebTools()  # uses Bright Data Request/Web Unlocker API when keys are configured.
 
     async def collect_one(cid: str, name: str) -> dict:
         # Broad queries for recall; the relevance + topical filter keeps only
@@ -223,7 +350,7 @@ def scrape_news(conn, offline: bool = False) -> dict:
     fetched_at = dt.datetime.utcnow().isoformat(timespec="seconds")
     store_news(conn, results, fetched_at)                       # persist in the DB (durable)
     _log_scrape(conn, "news", "ok", sum(r["n_items"] for r in results))
-    out = {"source": "Bright Data SERP · web news", "last_run": fetched_at,
+    out = {"source": "Bright Data Request API - Bing News", "last_run": fetched_at,
            "companies": results}
     (config.OUT_DIR / "news.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), "utf-8")
     print(f"  -> stored {len(results)} companies in DB + wrote {config.OUT_DIR / 'news.json'}")
@@ -262,7 +389,7 @@ def main():
         n = scrape_prices(conn, offline=args.offline)
         print(f"  -> {n} price rows written")
     if args.news or args.all:
-        print("Scraping live news/controversy via Bright Data Scraping Browser…")
+        print("Scraping live news/controversy via Bright Data Request API...")
         scrape_news(conn, offline=args.offline)
     conn.close()
     print("Done. Recompute with: python -m backend.engine.pipeline")

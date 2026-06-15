@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExternalLink, Quote, Radio } from "lucide-react";
+import { ExternalLink, Quote, Radio, Sparkles } from "lucide-react";
 import type { ClaimRow } from "../../types";
 import { TOPIC_LABEL } from "../../lib/ui";
 import { StateBadge } from "../common/badges";
@@ -54,8 +54,36 @@ export default function ClaimTable({
                   {TOPIC_LABEL(c.topic_id)} · pillar {c.pillar} · weight {c.weight}
                 </p>
               </div>
-              <Quote size={13} className="mt-0.5 shrink-0 text-faint" />
+              {c.state === "INFERRED" ? (
+                <Sparkles size={13} className="mt-0.5 shrink-0" style={{ color: "#a78bfa" }} />
+              ) : (
+                <Quote size={13} className="mt-0.5 shrink-0 text-faint" />
+              )}
             </button>
+            {open === i && c.state === "INFERRED" && (
+              <div
+                className="mx-4 mb-3 flex gap-2 rounded-md border px-3 py-2"
+                style={{ borderColor: "#a78bfa55", backgroundColor: "#a78bfa14" }}
+              >
+                <Sparkles size={12} className="mt-0.5 shrink-0" style={{ color: "#a78bfa" }} />
+                <p className="text-[12px] leading-snug text-muted">
+                  Inferred — this material topic isn’t directly disclosed in the report. This is an
+                  AI best-estimate from the full report and sector norms, shown for completeness and
+                  scored at reduced weight (not counted as a verified disclosure).
+                  {c.source_url && (
+                    <a
+                      href={c.source_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="ml-1 inline-flex items-center gap-0.5 text-pos hover:underline"
+                    >
+                      {c.source_doc}
+                      <ExternalLink size={10} />
+                    </a>
+                  )}
+                </p>
+              </div>
+            )}
             {open === i && c.source_sentence && (
               <div className="mx-4 mb-3 flex gap-2 rounded-md border border-pos/25 bg-pos/[0.06] px-3 py-2">
                 <Quote size={12} className="mt-0.5 shrink-0 text-pos" />
@@ -80,6 +108,24 @@ export default function ClaimTable({
                       {c.source_page ? `, p.${c.source_page}` : ""}
                     </span>
                   )}
+                </p>
+              </div>
+            )}
+            {open === i && c.corroboration_url && (
+              <div className="mx-4 mb-3 flex gap-2 rounded-md border border-pos/40 bg-pos/[0.1] px-3 py-2">
+                <Radio size={12} className="mt-0.5 shrink-0 text-pos" />
+                <p className="text-[12px] leading-snug text-muted">
+                  Independently corroborated by{" "}
+                  <a
+                    href={c.corroboration_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-0.5 font-medium text-pos hover:underline"
+                  >
+                    {c.corroboration_source || "an external source"}
+                    <ExternalLink size={10} />
+                  </a>{" "}
+                  — raised from company-disclosed to verified.
                 </p>
               </div>
             )}

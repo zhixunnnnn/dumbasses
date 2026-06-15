@@ -67,8 +67,13 @@ def compute_all(ds: Dataset, client: Optional[LLMClient] = None) -> dict[str, Si
         pts = [(e.year, e.total) for e in series if e.total is not None]
         momentum = _slope(pts)
         vcounts = [verified_count(ds, cid, e.year, client) for e in series]
+        # proof_up: evidence momentum is rising AND the latest report has
+        # independently-VERIFIED support. (We evaluate the latest year directly
+        # rather than requiring a monotonic verified-count across years, which
+        # would compare incompatible regimes once the latest year is real.)
+        latest_verified = vcounts[-1] if vcounts else 0
         proof_up = (momentum is not None and momentum >= config.PROOF_UP_MIN_SLOPE
-                    and all(b >= a for a, b in zip(vcounts, vcounts[1:])))
+                    and latest_verified > 0)
 
         flags = []
         if div is not None:

@@ -7,7 +7,7 @@ export type QuadrantKey =
   | "VALUE_TRAPS"
   | "OVERRATED";
 
-export type VerifyState = "VERIFIED" | "ASSERTED" | "ABSENT";
+export type VerifyState = "VERIFIED" | "ASSERTED" | "INFERRED" | "ABSENT";
 export type RegQuality = "MET" | "PARTIAL" | "MISSING" | "NA";
 
 export type TraceNode = {
@@ -181,6 +181,8 @@ export type ClaimRow = {
   source_url?: string | null;
   source_page: number | null;
   weight: number;
+  corroboration_url?: string | null;
+  corroboration_source?: string | null;
 };
 
 export type NewsItem = {

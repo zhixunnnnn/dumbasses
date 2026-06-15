@@ -49,6 +49,13 @@ def _company_detail(ds, cid, sig, model, client) -> dict:
               "evidence_total": (evidence_score(ds, c.company_id, config.END_YEAR, client).total)}
              for c in ds.companies.values()
              if c.scope == "demo" and c.sector == comp.sector and c.company_id != cid]
+    claims = claim_table(ds, cid, config.END_YEAR, client)
+    try:
+        from backend.data.realclaims import cached_claims_for
+
+        claims = cached_claims_for(cid, absent=claims.get("absent", [])) or claims
+    except Exception:
+        pass
     return {
         "company": comp.model_dump(),
         "evidence": es.model_dump(),
@@ -59,7 +66,7 @@ def _company_detail(ds, cid, sig, model, client) -> dict:
         "witness": price_witness(ds, cid, client).model_dump(),
         "compliance": compliance_gap(ds, cid, config.END_YEAR).model_dump(),
         "forecast": fc.model_dump(),
-        "claims": claim_table(ds, cid, config.END_YEAR, client),
+        "claims": claims,
         "peers": sorted(peers, key=lambda p: -(p["evidence_total"] or 0)),
     }
 

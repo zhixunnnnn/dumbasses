@@ -102,6 +102,19 @@ class OpenRouterLLMClient:
         data = json.loads(resp.choices[0].message.content or "{}")
         return data.get("claims", [])
 
+    def complete_json(self, prompt: str, max_tokens: int = 700) -> dict:
+        """Generic JSON completion — used for labelled inference of undisclosed topics."""
+        import json
+
+        resp = self.client.chat.completions.create(
+            model=self.model,
+            response_format={"type": "json_object"},
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.2,
+            max_tokens=max_tokens,
+        )
+        return json.loads(resp.choices[0].message.content or "{}")
+
 
 def get_default_client(offline: bool = True) -> LLMClient:
     """Offline or no key -> deterministic mock. Online -> OpenRouter, then OpenAI."""

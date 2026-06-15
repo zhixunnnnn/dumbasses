@@ -1,5 +1,7 @@
-"""T1 (trace integrity, evidence layer) and T3 (absence isolation)."""
+"""T1 (trace integrity, evidence layer) and T3 (coverage-weighted absence)."""
 from __future__ import annotations
+
+import json
 
 import pytest
 
@@ -56,11 +58,51 @@ def _build(cid, industry):
     return make_dataset(companies=[comp], documents=[doc], evidence=[ev])
 
 
-def test_T3_absence_isolation(_patched_materiality):
-    # A: industry with 6 material topics (4 ABSENT). B: same covered claims, only 2 topics (0 absent).
+def test_T3_absence_lowers_score(_patched_materiality):
+    # Coverage-weighted scoring: undisclosed material topics now count as zeros in
+    # the denominator, so they pull the score DOWN (no longer isolated to confidence).
+    # A: 6 material topics (4 ABSENT, total weight 1.0). B: same 2 covered claims,
+    # only 2 material topics (0 absent, total weight 0.5).
+    # numerator = alpha VERIFIED 0.30*1.0 + bravo ASSERTED 0.20*0.5 = 0.40
     a = evidence_score(_build("AA", "X6"), "AA", 2023, client=None)
     b = evidence_score(_build("BB", "X2"), "BB", 2023, client=None)
-    assert a.total == b.total, "absence moved the SCORE (T3 violation)"
-    assert a.confidence < b.confidence, "absence should lower confidence only"
+    assert a.total == 40.0, "0.40 / 1.0 total material weight"
+    assert b.total == 80.0, "0.40 / 0.5 total material weight"
+    assert a.total < b.total, "undisclosed material topics should lower the score"
+    assert a.confidence < b.confidence, "absence also lowers confidence"
     assert set(a.absent_topics) == {"charlie", "delta", "echo", "foxtrot"}
     assert b.absent_topics == []
+
+
+def test_latest_score_prefers_live_report_claim_cache(_patched_materiality, monkeypatch, tmp_path):
+    monkeypatch.setattr(config, "CACHE_DIR", tmp_path)
+    cache_dir = tmp_path / "realclaims"
+    cache_dir.mkdir()
+    (cache_dir / "AA.json").write_text(
+        json.dumps(
+            {
+                "source_url": "https://example.com/live-report.pdf",
+                "source_title": "Live Report",
+                "rows": [
+                    {
+                        "topic_id": "bravo",
+                        "pillar": "G",
+                        "state": "ASSERTED",
+                        "text": "Live report improved bravo controls.",
+                        "source_sentence": "Live report improved bravo controls.",
+                        "source_doc": "Live Report",
+                        "source_page": 4,
+                        "weight": 0.2,
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    score = evidence_score(_build("AA", "X2"), "AA", config.END_YEAR, client=None)
+
+    # coverage-weighted: bravo ASSERTED 0.20*0.5 = 0.10 over total material weight 0.50 = 20.0
+    assert score.total == 20.0
+    assert score.absent_topics == ["alpha"]
+    assert score.trace.children[0].children[0].children[0].source_doc == "Live Report"

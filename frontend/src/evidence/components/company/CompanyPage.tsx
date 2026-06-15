@@ -29,7 +29,7 @@ function Leg({ ok, label }: { ok: boolean | null; label: string }) {
 }
 
 export default function CompanyPage({ id }: { id: string }) {
-  const { goBack, openCompany } = useNavigation();
+  const { goBack, navigate } = useNavigation();
   const { data, loading, error } = useApi(() => api.company(id), [id]);
 
   if (loading) return <div className="p-10 text-sm text-muted">Loading {id}…</div>;
@@ -178,7 +178,9 @@ export default function CompanyPage({ id }: { id: string }) {
           <h3 className="mb-2 text-sm font-semibold text-txt">Sector peers</h3>
           <div className="flex flex-wrap gap-2">
             {peers.map((p) => (
-              <button key={p.id} onClick={() => openCompany(p.id)}
+              <button
+                key={p.id}
+                onClick={() => navigate({ name: "evidenceCompany", id: p.id })}
                 className="rounded-md border border-hairline bg-canvas/40 px-3 py-1.5 text-[12px] text-muted transition hover:border-pos/40 hover:text-txt">
                 {p.name} <span className="font-mono text-faint">· {na(p.evidence_total)}</span>
               </button>

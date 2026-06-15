@@ -3,90 +3,90 @@
     "id": "U96",
     "name": "Sembcorp Industries",
     "x": 17.5,
-    "y": 6.666,
+    "y": 5.5,
     "quadrant": "HIDDEN_WINNERS",
-    "size": 88.89,
-    "is_underpriced_improver": true
+    "size": 77.5,
+    "is_underpriced_improver": false
   },
   {
     "id": "BN4",
     "name": "Keppel Ltd",
     "x": 14.64,
-    "y": 6.387,
+    "y": 4.75,
     "quadrant": "HIDDEN_WINNERS",
-    "size": 94.44,
-    "is_underpriced_improver": true
+    "size": 80.0,
+    "is_underpriced_improver": false
   },
   {
     "id": "F34",
     "name": "Wilmar International",
     "x": 31.43,
-    "y": -1.334,
-    "quadrant": "VALUE_TRAPS",
-    "size": 73.33,
-    "is_underpriced_improver": false
+    "y": 6.0,
+    "quadrant": "HIDDEN_WINNERS",
+    "size": 90.0,
+    "is_underpriced_improver": true
   },
   {
     "id": "C6L",
     "name": "Singapore Airlines",
     "x": 64.63,
-    "y": 3.0,
+    "y": 0.25,
     "quadrant": "FUTURE_LEADERS",
-    "size": 87.5,
+    "size": 73.75,
     "is_underpriced_improver": false
   },
   {
     "id": "D05",
     "name": "DBS Group",
     "x": 81.25,
-    "y": 1.5,
-    "quadrant": "FUTURE_LEADERS",
-    "size": 95.0,
+    "y": -6.5,
+    "quadrant": "OVERRATED",
+    "size": 55.0,
     "is_underpriced_improver": false
   },
   {
     "id": "O39",
     "name": "OCBC",
     "x": 57.18,
-    "y": 1.5,
-    "quadrant": "FUTURE_LEADERS",
-    "size": 87.5,
+    "y": -5.5,
+    "quadrant": "OVERRATED",
+    "size": 52.5,
     "is_underpriced_improver": false
   },
   {
     "id": "U11",
     "name": "UOB",
     "x": 44.21,
-    "y": 2.25,
+    "y": 2.5,
     "quadrant": "HIDDEN_WINNERS",
-    "size": 87.5,
-    "is_underpriced_improver": true
+    "size": 88.75,
+    "is_underpriced_improver": false
   },
   {
     "id": "9CI",
     "name": "CapitaLand Investment",
     "x": 88.69,
-    "y": 1.5,
-    "quadrant": "FUTURE_LEADERS",
-    "size": 95.0,
+    "y": -1.25,
+    "quadrant": "OVERRATED",
+    "size": 81.25,
     "is_underpriced_improver": false
   },
   {
     "id": "C09",
     "name": "City Developments",
     "x": 68.45,
-    "y": -1.5,
+    "y": -0.5,
     "quadrant": "OVERRATED",
-    "size": 90.0,
+    "size": 95.0,
     "is_underpriced_improver": false
   },
   {
     "id": "Z74",
     "name": "Singtel",
     "x": 68.97,
-    "y": 1.5,
-    "quadrant": "FUTURE_LEADERS",
-    "size": 90.0,
+    "y": -1.0,
+    "quadrant": "OVERRATED",
+    "size": 77.5,
     "is_underpriced_improver": false
   }
 ]

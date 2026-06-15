@@ -1,0 +1,107 @@
+{
+  "rows": [
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "This Report should also be read together with the OCBC Annual Report, which can be found here: Reporting Framework This Sustainability Report is prepared in accordance with the following standards, guidelines and regulations: • Singapore Exchange (SGX) Securities Trading Limited Mainboard Listing Rules 711A and 711B on Sustainability Reporting; • SGX Practice Note 7.6 Sustainability Reporting Guide (updated January 2022); • Global Reporting Initiative (GRI) Standards: Topic and Universal Standards (updated 2021); • GRI G4 Financial Services Sector Disclosures; • The MAS Guidelines on Environmental Risk Management for Banks (published December 2020); • Sustainability Accounting Standards Board (SASB) Standards for Commercial Banks; and • Recommendations of the Task Force on Climate-related Financial Disclosures (TCFD).",
+      "source_sentence": "This Report should also be read together with the OCBC Annual Report, which can be found here: Reporting Framework This Sustainability Report is prepared in accordance with the following standards, guidelines and regulations: • Singapore Exchange (SGX) Securities Trading Limited Mainboard Listing Rules 711A and 711B on Sustainability Reporting; • SGX Practice Note 7.6 Sustainability Reporting Guide (updated January 2022); • Global Reporting Initiative (GRI) Standards: Topic and Universal Standards (updated 2021); • GRI G4 Financial Services Sector Disclosures; • The MAS Guidelines on Environmental Risk Management for Banks (published December 2020); • Sustainability Accounting Standards Board (SASB) Standards for Commercial Banks; and • Recommendations of the Task Force on Climate-related Financial Disclosures (TCFD).",
+      "source_doc": "ocbc sustainability report 2024",
+      "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "business_ethics",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "By integrating the Ten Principles into our strategies, policies and procedures, and fostering a culture of integrity around issues such as Human Rights, Labour, Environment and Anti-Corruption, OCBC reaffirms its commitment and responsibilities to both people and the planet.",
+      "source_sentence": "By integrating the Ten Principles into our strategies, policies and procedures, and fostering a culture of integrity around issues such as Human Rights, Labour, Environment and Anti-Corruption, OCBC reaffirms its commitment and responsibilities to both people and the planet.",
+      "source_doc": "ocbc sustainability report 2024",
+      "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.2
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "We trained over 12,200 employees on various sustainability topics, ranging from foundational principles to specialised areas such as climate risk assessment.",
+      "source_sentence": "We trained over 12,200 employees on various sustainability topics, ranging from foundational principles to specialised areas such as climate risk assessment.",
+      "source_doc": "ocbc sustainability report 2024",
+      "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "employee_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "The BSC addresses key topics such as the Bank’s progress towards net-zero targets, decarbonisation initiatives for its physical operations, sectoral sustainability trends including biodiversity, and alignment with sustainability and climate-related reporting standards and frameworks.",
+      "source_sentence": "In its discussions, the BSC addresses key topics such as the Bank’s progress towards net-zero targets, decarbonisation initiatives for its physical operations, sectoral sustainability trends including biodiversity, and alignment with sustainability and climate-related reporting standards and frameworks.",
+      "source_doc": "ocbc sustainability report 2024",
+      "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "The Board Risk Management Committee (BRMC) supports the Board in its oversight of the effective management of all risks facing the Bank, including ESG risks such as climate change.",
+      "source_sentence": "The Board Risk Management Committee (BRMC) supports the Board in its oversight of the effective management of all risks facing the Bank, including ESG risks such as climate change.",
+      "source_doc": "ocbc sustainability report 2024",
+      "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "employee_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Sustainability targets cover material ESG themes across the Group, including climate action, sustainable financing, talent management and wellbeing, workplace diversity, and fair dealing.",
+      "source_sentence": "From climate action, sustainable financing, talent management and wellbeing, workplace diversity to fair dealing, these targets cover material ESG themes across the Group, and are in turn cascaded down to the relevant business units and employee performance scorecards.",
+      "source_doc": "ocbc sustainability report 2024",
+      "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.1
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "Adopting a robust and holistic approach in the management of ESG factors is sound risk management.",
+      "source_sentence": "Adopting a robust and holistic approach in the management of ESG factors is sound risk management.",
+      "source_doc": "ocbc sustainability report 2024",
+      "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+      "source_page": 1,
+      "weight": 0.15
+    },
+    {
+      "topic_id": "financed_emissions",
+      "pillar": "E",
+      "state": "INFERRED",
+      "text": "The company likely addresses financed emissions through its sustainable financial solutions and green financing initiatives, aligning with its commitment to accelerating the transition to a net-zero future.",
+      "source_sentence": null,
+      "source_doc": "ocbc sustainability report 2024",
+      "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+      "source_page": null,
+      "weight": 0.25,
+      "inferred": true
+    },
+    {
+      "topic_id": "data_security",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company likely prioritizes data security through robust cybersecurity measures and compliance with data protection certifications, ensuring the safeguarding of sensitive customer information.",
+      "source_sentence": null,
+      "source_doc": "ocbc sustainability report 2024",
+      "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+      "source_page": null,
+      "weight": 0.15,
+      "inferred": true
+    }
+  ],
+  "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+  "source_title": "ocbc sustainability report 2024"
+}

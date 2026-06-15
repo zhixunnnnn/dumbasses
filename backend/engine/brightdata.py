@@ -48,6 +48,28 @@ def _token() -> Optional[str]:
     return os.environ.get("BRIGHTDATA_API_KEY")
 
 
+def _tokens() -> list[str]:
+    values: list[str] = []
+    seen: set[str] = set()
+    for name in (
+        "BRIGHTDATA_API_KEY",
+        "BRIGHT_DATA_API_KEY",
+        "BRIGHTDATA_TOKEN",
+        "BRIGHT_DATA_TOKEN",
+        "BRIGHTDATA_API_KEY_FALLBACK",
+        "BRIGHT_DATA_API_KEY_FALLBACK",
+        "BRIGHTDATA_FALLBACK_API_KEY",
+        "BRIGHT_DATA_FALLBACK_API_KEY",
+        "BRIGHTDATA_TOKEN_FALLBACK",
+        "BRIGHT_DATA_TOKEN_FALLBACK",
+    ):
+        value = os.environ.get(name)
+        if value and value not in seen:
+            values.append(value)
+            seen.add(value)
+    return values
+
+
 def _zone() -> str:
     return os.environ.get("BRIGHTDATA_ZONE", "web_unlocker1")
 
@@ -57,7 +79,12 @@ def _proxy() -> Optional[str]:
 
 
 def available() -> bool:
-    return bool(_token() or _proxy())
+    return bool(_tokens() or _proxy())
+
+
+def _provider_error(body: str) -> bool:
+    text = body.lstrip()[:240].lower()
+    return text.startswith("request failed") or "bad_endpoint" in text
 
 
 def _cache_path(source: str, key: str) -> Path:
@@ -70,14 +97,22 @@ def _cache_path(source: str, key: str) -> Path:
 def _via_api(url: str, fmt: str, timeout: int) -> str:
     import requests
 
-    resp = requests.post(
-        API_URL,
-        headers={"Authorization": f"Bearer {_token()}", "Content-Type": "application/json"},
-        json={"zone": _zone(), "url": url, "format": fmt},
-        timeout=timeout,
-    )
-    resp.raise_for_status()
-    return resp.text
+    last_error: Exception | None = None
+    for token in _tokens():
+        try:
+            resp = requests.post(
+                API_URL,
+                headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+                json={"zone": _zone(), "url": url, "format": fmt},
+                timeout=timeout,
+            )
+            resp.raise_for_status()
+            if _provider_error(resp.text):
+                raise RuntimeError(resp.text[:160])
+            return resp.text
+        except Exception as exc:  # noqa: BLE001
+            last_error = exc
+    raise RuntimeError(f"Bright Data API failed ({type(last_error).__name__ if last_error else 'no token'})")
 
 
 def _via_proxy(url: str, timeout: int) -> str:
@@ -92,7 +127,7 @@ def _via_proxy(url: str, timeout: int) -> str:
 def _live_fetch(url: str, fmt: str, timeout: int) -> str:
     """Try API-token mode first, then proxy mode (whichever creds exist)."""
     errors = []
-    if _token():
+    if _tokens():
         try:
             return _via_api(url, fmt, timeout)
         except Exception as exc:  # noqa: BLE001
@@ -158,10 +193,13 @@ def fetch_or_cache(source: str, key: str, url: str, *, ttl: int = _DEFAULT_TTL,
 
     if offline or not available():
         if cache.exists():
-            return cache.read_text(encoding="utf-8")
+            cached = cache.read_text(encoding="utf-8")
+            return None if _provider_error(cached) else cached
         return None
     if fresh:
-        return cache.read_text(encoding="utf-8")
+        cached = cache.read_text(encoding="utf-8")
+        if not _provider_error(cached):
+            return cached
 
     try:
         body = _live_fetch(url, fmt, timeout)
@@ -169,9 +207,11 @@ def fetch_or_cache(source: str, key: str, url: str, *, ttl: int = _DEFAULT_TTL,
         return body
     except Exception as exc:  # noqa: BLE001 — never crash the pipeline on a fetch error
         if cache.exists():
-            age = int((time.time() - cache.stat().st_mtime) / 3600)
-            print(f"[STALE] {source}/{key}: live fetch failed ({type(exc).__name__}); "
-                  f"using cache aged ~{age}h")
-            return cache.read_text(encoding="utf-8")
+            cached = cache.read_text(encoding="utf-8")
+            if not _provider_error(cached):
+                age = int((time.time() - cache.stat().st_mtime) / 3600)
+                print(f"[STALE] {source}/{key}: live fetch failed ({type(exc).__name__}); "
+                      f"using cache aged ~{age}h")
+                return cached
         print(f"[MISS] {source}/{key}: live fetch failed and no cache ({type(exc).__name__})")
         return None
