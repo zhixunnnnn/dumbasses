@@ -12,17 +12,17 @@
   "evidence": {
     "company_id": "O39",
     "year": 2023,
-    "total": 52.5,
+    "total": 45.0,
     "pillars": {
       "E": 25.0,
-      "S": 70.0,
-      "G": 57.5
+      "S": 58.0,
+      "G": 48.5
     },
     "confidence": 0.356,
     "absent_topics": [],
     "trace": {
       "label": "Evidence Score 2023",
-      "value": 52.5,
+      "value": 45.0,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -59,7 +59,7 @@
         },
         {
           "label": "Pillar S",
-          "value": 70.0,
+          "value": 58.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -85,9 +85,9 @@
               ]
             },
             {
-              "label": "employee_diversity (w=0.1, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.1,
+              "label": "employee_diversity (w=0.1, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.07,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -116,16 +116,16 @@
         },
         {
           "label": "Pillar G",
-          "value": 57.5,
+          "value": 48.5,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "systemic_risk (w=0.15, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.15,
+              "label": "systemic_risk (w=0.15, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.105,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -245,11 +245,11 @@
     },
     {
       "year": 2023,
-      "total": 52.5,
+      "total": 45.0,
       "pillars": {
         "E": 25.0,
-        "S": 70.0,
-        "G": 57.5
+        "S": 58.0,
+        "G": 48.5
       },
       "confidence": 0.356
     }
@@ -271,8 +271,8 @@
     "opinion_flat": true,
     "price_flat": true,
     "is_underpriced_improver": false,
-    "evidence_gap": -53.7,
-    "momentum": -5.5,
+    "evidence_gap": -42.59,
+    "momentum": -7.0,
     "esg_today": 59.26,
     "quadrant": "OVERRATED",
     "trace": {
@@ -284,8 +284,8 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=False (evidence momentum -5.5/yr, verified-driven)",
-          "value": -5.5,
+          "label": "proof_up=False (evidence momentum -7.0/yr, verified-driven)",
+          "value": -7.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -293,7 +293,7 @@
           "children": [
             {
               "label": "Evidence Score 2023",
-              "value": 52.5,
+              "value": 45.0,
               "contribution": null,
               "source_sentence": null,
               "source_doc": null,
@@ -330,7 +330,7 @@
                 },
                 {
                   "label": "Pillar S",
-                  "value": 70.0,
+                  "value": 58.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
@@ -356,9 +356,9 @@
                       ]
                     },
                     {
-                      "label": "employee_diversity (w=0.1, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.1,
+                      "label": "employee_diversity (w=0.1, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.07,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -387,16 +387,16 @@
                 },
                 {
                   "label": "Pillar G",
-                  "value": 57.5,
+                  "value": 48.5,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "systemic_risk (w=0.15, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.15,
+                      "label": "systemic_risk (w=0.15, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.105,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -493,8 +493,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-53.7 (evidence 5.56 - consensus 59.26)",
-          "value": -53.7,
+          "label": "evidence_gap=-42.59 (evidence 16.67 - consensus 59.26)",
+          "value": -42.59,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -5115,12 +5115,12 @@
     {
       "id": "U11",
       "name": "UOB",
-      "evidence_total": 88.75
+      "evidence_total": 63.25
     },
     {
       "id": "D05",
       "name": "DBS Group",
-      "evidence_total": 55.0
+      "evidence_total": 43.0
     }
   ]
 }

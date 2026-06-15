@@ -12,17 +12,17 @@
   "evidence": {
     "company_id": "Z74",
     "year": 2023,
-    "total": 77.5,
+    "total": 64.0,
     "pillars": {
-      "E": 71.43,
+      "E": 58.57,
       "S": 80.0,
-      "G": 81.25
+      "G": 58.75
     },
     "confidence": 0.418,
     "absent_topics": [],
     "trace": {
       "label": "Evidence Score 2023",
-      "value": 77.5,
+      "value": 64.0,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -30,7 +30,7 @@
       "children": [
         {
           "label": "Pillar E",
-          "value": 71.43,
+          "value": 58.57,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -56,9 +56,9 @@
               ]
             },
             {
-              "label": "ghg_emissions (w=0.15, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.15,
+              "label": "ghg_emissions (w=0.15, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.105,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -216,16 +216,16 @@
         },
         {
           "label": "Pillar G",
-          "value": 81.25,
+          "value": 58.75,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "data_privacy_security (w=0.3, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.3,
+              "label": "data_privacy_security (w=0.3, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.21,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -317,11 +317,11 @@
     },
     {
       "year": 2023,
-      "total": 77.5,
+      "total": 64.0,
       "pillars": {
-        "E": 71.43,
+        "E": 58.57,
         "S": 80.0,
-        "G": 81.25
+        "G": 58.75
       },
       "confidence": 0.418
     }
@@ -343,8 +343,8 @@
     "opinion_flat": false,
     "price_flat": null,
     "is_underpriced_improver": false,
-    "evidence_gap": -47.54,
-    "momentum": -1.0,
+    "evidence_gap": -61.83,
+    "momentum": -3.7,
     "esg_today": 68.97,
     "quadrant": "OVERRATED",
     "trace": {
@@ -356,8 +356,8 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=False (evidence momentum -1.0/yr, verified-driven)",
-          "value": -1.0,
+          "label": "proof_up=False (evidence momentum -3.7/yr, verified-driven)",
+          "value": -3.7,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -365,7 +365,7 @@
           "children": [
             {
               "label": "Evidence Score 2023",
-              "value": 77.5,
+              "value": 64.0,
               "contribution": null,
               "source_sentence": null,
               "source_doc": null,
@@ -373,7 +373,7 @@
               "children": [
                 {
                   "label": "Pillar E",
-                  "value": 71.43,
+                  "value": 58.57,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
@@ -399,9 +399,9 @@
                       ]
                     },
                     {
-                      "label": "ghg_emissions (w=0.15, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.15,
+                      "label": "ghg_emissions (w=0.15, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.105,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -559,16 +559,16 @@
                 },
                 {
                   "label": "Pillar G",
-                  "value": 81.25,
+                  "value": 58.75,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "data_privacy_security (w=0.3, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.3,
+                      "label": "data_privacy_security (w=0.3, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.21,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -637,8 +637,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-47.54 (evidence 21.43 - consensus 68.97)",
-          "value": -47.54,
+          "label": "evidence_gap=-61.83 (evidence 7.14 - consensus 68.97)",
+          "value": -61.83,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,

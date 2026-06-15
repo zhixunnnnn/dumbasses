@@ -12,17 +12,17 @@
   "evidence": {
     "company_id": "BN4",
     "year": 2023,
-    "total": 80.0,
+    "total": 59.0,
     "pillars": {
-      "E": 83.33,
-      "S": 100.0,
+      "E": 61.33,
+      "S": 70.0,
       "G": 25.0
     },
     "confidence": 0.39,
     "absent_topics": [],
     "trace": {
       "label": "Evidence Score 2023",
-      "value": 80.0,
+      "value": 59.0,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -30,16 +30,16 @@
       "children": [
         {
           "label": "Pillar E",
-          "value": 83.33,
+          "value": 61.33,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "ghg_emissions (w=0.3, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.3,
+              "label": "ghg_emissions (w=0.3, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.21,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -182,9 +182,9 @@
               ]
             },
             {
-              "label": "energy_transition (w=0.25, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.25,
+              "label": "energy_transition (w=0.25, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.175,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -269,16 +269,16 @@
         },
         {
           "label": "Pillar S",
-          "value": 100.0,
+          "value": 70.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "workforce_safety (w=0.15, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.15,
+              "label": "workforce_safety (w=0.15, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.105,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -524,10 +524,10 @@
     },
     {
       "year": 2023,
-      "total": 80.0,
+      "total": 59.0,
       "pillars": {
-        "E": 83.33,
-        "S": 100.0,
+        "E": 61.33,
+        "S": 70.0,
         "G": 25.0
       },
       "confidence": 0.39
@@ -550,8 +550,8 @@
     "opinion_flat": true,
     "price_flat": true,
     "is_underpriced_improver": true,
-    "evidence_gap": 8.18,
-    "momentum": 4.75,
+    "evidence_gap": -34.68,
+    "momentum": 0.55,
     "esg_today": 38.25,
     "quadrant": "HIDDEN_WINNERS",
     "trace": {
@@ -563,8 +563,8 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=True (evidence momentum 4.75/yr, verified-driven)",
-          "value": 4.75,
+          "label": "proof_up=True (evidence momentum 0.55/yr, verified-driven)",
+          "value": 0.55,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -572,7 +572,7 @@
           "children": [
             {
               "label": "Evidence Score 2023",
-              "value": 80.0,
+              "value": 59.0,
               "contribution": null,
               "source_sentence": null,
               "source_doc": null,
@@ -580,16 +580,16 @@
               "children": [
                 {
                   "label": "Pillar E",
-                  "value": 83.33,
+                  "value": 61.33,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "ghg_emissions (w=0.3, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.3,
+                      "label": "ghg_emissions (w=0.3, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.21,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -732,9 +732,9 @@
                       ]
                     },
                     {
-                      "label": "energy_transition (w=0.25, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.25,
+                      "label": "energy_transition (w=0.25, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.175,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -819,16 +819,16 @@
                 },
                 {
                   "label": "Pillar S",
-                  "value": 100.0,
+                  "value": 70.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "workforce_safety (w=0.15, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.15,
+                      "label": "workforce_safety (w=0.15, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.105,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -1051,8 +1051,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=8.18 (evidence 46.43 - consensus 38.25)",
-          "value": 8.18,
+          "label": "evidence_gap=-34.68 (evidence 3.57 - consensus 38.25)",
+          "value": -34.68,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -6034,7 +6034,7 @@
     {
       "id": "C6L",
       "name": "Singapore Airlines",
-      "evidence_total": 73.75
+      "evidence_total": 64.75
     }
   ]
 }

@@ -50,6 +50,10 @@ STI_ID = "_STI"                  # reserved company_id for the benchmark series
 CREDIT_VERIFIED = 1.0            # full credit (independently corroborated)
 CREDIT_ASSERTED = 0.5           # partial credit (company-disclosed)
 CREDIT_INFERRED = 0.25          # low credit (LLM estimate for an undisclosed topic — labelled)
+# A topic's credit is capped by its BEST evidence tier, so mere disclosure can't
+# reach full marks: only an independently VERIFIED topic can hit 1.0. This keeps
+# perfect pillar scores (100) rare and meaningful.
+ASSERTED_TOPIC_CAP = 0.7        # asserted-only topic tops out here (high, but not full)
 # absence never enters the score (it only lowers confidence) — see score.py / T3
 
 # ----- normalization -----------------------------------------------------------

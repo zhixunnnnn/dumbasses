@@ -12,17 +12,17 @@
   "evidence": {
     "company_id": "C6L",
     "year": 2023,
-    "total": 73.75,
+    "total": 64.75,
     "pillars": {
       "E": 72.73,
-      "S": 67.86,
-      "G": 100.0
+      "S": 50.71,
+      "G": 70.0
     },
     "confidence": 0.405,
     "absent_topics": [],
     "trace": {
       "label": "Evidence Score 2023",
-      "value": 73.75,
+      "value": 64.75,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -195,16 +195,16 @@
         },
         {
           "label": "Pillar S",
-          "value": 67.86,
+          "value": 50.71,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "labor_relations (w=0.2, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.2,
+              "label": "labor_relations (w=0.2, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.14,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -252,16 +252,16 @@
         },
         {
           "label": "Pillar G",
-          "value": 100.0,
+          "value": 70.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "business_ethics (w=0.1, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.1,
+              "label": "business_ethics (w=0.1, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.07,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -334,11 +334,11 @@
     },
     {
       "year": 2023,
-      "total": 73.75,
+      "total": 64.75,
       "pillars": {
         "E": 72.73,
-        "S": 67.86,
-        "G": 100.0
+        "S": 50.71,
+        "G": 70.0
       },
       "confidence": 0.405
     }
@@ -360,10 +360,10 @@
     "opinion_flat": false,
     "price_flat": true,
     "is_underpriced_improver": false,
-    "evidence_gap": -58.29,
-    "momentum": 0.25,
+    "evidence_gap": -51.15,
+    "momentum": -1.55,
     "esg_today": 61.86,
-    "quadrant": "FUTURE_LEADERS",
+    "quadrant": "OVERRATED",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -373,8 +373,8 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=False (evidence momentum 0.25/yr, verified-driven)",
-          "value": 0.25,
+          "label": "proof_up=False (evidence momentum -1.55/yr, verified-driven)",
+          "value": -1.55,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -382,7 +382,7 @@
           "children": [
             {
               "label": "Evidence Score 2023",
-              "value": 73.75,
+              "value": 64.75,
               "contribution": null,
               "source_sentence": null,
               "source_doc": null,
@@ -555,16 +555,16 @@
                 },
                 {
                   "label": "Pillar S",
-                  "value": 67.86,
+                  "value": 50.71,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "labor_relations (w=0.2, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.2,
+                      "label": "labor_relations (w=0.2, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.14,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -612,16 +612,16 @@
                 },
                 {
                   "label": "Pillar G",
-                  "value": 100.0,
+                  "value": 70.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "business_ethics (w=0.1, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.1,
+                      "label": "business_ethics (w=0.1, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.07,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -671,8 +671,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-58.29 (evidence 3.57 - consensus 61.86)",
-          "value": -58.29,
+          "label": "evidence_gap=-51.15 (evidence 10.71 - consensus 61.86)",
+          "value": -51.15,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -5430,7 +5430,7 @@
     {
       "id": "BN4",
       "name": "Keppel Ltd",
-      "evidence_total": 80.0
+      "evidence_total": 59.0
     }
   ]
 }

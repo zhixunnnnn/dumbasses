@@ -12,17 +12,17 @@
   "evidence": {
     "company_id": "U96",
     "year": 2023,
-    "total": 77.5,
+    "total": 64.0,
     "pillars": {
-      "E": 80.0,
-      "S": 100.0,
+      "E": 68.0,
+      "S": 70.0,
       "G": 25.0
     },
     "confidence": 0.397,
     "absent_topics": [],
     "trace": {
       "label": "Evidence Score 2023",
-      "value": 77.5,
+      "value": 64.0,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -30,7 +30,7 @@
       "children": [
         {
           "label": "Pillar E",
-          "value": 80.0,
+          "value": 68.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -137,9 +137,9 @@
               ]
             },
             {
-              "label": "ghg_emissions (w=0.3, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.3,
+              "label": "ghg_emissions (w=0.3, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.21,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -332,16 +332,16 @@
         },
         {
           "label": "Pillar S",
-          "value": 100.0,
+          "value": 70.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "workforce_safety (w=0.15, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.15,
+              "label": "workforce_safety (w=0.15, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.105,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -488,10 +488,10 @@
     },
     {
       "year": 2023,
-      "total": 77.5,
+      "total": 64.0,
       "pillars": {
-        "E": 80.0,
-        "S": 100.0,
+        "E": 68.0,
+        "S": 70.0,
         "G": 25.0
       },
       "confidence": 0.397
@@ -514,8 +514,8 @@
     "opinion_flat": true,
     "price_flat": false,
     "is_underpriced_improver": false,
-    "evidence_gap": 3.93,
-    "momentum": 5.5,
+    "evidence_gap": -10.36,
+    "momentum": 2.8,
     "esg_today": 17.5,
     "quadrant": "HIDDEN_WINNERS",
     "trace": {
@@ -527,8 +527,8 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=True (evidence momentum 5.5/yr, verified-driven)",
-          "value": 5.5,
+          "label": "proof_up=True (evidence momentum 2.8/yr, verified-driven)",
+          "value": 2.8,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -536,7 +536,7 @@
           "children": [
             {
               "label": "Evidence Score 2023",
-              "value": 77.5,
+              "value": 64.0,
               "contribution": null,
               "source_sentence": null,
               "source_doc": null,
@@ -544,7 +544,7 @@
               "children": [
                 {
                   "label": "Pillar E",
-                  "value": 80.0,
+                  "value": 68.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
@@ -651,9 +651,9 @@
                       ]
                     },
                     {
-                      "label": "ghg_emissions (w=0.3, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.3,
+                      "label": "ghg_emissions (w=0.3, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.21,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -846,16 +846,16 @@
                 },
                 {
                   "label": "Pillar S",
-                  "value": 100.0,
+                  "value": 70.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "workforce_safety (w=0.15, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.15,
+                      "label": "workforce_safety (w=0.15, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.105,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -979,8 +979,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=3.93 (evidence 21.43 - consensus 17.5)",
-          "value": 3.93,
+          "label": "evidence_gap=-10.36 (evidence 7.14 - consensus 17.5)",
+          "value": -10.36,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,

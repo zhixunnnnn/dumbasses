@@ -37,7 +37,21 @@ class TopicAgg:
     credit: float
     verified: int
     asserted: int
+    inferred: int = 0
     claim_traces: list[TraceNode] = field(default_factory=list)
+
+
+def _cap_credit(agg: "TopicAgg") -> float:
+    """Cap a topic's accumulated credit by its strongest evidence tier:
+    VERIFIED -> 1.0, asserted-only -> ASSERTED_TOPIC_CAP, inferred-only -> CREDIT_INFERRED.
+    So disclosure (or repeated disclosure) alone never reaches full marks."""
+    if agg.verified > 0:
+        cap = 1.0
+    elif agg.asserted > 0:
+        cap = config.ASSERTED_TOPIC_CAP
+    else:
+        cap = config.CREDIT_INFERRED
+    return min(agg.credit, cap)
 
 
 @dataclass
@@ -80,13 +94,13 @@ def _aggregate(ds: Dataset, cid: str, year: int, client: LLMClient) -> ScoreDeta
                     asserted=0,
                 )
                 topics[topic["topic_id"]] = agg
-            agg.credit = min(1.0, agg.credit + credit)
+            agg.credit += credit
             if state == "VERIFIED":
                 agg.verified += 1
                 verified_count += 1
                 confidences.append(0.9)
             elif state == "INFERRED":
-                agg.asserted += 1
+                agg.inferred += 1
                 confidences.append(0.2)  # inferred = low confidence (it's an estimate)
             else:
                 agg.asserted += 1
@@ -100,6 +114,8 @@ def _aggregate(ds: Dataset, cid: str, year: int, client: LLMClient) -> ScoreDeta
                 page=row.get("source_page"),
                 contribution=float(topic["weight"]) * credit,
             ))
+        for agg in topics.values():
+            agg.credit = _cap_credit(agg)
         absent = [tid for tid in material if tid not in topics]
         return ScoreDetail(cid, year, topics, absent, total_material_weight, confidences, verified_count)
 
@@ -117,9 +133,11 @@ def _aggregate(ds: Dataset, cid: str, year: int, client: LLMClient) -> ScoreDeta
                 agg = TopicAgg(topic_id=mapping.topic_id, pillar=mapping.pillar,
                                weight=mapping.weight, credit=0.0, verified=0, asserted=0)
                 topics[mapping.topic_id] = agg
-            agg.credit = min(1.0, agg.credit + CREDIT[v.state])
+            agg.credit += CREDIT[v.state]
             if v.state == "VERIFIED":
                 agg.verified += 1
+            elif v.state == "INFERRED":
+                agg.inferred += 1
             else:
                 agg.asserted += 1
             agg.claim_traces.append(leaf(
@@ -128,6 +146,8 @@ def _aggregate(ds: Dataset, cid: str, year: int, client: LLMClient) -> ScoreDeta
                 contribution=mapping.weight * CREDIT[v.state],
             ))
 
+    for agg in topics.values():
+        agg.credit = _cap_credit(agg)
     absent = [tid for tid in material if tid not in topics]
     return ScoreDetail(cid, year, topics, absent, total_material_weight, confidences, verified_count)
 

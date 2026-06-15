@@ -12,11 +12,11 @@
   "evidence": {
     "company_id": "F34",
     "year": 2023,
-    "total": 90.0,
+    "total": 76.5,
     "pillars": {
-      "E": 100.0,
-      "S": 75.0,
-      "G": 100.0
+      "E": 85.0,
+      "S": 67.5,
+      "G": 70.0
     },
     "confidence": 0.383,
     "absent_topics": [
@@ -24,7 +24,7 @@
     ],
     "trace": {
       "label": "Evidence Score 2023",
-      "value": 90.0,
+      "value": 76.5,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -32,16 +32,16 @@
       "children": [
         {
           "label": "Pillar E",
-          "value": 100.0,
+          "value": 85.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "ghg_emissions (w=0.15, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.15,
+              "label": "ghg_emissions (w=0.15, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.105,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -212,9 +212,9 @@
               ]
             },
             {
-              "label": "water_management (w=0.1, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.1,
+              "label": "water_management (w=0.1, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.07,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -288,16 +288,16 @@
         },
         {
           "label": "Pillar S",
-          "value": 75.0,
+          "value": 67.5,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "food_safety (w=0.1, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.1,
+              "label": "food_safety (w=0.1, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.07,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -417,16 +417,16 @@
         },
         {
           "label": "Pillar G",
-          "value": 100.0,
+          "value": 70.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "business_ethics (w=0.1, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.1,
+              "label": "business_ethics (w=0.1, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.07,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -526,11 +526,11 @@
     },
     {
       "year": 2023,
-      "total": 90.0,
+      "total": 76.5,
       "pillars": {
-        "E": 100.0,
-        "S": 75.0,
-        "G": 100.0
+        "E": 85.0,
+        "S": 67.5,
+        "G": 70.0
       },
       "confidence": 0.383
     }
@@ -552,8 +552,8 @@
     "opinion_flat": true,
     "price_flat": true,
     "is_underpriced_improver": true,
-    "evidence_gap": 40.0,
-    "momentum": 6.0,
+    "evidence_gap": -38.57,
+    "momentum": 3.3,
     "esg_today": 45.71,
     "quadrant": "HIDDEN_WINNERS",
     "trace": {
@@ -565,8 +565,8 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=True (evidence momentum 6.0/yr, verified-driven)",
-          "value": 6.0,
+          "label": "proof_up=True (evidence momentum 3.3/yr, verified-driven)",
+          "value": 3.3,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -574,7 +574,7 @@
           "children": [
             {
               "label": "Evidence Score 2023",
-              "value": 90.0,
+              "value": 76.5,
               "contribution": null,
               "source_sentence": null,
               "source_doc": null,
@@ -582,16 +582,16 @@
               "children": [
                 {
                   "label": "Pillar E",
-                  "value": 100.0,
+                  "value": 85.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "ghg_emissions (w=0.15, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.15,
+                      "label": "ghg_emissions (w=0.15, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.105,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -762,9 +762,9 @@
                       ]
                     },
                     {
-                      "label": "water_management (w=0.1, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.1,
+                      "label": "water_management (w=0.1, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.07,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -838,16 +838,16 @@
                 },
                 {
                   "label": "Pillar S",
-                  "value": 75.0,
+                  "value": 67.5,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "food_safety (w=0.1, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.1,
+                      "label": "food_safety (w=0.1, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.07,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -967,16 +967,16 @@
                 },
                 {
                   "label": "Pillar G",
-                  "value": 100.0,
+                  "value": 70.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "business_ethics (w=0.1, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.1,
+                      "label": "business_ethics (w=0.1, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.07,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -1053,8 +1053,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=40.0 (evidence 85.71 - consensus 45.71)",
-          "value": 40.0,
+          "label": "evidence_gap=-38.57 (evidence 7.14 - consensus 45.71)",
+          "value": -38.57,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -3160,9 +3160,9 @@
       {
         "start_date": "2023-01-01",
         "end_date": "2023-12-24",
-        "slope": 35.0,
+        "slope": 21.5,
         "start_score": 55.0,
-        "end_score": 90.0
+        "end_score": 76.5
       }
     ],
     "pins": [

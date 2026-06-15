@@ -12,17 +12,17 @@
   "evidence": {
     "company_id": "U11",
     "year": 2023,
-    "total": 88.75,
+    "total": 63.25,
     "pillars": {
-      "E": 100.0,
-      "S": 100.0,
-      "G": 77.5
+      "E": 70.0,
+      "S": 70.0,
+      "G": 56.5
     },
     "confidence": 0.392,
     "absent_topics": [],
     "trace": {
       "label": "Evidence Score 2023",
-      "value": 88.75,
+      "value": 63.25,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -30,16 +30,16 @@
       "children": [
         {
           "label": "Pillar E",
-          "value": 100.0,
+          "value": 70.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "financed_emissions (w=0.25, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.25,
+              "label": "financed_emissions (w=0.25, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.175,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -68,16 +68,16 @@
         },
         {
           "label": "Pillar S",
-          "value": 100.0,
+          "value": 70.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "financial_inclusion (w=0.15, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.15,
+              "label": "financial_inclusion (w=0.15, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.105,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -175,9 +175,9 @@
               ]
             },
             {
-              "label": "employee_diversity (w=0.1, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.1,
+              "label": "employee_diversity (w=0.1, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.07,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -215,16 +215,16 @@
         },
         {
           "label": "Pillar G",
-          "value": 77.5,
+          "value": 56.5,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "systemic_risk (w=0.15, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.15,
+              "label": "systemic_risk (w=0.15, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.105,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -295,9 +295,9 @@
               ]
             },
             {
-              "label": "business_ethics (w=0.2, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.2,
+              "label": "business_ethics (w=0.2, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.14,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -389,11 +389,11 @@
     },
     {
       "year": 2023,
-      "total": 88.75,
+      "total": 63.25,
       "pillars": {
-        "E": 100.0,
-        "S": 100.0,
-        "G": 77.5
+        "E": 70.0,
+        "S": 70.0,
+        "G": 56.5
       },
       "confidence": 0.392
     }
@@ -411,14 +411,14 @@
   },
   "signal": {
     "company_id": "U11",
-    "proof_up": true,
+    "proof_up": false,
     "opinion_flat": true,
     "price_flat": true,
-    "is_underpriced_improver": true,
-    "evidence_gap": 37.03,
-    "momentum": 2.5,
+    "is_underpriced_improver": false,
+    "evidence_gap": -18.52,
+    "momentum": -2.6,
     "esg_today": 46.3,
-    "quadrant": "HIDDEN_WINNERS",
+    "quadrant": "VALUE_TRAPS",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -428,8 +428,8 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=True (evidence momentum 2.5/yr, verified-driven)",
-          "value": 2.5,
+          "label": "proof_up=False (evidence momentum -2.6/yr, verified-driven)",
+          "value": -2.6,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -437,7 +437,7 @@
           "children": [
             {
               "label": "Evidence Score 2023",
-              "value": 88.75,
+              "value": 63.25,
               "contribution": null,
               "source_sentence": null,
               "source_doc": null,
@@ -445,16 +445,16 @@
               "children": [
                 {
                   "label": "Pillar E",
-                  "value": 100.0,
+                  "value": 70.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "financed_emissions (w=0.25, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.25,
+                      "label": "financed_emissions (w=0.25, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.175,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -483,16 +483,16 @@
                 },
                 {
                   "label": "Pillar S",
-                  "value": 100.0,
+                  "value": 70.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "financial_inclusion (w=0.15, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.15,
+                      "label": "financial_inclusion (w=0.15, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.105,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -590,9 +590,9 @@
                       ]
                     },
                     {
-                      "label": "employee_diversity (w=0.1, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.1,
+                      "label": "employee_diversity (w=0.1, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.07,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -630,16 +630,16 @@
                 },
                 {
                   "label": "Pillar G",
-                  "value": 77.5,
+                  "value": 56.5,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "systemic_risk (w=0.15, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.15,
+                      "label": "systemic_risk (w=0.15, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.105,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -710,9 +710,9 @@
                       ]
                     },
                     {
-                      "label": "business_ethics (w=0.2, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.2,
+                      "label": "business_ethics (w=0.2, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.14,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -781,8 +781,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=37.03 (evidence 83.33 - consensus 46.3)",
-          "value": 37.03,
+          "label": "evidence_gap=-18.52 (evidence 27.78 - consensus 46.3)",
+          "value": -18.52,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -5576,14 +5576,14 @@
   },
   "peers": [
     {
-      "id": "D05",
-      "name": "DBS Group",
-      "evidence_total": 55.0
-    },
-    {
       "id": "O39",
       "name": "OCBC",
-      "evidence_total": 52.5
+      "evidence_total": 45.0
+    },
+    {
+      "id": "D05",
+      "name": "DBS Group",
+      "evidence_total": 43.0
     }
   ]
 }

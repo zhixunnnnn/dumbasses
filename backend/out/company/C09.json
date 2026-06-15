@@ -12,17 +12,17 @@
   "evidence": {
     "company_id": "C09",
     "year": 2023,
-    "total": 95.0,
+    "total": 74.0,
     "pillars": {
-      "E": 100.0,
+      "E": 78.0,
       "S": 50.0,
-      "G": 100.0
+      "G": 70.0
     },
     "confidence": 0.421,
     "absent_topics": [],
     "trace": {
       "label": "Evidence Score 2023",
-      "value": 95.0,
+      "value": 74.0,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -30,7 +30,7 @@
       "children": [
         {
           "label": "Pillar E",
-          "value": 100.0,
+          "value": 78.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -137,9 +137,9 @@
               ]
             },
             {
-              "label": "climate_resilience (w=0.2, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.2,
+              "label": "climate_resilience (w=0.2, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.14,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -192,9 +192,9 @@
               ]
             },
             {
-              "label": "energy_management (w=0.25, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.25,
+              "label": "energy_management (w=0.25, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.175,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -229,9 +229,9 @@
               ]
             },
             {
-              "label": "water_management (w=0.1, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.1,
+              "label": "water_management (w=0.1, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.07,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -289,16 +289,16 @@
         },
         {
           "label": "Pillar G",
-          "value": 100.0,
+          "value": 70.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "business_ethics (w=0.15, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.15,
+              "label": "business_ethics (w=0.15, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.105,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
@@ -380,11 +380,11 @@
     },
     {
       "year": 2023,
-      "total": 95.0,
+      "total": 74.0,
       "pillars": {
-        "E": 100.0,
+        "E": 78.0,
         "S": 50.0,
-        "G": 100.0
+        "G": 70.0
       },
       "confidence": 0.421
     }
@@ -406,8 +406,8 @@
     "opinion_flat": true,
     "price_flat": null,
     "is_underpriced_improver": false,
-    "evidence_gap": 12.8,
-    "momentum": -0.5,
+    "evidence_gap": -37.2,
+    "momentum": -4.7,
     "esg_today": 68.45,
     "quadrant": "OVERRATED",
     "trace": {
@@ -419,8 +419,8 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=False (evidence momentum -0.5/yr, verified-driven)",
-          "value": -0.5,
+          "label": "proof_up=False (evidence momentum -4.7/yr, verified-driven)",
+          "value": -4.7,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -428,7 +428,7 @@
           "children": [
             {
               "label": "Evidence Score 2023",
-              "value": 95.0,
+              "value": 74.0,
               "contribution": null,
               "source_sentence": null,
               "source_doc": null,
@@ -436,7 +436,7 @@
               "children": [
                 {
                   "label": "Pillar E",
-                  "value": 100.0,
+                  "value": 78.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
@@ -543,9 +543,9 @@
                       ]
                     },
                     {
-                      "label": "climate_resilience (w=0.2, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.2,
+                      "label": "climate_resilience (w=0.2, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.14,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -598,9 +598,9 @@
                       ]
                     },
                     {
-                      "label": "energy_management (w=0.25, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.25,
+                      "label": "energy_management (w=0.25, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.175,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -635,9 +635,9 @@
                       ]
                     },
                     {
-                      "label": "water_management (w=0.1, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.1,
+                      "label": "water_management (w=0.1, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.07,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -695,16 +695,16 @@
                 },
                 {
                   "label": "Pillar G",
-                  "value": 100.0,
+                  "value": 70.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "business_ethics (w=0.15, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.15,
+                      "label": "business_ethics (w=0.15, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.105,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
@@ -763,8 +763,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=12.8 (evidence 81.25 - consensus 68.45)",
-          "value": 12.8,
+          "label": "evidence_gap=-37.2 (evidence 31.25 - consensus 68.45)",
+          "value": -37.2,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -5527,7 +5527,7 @@
     {
       "id": "9CI",
       "name": "CapitaLand Investment",
-      "evidence_total": 81.25
+      "evidence_total": 64.75
     }
   ]
 }
