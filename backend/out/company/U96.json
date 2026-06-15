@@ -5383,10 +5383,10 @@
   },
   "forecast": {
     "company_id": "U96",
-    "predicted_score": 78.34,
+    "predicted_score": 79.77,
     "horizon_years": 1,
-    "ci_low": 57.42,
-    "ci_high": 99.26,
+    "ci_low": 58.85,
+    "ci_high": 100.69,
     "feature_contributions": [
       {
         "feature": "consensus",
@@ -5397,11 +5397,6 @@
         "feature": "div_yield",
         "value": 3.24,
         "contribution": 1.695
-      },
-      {
-        "feature": "news_sentiment",
-        "value": 2.0,
-        "contribution": -1.572
       },
       {
         "feature": "pe",
@@ -5424,6 +5419,11 @@
         "contribution": 0.616
       },
       {
+        "feature": "news_sentiment",
+        "value": 1.0,
+        "contribution": -0.143
+      },
+      {
         "feature": "compliance_gap",
         "value": 0.0,
         "contribution": 0.0
@@ -5432,8 +5432,8 @@
     "val_error": 20.923,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 78.3 (HYPOTHESIS, test MAE=20.92)",
-      "value": 78.34,
+      "label": "Forecast 2024 = 79.8 (HYPOTHESIS, test MAE=20.92)",
+      "value": 79.77,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -5452,15 +5452,6 @@
           "label": "div_yield=3.24",
           "value": null,
           "contribution": 1.695,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "news_sentiment=2.0",
-          "value": null,
-          "contribution": -1.572,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5497,6 +5488,15 @@
           "label": "controversy_cum=0.0",
           "value": null,
           "contribution": 0.616,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "news_sentiment=1.0",
+          "value": null,
+          "contribution": -0.143,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

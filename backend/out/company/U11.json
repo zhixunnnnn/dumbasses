@@ -5174,10 +5174,10 @@
   },
   "forecast": {
     "company_id": "U11",
-    "predicted_score": 71.29,
+    "predicted_score": 72.72,
     "horizon_years": 1,
-    "ci_low": 50.37,
-    "ci_high": 92.22,
+    "ci_low": 51.8,
+    "ci_high": 93.65,
     "feature_contributions": [
       {
         "feature": "divergence",
@@ -5195,11 +5195,6 @@
         "contribution": 1.603
       },
       {
-        "feature": "news_sentiment",
-        "value": 2.0,
-        "contribution": -1.572
-      },
-      {
         "feature": "controversy_cum",
         "value": 0.0,
         "contribution": 0.616
@@ -5208,6 +5203,11 @@
         "feature": "consensus",
         "value": 46.3,
         "contribution": -0.206
+      },
+      {
+        "feature": "news_sentiment",
+        "value": 1.0,
+        "contribution": -0.143
       },
       {
         "feature": "hiring_cum",
@@ -5223,8 +5223,8 @@
     "val_error": 20.923,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 71.3 (HYPOTHESIS, test MAE=20.92)",
-      "value": 71.29,
+      "label": "Forecast 2024 = 72.7 (HYPOTHESIS, test MAE=20.92)",
+      "value": 72.72,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -5258,15 +5258,6 @@
           "children": []
         },
         {
-          "label": "news_sentiment=2.0",
-          "value": null,
-          "contribution": -1.572,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
           "label": "controversy_cum=0.0",
           "value": null,
           "contribution": 0.616,
@@ -5279,6 +5270,15 @@
           "label": "consensus=46.3",
           "value": null,
           "contribution": -0.206,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "news_sentiment=1.0",
+          "value": null,
+          "contribution": -0.143,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

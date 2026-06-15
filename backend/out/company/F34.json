@@ -5444,10 +5444,10 @@
   },
   "forecast": {
     "company_id": "F34",
-    "predicted_score": 62.58,
+    "predicted_score": 59.72,
     "horizon_years": 1,
-    "ci_low": 41.65,
-    "ci_high": 83.5,
+    "ci_low": 38.8,
+    "ci_high": 80.64,
     "feature_contributions": [
       {
         "feature": "controversy_cum",
@@ -5461,8 +5461,8 @@
       },
       {
         "feature": "news_sentiment",
-        "value": 0.0,
-        "contribution": 1.286
+        "value": 2.0,
+        "contribution": -1.572
       },
       {
         "feature": "div_yield",
@@ -5493,8 +5493,8 @@
     "val_error": 20.923,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 62.6 (HYPOTHESIS, test MAE=20.92)",
-      "value": 62.58,
+      "label": "Forecast 2024 = 59.7 (HYPOTHESIS, test MAE=20.92)",
+      "value": 59.72,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -5519,9 +5519,9 @@
           "children": []
         },
         {
-          "label": "news_sentiment=0.0",
+          "label": "news_sentiment=2.0",
           "value": null,
-          "contribution": 1.286,
+          "contribution": -1.572,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

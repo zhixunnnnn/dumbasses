@@ -54,7 +54,10 @@ number is live.
   labelled `INFERRED` estimates).
 - **Stock prices + STI benchmark** — real weekly OHLC scraped via Bright Data
   (Yahoo Finance, with native/MarketWatch fallbacks).
-- **Live News** — real headlines scraped weekly via Bright Data SERP.
+- **Live News** — real headlines scraped weekly via Bright Data SERP, then each
+  headline is classified (controversy / positive / stock / neutral, or dropped as
+  irrelevant) by an LLM, with a deterministic keyword classifier as the no-key
+  fallback. The resulting sentiment is a real leading feature in the forecaster.
 - **Company universe** (names, tickers, sectors, SASB industries) and the
   **regulation definitions** (SGX-711B, SGX Climate, IFRS S2/ISSB, MAS-ENRM,
   ASEAN Taxonomy) are real reference data.

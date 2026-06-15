@@ -14,7 +14,7 @@
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 78.34,
+    "forecast": 79.77,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -53,7 +53,7 @@
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
     "compliance_score": 0.0,
-    "forecast": 65.57,
+    "forecast": 62.71,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -87,7 +87,7 @@
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
     "compliance_score": 0.333,
-    "forecast": 62.58,
+    "forecast": 59.72,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -126,7 +126,7 @@
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 83.26,
+    "forecast": 74.69,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -160,7 +160,7 @@
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 76.97,
+    "forecast": 72.68,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -204,7 +204,7 @@
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 79.39,
+    "forecast": 73.68,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -248,7 +248,7 @@
     "quadrant": "VALUE_TRAPS",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 71.29,
+    "forecast": 72.72,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -292,7 +292,7 @@
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 86.09,
+    "forecast": 84.66,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -360,7 +360,7 @@
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 82.7,
+    "forecast": 81.27,
     "regulations": [
       {
         "reg_id": "SGX-711B",

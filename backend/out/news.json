@@ -1,29 +1,29 @@
 {
-  "source": "Bright Data SERP · web news",
-  "last_run": "2026-06-14T22:00:10",
+  "source": "Bright Data Request API - Bing News",
+  "last_run": "2026-06-15T18:17:18",
   "companies": [
     {
       "company_id": "U96",
       "name": "Sembcorp Industries",
       "n_items": 16,
-      "controversy": 0,
+      "controversy": 1,
       "positive": 2,
-      "sentiment": 2,
+      "sentiment": 1,
       "headlines": [
         {
-          "title": "Sembcorp Industries Archives",
-          "url": "https://esgnews.com/tag/sembcorp-industries/",
+          "title": "Sembcorp Industries",
+          "url": "https://www.sembcorp.com/",
           "label": "neutral"
         },
         {
-          "title": "News and Insights",
-          "url": "https://www.sembcorp.com/news-and-insights/",
-          "label": "neutral"
-        },
-        {
-          "title": "Issue 192: Sembcorp's renewable catalysts; South-east ...",
-          "url": "https://www.businesstimes.com.sg/newsletters/esg-insights/issue-192-sembcorps-renewable-catalysts-south-east-asias-geothermal-potential",
+          "title": "Sustainability Report - Singapore",
+          "url": "https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf",
           "label": "positive"
+        },
+        {
+          "title": "Sembcorp Expands Indian Renewables Portfolio with $190 ...",
+          "url": "https://esgnews.com/sembcorp-expands-indian-renewables-portfolio-with-190m-renew-solar-acquisition/",
+          "label": "neutral"
         },
         {
           "title": "Our ESG Priorities",
@@ -31,9 +31,9 @@
           "label": "neutral"
         },
         {
-          "title": "Sustainability Report - Singapore",
-          "url": "https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf",
-          "label": "stock"
+          "title": "Issue 134: Sembcorp's well-missed target; investors dump ...",
+          "url": "https://www.businesstimes.com.sg/newsletters/esg-insights/issue-134-sembcorps-well-missed-target-investors-dump-esg-funds",
+          "label": "controversy"
         },
         {
           "title": "Sembcorp Industries | Sustainability Performance",
@@ -41,38 +41,28 @@
           "label": "neutral"
         },
         {
-          "title": "Singapore's Sembcorp to Invest $10.5 Billion to Drive ...",
-          "url": "https://esgnews.com/singapores-sembcorp-to-invest-10-5-billion-to-drive-global-energy-transition/",
-          "label": "neutral"
+          "title": "Sembcorp Industries announces $675 million sustainability ...",
+          "url": "https://sg.finance.yahoo.com/news/sembcorp-industries-announces-675-million-053140785.html",
+          "label": "positive"
         },
         {
-          "title": "sembcorp industries Latest News & Headlines",
-          "url": "https://www.businesstimes.com.sg/keywords/sembcorp-industries",
-          "label": "stock"
+          "title": "Reports",
+          "url": "https://www.sembcorp.com/driving-energy-transition/our-approach-to-sustainability/reports/",
+          "label": "neutral"
         }
       ]
     },
     {
       "company_id": "BN4",
       "name": "Keppel Ltd",
-      "n_items": 18,
+      "n_items": 17,
       "controversy": 0,
-      "positive": 0,
-      "sentiment": 0,
+      "positive": 2,
+      "sentiment": 2,
       "headlines": [
         {
           "title": "We are proud to present Keppel's Sustainability Report ...",
           "url": "https://www.instagram.com/p/DY3cuOpD8Qo/",
-          "label": "neutral"
-        },
-        {
-          "title": "Keppel Ltd Sustainability Report 2024",
-          "url": "https://links.sgx.com/1.0.0/corporate-announcements/ENK3LBBUDL9IT9U7/847126_Keppel%20Ltd.%20Sustainability%20Report%202024.pdf",
-          "label": "neutral"
-        },
-        {
-          "title": "Keppel Ltd. ESG Score",
-          "url": "https://www.spglobal.com/sustainable1/en/scores/results?cid=4106971",
           "label": "neutral"
         },
         {
@@ -81,9 +71,19 @@
           "label": "neutral"
         },
         {
-          "title": "AI's complex role in sustainability; Keppel's emissions targets",
-          "url": "https://www.businesstimes.com.sg/newsletters/esg-insights/issue-196-ais-complex-role-sustainability-keppels-emissions-targets",
+          "title": "Keppel Ltd. ESG Score",
+          "url": "https://www.spglobal.com/sustainable1/en/scores/results?cid=4106971",
           "label": "neutral"
+        },
+        {
+          "title": "AIIB and Keppel to Mobilize $1.5B for Sustainable ...",
+          "url": "https://esgnews.com/aiib-and-keppel-to-mobilize-1-5b-for-sustainable-infrastructure-across-asia-pacific/",
+          "label": "positive"
+        },
+        {
+          "title": "Issue 196: AI's complex role in sustainability; Keppel's ...",
+          "url": "https://www.businesstimes.com.sg/newsletters/esg-insights/issue-196-ais-complex-role-sustainability-keppels-emissions-targets",
+          "label": "positive"
         },
         {
           "title": "Keppel Ltd. Sustainability Report 2025",
@@ -93,11 +93,11 @@
         {
           "title": "Keppel Corporation Ltd (BN4) ESG Rating 2026 (MSCI",
           "url": "https://knowesg.com/esg-ratings/keppel-corporation-ltd",
-          "label": "stock"
+          "label": "neutral"
         },
         {
-          "title": "AIIB and Keppel to Mobilize $1.5B for Sustainable ...",
-          "url": "https://esgnews.com/aiib-and-keppel-to-mobilize-1-5b-for-sustainable-infrastructure-across-asia-pacific/",
+          "title": "Keppel releases first sustainability report | News",
+          "url": "https://www.eco-business.com/news/keppel-releases-first-sustainability-report/",
           "label": "neutral"
         }
       ]
@@ -105,29 +105,19 @@
     {
       "company_id": "F34",
       "name": "Wilmar International",
-      "n_items": 20,
-      "controversy": 1,
-      "positive": 1,
-      "sentiment": 0,
+      "n_items": 18,
+      "controversy": 0,
+      "positive": 2,
+      "sentiment": 2,
       "headlines": [
+        {
+          "title": "Wilmar offers data-driven perspective on ESG performance ...",
+          "url": "https://www.eco-business.com/press-releases/wilmar-offers-data-driven-perspective-on-esg-performance-in-2023-sustainability-report/",
+          "label": "neutral"
+        },
         {
           "title": "Sustainability",
           "url": "http://www.wilmar-international.com/sustainability",
-          "label": "controversy"
-        },
-        {
-          "title": "Wilmar offers Data-Driven Perspective on ESG ...",
-          "url": "https://media-wilmar.todayir.com/202405301811221730057536_en.pdf",
-          "label": "neutral"
-        },
-        {
-          "title": "Wilmar Offers Data-driven Perspective on Esg Performance ...",
-          "url": "https://www.eqs-news.com/news/category/wilmar-offers-data-driven-perspective-on-esg-performance-in-sustainability-report-2023/d1dab611-70f5-4b36-b5ee-4d3935eeb895_en",
-          "label": "neutral"
-        },
-        {
-          "title": "Sustainability Report 2024: Wilmar International's ...",
-          "url": "https://www.studocu.vn/vn/document/truong-dai-hoc-bach-khoa-ha-noi/nang-luong-tai-tao/sustainability-report-2024-wilmar-internationals-commitment-to-esg/151632554",
           "label": "neutral"
         },
         {
@@ -136,18 +126,28 @@
           "label": "neutral"
         },
         {
-          "title": "Wilmar reaffirms sustainability leadership with continued ...",
-          "url": "https://www.eco-business.com/press-releases/wilmar-reaffirms-sustainability-leadership-with-continued-inclusion-in-djsi-2/",
-          "label": "neutral"
-        },
-        {
           "title": "Wilmar secures US$100m ESG-linked loan from Maybank",
           "url": "https://sbr.com.sg/agribusiness/news/wilmar-secures-us100m-esg-linked-loan-maybank",
+          "label": "positive"
+        },
+        {
+          "title": "Sustainability Report 2024: Wilmar International's ...",
+          "url": "https://www.studocu.vn/vn/document/truong-dai-hoc-bach-khoa-ha-noi/nang-luong-tai-tao/sustainability-report-2024-wilmar-internationals-commitment-to-esg/151632554",
           "label": "neutral"
         },
         {
-          "title": "Wilmar Sustainability Report 2024 Released | PDF",
-          "url": "https://es.scribd.com/document/924018018/202505291806171782745919-en",
+          "title": "Wilmar Receives 'A' Rating by MSCI for ESG Performance",
+          "url": "https://media-wilmar.todayir.com/202201041745421778798110_en.pdf",
+          "label": "positive"
+        },
+        {
+          "title": "Impact Stories: Wilmar International",
+          "url": "https://www.youtube.com/watch?v=yMRIcSEs08I",
+          "label": "neutral"
+        },
+        {
+          "title": "Sustainability Updates – Wilmar International Limited",
+          "url": "https://ir-media.wilmar-international.com/sustainability-updates",
           "label": "neutral"
         }
       ]
@@ -155,39 +155,39 @@
     {
       "company_id": "C6L",
       "name": "Singapore Airlines",
-      "n_items": 17,
-      "controversy": 2,
-      "positive": 1,
-      "sentiment": -1,
+      "n_items": 18,
+      "controversy": 0,
+      "positive": 5,
+      "sentiment": 5,
       "headlines": [
         {
           "title": "Sustainability",
-          "url": "https://www.singaporeair.com/en_UK/us/about-us/sustainability/",
-          "label": "neutral"
+          "url": "https://www.singaporeair.com/en_UK/sg/about-us/sustainability/",
+          "label": "positive"
         },
         {
           "title": "Cathay and Singapore Airlines to collaborate on ...",
           "url": "https://www.swirepacific.com/en/investor-relations/updates-to-our-shareholders/press-releases/cathay-and-singapore-airlines-to-collaborate-on-sustainability-initiatives",
-          "label": "neutral"
-        },
-        {
-          "title": "Singapore Airlines (C6L.SI) ESG Rating 2026 (MSCI: A)",
-          "url": "https://knowesg.com/esg-ratings/singapore-airlines",
-          "label": "stock"
-        },
-        {
-          "title": "Singapore Airlines Limited ESG Score",
-          "url": "https://www.spglobal.com/sustainable1/en/scores/results?cid=4227216",
-          "label": "neutral"
+          "label": "positive"
         },
         {
           "title": "Singapore Airlines Orders 1000 tons of Sustainable ...",
           "url": "https://esgnews.com/singapore-airlines-orders-1000-tons-of-sustainable-aviation-fuel-from-neste/",
-          "label": "stock"
+          "label": "positive"
+        },
+        {
+          "title": "Singapore Airlines (C6L.SI) ESG Rating 2026 (MSCI: A)",
+          "url": "https://knowesg.com/esg-ratings/singapore-airlines",
+          "label": "neutral"
         },
         {
           "title": "Singapore Airlines",
           "url": "https://www.greenairnews.com/?paged=2&tag=singapore-airlines",
+          "label": "neutral"
+        },
+        {
+          "title": "Singapore Airlines Limited ESG Score",
+          "url": "https://www.spglobal.com/sustainable1/en/scores/results?cid=4227216",
           "label": "neutral"
         },
         {
@@ -196,8 +196,8 @@
           "label": "positive"
         },
         {
-          "title": "How a Commercial Airline can Stay Committed to ...",
-          "url": "https://ustoa.com/blog/singapore-airlines-sustainability/",
+          "title": "(PDF) ِCorporate Environment Responsibility in Singapore ...",
+          "url": "https://www.researchgate.net/publication/388562977_Corporate_Environment_Responsibility_in_Singapore_Airlines_2015-2024",
           "label": "neutral"
         }
       ]
@@ -205,15 +205,15 @@
     {
       "company_id": "D05",
       "name": "DBS Group",
-      "n_items": 16,
+      "n_items": 18,
       "controversy": 0,
-      "positive": 2,
-      "sentiment": 2,
+      "positive": 5,
+      "sentiment": 5,
       "headlines": [
         {
           "title": "Sustainability",
           "url": "https://www.dbs.com/sustainability/default.page",
-          "label": "stock"
+          "label": "positive"
         },
         {
           "title": "DBS Appoints Kelvin Wong as New Chief Sustainability ...",
@@ -221,9 +221,14 @@
           "label": "neutral"
         },
         {
-          "title": "DBS Bank Archives",
-          "url": "https://esgnews.com/tag/dbs-bank/",
-          "label": "stock"
+          "title": "DBS Bank Study Reveals Indian Businesses Lead in ...",
+          "url": "https://esgnews.com/dbs-bank-study-reveals-indian-businesses-lead-in-esg-reporting-and-diversification-efforts/",
+          "label": "neutral"
+        },
+        {
+          "title": "DBS sees opportunities in climate adaptation and nature",
+          "url": "https://www.businesstimes.com.sg/esg/dbs-sees-opportunities-climate-adaptation-and-nature-track-cut-financed-emissions-most-sectors",
+          "label": "positive"
         },
         {
           "title": "DBS Bank: Driving Sustainable Financing in Asia",
@@ -231,108 +236,93 @@
           "label": "positive"
         },
         {
-          "title": "Latest Sustainability Report",
-          "url": "https://www.dbs.com/sustainability/reports-and-disclosures/sustainability-report",
+          "title": "Sustainability Report 2024",
+          "url": "https://www.dbs.com/iwov-resources/images/sustainability/reporting/pdf/web/DBS_SR2024.pdf?pid=sg-group-pweb-sustainability-pdf-dbs-sustainability-report-2024",
           "label": "positive"
+        },
+        {
+          "title": "DBS Group Holdings Ltd (D05) ESG Rating 2026 (MSCI: A)",
+          "url": "https://knowesg.com/esg-ratings/dbs",
+          "label": "neutral"
         },
         {
           "title": "DBS Group Holdings Ltd ESG Score",
           "url": "https://www.spglobal.com/sustainable1/en/scores/results?cid=4173349",
           "label": "neutral"
-        },
-        {
-          "title": "DBS sees opportunities in climate adaptation and nature",
-          "url": "https://www.businesstimes.com.sg/esg/dbs-sees-opportunities-climate-adaptation-and-nature-track-cut-financed-emissions-most-sectors",
-          "label": "neutral"
-        },
-        {
-          "title": "DBS Group Holdings Ltd (D05) ESG Rating 2026 (MSCI: A)",
-          "url": "https://knowesg.com/esg-ratings/dbs",
-          "label": "stock"
         }
       ]
     },
     {
       "company_id": "O39",
       "name": "OCBC",
-      "n_items": 11,
-      "controversy": 0,
-      "positive": 0,
-      "sentiment": 0,
+      "n_items": 16,
+      "controversy": 1,
+      "positive": 5,
+      "sentiment": 4,
       "headlines": [
         {
-          "title": "OCBC (@OCBC.Singapore)",
-          "url": "https://www.facebook.com/OCBC.Singapore/",
-          "label": "stock"
+          "title": "Sustainable Banking | ESG Investing and Green Financing",
+          "url": "https://www.ocbc.com/personal-banking/sustainability.page",
+          "label": "positive"
         },
         {
-          "title": "OCBC Bank",
-          "url": "https://en.wikipedia.org/wiki/OCBC_Bank",
-          "label": "stock"
+          "title": "Green group files SGX complaint against OCBC alleging ...",
+          "url": "https://www.businesstimes.com.sg/esg/green-group-files-sgx-complaint-against-ocbc-alleging-disclosure-gaps-carbon-intensive-assets",
+          "label": "controversy"
         },
         {
-          "title": "Oversea-Chinese Banking Corp Ltd Stock Price Quote",
-          "url": "https://www.bloomberg.com/quote/OCBC:SP",
-          "label": "stock"
+          "title": "OCBC's FY2025 Sustainability Report Highlights Strong ...",
+          "url": "https://www.linkedin.com/posts/esgpedia_scaling-sustainable-finance-with-ocbc-bank-activity-7444665031004221440-VNMO",
+          "label": "positive"
         },
         {
-          "title": "OCBC",
-          "url": "https://sg.linkedin.com/company/ocbc-bank",
-          "label": "stock"
+          "title": "Sustainability & ESG Reports - Singapore",
+          "url": "https://www.ocbc.com/group/sustainability/sustainability-reports.page",
+          "label": "neutral"
         },
         {
-          "title": "OCBC Q3 profit beats, shares hit record as CEO Wong ...",
-          "url": "https://www.reuters.com/world/asia-pacific/singapores-bank-ocbc-third-quarter-net-profit-unchanged-year-2025-11-06/",
-          "label": "stock"
+          "title": "OCBC Targets 12000 SMEs and SGD 25 Billion by 2028 in ...",
+          "url": "https://onestopesg.com/esg-news/ocbc-targets-12-000-smes-and-sgd-25-billion-by-2028-in-asia-s-first-dedicated-sustainable-finance-goal-for-small-businesses",
+          "label": "positive"
         },
         {
-          "title": "OCBC shares surge nearly 3.5% after better-than-expected ...",
-          "url": "https://www.youtube.com/watch?v=Ofbp7FWcY30",
-          "label": "stock"
+          "title": "OCBC Bank (O39.SI) ESG Rating 2026 (MSCI: AA)",
+          "url": "https://knowesg.com/esg-ratings/ocbc-bank",
+          "label": "neutral"
         },
         {
-          "title": "OCBC Bank (OCBC) Earnings Date & Report",
-          "url": "https://www.investing.com/equities/oversea-chinese-banking-corp.-earnings",
-          "label": "stock"
+          "title": "OCBC Bank, MetaVerse Green Exchange Partner to ...",
+          "url": "https://www.esgtoday.com/ocbc-bank-metaverse-green-exchange-partner-to-launch-tokenised-green-finance-solutions/",
+          "label": "positive"
         },
         {
-          "title": "OCBC's Indonesia deal a 'perfect fit' for Asean wealth ...",
-          "url": "https://www.businesstimes.com.sg/companies-markets/ocbcs-indonesia-deal-perfect-fit-asean-wealth-ambitions-says-ceo-q1-profit-beats-estimates",
-          "label": "stock"
+          "title": "OCBC and Enterprise Singapore launch ESG programme ...",
+          "url": "https://www.qorusglobal.com/content/29441-ocbc-and-enterprise-singapore-launch-esg-programme-to-boost-sme-sustainability",
+          "label": "positive"
         }
       ]
     },
     {
       "company_id": "U11",
       "name": "UOB",
-      "n_items": 10,
+      "n_items": 7,
       "controversy": 0,
-      "positive": 2,
-      "sentiment": 2,
+      "positive": 1,
+      "sentiment": 1,
       "headlines": [
-        {
-          "title": "ESG backlash? 'Huge' difference between headlines and ...",
-          "url": "https://www.eco-business.com/news/esg-backlash-huge-difference-between-headlines-and-reality-in-asia-uob-sustainability-chief/",
-          "label": "positive"
-        },
         {
           "title": "Convene ESG and UOB Launch SAGE Programme",
           "url": "https://www.azeusconvene.com/esg/news/uob-sage-programme-partnership",
+          "label": "positive"
+        },
+        {
+          "title": "ESG backlash? 'Huge' difference between headlines and ...",
+          "url": "https://www.eco-business.com/news/esg-backlash-huge-difference-between-headlines-and-reality-in-asia-uob-sustainability-chief/",
           "label": "neutral"
         },
         {
           "title": "UOB Sustainability Report 2023 - Singapore",
           "url": "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2023.pdf",
-          "label": "neutral"
-        },
-        {
-          "title": "Sustainable Investing | UOB Privilege Banking",
-          "url": "https://www.uob.com.sg/privilegebanking/our-solutions/invest/sustainable-investing.page",
-          "label": "neutral"
-        },
-        {
-          "title": "Sustainability: Getting Started",
-          "url": "http://www.uobam.com.sg/sustainability/getting-started.page",
           "label": "neutral"
         },
         {
@@ -346,33 +336,53 @@
           "label": "neutral"
         },
         {
-          "title": "UOB rolls out sustainable finance framework for companies",
-          "url": "https://esgclarity.com/uob-rolls-out-sustainable-finance-framework-for-companies/",
+          "title": "Why sustainable finance is critical for Asean SMEs seeking ...",
+          "url": "https://www.scmp.com/native/business/topics/reimagining-asean-future/article/3323280/why-sustainable-finance-critical-asean-smes-seeking-long-term-resilience",
           "label": "neutral"
+        },
+        {
+          "title": "United Overseas Bank Limited (U11.SI)",
+          "url": "https://finance.yahoo.com/quote/U11.SI/",
+          "label": "stock"
         }
       ]
     },
     {
       "company_id": "9CI",
       "name": "CapitaLand Investment",
-      "n_items": 18,
+      "n_items": 9,
       "controversy": 0,
-      "positive": 3,
-      "sentiment": 3,
+      "positive": 4,
+      "sentiment": 4,
       "headlines": [
         {
           "title": "Sustainability | CapitaLand Investment",
           "url": "https://www.capitaland.com/en/investment/our-impact/sustainability.html",
-          "label": "neutral"
+          "label": "positive"
         },
         {
           "title": "CapitaLand Rolls Out Framework to Quantify Financial ...",
           "url": "https://esgnews.com/capitaland-rolls-out-framework-to-quantify-financial-returns-of-green-investments/",
-          "label": "stock"
+          "label": "neutral"
+        },
+        {
+          "title": "CapitaLand Investment's ESG Policies",
+          "url": "https://www.capitaland.com/en/investment/our-impact/sustainability/esg-policies.html",
+          "label": "neutral"
         },
         {
           "title": "CapitaLand Launches New Framework to Quantify the ...",
           "url": "https://www.esgtoday.com/capitaland-launches-new-framework-to-quantify-the-financial-return-of-sustainability-investments/",
+          "label": "positive"
+        },
+        {
+          "title": "CapitaLand Investment sustainability chief Vinamra ...",
+          "url": "https://www.eco-business.com/news/capitaland-investment-sustainability-chief-vinamra-srivastava-moves-on-after-10-years/",
+          "label": "neutral"
+        },
+        {
+          "title": "CLI Global Sustainability Reports | CapitaLand Investment",
+          "url": "https://www.capitaland.com/en/investment/our-impact/sustainability/cli-global-sustainability-reports.html",
           "label": "neutral"
         },
         {
@@ -381,23 +391,8 @@
           "label": "positive"
         },
         {
-          "title": "CapitaLand Investment's ESG Policies",
-          "url": "https://www.capitaland.com/en/investment/our-impact/sustainability/esg-policies.html",
-          "label": "stock"
-        },
-        {
-          "title": "News | CapitaLand Investment",
-          "url": "https://ir.capitalandinvest.com/news.html/id/2566003",
-          "label": "positive"
-        },
-        {
-          "title": "Sustainability",
-          "url": "https://www.capitaland.com/en/invest/clar/en/sustainability.html",
-          "label": "neutral"
-        },
-        {
-          "title": "CapitaLand Investment's Paul Tham on Growth Strategies",
-          "url": "https://www.youtube.com/watch?v=CHYDorQtE2M",
+          "title": "Sustainability - Singapore",
+          "url": "https://www.capitaland.com/en/about-capitaland/sustainability.html",
           "label": "positive"
         }
       ]
@@ -405,25 +400,15 @@
     {
       "company_id": "C09",
       "name": "City Developments",
-      "n_items": 15,
+      "n_items": 17,
       "controversy": 0,
       "positive": 1,
       "sentiment": 1,
       "headlines": [
         {
-          "title": "CDL's Business Case for Sustainability in Real Estate",
-          "url": "https://onestopesg.com/esg-news/thought-leadership-series-1-esther-an-the-business-case-for-sustainability-in-real-estate-1756814834490",
-          "label": "stock"
-        },
-        {
-          "title": "City Developments Limited - ESG News & Media",
-          "url": "https://www.3blmedia.com/profiles/city-developments-limited",
-          "label": "neutral"
-        },
-        {
-          "title": "City Developments Limited Sustainable Investment Principles",
-          "url": "https://citydevelopmentslimited.gcs-web.com/static-files/47805f4c-d2c8-4a34-89ae-af0f89eaea03",
-          "label": "neutral"
+          "title": "City Developments lands SG$300M sustainability-linked loan",
+          "url": "https://app.dealroom.co/news/note/city-developments-lands-sg-300m-sustainability-linked-loan",
+          "label": "positive"
         },
         {
           "title": "Sustainability Reports - CDL | Investor Relations",
@@ -431,39 +416,59 @@
           "label": "neutral"
         },
         {
-          "title": "CDL_ISR_2024.pdf",
-          "url": "https://cdlsustainability.com/pdf/CDL_ISR_2024.pdf",
-          "label": "positive"
+          "title": "City Developments Limited Archives",
+          "url": "https://esgnews.com/tag/city-developments-limited/",
+          "label": "neutral"
         },
         {
-          "title": "City Developments Limited (CDL)",
-          "url": "https://www.reangle.co/post/pioneer-of-green-building-and-green-finance-city-developments-limited-cdl",
-          "label": "stock"
+          "title": "CDL's Business Case for Sustainability in Real Estate",
+          "url": "https://onestopesg.com/esg-news/thought-leadership-series-1-esther-an-the-business-case-for-sustainability-in-real-estate-1756814834490",
+          "label": "neutral"
         },
         {
-          "title": "City Developments Limited (C09.SI)",
-          "url": "https://finance.yahoo.com/quote/C09.SI/",
-          "label": "stock"
+          "title": "CDL Sustainability: Home",
+          "url": "https://cdlsustainability.com/",
+          "label": "neutral"
         },
         {
-          "title": "City Developments Limited (SGX: C09) Share Price, ...",
-          "url": "https://growbeansprout.com/quote/C09.SI",
-          "label": "stock"
+          "title": "City Developments : It's time for impact – a call for action by ...",
+          "url": "https://www.marketscreener.com/news/city-developments-it-s-time-for-impact-a-a-call-for-action-by-cdl-in-its-19th-integrated-sustain-ce7e51d9d08af72d",
+          "label": "neutral"
+        },
+        {
+          "title": "Fast-Forwarding Towards Sustainable Ecosystems: CDL ...",
+          "url": "https://finance.yahoo.com/news/fast-forwarding-towards-sustainable-ecosystems-053000421.html",
+          "label": "neutral"
+        },
+        {
+          "title": "City Developments Ltd",
+          "url": "https://www.sustainabilityreports.com/city-developments",
+          "label": "neutral"
         }
       ]
     },
     {
       "company_id": "Z74",
       "name": "Singtel",
-      "n_items": 17,
+      "n_items": 18,
       "controversy": 0,
-      "positive": 2,
-      "sentiment": 2,
+      "positive": 3,
+      "sentiment": 3,
       "headlines": [
         {
           "title": "Sustainability",
           "url": "https://www.singtel.com/about-us/sustainability",
-          "label": "stock"
+          "label": "neutral"
+        },
+        {
+          "title": "Singtel first telco in Singapore to launch a sustainability ...",
+          "url": "https://www.singtel.com/about-us/media-centre/news-releases/Singtel-first-telco-in-Singapore-to-launch-a-sustainability-programme-for-enterprises",
+          "label": "positive"
+        },
+        {
+          "title": "Singtel releases 11th Sustainability Report 2025",
+          "url": "https://www.linkedin.com/posts/singtel_2025-is-a-significant-milestone-for-singtel-activity-7345658261032878080-tMw2",
+          "label": "positive"
         },
         {
           "title": "What Will Cheh Hsien Lee Bring to Singtel in His New Role?",
@@ -471,33 +476,23 @@
           "label": "neutral"
         },
         {
-          "title": "Singtel releases 11th Sustainability Report 2025",
-          "url": "https://www.linkedin.com/posts/singtel_2025-is-a-significant-milestone-for-singtel-activity-7345658261032878080-tMw2",
+          "title": "Sustainability at Singtel",
+          "url": "https://www.singtel.com/about-us/sustainability/sustainability-at-singtel",
           "label": "neutral"
         },
         {
           "title": "SingTel Archives",
           "url": "https://esgnews.com/tag/singtel/",
-          "label": "neutral"
-        },
-        {
-          "title": "Singtel first telco in Singapore to launch a sustainability ...",
-          "url": "https://www.enterprisesg.gov.sg/-/media/esg/files/media-centre/media-releases/2025/april/mr01525_singtel-first-telco-in-singapore-to-launch-a-sustainability-programme-for-enterprises.pdf",
-          "label": "neutral"
+          "label": "positive"
         },
         {
           "title": "Singtel Details Environmental Strategy and Programmes…",
           "url": "https://www.engieimpact.com/newsroom/singtel-environmental-strategy",
-          "label": "positive"
+          "label": "neutral"
         },
         {
-          "title": "Singtel Sustainability Performance & ESG Data",
-          "url": "https://www.data.illuminem.com/company/0561bc7e_singtel",
-          "label": "positive"
-        },
-        {
-          "title": "Singtel Group Sustainability Report 2021",
-          "url": "https://www.linkedin.com/pulse/singtel-group-sustainability-report-2021-andrew-buay",
+          "title": "28SINGTELSustainability Report 2024",
+          "url": "https://links.sgx.com/1.0.0/corporate-announcements/EETW5TT2LMHBZ35B/808333_Singtel_Group%20Sustainability%20Report%202024.pdf",
           "label": "neutral"
         }
       ]

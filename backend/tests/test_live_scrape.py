@@ -57,6 +57,8 @@ def test_scrape_news_uses_request_api_when_scraping_browser_is_unavailable(
     monkeypatch.setattr(agent_module, "WebTools", FakeWebTools)
     monkeypatch.setattr(scrape.brightdata, "browser_collect", fail_browser_collect)
     monkeypatch.setattr(scrape.config, "OUT_DIR", tmp_path)
+    # exercise the deterministic keyword path (no network LLM call during the test)
+    monkeypatch.setattr(scrape, "_news_llm_client", lambda: None)
 
     result = scrape.scrape_news(conn, offline=False)
 

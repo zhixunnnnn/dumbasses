@@ -295,6 +295,65 @@ def _bing_url(query: str) -> str:
     return f"https://www.bing.com/news/search?q={quote(query)}"
 
 
+_LLM_LABELS = {"controversy", "positive", "stock", "neutral"}
+
+
+def _news_llm_client():
+    """OpenRouter client for headline classification, or None to fall back to keywords."""
+    import os
+
+    if not os.environ.get("OPENROUTER_API_KEY"):
+        return None
+    try:
+        from backend.engine.llm import OpenRouterLLMClient
+
+        return OpenRouterLLMClient()
+    except Exception:
+        return None
+
+
+async def _llm_label_headlines(client, name: str, items: list[dict]) -> dict | None:
+    """One LLM call per company: classify each candidate headline. Returns
+    {index: label} where label is controversy/positive/stock/neutral, or the item
+    is dropped (irrelevant). None on any failure so the caller keyword-falls-back."""
+    import asyncio
+
+    if not items:
+        return {}
+    listed = "\n".join(
+        f'{i}. {it["title"]} — {(it.get("snippet") or "")[:160]}' for i, it in enumerate(items)
+    )
+    prompt = (
+        f'Classify each news headline by how it relates to the company "{name}". '
+        "Pick exactly ONE label per headline:\n"
+        '- "controversy": a negative ESG/governance event (scandal, fine, lawsuit, probe, '
+        "pollution, deforestation, data breach, labour/safety failure).\n"
+        '- "positive": a favourable ESG/sustainability development (award, target met, green '
+        "milestone, rating upgrade, certification).\n"
+        '- "stock": market/financial news (earnings, share price, dividend, analyst call) not '
+        "primarily about ESG.\n"
+        '- "neutral": names this company and is ESG/business-relevant but neither clearly '
+        "positive nor negative.\n"
+        '- "irrelevant": not actually about THIS company, or not real ESG/business news.\n\n'
+        f"Headlines:\n{listed}\n\n"
+        'Return JSON {"labels": [{"i": <index>, "label": "<one of the five>"}, ...]} '
+        "covering every headline."
+    )
+    try:
+        data = await asyncio.to_thread(client.complete_json, prompt, 900)
+    except Exception:
+        return None
+    out: dict[int, str] = {}
+    for row in data.get("labels", []) if isinstance(data, dict) else []:
+        try:
+            lab = str(row["label"]).lower().strip()
+            if lab in _LLM_LABELS:
+                out[int(row["i"])] = lab
+        except (KeyError, ValueError, TypeError):
+            continue
+    return out
+
+
 def scrape_news(conn, offline: bool = False) -> dict:
     # Offline = don't hit the network; just serve whatever snapshot is already stored.
     if offline:
@@ -306,15 +365,17 @@ def scrape_news(conn, offline: bool = False) -> dict:
 
     rows = conn.execute("SELECT company_id, name FROM universe WHERE scope='demo'").fetchall()
     web = WebTools()  # uses Bright Data Request/Web Unlocker API when keys are configured.
+    llm = _news_llm_client()  # None -> deterministic keyword fallback (no OPENROUTER_API_KEY)
 
     async def collect_one(cid: str, name: str) -> dict:
-        # Broad queries for recall; the relevance + topical filter keeps only
-        # company-named ESG / stock headlines.
+        # Broad queries for recall; an LLM (or keyword fallback) then decides each
+        # headline's label and drops irrelevant noise.
         queries = [
             f"{name} sustainability ESG news",
             f"{name} stock earnings results news",
         ]
-        kept, seen = [], set()
+        raw, seen = [], set()
+        aliases = _COMPANY_ALIASES.get(cid, [])
         for q in queries:
             try:
                 res = await web.search(q, max_results=10)
@@ -324,19 +385,37 @@ def scrape_news(conn, offline: bool = False) -> dict:
                 title = (it.get("title") or "").strip()
                 if not title:
                     continue
-                # classify on title + snippet for recall; store the title as the headline
-                label = _relevant_label(f"{title} {it.get('snippet') or ''}", cid)
-                if not label:
-                    continue
                 key = title.lower()[:80]
                 if key in seen:
                     continue
                 seen.add(key)
-                kept.append({"title": title, "url": it.get("url"), "label": label})
+                blob = f"{title} {it.get('snippet') or ''}"
+                # cheap prefilter: must plausibly name the company (saves LLM tokens
+                # and is the same company-gate the keyword path applies)
+                if aliases and not any(a in blob.lower() for a in aliases):
+                    continue
+                raw.append({"title": title, "url": it.get("url"), "snippet": it.get("snippet")})
+
+        # decide labels: LLM judges when available, else deterministic keywords.
+        # use_llm distinguishes "LLM ran" (sole decider; omitted == irrelevant == drop)
+        # from "no LLM / call failed" (None -> keyword fallback for every item).
+        llm_labels = await _llm_label_headlines(llm, name, raw) if llm else None
+        use_llm = llm_labels is not None
+        kept = []
+        for i, it in enumerate(raw):
+            if use_llm:
+                label = llm_labels.get(i)  # missing -> LLM judged irrelevant -> drop
+            else:
+                label = _relevant_label(f'{it["title"]} {it.get("snippet") or ""}', cid)
+            if not label:
+                continue
+            kept.append({"title": it["title"], "url": it["url"], "label": label})
+
         ncon = sum(1 for c in kept if c["label"] == "controversy")
         npos = sum(1 for c in kept if c["label"] == "positive")
         nstk = sum(1 for c in kept if c["label"] == "stock")
-        print(f"  {cid:4} {name:24} kept={len(kept):2d} (esg+/-={npos}/{ncon}, stock={nstk})")
+        src = "LLM" if use_llm else "keywords"
+        print(f"  {cid:4} {name:24} kept={len(kept):2d} (esg+/-={npos}/{ncon}, stock={nstk}) [{src}]")
         return {"company_id": cid, "name": name, "n_items": len(kept),
                 "controversy": ncon, "positive": npos, "sentiment": npos - ncon,
                 "headlines": kept[:8]}
