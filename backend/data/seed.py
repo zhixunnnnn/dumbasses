@@ -334,9 +334,15 @@ def _add_evidence(conn, cid, topic, year, supports, authority=None, snippet=None
                  (eid, cid, domain, authority, snippet,
                   f"https://example.com/evidence/{eid}", supports, f"{year}-12-31", topic["topic_id"]))
     if domain == "climate" and supports == 1:
-        conn.execute("INSERT INTO events VALUES (?,?,?,?,?)",
-                     (cid, f"{year}-12-31", "emissions_verified",
-                      f"Emissions verified by {authority} ({year})", None))
+        # one emissions_verified event per company-year, even if several climate
+        # topics are verified that year (otherwise the witness shows duplicate pins)
+        exists = conn.execute(
+            "SELECT 1 FROM events WHERE company_id=? AND date=? AND type='emissions_verified'",
+            (cid, f"{year}-12-31")).fetchone()
+        if not exists:
+            conn.execute("INSERT INTO events VALUES (?,?,?,?,?)",
+                         (cid, f"{year}-12-31", "emissions_verified",
+                          f"Emissions verified by {authority} ({year})", None))
 
 
 def _insert_compliance(conn, c, regs):

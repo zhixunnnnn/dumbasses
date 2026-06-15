@@ -101,6 +101,9 @@ def price_witness(ds: Dataset, cid: str, client: Optional[LLMClient] = None) -> 
                 ref = leaf(ev.label, ev_rows[0].snippet)
         pins.append(WitnessPin(date=_snap(ev.date, fridays), type=_PIN_TYPE[ev.type],
                                label=ev.label, trace_ref=ref))
+    # dedupe: a year with several verified climate topics emits one pin, not many
+    seen: set = set()
+    pins = [p for p in pins if (p.type, p.label) not in seen and not seen.add((p.type, p.label))]
     pins.sort(key=lambda p: p.date)
 
     return Witness(company_id=cid, candles=candles, band=band, pins=pins,

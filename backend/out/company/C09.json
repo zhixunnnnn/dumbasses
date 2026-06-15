@@ -2883,48 +2883,6 @@
         }
       },
       {
-        "date": "2019-12-29",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2019)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2019)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2019)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2019-12-29",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2019)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2019)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2019)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2019-12-29",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2019)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2019)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2019)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
         "date": "2021-01-03",
         "type": "emissions_verified",
         "label": "Emissions verified by CDP (2020)",
@@ -2933,90 +2891,6 @@
           "value": null,
           "contribution": null,
           "source_sentence": "CDP record corroborating energy_management (2020)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2021-01-03",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2020)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2020)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2020)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2021-01-03",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2020)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2020)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2020)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2021-01-03",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2020)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2020)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2020)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2022-01-02",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2021)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2021)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2021)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2022-01-02",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2021)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2021)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2021)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2022-01-02",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2021)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2021)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2021)",
           "source_doc": null,
           "source_page": null,
           "children": []
@@ -3045,62 +2919,6 @@
           "value": null,
           "contribution": null,
           "source_sentence": "CDP record corroborating energy_management (2022)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2023-01-01",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2022)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2022)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2022)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2023-01-01",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2022)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2022)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2022)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2023-12-24",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2023)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2023)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2023)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
-        "date": "2023-12-24",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2023)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2023)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating energy_management (2023)",
           "source_doc": null,
           "source_page": null,
           "children": []

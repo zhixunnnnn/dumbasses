@@ -3181,20 +3181,6 @@
         }
       },
       {
-        "date": "2019-12-29",
-        "type": "emissions_verified",
-        "label": "Emissions verified by CDP (2019)",
-        "trace_ref": {
-          "label": "Emissions verified by CDP (2019)",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "CDP record corroborating ghg_emissions (2019)",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      },
-      {
         "date": "2021-01-03",
         "type": "emissions_verified",
         "label": "Emissions verified by CDP (2020)",
