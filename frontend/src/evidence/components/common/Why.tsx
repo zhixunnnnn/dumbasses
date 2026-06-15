@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { HelpCircle, Quote, X } from "lucide-react";
 import type { TraceNode } from "../../types";
 
@@ -63,6 +64,16 @@ export default function Why({
 }) {
   const [open, setOpen] = useState(false);
   const traceable = hasSentence(trace);
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   return (
     <>
       <button
@@ -73,7 +84,7 @@ export default function Why({
         <HelpCircle size={11} />
         why?
       </button>
-      {open && (
+      {open && createPortal(
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
           onClick={() => setOpen(false)}
@@ -101,7 +112,8 @@ export default function Why({
               <NodeView node={trace} depth={0} />
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
