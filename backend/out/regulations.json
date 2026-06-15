@@ -1,0 +1,72 @@
+[
+  {
+    "reg_id": "SGX-711B",
+    "name": "SGX Sustainability Reporting (Comply-or-Explain)",
+    "jurisdiction": "SG",
+    "scope": "SGX-listed",
+    "requirement": "Annual sustainability report on material ESG factors with a board statement.",
+    "effective_year": 2017,
+    "applies_to": "All SGX-listed",
+    "n_applicable": 10,
+    "n_met": 10,
+    "n_partial": 0,
+    "n_missing": 0,
+    "n_na": 0
+  },
+  {
+    "reg_id": "SGX-CLIMATE",
+    "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
+    "jurisdiction": "SG",
+    "scope": "SGX-listed",
+    "requirement": "TCFD-aligned climate disclosures including Scope 1 and Scope 2 emissions.",
+    "effective_year": 2023,
+    "applies_to": "Financials, Consumer Staples, Utilities",
+    "n_applicable": 5,
+    "n_met": 3,
+    "n_partial": 1,
+    "n_missing": 1,
+    "n_na": 0
+  },
+  {
+    "reg_id": "ISSB-S2",
+    "name": "IFRS S2 / ISSB Climate-related Disclosures",
+    "jurisdiction": "SG",
+    "scope": "SGX-listed",
+    "requirement": "ISSB-aligned climate disclosures incl. Scope 3 roadmap and scenario analysis.",
+    "effective_year": 2025,
+    "applies_to": "All SGX-listed",
+    "n_applicable": 10,
+    "n_met": 0,
+    "n_partial": 0,
+    "n_missing": 0,
+    "n_na": 10
+  },
+  {
+    "reg_id": "MAS-ENRM",
+    "name": "MAS Guidelines on Environmental Risk Management",
+    "jurisdiction": "SG",
+    "scope": "MAS-FI",
+    "requirement": "Board-level environmental risk governance and disclosure for financial institutions.",
+    "effective_year": 2022,
+    "applies_to": "Financial institutions",
+    "n_applicable": 3,
+    "n_met": 3,
+    "n_partial": 0,
+    "n_missing": 0,
+    "n_na": 0
+  },
+  {
+    "reg_id": "ASEAN-TAXO",
+    "name": "ASEAN Taxonomy for Sustainable Finance",
+    "jurisdiction": "ASEAN",
+    "scope": "ASEAN-listed",
+    "requirement": "Classification/alignment of activities against the ASEAN Taxonomy.",
+    "effective_year": 2023,
+    "applies_to": "ASEAN-listed",
+    "n_applicable": 10,
+    "n_met": 7,
+    "n_partial": 2,
+    "n_missing": 1,
+    "n_na": 0
+  }
+]

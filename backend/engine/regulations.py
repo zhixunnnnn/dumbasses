@@ -24,7 +24,20 @@ def _reg_keywords() -> dict[str, list[str]]:
     return {r["reg_id"]: r.get("disclosure_keywords", []) for r in regs}
 
 
-def _applicable(reg, is_fi: bool, is_sgx: bool, is_asean: bool) -> bool:
+@functools.lru_cache(maxsize=1)
+def _reg_sectors() -> dict[str, list[str]]:
+    """reg_id -> the sectors a regulation specifically targets (config-driven, auditable).
+    Empty/absent means the regulation is not sector-restricted (falls back to scope)."""
+    regs = config.load_json("regulations.json")["regulations"]
+    return {r["reg_id"]: r.get("applies_to_sectors", []) for r in regs}
+
+
+def _applicable(reg, sector: str, is_fi: bool, is_sgx: bool, is_asean: bool) -> bool:
+    # A sector-targeted regulation (e.g. SGX climate's phased rollout) binds only the
+    # sectors it names; otherwise fall back to the jurisdiction/who-it-binds scope.
+    sectors = _reg_sectors().get(reg.reg_id) or []
+    if sectors:
+        return sector in sectors
     if reg.scope == "MAS-FI":
         return is_fi
     if reg.scope.startswith("SGX"):
@@ -61,7 +74,7 @@ def compliance_gap(ds: Dataset, cid: str, year: int = config.END_YEAR) -> Compli
     children: list[TraceNode] = []
 
     for reg in ds.regulations:
-        if not _applicable(reg, is_fi, is_sgx, is_asean):
+        if not _applicable(reg, comp.sector, is_fi, is_sgx, is_asean):
             continue
         rs = RegStatus(reg_id=reg.reg_id, name=reg.name, status="NA")
         if year < reg.effective_year:

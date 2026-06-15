@@ -138,6 +138,12 @@ def signals():
     return _read("signals.json")
 
 
+@app.get("/api/regulations")
+def regulations():
+    """Catalog of tracked SG/ASEAN ESG regimes: who each binds + demo-set status counts."""
+    return _read("regulations.json")
+
+
 @app.get("/api/company/{company_id}")
 def company(company_id: str):
     return _read(f"company/{company_id}.json")

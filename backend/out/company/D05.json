@@ -4814,57 +4814,57 @@
   },
   "forecast": {
     "company_id": "D05",
-    "predicted_score": 89.27,
+    "predicted_score": 89.49,
     "horizon_years": 1,
-    "ci_low": 85.39,
-    "ci_high": 93.14,
+    "ci_low": 84.85,
+    "ci_high": 94.14,
     "feature_contributions": [
       {
         "feature": "consensus",
         "value": 81.25,
-        "contribution": 3.746
+        "contribution": 3.047
       },
       {
-        "feature": "pe",
-        "value": 14.6,
-        "contribution": 1.464
+        "feature": "news_sentiment",
+        "value": 1.0,
+        "contribution": 1.13
       },
       {
         "feature": "hiring_cum",
         "value": 0.0,
-        "contribution": -1.252
+        "contribution": -1.125
+      },
+      {
+        "feature": "pe",
+        "value": 14.6,
+        "contribution": 1.093
       },
       {
         "feature": "divergence",
         "value": 22.92,
-        "contribution": 0.413
-      },
-      {
-        "feature": "div_yield",
-        "value": 3.87,
-        "contribution": -0.401
+        "contribution": 0.329
       },
       {
         "feature": "controversy_cum",
         "value": 0.0,
-        "contribution": 0.29
+        "contribution": 0.227
+      },
+      {
+        "feature": "div_yield",
+        "value": 3.87,
+        "contribution": -0.217
       },
       {
         "feature": "compliance_gap",
         "value": 0.0,
         "contribution": 0.0
-      },
-      {
-        "feature": "news_sentiment",
-        "value": 0.0,
-        "contribution": 0.0
       }
     ],
-    "val_error": 3.873,
+    "val_error": 4.647,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 89.3 (HYPOTHESIS, test MAE=3.87)",
-      "value": 89.27,
+      "label": "Forecast 2024 = 89.5 (HYPOTHESIS, test MAE=4.65)",
+      "value": 89.49,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -4873,16 +4873,16 @@
         {
           "label": "consensus=81.25",
           "value": null,
-          "contribution": 3.746,
+          "contribution": 3.047,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": []
         },
         {
-          "label": "pe=14.6",
+          "label": "news_sentiment=1.0",
           "value": null,
-          "contribution": 1.464,
+          "contribution": 1.13,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4891,7 +4891,16 @@
         {
           "label": "hiring_cum=0.0",
           "value": null,
-          "contribution": -1.252,
+          "contribution": -1.125,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "pe=14.6",
+          "value": null,
+          "contribution": 1.093,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4900,16 +4909,7 @@
         {
           "label": "divergence=22.92",
           "value": null,
-          "contribution": 0.413,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "div_yield=3.87",
-          "value": null,
-          "contribution": -0.401,
+          "contribution": 0.329,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4918,7 +4918,16 @@
         {
           "label": "controversy_cum=0.0",
           "value": null,
-          "contribution": 0.29,
+          "contribution": 0.227,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "div_yield=3.87",
+          "value": null,
+          "contribution": -0.217,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4932,15 +4941,6 @@
           "source_doc": null,
           "source_page": null,
           "children": []
-        },
-        {
-          "label": "news_sentiment=0.0",
-          "value": null,
-          "contribution": 0.0,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
         }
       ]
     }
@@ -4948,79 +4948,52 @@
   "claims": {
     "claims": [
       {
-        "topic_id": "financial_inclusion",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "In addition to our focus on large corporates, we doubled down on our efforts to help SMEs in their sustainability efforts.",
-        "source_sentence": "In addition to our focus on large corporates, we doubled down on our efforts to help SMEs in their sustainability efforts.",
-        "source_doc": "dbs sr2024",
-        "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+        "topic_id": "financed_emissions",
+        "pillar": "E",
+        "state": "VERIFIED",
+        "text": "In FY2023, DBS Group expanded sustainable financing and set interim financed emissions tar",
+        "source_sentence": "In FY2023, DBS Group expanded sustainable financing and set interim financed emissions targets toward net zero.",
+        "source_doc": "D05-SR2023",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.25
       },
       {
-        "topic_id": "financial_inclusion",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "We leveraged the work of past years including several strategic partnerships with industry leaders in markets like India and Hong Kong, and translated these into financing solutions for our SME customers.",
-        "source_sentence": "We leveraged the work of past years including several strategic partnerships with industry leaders in markets like India and Hong Kong, and translated these into financing solutions for our SME customers.",
-        "source_doc": "dbs sr2024",
-        "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+        "topic_id": "business_ethics",
+        "pillar": "G",
+        "state": "VERIFIED",
+        "text": "In FY2023, DBS Group strengthened its anti-corruption code of conduct and board ethics ove",
+        "source_sentence": "In FY2023, DBS Group strengthened its anti-corruption code of conduct and board ethics oversight.",
+        "source_doc": "D05-SR2023",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.2
       },
       {
-        "topic_id": "financial_inclusion",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "Overall, we almost doubled our sustainable finance volumes to Mid-Cap and SME customers last year.",
-        "source_sentence": "Overall, we almost doubled our sustainable finance volumes to Mid-Cap and SME customers last year.",
-        "source_doc": "dbs sr2024",
-        "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+        "topic_id": "data_security",
+        "pillar": "G",
+        "state": "VERIFIED",
+        "text": "In FY2023, DBS Group invested in cybersecurity controls to prevent customer data breach in",
+        "source_sentence": "In FY2023, DBS Group invested in cybersecurity controls to prevent customer data breach incidents.",
+        "source_doc": "D05-SR2023",
         "source_page": 1,
         "weight": 0.15
       },
       {
         "topic_id": "systemic_risk",
         "pillar": "G",
-        "state": "ASSERTED",
-        "text": "Complementing all these efforts on client engagement, we also further strengthened our ESG risk management capabilities and governance.",
-        "source_sentence": "Complementing all these efforts on client engagement, we also further strengthened our ESG risk management capabilities and governance.",
-        "source_doc": "dbs sr2024",
-        "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+        "state": "VERIFIED",
+        "text": "In FY2023, DBS Group maintained capital adequacy well above regulatory minimums under stre",
+        "source_sentence": "In FY2023, DBS Group maintained capital adequacy well above regulatory minimums under stress test scenarios.",
+        "source_doc": "D05-SR2023",
         "source_page": 1,
         "weight": 0.15
       },
       {
         "topic_id": "financial_inclusion",
         "pillar": "S",
-        "state": "ASSERTED",
-        "text": "We launched a new accredited training programme to equip relationship managers and credit risk managers with the skills to integrate ESG principles into client strategy and financial risk assessments.",
-        "source_sentence": "We launched a new accredited training programme to equip relationship managers and credit risk managers with the skills to integrate ESG principles into client strategy and financial risk assessments.",
-        "source_doc": "dbs sr2024",
-        "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
-        "source_page": 1,
-        "weight": 0.15
-      },
-      {
-        "topic_id": "systemic_risk",
-        "pillar": "G",
-        "state": "ASSERTED",
-        "text": "We started to leverage Gen AI for data analytics and ESG risk management processes.",
-        "source_sentence": "We started to leverage Gen AI for data analytics and ESG risk management processes.",
-        "source_doc": "dbs sr2024",
-        "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
-        "source_page": 1,
-        "weight": 0.15
-      },
-      {
-        "topic_id": "financial_inclusion",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "We also continued providing inclusive financial services to underserved communities.",
-        "source_sentence": "We also continued providing inclusive financial services to underserved communities.",
-        "source_doc": "dbs sr2024",
-        "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+        "state": "VERIFIED",
+        "text": "In FY2023, DBS Group broadened financial inclusion programmes for underserved SME customer",
+        "source_sentence": "In FY2023, DBS Group broadened financial inclusion programmes for underserved SME customers.",
+        "source_doc": "D05-SR2023",
         "source_page": 1,
         "weight": 0.15
       },
@@ -5028,29 +5001,14 @@
         "topic_id": "employee_diversity",
         "pillar": "S",
         "state": "ASSERTED",
-        "text": "While there has been debate on the topic of Diversity, Equity and Inclusion (DEI), especially in the United States, our belief remains unchanged.",
-        "source_sentence": "While there has been debate on the topic of Diversity, Equity and Inclusion (DEI), especially in the United States, our belief remains unchanged.",
-        "source_doc": "dbs sr2024",
-        "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
-        "source_page": 1,
-        "weight": 0.1
-      },
-      {
-        "topic_id": "employee_diversity",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "In 2024, we already committed SGD 98.1 million in funding to support multi-year programmes focussed on two key themes, providing essential needs and fostering inclusion, while additionally granting SGD 4.5 million to Businesses for Impact.",
-        "source_sentence": "In 2024, we already committed SGD 98.1 million in funding to support multi-year programmes focussed on two key themes, providing essential needs and fostering inclusion, while additionally granting SGD 4.5 million to Businesses for Impact.",
-        "source_doc": "dbs sr2024",
-        "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
+        "text": "In FY2023, DBS Group increased gender diversity with more women in leadership roles.",
+        "source_sentence": "In FY2023, DBS Group increased gender diversity with more women in leadership roles.",
+        "source_doc": "D05-SR2023",
         "source_page": 1,
         "weight": 0.1
       }
     ],
-    "absent": [],
-    "live": true,
-    "source_url": "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf",
-    "source_title": "dbs sr2024"
+    "absent": []
   },
   "peers": [
     {

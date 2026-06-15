@@ -4834,57 +4834,57 @@
   },
   "forecast": {
     "company_id": "U96",
-    "predicted_score": 87.72,
+    "predicted_score": 87.11,
     "horizon_years": 1,
-    "ci_low": 83.85,
-    "ci_high": 91.6,
+    "ci_low": 82.46,
+    "ci_high": 91.76,
     "feature_contributions": [
       {
         "feature": "hiring_cum",
         "value": 2.0,
-        "contribution": 7.093
+        "contribution": 6.374
       },
       {
         "feature": "consensus",
         "value": 17.5,
-        "contribution": -3.958
+        "contribution": -3.22
       },
       {
         "feature": "pe",
         "value": 11.7,
-        "contribution": -1.612
+        "contribution": -1.204
       },
       {
         "feature": "div_yield",
         "value": 3.24,
-        "contribution": 1.208
+        "contribution": 0.653
+      },
+      {
+        "feature": "news_sentiment",
+        "value": 0.0,
+        "contribution": -0.484
       },
       {
         "feature": "divergence",
         "value": 28.94,
-        "contribution": -0.305
+        "contribution": -0.243
       },
       {
         "feature": "controversy_cum",
         "value": 0.0,
-        "contribution": 0.29
+        "contribution": 0.227
       },
       {
         "feature": "compliance_gap",
         "value": 0.0,
         "contribution": 0.0
-      },
-      {
-        "feature": "news_sentiment",
-        "value": 0.0,
-        "contribution": 0.0
       }
     ],
-    "val_error": 3.873,
+    "val_error": 4.647,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 87.7 (HYPOTHESIS, test MAE=3.87)",
-      "value": 87.72,
+      "label": "Forecast 2024 = 87.1 (HYPOTHESIS, test MAE=4.65)",
+      "value": 87.11,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -4893,7 +4893,7 @@
         {
           "label": "hiring_cum=2.0",
           "value": null,
-          "contribution": 7.093,
+          "contribution": 6.374,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4902,7 +4902,7 @@
         {
           "label": "consensus=17.5",
           "value": null,
-          "contribution": -3.958,
+          "contribution": -3.22,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4911,7 +4911,7 @@
         {
           "label": "pe=11.7",
           "value": null,
-          "contribution": -1.612,
+          "contribution": -1.204,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4920,7 +4920,16 @@
         {
           "label": "div_yield=3.24",
           "value": null,
-          "contribution": 1.208,
+          "contribution": 0.653,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "news_sentiment=0.0",
+          "value": null,
+          "contribution": -0.484,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4929,7 +4938,7 @@
         {
           "label": "divergence=28.94",
           "value": null,
-          "contribution": -0.305,
+          "contribution": -0.243,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4938,7 +4947,7 @@
         {
           "label": "controversy_cum=0.0",
           "value": null,
-          "contribution": 0.29,
+          "contribution": 0.227,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4952,15 +4961,6 @@
           "source_doc": null,
           "source_page": null,
           "children": []
-        },
-        {
-          "label": "news_sentiment=0.0",
-          "value": null,
-          "contribution": 0.0,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
         }
       ]
     }
@@ -4968,59 +4968,54 @@
   "claims": {
     "claims": [
       {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Energy companies play a transformative role in an inclusive energy transition.",
-        "source_sentence": "Energy companies play a transformative role in an inclusive energy transition.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.25
-      },
-      {
         "topic_id": "ghg_emissions",
         "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Conversely, we also have opportunities to drive the growth and development of low-carbon solutions to enable the global energy transition.",
-        "source_sentence": "Conversely, we also have opportunities to drive the growth and development of low-carbon solutions to enable the global energy transition.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+        "state": "VERIFIED",
+        "text": "In FY2023, Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity.",
+        "source_sentence": "In FY2023, Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity.",
+        "source_doc": "U96-SR2023",
         "source_page": 1,
         "weight": 0.3
+      },
+      {
+        "topic_id": "energy_transition",
+        "pillar": "E",
+        "state": "VERIFIED",
+        "text": "In FY2023, Sembcorp Industries grew its renewables and solar capacity as part of its decar",
+        "source_sentence": "In FY2023, Sembcorp Industries grew its renewables and solar capacity as part of its decarbonisation transition.",
+        "source_doc": "U96-SR2023",
+        "source_page": 1,
+        "weight": 0.25
       },
       {
         "topic_id": "workforce_safety",
         "pillar": "S",
-        "state": "ASSERTED",
-        "text": "These risks include corruption, non-compliance with laws, as well as health and safety.",
-        "source_sentence": "These risks include corruption, non-compliance with laws, as well as health and safety.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+        "state": "VERIFIED",
+        "text": "In FY2023, Sembcorp Industries reduced lost-time injuries through occupational health and ",
+        "source_sentence": "In FY2023, Sembcorp Industries reduced lost-time injuries through occupational health and safety programmes.",
+        "source_doc": "U96-SR2023",
         "source_page": 1,
         "weight": 0.15
       },
       {
-        "topic_id": "energy_transition",
+        "topic_id": "air_quality",
         "pillar": "E",
         "state": "ASSERTED",
-        "text": "In line with our purpose to drive the energy transition, we have adopted SDG 7 (Affordable and Clean Energy) and SDG 13 (Climate Action) as our priority SDGs.",
-        "source_sentence": "In line with our purpose to drive the energy transition, we have adopted SDG 7 (Affordable and Clean Energy) and SDG 13 (Climate Action) as our priority SDGs.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+        "text": "In FY2023, Sembcorp Industries cut NOx and particulate air quality emissions at its plants",
+        "source_sentence": "In FY2023, Sembcorp Industries cut NOx and particulate air quality emissions at its plants.",
+        "source_doc": "U96-SR2023",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.1
       },
       {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
+        "topic_id": "grid_resiliency",
+        "pillar": "G",
         "state": "ASSERTED",
-        "text": "These include health and safety indicators, as well as environmental indicators such as GHG emissions intensity and gross installed renewable energy capacity.",
-        "source_sentence": "These include health and safety indicators, as well as environmental indicators such as GHG emissions intensity and gross installed renewable energy capacity.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+        "text": "In FY2023, Sembcorp Industries improved grid reliability and supply security.",
+        "source_sentence": "In FY2023, Sembcorp Industries improved grid reliability and supply security.",
+        "source_doc": "U96-SR2023",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.1
       }
     ],
     "absent": [
@@ -5028,10 +5023,7 @@
         "topic_id": "water_management",
         "state": "ABSENT"
       }
-    ],
-    "live": true,
-    "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-    "source_title": "sci sustainability report 2024"
+    ]
   },
   "peers": []
 }

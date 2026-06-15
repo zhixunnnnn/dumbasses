@@ -14,7 +14,29 @@
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
     "compliance_score": 0.0,
-    "forecast": 87.72
+    "forecast": 87.11,
+    "regulations": [
+      {
+        "reg_id": "SGX-711B",
+        "name": "SGX Sustainability Reporting (Comply-or-Explain)",
+        "status": "MET"
+      },
+      {
+        "reg_id": "SGX-CLIMATE",
+        "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
+        "status": "PARTIAL"
+      },
+      {
+        "reg_id": "ASEAN-TAXO",
+        "name": "ASEAN Taxonomy for Sustainable Finance",
+        "status": "PARTIAL"
+      },
+      {
+        "reg_id": "ISSB-S2",
+        "name": "IFRS S2 / ISSB Climate-related Disclosures",
+        "status": "NA"
+      }
+    ]
   },
   {
     "id": "BN4",
@@ -31,7 +53,24 @@
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
     "compliance_score": 0.0,
-    "forecast": 89.6
+    "forecast": 89.27,
+    "regulations": [
+      {
+        "reg_id": "SGX-711B",
+        "name": "SGX Sustainability Reporting (Comply-or-Explain)",
+        "status": "MET"
+      },
+      {
+        "reg_id": "ASEAN-TAXO",
+        "name": "ASEAN Taxonomy for Sustainable Finance",
+        "status": "MET"
+      },
+      {
+        "reg_id": "ISSB-S2",
+        "name": "IFRS S2 / ISSB Climate-related Disclosures",
+        "status": "NA"
+      }
+    ]
   },
   {
     "id": "U11",
@@ -48,6 +87,33 @@
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
     "compliance_score": 0.0,
-    "forecast": 81.59
+    "forecast": 82.16,
+    "regulations": [
+      {
+        "reg_id": "SGX-711B",
+        "name": "SGX Sustainability Reporting (Comply-or-Explain)",
+        "status": "MET"
+      },
+      {
+        "reg_id": "SGX-CLIMATE",
+        "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
+        "status": "MET"
+      },
+      {
+        "reg_id": "MAS-ENRM",
+        "name": "MAS Guidelines on Environmental Risk Management",
+        "status": "MET"
+      },
+      {
+        "reg_id": "ASEAN-TAXO",
+        "name": "ASEAN Taxonomy for Sustainable Finance",
+        "status": "MET"
+      },
+      {
+        "reg_id": "ISSB-S2",
+        "name": "IFRS S2 / ISSB Climate-related Disclosures",
+        "status": "NA"
+      }
+    ]
   }
 ]

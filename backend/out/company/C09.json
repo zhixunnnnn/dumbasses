@@ -4902,12 +4902,6 @@
         "evidence_ref": null
       },
       {
-        "reg_id": "SGX-CLIMATE",
-        "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
-        "status": "MET",
-        "evidence_ref": null
-      },
-      {
         "reg_id": "ASEAN-TAXO",
         "name": "ASEAN Taxonomy for Sustainable Finance",
         "status": "MET",
@@ -4942,15 +4936,6 @@
           "children": []
         },
         {
-          "label": "SGX Mandatory Climate Reporting (TCFD-aligned) — MET",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "In FY2023, City Developments reduced Scope 1 and Scope 2 carbon emissions intensity.",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
           "label": "IFRS S2 / ISSB Climate-related Disclosures — not yet in force (2025)",
           "value": null,
           "contribution": null,
@@ -4973,84 +4958,75 @@
   },
   "forecast": {
     "company_id": "C09",
-    "predicted_score": 88.94,
+    "predicted_score": 88.42,
     "horizon_years": 1,
-    "ci_low": 85.07,
-    "ci_high": 92.81,
+    "ci_low": 83.77,
+    "ci_high": 93.07,
     "feature_contributions": [
-      {
-        "feature": "div_yield",
-        "value": 2.67,
-        "contribution": 2.665
-      },
       {
         "feature": "consensus",
         "value": 68.45,
-        "contribution": 2.199
+        "contribution": 1.789
       },
       {
-        "feature": "pe",
-        "value": 14.6,
-        "contribution": 1.464
+        "feature": "div_yield",
+        "value": 2.67,
+        "contribution": 1.439
       },
       {
         "feature": "divergence",
         "value": 38.39,
-        "contribution": -1.434
+        "contribution": -1.141
+      },
+      {
+        "feature": "news_sentiment",
+        "value": 1.0,
+        "contribution": 1.13
       },
       {
         "feature": "hiring_cum",
         "value": 0.0,
-        "contribution": -1.252
+        "contribution": -1.125
+      },
+      {
+        "feature": "pe",
+        "value": 14.6,
+        "contribution": 1.093
       },
       {
         "feature": "controversy_cum",
         "value": 0.0,
-        "contribution": 0.29
+        "contribution": 0.227
       },
       {
         "feature": "compliance_gap",
         "value": 0.0,
         "contribution": 0.0
-      },
-      {
-        "feature": "news_sentiment",
-        "value": 0.0,
-        "contribution": 0.0
       }
     ],
-    "val_error": 3.873,
+    "val_error": 4.647,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 88.9 (HYPOTHESIS, test MAE=3.87)",
-      "value": 88.94,
+      "label": "Forecast 2024 = 88.4 (HYPOTHESIS, test MAE=4.65)",
+      "value": 88.42,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
-          "label": "div_yield=2.67",
-          "value": null,
-          "contribution": 2.665,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
           "label": "consensus=68.45",
           "value": null,
-          "contribution": 2.199,
+          "contribution": 1.789,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": []
         },
         {
-          "label": "pe=14.6",
+          "label": "div_yield=2.67",
           "value": null,
-          "contribution": 1.464,
+          "contribution": 1.439,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5059,7 +5035,16 @@
         {
           "label": "divergence=38.39",
           "value": null,
-          "contribution": -1.434,
+          "contribution": -1.141,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "news_sentiment=1.0",
+          "value": null,
+          "contribution": 1.13,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5068,7 +5053,16 @@
         {
           "label": "hiring_cum=0.0",
           "value": null,
-          "contribution": -1.252,
+          "contribution": -1.125,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "pe=14.6",
+          "value": null,
+          "contribution": 1.093,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5077,7 +5071,7 @@
         {
           "label": "controversy_cum=0.0",
           "value": null,
-          "contribution": 0.29,
+          "contribution": 0.227,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5085,15 +5079,6 @@
         },
         {
           "label": "compliance_gap=0.0",
-          "value": null,
-          "contribution": 0.0,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "news_sentiment=0.0",
           "value": null,
           "contribution": 0.0,
           "source_sentence": null,

@@ -4814,57 +4814,57 @@
   },
   "forecast": {
     "company_id": "U11",
-    "predicted_score": 81.59,
+    "predicted_score": 82.16,
     "horizon_years": 1,
-    "ci_low": 77.72,
-    "ci_high": 85.46,
+    "ci_low": 77.51,
+    "ci_high": 86.8,
     "feature_contributions": [
       {
         "feature": "pe",
         "value": 15.9,
-        "contribution": 2.843
-      },
-      {
-        "feature": "div_yield",
-        "value": 4.69,
-        "contribution": -2.496
+        "contribution": 2.124
       },
       {
         "feature": "divergence",
         "value": 43.75,
-        "contribution": -2.073
+        "contribution": -1.65
+      },
+      {
+        "feature": "div_yield",
+        "value": 4.69,
+        "contribution": -1.348
       },
       {
         "feature": "hiring_cum",
         "value": 0.0,
-        "contribution": -1.252
+        "contribution": -1.125
       },
       {
         "feature": "consensus",
         "value": 44.21,
-        "contribution": -0.73
+        "contribution": -0.594
+      },
+      {
+        "feature": "news_sentiment",
+        "value": 0.0,
+        "contribution": -0.484
       },
       {
         "feature": "controversy_cum",
         "value": 0.0,
-        "contribution": 0.29
+        "contribution": 0.227
       },
       {
         "feature": "compliance_gap",
         "value": 0.0,
         "contribution": 0.0
-      },
-      {
-        "feature": "news_sentiment",
-        "value": 0.0,
-        "contribution": 0.0
       }
     ],
-    "val_error": 3.873,
+    "val_error": 4.647,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 81.6 (HYPOTHESIS, test MAE=3.87)",
-      "value": 81.59,
+      "label": "Forecast 2024 = 82.2 (HYPOTHESIS, test MAE=4.65)",
+      "value": 82.16,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -4873,16 +4873,7 @@
         {
           "label": "pe=15.9",
           "value": null,
-          "contribution": 2.843,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "div_yield=4.69",
-          "value": null,
-          "contribution": -2.496,
+          "contribution": 2.124,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4891,7 +4882,16 @@
         {
           "label": "divergence=43.75",
           "value": null,
-          "contribution": -2.073,
+          "contribution": -1.65,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "div_yield=4.69",
+          "value": null,
+          "contribution": -1.348,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4900,7 +4900,7 @@
         {
           "label": "hiring_cum=0.0",
           "value": null,
-          "contribution": -1.252,
+          "contribution": -1.125,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4909,7 +4909,16 @@
         {
           "label": "consensus=44.21",
           "value": null,
-          "contribution": -0.73,
+          "contribution": -0.594,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "news_sentiment=0.0",
+          "value": null,
+          "contribution": -0.484,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4918,7 +4927,7 @@
         {
           "label": "controversy_cum=0.0",
           "value": null,
-          "contribution": 0.29,
+          "contribution": 0.227,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4926,15 +4935,6 @@
         },
         {
           "label": "compliance_gap=0.0",
-          "value": null,
-          "contribution": 0.0,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "news_sentiment=0.0",
           "value": null,
           "contribution": 0.0,
           "source_sentence": null,

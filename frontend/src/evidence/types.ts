@@ -31,6 +31,12 @@ export type Candle = {
   volume?: number | null;
 };
 
+export type RegCell = {
+  reg_id: string;
+  name: string;
+  status: RegQuality;
+};
+
 export type CompanyRow = {
   id: string;
   name: string;
@@ -47,6 +53,22 @@ export type CompanyRow = {
   is_underpriced_improver: boolean;
   compliance_score: number | null;
   forecast: number | null;
+  regulations?: RegCell[] | null;
+};
+
+export type RegulationInfo = {
+  reg_id: string;
+  name: string;
+  jurisdiction: string;
+  scope: string;
+  requirement: string;
+  effective_year: number;
+  applies_to: string;
+  n_applicable: number;
+  n_met: number;
+  n_partial: number;
+  n_missing: number;
+  n_na: number;
 };
 
 export type MatrixPoint = {

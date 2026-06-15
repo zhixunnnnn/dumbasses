@@ -4797,12 +4797,6 @@
         "evidence_ref": null
       },
       {
-        "reg_id": "SGX-CLIMATE",
-        "name": "SGX Mandatory Climate Reporting (TCFD-aligned)",
-        "status": "MET",
-        "evidence_ref": null
-      },
-      {
         "reg_id": "ASEAN-TAXO",
         "name": "ASEAN Taxonomy for Sustainable Finance",
         "status": "MET",
@@ -4837,15 +4831,6 @@
           "children": []
         },
         {
-          "label": "SGX Mandatory Climate Reporting (TCFD-aligned) — MET",
-          "value": null,
-          "contribution": null,
-          "source_sentence": "In FY2023, Keppel Ltd reduced Scope 1 and Scope 2 carbon emissions intensity.",
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
           "label": "IFRS S2 / ISSB Climate-related Disclosures — not yet in force (2025)",
           "value": null,
           "contribution": null,
@@ -4868,57 +4853,57 @@
   },
   "forecast": {
     "company_id": "BN4",
-    "predicted_score": 89.6,
+    "predicted_score": 89.27,
     "horizon_years": 1,
-    "ci_low": 85.73,
-    "ci_high": 93.47,
+    "ci_low": 84.62,
+    "ci_high": 93.92,
     "feature_contributions": [
       {
         "feature": "hiring_cum",
         "value": 2.0,
-        "contribution": 7.093
+        "contribution": 6.374
       },
       {
         "feature": "consensus",
         "value": 14.64,
-        "contribution": -4.303
+        "contribution": -3.501
       },
       {
         "feature": "pe",
         "value": 15.7,
-        "contribution": 2.63
+        "contribution": 1.965
       },
       {
         "feature": "div_yield",
         "value": 4.59,
-        "contribution": -2.24
+        "contribution": -1.21
       },
       {
         "feature": "divergence",
         "value": 16.98,
-        "contribution": 1.123
+        "contribution": 0.893
+      },
+      {
+        "feature": "news_sentiment",
+        "value": 0.0,
+        "contribution": -0.484
       },
       {
         "feature": "controversy_cum",
         "value": 0.0,
-        "contribution": 0.29
+        "contribution": 0.227
       },
       {
         "feature": "compliance_gap",
         "value": 0.0,
         "contribution": 0.0
-      },
-      {
-        "feature": "news_sentiment",
-        "value": 0.0,
-        "contribution": 0.0
       }
     ],
-    "val_error": 3.873,
+    "val_error": 4.647,
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 89.6 (HYPOTHESIS, test MAE=3.87)",
-      "value": 89.6,
+      "label": "Forecast 2024 = 89.3 (HYPOTHESIS, test MAE=4.65)",
+      "value": 89.27,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -4927,7 +4912,7 @@
         {
           "label": "hiring_cum=2.0",
           "value": null,
-          "contribution": 7.093,
+          "contribution": 6.374,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4936,7 +4921,7 @@
         {
           "label": "consensus=14.64",
           "value": null,
-          "contribution": -4.303,
+          "contribution": -3.501,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4945,7 +4930,7 @@
         {
           "label": "pe=15.7",
           "value": null,
-          "contribution": 2.63,
+          "contribution": 1.965,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4954,7 +4939,7 @@
         {
           "label": "div_yield=4.59",
           "value": null,
-          "contribution": -2.24,
+          "contribution": -1.21,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4963,7 +4948,16 @@
         {
           "label": "divergence=16.98",
           "value": null,
-          "contribution": 1.123,
+          "contribution": 0.893,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "news_sentiment=0.0",
+          "value": null,
+          "contribution": -0.484,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4972,7 +4966,7 @@
         {
           "label": "controversy_cum=0.0",
           "value": null,
-          "contribution": 0.29,
+          "contribution": 0.227,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -4980,15 +4974,6 @@
         },
         {
           "label": "compliance_gap=0.0",
-          "value": null,
-          "contribution": 0.0,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "news_sentiment=0.0",
           "value": null,
           "contribution": 0.0,
           "source_sentence": null,
@@ -5004,57 +4989,52 @@
       {
         "topic_id": "ghg_emissions",
         "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Keppel has achieved an 87.6% reduction in Scope 1 and 2 emissions compared to their 2020 baseline.",
-        "source_sentence": "As at end-2025, we have achieved an 87.6% reduction in Scope 1 and 2 emissions compared to our 2020 baseline and are on track to meet our target of achieving net zero Scope 1 and 2 emissions well ahead of 2050.",
-        "source_doc": "keppel sustainability report 2025",
-        "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
+        "state": "VERIFIED",
+        "text": "In FY2023, Keppel Ltd reduced Scope 1 and Scope 2 carbon emissions intensity.",
+        "source_sentence": "In FY2023, Keppel Ltd reduced Scope 1 and Scope 2 carbon emissions intensity.",
+        "source_doc": "BN4-SR2023",
         "source_page": 1,
         "weight": 0.3
       },
       {
-        "topic_id": "ghg_emissions",
+        "topic_id": "energy_transition",
         "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Keppel’s Scope 3 emissions in 2025 amounted to about 6.7 million tCO2e.",
-        "source_sentence": "Our Scope 3 emissions in 2025 amounted to about 6.7 million tCO2e, which was higher than 2024, mainly due to higher gas sales and one-off accounting for the divestment of an office complex in India.",
-        "source_doc": "keppel sustainability report 2025",
-        "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
+        "state": "VERIFIED",
+        "text": "In FY2023, Keppel Ltd grew its renewables and solar capacity as part of its decarbonisatio",
+        "source_sentence": "In FY2023, Keppel Ltd grew its renewables and solar capacity as part of its decarbonisation transition.",
+        "source_doc": "BN4-SR2023",
         "source_page": 1,
-        "weight": 0.3
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Keppel contributed 1.12 million tCO2e in avoided emissions from various projects in 2025.",
-        "source_sentence": "In 2025, we contributed 1.12 million tCO2e in avoided emissions from various Keppel projects, including the waste-to-energy plant that we operate in Qatar, and the upgrade of the Keppel Merlimau Cogen Plant in Singapore.",
-        "source_doc": "keppel sustainability report 2025",
-        "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
-        "source_page": 1,
-        "weight": 0.3
-      },
-      {
-        "topic_id": "water_management",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Keppel reduced water withdrawal and waste generation in absolute and intensity terms compared to the 2023 base year.",
-        "source_sentence": "Beyond carbon emissions, Keppel also reduced our water withdrawal and waste generation, both in absolute and intensity terms, compared to the 2023 base year.",
-        "source_doc": "keppel sustainability report 2025",
-        "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
-        "source_page": 1,
-        "weight": 0.1
+        "weight": 0.25
       },
       {
         "topic_id": "workforce_safety",
         "pillar": "S",
-        "state": "ASSERTED",
-        "text": "Keppel achieved zero fatalities across their operations in 2025.",
-        "source_sentence": "Reflecting Keppel’s focus on safety, we achieved zero fatalities across our operations in 2025.",
-        "source_doc": "keppel sustainability report 2025",
-        "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
+        "state": "VERIFIED",
+        "text": "In FY2023, Keppel Ltd reduced lost-time injuries through occupational health and safety pr",
+        "source_sentence": "In FY2023, Keppel Ltd reduced lost-time injuries through occupational health and safety programmes.",
+        "source_doc": "BN4-SR2023",
         "source_page": 1,
         "weight": 0.15
+      },
+      {
+        "topic_id": "air_quality",
+        "pillar": "E",
+        "state": "VERIFIED",
+        "text": "In FY2023, Keppel Ltd cut NOx and particulate air quality emissions at its plants.",
+        "source_sentence": "In FY2023, Keppel Ltd cut NOx and particulate air quality emissions at its plants.",
+        "source_doc": "BN4-SR2023",
+        "source_page": 1,
+        "weight": 0.1
+      },
+      {
+        "topic_id": "grid_resiliency",
+        "pillar": "G",
+        "state": "ASSERTED",
+        "text": "In FY2023, Keppel Ltd improved grid reliability and supply security.",
+        "source_sentence": "In FY2023, Keppel Ltd improved grid reliability and supply security.",
+        "source_doc": "BN4-SR2023",
+        "source_page": 1,
+        "weight": 0.1
       }
     ],
     "absent": [
@@ -5062,10 +5042,7 @@
         "topic_id": "water_management",
         "state": "ABSENT"
       }
-    ],
-    "live": true,
-    "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-sustainability-report-2025.pdf",
-    "source_title": "keppel sustainability report 2025"
+    ]
   },
   "peers": [
     {
