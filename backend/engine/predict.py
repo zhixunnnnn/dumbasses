@@ -44,6 +44,14 @@ class _Model:
 
 
 def _features_at(ds: Dataset, cid: str, year: int, pcts_cache: dict) -> Optional[list[float]]:
+    """FIXED-SCHEMA feature vector — the SAME columns, in the SAME order, for every
+    company-year. The model only ever sees these consistent fields (same types the
+    seed produced); we never add per-company/per-year features or predict values that
+    only some companies have. Missing inputs fall back to neutral defaults (never NaN,
+    never a variable-length row), so a company that doesn't disclose a section is still
+    comparable — its real, always-available news_sentiment (Bright Data + LLM) carries
+    signal where report data is thin. Returns None ONLY when the company has no rater
+    coverage that year; that row is then skipped, not imputed with a fake schema."""
     pcts = pcts_cache.setdefault(year, normalize_raters(ds, year))
     rp = pcts.get(cid)
     if rp is None:
@@ -69,7 +77,12 @@ def _features_at(ds: Dataset, cid: str, year: int, pcts_cache: dict) -> Optional
 
 def _panel(ds: Dataset, client: LLMClient):
     """Rows: features at year t -> evidence score at year t+1 (leading prediction).
-    Also returns `cur` (the score at year t) so we can score up/down DIRECTION."""
+    Also returns `cur` (the score at year t) so we can score up/down DIRECTION.
+
+    A row exists ONLY for a company-year that has a REAL evidence target at BOTH t and
+    t+1 (i.e. the company actually filed a report those years). Company-years without a
+    report are excluded — the model is never trained on imputed or invented targets, and
+    absent material topics only lower the coverage-weighted score, never the schema."""
     pcts_cache: dict = {}
     X, y, years, cur = [], [], [], []
     for cid in ds.demo_ids():
