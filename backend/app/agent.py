@@ -611,6 +611,13 @@ def make_system_prompt(page_context: dict[str, Any]) -> str:
         "Prefer the current page_context company over older chat history when the "
         "user says this company, their, it, the selected company, or asks from a "
         "company page. "
+        "Use get_company_esg whenever the user asks for THIS APP'S ESG score, a "
+        "company's predicted/forecast next-year ESG score, why a company scored or is "
+        "predicted as it is, or its underpriced-improver/quadrant status — it returns "
+        "the same numbers the dashboard shows plus the forecast's feature drivers. "
+        "Do not web-search for the app's own score/forecast; call get_company_esg. "
+        "Always present the forecast as a HYPOTHESIS from a local model, cite its "
+        "validation error, and explain 'why' using the model's top_drivers. "
         "Use research_company_esg_news when the user asks for current ESG news, "
         "recent sustainability developments, controversies, why a company score is "
         "high or low, or source-backed company ESG context. "
@@ -860,6 +867,83 @@ class OpenRouterAgent:
             report=report,
             model=self.model,
         )
+
+
+def _engine_company_payload(company: str) -> dict | None:
+    """Read the ESG engine's precomputed output — the SAME numbers the dashboard
+    shows (evidence score, improver signal, and the ML next-year forecast with its
+    feature drivers) — for a company resolved by id, ticker, or name."""
+    from backend.engine import config
+
+    out = config.OUT_DIR
+    idx_path = out / "companies.json"
+    if not idx_path.exists():
+        return None
+    try:
+        companies = json.loads(idx_path.read_text("utf-8"))
+    except Exception:
+        return None
+    q = (company or "").strip().lower()
+    if not q:
+        return None
+    match = None
+    for row in companies:
+        cid = str(row.get("id", "")).lower()
+        ticker = str(row.get("ticker", "")).lower()
+        if q == cid or q == ticker or q == ticker.split(".")[0]:
+            match = row
+            break
+    if match is None:
+        for row in companies:  # fall back to a name contains-match
+            if q in str(row.get("name", "")).lower():
+                match = row
+                break
+    if match is None:
+        return None
+
+    dpath = out / "company" / f"{match['id']}.json"
+    if not dpath.exists():
+        return None
+    try:
+        d = json.loads(dpath.read_text("utf-8"))
+    except Exception:
+        return None
+
+    ev = d.get("evidence", {}) or {}
+    sig = d.get("signal", {}) or {}
+    fc = d.get("forecast", {}) or {}
+    raters = d.get("raters", {}) or {}
+    drivers = sorted(
+        fc.get("feature_contributions", []) or [],
+        key=lambda c: -abs(c.get("contribution") or 0),
+    )[:5]
+    return {
+        "company": {"id": match["id"], "name": match.get("name"),
+                    "ticker": match.get("ticker"), "sector": match.get("sector")},
+        "evidence_score": ev.get("total"),
+        "pillars": ev.get("pillars"),
+        "confidence": ev.get("confidence"),
+        "signal": {
+            "is_underpriced_improver": sig.get("is_underpriced_improver"),
+            "proof_up": sig.get("proof_up"),
+            "opinion_flat": sig.get("opinion_flat"),
+            "price_flat": sig.get("price_flat"),
+            "momentum": sig.get("momentum"),
+            "evidence_gap": sig.get("evidence_gap"),
+            "quadrant": sig.get("quadrant"),
+        },
+        "raters": {"consensus": raters.get("consensus"), "divergence": raters.get("divergence")},
+        "forecast": {
+            "predicted_score": fc.get("predicted_score"),
+            "horizon_years": fc.get("horizon_years"),
+            "ci_low": fc.get("ci_low"),
+            "ci_high": fc.get("ci_high"),
+            "validation_mae": fc.get("val_error"),
+            "is_hypothesis": fc.get("hypothesis", True),
+            "top_drivers": drivers,
+        },
+        "report_source": (d.get("claims", {}) or {}).get("source_url"),
+    }
 
 
 def build_langchain_tools(web_tools: WebTools) -> list[Any]:
@@ -1114,7 +1198,43 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
             ensure_ascii=False,
         )
 
-    return [web_search, scrape_url, research_company_esg_news, research_esg_scoring]
+    @tool
+    async def get_company_esg(company: str) -> str:
+        """Return THIS APP'S own computed ESG evidence score, the underpriced-improver
+        signal, and the ML next-year forecast (with the feature drivers behind it) for a
+        company, resolved by id, ticker, or name. Use this — NOT a web search — whenever
+        the user asks for the app's ESG score, why a company scored that way, its
+        improver/quadrant status, or its predicted / forecast next-year ESG score. The
+        forecast is a HYPOTHESIS from a local model; always state that and its validation
+        error, and explain 'why' using top_drivers (the model's feature contributions)."""
+        payload = await asyncio.to_thread(_engine_company_payload, company)
+        if not payload:
+            summary = (f"No engine ESG record found for '{company}'. It may be outside "
+                       "the covered universe — try the exact company name or ticker.")
+            emit_workflow_step(label="Read ESG engine", status="error",
+                               detail=summary, tool_name="get_company_esg")
+            return json.dumps({"tool": "get_company_esg", "status": "error",
+                               "summary": summary, "sources": [],
+                               "result": {"company": company}}, ensure_ascii=False)
+        name = payload["company"]["name"]
+        fc = payload["forecast"]
+        summary = (f"{name}: ESG evidence {payload['evidence_score']}, next-year "
+                   f"forecast {fc['predicted_score']} (HYPOTHESIS, validation MAE "
+                   f"{fc['validation_mae']}).")
+        sources = []
+        if payload.get("report_source"):
+            sources = [AssistantSource(title=f"{name} sustainability report",
+                                       url=payload["report_source"],
+                                       source="ESG Evidence Engine").model_dump(by_alias=True)]
+        emit_workflow_step(label="Read ESG engine", status="ok",
+                           detail=f"Read computed ESG + forecast for {name}",
+                           tool_name="get_company_esg")
+        return json.dumps({"tool": "get_company_esg", "status": "ok",
+                           "summary": summary, "sources": sources,
+                           "result": payload}, ensure_ascii=False)
+
+    return [web_search, scrape_url, research_company_esg_news,
+            research_esg_scoring, get_company_esg]
 
 
 async def collect_company_esg_news(
