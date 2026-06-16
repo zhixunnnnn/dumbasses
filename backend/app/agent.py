@@ -695,6 +695,13 @@ class OpenRouterAgent:
         input_messages = [message_to_langchain_payload(request.messages[-1])]
         failures: list[str] = []
 
+        emit_workflow_step(
+            label="Reading your question",
+            status="running",
+            detail="Deciding which tools to use",
+            tool_name=None,
+        )
+
         for attempt in range(1, self.max_recovery_attempts + 1):
             langchain_agent = self.langchain_agent_factory(system_prompt)
             try:
@@ -963,6 +970,12 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
     @tool
     async def web_search(query: str, max_results: int = 5) -> str:
         """Search the public web for current ESG, company, market, regulatory, or sustainability information."""
+        emit_workflow_step(
+            label="Searching the web",
+            status="running",
+            detail=f"Searching: {query}",
+            tool_name="web_search",
+        )
         try:
             result = await web_tools.search(query=query, max_results=max_results)
         except Exception as exc:
@@ -1004,6 +1017,12 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
     @tool
     async def scrape_url(url: str) -> str:
         """Retrieve and extract readable text from a public webpage URL."""
+        emit_workflow_step(
+            label="Reading page",
+            status="running",
+            detail=f"Reading {url}",
+            tool_name="scrape_url",
+        )
         try:
             result = await web_tools.fetch_url(url)
         except Exception as exc:
@@ -1132,35 +1151,46 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
         sources: list[AssistantSource] = []
         seen: set[str] = set()
         errors: list[str] = []
-        for query in queries:
-            if len(sources) >= max_results:
-                break
+
+        # Run every reference query concurrently and surface each one live.
+        async def _scoring_search(query: str):
+            emit_workflow_step(
+                label="Searching the web",
+                status="running",
+                detail=f"Searching: {query}",
+                tool_name="research_esg_scoring",
+            )
             try:
                 result = await web_tools.search(query=query, max_results=3)
             except Exception as exc:
                 errors.append(f"{query}: {safe_error_summary(exc)}")
                 emit_workflow_step(
-                    label="Searched web",
+                    label="Search failed",
                     status="error",
-                    detail=f"Search failed for: {query}",
-                    tool_name="web_search",
+                    detail=f"{query}: {safe_error_summary(exc)}",
+                    tool_name="research_esg_scoring",
                 )
-                continue
+                return None
             emit_workflow_step(
-                label="Searched web",
+                label="Searched the web",
                 status="ok",
-                detail=f"Searched web for: {query}",
-                tool_name="web_search",
+                detail=f"{len(result.get('results', []))} hits · {query}",
+                tool_name="research_esg_scoring",
             )
+            return result
+
+        for result in await asyncio.gather(*[_scoring_search(q) for q in queries]):
+            if not result:
+                continue
             for item in result.get("results", []):
+                if len(sources) >= max_results:
+                    break
                 source = AssistantSource(**item)
                 key = source.url.split("#", 1)[0]
                 if key in seen:
                     continue
                 seen.add(key)
                 sources.append(source)
-                if len(sources) >= max_results:
-                    break
 
         if len(sources) < max_results:
             if not sources:
@@ -1220,6 +1250,12 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
         improver/quadrant status, or its predicted / forecast next-year ESG score. The
         forecast is a HYPOTHESIS from a local model; always state that and its validation
         error, and explain 'why' using top_drivers (the model's feature contributions)."""
+        emit_workflow_step(
+            label="Reading the ESG engine",
+            status="running",
+            detail=f"Loading our computed ESG score + forecast for {company}",
+            tool_name="get_company_esg",
+        )
         payload = await asyncio.to_thread(_engine_company_payload, company)
         if not payload:
             summary = (f"No engine ESG record found for '{company}'. It may be outside "
@@ -1267,13 +1303,36 @@ async def collect_company_esg_news(
     seen: set[str] = set()
     errors: list[str] = []
 
-    for query in queries:
-        if len(candidates) >= max_results * 3:
-            break
+    # Fire every discovery query at once (instead of one-after-another) and stream
+    # each search out live so the chat shows exactly what is being looked up.
+    async def _news_search(query: str):
+        emit_workflow_step(
+            label="Searching the web",
+            status="running",
+            detail=f"Searching: {query}",
+            tool_name="research_company_esg_news",
+        )
         try:
             result = await web_tools.search(query=query, max_results=6)
         except Exception as exc:
             errors.append(f"{query}: {safe_error_summary(exc)}")
+            emit_workflow_step(
+                label="Search failed",
+                status="error",
+                detail=f"{query}: {safe_error_summary(exc)}",
+                tool_name="research_company_esg_news",
+            )
+            return None
+        emit_workflow_step(
+            label="Searched the web",
+            status="ok",
+            detail=f"{len(result.get('results', []))} hits · {query}",
+            tool_name="research_company_esg_news",
+        )
+        return result
+
+    for result in await asyncio.gather(*[_news_search(q) for q in queries]):
+        if not result:
             continue
         for item in result.get("results", []):
             source = AssistantSource(**item)
@@ -1292,26 +1351,59 @@ async def collect_company_esg_news(
         key=lambda source: source_reliability_score(source, domain=domain),
         reverse=True,
     )
+
+    # Read the most promising sources concurrently (bounded) with a per-page
+    # timeout, announcing each exact URL as it's opened. One slow page can no
+    # longer stall the whole batch.
+    semaphore = asyncio.Semaphore(6)
+
+    async def _enrich(candidate: AssistantSource) -> AssistantSource:
+        host = urlparse(candidate.url).hostname or candidate.url
+        async with semaphore:
+            emit_workflow_step(
+                label="Reading source",
+                status="running",
+                detail=f"Reading {host} — {candidate.url}",
+                tool_name="research_company_esg_news",
+            )
+            try:
+                fetched = await asyncio.wait_for(
+                    web_tools.fetch_url(candidate.url, max_chars=REPORT_FETCH_CHARS),
+                    timeout=30,
+                )
+                text = str(fetched.get("text") or "")
+                snippet = evidence_snippet(text, aliases=aliases) or candidate.snippet
+                enriched = AssistantSource(
+                    title=str(fetched.get("title") or candidate.title),
+                    url=str(fetched.get("url") or candidate.url),
+                    snippet=snippet,
+                    source=str(fetched.get("source") or candidate.source),
+                )
+                emit_workflow_step(
+                    label="Read source",
+                    status="ok",
+                    detail=f"Read {host}",
+                    tool_name="research_company_esg_news",
+                )
+                return enriched
+            except Exception as exc:
+                errors.append(f"{candidate.url}: {safe_error_summary(exc)}")
+                emit_workflow_step(
+                    label="Read failed",
+                    status="error",
+                    detail=f"{host}: {safe_error_summary(exc)}",
+                    tool_name="research_company_esg_news",
+                )
+                return candidate
+
+    to_read = ranked_candidates[: max_results + 3]
+    enriched_candidates = await asyncio.gather(*[_enrich(c) for c in to_read])
+
     sources: list[AssistantSource] = []
     articles: list[ReferenceArticle] = []
-
-    for candidate in ranked_candidates:
+    for enriched in enriched_candidates:
         if len(sources) >= max_results:
             break
-        enriched = candidate
-        try:
-            fetched = await web_tools.fetch_url(candidate.url, max_chars=REPORT_FETCH_CHARS)
-            text = str(fetched.get("text") or "")
-            snippet = evidence_snippet(text, aliases=aliases) or candidate.snippet
-            enriched = AssistantSource(
-                title=str(fetched.get("title") or candidate.title),
-                url=str(fetched.get("url") or candidate.url),
-                snippet=snippet,
-                source=str(fetched.get("source") or candidate.source),
-            )
-        except Exception as exc:
-            errors.append(f"{candidate.url}: {safe_error_summary(exc)}")
-
         if not is_company_specific_source(enriched, aliases=aliases, domain=domain):
             continue
         kind = classify_company_esg_news_kind(enriched)

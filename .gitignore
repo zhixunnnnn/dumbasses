@@ -9,3 +9,4 @@ __pycache__
 .claude
 backend/tests/.tmp
 backend/cache/brightdata/
+backend/uvicorn_*.log
