@@ -1,0 +1,39 @@
+# Caddy: serves the built SPA + proxies /api to the FastAPI backend, with HTTP
+# Basic Auth gating the ENTIRE origin (login required before the page OR the API
+# loads — this is what makes the public deploy safe).
+#
+# Cloudflare terminates TLS at its edge and forwards plain HTTP to this local
+# listener, so Caddy's own HTTPS is turned off. Caddy listens on localhost only;
+# the only way in is the Cloudflare Tunnel.
+#
+# Credentials come from .env (BASIC_AUTH_USER, BASIC_AUTH_HASH) — the systemd
+# unit loads .env, and Caddy reads them via {env.*} below.
+
+{
+	auto_https off
+	admin off
+}
+
+http://localhost:8080 {
+	encode zstd gzip
+
+	# --- Login gate: applies to everything below (static files AND /api) ---
+	basic_auth {
+		{env.BASIC_AUTH_USER} {env.BASIC_AUTH_HASH}
+	}
+
+	# API -> uvicorn backend. flush_interval -1 disables buffering so the
+	# agent's live NDJSON workflow steps stream through in real time.
+	handle /api/* {
+		reverse_proxy 127.0.0.1:8000 {
+			flush_interval -1
+		}
+	}
+
+	# Single-page app: serve built assets, fall back to index.html for routes.
+	handle {
+		root * /home/ubuntu/WSP-Squad-Polyfintech-2026/frontend/dist
+		try_files {path} /index.html
+		file_server
+	}
+}

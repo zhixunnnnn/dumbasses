@@ -1,0 +1,14 @@
+# Cloudflare Tunnel config. Copy to ~/.cloudflared/config.yml on the VPS.
+# Replace TUNNEL_ID with the id printed by `cloudflared tunnel create wspsquad`.
+#
+# The tunnel dials OUT to Cloudflare — no inbound ports are opened on the VPS.
+# It forwards the public hostname to the local Caddy listener, which holds the
+# login gate.
+
+tunnel: TUNNEL_ID
+credentials-file: /home/ubuntu/.cloudflared/TUNNEL_ID.json
+
+ingress:
+  - hostname: wspsquad-polyfintech.ngyuhang.com
+    service: http://localhost:8080
+  - service: http_status:404

@@ -1,0 +1,14 @@
+[Unit]
+Description=WSP Squad PolyFintech - Cloudflare Tunnel
+After=network-online.target wspsquad-caddy.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+ExecStart=/usr/bin/cloudflared tunnel --config /home/ubuntu/.cloudflared/config.yml run
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,18 @@
+[Unit]
+Description=WSP Squad PolyFintech - FastAPI backend (uvicorn)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/WSP-Squad-Polyfintech-2026
+EnvironmentFile=/home/ubuntu/WSP-Squad-Polyfintech-2026/.env
+# Bind to localhost ONLY so the API is never reachable except through Caddy
+# (which holds the login gate). Do not change to 0.0.0.0.
+ExecStart=/home/ubuntu/WSP-Squad-Polyfintech-2026/.venv/bin/uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

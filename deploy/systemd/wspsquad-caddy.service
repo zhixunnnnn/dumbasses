@@ -1,0 +1,16 @@
+[Unit]
+Description=WSP Squad PolyFintech - Caddy (SPA + /api proxy + login gate)
+After=network-online.target wspsquad-backend.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+# Loads BASIC_AUTH_USER / BASIC_AUTH_HASH (and the rest of .env) into Caddy's env.
+EnvironmentFile=/home/ubuntu/WSP-Squad-Polyfintech-2026/.env
+ExecStart=/usr/bin/caddy run --config /home/ubuntu/WSP-Squad-Polyfintech-2026/deploy/Caddyfile --adapter caddyfile
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
