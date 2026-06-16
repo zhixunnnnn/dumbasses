@@ -93,7 +93,7 @@ function SessionHistoryPanel({
 }) {
   const [confirmingId, setConfirmingId] = useState<string | null>(null);
   return (
-    <aside className="min-h-0 rounded-2xl border border-hairline bg-surface p-3 shadow-panel">
+    <aside className="flex min-h-0 flex-col overflow-hidden rounded-2xl border border-hairline bg-surface p-3 shadow-panel">
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-faint">
@@ -116,7 +116,7 @@ function SessionHistoryPanel({
         </p>
       )}
 
-      <div className="mt-3 max-h-[calc(100vh-14rem)] space-y-1.5 overflow-y-auto pr-1">
+      <div className="mt-3 flex-1 space-y-1.5 overflow-y-auto pr-1">
         {sessions.map((session) => {
           const active = session.id === activeSessionId;
           return (
