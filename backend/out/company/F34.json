@@ -5444,74 +5444,77 @@
   },
   "forecast": {
     "company_id": "F34",
-    "predicted_score": 69.52,
-    "horizon_years": 1,
-    "ci_low": 58.32,
-    "ci_high": 80.72,
+    "predicted_score": 66.1,
+    "horizon_years": 0,
+    "ci_low": 57.92,
+    "ci_high": 74.28,
     "feature_contributions": [
       {
-        "feature": "divergence",
-        "value": 60.0,
-        "contribution": -8.245
-      },
-      {
-        "feature": "hiring_cum",
+        "feature": "is_financial",
         "value": 0.0,
-        "contribution": 1.076
+        "contribution": 3.067
       },
       {
-        "feature": "div_yield",
-        "value": 3.43,
-        "contribution": 0.773
+        "feature": "price_return",
+        "value": 14.06,
+        "contribution": 0.783
       },
       {
         "feature": "news_sentiment",
-        "value": 2.0,
-        "contribution": 0.271
+        "value": 4.0,
+        "contribution": 0.542
+      },
+      {
+        "feature": "volatility",
+        "value": 23.09,
+        "contribution": -0.121
       }
     ],
-    "val_error": 11.201,
-    "directional_accuracy": 0.81,
+    "val_error": 8.18,
+    "directional_accuracy": 0.8,
+    "target_year": 2023,
+    "drift_years": 0,
+    "drift_note": "Trained ENTIRELY on real data (real 2023 evidence vs real news + price/sector signals) — no seeded inputs. EXPERIMENTAL: free real-time signals only weakly predict verified ESG disclosure, so treat this as a low-confidence directional estimate, not a precise score.",
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 69.5 (HYPOTHESIS, LOO MAE=11.2, directional 81%)",
-      "value": 69.52,
+      "label": "Real-data ESG estimate = 66.1 (EXPERIMENTAL, ~80% hit-rate, MAE=8.2)",
+      "value": 66.1,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
-          "label": "divergence=60.0",
+          "label": "is_financial=0.0",
           "value": null,
-          "contribution": -8.245,
+          "contribution": 3.067,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": []
         },
         {
-          "label": "hiring_cum=0.0",
+          "label": "price_return=14.06",
           "value": null,
-          "contribution": 1.076,
+          "contribution": 0.783,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": []
         },
         {
-          "label": "div_yield=3.43",
+          "label": "news_sentiment=4.0",
           "value": null,
-          "contribution": 0.773,
+          "contribution": 0.542,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": []
         },
         {
-          "label": "news_sentiment=2.0",
+          "label": "volatility=23.09",
           "value": null,
-          "contribution": 0.271,
+          "contribution": -0.121,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

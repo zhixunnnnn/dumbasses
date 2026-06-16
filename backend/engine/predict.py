@@ -1,10 +1,18 @@
-"""predict — an EXPLAINABLE next-year evidence-score forecaster.
+"""predict — an EXPLAINABLE ESG-evidence estimator trained ENTIRELY on real data.
 
-Kept non-circular on purpose: features are LEADING alt-data signals (hiring,
-controversy, compliance readiness, rater divergence/consensus, fundamentals) —
-NEVER the lagged ESG/evidence score itself. Validated time-based (train <=2022 /
-test 2023) with the real error reported. Always HYPOTHESIS, with feature
-attribution as its trace.
+No seeded inputs. The target is each company's REAL 2023 evidence score (from the
+extracted + independently-verified claims). The features are REAL, free, real-time
+signals only:
+
+    news_sentiment   real LLM-classified Bright Data news (positive - controversy)
+    price_return     real 5y stock return
+    volatility       real annualised weekly-return volatility
+    is_financial     real sector flag
+
+HONEST CAVEAT (surfaced in the UI): free real-time signals only weakly predict how
+much verified ESG a company discloses, so this is a LOW-CONFIDENCE / EXPERIMENTAL
+estimate — useful directionally, not as a precise score. Accuracy is reported as the
+leave-one-out above/below-median hit-rate (no metric gaming, no seeded features).
 """
 from __future__ import annotations
 
@@ -16,21 +24,14 @@ from sklearn.linear_model import Ridge
 from sklearn.preprocessing import StandardScaler
 
 from . import config
-from .divergence import divergence_index
 from .ingest import Dataset
 from .llm import LLMClient, MockLLMClient
 from .models import FeatureContribution, Forecast, TraceNode
-from .normalize import consensus, normalize_raters
-from .regulations import compliance_gap
 from .score import evidence_score
 
-ALL_FEATURES = ["divergence", "consensus", "compliance_gap", "hiring_cum", "controversy_cum",
-                "news_sentiment", "pe", "div_yield"]
-# Selected by leave-one-out cross-validation to avoid over-fitting 8 features on a
-# small panel; keeps the real LLM-classified news signal in. alpha tuned with it.
-FEATURES = ["divergence", "hiring_cum", "news_sentiment", "div_yield"]
-_SELECT = [ALL_FEATURES.index(f) for f in FEATURES]
-RIDGE_ALPHA = 20.0
+FEATURES = ["news_sentiment", "price_return", "volatility", "is_financial"]
+RIDGE_ALPHA = 3.0
+MIN_ROWS = 6
 
 
 @dataclass
@@ -38,71 +39,41 @@ class _Model:
     ridge: Ridge
     scaler: StandardScaler
     val_error: Optional[float]
-    directional_accuracy: Optional[float]
+    directional_accuracy: Optional[float]   # LOO above/below-median hit-rate
     means: np.ndarray
     stds: np.ndarray
 
 
-def _features_at(ds: Dataset, cid: str, year: int, pcts_cache: dict) -> Optional[list[float]]:
-    """FIXED-SCHEMA feature vector — the SAME columns, in the SAME order, for every
-    company-year. The model only ever sees these consistent fields (same types the
-    seed produced); we never add per-company/per-year features or predict values that
-    only some companies have. Missing inputs fall back to neutral defaults (never NaN,
-    never a variable-length row), so a company that doesn't disclose a section is still
-    comparable — its real, always-available news_sentiment (Bright Data + LLM) carries
-    signal where report data is thin. Returns None ONLY when the company has no rater
-    coverage that year; that row is then skipped, not imputed with a fake schema."""
-    pcts = pcts_cache.setdefault(year, normalize_raters(ds, year))
-    rp = pcts.get(cid)
-    if rp is None:
+def _real_features(ds: Dataset, cid: str) -> Optional[list[float]]:
+    """REAL signals only — no seeded inputs. None if a company lacks real prices."""
+    closes = [c.close for c in ds.prices.get(cid, []) if c.close]
+    if len(closes) < 10:
         return None
-    div = divergence_index(rp)
-    cons = consensus(rp)
-    cg = compliance_gap(ds, cid, year).score
-    events = [e for e in ds.events_for(cid) if (e.date or "")[:4].isdigit() and int(e.date[:4]) <= year]
-    hiring = sum(1 for e in events if e.type == "hiring_surge")
-    contro = sum(1 for e in events if e.type == "controversy")
-    fund = ds.fundamentals.get(cid, {}).get("2023", {})
-    # live Bright Data news sentiment — a current leading signal (broadcast across years,
-    # like the fundamentals snapshot); 0 when no news has been scraped.
+    ret = (closes[-1] / closes[0] - 1.0) * 100.0
+    vol = float(np.std(np.diff(np.log(closes))) * np.sqrt(52) * 100.0)
     news = float(ds.news_sentiment.get(cid, 0))
-    return [
-        div if div is not None else 0.0,
-        cons if cons is not None else 50.0,
-        cg if cg is not None else 0.0,
-        float(hiring), float(contro), news,
-        float(fund.get("pe") or 12.0), float(fund.get("dividend_yield") or 3.0),
-    ]
+    is_fin = 1.0 if ds.company(cid).sector == "Financials" else 0.0
+    return [news, ret, vol, is_fin]
 
 
 def _panel(ds: Dataset, client: LLMClient):
-    """Rows: features at year t -> evidence score at year t+1 (leading prediction).
-    Also returns `cur` (the score at year t) so we can score up/down DIRECTION.
-
-    A row exists ONLY for a company-year that has a REAL evidence target at BOTH t and
-    t+1 (i.e. the company actually filed a report those years). Company-years without a
-    report are excluded — the model is never trained on imputed or invented targets, and
-    absent material topics only lower the coverage-weighted score, never the schema."""
-    pcts_cache: dict = {}
-    X, y, years, cur = [], [], [], []
+    """Cross-sectional, 100% real: real signals -> REAL 2023 evidence score."""
+    X, y, cids = [], [], []
     for cid in ds.demo_ids():
-        totals = {es.year: es.total for es in
-                  [evidence_score(ds, cid, yr, client) for yr in config.YEARS if ds.docs_for(cid, yr)]}
-        for t in config.YEARS[:-1]:
-            nxt = totals.get(t + 1)
-            now = totals.get(t)
-            feats = _features_at(ds, cid, t, pcts_cache)
-            if nxt is None or now is None or feats is None:
-                continue
-            X.append([feats[i] for i in _SELECT]); y.append(nxt)
-            years.append(t); cur.append(now)
-    return np.array(X, float), np.array(y, float), np.array(years), np.array(cur, float)
+        feats = _real_features(ds, cid)
+        target = evidence_score(ds, cid, config.END_YEAR, client).total
+        if feats is None or target is None:
+            continue
+        X.append(feats)
+        y.append(target)
+        cids.append(cid)
+    return np.array(X, float), np.array(y, float), cids
 
 
-def _loo_metrics(Xs: np.ndarray, y: np.ndarray, cur: np.ndarray) -> tuple[Optional[float], Optional[float]]:
-    """Leave-one-out CV (honest for a small panel): mean abs error + directional
-    accuracy = share of next-year up/down moves the model calls correctly."""
-    if len(y) < 6:
+def _loo_eval(Xs: np.ndarray, y: np.ndarray) -> tuple[Optional[float], Optional[float]]:
+    """Leave-one-out CV: mean abs error + above/below-median hit-rate. Honest for a
+    small cross-section; no feature selection inside (that would bias the metric)."""
+    if len(y) < MIN_ROWS:
         return None, None
     preds = np.zeros(len(y))
     idx = np.arange(len(y))
@@ -110,51 +81,56 @@ def _loo_metrics(Xs: np.ndarray, y: np.ndarray, cur: np.ndarray) -> tuple[Option
         mask = idx != i
         preds[i] = Ridge(alpha=RIDGE_ALPHA).fit(Xs[mask], y[mask]).predict(Xs[i:i + 1])[0]
     mae = float(np.mean(np.abs(preds - y)))
-    moved = np.sign(y - cur) != 0
-    diracc = (float(np.mean(np.sign(preds - cur)[moved] == np.sign(y - cur)[moved]))
-              if moved.any() else None)
-    return mae, diracc
+    med = float(np.median(y))
+    acc = float(np.mean((preds > med) == (y > med)))
+    return mae, acc
 
 
 def train(ds: Dataset, client: Optional[LLMClient] = None) -> _Model:
     client = client or MockLLMClient()
-    X, y, years, cur = _panel(ds, client)
+    X, y, _ = _panel(ds, client)
     scaler = StandardScaler().fit(X)
     Xs = scaler.transform(X)
-    val_error, directional = _loo_metrics(Xs, y, cur)
-    ridge = Ridge(alpha=RIDGE_ALPHA).fit(Xs, y)   # final model on all rows
-    return _Model(ridge, scaler, val_error, directional, scaler.mean_, scaler.scale_)
+    val_error, acc = _loo_eval(Xs, y)
+    ridge = Ridge(alpha=RIDGE_ALPHA).fit(Xs, y)
+    return _Model(ridge, scaler, val_error, acc, scaler.mean_, scaler.scale_)
 
 
 def forecast(ds: Dataset, cid: str, model: _Model, client: Optional[LLMClient] = None) -> Forecast:
     client = client or MockLLMClient()
-    feats = _features_at(ds, cid, config.END_YEAR, {})
-    series = [es for es in [evidence_score(ds, cid, yr, client) for yr in config.YEARS
-                            if ds.docs_for(cid, yr)]]
-    empty_trace = TraceNode(label="Forecast (HYPOTHESIS — no sufficient features)")
-    if feats is None or len(series) < config.MIN_FEATURE_YEARS:
-        return Forecast(company_id=cid, predicted_score=None, hypothesis=True, trace=empty_trace)
+    feats = _real_features(ds, cid)
+    empty = TraceNode(label="ESG estimate (experimental — no real price signal)")
+    if feats is None:
+        return Forecast(company_id=cid, predicted_score=None, hypothesis=True, trace=empty)
 
-    x = np.array([feats[i] for i in _SELECT], float)
+    x = np.array(feats, float)
     xs = (x - model.means) / model.stds
     pred = float(model.ridge.predict(xs.reshape(1, -1))[0])
-    # linear attribution: contribution_i = coef_i * standardized_x_i
-    contribs = []
-    for name, coef, val, sx in zip(FEATURES, model.ridge.coef_, x, xs):
-        contribs.append(FeatureContribution(feature=name, value=round(float(val), 2),
-                                            contribution=round(float(coef * sx), 3)))
+    pred = max(0.0, min(100.0, pred))
+    contribs = [
+        FeatureContribution(feature=name, value=round(float(v), 2),
+                            contribution=round(float(coef * sx), 3))
+        for name, coef, v, sx in zip(FEATURES, model.ridge.coef_, x, xs)
+    ]
     contribs.sort(key=lambda c: -abs(c.contribution))
-    err = model.val_error if model.val_error is not None else 5.0
-    da = model.directional_accuracy
-    da_txt = f", directional {round(da * 100)}%" if da is not None else ""
+    err = model.val_error if model.val_error is not None else 10.0
+    acc = model.directional_accuracy
+    acc_txt = f", ~{round(acc * 100)}% hit-rate" if acc is not None else ""
+    note = (
+        "Trained ENTIRELY on real data (real 2023 evidence vs real news + price/sector "
+        "signals) — no seeded inputs. EXPERIMENTAL: free real-time signals only weakly "
+        "predict verified ESG disclosure, so treat this as a low-confidence directional "
+        "estimate, not a precise score."
+    )
     trace = TraceNode(
-        label=f"Forecast {config.END_YEAR + 1} = {round(pred, 1)} (HYPOTHESIS, LOO MAE={round(err, 2)}{da_txt})",
+        label=f"Real-data ESG estimate = {round(pred, 1)} (EXPERIMENTAL{acc_txt}, MAE={round(err, 1)})",
         value=round(pred, 2),
         children=[TraceNode(label=f"{c.feature}={c.value}", contribution=c.contribution) for c in contribs],
     )
     return Forecast(
-        company_id=cid, predicted_score=round(pred, 2), horizon_years=config.FORECAST_HORIZON_YEARS,
-        ci_low=round(pred - err, 2), ci_high=round(pred + err, 2),
+        company_id=cid, predicted_score=round(pred, 2), horizon_years=0,
+        ci_low=round(max(0.0, pred - err), 2), ci_high=round(min(100.0, pred + err), 2),
         feature_contributions=contribs, val_error=round(err, 3),
-        directional_accuracy=(round(da, 3) if da is not None else None),
+        directional_accuracy=(round(acc, 3) if acc is not None else None),
+        target_year=config.END_YEAR, drift_years=0, drift_note=note,
         hypothesis=True, trace=trace)

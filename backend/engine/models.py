@@ -146,6 +146,9 @@ class Forecast(BaseModel):
     feature_contributions: list[FeatureContribution] = Field(default_factory=list)
     val_error: Optional[float] = None        # honest test-set MAE
     directional_accuracy: Optional[float] = None  # LOO-CV: % of up/down calls correct
+    target_year: Optional[int] = None        # year this estimate is projected to
+    drift_years: Optional[int] = None        # years beyond the model's training window
+    drift_note: Optional[str] = None         # plain-English drift disclosure for the UI
     hypothesis: bool = True
     trace: TraceNode
 

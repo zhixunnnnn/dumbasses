@@ -4336,74 +4336,77 @@
   },
   "forecast": {
     "company_id": "9CI",
-    "predicted_score": 74.08,
-    "horizon_years": 1,
-    "ci_low": 62.88,
-    "ci_high": 85.28,
+    "predicted_score": 65.96,
+    "horizon_years": 0,
+    "ci_low": 57.78,
+    "ci_high": 74.14,
     "feature_contributions": [
       {
-        "feature": "hiring_cum",
-        "value": 2.0,
-        "contribution": -6.099
+        "feature": "is_financial",
+        "value": 0.0,
+        "contribution": 3.067
       },
       {
-        "feature": "divergence",
-        "value": 15.18,
-        "contribution": 2.747
+        "feature": "price_return",
+        "value": -2.71,
+        "contribution": 1.201
       },
       {
-        "feature": "div_yield",
-        "value": 2.91,
-        "contribution": 2.192
+        "feature": "volatility",
+        "value": 21.74,
+        "contribution": -1.016
       },
       {
         "feature": "news_sentiment",
-        "value": 4.0,
-        "contribution": -0.407
+        "value": 5.0,
+        "contribution": 0.881
       }
     ],
-    "val_error": 11.201,
-    "directional_accuracy": 0.81,
+    "val_error": 8.18,
+    "directional_accuracy": 0.8,
+    "target_year": 2023,
+    "drift_years": 0,
+    "drift_note": "Trained ENTIRELY on real data (real 2023 evidence vs real news + price/sector signals) — no seeded inputs. EXPERIMENTAL: free real-time signals only weakly predict verified ESG disclosure, so treat this as a low-confidence directional estimate, not a precise score.",
     "hypothesis": true,
     "trace": {
-      "label": "Forecast 2024 = 74.1 (HYPOTHESIS, LOO MAE=11.2, directional 81%)",
-      "value": 74.08,
+      "label": "Real-data ESG estimate = 66.0 (EXPERIMENTAL, ~80% hit-rate, MAE=8.2)",
+      "value": 65.96,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
-          "label": "hiring_cum=2.0",
+          "label": "is_financial=0.0",
           "value": null,
-          "contribution": -6.099,
+          "contribution": 3.067,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": []
         },
         {
-          "label": "divergence=15.18",
+          "label": "price_return=-2.71",
           "value": null,
-          "contribution": 2.747,
+          "contribution": 1.201,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": []
         },
         {
-          "label": "div_yield=2.91",
+          "label": "volatility=21.74",
           "value": null,
-          "contribution": 2.192,
+          "contribution": -1.016,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": []
         },
         {
-          "label": "news_sentiment=4.0",
+          "label": "news_sentiment=5.0",
           "value": null,
-          "contribution": -0.407,
+          "contribution": 0.881,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

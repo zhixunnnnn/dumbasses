@@ -199,6 +199,9 @@ export type Forecast = {
   feature_contributions: FeatureContribution[];
   val_error: number | null;
   directional_accuracy?: number | null;
+  target_year?: number | null;
+  drift_years?: number | null;
+  drift_note?: string | null;
   hypothesis: boolean;
   trace: TraceNode;
 };
