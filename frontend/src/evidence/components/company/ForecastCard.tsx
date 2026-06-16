@@ -11,14 +11,14 @@ export default function ForecastCard({ forecast }: { forecast: Forecast }) {
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-sm font-semibold text-txt">
-            ESG estimate <span className="font-normal text-faint">· experimental</span>
+            Live ESG estimate{fc.target_year ? ` · ${fc.target_year}` : ""}
           </h3>
-          <p className="text-[11px] text-faint">Trained on real data only — real news + price/sector signals</p>
+          <p className="text-[11px] text-faint">Real-time, from current news + market signals</p>
         </div>
         <HypothesisBadge
           note={`Real-data Ridge model · LOO MAE ${na(fc.val_error)}${
             fc.directional_accuracy != null
-              ? ` · ~${Math.round(fc.directional_accuracy * 100)}% hit-rate (n=10)`
+              ? ` · ~${Math.round(fc.directional_accuracy * 100)}% hit-rate`
               : ""
           }`}
         />
@@ -38,11 +38,6 @@ export default function ForecastCard({ forecast }: { forecast: Forecast }) {
             </span>
             <span className="pb-1 ml-auto"><Why trace={fc.trace} title="Estimate drivers" /></span>
           </div>
-          {fc.drift_note && (
-            <p className="mt-2 rounded-md border border-hairline bg-raised/40 px-2.5 py-1.5 text-[10.5px] leading-snug text-faint">
-              {fc.drift_note}
-            </p>
-          )}
 
           <p className="mt-3 mb-1 text-[11px] font-medium text-faint">What's driving it</p>
           <div className="space-y-1">

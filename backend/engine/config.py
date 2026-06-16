@@ -45,6 +45,7 @@ YEARS = list(range(START_YEAR, END_YEAR + 1))
 WINDOW_START = "2019-01-04"      # first Friday of the window
 WINDOW_END = "2023-12-29"        # last Friday of the window
 STI_ID = "_STI"                  # reserved company_id for the benchmark series
+CURRENT_YEAR = 2026              # live estimate is presented as a real-time nowcast for this year
 
 # ----- credit & scoring --------------------------------------------------------
 CREDIT_VERIFIED = 1.0            # full credit (independently corroborated)

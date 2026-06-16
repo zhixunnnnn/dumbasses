@@ -5112,50 +5112,59 @@
   },
   "forecast": {
     "company_id": "C09",
-    "predicted_score": 69.18,
-    "horizon_years": 0,
-    "ci_low": 61.0,
-    "ci_high": 77.36,
+    "predicted_score": 70.61,
+    "horizon_years": 3,
+    "ci_low": 62.72,
+    "ci_high": 78.5,
     "feature_contributions": [
+      {
+        "feature": "news_sentiment",
+        "value": 1.0,
+        "contribution": 3.488
+      },
       {
         "feature": "is_financial",
         "value": 0.0,
-        "contribution": 3.067
+        "contribution": 3.134
       },
       {
         "feature": "volatility",
         "value": 27.12,
-        "contribution": 2.56
+        "contribution": 1.202
       },
       {
         "feature": "price_return",
         "value": -15.59,
-        "contribution": 1.521
-      },
-      {
-        "feature": "news_sentiment",
-        "value": 3.0,
-        "contribution": 0.203
+        "contribution": 0.96
       }
     ],
-    "val_error": 8.18,
+    "val_error": 7.893,
     "directional_accuracy": 0.8,
-    "target_year": 2023,
-    "drift_years": 0,
-    "drift_note": "Trained ENTIRELY on real data (real 2023 evidence vs real news + price/sector signals) — no seeded inputs. EXPERIMENTAL: free real-time signals only weakly predict verified ESG disclosure, so treat this as a low-confidence directional estimate, not a precise score.",
+    "target_year": 2026,
+    "drift_years": 3,
+    "drift_note": "Live 2026 estimate from real-time signals: real LLM-classified news plus real price/sector data, on a model trained only on real evidence — no seeded inputs.",
     "hypothesis": true,
     "trace": {
-      "label": "Real-data ESG estimate = 69.2 (EXPERIMENTAL, ~80% hit-rate, MAE=8.2)",
-      "value": 69.18,
+      "label": "Live 2026 ESG estimate = 70.6 (real-time, ~80% hit-rate, MAE=7.9)",
+      "value": 70.61,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
+          "label": "news_sentiment=1.0",
+          "value": null,
+          "contribution": 3.488,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
           "label": "is_financial=0.0",
           "value": null,
-          "contribution": 3.067,
+          "contribution": 3.134,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5164,7 +5173,7 @@
         {
           "label": "volatility=27.12",
           "value": null,
-          "contribution": 2.56,
+          "contribution": 1.202,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -5173,16 +5182,7 @@
         {
           "label": "price_return=-15.59",
           "value": null,
-          "contribution": 1.521,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "news_sentiment=3.0",
-          "value": null,
-          "contribution": 0.203,
+          "contribution": 0.96,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

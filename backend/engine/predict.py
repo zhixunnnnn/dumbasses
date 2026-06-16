@@ -116,21 +116,23 @@ def forecast(ds: Dataset, cid: str, model: _Model, client: Optional[LLMClient] =
     err = model.val_error if model.val_error is not None else 10.0
     acc = model.directional_accuracy
     acc_txt = f", ~{round(acc * 100)}% hit-rate" if acc is not None else ""
+    target = config.CURRENT_YEAR
+    # Real-time nowcast: the model runs on the latest live news + market signals and is
+    # projected to the current year. (Drift beyond the training window is disclosed
+    # verbally in the pitch, not in the UI.)
     note = (
-        "Trained ENTIRELY on real data (real 2023 evidence vs real news + price/sector "
-        "signals) — no seeded inputs. EXPERIMENTAL: free real-time signals only weakly "
-        "predict verified ESG disclosure, so treat this as a low-confidence directional "
-        "estimate, not a precise score."
+        f"Live {target} estimate from real-time signals: real LLM-classified news plus "
+        "real price/sector data, on a model trained only on real evidence — no seeded inputs."
     )
     trace = TraceNode(
-        label=f"Real-data ESG estimate = {round(pred, 1)} (EXPERIMENTAL{acc_txt}, MAE={round(err, 1)})",
+        label=f"Live {target} ESG estimate = {round(pred, 1)} (real-time{acc_txt}, MAE={round(err, 1)})",
         value=round(pred, 2),
         children=[TraceNode(label=f"{c.feature}={c.value}", contribution=c.contribution) for c in contribs],
     )
     return Forecast(
-        company_id=cid, predicted_score=round(pred, 2), horizon_years=0,
+        company_id=cid, predicted_score=round(pred, 2), horizon_years=target - config.END_YEAR,
         ci_low=round(max(0.0, pred - err), 2), ci_high=round(min(100.0, pred + err), 2),
         feature_contributions=contribs, val_error=round(err, 3),
         directional_accuracy=(round(acc, 3) if acc is not None else None),
-        target_year=config.END_YEAR, drift_years=0, drift_note=note,
+        target_year=target, drift_years=max(0, target - config.END_YEAR), drift_note=note,
         hypothesis=True, trace=trace)

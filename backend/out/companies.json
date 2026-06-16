@@ -14,7 +14,7 @@
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 63.06,
+    "forecast": 63.26,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -53,7 +53,7 @@
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
     "compliance_score": 0.0,
-    "forecast": 66.02,
+    "forecast": 63.0,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -87,7 +87,7 @@
     "quadrant": "HIDDEN_WINNERS",
     "is_underpriced_improver": true,
     "compliance_score": 0.333,
-    "forecast": 66.1,
+    "forecast": 65.4,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -126,7 +126,7 @@
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 66.92,
+    "forecast": 69.96,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -160,7 +160,7 @@
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 53.44,
+    "forecast": 52.1,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -204,7 +204,7 @@
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 51.1,
+    "forecast": 51.75,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -248,7 +248,7 @@
     "quadrant": "VALUE_TRAPS",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 53.15,
+    "forecast": 53.98,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -292,7 +292,7 @@
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 65.96,
+    "forecast": 66.98,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -326,7 +326,7 @@
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 69.18,
+    "forecast": 70.61,
     "regulations": [
       {
         "reg_id": "SGX-711B",
@@ -360,7 +360,7 @@
     "quadrant": "OVERRATED",
     "is_underpriced_improver": false,
     "compliance_score": 0.0,
-    "forecast": 63.33,
+    "forecast": 61.2,
     "regulations": [
       {
         "reg_id": "SGX-711B",
