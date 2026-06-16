@@ -18,6 +18,9 @@ export default function ClaimTable({
   sourceTitle?: string;
 }) {
   const [open, setOpen] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState(false);
+  const LIMIT = 5;
+  const shown = showAll ? claims : claims.slice(0, LIMIT);
   return (
     <div className="rounded-xl border border-hairline bg-surface shadow-panel">
       <div className="flex items-start justify-between gap-3 border-b border-hairline px-4 py-3">
@@ -40,8 +43,8 @@ export default function ClaimTable({
           </a>
         )}
       </div>
-      <div className="divide-y divide-hairline/60">
-        {claims.map((c, i) => (
+      <div className={`divide-y divide-hairline/60${showAll ? " max-h-[440px] overflow-y-auto" : ""}`}>
+        {shown.map((c, i) => (
           <div key={i}>
             <button
               onClick={() => setOpen(open === i ? null : i)}
@@ -131,15 +134,27 @@ export default function ClaimTable({
             )}
           </div>
         ))}
-        {absent.map((a) => (
-          <div key={a.topic_id} className="flex items-center gap-3 px-4 py-2.5 opacity-70">
-            <StateBadge state="ABSENT" />
-            <p className="text-[12.5px] text-faint">
-              {TOPIC_LABEL(a.topic_id)} — <span className="italic">material topic, undisclosed</span>
-            </p>
-          </div>
-        ))}
       </div>
+      {claims.length > LIMIT && (
+        <button
+          onClick={() => setShowAll((v) => !v)}
+          className="w-full border-t border-hairline px-4 py-2.5 text-[12px] font-medium text-pos transition hover:bg-raised/40"
+        >
+          {showAll ? "Show fewer" : `Show ${claims.length - LIMIT} more claim${claims.length - LIMIT === 1 ? "" : "s"}`}
+        </button>
+      )}
+      {absent.length > 0 && (
+        <div className="divide-y divide-hairline/60 border-t border-hairline">
+          {absent.map((a) => (
+            <div key={a.topic_id} className="flex items-center gap-3 px-4 py-2.5 opacity-70">
+              <StateBadge state="ABSENT" />
+              <p className="text-[12.5px] text-faint">
+                {TOPIC_LABEL(a.topic_id)} — <span className="italic">material topic, undisclosed</span>
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
