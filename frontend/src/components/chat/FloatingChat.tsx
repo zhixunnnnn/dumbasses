@@ -46,7 +46,7 @@ export default function FloatingChat() {
         <button
           onClick={openChat}
           className="fixed bottom-5 right-5 z-30 flex h-12 w-12 items-center justify-center rounded-full bg-pos text-canvas shadow-float transition hover:brightness-110"
-          aria-label="Open AI assistant"
+          aria-label="Open AI agent"
         >
           <MessageSquareText size={20} />
         </button>

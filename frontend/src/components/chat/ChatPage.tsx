@@ -33,7 +33,7 @@ export default function ChatPage() {
             <Sparkles size={18} />
           </div>
           <div>
-            <h1 className="text-lg font-semibold">AI Assistant</h1>
+            <h1 className="text-lg font-semibold">AI Agent</h1>
             <p className="text-sm text-muted">
               Conversational ESG research across the full universe
             </p>

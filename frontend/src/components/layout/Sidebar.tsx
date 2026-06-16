@@ -21,7 +21,7 @@ type NavItem = {
 
 const PRIMARY: NavItem[] = [
   { key: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={17} /> },
-  { key: "assistant", label: "AI Assistant", icon: <Sparkles size={17} /> },
+  { key: "assistant", label: "AI Agent", icon: <Sparkles size={17} /> },
 ];
 
 const ENGINE: NavItem[] = [

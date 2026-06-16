@@ -44,7 +44,7 @@ export default function WatchlistsPage() {
             Watchlists
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            Track selected companies from Explore and keep the assistant aware
+            Track selected companies from Explore and keep the agent aware
             of the names you care about.
           </p>
         </div>
@@ -89,7 +89,7 @@ export default function WatchlistsPage() {
             <h2 className="mt-4 text-lg font-semibold">No companies saved yet</h2>
             <p className="mx-auto mt-2 max-w-md text-sm text-muted">
               Use Explore to add companies. They will appear here and become
-              part of the assistant page context.
+              part of the agent page context.
             </p>
             <button
               onClick={() => navigate({ name: "explore" })}
@@ -146,9 +146,9 @@ export default function WatchlistsPage() {
             </Reveal>
 
             <Reveal delay={120}>
-              <Panel title="Assistant context">
+              <Panel title="Agent context">
                 <p className="text-sm leading-relaxed text-muted">
-                  The full-page assistant and floating chat receive this
+                  The full-page agent and floating chat receive this
                   watchlist as page context, so questions can reference saved
                   companies, sectors, scores, and risk signals directly.
                 </p>
