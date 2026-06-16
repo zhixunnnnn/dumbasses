@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sparkles, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import ChatThread from "./ChatThread";
 import { useChat, type ChatSessionSummary } from "./useChat";
 
@@ -27,16 +27,25 @@ export default function ChatPage() {
 
   return (
     <div className="mx-auto flex h-full w-full max-w-7xl flex-col px-6 py-6 sm:px-10 lg:px-12">
-      <header className="pb-5">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-pos/15 text-pos">
-            <Sparkles size={18} />
-          </div>
-          <div>
-            <h1 className="text-lg font-semibold">AI Agent</h1>
-            <p className="text-sm text-muted">
+      <header className="mb-5 border-b border-hairline pb-4">
+        <div className="flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <p className="text-[10.5px] font-medium uppercase tracking-[0.2em] text-faint">
+              ESG Intelligence
+            </p>
+            <h1 className="mt-1.5 text-[22px] font-semibold leading-none tracking-tight text-txt">
+              AI Agent
+            </h1>
+            <p className="mt-2 text-[13px] leading-snug text-muted">
               Conversational ESG research across the full universe
             </p>
+          </div>
+          <div className="mt-0.5 hidden shrink-0 items-center gap-1.5 sm:flex">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pos/60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-pos" />
+            </span>
+            <span className="text-[11px] font-medium tracking-wide text-muted">Live</span>
           </div>
         </div>
       </header>
