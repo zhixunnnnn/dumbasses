@@ -53,7 +53,7 @@ export default function DashboardPage() {
 
       <StatRow rows={filtered} news={news.data} />
 
-      <div className="grid grid-cols-1 gap-5 lg:grid-cols-[1.7fr_1fr]">
+      <div className="grid grid-cols-1 items-start gap-5 lg:grid-cols-[1.7fr_1fr]">
         <div className="space-y-5">
           <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
             <div className="mb-1 flex items-center justify-between">
