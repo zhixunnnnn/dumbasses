@@ -45,8 +45,11 @@ class _Model:
 
 
 def _real_features(ds: Dataset, cid: str) -> Optional[list[float]]:
-    """REAL signals only — no seeded inputs. None if a company lacks real prices."""
-    closes = [c.close for c in ds.prices.get(cid, []) if c.close]
+    """REAL signals only — no seeded inputs. None if a company lacks real prices.
+    Price features are clipped to END_YEAR so the model never uses post-target prices
+    (the Price Witness chart keeps the full series to today — that's separate)."""
+    cutoff = f"{config.END_YEAR}-12-31"
+    closes = [c.close for c in ds.prices.get(cid, []) if c.close and c.week_date <= cutoff]
     if len(closes) < 10:
         return None
     ret = (closes[-1] / closes[0] - 1.0) * 100.0

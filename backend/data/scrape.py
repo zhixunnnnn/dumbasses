@@ -132,7 +132,7 @@ def _insert_price_rows(conn, cid: str, rows: list[tuple[str, float, float, float
 
 def scrape_prices(conn, offline: bool = False) -> int:
     p1 = int(dt.datetime(config.START_YEAR, 1, 1).timestamp())
-    p2 = int(dt.datetime(config.END_YEAR, 12, 31).timestamp())
+    p2 = int(dt.datetime(config.PRICE_END_YEAR, 12, 31).timestamp())
     total = 0
     for cid, sym in _demo_tickers(conn):
         url = YF_CHART.format(sym=sym.replace("^", "%5E"), p1=p1, p2=p2)
@@ -162,7 +162,7 @@ def scrape_prices(conn, offline: bool = False) -> int:
         if not rows:
             mw_sym = _marketwatch_symbol(sym)
             if mw_sym:
-                mw_url = MW_DOWNLOAD.format(sym=mw_sym, start=config.START_YEAR, end=config.END_YEAR)
+                mw_url = MW_DOWNLOAD.format(sym=mw_sym, start=config.START_YEAR, end=config.PRICE_END_YEAR)
                 mw_body = brightdata.fetch_or_cache(
                     "marketwatch_prices",
                     sym,
