@@ -10,6 +10,9 @@ Run from the repo root so the absolute ``backend.*`` engine imports resolve:
 from __future__ import annotations
 
 import json
+import os
+from datetime import datetime, timezone
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,7 +25,9 @@ from backend.engine.pipeline import build
 from .agent import (
     AssistantRequest,
     AssistantResponse,
+    ChatMessage,
     OpenRouterAgent,
+    ToolResult,
     collect_company_esg_news,
 )
 from .chat_history import (
@@ -58,6 +63,51 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# --------------------------------------------------------------------------- #
+# Agent rate limit — the site is public, so a global per-day cap on AI messages
+# bounds API cost (the dashboard and all data stay unrestricted). Persisted to a
+# gitignored file so the cap survives restarts.
+# --------------------------------------------------------------------------- #
+AGENT_DAILY_LIMIT = int(os.environ.get("AGENT_DAILY_LIMIT", "100"))
+_RATE_FILE = Path(__file__).resolve().parents[2] / "cache" / "agent" / "agent_rate.json"
+
+
+def _agent_rate_allow() -> bool:
+    """Count one agent message against today's global cap. Returns False once the
+    daily limit is reached, so the costly LLM call is skipped."""
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    try:
+        data = json.loads(_RATE_FILE.read_text("utf-8")) if _RATE_FILE.exists() else {}
+    except Exception:
+        data = {}
+    if data.get("date") != today:
+        data = {"date": today, "count": 0}
+    if int(data.get("count", 0)) >= AGENT_DAILY_LIMIT:
+        return False
+    data["count"] = int(data.get("count", 0)) + 1
+    try:
+        _RATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        _RATE_FILE.write_text(json.dumps(data), "utf-8")
+    except Exception:
+        pass
+    return True
+
+
+def _rate_limited_response() -> AssistantResponse:
+    note = (
+        f"The shared daily limit of {AGENT_DAILY_LIMIT} AI messages has been "
+        "reached. The dashboard and all data are still fully available — please "
+        "try the assistant again tomorrow."
+    )
+    return AssistantResponse(
+        message=ChatMessage(role="assistant", content=note),
+        tool_results=[
+            ToolResult(name="rate_limit", status="error", summary=note, source_count=0)
+        ],
+        model=agent.model,
+    )
 
 
 # --------------------------------------------------------------------------- #
@@ -225,6 +275,8 @@ def delete_assistant_session(session_id: str) -> Response:
 
 @app.post("/api/assistant/chat", response_model=AssistantResponse)
 async def assistant_chat(request: AssistantRequest) -> AssistantResponse:
+    if not _agent_rate_allow():
+        return _rate_limited_response()
     session = chat_history.ensure_session(request.session_id)
     effective_request = request.model_copy(update={"session_id": session.id})
     persist_latest_user_message(session.id, request)
@@ -239,6 +291,14 @@ async def assistant_chat(request: AssistantRequest) -> AssistantResponse:
 
 @app.post("/api/assistant/chat/stream")
 async def assistant_chat_stream(request: AssistantRequest) -> StreamingResponse:
+    if not _agent_rate_allow():
+        async def limited():
+            yield json.dumps(
+                {"type": "final", "response": _rate_limited_response().model_dump(by_alias=True)},
+                ensure_ascii=False,
+            ) + "\n"
+
+        return StreamingResponse(limited(), media_type="application/x-ndjson")
     session = chat_history.ensure_session(request.session_id)
     effective_request = request.model_copy(update={"session_id": session.id})
     persist_latest_user_message(session.id, request)

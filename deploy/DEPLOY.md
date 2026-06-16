@@ -1,12 +1,12 @@
-# Deploy — `wspsquad-polyfintech.ngyuhang.com` (VPS + Cloudflare Tunnel + login gate)
+# Deploy — `wspsquad-polyfintech.ngyuhang.com` (VPS + Cloudflare Tunnel)
 
-Hosts the full stack on a VPS, 24/7, behind a username/password gate, reachable
-only via a Cloudflare Tunnel. **No inbound ports are opened** and the VPS IP is
-never exposed — cloudflared dials out to Cloudflare, and a login is required
-before the page *or* the API loads.
+Hosts the full stack on a VPS, 24/7, reachable only via a Cloudflare Tunnel.
+**No inbound ports are opened** and the VPS IP is never exposed — cloudflared
+dials out to Cloudflare. The site is **public** (no login); abuse is bounded by
+a per-day cap on AI messages (below), and the API keys stay server-side only.
 
 ```
-Browser ──HTTPS──▶ Cloudflare edge ──tunnel──▶ cloudflared ──▶ Caddy (:8080, Basic Auth)
+Browser ──HTTPS──▶ Cloudflare edge ──tunnel──▶ cloudflared ──▶ Caddy (:8080)
                                                                   ├─ /api/*  ▶ uvicorn (127.0.0.1:8000)
                                                                   └─ /       ▶ frontend/dist (SPA)
 ```
@@ -15,18 +15,17 @@ Assumes **Ubuntu 22.04/24.04** and that `ngyuhang.com` is already on Cloudflare
 (it is). Adjust the user (`ubuntu`) and paths if yours differ — they appear in
 the Caddyfile, the cloudflared config, and all three systemd units.
 
-The login is **HTTP Basic Auth at Caddy**, with credentials read from `.env`
-(`BASIC_AUTH_USER` and `BASIC_AUTH_HASH`, the bcrypt hash). The username and
-password live **only in your `.env`** — they are intentionally not written into
-this committed file.
+There is **no login**. The AI agent is rate-limited to `AGENT_DAILY_LIMIT`
+messages per day (default 100) to bound API cost; everything else is open. API
+keys are used only by the backend and are never sent to the browser.
 
 ---
 
 ## 0. Prerequisites
 - A VPS you can SSH into (this guide uses user `ubuntu`, home `/home/ubuntu`).
 - `ngyuhang.com` managed in Cloudflare DNS.
-- The `.env` file (NOT in git) copied to the VPS — it carries the API keys **and**
-  the `BASIC_AUTH_*` values. Keep it at the repo root: `WSP-Squad-Polyfintech-2026/.env`.
+- The `.env` file (NOT in git) copied to the VPS — it carries the API keys. Keep
+  it at the repo root: `WSP-Squad-Polyfintech-2026/.env`.
 
 ## 1. Clone the repo + drop in .env
 ```bash
@@ -95,9 +94,9 @@ journalctl -u wspsquad-tunnel -n 30 --no-pager
 ```
 
 ## 7. Verify
-- Visit **https://wspsquad-polyfintech.ngyuhang.com** → browser asks for login →
-  enter the `BASIC_AUTH_USER` + password from your `.env` → dashboard loads.
-- The chat works (it carries the same login automatically on its `/api` calls).
+- Visit **https://wspsquad-polyfintech.ngyuhang.com** → the dashboard loads (no login).
+- The AI agent works; after `AGENT_DAILY_LIMIT` messages in a day it returns a
+  "daily limit reached" message until the next UTC day.
 
 ---
 
@@ -110,19 +109,18 @@ cd frontend && npm ci && npm run build && cd ..
 sudo systemctl restart wspsquad-backend wspsquad-caddy
 ```
 
-## Changing the login
-Regenerate the hash and update `.env`, then restart Caddy:
+## Changing the rate limit
+Set `AGENT_DAILY_LIMIT` in `.env` (default 100), then restart the backend:
 ```bash
-caddy hash-password --plaintext 'NEW_PASSWORD'   # paste output into BASIC_AUTH_HASH
-sudo systemctl restart wspsquad-caddy
+sudo systemctl restart wspsquad-backend
 ```
 
 ## Security notes
-- **Everything is gated.** Basic Auth covers the SPA and `/api` (including the
-  agent), so nobody can hit your OpenRouter / Bright Data keys without the login.
+- **API cost is bounded** by the agent's daily message cap; the dashboard/data
+  endpoints are cheap static reads and stay open.
+- **Keys never reach the browser.** OpenRouter / Bright Data keys are used only by
+  the backend; the frontend calls `/api/*` and never sees them.
 - **Nothing is exposed.** Backend and Caddy bind to localhost; the only path in
   is the tunnel. You can leave the VPS firewall closed to all inbound except SSH.
-- **`.env` carries real secrets** (API keys + the auth hash). Keep it `chmod 600`,
-  never commit it, and be deliberate about who you hand it to.
-- If a credential ever leaks, rotate the OpenRouter / Bright Data keys and change
-  the Basic Auth password.
+- **`.env` carries real secrets** (API keys). Keep it `chmod 600`, never commit it,
+  and rotate the keys if one ever leaks.
