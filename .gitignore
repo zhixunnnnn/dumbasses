@@ -10,3 +10,4 @@ __pycache__
 backend/tests/.tmp
 backend/cache/brightdata/
 backend/uvicorn_*.log
+cache/agent/

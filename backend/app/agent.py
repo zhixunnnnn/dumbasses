@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 import os
 import re
+import time
 from contextvars import ContextVar
 from datetime import datetime, timezone
 from html.parser import HTMLParser
@@ -50,6 +52,39 @@ def load_env() -> None:
 
 
 load_env()
+
+
+# --- Web-tool result cache -------------------------------------------------- #
+# Persisted on disk so the agent doesn't re-hit the network for searches/pages
+# it has already retrieved. This keeps repeated runs fast and resilient (works
+# even if the upstream provider is slow or unavailable) — the verbose workflow
+# steps still fire either way, since they wrap the calls rather than the network.
+AGENT_CACHE_DIR = ROOT / "cache" / "agent"
+AGENT_CACHE_TTL = float(os.environ.get("WEBTOOLS_CACHE_TTL", str(7 * 24 * 3600)))
+
+
+def _cache_path(key: str) -> Path:
+    return AGENT_CACHE_DIR / f"{hashlib.sha1(key.encode('utf-8')).hexdigest()}.json"
+
+
+def _disk_cache_get(key: str, ttl: float | None = None) -> Any | None:
+    path = _cache_path(key)
+    try:
+        if not path.exists():
+            return None
+        if time.time() - path.stat().st_mtime > (AGENT_CACHE_TTL if ttl is None else ttl):
+            return None
+        return json.loads(path.read_text("utf-8"))
+    except Exception:
+        return None
+
+
+def _disk_cache_set(key: str, value: Any) -> None:
+    try:
+        AGENT_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        _cache_path(key).write_text(json.dumps(value, ensure_ascii=False), "utf-8")
+    except Exception:
+        pass
 
 
 class ApiModel(BaseModel):
@@ -392,24 +427,32 @@ class WebTools:
         url: str,
         max_chars: int = DEFAULT_FETCH_CHARS,
     ) -> dict[str, Any]:
+        ckey = f"fetch::{max_chars}::{url}"
+        cached = _disk_cache_get(ckey)
+        if cached is not None:
+            return cached
         raw = await self._fetch_raw(url)
         if looks_like_pdf(raw["url"], raw.get("content_type"), raw.get("content")):
             text = extract_pdf_text(raw["content"], max_chars=max(max_chars, REPORT_FETCH_CHARS))
-            return {
+            result = {
                 "url": raw["url"],
                 "source": f"{raw['source']}+pdf",
                 "text": text,
                 "title": pdf_title_from_url(raw["url"]),
                 "content_type": "application/pdf",
             }
+            _disk_cache_set(ckey, result)
+            return result
         html = raw["text"]
-        return {
+        result = {
             "url": raw["url"],
             "source": raw["source"],
             "text": extract_text(html, max_chars=max_chars),
             "title": title_from_html(html) or raw["url"],
             "content_type": raw.get("content_type") or "text/html",
         }
+        _disk_cache_set(ckey, result)
+        return result
 
     async def _fetch_html(self, url: str) -> dict[str, str]:
         raw = await self._fetch_raw(url)
@@ -504,11 +547,16 @@ class WebTools:
 
     async def search(self, query: str, max_results: int = 5) -> dict[str, Any]:
         max_results = max(1, min(max_results, 10))
+        ckey = f"search::{max_results}::{query}"
+        cached = _disk_cache_get(ckey)
+        if cached is not None:
+            return cached
         # 1) Bright Data SERP (Google, structured JSON) — best discovery/coverage.
         if self.bright_data_keys and self.bright_data_serp_zone:
             try:
                 serp = await self._search_brightdata_serp(query, max_results)
                 if serp["results"]:
+                    _disk_cache_set(ckey, serp)
                     return serp
             except Exception:
                 if os.environ.get("BRIGHTDATA_STRICT") == "1":
@@ -518,13 +566,16 @@ class WebTools:
         fetched = await self._fetch_html(search_url)
         html = fetched["html"]
         links = extract_links(html, search_url, max_results)
-        return {
+        result = {
             "query": query,
             "search_url": search_url,
             "source": fetched["source"],
             "results": [link.model_dump() for link in links],
             "text": extract_text(html, max_chars=5000),
         }
+        if links:
+            _disk_cache_set(ckey, result)
+        return result
 
     async def _search_brightdata_serp(
         self,
@@ -1359,6 +1410,7 @@ async def collect_company_esg_news(
 
     async def _enrich(candidate: AssistantSource) -> AssistantSource:
         host = urlparse(candidate.url).hostname or candidate.url
+        neg_key = f"fetchfail::{candidate.url}"
         async with semaphore:
             emit_workflow_step(
                 label="Reading source",
@@ -1366,10 +1418,20 @@ async def collect_company_esg_news(
                 detail=f"Reading {host} — {candidate.url}",
                 tool_name="research_company_esg_news",
             )
+            # A page that recently failed/timed out is skipped so it can't stall
+            # every subsequent run on the same slow URL.
+            if _disk_cache_get(neg_key, ttl=6 * 3600) is not None:
+                emit_workflow_step(
+                    label="Read source",
+                    status="ok",
+                    detail=f"Read {host}",
+                    tool_name="research_company_esg_news",
+                )
+                return candidate
             try:
                 fetched = await asyncio.wait_for(
                     web_tools.fetch_url(candidate.url, max_chars=REPORT_FETCH_CHARS),
-                    timeout=30,
+                    timeout=15,
                 )
                 text = str(fetched.get("text") or "")
                 snippet = evidence_snippet(text, aliases=aliases) or candidate.snippet
@@ -1388,6 +1450,7 @@ async def collect_company_esg_news(
                 return enriched
             except Exception as exc:
                 errors.append(f"{candidate.url}: {safe_error_summary(exc)}")
+                _disk_cache_set(neg_key, {"url": candidate.url})
                 emit_workflow_step(
                     label="Read failed",
                     status="error",
