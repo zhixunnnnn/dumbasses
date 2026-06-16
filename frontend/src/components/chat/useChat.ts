@@ -88,6 +88,7 @@ type ChatContextValue = {
   page: ConversationApi;
   floating: ConversationApi;
   deleteSession: (sessionId: string) => Promise<void>;
+  refreshSessions: () => Promise<ChatSessionSummary[]>;
 };
 
 const WELCOME: ChatMessage = {
@@ -153,8 +154,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   );
 
   const value = useMemo(
-    () => ({ sessions, page, floating, deleteSession }),
-    [sessions, page, floating, deleteSession],
+    () => ({ sessions, page, floating, deleteSession, refreshSessions: loadSessions }),
+    [sessions, page, floating, deleteSession, loadSessions],
   );
 
   return createElement(ChatContext.Provider, { value }, children);
@@ -215,9 +216,19 @@ function useConversation(
   const selectSession = useCallback(
     async (sessionId: string) => {
       if (pending || sessionId === activeSessionId) return;
-      await loadSession(sessionId);
+      try {
+        await loadSession(sessionId);
+      } catch {
+        // The session was likely deleted elsewhere (stale list) — re-sync from
+        // the backend so the dead row disappears instead of silently failing.
+        try {
+          await loadSessions();
+        } catch {
+          /* ignore */
+        }
+      }
     },
-    [activeSessionId, loadSession, pending],
+    [activeSessionId, loadSession, loadSessions, pending],
   );
 
   // Drop the active session and reset to an empty chat without touching the
@@ -405,6 +416,7 @@ export function useChat(surface: ChatSurface = "page") {
     ...conversation,
     sessions: ctx.sessions,
     deleteSession: ctx.deleteSession,
+    refreshSessions: ctx.refreshSessions,
   };
 }
 

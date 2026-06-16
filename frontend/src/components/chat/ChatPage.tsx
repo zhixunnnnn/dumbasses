@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Trash2 } from "lucide-react";
 import ChatThread from "./ChatThread";
 import { useChat, type ChatSessionSummary } from "./useChat";
@@ -10,9 +10,16 @@ export default function ChatPage() {
     createSession,
     selectSession,
     deleteSession,
+    refreshSessions,
     pending,
   } = useChat();
   const [deleteError, setDeleteError] = useState<string | null>(null);
+
+  // Re-sync the session list whenever the chat page opens, so rows can't go
+  // stale (deleted-elsewhere entries that 404 on click).
+  useEffect(() => {
+    void refreshSessions();
+  }, [refreshSessions]);
 
   const handleDeleteSession = async (sessionId: string) => {
     setDeleteError(null);
