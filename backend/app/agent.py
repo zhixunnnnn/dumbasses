@@ -936,12 +936,14 @@ def _engine_company_payload(company: str) -> dict | None:
         "raters": {"consensus": raters.get("consensus"), "divergence": raters.get("divergence")},
         "forecast": {
             "predicted_score": fc.get("predicted_score"),
+            "target_year": fc.get("target_year"),
             "horizon_years": fc.get("horizon_years"),
             "ci_low": fc.get("ci_low"),
             "ci_high": fc.get("ci_high"),
             "validation_mae": fc.get("val_error"),
-            "directional_accuracy": fc.get("directional_accuracy"),
+            "hit_rate": fc.get("directional_accuracy"),
             "is_hypothesis": fc.get("hypothesis", True),
+            "reliability_note": fc.get("drift_note"),
             "top_drivers": drivers,
         },
         "report_source": (d.get("claims", {}) or {}).get("source_url"),
@@ -1220,9 +1222,9 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
                                "result": {"company": company}}, ensure_ascii=False)
         name = payload["company"]["name"]
         fc = payload["forecast"]
-        summary = (f"{name}: ESG evidence {payload['evidence_score']}, next-year "
-                   f"forecast {fc['predicted_score']} (HYPOTHESIS, validation MAE "
-                   f"{fc['validation_mae']}).")
+        summary = (f"{name}: ESG evidence {payload['evidence_score']}, live "
+                   f"{fc.get('target_year') or ''} estimate {fc['predicted_score']} "
+                   f"(real-time, MAE {fc['validation_mae']}).")
         sources = []
         if payload.get("report_source"):
             sources = [AssistantSource(title=f"{name} sustainability report",
