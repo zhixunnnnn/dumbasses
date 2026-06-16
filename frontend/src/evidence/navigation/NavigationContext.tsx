@@ -13,6 +13,6 @@ export function useNavigation() {
     route: nav.route,
     navigate: nav.navigate,
     openCompany: (id: string) => nav.navigate({ name: "evidenceCompany", id }),
-    goBack: () => nav.navigate({ name: "evidence" }),
+    goBack: () => nav.navigate({ name: "dashboard" }),
   };
 }

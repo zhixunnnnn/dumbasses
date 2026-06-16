@@ -3,7 +3,6 @@ import {
   useNavigation,
 } from "./navigation/NavigationContext";
 import AppShell from "./components/layout/AppShell";
-import DashboardPage from "./components/dashboard/DashboardPage";
 import ChatPage from "./components/chat/ChatPage";
 import CompanyPage from "./components/company/CompanyPage";
 import SettingsPage from "./components/settings/SettingsPage";
@@ -23,13 +22,12 @@ function Routed() {
   return (
     <>
       <AppShell>
-        {route.name === "dashboard" && <DashboardPage />}
+        {route.name === "dashboard" && <EvidenceDashboard />}
         {route.name === "assistant" && <ChatPage />}
         {route.name === "explore" && <ExplorePage />}
         {route.name === "watchlists" && <WatchlistsPage />}
         {route.name === "settings" && <SettingsPage />}
         {route.name === "company" && <CompanyPage id={route.id} />}
-        {route.name === "evidence" && <EvidenceDashboard />}
         {route.name === "news" && <EvidenceNews />}
         {route.name === "evidenceCompany" && (
           <EvidenceCompany id={route.id} />

@@ -7,7 +7,6 @@ export type Route =
   | { name: "watchlists" }
   | { name: "settings" }
   | { name: "company"; id: string }
-  | { name: "evidence" }
   | { name: "news" }
   | { name: "evidenceCompany"; id: string };
 
