@@ -84,6 +84,7 @@ function SessionHistoryPanel({
   onDeleteSession: (sessionId: string) => Promise<void>;
   deleteError: string | null;
 }) {
+  const [confirmingId, setConfirmingId] = useState<string | null>(null);
   return (
     <aside className="min-h-0 rounded-2xl border border-hairline bg-surface p-3 shadow-panel">
       <div className="flex items-center justify-between gap-3">
@@ -133,21 +134,36 @@ function SessionHistoryPanel({
                   <span>{session.messageCount} msgs</span>
                 </span>
               </button>
-              <button
-                onClick={() => {
-                  if (
-                    window.confirm(`Delete chat "${session.title}"?`)
-                  ) {
-                    void onDeleteSession(session.id);
-                  }
-                }}
-                disabled={pending}
-                className="absolute right-2 top-2 rounded-md p-1.5 text-faint opacity-0 transition hover:bg-neg/10 hover:text-neg focus:opacity-100 group-hover:opacity-100 disabled:opacity-30"
-                aria-label={`Delete chat "${session.title}"`}
-                title="Delete chat"
-              >
-                <Trash2 size={14} />
-              </button>
+              {confirmingId === session.id ? (
+                <div className="absolute right-1.5 top-1.5 flex items-center gap-1">
+                  <button
+                    onClick={() => {
+                      setConfirmingId(null);
+                      void onDeleteSession(session.id);
+                    }}
+                    className="rounded-md bg-neg px-2 py-1 text-[10px] font-semibold text-canvas transition hover:brightness-110"
+                    title="Confirm delete"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={() => setConfirmingId(null)}
+                    className="rounded-md border border-hairline bg-surface px-2 py-1 text-[10px] font-medium text-muted transition hover:text-txt"
+                    title="Cancel"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setConfirmingId(session.id)}
+                  className="absolute right-2 top-2 rounded-md p-1.5 text-faint opacity-0 transition hover:bg-neg/10 hover:text-neg focus:opacity-100 group-hover:opacity-100"
+                  aria-label={`Delete chat "${session.title}"`}
+                  title="Delete chat"
+                >
+                  <Trash2 size={14} />
+                </button>
+              )}
             </div>
           );
         })}

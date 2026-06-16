@@ -429,13 +429,16 @@ function MessageArtifacts({ message }: { message: ChatMessage }) {
     (source) => !referencedUrls.has(dedupeUrlKey(source.url)),
   );
 
+  const steps = message.workflowSteps ?? [];
+  const hasSteps = steps.length > 0;
   const hasSources = sources.length > 0;
   const hasReferences = references.length > 0;
   const hasReport = Boolean(message.report);
-  if (!hasSources && !hasReferences && !hasReport) return null;
+  if (!hasSources && !hasReferences && !hasReport && !hasSteps) return null;
 
   return (
     <div className="mt-3 space-y-2 border-t border-hairline pt-3 text-xs">
+      {hasSteps && <ActivityTrail steps={steps} />}
       {hasReferences && <ReferenceArticles articles={references} />}
       {hasSources && (
         <div className="space-y-1.5">
@@ -464,6 +467,31 @@ function MessageArtifacts({ message }: { message: ChatMessage }) {
       )}
       {message.report && <ReportDownload message={message} />}
     </div>
+  );
+}
+
+function ActivityTrail({ steps }: { steps: WorkflowStep[] }) {
+  if (!steps.length) return null;
+  return (
+    <details className="rounded-md border border-hairline bg-canvas/40 px-2 py-1.5">
+      <summary className="flex cursor-pointer select-none items-center gap-1.5 text-[11px] font-medium text-muted">
+        <Wrench size={12} className="text-faint" />
+        {steps.length} step{steps.length === 1 ? "" : "s"} · what the agent did
+      </summary>
+      <div className="mt-1.5 space-y-1 border-t border-hairline/60 pt-1.5">
+        {steps.map((step, i) => (
+          <div key={`${step.label}-${i}`} className="flex items-start gap-1.5 text-[11px]">
+            <span className={step.status === "error" ? "text-neg" : "text-faint"}>•</span>
+            <span className="min-w-0">
+              <span className={step.status === "error" ? "font-medium text-neg" : "font-medium text-muted"}>
+                {step.label}
+              </span>
+              {step.detail && <span className="ml-1 text-faint">{step.detail}</span>}
+            </span>
+          </div>
+        ))}
+      </div>
+    </details>
   );
 }
 
