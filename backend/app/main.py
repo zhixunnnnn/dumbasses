@@ -304,14 +304,27 @@ async def assistant_chat_stream(request: AssistantRequest) -> StreamingResponse:
     persist_latest_user_message(session.id, request)
 
     async def events():
+        # Capture the detailed live trail (every search query + each URL opened)
+        # so the finished message preserves what was scraped — not just the coarse
+        # one-step-per-tool summary. Keep action starts + failures; drop the
+        # redundant "ok" confirmations.
+        live_steps: list[dict] = []
         async for event in agent.stream(effective_request):
+            if event.get("type") == "workflow" and event.get("step"):
+                step = event["step"]
+                if step.get("status") in ("running", "error"):
+                    live_steps.append(step)
             if event.get("type") == "final" and event.get("response"):
-                response = AssistantResponse(**event["response"])
+                resp_data = event["response"]
+                if live_steps:
+                    resp_data["workflowSteps"] = live_steps
+                response = AssistantResponse(**resp_data)
                 chat_history.append_assistant_response(
                     session.id,
                     response,
                     request.page_context,
                 )
+                event["response"] = response.model_dump(by_alias=True)
                 event["session"] = chat_history.get_session_summary(
                     session.id,
                 ).model_dump(by_alias=True)
