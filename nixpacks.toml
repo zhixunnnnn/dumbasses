@@ -1,7 +1,10 @@
 providers = ["python", "node"]
 
+[variables]
+NIXPACKS_NODE_VERSION = "22"
+
 [phases.setup]
-nixPkgs = ["python312", "nodejs_20"]
+nixPkgs = ["python312"]
 
 [phases.install]
 cmds = [
