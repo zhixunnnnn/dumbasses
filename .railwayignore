@@ -1,0 +1,14 @@
+.git
+.env
+.venv
+__pycache__
+*.pyc
+*.tsbuildinfo
+.pytest_cache
+frontend/node_modules
+frontend/dist
+frontend/.vite
+backend/.pytest_cache
+backend/cache/brightdata
+backend/uvicorn_*.log
+cache/agent

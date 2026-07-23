@@ -1,0 +1,17 @@
+providers = ["python", "node"]
+
+[phases.setup]
+nixPkgs = ["python312", "nodejs_20"]
+
+[phases.install]
+cmds = [
+  "python -m pip install --upgrade pip",
+  "python -m pip install -r backend/requirements.txt",
+  "npm ci --prefix frontend"
+]
+
+[phases.build]
+cmds = ["npm run build --prefix frontend"]
+
+[start]
+cmd = "python -m uvicorn backend.app.railway:app --host 0.0.0.0 --port ${PORT:-8000}"
