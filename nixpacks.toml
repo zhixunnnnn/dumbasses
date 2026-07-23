@@ -8,8 +8,9 @@ nixPkgs = ["python312"]
 
 [phases.install]
 cmds = [
-  "python -m pip install --upgrade pip",
-  "python -m pip install -r backend/requirements.txt",
+  "python -m venv /opt/venv",
+  "/opt/venv/bin/python -m pip install --upgrade pip",
+  "/opt/venv/bin/python -m pip install -r backend/requirements.txt",
   "npm ci --prefix frontend"
 ]
 
@@ -17,4 +18,4 @@ cmds = [
 cmds = ["npm run build --prefix frontend"]
 
 [start]
-cmd = "python -m uvicorn backend.app.railway:app --host 0.0.0.0 --port ${PORT:-8000}"
+cmd = "/opt/venv/bin/python -m uvicorn backend.app.railway:app --host 0.0.0.0 --port ${PORT:-8000}"
