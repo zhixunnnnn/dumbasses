@@ -1,0 +1,13 @@
+.git
+.env
+**/.env
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/*.log
+frontend/node_modules
+frontend/dist
+backend/cache/brightdata
+cache
+.claude
+.omx

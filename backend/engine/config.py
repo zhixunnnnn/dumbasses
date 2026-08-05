@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 from pathlib import Path
 
 # ----- paths -------------------------------------------------------------------
@@ -30,13 +31,24 @@ _load_dotenv()
 ENGINE_DIR = BACKEND_DIR / "engine"
 CONFIG_DIR = ENGINE_DIR / "config"
 DATA_DIR = BACKEND_DIR / "data"
-DB_PATH = DATA_DIR / "esg.db"
+RUNTIME_DATA_DIR = Path(
+    os.environ.get("POLYFINTECH_DATA_DIR")
+    or os.environ.get("RAILWAY_VOLUME_MOUNT_PATH")
+    or DATA_DIR
+).expanduser()
+DB_PATH = RUNTIME_DATA_DIR / "esg.db"
 CACHE_DIR = BACKEND_DIR / "cache"
 MODELS_DIR = BACKEND_DIR / "models"
 OUT_DIR = BACKEND_DIR / "out"
 
-for _d in (DATA_DIR, CACHE_DIR, MODELS_DIR, OUT_DIR):
+for _d in (RUNTIME_DATA_DIR, CACHE_DIR, MODELS_DIR, OUT_DIR):
     _d.mkdir(parents=True, exist_ok=True)
+
+# A fresh Railway volume starts empty. Seed it from the committed database once,
+# then let subsequent writes remain on the persistent volume.
+_BUNDLED_DB_PATH = DATA_DIR / "esg.db"
+if DB_PATH != _BUNDLED_DB_PATH and not DB_PATH.exists() and _BUNDLED_DB_PATH.exists():
+    shutil.copy2(_BUNDLED_DB_PATH, DB_PATH)
 
 # ----- analysis window ---------------------------------------------------------
 START_YEAR = 2019

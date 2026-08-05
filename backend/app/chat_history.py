@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import os
+import shutil
 import sqlite3
 import uuid
 from datetime import datetime, timezone
@@ -13,7 +15,29 @@ from .agent import AssistantResponse, ChatMessage
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_CHAT_HISTORY_DB = ROOT / "backend" / "data" / "chat_history.sqlite3"
+_BUNDLED_CHAT_HISTORY_DB = ROOT / "backend" / "data" / "chat_history.sqlite3"
+_RUNTIME_DATA_DIR = Path(
+    os.environ.get("POLYFINTECH_DATA_DIR")
+    or os.environ.get("RAILWAY_VOLUME_MOUNT_PATH")
+    or _BUNDLED_CHAT_HISTORY_DB.parent
+).expanduser()
+DEFAULT_CHAT_HISTORY_DB = Path(
+    os.environ.get("CHAT_HISTORY_DB_PATH")
+    or (_RUNTIME_DATA_DIR / "chat_history.sqlite3")
+).expanduser()
+
+
+def _seed_runtime_chat_history() -> None:
+    if (
+        DEFAULT_CHAT_HISTORY_DB != _BUNDLED_CHAT_HISTORY_DB
+        and not DEFAULT_CHAT_HISTORY_DB.exists()
+        and _BUNDLED_CHAT_HISTORY_DB.exists()
+    ):
+        DEFAULT_CHAT_HISTORY_DB.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(_BUNDLED_CHAT_HISTORY_DB, DEFAULT_CHAT_HISTORY_DB)
+
+
+_seed_runtime_chat_history()
 
 
 class ApiModel(BaseModel):
