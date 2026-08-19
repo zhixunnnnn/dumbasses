@@ -1,0 +1,25 @@
+{
+  "name": "PolyFintech ESG Intelligence",
+  "short_name": "ESG Intel",
+  "description": "Singapore ESG evidence, research, and agent workspace.",
+  "start_url": "/app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#161514",
+  "theme_color": "#161514",
+  "icons": [
+    {
+      "src": "/pwa-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

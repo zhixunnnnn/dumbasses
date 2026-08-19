@@ -26,6 +26,22 @@ from langchain_openrouter import ChatOpenRouter
 from langgraph.checkpoint.memory import InMemorySaver
 from pydantic import BaseModel, ConfigDict, Field
 
+from backend.engine.scrape_settings import enabled_providers
+from backend.engine.scraper_providers import (
+    fetch_crawl4ai,
+    fetch_oxylabs,
+    fetch_scrapedo,
+    search_oxylabs,
+    search_scrapedo,
+    search_searxng,
+)
+from backend.engine.source_intelligence import (
+    classify_domain,
+    domain_from_url,
+    get_company_intelligence,
+    run_research,
+)
+
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OPENROUTER_MODEL = "deepseek/deepseek-v4-flash"
@@ -107,6 +123,7 @@ class AssistantSource(ApiModel):
     url: str
     snippet: str | None = None
     source: str
+    source_class: str | None = Field(default=None, alias="sourceClass")
 
 
 class ReferenceArticle(ApiModel):
@@ -116,6 +133,7 @@ class ReferenceArticle(ApiModel):
     source: str
     kind: str = "article"
     reason: str | None = None
+    source_class: str | None = Field(default=None, alias="sourceClass")
 
 
 class ToolResult(ApiModel):
@@ -356,6 +374,11 @@ def normalize_search_url(url: str) -> str:
     return url
 
 
+def canonical_url_key(url: str) -> str:
+    normalized = normalize_search_url(url).split("#", 1)[0]
+    return normalized.rstrip("/")
+
+
 def require_public_url(url: str) -> str:
     parsed = urlparse(url)
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
@@ -422,12 +445,30 @@ class WebTools:
             "BRIGHT_DATA_SERP_ZONE",
         ) or ("serp_api1" if self.bright_data_keys else None)
 
+    def _enabled_providers(self) -> list[str]:
+        try:
+            return enabled_providers()
+        except Exception:
+            return ["brightdata"] if self.bright_data_keys else []
+
     async def fetch_url(
         self,
         url: str,
         max_chars: int = DEFAULT_FETCH_CHARS,
     ) -> dict[str, Any]:
-        ckey = f"fetch::{max_chars}::{url}"
+        enabled = self._enabled_providers()
+        credential_profile = hashlib.sha1(
+            "|".join(
+                [
+                    *self.bright_data_keys,
+                    os.environ.get("SCRAPEDO_API_TOKEN", ""),
+                    os.environ.get("OXYLABS_USERNAME", ""),
+                    os.environ.get("SEARXNG_BASE_URL", ""),
+                    os.environ.get("CRAWL4AI_BASE_URL", ""),
+                ]
+            ).encode("utf-8")
+        ).hexdigest()[:12]
+        ckey = f"fetch::{','.join(sorted(enabled))}::{credential_profile}::{max_chars}::{url}"
         cached = _disk_cache_get(ckey)
         if cached is not None:
             return cached
@@ -460,8 +501,13 @@ class WebTools:
 
     async def _fetch_raw(self, url: str) -> dict[str, Any]:
         safe_url = require_public_url(url)
+        enabled = self._enabled_providers()
         async with httpx.AsyncClient(timeout=60.0, follow_redirects=True) as client:
-            if self.bright_data_keys and self.bright_data_zone:
+            if (
+                "brightdata" in enabled
+                and self.bright_data_keys
+                and self.bright_data_zone
+            ):
                 try:
                     response, key_index = await self._request_brightdata(
                         client,
@@ -481,12 +527,47 @@ class WebTools:
                     if os.environ.get("BRIGHTDATA_STRICT") == "1":
                         raise
 
+            if "scrapedo" in enabled:
+                try:
+                    result = await fetch_scrapedo(safe_url, client)
+                    return {
+                        "url": result.url,
+                        "source": result.source,
+                        "content": result.content,
+                        "text": result.text,
+                        "content_type": result.content_type,
+                    }
+                except Exception:
+                    pass
+
+            if "oxylabs" in enabled:
+                try:
+                    result = await fetch_oxylabs(safe_url, client)
+                    return {
+                        "url": result.url,
+                        "source": result.source,
+                        "content": result.content,
+                        "text": result.text,
+                        "content_type": result.content_type,
+                    }
+                except Exception:
+                    pass
+
+            if "crawl4ai_searxng" in enabled:
+                try:
+                    result = await fetch_crawl4ai(safe_url, client)
+                    return {
+                        "url": result.url,
+                        "source": result.source,
+                        "content": result.content,
+                        "text": result.text,
+                        "content_type": result.content_type,
+                    }
+                except Exception:
+                    pass
+
             response = await self._fetch_native(client, safe_url)
-            source = (
-                "native_fetch_after_bright_data_error"
-                if self.bright_data_keys and self.bright_data_zone
-                else "native_fetch"
-            )
+            source = "native_fetch_after_provider_error" if enabled else "native_fetch"
             response.raise_for_status()
             return {
                 "url": str(response.url),
@@ -546,36 +627,127 @@ class WebTools:
         return last_response, len(self.bright_data_keys) - 1
 
     async def search(self, query: str, max_results: int = 5) -> dict[str, Any]:
-        max_results = max(1, min(max_results, 10))
-        ckey = f"search::{max_results}::{query}"
+        max_results = max(1, min(max_results, 25))
+        enabled = self._enabled_providers()
+        ckey = f"search::{','.join(sorted(enabled))}::{max_results}::{query}"
         cached = _disk_cache_get(ckey)
         if cached is not None:
             return cached
         # 1) Bright Data SERP (Google, structured JSON) — best discovery/coverage.
-        if self.bright_data_keys and self.bright_data_serp_zone:
-            try:
-                serp = await self._search_brightdata_serp(query, max_results)
-                if serp["results"]:
-                    _disk_cache_set(ckey, serp)
-                    return serp
-            except Exception:
-                if os.environ.get("BRIGHTDATA_STRICT") == "1":
-                    raise
-        # 2) Fallback: DuckDuckGo HTML (fetched via unlocker/native).
-        search_url = f"https://duckduckgo.com/html/?q={quote_plus(query)}"
-        fetched = await self._fetch_html(search_url)
-        html = fetched["html"]
-        links = extract_links(html, search_url, max_results)
+        tasks: list[tuple[str, Any]] = []
+        if (
+            "brightdata" in enabled
+            and self.bright_data_keys
+            and self.bright_data_serp_zone
+        ):
+            tasks.append(
+                (
+                    "bright_data_serp",
+                    self._search_brightdata_serp(query, max_results),
+                )
+            )
+
+        async with httpx.AsyncClient(timeout=60.0, follow_redirects=True) as client:
+            if "scrapedo" in enabled:
+                tasks.append(
+                    (
+                        "scrapedo_search",
+                        search_scrapedo(query, max_results, client),
+                    )
+                )
+            if "oxylabs" in enabled:
+                tasks.append(
+                    (
+                        "oxylabs_search",
+                        search_oxylabs(query, max_results, client),
+                    )
+                )
+            if "crawl4ai_searxng" in enabled:
+                tasks.append(
+                    (
+                        "searxng_search",
+                        search_searxng(query, max_results, client),
+                    )
+                )
+            gathered = (
+                await asyncio.gather(
+                    *(task for _, task in tasks),
+                    return_exceptions=True,
+                )
+                if tasks
+                else []
+            )
+
+        links: list[AssistantSource] = []
+        seen: set[str] = set()
+        providers_used: list[str] = []
+        for (provider_name, _), provider_result in zip(tasks, gathered):
+            if isinstance(provider_result, Exception):
+                if (
+                    provider_name == "bright_data_serp"
+                    and os.environ.get("BRIGHTDATA_STRICT") == "1"
+                ):
+                    raise provider_result
+                continue
+            raw_items = (
+                provider_result.get("results") or []
+                if isinstance(provider_result, dict)
+                else [item.__dict__ for item in provider_result]
+            )
+            added = 0
+            for item in raw_items:
+                source = AssistantSource(**item)
+                if source.source_class is None:
+                    source.source_class = classify_domain(domain_from_url(source.url))
+                key = canonical_url_key(source.url)
+                if not key or key in seen:
+                    continue
+                seen.add(key)
+                links.append(source)
+                added += 1
+            if added:
+                providers_used.append(provider_name)
+
+        try:
+            native_links = await self._search_native(query, max_results)
+        except Exception:
+            native_links = []
+        native_added = 0
+        for source in native_links:
+            if source.source_class is None:
+                source.source_class = classify_domain(domain_from_url(source.url))
+            key = canonical_url_key(source.url)
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            links.append(source)
+            native_added += 1
+        if native_added:
+            providers_used.append("native_search")
+
+        search_url = f"https://www.google.com/search?q={quote_plus(query)}"
         result = {
             "query": query,
             "search_url": search_url,
-            "source": fetched["source"],
+            "source": "+".join(providers_used) or "search_unavailable",
+            "providers": providers_used,
             "results": [link.model_dump() for link in links],
-            "text": extract_text(html, max_chars=5000),
+            "text": "",
         }
         if links:
             _disk_cache_set(ckey, result)
         return result
+
+    async def _search_native(
+        self,
+        query: str,
+        max_results: int,
+    ) -> list[AssistantSource]:
+        search_url = f"https://duckduckgo.com/html/?q={quote_plus(query)}"
+        async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
+            response = await self._fetch_native(client, search_url)
+            response.raise_for_status()
+        return extract_links(response.text, search_url, max_results)
 
     async def _search_brightdata_serp(
         self,
@@ -682,6 +854,14 @@ def make_system_prompt(page_context: dict[str, Any]) -> str:
         "Use research_company_esg_news when the user asks for current ESG news, "
         "recent sustainability developments, controversies, why a company score is "
         "high or low, or source-backed company ESG context. "
+        "Use get_validated_esg_evidence before describing a web claim as verified. "
+        "Use refresh_company_esg_research when the user explicitly asks to refresh, "
+        "deep-research, or scrape a covered company now. Keep Verified, Non-verified, "
+        "and Community sentiment distinct. A reputable domain does not make every "
+        "claim true; explain the actual corroborating sources. Community sentiment "
+        "may affect only the live news signal by at most two points and never the "
+        "core evidence score. Renewable-energy use and emissions direction are "
+        "separate indicators; a falling emissions trend does not prove renewable use. "
         "Use web_search or scrape_url when the user asks for current, latest, live, "
         "source-backed, regulatory, news, or webpage-specific information. Cite URLs "
         "you used in the answer. For public webpage scraping, never mention API keys "
@@ -745,13 +925,6 @@ class OpenRouterAgent:
         thread_id = request.session_id or "polyfintech-default"
         input_messages = [message_to_langchain_payload(request.messages[-1])]
         failures: list[str] = []
-
-        emit_workflow_step(
-            label="Reading your question",
-            status="running",
-            detail="Deciding which tools to use",
-            tool_name=None,
-        )
 
         for attempt in range(1, self.max_recovery_attempts + 1):
             langchain_agent = self.langchain_agent_factory(system_prompt)
@@ -1099,6 +1272,7 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
             url=result["url"],
             snippet=result["text"][:260],
             source=result["source"],
+            source_class=classify_domain(domain_from_url(result["url"])),
         )
         emit_workflow_step(
             label="Scraped page",
@@ -1333,8 +1507,158 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
                            "summary": summary, "sources": sources,
                            "result": payload}, ensure_ascii=False)
 
+    @tool
+    async def get_validated_esg_evidence(company: str) -> str:
+        """Read persisted, cross-referenced ESG claims, source trust labels,
+        renewable-energy usage evidence, emissions direction, and community
+        sentiment for a covered Singapore company. Use this before claiming that
+        online evidence is verified."""
+        emit_workflow_step(
+            label="Reading validated evidence",
+            status="running",
+            detail=f"Loading cross-referenced sources for {company}",
+            tool_name="get_validated_esg_evidence",
+        )
+        payload = await asyncio.to_thread(_engine_company_payload, company)
+        if not payload:
+            summary = f"No covered company matched '{company}'."
+            emit_workflow_step("Read validated evidence", "error", summary,
+                               "get_validated_esg_evidence")
+            return json.dumps({"tool": "get_validated_esg_evidence", "status": "error",
+                               "summary": summary, "sources": [], "result": {}},
+                              ensure_ascii=False)
+        try:
+            intelligence = await asyncio.to_thread(
+                get_company_intelligence, payload["company"]["id"]
+            )
+        except Exception as exc:
+            summary = f"Validated evidence is unavailable: {safe_error_summary(exc)}"
+            emit_workflow_step("Read validated evidence", "error", summary,
+                               "get_validated_esg_evidence")
+            return json.dumps({"tool": "get_validated_esg_evidence", "status": "error",
+                               "summary": summary, "sources": [], "result": {}},
+                              ensure_ascii=False)
+        sources: list[dict[str, Any]] = []
+        seen_urls: set[str] = set()
+        for claim in intelligence["claims"]:
+            for item in claim.get("sources", []):
+                if item["url"] in seen_urls:
+                    continue
+                seen_urls.add(item["url"])
+                sources.append(AssistantSource(
+                    title=item.get("title") or item["domain"],
+                    url=item["url"],
+                    snippet=item.get("snippet"),
+                    source=item.get("provider") or item["domain"],
+                    source_class=item.get("source_class"),
+                ).model_dump(by_alias=True))
+        summary = (
+            f"Loaded {len(intelligence['claims'])} grouped claims and {len(sources)} "
+            f"sources for {intelligence['company']['name']}."
+        )
+        emit_workflow_step("Read validated evidence", "ok", summary,
+                           "get_validated_esg_evidence")
+        return json.dumps({"tool": "get_validated_esg_evidence", "status": "ok",
+                           "summary": summary, "sources": sources,
+                           "result": intelligence}, ensure_ascii=False)
+
+    @tool
+    async def refresh_company_esg_research(company: str) -> str:
+        """Run a fresh multi-provider ESG research pass for one covered Singapore
+        company, validate and group claims, persist provenance, and update its
+        renewable-energy indicator. Use only when current online research is needed."""
+        payload = await asyncio.to_thread(_engine_company_payload, company)
+        if not payload:
+            summary = f"No covered company matched '{company}'."
+            emit_workflow_step("Refresh company research", "error", summary,
+                               "refresh_company_esg_research")
+            return json.dumps({"tool": "refresh_company_esg_research", "status": "error",
+                               "summary": summary, "sources": [], "result": {}},
+                              ensure_ascii=False)
+        name = payload["company"]["name"]
+        emit_workflow_step(
+            label="Researching company evidence",
+            status="running",
+            detail=f"Searching enabled providers and cross-referencing {name}",
+            tool_name="refresh_company_esg_research",
+        )
+        try:
+            result = await run_research(
+                web_tools=web_tools,
+                company_id=payload["company"]["id"],
+            )
+            intelligence = await asyncio.to_thread(
+                get_company_intelligence, payload["company"]["id"]
+            )
+        except Exception as exc:
+            summary = f"Research refresh failed for {name}: {safe_error_summary(exc)}"
+            emit_workflow_step("Refresh company research", "error", summary,
+                               "refresh_company_esg_research")
+            return json.dumps({"tool": "refresh_company_esg_research", "status": "error",
+                               "summary": summary, "sources": [],
+                               "result": {"company": name}}, ensure_ascii=False)
+        sources = []
+        seen_urls: set[str] = set()
+        for claim in intelligence["claims"]:
+            for item in claim.get("sources", []):
+                if item["url"] in seen_urls:
+                    continue
+                seen_urls.add(item["url"])
+                sources.append(AssistantSource(
+                    title=item.get("title") or item["domain"],
+                    url=item["url"], snippet=item.get("snippet"),
+                    source=item.get("provider") or item["domain"],
+                    source_class=item.get("source_class"),
+                ).model_dump(by_alias=True))
+        summary = (
+            f"Refreshed {name}: {result['source_count']} sources, "
+            f"{result['claim_count']} grouped claims."
+        )
+        emit_workflow_step("Refreshed company research", "ok", summary,
+                           "refresh_company_esg_research")
+        return json.dumps({"tool": "refresh_company_esg_research", "status": "ok",
+                           "summary": summary, "sources": sources,
+                           "result": intelligence}, ensure_ascii=False)
+
+    @tool
+    async def compare_company_esg(company_a: str, company_b: str) -> str:
+        """Compare the app's evidence scores, pillars, signals, forecasts, and
+        validated live evidence for two covered Singapore companies."""
+        emit_workflow_step(
+            label="Comparing companies",
+            status="running",
+            detail=f"Loading {company_a} and {company_b}",
+            tool_name="compare_company_esg",
+        )
+        left, right = await asyncio.gather(
+            asyncio.to_thread(_engine_company_payload, company_a),
+            asyncio.to_thread(_engine_company_payload, company_b),
+        )
+        if not left or not right:
+            summary = "One or both companies are outside the covered universe."
+            emit_workflow_step("Compared companies", "error", summary,
+                               "compare_company_esg")
+            return json.dumps({"tool": "compare_company_esg", "status": "error",
+                               "summary": summary, "sources": [], "result": {}},
+                              ensure_ascii=False)
+        live: dict[str, Any] = {}
+        for item in (left, right):
+            try:
+                live[item["company"]["id"]] = await asyncio.to_thread(
+                    get_company_intelligence, item["company"]["id"]
+                )
+            except Exception:
+                live[item["company"]["id"]] = None
+        summary = f"Compared {left['company']['name']} with {right['company']['name']}."
+        emit_workflow_step("Compared companies", "ok", summary, "compare_company_esg")
+        return json.dumps({"tool": "compare_company_esg", "status": "ok",
+                           "summary": summary, "sources": [],
+                           "result": {"company_a": left, "company_b": right,
+                                      "validated_evidence": live}}, ensure_ascii=False)
+
     return [web_search, scrape_url, research_company_esg_news,
-            research_esg_scoring, get_company_esg]
+            research_esg_scoring, get_company_esg, get_validated_esg_evidence,
+            refresh_company_esg_research, compare_company_esg]
 
 
 async def collect_company_esg_news(
@@ -1440,6 +1764,9 @@ async def collect_company_esg_news(
                     url=str(fetched.get("url") or candidate.url),
                     snippet=snippet,
                     source=str(fetched.get("source") or candidate.source),
+                    source_class=candidate.source_class or classify_domain(
+                        domain_from_url(str(fetched.get("url") or candidate.url))
+                    ),
                 )
                 emit_workflow_step(
                     label="Read source",
@@ -1479,6 +1806,7 @@ async def collect_company_esg_news(
                 source=source_name_from_url(enriched.url) or enriched.source,
                 kind=kind,
                 reason=company_news_reason(kind, company=company),
+                source_class=enriched.source_class or classify_domain(domain_from_url(enriched.url)),
             )
         )
 
@@ -1765,6 +2093,7 @@ def reference_article_from_source(
         source=source_name_from_url(source.url) or source.source,
         kind=kind,
         reason=reference_reason(kind, company=company),
+        source_class=source.source_class or classify_domain(domain_from_url(source.url)),
     )
 
 

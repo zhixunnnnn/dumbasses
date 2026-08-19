@@ -21,13 +21,16 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<ThemeMode>(() => {
     const saved = window.localStorage.getItem(STORAGE_KEY);
-    // Light is the default; only honor an explicit saved "dark" preference.
-    return saved === "dark" ? "dark" : "light";
+    // Preserve the original graphite dashboard as the default theme.
+    return saved === "light" ? "light" : "dark";
   });
 
   useEffect(() => {
     document.documentElement.dataset.theme = mode;
     window.localStorage.setItem(STORAGE_KEY, mode);
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute("content", mode === "dark" ? "#161514" : "#f4f1eb");
   }, [mode]);
 
   const value = useMemo(

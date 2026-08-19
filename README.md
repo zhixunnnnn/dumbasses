@@ -1,6 +1,6 @@
 # PolyFintech 2026
 
-React + FastAPI starter for a fintech operations dashboard.
+React + FastAPI ESG evidence and agent workspace for Singapore-listed companies.
 
 ## Structure
 
@@ -38,6 +38,38 @@ The frontend proxies `/api/*` requests to `http://localhost:8000`.
 
 - **AI Assistant** — chat sessions, streaming research agent, source-backed PDF reports (`/api/assistant/*`).
 - **ESG Evidence Engine** — scoring/signal/witness/forecast over a Singapore universe, served as `/api/companies`, `/api/matrix`, `/api/signals`, `/api/company/{id}`, and live `/api/news`. UI lives under the "Evidence Engine" and "Live News" sidebar sections.
+
+## Scraper providers
+
+All credentials are environment-only. Configure any combination and enable it from Settings:
+
+```env
+BRIGHTDATA_API_KEY=
+BRIGHTDATA_API_KEY_FALLBACK=
+SCRAPEDO_API_TOKEN=
+OXYLABS_USERNAME=
+OXYLABS_PASSWORD=
+SEARXNG_BASE_URL=
+CRAWL4AI_BASE_URL=
+```
+
+The pipeline fans out across enabled providers, canonicalizes URLs, groups duplicate claims, and stops after repeated discovery rounds yield no new evidence. It does not bypass login pages, authentication, or hard paywalls.
+
+Start the free self-hosted stack locally with:
+
+```bash
+docker compose -f docker-compose.scrapers.yml up -d
+```
+
+Then set `SEARXNG_BASE_URL=http://localhost:8080` and `CRAWL4AI_BASE_URL=http://localhost:11235`.
+
+For Railway, create two private services from this repository with root directories `infra/searxng` and `infra/crawl4ai`. Set `SEARXNG_SECRET` on the SearXNG service, then configure the main app with the Railway private-network URLs. These scraper services do not need public domains.
+
+## Research controls
+
+Settings provides Daily, Weekly (Monday), or Monthly (first day) scheduling at 06:00 Singapore time, provider and source-type selection, a full-universe Run now action, and manual review of source-promotion candidates. Raw extracted pages expire after 30 days; grouped claims and provenance remain in SQLite.
+
+The deployed app is installable from `/app` using the browser's Add to Home Screen action.
 
 ## Data provenance (real vs. seeded)
 

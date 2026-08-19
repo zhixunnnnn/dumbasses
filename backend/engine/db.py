@@ -124,6 +124,91 @@ CREATE TABLE IF NOT EXISTS scrape_log (
     rows        INTEGER
 );
 
+CREATE TABLE IF NOT EXISTS app_settings (
+    key        TEXT PRIMARY KEY,
+    value_json TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+);
+
+-- live ESG research provenance and source-quality decisions -----------------
+CREATE TABLE IF NOT EXISTS source_registry (
+    domain          TEXT PRIMARY KEY,
+    source_class    TEXT NOT NULL CHECK (source_class IN ('verified','non_verified','community')),
+    reason          TEXT,
+    is_builtin      INTEGER NOT NULL DEFAULT 0,
+    updated_at      TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS source_promotion_candidates (
+    domain                    TEXT PRIMARY KEY,
+    status                    TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending','approved','rejected')),
+    overlap_score             REAL NOT NULL DEFAULT 0,
+    matching_claims           INTEGER NOT NULL DEFAULT 0,
+    matched_verified_domains  TEXT NOT NULL DEFAULT '[]',
+    first_seen                TEXT NOT NULL,
+    last_seen                 TEXT NOT NULL,
+    reviewed_at               TEXT
+);
+
+CREATE TABLE IF NOT EXISTS research_runs (
+    run_id          TEXT PRIMARY KEY,
+    scope           TEXT NOT NULL,
+    company_id      TEXT,
+    status          TEXT NOT NULL,
+    providers_json  TEXT NOT NULL DEFAULT '[]',
+    started_at      TEXT NOT NULL,
+    finished_at     TEXT,
+    source_count    INTEGER NOT NULL DEFAULT 0,
+    claim_count     INTEGER NOT NULL DEFAULT 0,
+    error_count     INTEGER NOT NULL DEFAULT 0,
+    message         TEXT
+);
+
+CREATE TABLE IF NOT EXISTS research_claims (
+    claim_id        TEXT PRIMARY KEY,
+    company_id      TEXT NOT NULL,
+    claim_text      TEXT NOT NULL,
+    topic           TEXT NOT NULL,
+    verification    TEXT NOT NULL CHECK (verification IN ('verified','non_verified','community')),
+    sentiment       REAL NOT NULL DEFAULT 0,
+    first_seen      TEXT NOT NULL,
+    last_seen       TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS research_claim_sources (
+    claim_id        TEXT NOT NULL,
+    canonical_url   TEXT NOT NULL,
+    domain          TEXT NOT NULL,
+    source_class    TEXT NOT NULL,
+    title           TEXT,
+    snippet         TEXT,
+    provider        TEXT,
+    fetched_at      TEXT NOT NULL,
+    PRIMARY KEY (claim_id, canonical_url)
+);
+
+CREATE TABLE IF NOT EXISTS scraped_pages (
+    url_hash        TEXT PRIMARY KEY,
+    canonical_url   TEXT NOT NULL,
+    domain          TEXT NOT NULL,
+    provider        TEXT,
+    title           TEXT,
+    extracted_text  TEXT,
+    source_class    TEXT NOT NULL,
+    fetched_at      TEXT NOT NULL,
+    expires_at      TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS renewable_status (
+    company_id           TEXT PRIMARY KEY,
+    renewable_status     TEXT NOT NULL,
+    emissions_trend      TEXT NOT NULL,
+    evidence_count       INTEGER NOT NULL DEFAULT 0,
+    verified_count       INTEGER NOT NULL DEFAULT 0,
+    latest_evidence_at   TEXT,
+    updated_at           TEXT NOT NULL
+);
+
 -- scraped regulation provenance (a real source link/excerpt per regime) -------
 CREATE TABLE IF NOT EXISTS reg_source (
     reg_id         TEXT PRIMARY KEY,

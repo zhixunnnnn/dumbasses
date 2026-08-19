@@ -56,7 +56,7 @@ export default function ChatPage() {
           </div>
         </div>
       </header>
-      <div className="grid min-h-0 flex-1 gap-4 pb-4 lg:grid-cols-[280px_minmax(0,1fr)]">
+      <div className="grid min-h-0 flex-1 grid-rows-[auto_minmax(420px,1fr)] gap-4 pb-4 lg:grid-cols-[280px_minmax(0,1fr)] lg:grid-rows-1">
         <SessionHistoryPanel
           sessions={sessions}
           activeSessionId={activeSessionId}
@@ -93,7 +93,7 @@ function SessionHistoryPanel({
 }) {
   const [confirmingId, setConfirmingId] = useState<string | null>(null);
   return (
-    <aside className="flex min-h-0 flex-col overflow-hidden rounded-2xl border border-hairline bg-surface p-3 shadow-panel">
+    <aside className="flex max-h-44 min-h-0 flex-col overflow-hidden rounded-2xl border border-hairline bg-surface p-3 shadow-panel lg:max-h-none">
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-faint">

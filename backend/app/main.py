@@ -9,8 +9,10 @@ Run from the repo root so the absolute ``backend.*`` engine imports resolve:
 """
 from __future__ import annotations
 
+import asyncio
 import json
 import os
+import threading
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -21,6 +23,15 @@ from pydantic import BaseModel
 
 from backend.engine import config
 from backend.engine.pipeline import build
+from backend.engine.scrape_settings import get_scrape_settings, save_scrape_settings
+from backend.engine.source_intelligence import (
+    get_company_intelligence,
+    get_research_status,
+    initialize_source_registry,
+    list_source_registry,
+    review_source_candidate,
+    run_research,
+)
 
 from .agent import (
     AssistantRequest,
@@ -52,9 +63,29 @@ class Portfolio(BaseModel):
     products: list[Product]
 
 
+class ScrapeSettingsUpdate(BaseModel):
+    providers: dict[str, bool] | None = None
+    sourceTypes: dict[str, bool] | None = None
+    frequency: str | None = None
+    timezone: str | None = None
+    runAt: str | None = None
+    retainRawDays: int | None = None
+
+
+class ResearchRunRequest(BaseModel):
+    companyId: str | None = None
+
+
+class SourceReviewRequest(BaseModel):
+    domain: str
+    decision: str
+
+
 app = FastAPI(title="PolyFintech 2026 API", version="1.0.0")
 agent = OpenRouterAgent()
 chat_history = ChatHistoryStore()
+_research_lock = threading.Lock()
+_research_scheduler = None
 
 app.add_middleware(
     CORSMiddleware,
@@ -123,27 +154,66 @@ def _ensure_built() -> None:
         seed_build()
     if not (config.OUT_DIR / "companies.json").exists():
         build(offline=True)
-    _start_weekly_scheduler()
+    initialize_source_registry()
+    _start_research_scheduler()
 
 
-def _start_weekly_scheduler() -> None:
-    """Refresh Bright Data signals every Monday; catch up on startup if >7 days stale.
-    Both run in background threads so they never block the server (or crash it)."""
-    import threading
-
-    from backend.data.weekly import run_weekly
-
-    threading.Thread(target=run_weekly, daemon=True).start()  # startup catch-up (no-op if fresh)
+def _start_research_scheduler() -> None:
+    """Schedule the global research pipeline from the persisted Settings values."""
+    global _research_scheduler
     try:
         from apscheduler.schedulers.background import BackgroundScheduler
-        from apscheduler.triggers.cron import CronTrigger
-
-        sched = BackgroundScheduler(daemon=True)
-        sched.add_job(lambda: run_weekly(force=True), CronTrigger(day_of_week="mon", hour=6))
-        sched.start()
-        print("Weekly Bright Data refresh scheduled (Mondays 06:00).")
+        _research_scheduler = BackgroundScheduler(daemon=True, timezone="Asia/Singapore")
+        _research_scheduler.start()
+        _reschedule_research()
     except Exception as exc:  # noqa: BLE001
-        print(f"Weekly scheduler not started ({type(exc).__name__}); run `python -m backend.data.weekly`.")
+        print(f"Research scheduler not started ({type(exc).__name__}).")
+
+
+def _reschedule_research() -> None:
+    if _research_scheduler is None:
+        return
+    from apscheduler.triggers.cron import CronTrigger
+
+    settings = get_scrape_settings()
+    hour, minute = (int(part) for part in settings["runAt"].split(":"))
+    trigger_args: dict[str, object] = {
+        "hour": hour,
+        "minute": minute,
+        "timezone": settings["timezone"],
+    }
+    if settings["frequency"] == "weekly":
+        trigger_args["day_of_week"] = "mon"
+    elif settings["frequency"] == "monthly":
+        trigger_args["day"] = 1
+    _research_scheduler.add_job(
+        _launch_research,
+        CronTrigger(**trigger_args),
+        id="esg-research-refresh",
+        replace_existing=True,
+        max_instances=1,
+        coalesce=True,
+    )
+
+
+def _launch_research(company_id: str | None = None) -> bool:
+    """Start research in a daemon thread and reject overlapping runs."""
+    if not _research_lock.acquire(blocking=False):
+        return False
+
+    def worker() -> None:
+        try:
+            asyncio.run(run_research(agent.web_tools, company_id=company_id))
+            # Keep the existing dashboard news snapshot fresh too.
+            from backend.data.weekly import run_weekly
+            run_weekly(force=True)
+        except Exception as exc:  # noqa: BLE001
+            print(f"Research refresh failed ({type(exc).__name__}: {str(exc)[:160]}).")
+        finally:
+            _research_lock.release()
+
+    threading.Thread(target=worker, daemon=True, name="esg-research").start()
+    return True
 
 
 def _read(rel: str):
@@ -156,6 +226,57 @@ def _read(rel: str):
 @app.get("/api/health")
 def health() -> dict[str, str]:
     return {"status": "ok", "service": "polyfintech-esg"}
+
+
+@app.get("/api/settings/scraping")
+def scraping_settings():
+    return get_scrape_settings()
+
+
+@app.put("/api/settings/scraping")
+def update_scraping_settings(request: ScrapeSettingsUpdate):
+    payload = request.model_dump(exclude_none=True)
+    try:
+        result = save_scrape_settings(payload)
+        _reschedule_research()
+        return result
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.get("/api/research/status")
+def research_status():
+    return {**get_research_status(), "running": _research_lock.locked()}
+
+
+@app.post("/api/research/run", status_code=202)
+def start_research(request: ResearchRunRequest):
+    if not _launch_research(request.companyId):
+        raise HTTPException(status_code=409, detail="A research run is already active.")
+    return {"status": "started", "scope": request.companyId or "universe"}
+
+
+@app.get("/api/research/sources")
+def research_sources():
+    return list_source_registry()
+
+
+@app.post("/api/research/sources/review")
+def review_research_source(request: SourceReviewRequest):
+    try:
+        return review_source_candidate(request.domain, request.decision)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="Source candidate not found.") from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.get("/api/research/company/{company_id}")
+def company_research(company_id: str):
+    try:
+        return get_company_intelligence(company_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="Company not found.") from exc
 
 
 @app.get("/api/portfolio", response_model=Portfolio)
@@ -196,7 +317,12 @@ def regulations():
 
 @app.get("/api/company/{company_id}")
 def company(company_id: str):
-    return _read(f"company/{company_id}.json")
+    payload = _read(f"company/{company_id}.json")
+    try:
+        payload["liveIntelligence"] = get_company_intelligence(company_id)
+    except KeyError:
+        payload["liveIntelligence"] = None
+    return payload
 
 
 @app.get("/api/news")

@@ -1,4 +1,15 @@
-import { Moon, Palette, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  Check,
+  Database,
+  LoaderCircle,
+  Moon,
+  Palette,
+  Play,
+  Power,
+  ShieldCheck,
+  Sun,
+} from "lucide-react";
 import { useThemeMode } from "../../theme/ThemeContext";
 
 const OPTIONS = [
@@ -16,8 +27,202 @@ const OPTIONS = [
   },
 ];
 
+type ProviderStatus = {
+  id: string;
+  label: string;
+  available: boolean;
+  enabled: boolean;
+  reason?: string | null;
+};
+
+type ScrapeSettings = {
+  providers: Record<string, boolean>;
+  sourceTypes: {
+    verified: boolean;
+    nonVerified: boolean;
+    community: boolean;
+  };
+  providerStatus: Record<string, ProviderStatus>;
+  frequency: "daily" | "weekly" | "monthly";
+  timezone: string;
+  runAt: string;
+  retainRawDays: number;
+  adaptiveCrawl: boolean;
+  communitySentimentWeight: number;
+  updatedAt?: string | null;
+};
+
+type SourceCandidate = {
+  domain: string;
+  status: "pending" | "approved" | "rejected";
+  overlap_score: number;
+  matching_claims: number;
+  matched_verified_domains: string[];
+  last_seen: string;
+};
+
+type SourceRegistryResponse = {
+  sources: Array<{ domain: string; source_class: string; reason?: string | null }>;
+  candidates: SourceCandidate[];
+};
+
+type ResearchStatus = {
+  status: string;
+  running?: boolean;
+  started_at?: string;
+  finished_at?: string | null;
+  source_count?: number;
+  claim_count?: number;
+  error_count?: number;
+  message?: string | null;
+};
+
+const FREQUENCIES = ["daily", "weekly", "monthly"] as const;
+
 export default function SettingsPage() {
   const { mode, setMode } = useThemeMode();
+  const [scraping, setScraping] = useState<ScrapeSettings | null>(null);
+  const [scrapeError, setScrapeError] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [sourceRegistry, setSourceRegistry] = useState<SourceRegistryResponse | null>(null);
+  const [researchStatus, setResearchStatus] = useState<ResearchStatus | null>(null);
+  const [startingResearch, setStartingResearch] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/settings/scraping")
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`Settings request failed (${response.status})`);
+        return (await response.json()) as ScrapeSettings;
+      })
+      .then((data) => {
+        if (!cancelled) setScraping(data);
+      })
+      .catch((error) => {
+        if (!cancelled) {
+          setScrapeError(error instanceof Error ? error.message : "Could not load scraping settings.");
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const [sourcesResponse, statusResponse] = await Promise.all([
+          fetch("/api/research/sources"),
+          fetch("/api/research/status"),
+        ]);
+        if (!sourcesResponse.ok || !statusResponse.ok) return;
+        const [sources, status] = await Promise.all([
+          sourcesResponse.json() as Promise<SourceRegistryResponse>,
+          statusResponse.json() as Promise<ResearchStatus>,
+        ]);
+        if (!cancelled) {
+          setSourceRegistry(sources);
+          setResearchStatus(status);
+          if (!status.running) setStartingResearch(false);
+        }
+      } catch {
+        // Provider settings remain usable if research status is temporarily unavailable.
+      }
+    };
+    void load();
+    const timer = window.setInterval(load, 5000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, []);
+
+  const saveScraping = async (next: ScrapeSettings) => {
+    setSaving(true);
+    setScrapeError(null);
+    try {
+      const response = await fetch("/api/settings/scraping", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          providers: next.providers,
+          sourceTypes: next.sourceTypes,
+          frequency: next.frequency,
+          timezone: next.timezone,
+          runAt: next.runAt,
+          retainRawDays: next.retainRawDays,
+        }),
+      });
+      if (!response.ok) throw new Error(`Settings update failed (${response.status})`);
+      setScraping((await response.json()) as ScrapeSettings);
+    } catch (error) {
+      setScrapeError(error instanceof Error ? error.message : "Could not save scraping settings.");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const toggleSourceType = (key: keyof ScrapeSettings["sourceTypes"]) => {
+    if (!scraping) return;
+    void saveScraping({
+      ...scraping,
+      sourceTypes: { ...scraping.sourceTypes, [key]: !scraping.sourceTypes[key] },
+    });
+  };
+
+  const runResearchNow = async () => {
+    setStartingResearch(true);
+    setScrapeError(null);
+    try {
+      const response = await fetch("/api/research/run", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}));
+        throw new Error(payload.detail || `Research run failed to start (${response.status})`);
+      }
+      setResearchStatus((current) => ({ ...(current ?? { status: "running" }), status: "running", running: true }));
+    } catch (error) {
+      setStartingResearch(false);
+      setScrapeError(error instanceof Error ? error.message : "Could not start research.");
+    }
+  };
+
+  const reviewCandidate = async (domain: string, decision: "approved" | "rejected") => {
+    const response = await fetch("/api/research/sources/review", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ domain, decision }),
+    });
+    if (!response.ok) {
+      setScrapeError(`Could not ${decision === "approved" ? "approve" : "reject"} ${domain}.`);
+      return;
+    }
+    setSourceRegistry((await response.json()) as SourceRegistryResponse);
+  };
+
+  const toggleProvider = (providerId: string) => {
+    if (!scraping || !scraping.providerStatus[providerId]?.available) return;
+    void saveScraping({
+      ...scraping,
+      providers: {
+        ...scraping.providers,
+        [providerId]: !scraping.providers[providerId],
+      },
+    });
+  };
+
+  const enableFullPower = () => {
+    if (!scraping) return;
+    const providers = { ...scraping.providers };
+    Object.values(scraping.providerStatus).forEach((provider) => {
+      if (provider.available) providers[provider.id] = true;
+    });
+    void saveScraping({ ...scraping, providers });
+  };
 
   return (
     <div className="mx-auto flex h-full w-full max-w-6xl flex-col px-6 py-6 sm:px-10 lg:px-12">
@@ -104,6 +309,213 @@ export default function SettingsPage() {
               Assistant panels stay readable in both modes.
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="mt-5 rounded-2xl border border-hairline bg-surface p-5 shadow-panel">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div className="flex items-start gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-pos/15 text-pos">
+              <Database size={18} />
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-faint">
+                Research pipeline
+              </p>
+              <h2 className="mt-1 text-xl font-semibold text-txt">Scraping providers</h2>
+              <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted">
+                Discovery fans out across every enabled provider. Duplicate URLs and claims are merged before verification.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={enableFullPower}
+            disabled={!scraping || saving}
+            className="flex shrink-0 items-center justify-center gap-2 rounded-lg border border-pos/35 bg-pos/10 px-3 py-2 text-xs font-semibold text-pos transition hover:bg-pos/15 disabled:opacity-40"
+          >
+            <Power size={14} />
+            Full power
+          </button>
+        </div>
+
+        {scrapeError && (
+          <p className="mt-4 rounded-lg border border-neg/30 bg-neg/10 px-3 py-2 text-xs text-neg">
+            {scrapeError}
+          </p>
+        )}
+
+        {!scraping ? (
+          <div className="mt-5 flex items-center gap-2 text-sm text-muted">
+            <LoaderCircle size={16} className="animate-spin" /> Loading provider status
+          </div>
+        ) : (
+          <>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {Object.values(scraping.providerStatus).map((provider) => {
+                const active = provider.available && scraping.providers[provider.id];
+                return (
+                  <button
+                    key={provider.id}
+                    onClick={() => toggleProvider(provider.id)}
+                    disabled={!provider.available || saving}
+                    className={`min-h-28 rounded-xl border p-4 text-left transition ${
+                      active
+                        ? "border-pos bg-pos/10"
+                        : provider.available
+                          ? "border-hairline bg-canvas/45 hover:bg-raised"
+                          : "cursor-not-allowed border-hairline bg-canvas/25 opacity-60"
+                    }`}
+                  >
+                    <span className="flex items-center justify-between gap-3">
+                      <span className="text-sm font-semibold text-txt">{provider.label}</span>
+                      <span
+                        className={`flex h-5 w-5 items-center justify-center rounded-md border ${
+                          active ? "border-pos bg-pos text-canvas" : "border-hairline text-transparent"
+                        }`}
+                      >
+                        <Check size={13} />
+                      </span>
+                    </span>
+                    <span className={`mt-3 block text-xs ${provider.available ? "text-muted" : "text-faint"}`}>
+                      {provider.available
+                        ? active
+                          ? "Enabled for search and retrieval"
+                          : "Configured and ready"
+                        : provider.reason || "Not configured"}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-5 border-t border-hairline pt-5">
+              <div className="flex items-center gap-2">
+                <ShieldCheck size={15} className="text-pos" />
+                <p className="text-xs font-semibold uppercase tracking-wider text-faint">Source coverage</p>
+              </div>
+              <p className="mt-1 text-xs leading-relaxed text-muted">
+                Source reputation and claim verification are tracked separately. Community sources influence only the live sentiment signal by at most two points.
+              </p>
+              <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                {([
+                  ["verified", "Verified", "Official, regulatory, standards, and approved reporting sources"],
+                  ["nonVerified", "Non-verified", "Broader web coverage retained with a clear trust label"],
+                  ["community", "Community sentiment", "Reddit and similar discussion signals, never core evidence"],
+                ] as const).map(([key, label, description]) => {
+                  const active = scraping.sourceTypes[key];
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => toggleSourceType(key)}
+                      disabled={saving}
+                      className={`rounded-xl border p-3 text-left transition ${
+                        active ? "border-pos/60 bg-pos/10" : "border-hairline bg-canvas/35"
+                      }`}
+                    >
+                      <span className="flex items-center justify-between gap-2">
+                        <span className="text-sm font-semibold text-txt">{label}</span>
+                        <span className={`flex h-5 w-5 items-center justify-center rounded-md border ${
+                          active ? "border-pos bg-pos text-canvas" : "border-hairline text-transparent"
+                        }`}>
+                          <Check size={13} />
+                        </span>
+                      </span>
+                      <span className="mt-2 block text-xs leading-relaxed text-muted">{description}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-4 border-t border-hairline pt-5 md:grid-cols-[minmax(0,1fr)_minmax(260px,0.6fr)]">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-faint">Schedule</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {FREQUENCIES.map((frequency) => (
+                    <button
+                      key={frequency}
+                      onClick={() => void saveScraping({ ...scraping, frequency })}
+                      disabled={saving}
+                      className={`rounded-lg border px-3 py-2 text-xs font-semibold capitalize transition ${
+                        scraping.frequency === frequency
+                          ? "border-pos bg-pos/10 text-pos"
+                          : "border-hairline bg-canvas/45 text-muted hover:text-txt"
+                      }`}
+                    >
+                      {frequency}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-3 rounded-xl border border-hairline bg-canvas/45 px-4 py-3 text-xs leading-relaxed text-muted">
+                <p>
+                  Runs at <span className="font-semibold text-txt">{scraping.runAt} Singapore time</span>. Raw pages are retained for {scraping.retainRawDays} days; extracted claims and provenance are retained.
+                </p>
+                <button
+                  onClick={() => void runResearchNow()}
+                  disabled={startingResearch || researchStatus?.running}
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-pos px-3 py-2 text-xs font-semibold text-canvas transition hover:brightness-105 disabled:opacity-45"
+                >
+                  {startingResearch || researchStatus?.running ? (
+                    <LoaderCircle size={14} className="animate-spin" />
+                  ) : (
+                    <Play size={14} />
+                  )}
+                  {startingResearch || researchStatus?.running ? "Research running" : "Run all 10 companies now"}
+                </button>
+                {researchStatus && researchStatus.status !== "never_run" && (
+                  <p className="text-[11px] text-faint">
+                    Latest: {researchStatus.status} · {researchStatus.source_count ?? 0} sources · {researchStatus.claim_count ?? 0} grouped claims
+                  </p>
+                )}
+              </div>
+            </div>
+          </>
+        )}
+      </section>
+
+      <section className="my-5 rounded-2xl border border-hairline bg-surface p-5 shadow-panel">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-faint">Trust governance</p>
+            <h2 className="mt-1 text-xl font-semibold text-txt">Source promotion</h2>
+            <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted">
+              A non-verified domain appears here only after multiple claims overlap with at least two verified domains. Approval promotes the domain, not every claim it publishes.
+            </p>
+          </div>
+          <span className="shrink-0 rounded-full border border-hairline bg-canvas/45 px-3 py-1 text-xs text-muted">
+            {sourceRegistry?.candidates.filter((item) => item.status === "pending").length ?? 0} pending
+          </span>
+        </div>
+        <div className="mt-4 space-y-2">
+          {sourceRegistry?.candidates.filter((item) => item.status === "pending").map((candidate) => (
+            <div key={candidate.domain} className="flex flex-col gap-3 rounded-xl border border-hairline bg-canvas/40 p-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-txt">{candidate.domain}</p>
+                <p className="mt-1 text-xs text-muted">
+                  {candidate.matching_claims} matching claims · {Math.round(candidate.overlap_score * 100)}% overlap · {candidate.matched_verified_domains.join(", ")}
+                </p>
+              </div>
+              <div className="flex shrink-0 gap-2">
+                <button onClick={() => void reviewCandidate(candidate.domain, "rejected")} className="rounded-lg border border-hairline px-3 py-1.5 text-xs font-semibold text-muted transition hover:text-txt">
+                  Reject
+                </button>
+                <button onClick={() => void reviewCandidate(candidate.domain, "approved")} className="rounded-lg bg-pos px-3 py-1.5 text-xs font-semibold text-canvas transition hover:brightness-105">
+                  Approve
+                </button>
+              </div>
+            </div>
+          ))}
+          {sourceRegistry && sourceRegistry.candidates.every((item) => item.status !== "pending") && (
+            <div className="rounded-xl border border-dashed border-hairline p-4 text-sm text-muted">
+              No domains currently meet the promotion threshold.
+            </div>
+          )}
+          {!sourceRegistry && (
+            <div className="flex items-center gap-2 py-2 text-sm text-muted">
+              <LoaderCircle size={15} className="animate-spin" /> Loading source registry
+            </div>
+          )}
         </div>
       </section>
     </div>

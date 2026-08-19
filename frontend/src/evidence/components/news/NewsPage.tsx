@@ -3,6 +3,7 @@ import { ExternalLink, Newspaper, Radio, ArrowRight, Search, X } from "lucide-re
 import { api, useApi } from "../../lib/api";
 import type { NewsCompany, NewsItem } from "../../types";
 import { useNavigation } from "../../navigation/NavigationContext";
+import { usePublishAssistantPageContext } from "../../../components/chat/PageContext";
 
 const LABEL_COLOR: Record<string, string> = {
   controversy: "#ec6a5e",
@@ -113,6 +114,22 @@ export default function NewsPage() {
     data?.companies.forEach((c) => c.sector && s.add(c.sector));
     return ["All", ...[...s].sort()];
   }, [data]);
+  const pageContext = useMemo(() => ({
+    route: "news",
+    title: "Live ESG and market news",
+    filters: { query: q, sector, topic },
+    lastRun: data?.last_run ?? null,
+    companies: data?.companies.map((company) => ({
+      id: company.company_id,
+      name: company.name,
+      sector: company.sector,
+      sentiment: company.sentiment,
+      controversyCount: company.controversy,
+      positiveCount: company.positive,
+      headlines: company.headlines,
+    })) ?? [],
+  }), [data, q, sector, topic]);
+  usePublishAssistantPageContext(pageContext);
 
   if (loading) return <div className="p-10 text-sm text-muted">Loading live news…</div>;
   if (error || !data) return <div className="p-10 text-sm text-neg">Couldn’t load news. {error}</div>;

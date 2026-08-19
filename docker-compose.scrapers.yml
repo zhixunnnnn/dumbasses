@@ -1,0 +1,15 @@
+services:
+  searxng:
+    build: ./infra/searxng
+    environment:
+      SEARXNG_SECRET: local-development-only
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  crawl4ai:
+    build: ./infra/crawl4ai
+    shm_size: 1gb
+    ports:
+      - "11235:11235"
+    restart: unless-stopped

@@ -47,7 +47,7 @@ export default function ChatThread({ compact = false, surface = "page" }: Props)
   };
 
   // Prefill the input with a suggestion so the user can edit before sending.
-  const useSuggestion = (text: string) => {
+  const applySuggestion = (text: string) => {
     setDraft(text);
     textareaRef.current?.focus();
   };
@@ -69,7 +69,7 @@ export default function ChatThread({ compact = false, surface = "page" }: Props)
             {suggestions.map((s) => (
               <button
                 key={s}
-                onClick={() => useSuggestion(s)}
+                onClick={() => applySuggestion(s)}
                 className="rounded-full border border-hairline bg-surface px-3 py-1.5 text-xs text-muted transition hover:border-pos/40 hover:text-txt"
               >
                 {s}
@@ -429,16 +429,13 @@ function MessageArtifacts({ message }: { message: ChatMessage }) {
     (source) => !referencedUrls.has(dedupeUrlKey(source.url)),
   );
 
-  const steps = message.workflowSteps ?? [];
-  const hasSteps = steps.length > 0;
   const hasSources = sources.length > 0;
   const hasReferences = references.length > 0;
   const hasReport = Boolean(message.report);
-  if (!hasSources && !hasReferences && !hasReport && !hasSteps) return null;
+  if (!hasSources && !hasReferences && !hasReport) return null;
 
   return (
     <div className="mt-3 space-y-2 border-t border-hairline pt-3 text-xs">
-      {hasSteps && <ActivityTrail steps={steps} />}
       {hasReferences && <ReferenceArticles articles={references} />}
       {hasSources && (
         <div className="space-y-1.5">
@@ -455,6 +452,7 @@ function MessageArtifacts({ message }: { message: ChatMessage }) {
                 <span className="block truncate font-medium">
                   {source.title || source.url}
                 </span>
+                {source.sourceClass && <TrustLabel value={source.sourceClass} />}
                 {source.snippet && (
                   <span className="mt-0.5 line-clamp-2 block text-[11px] text-faint">
                     {source.snippet}
@@ -535,6 +533,7 @@ function ReferenceArticles({
             <span className="truncate text-[11px] text-faint">
               {article.source}
             </span>
+            {article.sourceClass && <TrustLabel value={article.sourceClass} />}
           </span>
           <span className="flex items-start gap-2">
             <ExternalLink size={13} className="mt-0.5 shrink-0 text-pos" />
@@ -601,6 +600,32 @@ function ToolActivity({
         )}
       </div>
     </div>
+  );
+}
+
+function TrustLabel({
+  value,
+}: {
+  value: "verified" | "non_verified" | "community";
+}) {
+  const label =
+    value === "verified"
+      ? "Verified"
+      : value === "community"
+        ? "Community"
+        : "Non-verified";
+  const style =
+    value === "verified"
+      ? "border-pos/30 bg-pos/10 text-pos"
+      : value === "community"
+        ? "border-hairline bg-raised text-muted"
+        : "border-profit/30 bg-profit/10 text-profit";
+  return (
+    <span
+      className={`mt-1 inline-flex rounded-full border px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide ${style}`}
+    >
+      {label}
+    </span>
   );
 }
 

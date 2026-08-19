@@ -7,6 +7,7 @@ import ScreenerTable from "./ScreenerTable";
 import { HypothesisBadge } from "../common/badges";
 import { FilterBar, applyDashFilters, defaultDashFilters, type DashFilters } from "./Filters";
 import { StatRow, SectorLeaderboard, ScoreHistogram, QuadrantMix, ControversyFeed } from "./panels";
+import { usePublishAssistantPageContext } from "../../../components/chat/PageContext";
 
 export default function DashboardPage() {
   const { openCompany } = useNavigation();
@@ -21,6 +22,37 @@ export default function DashboardPage() {
     const ids = new Set(filtered.map((r) => r.id));
     return (matrix.data ?? []).filter((p) => ids.has(p.id));
   }, [matrix.data, filtered]);
+  const pageContext = useMemo(() => ({
+    route: "dashboard",
+    title: "Singapore ESG Evidence Dashboard",
+    scope: "10 covered Singapore-listed companies",
+    filters,
+    companies: filtered.map((row) => ({
+      id: row.id,
+      name: row.name,
+      ticker: row.ticker,
+      sector: row.sector,
+      evidenceScore: row.evidence_total,
+      confidence: row.confidence,
+      consensus: row.consensus,
+      divergence: row.divergence,
+      evidenceGap: row.evidence_gap,
+      momentum: row.momentum,
+      quadrant: row.quadrant,
+      underpricedImprover: row.is_underpriced_improver,
+      complianceScore: row.compliance_score,
+      forecast: row.forecast,
+    })),
+    liveNews: news.data?.companies.map((company) => ({
+      id: company.company_id,
+      name: company.name,
+      sentiment: company.sentiment,
+      controversy: company.controversy,
+      positive: company.positive,
+      headlines: company.headlines.slice(0, 3),
+    })) ?? [],
+  }), [filtered, filters, news.data]);
+  usePublishAssistantPageContext(pageContext);
 
   if (companies.loading || matrix.loading)
     return <div className="p-10 text-sm text-muted">Loading the evidence engine…</div>;

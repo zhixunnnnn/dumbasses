@@ -1,0 +1,43 @@
+{
+  "verified_domains": {
+    "dbs.com": "DBS official disclosures",
+    "ocbc.com": "OCBC official disclosures",
+    "uobgroup.com": "UOB official disclosures",
+    "singtel.com": "Singtel official disclosures",
+    "singaporeair.com": "Singapore Airlines official disclosures",
+    "keppel.com": "Keppel official disclosures",
+    "sembcorp.com": "Sembcorp official disclosures",
+    "capitaland.com": "CapitaLand official disclosures",
+    "cdl.com.sg": "City Developments official disclosures",
+    "wilmar-international.com": "Wilmar official disclosures",
+    "sgx.com": "Singapore Exchange",
+    "mas.gov.sg": "Monetary Authority of Singapore",
+    "nea.gov.sg": "National Environment Agency",
+    "mse.gov.sg": "Ministry of Sustainability and the Environment",
+    "gov.sg": "Singapore Government",
+    "cdp.net": "CDP",
+    "globalreporting.org": "Global Reporting Initiative",
+    "ifrs.org": "IFRS Sustainability",
+    "sasb.org": "SASB standards",
+    "reuters.com": "Reuters",
+    "bloomberg.com": "Bloomberg",
+    "ft.com": "Financial Times",
+    "channelnewsasia.com": "CNA",
+    "straitstimes.com": "The Straits Times"
+  },
+  "community_domains": {
+    "reddit.com": "Reddit community sentiment"
+  },
+  "company_domains": {
+    "D05": "dbs.com",
+    "O39": "ocbc.com",
+    "U11": "uobgroup.com",
+    "Z74": "singtel.com",
+    "C6L": "singaporeair.com",
+    "BN4": "keppel.com",
+    "U96": "sembcorp.com",
+    "9CI": "capitaland.com",
+    "C09": "cdl.com.sg",
+    "F34": "wilmar-international.com"
+  }
+}

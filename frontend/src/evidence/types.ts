@@ -239,6 +239,40 @@ export type NewsCompany = {
 };
 export type NewsData = { source?: string; last_run?: string | null; companies: NewsCompany[] };
 
+export type LiveResearchSource = {
+  url: string;
+  domain: string;
+  source_class: "verified" | "non_verified" | "community";
+  title?: string | null;
+  snippet?: string | null;
+  provider?: string | null;
+  fetched_at: string;
+};
+
+export type LiveResearchClaim = {
+  claim_id: string;
+  claim_text: string;
+  topic: string;
+  verification: "verified" | "non_verified" | "community";
+  sentiment: number;
+  last_seen: string;
+  sources: LiveResearchSource[];
+};
+
+export type LiveIntelligence = {
+  renewable: {
+    company_id: string;
+    renewable_status: "Verified" | "Non-verified" | "No evidence found";
+    emissions_trend: "Falling" | "Stable" | "Rising" | "No evidence found";
+    evidence_count: number;
+    verified_count: number;
+    latest_evidence_at?: string | null;
+  };
+  claims: LiveResearchClaim[];
+  community_sentiment_adjustment: number;
+  community_sentiment_note: string;
+};
+
 export type CompanyDetail = {
   company: {
     company_id: string;
@@ -265,4 +299,5 @@ export type CompanyDetail = {
     source_title?: string;
   };
   peers: { id: string; name: string; evidence_total: number | null }[];
+  liveIntelligence?: LiveIntelligence | null;
 };

@@ -1,4 +1,5 @@
-import { ArrowLeft, Check, X, Minus } from "lucide-react";
+import { useMemo } from "react";
+import { Activity, ArrowLeft, Check, Leaf, Minus, X } from "lucide-react";
 import { api, useApi } from "../../lib/api";
 import type { TraceNode } from "../../types";
 import { na, signed, PILLAR_COLOR } from "../../lib/ui";
@@ -12,6 +13,7 @@ import ComplianceGap from "./ComplianceGap";
 import ForecastCard from "./ForecastCard";
 import TrustMeter from "./TrustMeter";
 import LiveNews from "./LiveNews";
+import { usePublishAssistantPageContext } from "../../../components/chat/PageContext";
 
 function node(label: string, value: number | null, children: TraceNode[] = []): TraceNode {
   return { label, value, contribution: null, source_sentence: null, source_doc: null, source_page: null, children };
@@ -31,11 +33,26 @@ function Leg({ ok, label }: { ok: boolean | null; label: string }) {
 export default function CompanyPage({ id }: { id: string }) {
   const { goBack, navigate } = useNavigation();
   const { data, loading, error } = useApi(() => api.company(id), [id]);
+  const pageContext = useMemo(() => data ? ({
+    route: "evidenceCompany",
+    title: `${data.company.name} ESG evidence profile`,
+    company: data.company,
+    evidence: data.evidence,
+    evidenceSeries: data.series,
+    raters: data.raters,
+    signal: data.signal,
+    compliance: data.compliance,
+    forecast: data.forecast,
+    claims: data.claims,
+    liveIntelligence: data.liveIntelligence ?? null,
+    peers: data.peers,
+  }) : ({ route: "evidenceCompany", title: `Company ${id}`, companyId: id }), [data, id]);
+  usePublishAssistantPageContext(pageContext);
 
   if (loading) return <div className="p-10 text-sm text-muted">Loading {id}…</div>;
   if (error || !data) return <div className="p-10 text-sm text-neg">Couldn’t load {id}. {error}</div>;
 
-  const { company, evidence, series, raters, signal, witness, compliance, forecast, claims, peers } = data;
+  const { company, evidence, series, raters, signal, witness, compliance, forecast, claims, peers, liveIntelligence } = data;
   const seriesPts = series.filter((s) => s.total !== null);
 
   const consensusTrace = node("Rater consensus (mean of available, higher=better)", raters.consensus, [
@@ -113,6 +130,50 @@ export default function CompanyPage({ id }: { id: string }) {
         {signal.is_underpriced_improver
           ? <span className="text-[12px] font-semibold text-pos">(the gap the market missed)</span>
           : <span className="text-[12px] text-faint">not all three legs met</span>}
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
+          <div className="flex items-center gap-2 text-muted">
+            <Leaf size={14} className="text-pos" />
+            <p className="text-[12px] font-medium">Sustainable energy use</p>
+          </div>
+          <p className={`mt-2 text-lg font-semibold ${
+            liveIntelligence?.renewable.renewable_status === "Verified"
+              ? "text-pos"
+              : liveIntelligence?.renewable.renewable_status === "Non-verified"
+                ? "text-profit"
+                : "text-muted"
+          }`}>
+            {liveIntelligence?.renewable.renewable_status ?? "No evidence found"}
+          </p>
+          <p className="mt-1 text-[11px] text-faint">
+            {liveIntelligence?.renewable.evidence_count ?? 0} grouped claims · {liveIntelligence?.renewable.verified_count ?? 0} verified
+          </p>
+        </div>
+        <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
+          <div className="flex items-center gap-2 text-muted">
+            <Activity size={14} className="text-purpose" />
+            <p className="text-[12px] font-medium">Emissions direction</p>
+          </div>
+          <p className={`mt-2 text-lg font-semibold ${
+            liveIntelligence?.renewable.emissions_trend === "Falling"
+              ? "text-pos"
+              : liveIntelligence?.renewable.emissions_trend === "Rising"
+                ? "text-neg"
+                : "text-muted"
+          }`}>
+            {liveIntelligence?.renewable.emissions_trend ?? "No evidence found"}
+          </p>
+          <p className="mt-1 text-[11px] text-faint">Separate evidence signal; it does not prove renewable use.</p>
+        </div>
+        <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
+          <p className="text-[12px] font-medium text-muted">Validated web research</p>
+          <p className="mt-2 text-lg font-semibold text-txt">{liveIntelligence?.claims.length ?? 0} claims</p>
+          <p className="mt-1 text-[11px] text-faint">
+            Community adjustment {liveIntelligence?.community_sentiment_adjustment ?? 0} pts, live signal only
+          </p>
+        </div>
       </div>
 
       {/* pillars + evidence trajectory */}

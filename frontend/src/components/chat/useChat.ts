@@ -18,6 +18,7 @@ export type ChatSource = {
   url: string;
   snippet?: string | null;
   source: string;
+  sourceClass?: "verified" | "non_verified" | "community" | null;
 };
 
 export type ReferenceArticle = {
@@ -27,6 +28,7 @@ export type ReferenceArticle = {
   source: string;
   kind: string;
   reason?: string | null;
+  sourceClass?: "verified" | "non_verified" | "community" | null;
 };
 
 export type ToolResult = {
@@ -181,10 +183,10 @@ function useConversation(
   const initialized = useRef(false);
   const abortRef = useRef<AbortController | null>(null);
 
-  const nextId = () => {
+  const nextId = useCallback(() => {
     counter.current += 1;
     return `${surface}-m${counter.current}`;
-  };
+  }, [surface]);
 
   const commitMessages = (next: ChatMessage[]) => {
     messagesRef.current = next;
@@ -373,7 +375,7 @@ function useConversation(
         setActiveWorkflowSteps([]);
       }
     },
-    [activeSessionId, loadSessions, pending, upsertSession],
+    [activeSessionId, loadSessions, nextId, pending, upsertSession],
   );
 
   const stop = useCallback(() => {

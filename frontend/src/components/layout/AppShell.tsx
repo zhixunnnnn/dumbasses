@@ -35,10 +35,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         ? `evidenceCompany-${route.id}`
         : route.name;
   return (
-    <div className="flex h-screen overflow-hidden bg-canvas text-txt">
+    <div className="flex h-[100dvh] overflow-hidden bg-canvas text-txt">
       <Sidebar />
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex items-center justify-between border-b border-hairline px-4 py-2.5 md:hidden">
+        <header className="safe-top flex shrink-0 items-center justify-between border-b border-hairline bg-surface/95 px-3 py-2.5 backdrop-blur md:hidden">
           <div className="flex items-center gap-2">
             <Leaf size={16} className="text-pos" />
             <span className="text-sm font-semibold">ESG Intelligence</span>
@@ -58,7 +58,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             ))}
           </div>
         </header>
-        <main className="min-h-0 flex-1 overflow-y-auto">
+        <main className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain">
           <div key={routeKey} className="h-full animate-fade-up">
             {children}
           </div>

@@ -359,6 +359,7 @@ def test_company_esg_news_collector_filters_and_enriches_company_sources():
 
 def test_webtools_uses_default_brightdata_zone_when_key_exists(monkeypatch):
     zones: list[str] = []
+    monkeypatch.setattr(agent_module, "_disk_cache_get", lambda *args, **kwargs: None)
 
     class FakeAsyncClient:
         def __init__(self, *args, **kwargs) -> None:
@@ -397,6 +398,7 @@ def test_webtools_uses_default_brightdata_zone_when_key_exists(monkeypatch):
 
 def test_webtools_falls_back_to_second_brightdata_key_on_quota_failure(monkeypatch):
     calls: list[str] = []
+    monkeypatch.setattr(agent_module, "_disk_cache_get", lambda *args, **kwargs: None)
 
     class FakeAsyncClient:
         def __init__(self, *args, **kwargs) -> None:
