@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { apiUrl } from "../../lib/apiBase";
 import type { CompanyDetail, CompanyRow, MatrixPoint, NewsData, RegulationInfo } from "../types";
 
-const BASE = apiUrl("/api");
+const BASE = "/api";
 
 async function getJSON<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`);

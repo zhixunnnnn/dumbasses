@@ -1,4 +1,3 @@
-import { apiUrl } from "../../lib/apiBase";
 import { useEffect, useState } from "react";
 import {
   Check,
@@ -93,7 +92,7 @@ export default function SettingsPage() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch(apiUrl("/api/settings/scraping"))
+    fetch("/api/settings/scraping")
       .then(async (response) => {
         if (!response.ok) throw new Error(`Settings request failed (${response.status})`);
         return (await response.json()) as ScrapeSettings;
@@ -116,8 +115,8 @@ export default function SettingsPage() {
     const load = async () => {
       try {
         const [sourcesResponse, statusResponse] = await Promise.all([
-          fetch(apiUrl("/api/research/sources")),
-          fetch(apiUrl("/api/research/status")),
+          fetch("/api/research/sources"),
+          fetch("/api/research/status"),
         ]);
         if (!sourcesResponse.ok || !statusResponse.ok) return;
         const [sources, status] = await Promise.all([
@@ -145,7 +144,7 @@ export default function SettingsPage() {
     setSaving(true);
     setScrapeError(null);
     try {
-      const response = await fetch(apiUrl("/api/settings/scraping"), {
+      const response = await fetch("/api/settings/scraping", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -179,7 +178,7 @@ export default function SettingsPage() {
     setStartingResearch(true);
     setScrapeError(null);
     try {
-      const response = await fetch(apiUrl("/api/research/run"), {
+      const response = await fetch("/api/research/run", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({}),
@@ -196,7 +195,7 @@ export default function SettingsPage() {
   };
 
   const reviewCandidate = async (domain: string, decision: "approved" | "rejected") => {
-    const response = await fetch(apiUrl("/api/research/sources/review"), {
+    const response = await fetch("/api/research/sources/review", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ domain, decision }),
