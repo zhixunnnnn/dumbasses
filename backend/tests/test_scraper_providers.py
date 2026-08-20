@@ -168,11 +168,11 @@ def test_searxng_search_and_crawl4ai_fetch(monkeypatch):
             "content": "Official report and renewable energy information.",
         }]
     })])
+    # /md is the primary endpoint: flat body, stable across Crawl4AI releases.
     crawl_client = FakeClient(post_responses=[FakeResponse({
-        "results": [{
-            "url": "https://dbs.com/sustainability",
-            "markdown": {"fit_markdown": "DBS sustainability evidence"},
-        }]
+        "url": "https://dbs.com/sustainability",
+        "markdown": "DBS sustainability evidence",
+        "success": True,
     })])
 
     results = asyncio.run(search_searxng("DBS ESG", 10, search_client))
@@ -183,7 +183,59 @@ def test_searxng_search_and_crawl4ai_fetch(monkeypatch):
     assert fetched.source == "crawl4ai"
     assert "sustainability evidence" in fetched.text
     assert search_client.get_calls[0][1]["params"]["format"] == "json"
-    assert crawl_client.post_calls[0][1]["json"]["urls"] == ["https://dbs.com/sustainability"]
+    assert crawl_client.post_calls[0][0].endswith("/md")
+    assert crawl_client.post_calls[0][1]["json"]["url"] == "https://dbs.com/sustainability"
+
+
+def test_crawl4ai_falls_back_to_crawl_when_md_is_unavailable(monkeypatch):
+    """Older/trimmed Crawl4AI builds have no /md route. The adapter must retry via
+    /crawl rather than reporting the page as unfetchable."""
+    monkeypatch.setenv("CRAWL4AI_BASE_URL", "https://crawl.internal")
+    client = FakeClient(post_responses=[
+        FakeResponse({"detail": "Not Found"}, status_code=404),
+        FakeResponse({
+            "results": [{
+                "url": "https://dbs.com/sustainability",
+                "markdown": {"fit_markdown": "DBS sustainability evidence"},
+            }]
+        }),
+    ])
+
+    fetched = asyncio.run(fetch_crawl4ai("https://dbs.com/sustainability", client))
+
+    assert "sustainability evidence" in fetched.text
+    assert client.post_calls[0][0].endswith("/md")
+    assert client.post_calls[1][0].endswith("/crawl")
+    assert client.post_calls[1][1]["json"]["urls"] == ["https://dbs.com/sustainability"]
+    # The config objects must carry the explicit serialization wrapper the server
+    # deserializes on every release.
+    assert client.post_calls[1][1]["json"]["browser_config"]["type"] == "BrowserConfig"
+
+
+def test_base_url_is_normalized_from_a_pasted_endpoint(monkeypatch):
+    """The base-URL bug: a value pasted with no scheme, a trailing slash, or an
+    endpoint path used to produce unresolvable request URLs."""
+    from backend.engine.scraper_providers import normalize_base_url
+
+    assert normalize_base_url("  searxng.up.railway.app/ ") == "https://searxng.up.railway.app"
+    assert normalize_base_url("http://localhost:11235/crawl") == "http://localhost:11235"
+    assert normalize_base_url("crawl4ai.railway.internal:11235") == "http://crawl4ai.railway.internal:11235"
+    assert normalize_base_url("") == ""
+    assert normalize_base_url("not a url") == ""
+
+
+def test_searxng_reports_a_blocked_json_api_instead_of_empty_results(monkeypatch):
+    """A limiter-enabled instance 403s the JSON API. Returning [] there looks like
+    'no results found', which hides the misconfiguration."""
+    monkeypatch.setenv("SEARXNG_BASE_URL", "https://search.internal")
+    client = FakeClient(get_responses=[FakeResponse({}, status_code=403)])
+
+    try:
+        asyncio.run(search_searxng("DBS ESG", 10, client))
+    except RuntimeError as exc:
+        assert "limiter" in str(exc)
+    else:
+        raise AssertionError("a blocked JSON API must raise, not return []")
 
 
 def test_provider_availability_never_returns_credentials(monkeypatch):

@@ -18,6 +18,12 @@ SCRAPEDO_API_URL = "https://api.scrape.do/"
 SCRAPEDO_SEARCH_URL = "https://api.scrape.do/plugin/google/search"
 OXYLABS_API_URL = "https://realtime.oxylabs.io/v1/queries"
 
+# Self-hosted endpoints. The URL is a setting, not a secret, so it is editable from
+# the Settings page and persisted alongside the other scraping settings; the
+# environment variable stays as the deployment-level default.
+SEARXNG_URL_KEY = "searxngBaseUrl"
+CRAWL4AI_URL_KEY = "crawl4aiBaseUrl"
+
 PROVIDER_LABELS = {
     "brightdata": "Bright Data",
     "scrapedo": "Scrape.do",
@@ -67,21 +73,178 @@ def provider_availability() -> dict[str, dict[str, Any]]:
             else "OXYLABS_USERNAME or OXYLABS_PASSWORD is missing.",
         ),
         "crawl4ai_searxng": (
-            bool(os.environ.get("SEARXNG_BASE_URL") and os.environ.get("CRAWL4AI_BASE_URL")),
+            bool(searxng_base_url() and crawl4ai_base_url()),
             None
-            if os.environ.get("SEARXNG_BASE_URL") and os.environ.get("CRAWL4AI_BASE_URL")
-            else "SEARXNG_BASE_URL or CRAWL4AI_BASE_URL is missing.",
+            if searxng_base_url() and crawl4ai_base_url()
+            else "Set the SearXNG and Crawl4AI base URLs in Settings "
+            "(or SEARXNG_BASE_URL / CRAWL4AI_BASE_URL).",
         ),
     }
+    endpoints = {"searxng": searxng_base_url(), "crawl4ai": crawl4ai_base_url()}
     return {
         key: {
             "id": key,
             "label": PROVIDER_LABELS[key],
             "available": available,
             "reason": reason,
+            **({"endpoints": endpoints} if key == "crawl4ai_searxng" else {}),
         }
         for key, (available, reason) in statuses.items()
     }
+
+
+# --------------------------------------------------------------------------- #
+# Base URL resolution — the bug this fixes: a URL typed without a scheme, with a
+# trailing slash, or with a path suffix produced requests like
+# "myhost.up.railway.app//search", which never resolve. Every self-hosted endpoint
+# now goes through one normalizer, and the value can come from settings or env.
+# --------------------------------------------------------------------------- #
+def normalize_base_url(value: str | None) -> str:
+    """Return a clean scheme://host[:port] origin, or "" if the value is unusable."""
+    text = (value or "").strip().strip('"').strip("'")
+    if not text:
+        return ""
+    if "://" not in text:
+        # A bare host:port on a private network is plain HTTP; anything else is
+        # assumed to be a public hostname served over TLS.
+        text = ("http://" if _is_private_host(text) else "https://") + text
+    parsed = urlparse(text)
+    if parsed.scheme not in {"http", "https"} or not _is_valid_netloc(parsed.netloc):
+        return ""
+    path = parsed.path.rstrip("/")
+    # Tolerate someone pasting the endpoint rather than the origin.
+    for suffix in ("/search", "/crawl", "/md", "/health"):
+        if path.endswith(suffix):
+            path = path[: -len(suffix)]
+    return f"{parsed.scheme}://{parsed.netloc}{path}".rstrip("/")
+
+
+def searxng_base_url() -> str:
+    return normalize_base_url(
+        _setting(SEARXNG_URL_KEY) or os.environ.get("SEARXNG_BASE_URL")
+    )
+
+
+def crawl4ai_base_url() -> str:
+    return normalize_base_url(
+        _setting(CRAWL4AI_URL_KEY) or os.environ.get("CRAWL4AI_BASE_URL")
+    )
+
+
+def _is_valid_netloc(netloc: str) -> bool:
+    """urlparse happily accepts spaces and other junk in the authority, so a typo
+    like "my host" would otherwise become the plausible-looking "https://my host"
+    and fail only at request time."""
+    if not netloc or any(char.isspace() for char in netloc):
+        return False
+    host, _, port = netloc.rpartition(":")
+    if not host:
+        host, port = netloc, ""
+    if port and not port.isdigit():
+        return False
+    return bool(host) and all(
+        char.isalnum() or char in "-._[]" for char in host
+    )
+
+
+def _is_private_host(value: str) -> bool:
+    host = value.split("/", 1)[0].split(":", 1)[0].lower()
+    return (
+        host in {"localhost", "127.0.0.1", "0.0.0.0", "host.docker.internal"}
+        or host.endswith(".internal")
+        or host.endswith(".railway.internal")
+        or host.startswith(("10.", "192.168.", "172."))
+    )
+
+
+def _setting(key: str) -> str | None:
+    """Read one scraping setting straight from SQLite.
+
+    Deliberately not via ``scrape_settings.get_scrape_settings`` — that function
+    calls ``provider_availability`` to build its status block, so going through it
+    here would recurse.
+    """
+    try:
+        from .db import bootstrap
+
+        conn = bootstrap()
+        try:
+            row = conn.execute(
+                "SELECT value_json FROM app_settings WHERE key='scraping'"
+            ).fetchone()
+        finally:
+            conn.close()
+        if not row:
+            return None
+        value = json.loads(row["value_json"]).get(key)
+        return value if isinstance(value, str) and value.strip() else None
+    except Exception:  # noqa: BLE001 — settings are best-effort; env is the fallback
+        return None
+
+
+async def check_selfhosted_endpoints(client: httpx.AsyncClient) -> dict[str, Any]:
+    """Live reachability probe for the Settings page, so a wrong base URL shows up
+    as a concrete error instead of an empty result set later."""
+    results: dict[str, Any] = {}
+
+    searxng = searxng_base_url()
+    if not searxng:
+        results["searxng"] = {"ok": False, "url": None, "detail": "No base URL configured."}
+    else:
+        try:
+            response = await client.get(
+                f"{searxng}/search",
+                params={"q": "esg", "format": "json"},
+                headers=_SEARXNG_HEADERS,
+                timeout=20.0,
+            )
+            payload = response.json() if response.status_code == 200 else {}
+            count = len(payload.get("results") or []) if isinstance(payload, dict) else 0
+            results["searxng"] = {
+                "ok": response.status_code == 200 and count > 0,
+                "url": f"{searxng}/search",
+                "detail": (
+                    f"{count} results"
+                    if response.status_code == 200
+                    else f"HTTP {response.status_code}"
+                    + (
+                        " — the JSON API is blocked. Set `limiter: false` and add "
+                        "`json` to `search.formats` in settings.yml."
+                        if response.status_code in (403, 429)
+                        else ""
+                    )
+                ),
+            }
+        except Exception as exc:  # noqa: BLE001
+            results["searxng"] = {
+                "ok": False,
+                "url": f"{searxng}/search",
+                "detail": f"{type(exc).__name__}: {str(exc)[:160]}",
+            }
+
+    crawl4ai = crawl4ai_base_url()
+    if not crawl4ai:
+        results["crawl4ai"] = {"ok": False, "url": None, "detail": "No base URL configured."}
+    else:
+        try:
+            response = await client.get(f"{crawl4ai}/health", timeout=20.0)
+            results["crawl4ai"] = {
+                "ok": response.status_code == 200,
+                "url": f"{crawl4ai}/health",
+                "detail": (
+                    str(response.json())[:160]
+                    if response.status_code == 200
+                    else f"HTTP {response.status_code}"
+                ),
+            }
+        except Exception as exc:  # noqa: BLE001
+            results["crawl4ai"] = {
+                "ok": False,
+                "url": f"{crawl4ai}/health",
+                "detail": f"{type(exc).__name__}: {str(exc)[:160]}",
+            }
+
+    return results
 
 
 async def search_scrapedo(
@@ -212,12 +375,25 @@ async def fetch_oxylabs(
     )
 
 
+# SearXNG's bot filter rejects requests that look automated. A private instance
+# should run with `limiter: false`, but sending a browser-like Accept/UA pair also
+# gets a limiter-enabled instance to answer, so both configurations work.
+_SEARXNG_HEADERS = {
+    "Accept": "application/json,text/html;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+    ),
+}
+
+
 async def search_searxng(
     query: str,
     max_results: int,
     client: httpx.AsyncClient,
 ) -> list[ProviderSearchResult]:
-    base_url = os.environ.get("SEARXNG_BASE_URL", "").rstrip("/")
+    base_url = searxng_base_url()
     if not base_url:
         return []
     response = await client.get(
@@ -229,40 +405,85 @@ async def search_searxng(
             "categories": "general,news",
             "safesearch": 1,
         },
+        headers=_SEARXNG_HEADERS,
     )
+    if response.status_code in (403, 429):
+        raise RuntimeError(
+            f"SearXNG rejected the JSON API (HTTP {response.status_code}) at "
+            f"{base_url}/search. Set `limiter: false` and include `json` in "
+            "`search.formats` in the instance settings.yml."
+        )
     response.raise_for_status()
-    return _normalize_search_payload(response.json(), "searxng_search", max_results)
+    try:
+        payload = response.json()
+    except ValueError as exc:
+        raise RuntimeError(
+            f"SearXNG at {base_url} returned non-JSON — `json` is probably missing "
+            "from `search.formats` in settings.yml."
+        ) from exc
+    return _normalize_search_payload(payload, "searxng_search", max_results)
 
 
 async def fetch_crawl4ai(
     url: str,
     client: httpx.AsyncClient,
 ) -> ProviderFetchResult:
-    base_url = os.environ.get("CRAWL4AI_BASE_URL", "").rstrip("/")
+    base_url = crawl4ai_base_url()
     if not base_url:
-        raise RuntimeError("Crawl4AI is not configured.")
-    response = await client.post(
-        f"{base_url}/crawl",
-        json={
-            "urls": [url],
-            "browser_config": {
-                "headless": True,
-                "text_mode": True,
-            },
-            "crawler_config": {
-                "cache_mode": "bypass",
-                "page_timeout": 60000,
-                "wait_until": "domcontentloaded",
-            },
-        },
-    )
-    response.raise_for_status()
-    payload = response.json()
-    result = _crawl4ai_result(payload)
-    text = _crawl4ai_text(result)
-    if not text:
-        raise RuntimeError("Crawl4AI returned no readable content.")
-    resolved_url = str(result.get("url") or url) if isinstance(result, dict) else url
+        raise RuntimeError(
+            "Crawl4AI is not configured — set its base URL in Settings or "
+            "CRAWL4AI_BASE_URL."
+        )
+    # /md is the flat, version-stable markdown endpoint. /crawl is the fallback for
+    # builds where /md is unavailable; its config objects use the explicit
+    # {"type", "params"} serialization the server deserializes on every release.
+    text = ""
+    resolved_url = url
+    errors: list[str] = []
+    try:
+        response = await client.post(
+            f"{base_url}/md",
+            json={"url": url, "f": "fit", "c": "0"},
+        )
+        response.raise_for_status()
+        payload = response.json()
+        text = str(payload.get("markdown") or "") if isinstance(payload, dict) else ""
+    except Exception as exc:  # noqa: BLE001
+        errors.append(f"/md {type(exc).__name__}: {str(exc)[:120]}")
+
+    if not text.strip():
+        try:
+            response = await client.post(
+                f"{base_url}/crawl",
+                json={
+                    "urls": [url],
+                    "browser_config": {
+                        "type": "BrowserConfig",
+                        "params": {"headless": True, "text_mode": True},
+                    },
+                    "crawler_config": {
+                        "type": "CrawlerRunConfig",
+                        "params": {
+                            "page_timeout": 60000,
+                            "wait_until": "domcontentloaded",
+                            "scan_full_page": False,
+                        },
+                    },
+                },
+            )
+            response.raise_for_status()
+            result = _crawl4ai_result(response.json())
+            text = _crawl4ai_text(result)
+            if isinstance(result, dict):
+                resolved_url = str(result.get("url") or url)
+        except Exception as exc:  # noqa: BLE001
+            errors.append(f"/crawl {type(exc).__name__}: {str(exc)[:120]}")
+
+    if not text.strip():
+        raise RuntimeError(
+            f"Crawl4AI at {base_url} returned no readable content"
+            + (f" ({'; '.join(errors)})" if errors else ".")
+        )
     encoded = text.encode("utf-8")
     return ProviderFetchResult(
         url=resolved_url,

@@ -6,6 +6,8 @@ import {
   BookMarked,
   Settings,
   Newspaper,
+  Microscope,
+  ShieldAlert,
 } from "lucide-react";
 import {
   useNavigation,
@@ -22,6 +24,12 @@ const PRIMARY: NavItem[] = [
   { key: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={17} /> },
   { key: "assistant", label: "AI Agent", icon: <Sparkles size={17} /> },
   { key: "news", label: "Live News", icon: <Newspaper size={17} /> },
+  {
+    key: "interpretability",
+    label: "Interpretability",
+    icon: <Microscope size={17} />,
+  },
+  { key: "governance", label: "Governance", icon: <ShieldAlert size={17} /> },
 ];
 
 const BROWSE: NavItem[] = [

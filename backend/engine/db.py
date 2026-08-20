@@ -232,6 +232,20 @@ CREATE TABLE IF NOT EXISTS reg_evidence (
     source         TEXT,
     PRIMARY KEY (company_id, reg_id)
 );
+
+-- cached Monday-morning manager briefing, one row per company per SG calendar
+-- day (regenerated lazily on first request each day; see engine/briefing.py)
+CREATE TABLE IF NOT EXISTS company_briefings (
+    company_id        TEXT,
+    briefing_date      TEXT,    -- YYYY-MM-DD, Asia/Singapore
+    headline           TEXT,
+    summary            TEXT,
+    potential_effects  TEXT,    -- JSON array of strings
+    watch_items        TEXT,    -- JSON array of strings
+    sentiment          TEXT,    -- positive | neutral | negative | mixed
+    generated_at       TEXT,
+    PRIMARY KEY (company_id, briefing_date)
+);
 """
 
 TABLES = [

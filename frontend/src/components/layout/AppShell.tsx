@@ -3,7 +3,9 @@ import {
   Compass,
   LayoutDashboard,
   Leaf,
+  Microscope,
   Newspaper,
+  ShieldAlert,
   Settings,
   Sparkles,
 } from "lucide-react";
@@ -21,6 +23,12 @@ const MOBILE_NAV: MobileNavItem[] = [
   { key: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={16} /> },
   { key: "assistant", label: "AI Agent", icon: <Sparkles size={16} /> },
   { key: "news", label: "Live News", icon: <Newspaper size={16} /> },
+  {
+    key: "interpretability",
+    label: "Interpretability",
+    icon: <Microscope size={16} />,
+  },
+  { key: "governance", label: "Governance", icon: <ShieldAlert size={16} /> },
   { key: "explore", label: "Explore", icon: <Compass size={16} /> },
   { key: "watchlists", label: "Watchlists", icon: <BookMarked size={16} /> },
   { key: "settings", label: "Settings", icon: <Settings size={16} /> },

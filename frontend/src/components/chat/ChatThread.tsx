@@ -6,6 +6,7 @@ import {
   ExternalLink,
   Eye,
   FileText,
+  Flag,
   Newspaper,
   Search,
   Square,
@@ -23,6 +24,10 @@ import {
   type WorkflowStep,
 } from "./useChat";
 import { useAssistantPageContext } from "./PageContext";
+import {
+  FEEDBACK_REASONS,
+  submitFeedback,
+} from "../../lib/feedback";
 
 type Props = {
   compact?: boolean;
@@ -30,7 +35,7 @@ type Props = {
 };
 
 export default function ChatThread({ compact = false, surface = "page" }: Props) {
-  const { messages, pending, activeWorkflowSteps, send, stop } =
+  const { messages, pending, activeWorkflowSteps, activeSessionId, send, stop } =
     useChat(surface);
   const pageContext = useAssistantPageContext();
   const [draft, setDraft] = useState("");
@@ -58,8 +63,16 @@ export default function ChatThread({ compact = false, surface = "page" }: Props)
   return (
     <div className="flex h-full flex-col">
       <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-2 py-2 sm:px-4">
-        {messages.map((m) => (
-          <Bubble key={m.id} message={m} compact={compact} />
+        {messages.map((m, index) => (
+          <Bubble
+            key={m.id}
+            message={m}
+            compact={compact}
+            surface={surface}
+            sessionId={activeSessionId}
+            pageContext={pageContext}
+            promptText={previousUserContent(messages, index)}
+          />
         ))}
         {pending && (
           <ToolActivity compact={compact} steps={activeWorkflowSteps} />
@@ -119,14 +132,33 @@ export default function ChatThread({ compact = false, surface = "page" }: Props)
   );
 }
 
+/** The user turn a given assistant message answered — the "prompt" half of an
+ *  RLHF pair. */
+function previousUserContent(messages: ChatMessage[], index: number): string {
+  for (let i = index - 1; i >= 0; i -= 1) {
+    if (messages[i].role === "user") return messages[i].content;
+  }
+  return "";
+}
+
 function Bubble({
   message,
   compact,
+  surface,
+  sessionId,
+  pageContext,
+  promptText,
 }: {
   message: ChatMessage;
   compact: boolean;
+  surface: ChatSurface;
+  sessionId: string | null;
+  pageContext: Record<string, unknown>;
+  promptText: string;
 }) {
   const isUser = message.role === "user";
+  // The canned welcome line is not a model response, so there is nothing to flag.
+  const flaggable = !isUser && message.id !== "welcome";
   return (
     <div
       className={`flex ${
@@ -151,7 +183,145 @@ function Bubble({
           <MarkdownContent content={message.content} />
         )}
         {!isUser && <MessageArtifacts message={message} />}
+        {flaggable && (
+          <FlagAction
+            message={message}
+            surface={surface}
+            sessionId={sessionId}
+            pageContext={pageContext}
+            promptText={promptText}
+          />
+        )}
       </div>
+    </div>
+  );
+}
+
+/** Flag an assistant response for human review. The flag captures the prompt, the
+ *  answer, and the evidence the agent cited, so a reviewer in Governance can judge
+ *  it without replaying the session. */
+function FlagAction({
+  message,
+  surface,
+  sessionId,
+  pageContext,
+  promptText,
+}: {
+  message: ChatMessage;
+  surface: ChatSurface;
+  sessionId: string | null;
+  pageContext: Record<string, unknown>;
+  promptText: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const [reason, setReason] = useState(FEEDBACK_REASONS[0].id);
+  const [comment, setComment] = useState("");
+  const [state, setState] = useState<"idle" | "saving" | "done" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  const send = async () => {
+    setState("saving");
+    setError(null);
+    try {
+      await submitFeedback({
+        sessionId,
+        messageId: message.id,
+        reason,
+        comment,
+        responseText: message.content,
+        promptText,
+        model: message.model ?? null,
+        surface,
+        artifacts: {
+          sources: message.sources ?? [],
+          referenceArticles: message.referenceArticles ?? [],
+          toolResults: message.toolResults ?? [],
+          workflowSteps: message.workflowSteps ?? [],
+        },
+        pageContext,
+      });
+      setState("done");
+      setOpen(false);
+    } catch (err) {
+      setState("error");
+      setError(err instanceof Error ? err.message : "Could not send the flag.");
+    }
+  };
+
+  if (state === "done") {
+    return (
+      <p className="mt-2 flex items-center gap-1.5 border-t border-hairline pt-2 text-[11px] text-pos">
+        <Flag size={11} />
+        Flagged for review — it is now in the Governance queue.
+      </p>
+    );
+  }
+
+  return (
+    <div className="mt-2 border-t border-hairline pt-2">
+      {!open ? (
+        <button
+          onClick={() => setOpen(true)}
+          className="flex items-center gap-1.5 rounded-md px-1.5 py-1 text-[11px] text-faint transition hover:bg-raised hover:text-neg"
+          title="Flag this response for human review"
+        >
+          <Flag size={11} />
+          Flag response
+        </button>
+      ) : (
+        <div className="space-y-2 rounded-lg border border-hairline bg-canvas/50 p-2.5">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-faint">
+              What went wrong?
+            </p>
+            <button
+              onClick={() => setOpen(false)}
+              className="text-faint transition hover:text-txt"
+              aria-label="Cancel"
+            >
+              <X size={13} />
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {FEEDBACK_REASONS.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setReason(item.id)}
+                className={`rounded-full border px-2 py-1 text-[11px] transition ${
+                  reason === item.id
+                    ? "border-neg bg-neg/10 text-neg"
+                    : "border-hairline text-muted hover:text-txt"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+          <textarea
+            value={comment}
+            onChange={(event) => setComment(event.target.value)}
+            rows={2}
+            placeholder="Optional: what should it have said instead?"
+            className="w-full resize-none rounded-md border border-hairline bg-surface px-2 py-1.5 text-[12px] text-txt outline-none placeholder:text-faint"
+          />
+          {error && <p className="text-[11px] text-neg">{error}</p>}
+          <div className="flex justify-end gap-2">
+            <button
+              onClick={() => setOpen(false)}
+              className="rounded-md px-2.5 py-1 text-[11px] text-muted transition hover:text-txt"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => void send()}
+              disabled={state === "saving"}
+              className="rounded-md bg-neg px-2.5 py-1 text-[11px] font-semibold text-canvas transition hover:brightness-110 disabled:opacity-50"
+            >
+              {state === "saving" ? "Sending" : "Submit flag"}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

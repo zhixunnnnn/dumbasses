@@ -6,6 +6,8 @@ import AppShell from "./components/layout/AppShell";
 import ChatPage from "./components/chat/ChatPage";
 import CompanyPage from "./components/company/CompanyPage";
 import SettingsPage from "./components/settings/SettingsPage";
+import InterpretabilityPage from "./components/interpretability/InterpretabilityPage";
+import GovernancePage from "./components/governance/GovernancePage";
 import ExplorePage from "./components/explore/ExplorePage";
 import WatchlistsPage from "./components/watchlist/WatchlistsPage";
 import EvidenceDashboard from "./evidence/components/dashboard/DashboardPage";
@@ -26,6 +28,8 @@ function Routed() {
         {route.name === "assistant" && <ChatPage />}
         {route.name === "explore" && <ExplorePage />}
         {route.name === "watchlists" && <WatchlistsPage />}
+        {route.name === "interpretability" && <InterpretabilityPage />}
+        {route.name === "governance" && <GovernancePage />}
         {route.name === "settings" && <SettingsPage />}
         {route.name === "company" && <CompanyPage id={route.id} />}
         {route.name === "news" && <EvidenceNews />}

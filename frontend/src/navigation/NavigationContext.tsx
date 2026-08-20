@@ -5,6 +5,8 @@ export type Route =
   | { name: "assistant" }
   | { name: "explore" }
   | { name: "watchlists" }
+  | { name: "interpretability" }
+  | { name: "governance" }
   | { name: "settings" }
   | { name: "company"; id: string }
   | { name: "news" }

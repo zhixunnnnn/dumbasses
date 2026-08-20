@@ -11,6 +11,9 @@ import {
   Sun,
 } from "lucide-react";
 import { useThemeMode } from "../../theme/ThemeContext";
+import ModelProviderPanel from "./ModelProviderPanel";
+import FeedbackPanel from "./FeedbackPanel";
+import SelfHostedScrapers from "./SelfHostedScrapers";
 
 const OPTIONS = [
   {
@@ -33,6 +36,7 @@ type ProviderStatus = {
   available: boolean;
   enabled: boolean;
   reason?: string | null;
+  endpoints?: { searxng: string; crawl4ai: string };
 };
 
 type ScrapeSettings = {
@@ -48,6 +52,8 @@ type ScrapeSettings = {
   timezone: string;
   runAt: string;
   retainRawDays: number;
+  searxngBaseUrl: string;
+  crawl4aiBaseUrl: string;
   adaptiveCrawl: boolean;
   communitySentimentWeight: number;
   updatedAt?: string | null;
@@ -155,6 +161,8 @@ export default function SettingsPage() {
           timezone: next.timezone,
           runAt: next.runAt,
           retainRawDays: next.retainRawDays,
+          searxngBaseUrl: next.searxngBaseUrl,
+          crawl4aiBaseUrl: next.crawl4aiBaseUrl,
         }),
       });
       if (!response.ok) throw new Error(`Settings update failed (${response.status})`);
@@ -391,6 +399,13 @@ export default function SettingsPage() {
               })}
             </div>
 
+            <SelfHostedScrapers
+              searxngBaseUrl={scraping.searxngBaseUrl}
+              crawl4aiBaseUrl={scraping.crawl4aiBaseUrl}
+              saving={saving}
+              onSave={(patch) => void saveScraping({ ...scraping, ...patch })}
+            />
+
             <div className="mt-5 border-t border-hairline pt-5">
               <div className="flex items-center gap-2">
                 <ShieldCheck size={15} className="text-pos" />
@@ -513,6 +528,10 @@ export default function SettingsPage() {
           </>
         )}
       </section>
+
+      <ModelProviderPanel />
+
+      <FeedbackPanel />
 
       <section className="my-5 rounded-2xl border border-hairline bg-surface p-5 shadow-panel">
         <div className="flex items-start justify-between gap-4">

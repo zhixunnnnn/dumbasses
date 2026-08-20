@@ -22,8 +22,10 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from backend.engine import config
+from backend.engine.model_settings import get_model_settings, save_model_settings
 from backend.engine.pipeline import build
 from backend.engine.scrape_settings import get_scrape_settings, save_scrape_settings
+from backend.engine.scraper_providers import check_selfhosted_endpoints
 from backend.engine.source_intelligence import (
     get_company_intelligence,
     get_research_status,
@@ -46,6 +48,12 @@ from .chat_history import (
     ChatSessionDetail,
     ChatSessionSummary,
     CreateChatSessionRequest,
+)
+from .feedback import (
+    FeedbackCreate,
+    FeedbackRecord,
+    FeedbackReview,
+    FeedbackStore,
 )
 
 
@@ -71,6 +79,17 @@ class ScrapeSettingsUpdate(BaseModel):
     timezone: str | None = None
     runAt: str | None = None
     retainRawDays: int | None = None
+    searxngBaseUrl: str | None = None
+    crawl4aiBaseUrl: str | None = None
+
+
+class ModelSettingsUpdate(BaseModel):
+    provider: str | None = None
+    openrouterModel: str | None = None
+    bedrockModelId: str | None = None
+    bedrockRegion: str | None = None
+    temperature: float | None = None
+    maxTokens: int | None = None
 
 
 class ResearchRunRequest(BaseModel):
@@ -85,6 +104,7 @@ class SourceReviewRequest(BaseModel):
 app = FastAPI(title="PolyFintech 2026 API", version="1.0.0")
 agent = OpenRouterAgent()
 chat_history = ChatHistoryStore()
+feedback_store = FeedbackStore()
 _research_lock = threading.Lock()
 _research_scheduler = None
 
@@ -236,13 +256,111 @@ def scraping_settings():
 
 @app.put("/api/settings/scraping")
 def update_scraping_settings(request: ScrapeSettingsUpdate):
-    payload = request.model_dump(exclude_none=True)
+    payload = request.model_dump(exclude_unset=True, exclude_none=True)
     try:
         result = save_scrape_settings(payload)
         _reschedule_research()
         return result
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.post("/api/settings/scraping/test")
+async def test_scraping_endpoints():
+    """Probe the self-hosted SearXNG/Crawl4AI base URLs so a misconfiguration shows
+    up in Settings as a concrete error instead of silently empty results."""
+    import httpx
+
+    async with httpx.AsyncClient(follow_redirects=True, timeout=25.0) as client:
+        return await check_selfhosted_endpoints(client)
+
+
+@app.get("/api/settings/models")
+def model_settings():
+    return get_model_settings()
+
+
+@app.put("/api/settings/models")
+def update_model_settings(request: ModelSettingsUpdate):
+    payload = request.model_dump(exclude_unset=True, exclude_none=True)
+    try:
+        return save_model_settings(payload)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+# --------------------------------------------------------------------------- #
+# Interpretability — why the forecaster produced a given ESG estimate.
+# --------------------------------------------------------------------------- #
+@app.get("/api/interpretability/model-card")
+def interpretability_model_card():
+    from backend.engine.interpret import model_card
+
+    return model_card()
+
+
+@app.get("/api/interpretability/predictions")
+def interpretability_predictions():
+    from backend.engine.interpret import explain_all
+
+    return explain_all()
+
+
+@app.get("/api/interpretability/company/{company_id}")
+def interpretability_company(company_id: str):
+    from backend.engine.interpret import explain
+
+    try:
+        return explain(company_id)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="Company not found.") from exc
+
+
+# --------------------------------------------------------------------------- #
+# Governance — flagged agent responses, reviewed by a human, exported for RLHF.
+# --------------------------------------------------------------------------- #
+@app.post("/api/assistant/feedback", response_model=FeedbackRecord, status_code=201)
+def create_feedback(request: FeedbackCreate) -> FeedbackRecord:
+    return feedback_store.create(request)
+
+
+@app.get("/api/assistant/feedback", response_model=list[FeedbackRecord])
+def list_feedback(status: str | None = None, limit: int = 200) -> list[FeedbackRecord]:
+    return feedback_store.list(status=status, limit=limit)
+
+
+@app.get("/api/assistant/feedback/stats")
+def feedback_stats():
+    return feedback_store.stats()
+
+
+@app.get("/api/assistant/feedback/export")
+def export_feedback(all: bool = False) -> Response:
+    body = feedback_store.export_jsonl(only_corrected=not all)
+    return Response(
+        content=body,
+        media_type="application/x-ndjson",
+        headers={
+            "Content-Disposition": 'attachment; filename="rlhf-feedback.jsonl"',
+        },
+    )
+
+
+@app.patch("/api/assistant/feedback/{feedback_id}", response_model=FeedbackRecord)
+def review_feedback(feedback_id: str, request: FeedbackReview) -> FeedbackRecord:
+    try:
+        return feedback_store.review(feedback_id, request)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="Feedback not found.") from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.delete("/api/assistant/feedback/{feedback_id}", status_code=204)
+def delete_feedback(feedback_id: str) -> Response:
+    if not feedback_store.delete(feedback_id):
+        raise HTTPException(status_code=404, detail="Feedback not found.")
+    return Response(status_code=204)
 
 
 @app.get("/api/research/status")
@@ -337,6 +455,15 @@ def news():
         return load_news(conn)
     finally:
         conn.close()
+
+
+@app.get("/api/dashboard/briefing")
+def dashboard_briefing():
+    """Monday-morning manager digest: one LLM-synthesized summary per covered
+    company, cached per Asia/Singapore calendar day."""
+    from backend.engine.briefing import get_or_generate_briefings
+
+    return get_or_generate_briefings()
 
 
 @app.get("/api/esg-news/company")

@@ -1,16 +1,40 @@
 use_default_settings: true
 
+general:
+  # A private instance used only by this backend — no public search UI to defend.
+  instance_name: "PolyFintech ESG Search"
+  donation_url: false
+  contact_url: false
+
 server:
   bind_address: "0.0.0.0"
   port: 8080
-  secret_key: "${SEARXNG_SECRET}"
-  limiter: true
+  # The container entrypoint rewrites this literal with a random value on boot.
+  secret_key: "ultrasecretkey"
+  base_url: false
+  # The limiter is SearXNG's bot filter. It rejects the JSON API, which is the
+  # only interface this backend uses, so it stays off. The instance is reachable
+  # only by the backend, and the backend does not expose it onward.
+  limiter: false
+  public_instance: false
+  image_proxy: false
+  method: "GET"
 
 search:
   safe_search: 1
+  # `json` MUST be listed here — without it /search?format=json returns 403 and the
+  # Crawl4AI + SearXNG provider silently yields zero results.
   formats:
     - html
     - json
+  autocomplete: ""
+  default_lang: "en"
+
+outgoing:
+  request_timeout: 10.0
+  max_request_timeout: 20.0
+  pool_connections: 100
+  pool_maxsize: 20
 
 ui:
   static_use_hash: true

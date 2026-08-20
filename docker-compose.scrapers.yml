@@ -3,6 +3,7 @@ services:
     build: ./infra/searxng
     environment:
       SEARXNG_SECRET: local-development-only
+      SEARXNG_BASE_URL: "http://localhost:8080/"
     ports:
       - "8080:8080"
     restart: unless-stopped

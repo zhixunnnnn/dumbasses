@@ -6,7 +6,11 @@ from datetime import datetime, timezone
 from typing import Any
 
 from .db import bootstrap
-from .scraper_providers import PROVIDER_LABELS, provider_availability
+from .scraper_providers import (
+    PROVIDER_LABELS,
+    normalize_base_url,
+    provider_availability,
+)
 
 SETTINGS_KEY = "scraping"
 DEFAULT_SETTINGS: dict[str, Any] = {
@@ -26,6 +30,10 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "timezone": "Asia/Singapore",
     "runAt": "06:00",
     "retainRawDays": 30,
+    # Self-hosted endpoints for the Crawl4AI + SearXNG provider. Blank falls back
+    # to the SEARXNG_BASE_URL / CRAWL4AI_BASE_URL environment variables.
+    "searxngBaseUrl": "",
+    "crawl4aiBaseUrl": "",
     "adaptiveCrawl": True,
     "communitySentimentWeight": 0.02,
 }
@@ -129,6 +137,15 @@ def _validate_settings(settings: dict[str, Any]) -> dict[str, Any]:
     if retain_days < 1 or retain_days > 365:
         raise ValueError("retainRawDays must be between 1 and 365")
     settings["retainRawDays"] = retain_days
+    for key in ("searxngBaseUrl", "crawl4aiBaseUrl"):
+        raw = settings.get(key) or ""
+        if not str(raw).strip():
+            settings[key] = ""
+            continue
+        normalized = normalize_base_url(str(raw))
+        if not normalized:
+            raise ValueError(f"{key} must be a valid http(s) URL or host")
+        settings[key] = normalized
     settings["communitySentimentWeight"] = 0.02
     settings["adaptiveCrawl"] = True
     return settings

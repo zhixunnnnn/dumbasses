@@ -1041,16 +1041,48 @@ class OpenRouterAgent:
         finally:
             WORKFLOW_EVENT_QUEUE.reset(token)
 
+    def _resolve_model(self) -> dict[str, Any]:
+        """Provider + model for this request, from the persisted Settings choice.
+        Falls back to the constructor default if the settings table is unreachable."""
+        try:
+            from backend.engine.model_settings import active_model
+
+            return active_model()
+        except Exception:  # noqa: BLE001
+            return {
+                "provider": "openrouter",
+                "model": self.model,
+                "temperature": 0.25,
+                "maxTokens": 1800,
+                "region": None,
+                "requestedProvider": "openrouter",
+                "fallbackReason": None,
+            }
+
     def _create_langchain_agent(self, system_prompt: str) -> Any:
-        model = ChatOpenRouter(
-            model=self.model,
-            api_key=self.api_key,
-            temperature=0.25,
-            max_tokens=1800,
-            max_retries=2,
-            app_url="http://localhost:5173",
-            app_title="PolyFintech ESG Intelligence",
-        )
+        selection = self._resolve_model()
+        # Keep the reported model in sync with what actually ran, so the UI and
+        # the stored chat history show the provider that answered.
+        self.model = selection["model"]
+        if selection["provider"] == "bedrock":
+            from backend.engine.model_settings import build_bedrock_chat_model
+
+            model = build_bedrock_chat_model(
+                selection["model"],
+                selection["region"],
+                selection["temperature"],
+                selection["maxTokens"],
+            )
+        else:
+            model = ChatOpenRouter(
+                model=selection["model"],
+                api_key=self.api_key,
+                temperature=selection["temperature"],
+                max_tokens=selection["maxTokens"],
+                max_retries=2,
+                app_url="http://localhost:5173",
+                app_title="PolyFintech ESG Intelligence",
+            )
         return create_agent(
             model=model,
             tools=self.tools,

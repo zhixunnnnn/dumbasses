@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { api, useApi } from "../../lib/api";
 import { useNavigation } from "../../navigation/NavigationContext";
 import MomentumMatrix from "./MomentumMatrix";
+import MondayBriefing from "./MondayBriefing";
 import ImproverFeed from "./ImproverFeed";
 import ScreenerTable from "./ScreenerTable";
 import { HypothesisBadge } from "../common/badges";
@@ -80,6 +81,8 @@ export default function DashboardPage() {
           hasn’t priced yet. Every number traces to a source sentence.
         </p>
       </header>
+
+      <MondayBriefing onSelect={openCompany} />
 
       <FilterBar rows={rows} filters={filters} setFilters={setFilters} resultCount={filtered.length} />
 

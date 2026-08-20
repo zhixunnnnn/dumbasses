@@ -239,6 +239,17 @@ export type NewsCompany = {
 };
 export type NewsData = { source?: string; last_run?: string | null; companies: NewsCompany[] };
 
+export type CompanyBriefing = {
+  id: string;
+  headline: string;
+  summary: string;
+  potentialEffects: string[];
+  watchItems: string[];
+  sentiment: "positive" | "neutral" | "negative" | "mixed";
+  generatedAt: string;
+};
+export type BriefingData = { date: string; companies: CompanyBriefing[] };
+
 export type LiveResearchSource = {
   url: string;
   domain: string;
