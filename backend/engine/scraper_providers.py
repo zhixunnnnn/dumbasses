@@ -113,7 +113,7 @@ def normalize_base_url(value: str | None) -> str:
         return ""
     path = parsed.path.rstrip("/")
     # Tolerate someone pasting the endpoint rather than the origin.
-    for suffix in ("/search", "/crawl", "/md", "/health"):
+    for suffix in ("/search", "/crawl", "/md", "/health", "/schema"):
         if path.endswith(suffix):
             path = path[: -len(suffix)]
     return f"{parsed.scheme}://{parsed.netloc}{path}".rstrip("/")
@@ -226,23 +226,30 @@ async def check_selfhosted_endpoints(client: httpx.AsyncClient) -> dict[str, Any
     if not crawl4ai:
         results["crawl4ai"] = {"ok": False, "url": None, "detail": "No base URL configured."}
     else:
-        try:
-            response = await client.get(f"{crawl4ai}/health", timeout=20.0)
-            results["crawl4ai"] = {
-                "ok": response.status_code == 200,
-                "url": f"{crawl4ai}/health",
-                "detail": (
-                    str(response.json())[:160]
-                    if response.status_code == 200
-                    else f"HTTP {response.status_code}"
-                ),
-            }
-        except Exception as exc:  # noqa: BLE001
-            results["crawl4ai"] = {
-                "ok": False,
-                "url": f"{crawl4ai}/health",
-                "detail": f"{type(exc).__name__}: {str(exc)[:160]}",
-            }
+        # /schema exists on every release; /health only on newer ones. Try both so
+        # the probe reflects reachability rather than which build is running.
+        probe: dict[str, Any] | None = None
+        for path in ("/schema", "/health"):
+            try:
+                response = await client.get(f"{crawl4ai}{path}", timeout=20.0)
+                probe = {
+                    "ok": response.status_code == 200,
+                    "url": f"{crawl4ai}{path}",
+                    "detail": (
+                        "reachable"
+                        if response.status_code == 200
+                        else f"HTTP {response.status_code}"
+                    ),
+                }
+            except Exception as exc:  # noqa: BLE001
+                probe = {
+                    "ok": False,
+                    "url": f"{crawl4ai}{path}",
+                    "detail": f"{type(exc).__name__}: {str(exc)[:160]}",
+                }
+            if probe["ok"]:
+                break
+        results["crawl4ai"] = probe
 
     return results
 

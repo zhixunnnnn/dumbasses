@@ -10,7 +10,7 @@ this service turns each one into readable text.
 | Root directory | `/infra/crawl4ai` |
 | Builder | Dockerfile (`infra/crawl4ai/railway.json`) |
 | Target port | `11235` |
-| Healthcheck | `/health` |
+| Healthcheck | `/schema` |
 
 Pinned to `unclecode/crawl4ai:0.8.0`. Auth is off in the image's default config
 (`security.jwt_enabled: false`), so no token is needed; keep the service on the
@@ -40,7 +40,7 @@ than reporting the page as simply unfetchable.
 Set `CRAWL4AI_BASE_URL`, or paste the URL into Settings → Scraping providers →
 Self-hosted endpoints. The value is normalized, so an origin, a trailing slash,
 or a pasted `/crawl` URL all resolve the same. Settings → **Test connection**
-probes `/health`.
+probes it.
 
 Prefer `http://crawl4ai.railway.internal:11235` to keep it off the public
 internet.
@@ -48,5 +48,9 @@ internet.
 ## Checking it by hand
 
 ```bash
-curl -s "$CRAWL4AI_BASE_URL/health"
+curl -s "$CRAWL4AI_BASE_URL/schema" | head -c 200
 ```
+
+0.8.0 has **no `/health` route** — `/` only redirects to the playground, so a
+healthcheck pointed at `/health` leaves the deploy stuck in DEPLOYING until it
+times out. `/schema` is a plain JSON GET present on every release.

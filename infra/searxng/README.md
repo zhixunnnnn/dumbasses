@@ -23,8 +23,16 @@ lines are load-bearing:
   onward, so the filter has nothing to protect.
 - **`json` in `search.formats`** — without it, `format=json` is refused outright.
 
-`secret_key` is the literal `ultrasecretkey`; the container entrypoint rewrites it
-with a random value on boot.
+**`SEARXNG_SECRET` must be set on the service.** The image entrypoint rewrites the
+`ultrasecretkey` placeholder only in a settings file it generates itself, not in
+one copied to `/etc/searxng/settings.yml`, and SearXNG refuses to start while the
+placeholder is in place:
+
+```
+ERROR:searx.webapp: server.secret_key is not changed.
+```
+
+The environment variable overrides the file, so setting it is the fix.
 
 ## Pointing the backend at it
 

@@ -9,7 +9,9 @@ general:
 server:
   bind_address: "0.0.0.0"
   port: 8080
-  # The container entrypoint rewrites this literal with a random value on boot.
+  # Overridden by the SEARXNG_SECRET environment variable, which is REQUIRED:
+  # the container entrypoint only rewrites a settings file it generates itself,
+  # not one copied in here, and SearXNG refuses to boot on this placeholder.
   secret_key: "ultrasecretkey"
   base_url: false
   # The limiter is SearXNG's bot filter. It rejects the JSON API, which is the
