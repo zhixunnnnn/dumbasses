@@ -84,6 +84,56 @@ body {
   }
 }
 
+/* Phone ergonomics. The dense 10-12px labels read fine on a monitor but not in
+   the hand, and several controls are laid out tight enough to mis-tap, so lift
+   both to a floor below the md breakpoint. Table cells keep their density —
+   tables scroll horizontally in their own container. */
+@media (max-width: 767px) {
+  [class*="text-[10px]"] {
+    font-size: 11px;
+  }
+
+  [class*="text-[10.5px]"],
+  [class*="text-[11px]"] {
+    font-size: 11.5px;
+  }
+
+  [class*="text-[12px]"],
+  [class*="text-[12.5px]"] {
+    font-size: 13px;
+  }
+
+  main button,
+  main select,
+  main a[href],
+  main input:not([type="checkbox"]),
+  header button {
+    min-height: 40px;
+  }
+
+  main td button,
+  main th button,
+  main td a[href],
+  main tbody select {
+    min-height: 0;
+  }
+
+  main input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* The checkbox itself stays small; its label carries the tap area. */
+  main label:has(input[type="checkbox"]) {
+    min-height: 40px;
+  }
+
+  /* Breathing room between wrapped chip/filter rows. */
+  main .flex-wrap {
+    row-gap: 0.5rem;
+  }
+}
+
 button,
 input,
 textarea,

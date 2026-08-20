@@ -100,7 +100,7 @@ export default function PriceWitness({ witness, series }: { witness: Witness; se
 
   const hc = hover !== null && hover >= 0 && hover < n ? candles[hover] : null;
   const presetCls = (active: boolean) =>
-    `rounded-md px-2 py-0.5 text-[11px] transition ${active ? "bg-raised text-txt" : "text-muted hover:text-txt"}`;
+    `shrink-0 rounded-md px-2 py-0.5 text-[11px] transition ${active ? "bg-raised text-txt" : "text-muted hover:text-txt"}`;
   const setRange = (a: string, b: string) => { setFrom(a); setTo(b); setHover(null); };
 
   const onMove = (e: React.MouseEvent<SVGRectElement>) => {
@@ -114,7 +114,7 @@ export default function PriceWitness({ witness, series }: { witness: Witness; se
     <div>
       {/* date-range filter */}
       <div className="mb-2 flex flex-wrap items-center gap-2">
-        <div className="flex rounded-lg border border-hairline bg-canvas/40 p-0.5">
+        <div className="flex max-w-full overflow-x-auto rounded-lg border border-hairline bg-canvas/40 p-0.5">
           <button className={presetCls(from === minDate && to === maxDate)}
             onClick={() => setRange(minDate, maxDate)}>All</button>
           {years.map((y) => (

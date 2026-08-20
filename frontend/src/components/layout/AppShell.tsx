@@ -43,12 +43,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             <Leaf size={16} className="text-pos" />
             <span className="text-sm font-semibold">ESG Intelligence</span>
           </div>
-          <div className="flex max-w-[52vw] gap-1 overflow-x-auto">
+          <div className="-mr-1 flex max-w-[58vw] gap-0.5 overflow-x-auto">
             {MOBILE_NAV.map((item) => (
               <button
                 key={item.key}
                 onClick={() => navigate({ name: item.key })}
-                className={`shrink-0 rounded-md p-1.5 ${
+                className={`flex shrink-0 items-center justify-center rounded-md px-2.5 ${
                   route.name === item.key ? "bg-raised text-txt" : "text-muted"
                 }`}
                 aria-label={item.label}
