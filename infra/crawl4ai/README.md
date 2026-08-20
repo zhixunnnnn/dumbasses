@@ -20,6 +20,19 @@ Railway cannot raise a container's `/dev/shm`, which normally makes Chromium
 unstable — but Crawl4AI's default browser arguments already include
 `--disable-dev-shm-usage`, so the small default shm is not a problem here.
 
+## Why the Dockerfile patches supervisord
+
+The upstream image starts gunicorn with `--bind 0.0.0.0:11235`, an IPv4-only
+listener. Railway's internal network is IPv6, and both the healthcheck and the
+private-network hostname go through it, so every request returned 502 while the
+container logged a clean startup and sat at 0.7 GB of its 8 GB limit — the
+service looked healthy from the inside and was simply unreachable.
+
+The Dockerfile rewrites the bind to `[::]:11235`. That is a dual-stack socket
+(`net.ipv6.bindv6only` defaults to 0), so plain IPv4 clients such as
+docker-compose still work. SearXNG needs no such patch — its server already
+listens on `:::8080`.
+
 ## Endpoints the adapter uses
 
 `fetch_crawl4ai` tries them in this order:
