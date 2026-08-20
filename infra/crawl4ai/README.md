@@ -5,12 +5,24 @@ this service turns each one into readable text.
 
 ## Railway
 
-| Setting | Value |
-| --- | --- |
-| Root directory | `/infra/crawl4ai` |
-| Builder | Dockerfile (`infra/crawl4ai/railway.json`) |
-| Target port | `11235` |
-| Healthcheck | `/schema` |
+`railway.json` in this directory carries the builder, healthcheck, and restart
+policy — but only if the service's **Config-as-code path** is set to
+`railway.json`. Without that, Railway silently falls back to Railpack defaults
+and ignores this file.
+
+Everything below it *cannot* express, and must be set on the service itself:
+
+| Setting | Value | Why |
+| --- | --- | --- |
+| Root directory | `/infra/crawl4ai` | Otherwise Railway builds the repo root — the whole app — instead of this image |
+| Config-as-code path | `railway.json` | Without it the file below is ignored |
+| Domain target port | `11235` | Crawl4AI does not read `$PORT` |
+| `PORT` | `11235` | Railway probes the port it injects; the app hardcodes 11235, so they must agree or the healthcheck never passes |
+| Watch patterns | `infra/crawl4ai/**` | Avoids rebuilding on unrelated commits |
+
+Missing `PORT` or the root directory reproduces the two failed deploys in this
+project's history: a build of the wrong thing, then a healthcheck that times out
+against a port nothing is listening on.
 
 Pinned to `unclecode/crawl4ai:0.8.0`. Auth is off in the image's default config
 (`security.jwt_enabled: false`), so no token is needed; keep the service on the

@@ -5,11 +5,19 @@ Private metasearch instance. The backend only ever uses the JSON API
 
 ## Railway
 
-| Setting | Value |
-| --- | --- |
-| Root directory | `/infra/searxng` |
-| Builder | Dockerfile (`infra/searxng/railway.json`) |
-| Target port | `8080` |
+`railway.json` in this directory carries the builder and restart policy — but
+only if the service's **Config-as-code path** is set to `railway.json`. Without
+that, Railway silently falls back to Railpack defaults and ignores the file.
+
+Settings it cannot express, which must be set on the service itself:
+
+| Setting | Value | Why |
+| --- | --- | --- |
+| Root directory | `/infra/searxng` | Otherwise Railway builds the repo root — the whole app — instead of this image |
+| Config-as-code path | `railway.json` | Without it the file below is ignored |
+| Domain target port | `8080` | SearXNG's own default |
+| `SEARXNG_SECRET` | a random 32-byte hex string | Required — see below; without it the container will not start |
+| Watch patterns | `infra/searxng/**` | Avoids rebuilding on unrelated commits |
 
 ## The two settings that actually matter
 
