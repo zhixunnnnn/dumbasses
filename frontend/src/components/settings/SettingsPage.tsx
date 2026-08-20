@@ -1,3 +1,4 @@
+import { apiUrl } from "../../lib/apiBase";
 import { useEffect, useState } from "react";
 import {
   Check,
@@ -44,6 +45,7 @@ type ScrapeSettings = {
   };
   providerStatus: Record<string, ProviderStatus>;
   frequency: "daily" | "weekly" | "monthly";
+  maxCompanies: number;
   timezone: string;
   runAt: string;
   retainRawDays: number;
@@ -78,6 +80,7 @@ type ResearchStatus = {
 };
 
 const FREQUENCIES = ["daily", "weekly", "monthly"] as const;
+const COMPANY_COUNTS = [5, 10, 25, 50] as const;
 
 export default function SettingsPage() {
   const { mode, setMode } = useThemeMode();
@@ -90,7 +93,7 @@ export default function SettingsPage() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch("/api/settings/scraping")
+    fetch(apiUrl("/api/settings/scraping"))
       .then(async (response) => {
         if (!response.ok) throw new Error(`Settings request failed (${response.status})`);
         return (await response.json()) as ScrapeSettings;
@@ -113,8 +116,8 @@ export default function SettingsPage() {
     const load = async () => {
       try {
         const [sourcesResponse, statusResponse] = await Promise.all([
-          fetch("/api/research/sources"),
-          fetch("/api/research/status"),
+          fetch(apiUrl("/api/research/sources")),
+          fetch(apiUrl("/api/research/status")),
         ]);
         if (!sourcesResponse.ok || !statusResponse.ok) return;
         const [sources, status] = await Promise.all([
@@ -142,13 +145,14 @@ export default function SettingsPage() {
     setSaving(true);
     setScrapeError(null);
     try {
-      const response = await fetch("/api/settings/scraping", {
+      const response = await fetch(apiUrl("/api/settings/scraping"), {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           providers: next.providers,
           sourceTypes: next.sourceTypes,
           frequency: next.frequency,
+          maxCompanies: next.maxCompanies,
           timezone: next.timezone,
           runAt: next.runAt,
           retainRawDays: next.retainRawDays,
@@ -175,7 +179,7 @@ export default function SettingsPage() {
     setStartingResearch(true);
     setScrapeError(null);
     try {
-      const response = await fetch("/api/research/run", {
+      const response = await fetch(apiUrl("/api/research/run"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({}),
@@ -192,7 +196,7 @@ export default function SettingsPage() {
   };
 
   const reviewCandidate = async (domain: string, decision: "approved" | "rejected") => {
-    const response = await fetch("/api/research/sources/review", {
+    const response = await fetch(apiUrl("/api/research/sources/review"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ domain, decision }),
@@ -446,6 +450,43 @@ export default function SettingsPage() {
                     </button>
                   ))}
                 </div>
+                <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-faint">Companies per run</p>
+                <div className="mt-2 flex flex-wrap items-center gap-2">
+                  {COMPANY_COUNTS.map((count) => (
+                    <button
+                      key={count}
+                      onClick={() => void saveScraping({ ...scraping, maxCompanies: count })}
+                      disabled={saving}
+                      className={`rounded-lg border px-3 py-2 text-xs font-semibold transition ${
+                        scraping.maxCompanies === count
+                          ? "border-pos bg-pos/10 text-pos"
+                          : "border-hairline bg-canvas/45 text-muted hover:text-txt"
+                      }`}
+                    >
+                      {count}
+                    </button>
+                  ))}
+                  <label className="flex items-center gap-1.5 text-[11px] text-faint">
+                    custom
+                    <input
+                      type="number"
+                      min={1}
+                      max={50}
+                      defaultValue={scraping.maxCompanies}
+                      onBlur={(event) => {
+                        const value = Number(event.target.value);
+                        if (Number.isFinite(value) && value >= 1 && value <= 50 && value !== scraping.maxCompanies) {
+                          void saveScraping({ ...scraping, maxCompanies: Math.round(value) });
+                        }
+                      }}
+                      disabled={saving}
+                      className="w-16 rounded-lg border border-hairline bg-canvas/45 px-2 py-1.5 text-xs text-txt"
+                    />
+                  </label>
+                </div>
+                <p className="mt-1.5 text-[11px] text-faint">
+                  Scheduled and manual runs cover the first {scraping.maxCompanies} companies of the universe (max 50).
+                </p>
               </div>
               <div className="space-y-3 rounded-xl border border-hairline bg-canvas/45 px-4 py-3 text-xs leading-relaxed text-muted">
                 <p>
@@ -461,7 +502,7 @@ export default function SettingsPage() {
                   ) : (
                     <Play size={14} />
                   )}
-                  {startingResearch || researchStatus?.running ? "Research running" : "Run all 10 companies now"}
+                  {startingResearch || researchStatus?.running ? "Research running" : `Run ${scraping.maxCompanies} companies now`}
                 </button>
                 {researchStatus && researchStatus.status !== "never_run" && (
                   <p className="text-[11px] text-faint">

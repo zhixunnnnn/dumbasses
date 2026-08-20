@@ -22,6 +22,7 @@ DEFAULT_SETTINGS: dict[str, Any] = {
         "community": True,
     },
     "frequency": "weekly",
+    "maxCompanies": 10,
     "timezone": "Asia/Singapore",
     "runAt": "06:00",
     "retainRawDays": 30,
@@ -120,6 +121,10 @@ def _validate_settings(settings: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("Only Asia/Singapore is currently supported")
     if not isinstance(settings["runAt"], str) or len(settings["runAt"].split(":")) != 2:
         raise ValueError("runAt must use HH:MM format")
+    max_companies = int(settings["maxCompanies"])
+    if max_companies < 1 or max_companies > 50:
+        raise ValueError("maxCompanies must be between 1 and 50")
+    settings["maxCompanies"] = max_companies
     retain_days = int(settings["retainRawDays"])
     if retain_days < 1 or retain_days > 365:
         raise ValueError("retainRawDays must be between 1 and 365")

@@ -67,6 +67,7 @@ class ScrapeSettingsUpdate(BaseModel):
     providers: dict[str, bool] | None = None
     sourceTypes: dict[str, bool] | None = None
     frequency: str | None = None
+    maxCompanies: int | None = None
     timezone: str | None = None
     runAt: str | None = None
     retainRawDays: int | None = None
@@ -87,9 +88,17 @@ chat_history = ChatHistoryStore()
 _research_lock = threading.Lock()
 _research_scheduler = None
 
+# Extra origins for a separately hosted frontend (e.g. Vercel), comma-separated.
+_extra_origins = [
+    origin.strip()
+    for origin in os.environ.get("FRONTEND_ORIGINS", "").split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", *_extra_origins],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

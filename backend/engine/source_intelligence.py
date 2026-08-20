@@ -290,7 +290,9 @@ async def run_research(
             ).fetchall()
         else:
             companies = conn.execute(
-                "SELECT company_id, name, ticker FROM universe WHERE scope='demo' ORDER BY company_id"
+                "SELECT company_id, name, ticker FROM universe WHERE scope='demo' "
+                "ORDER BY company_id LIMIT ?",
+                (int(settings["maxCompanies"]),),
             ).fetchall()
         if not companies:
             raise KeyError(company_id or "demo universe")

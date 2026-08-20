@@ -1,3 +1,4 @@
+import { apiUrl } from "../../lib/apiBase";
 import {
   createContext,
   createElement,
@@ -116,7 +117,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const loadSessions = useCallback(async () => {
-    const response = await fetch("/api/assistant/sessions");
+    const response = await fetch(apiUrl("/api/assistant/sessions"));
     if (!response.ok) {
       throw new Error(`Failed to load chat sessions (${response.status})`);
     }
@@ -142,7 +143,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
 
   const deleteSession = useCallback(
     async (sessionId: string) => {
-      const response = await fetch(`/api/assistant/sessions/${sessionId}`, {
+      const response = await fetch(apiUrl(`/api/assistant/sessions/${sessionId}`), {
         method: "DELETE",
       });
       if (!response.ok && response.status !== 404) {
@@ -195,7 +196,7 @@ function useConversation(
 
   const loadSession = useCallback(
     async (sessionId: string) => {
-      const response = await fetch(`/api/assistant/sessions/${sessionId}`);
+      const response = await fetch(apiUrl(`/api/assistant/sessions/${sessionId}`));
       if (!response.ok) {
         throw new Error(`Failed to load chat session (${response.status})`);
       }
@@ -299,7 +300,7 @@ function useConversation(
       abortRef.current = controller;
 
       try {
-        const response = await fetch("/api/assistant/chat/stream", {
+        const response = await fetch(apiUrl("/api/assistant/chat/stream"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -423,7 +424,7 @@ export function useChat(surface: ChatSurface = "page") {
 }
 
 async function createSessionRemote() {
-  const response = await fetch("/api/assistant/sessions", {
+  const response = await fetch(apiUrl("/api/assistant/sessions"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title: "New ESG chat" }),
