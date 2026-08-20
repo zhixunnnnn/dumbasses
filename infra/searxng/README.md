@@ -5,16 +5,17 @@ Private metasearch instance. The backend only ever uses the JSON API
 
 ## Railway
 
-`railway.json` in this directory carries the builder and restart policy — but
-only if the service's **Config-as-code path** is set to `railway.json`. Without
-that, Railway silently falls back to Railpack defaults and ignores the file.
+> **Do not set the service's Config-as-code path.** Pointing it at
+> `railway.json` was tried and stalled the deploy — the service appears to pick
+> up the *repo root* `railway.json`, whose `/api/health` healthcheck this image
+> does not serve, so the rollout never completes. Leave it empty.
 
-Settings it cannot express, which must be set on the service itself:
+The `railway.json` in this directory is therefore currently inert. These are set
+on the service itself and are what make it work:
 
 | Setting | Value | Why |
 | --- | --- | --- |
 | Root directory | `/infra/searxng` | Otherwise Railway builds the repo root — the whole app — instead of this image |
-| Config-as-code path | `railway.json` | Without it the file below is ignored |
 | Domain target port | `8080` | SearXNG's own default |
 | `SEARXNG_SECRET` | a random 32-byte hex string | Required — see below; without it the container will not start |
 | Watch patterns | `infra/searxng/**` | Avoids rebuilding on unrelated commits |

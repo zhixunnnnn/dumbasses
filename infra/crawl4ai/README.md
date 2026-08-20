@@ -5,19 +5,21 @@ this service turns each one into readable text.
 
 ## Railway
 
-`railway.json` in this directory carries the builder, healthcheck, and restart
-policy — but only if the service's **Config-as-code path** is set to
-`railway.json`. Without that, Railway silently falls back to Railpack defaults
-and ignores this file.
+> **Do not set the service's Config-as-code path.** Pointing it at
+> `railway.json` was tried and stalled the deploy — the service appears to pick
+> up the *repo root* `railway.json`, whose `/api/health` healthcheck this image
+> does not serve, so the rollout never completes. Leave it empty; the settings
+> below are what actually govern the service.
 
-Everything below it *cannot* express, and must be set on the service itself:
+The `railway.json` in this directory is therefore currently inert. These are set
+on the service itself and are what make it work:
 
 | Setting | Value | Why |
 | --- | --- | --- |
 | Root directory | `/infra/crawl4ai` | Otherwise Railway builds the repo root — the whole app — instead of this image |
-| Config-as-code path | `railway.json` | Without it the file below is ignored |
 | Domain target port | `11235` | Crawl4AI does not read `$PORT` |
 | `PORT` | `11235` | Railway probes the port it injects; the app hardcodes 11235, so they must agree or the healthcheck never passes |
+| Healthcheck path | `/schema` | 0.8.0 has no `/health`; `/` only redirects |
 | Watch patterns | `infra/crawl4ai/**` | Avoids rebuilding on unrelated commits |
 
 Missing `PORT` or the root directory reproduces the two failed deploys in this
