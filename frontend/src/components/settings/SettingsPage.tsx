@@ -7,9 +7,11 @@ import {
   Moon,
   Palette,
   Play,
+  Plus,
   Power,
   ShieldCheck,
   Sun,
+  X,
 } from "lucide-react";
 import { useThemeMode } from "../../theme/ThemeContext";
 import ModelProviderPanel from "./ModelProviderPanel";
@@ -69,13 +71,21 @@ type SourceCandidate = {
   last_seen: string;
 };
 
+type SourceEntry = {
+  domain: string;
+  source_class: string;
+  reason?: string | null;
+  is_builtin?: number;
+};
+
+const SOURCE_CLASSES = [
+  { id: "verified", label: "Verified" },
+  { id: "non_verified", label: "Non-verified" },
+  { id: "community", label: "Community" },
+] as const;
+
 type SourceRegistryResponse = {
-  sources: Array<{
-    domain: string;
-    source_class: string;
-    reason?: string | null;
-    is_builtin?: number;
-  }>;
+  sources: SourceEntry[];
   candidates: SourceCandidate[];
   observed: Array<{ domain: string; pages: number; last_fetched: string }>;
 };
@@ -104,6 +114,44 @@ type TabId = (typeof TABS)[number]["id"];
 const FREQUENCIES = ["daily", "weekly", "monthly"] as const;
 const COMPANY_COUNTS = [5, 10, 25, 50] as const;
 
+function SourceRow({
+  entry,
+  active,
+  onEdit,
+  onRemove,
+}: {
+  entry: SourceEntry;
+  active: boolean;
+  onEdit: () => void;
+  onRemove: () => void;
+}) {
+  return (
+    <li
+      className={`group flex items-center justify-between gap-1 rounded px-1 py-0.5 transition ${
+        active ? "bg-pos/10" : "hover:bg-raised"
+      }`}
+    >
+      <button
+        onClick={onEdit}
+        title={entry.reason || "Edit"}
+        className="min-w-0 flex-1 truncate text-left text-xs text-txt"
+      >
+        {entry.domain}
+      </button>
+      {!entry.is_builtin && (
+        <span className="shrink-0 text-[10px] font-semibold uppercase text-pos">added</span>
+      )}
+      <button
+        onClick={onRemove}
+        title={`Remove ${entry.domain}`}
+        className="shrink-0 rounded p-0.5 text-faint opacity-0 transition hover:text-neg focus:opacity-100 group-hover:opacity-100"
+      >
+        <X size={12} />
+      </button>
+    </li>
+  );
+}
+
 export default function SettingsPage() {
   const { mode, setMode } = useThemeMode();
   const [tab, setTab] = useState<TabId>("appearance");
@@ -113,6 +161,11 @@ export default function SettingsPage() {
   const [sourceRegistry, setSourceRegistry] = useState<SourceRegistryResponse | null>(null);
   const [researchStatus, setResearchStatus] = useState<ResearchStatus | null>(null);
   const [startingResearch, setStartingResearch] = useState(false);
+  const [draftDomain, setDraftDomain] = useState("");
+  const [draftClass, setDraftClass] = useState<string>("verified");
+  const [draftReason, setDraftReason] = useState("");
+  const [sourceError, setSourceError] = useState<string | null>(null);
+  const [savingSource, setSavingSource] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -239,6 +292,56 @@ export default function SettingsPage() {
   const pendingCandidates = sourceRegistry?.candidates.filter((item) => item.status === "pending") ?? [];
   const reviewedCandidates = sourceRegistry?.candidates.filter((item) => item.status !== "pending") ?? [];
   const pendingCount = pendingCandidates.length;
+  const existingDraft = sourceRegistry?.sources.find(
+    (item) => item.domain === draftDomain.trim().toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0],
+  );
+
+  const saveSourceDomain = async () => {
+    if (!draftDomain.trim()) return;
+    setSavingSource(true);
+    setSourceError(null);
+    try {
+      const response = await fetch("/api/research/sources", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          domain: draftDomain,
+          sourceClass: draftClass,
+          reason: draftReason || null,
+        }),
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.detail || `Could not save (${response.status}).`);
+      setSourceRegistry(payload as SourceRegistryResponse);
+      setDraftDomain("");
+      setDraftReason("");
+    } catch (error) {
+      setSourceError(error instanceof Error ? error.message : "Could not save the domain.");
+    } finally {
+      setSavingSource(false);
+    }
+  };
+
+  const removeSourceDomain = async (domain: string) => {
+    setSourceError(null);
+    try {
+      const response = await fetch(`/api/research/sources/${encodeURIComponent(domain)}`, {
+        method: "DELETE",
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.detail || `Could not remove ${domain}.`);
+      setSourceRegistry(payload as SourceRegistryResponse);
+    } catch (error) {
+      setSourceError(error instanceof Error ? error.message : `Could not remove ${domain}.`);
+    }
+  };
+
+  const editSource = (entry: SourceEntry) => {
+    setDraftDomain(entry.domain);
+    setDraftClass(entry.source_class);
+    setDraftReason(entry.reason ?? "");
+    setSourceError(null);
+  };
 
   const toggleProvider = (providerId: string) => {
     if (!scraping || !scraping.providerStatus[providerId]?.available) return;
@@ -602,6 +705,71 @@ export default function SettingsPage() {
           </div>
         </div>
 
+        <div className="mt-5 rounded-xl border border-hairline bg-canvas/40 p-4">
+          <p className="text-xs font-semibold uppercase tracking-wider text-faint">
+            {existingDraft ? `Editing ${existingDraft.domain}` : "Add a domain"}
+          </p>
+          <div className="mt-3 flex flex-col gap-2 lg:flex-row lg:items-center">
+            <input
+              value={draftDomain}
+              onChange={(event) => setDraftDomain(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") void saveSourceDomain();
+              }}
+              placeholder="example.com or a full URL"
+              spellCheck={false}
+              className="min-w-0 flex-1 rounded-lg border border-hairline bg-surface px-3 py-2 text-sm text-txt placeholder:text-faint"
+            />
+            <div className="flex gap-1 rounded-lg border border-hairline bg-surface p-1">
+              {SOURCE_CLASSES.map((option) => (
+                <button
+                  key={option.id}
+                  onClick={() => setDraftClass(option.id)}
+                  className={`rounded-md px-2.5 py-1.5 text-xs font-semibold transition ${
+                    draftClass === option.id ? "bg-pos text-canvas" : "text-muted hover:text-txt"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+            <input
+              value={draftReason}
+              onChange={(event) => setDraftReason(event.target.value)}
+              placeholder="Reason (optional)"
+              className="min-w-0 flex-1 rounded-lg border border-hairline bg-surface px-3 py-2 text-sm text-txt placeholder:text-faint lg:max-w-56"
+            />
+            <button
+              onClick={() => void saveSourceDomain()}
+              disabled={savingSource || !draftDomain.trim()}
+              className="flex shrink-0 items-center justify-center gap-1.5 rounded-lg bg-pos px-3 py-2 text-xs font-semibold text-canvas transition hover:brightness-105 disabled:opacity-40"
+            >
+              {savingSource ? <LoaderCircle size={14} className="animate-spin" /> : <Plus size={14} />}
+              {existingDraft ? "Save" : "Add"}
+            </button>
+            {(draftDomain || draftReason) && (
+              <button
+                onClick={() => {
+                  setDraftDomain("");
+                  setDraftReason("");
+                  setSourceError(null);
+                }}
+                className="shrink-0 rounded-lg border border-hairline px-3 py-2 text-xs font-semibold text-muted transition hover:text-txt"
+              >
+                Clear
+              </button>
+            )}
+          </div>
+          <p className="mt-2 text-[11px] leading-relaxed text-faint">
+            A URL is reduced to its host, so a link to one article registers the whole site. A registered domain also covers its subdomains.
+          </p>
+          {sourceError && (
+            <p className="mt-2 rounded-lg border border-neg/30 bg-neg/10 px-3 py-2 text-xs text-neg">
+              {sourceError}
+            </p>
+          )}
+        </div>
+
         {!sourceRegistry ? (
           <div className="mt-5 flex items-center gap-2 text-sm text-muted">
             <LoaderCircle size={15} className="animate-spin" /> Loading source registry
@@ -617,14 +785,13 @@ export default function SettingsPage() {
               </div>
               <ul className="mt-3 max-h-72 space-y-1.5 overflow-y-auto pr-1">
                 {verifiedSources.map((item) => (
-                  <li key={item.domain} className="flex items-baseline justify-between gap-2">
-                    <span className="truncate text-xs text-txt" title={item.reason ?? undefined}>
-                      {item.domain}
-                    </span>
-                    {!item.is_builtin && (
-                      <span className="shrink-0 text-[10px] font-semibold uppercase text-pos">promoted</span>
-                    )}
-                  </li>
+                  <SourceRow
+                    key={item.domain}
+                    entry={item}
+                    active={draftDomain.trim().toLowerCase() === item.domain}
+                    onEdit={() => editSource(item)}
+                    onRemove={() => void removeSourceDomain(item.domain)}
+                  />
                 ))}
               </ul>
             </div>
@@ -641,9 +808,20 @@ export default function SettingsPage() {
               </p>
               <ul className="mt-3 max-h-72 space-y-1.5 overflow-y-auto pr-1">
                 {observedSources.map((item) => (
-                  <li key={item.domain} className="flex items-baseline justify-between gap-2">
-                    <span className="truncate text-xs text-txt">{item.domain}</span>
-                    <span className="shrink-0 text-[10px] text-faint">{item.pages}</span>
+                  <li key={item.domain}>
+                    <button
+                      onClick={() => {
+                        setDraftDomain(item.domain);
+                        setDraftClass("verified");
+                        setDraftReason("");
+                        setSourceError(null);
+                      }}
+                      title="Load into the form to classify"
+                      className="flex w-full items-baseline justify-between gap-2 rounded px-1 py-0.5 text-left transition hover:bg-raised"
+                    >
+                      <span className="truncate text-xs text-txt">{item.domain}</span>
+                      <span className="shrink-0 text-[10px] text-faint">{item.pages}</span>
+                    </button>
                   </li>
                 ))}
                 {observedSources.length === 0 && (
@@ -662,7 +840,13 @@ export default function SettingsPage() {
               </p>
               <ul className="mt-3 space-y-1.5">
                 {communitySources.map((item) => (
-                  <li key={item.domain} className="truncate text-xs text-txt">{item.domain}</li>
+                  <SourceRow
+                    key={item.domain}
+                    entry={item}
+                    active={draftDomain.trim().toLowerCase() === item.domain}
+                    onEdit={() => editSource(item)}
+                    onRemove={() => void removeSourceDomain(item.domain)}
+                  />
                 ))}
               </ul>
               {reviewedCandidates.length > 0 && (

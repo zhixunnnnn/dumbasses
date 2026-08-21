@@ -46,6 +46,18 @@ POSITIVE_USE_TERMS = {
 FALLING_TERMS = {"reduced", "reduction", "declined", "decreased", "fell", "lowered", "down"}
 RISING_TERMS = {"increased", "increase", "rose", "rising", "grew", "higher", "up"}
 COMMUNITY_WEIGHT = 0.02
+# Registering one of these would silently classify every commercial site beneath
+# it. Institution-scoped suffixes (gov.sg, ac.uk) are deliberately absent: the
+# builtin registry whitelists gov.sg wholesale and that is a reasonable thing to
+# want, so only the generic ones are refused.
+PUBLIC_SUFFIXES = {
+    "com", "net", "org", "edu", "gov", "int", "mil", "io", "co", "ai", "app", "dev",
+    "sg", "com.sg", "net.sg", "org.sg", "per.sg",
+    "uk", "co.uk", "org.uk",
+    "au", "com.au", "net.au", "org.au",
+    "jp", "co.jp", "or.jp", "cn", "com.cn",
+    "my", "com.my", "hk", "com.hk", "id", "co.id", "in", "co.in",
+}
 
 
 class ResearchWebTools(Protocol):
@@ -100,6 +112,28 @@ def domain_from_url(url: str) -> str:
     return (urlparse(url).hostname or "").lower().removeprefix("www.")
 
 
+def normalize_domain(value: str) -> str:
+    """Reduce user input to the host it registers against.
+
+    Accepts a bare domain or a full URL and keeps only the hostname, so
+    `https://www.reuters.com/business/energy/x-2026` and `reuters.com` register
+    the same entry. A registered host also covers its subdomains via
+    `classify_domain`, so a path or query would only ever narrow it wrongly.
+    """
+    raw = (value or "").strip().lower()
+    if not raw:
+        raise ValueError("Enter a domain.")
+    host = (urlparse(raw if "://" in raw else f"//{raw}").hostname or "").strip(".")
+    host = host.removeprefix("www.")
+    if not host or "." not in host:
+        raise ValueError(f"{value!r} is not a domain (expected something like example.com).")
+    if not re.fullmatch(r"[a-z0-9.-]+", host) or ".." in host:
+        raise ValueError(f"{value!r} is not a valid domain.")
+    if host in PUBLIC_SUFFIXES:
+        raise ValueError(f"{host!r} is a public suffix; it would match every site under it.")
+    return host
+
+
 def source_registry_config() -> dict[str, Any]:
     return json.loads(SOURCE_CONFIG.read_text(encoding="utf-8"))
 
@@ -115,9 +149,10 @@ def initialize_source_registry() -> None:
                 INSERT INTO source_registry(domain, source_class, reason, is_builtin, updated_at)
                 VALUES (?, 'verified', ?, 1, ?)
                 ON CONFLICT(domain) DO UPDATE SET
-                    reason=excluded.reason, is_builtin=1
+                    reason=CASE WHEN user_modified=1 THEN reason ELSE excluded.reason END,
+                    is_builtin=1
                 """,
-                (domain.lower(), reason, now),
+                (normalize_domain(domain), reason, now),
             )
         for domain, reason in registry.get("community_domains", {}).items():
             conn.execute(
@@ -125,9 +160,10 @@ def initialize_source_registry() -> None:
                 INSERT INTO source_registry(domain, source_class, reason, is_builtin, updated_at)
                 VALUES (?, 'community', ?, 1, ?)
                 ON CONFLICT(domain) DO UPDATE SET
-                    reason=excluded.reason, is_builtin=1
+                    reason=CASE WHEN user_modified=1 THEN reason ELSE excluded.reason END,
+                    is_builtin=1
                 """,
-                (domain.lower(), reason, now),
+                (normalize_domain(domain), reason, now),
             )
         conn.commit()
     finally:
@@ -139,7 +175,7 @@ def classify_domain(domain: str, conn=None) -> str:
     conn = conn or bootstrap()
     try:
         labels = conn.execute(
-            "SELECT domain, source_class FROM source_registry"
+            "SELECT domain, source_class FROM source_registry WHERE is_disabled=0"
         ).fetchall()
         domain = domain.lower().removeprefix("www.")
         best: tuple[int, str] | None = None
@@ -160,7 +196,7 @@ def list_source_registry() -> dict[str, Any]:
     try:
         sources = [dict(row) for row in conn.execute(
             "SELECT domain, source_class, reason, is_builtin, updated_at "
-            "FROM source_registry ORDER BY source_class, domain"
+            "FROM source_registry WHERE is_disabled=0 ORDER BY source_class, domain"
         )]
         candidates = [dict(row) for row in conn.execute(
             """
@@ -186,6 +222,65 @@ def list_source_registry() -> dict[str, Any]:
         return {"sources": sources, "candidates": candidates, "observed": observed}
     finally:
         conn.close()
+
+
+SOURCE_CLASSES = {"verified", "non_verified", "community"}
+
+
+def upsert_source_domain(domain: str, source_class: str, reason: str | None = None) -> dict[str, Any]:
+    """Add a domain or change the class/reason of an existing one."""
+    if source_class not in SOURCE_CLASSES:
+        raise ValueError(f"source_class must be one of {sorted(SOURCE_CLASSES)}.")
+    domain = normalize_domain(domain)
+    reason = (reason or "").strip() or None
+    initialize_source_registry()
+    now = utc_now()
+    conn = bootstrap()
+    try:
+        conn.execute(
+            """
+            INSERT INTO source_registry(
+                domain, source_class, reason, is_builtin, is_disabled, user_modified, updated_at)
+            VALUES (?, ?, ?, 0, 0, 1, ?)
+            ON CONFLICT(domain) DO UPDATE SET
+                source_class=excluded.source_class,
+                reason=excluded.reason,
+                is_disabled=0,
+                user_modified=1,
+                updated_at=excluded.updated_at
+            """,
+            (domain, source_class, reason, now),
+        )
+        conn.commit()
+    finally:
+        conn.close()
+    return list_source_registry()
+
+
+def delete_source_domain(domain: str) -> dict[str, Any]:
+    """Remove a domain. Builtins are disabled instead, since the seed re-adds them."""
+    domain = normalize_domain(domain)
+    initialize_source_registry()
+    now = utc_now()
+    conn = bootstrap()
+    try:
+        row = conn.execute(
+            "SELECT is_builtin FROM source_registry WHERE domain=? AND is_disabled=0", (domain,)
+        ).fetchone()
+        if not row:
+            raise KeyError(domain)
+        if row["is_builtin"]:
+            conn.execute(
+                "UPDATE source_registry SET is_disabled=1, user_modified=1, updated_at=? "
+                "WHERE domain=?",
+                (now, domain),
+            )
+        else:
+            conn.execute("DELETE FROM source_registry WHERE domain=?", (domain,))
+        conn.commit()
+    finally:
+        conn.close()
+    return list_source_registry()
 
 
 def review_source_candidate(domain: str, decision: str) -> dict[str, Any]:

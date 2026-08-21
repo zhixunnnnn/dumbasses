@@ -27,12 +27,14 @@ from backend.engine.pipeline import build
 from backend.engine.scrape_settings import get_scrape_settings, save_scrape_settings
 from backend.engine.scraper_providers import check_selfhosted_endpoints
 from backend.engine.source_intelligence import (
+    delete_source_domain,
     get_company_intelligence,
     get_research_status,
     initialize_source_registry,
     list_source_registry,
     review_source_candidate,
     run_research,
+    upsert_source_domain,
 )
 
 from .agent import (
@@ -99,6 +101,12 @@ class ResearchRunRequest(BaseModel):
 class SourceReviewRequest(BaseModel):
     domain: str
     decision: str
+
+
+class SourceUpsertRequest(BaseModel):
+    domain: str
+    sourceClass: str
+    reason: str | None = None
 
 
 app = FastAPI(title="PolyFintech 2026 API", version="1.0.0")
@@ -378,6 +386,24 @@ def start_research(request: ResearchRunRequest):
 @app.get("/api/research/sources")
 def research_sources():
     return list_source_registry()
+
+
+@app.post("/api/research/sources")
+def upsert_research_source(request: SourceUpsertRequest):
+    try:
+        return upsert_source_domain(request.domain, request.sourceClass, request.reason)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.delete("/api/research/sources/{domain:path}")
+def delete_research_source(domain: str):
+    try:
+        return delete_source_domain(domain)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=f"{domain} is not in the registry.") from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
 
 
 @app.post("/api/research/sources/review")

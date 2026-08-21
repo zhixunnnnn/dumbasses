@@ -136,6 +136,10 @@ CREATE TABLE IF NOT EXISTS source_registry (
     source_class    TEXT NOT NULL CHECK (source_class IN ('verified','non_verified','community')),
     reason          TEXT,
     is_builtin      INTEGER NOT NULL DEFAULT 0,
+    -- a builtin cannot be deleted (initialize would re-add it); it is disabled instead
+    is_disabled     INTEGER NOT NULL DEFAULT 0,
+    -- once edited by hand, the builtin seed no longer overwrites reason/class
+    user_modified   INTEGER NOT NULL DEFAULT 0,
     updated_at      TEXT NOT NULL
 );
 
@@ -271,10 +275,26 @@ def connect(db_path: Path | str | None = None) -> sqlite3.Connection:
     return conn
 
 
+# columns added after the first release; SCHEMA only covers freshly created DBs
+MIGRATIONS = (
+    ("source_registry", "is_disabled", "INTEGER NOT NULL DEFAULT 0"),
+    ("source_registry", "user_modified", "INTEGER NOT NULL DEFAULT 0"),
+)
+
+
+def _migrate(conn: sqlite3.Connection) -> None:
+    """Add columns missing from an existing database. Idempotent."""
+    for table, column, definition in MIGRATIONS:
+        existing = {row["name"] for row in conn.execute(f"PRAGMA table_info({table})")}
+        if column not in existing:
+            conn.execute(f"ALTER TABLE {table} ADD COLUMN {column} {definition}")
+
+
 def bootstrap(db_path: Path | str | None = None) -> sqlite3.Connection:
     """Create the schema if absent and return an open connection."""
     conn = connect(db_path)
     conn.executescript(SCHEMA)
+    _migrate(conn)
     conn.commit()
     return conn
 
