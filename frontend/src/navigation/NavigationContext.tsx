@@ -1,4 +1,12 @@
-import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 export type Route =
   | { name: "dashboard" }
@@ -23,13 +31,88 @@ type NavigationValue = {
 
 const NavigationContext = createContext<NavigationValue | null>(null);
 
+const DEFAULT_ROUTE: Route = { name: "dashboard" };
+
+// Every page owns a URL so reloads, bookmarks and browser back/forward work.
+// The dashboard lives at "/" and company drill-ins carry their id in the path.
+function routeToPath(route: Route): string {
+  switch (route.name) {
+    case "dashboard":
+      return "/";
+    case "company":
+      return `/company/${encodeURIComponent(route.id)}`;
+    case "evidenceCompany":
+      return `/evidence/company/${encodeURIComponent(route.id)}`;
+    default:
+      return `/${route.name}`;
+  }
+}
+
+const SIMPLE_ROUTES: RouteName[] = [
+  "assistant",
+  "explore",
+  "watchlists",
+  "interpretability",
+  "governance",
+  "settings",
+  "news",
+];
+
+function pathToRoute(pathname: string): Route {
+  const segments = pathname.split("/").filter(Boolean).map(decodeURIComponent);
+
+  if (segments.length === 0) return DEFAULT_ROUTE;
+
+  if (segments.length === 1) {
+    const name = SIMPLE_ROUTES.find((candidate) => candidate === segments[0]);
+    return name ? ({ name } as Route) : DEFAULT_ROUTE;
+  }
+
+  if (segments.length === 2 && segments[0] === "company") {
+    return { name: "company", id: segments[1] };
+  }
+
+  if (
+    segments.length === 3 &&
+    segments[0] === "evidence" &&
+    segments[1] === "company"
+  ) {
+    return { name: "evidenceCompany", id: segments[2] };
+  }
+
+  return DEFAULT_ROUTE;
+}
+
 export function NavigationProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [route, setRoute] = useState<Route>({ name: "dashboard" });
-  const [previous, setPrevious] = useState<Route>({ name: "dashboard" });
+  const [route, setRoute] = useState<Route>(() =>
+    pathToRoute(window.location.pathname),
+  );
+  const [previous, setPrevious] = useState<Route>(DEFAULT_ROUTE);
+  const mounted = useRef(false);
+
+  // Keep the address bar in sync. A path that already matches means the change
+  // came from the browser (back/forward), so there is nothing to push.
+  useEffect(() => {
+    const path = routeToPath(route);
+    if (path === window.location.pathname) return;
+    if (mounted.current) {
+      window.history.pushState(null, "", path);
+    } else {
+      // Normalise an unknown entry URL without leaving a dead history entry.
+      window.history.replaceState(null, "", path);
+    }
+  }, [route]);
+
+  useEffect(() => {
+    mounted.current = true;
+    const onPopState = () => setRoute(pathToRoute(window.location.pathname));
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
   const navigate = useCallback((next: Route) => {
     setRoute((current) => {
@@ -44,7 +127,7 @@ export function NavigationProvider({
   );
 
   const goBack = useCallback(() => {
-    setRoute(previous.name === "company" ? { name: "dashboard" } : previous);
+    setRoute(previous.name === "company" ? DEFAULT_ROUTE : previous);
   }, [previous]);
 
   const value = useMemo(
