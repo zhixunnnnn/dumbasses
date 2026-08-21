@@ -68,7 +68,7 @@ export default function DashboardPage() {
     );
 
   return (
-    <div className="mx-auto max-w-[1320px] space-y-5 p-5 md:p-7">
+    <div className="mx-auto max-w-[1680px] space-y-5 p-5 md:p-7">
       <header>
         <p className="text-[11px] font-semibold uppercase tracking-wider text-pos">
           Singapore · 2019–2023 · evidence over opinion
@@ -85,40 +85,49 @@ export default function DashboardPage() {
 
       <BriefingOverview state={briefing} />
 
-      <FilterBar rows={rows} filters={filters} setFilters={setFilters} resultCount={filtered.length} />
+      {/* Dashboard body, with the per-company briefing pinned as its own far-right rail. */}
+      <div className="grid grid-cols-1 items-start gap-5 xl:grid-cols-[minmax(0,1fr)_330px]">
+        <div className="min-w-0 space-y-5">
+          <FilterBar rows={rows} filters={filters} setFilters={setFilters} resultCount={filtered.length} />
 
-      <StatRow rows={filtered} news={news.data} />
+          <StatRow rows={filtered} news={news.data} />
 
-      <div className="grid grid-cols-1 items-start gap-5 lg:grid-cols-[1.7fr_1fr]">
-        <div className="space-y-5">
-          <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
-            <div className="mb-1 flex items-center justify-between">
-              <div>
-                <h3 className="text-sm font-semibold text-txt">ESG Momentum Matrix</h3>
-                <p className="text-[11px] text-faint">
-                  Where the market rates them today × where the evidence is heading. Click a point.
-                </p>
+          <div className="grid grid-cols-1 items-start gap-5 lg:grid-cols-[1.7fr_1fr]">
+            <div className="space-y-5">
+              <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
+                <div className="mb-1 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-sm font-semibold text-txt">ESG Momentum Matrix</h3>
+                    <p className="text-[11px] text-faint">
+                      Where the market rates them today × where the evidence is heading. Click a point.
+                    </p>
+                  </div>
+                  <HypothesisBadge note="That improvers outperform is the thesis under test — not yet backtested on this set." />
+                </div>
+                <MomentumMatrix points={filteredMatrix} />
               </div>
-              <HypothesisBadge note="That improvers outperform is the thesis under test — not yet backtested on this set." />
+
+              <div className="grid gap-5 sm:grid-cols-2">
+                <ScoreHistogram rows={filtered} />
+                <SectorLeaderboard rows={filtered} />
+              </div>
             </div>
-            <MomentumMatrix points={filteredMatrix} />
+
+            <div className="space-y-5">
+              <ImproverFeed rows={filtered} />
+              <QuadrantMix rows={filtered} />
+              <ControversyFeed rows={filtered} news={news.data} onSelect={openCompany} />
+            </div>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            <ScoreHistogram rows={filtered} />
-            <SectorLeaderboard rows={filtered} />
-          </div>
+          <ScreenerTable rows={filtered} />
         </div>
 
-        <div className="space-y-5">
+        {/* Below xl the rail stacks; keep it next to the overview instead of below the screener. */}
+        <aside className="order-first xl:order-none xl:sticky xl:top-5 xl:max-h-[calc(100dvh-2.5rem)] xl:overflow-y-auto">
           <BriefingFeed state={briefing} onSelect={openCompany} />
-          <ImproverFeed rows={filtered} />
-          <QuadrantMix rows={filtered} />
-          <ControversyFeed rows={filtered} news={news.data} onSelect={openCompany} />
-        </div>
+        </aside>
       </div>
-
-      <ScreenerTable rows={filtered} />
     </div>
   );
 }
