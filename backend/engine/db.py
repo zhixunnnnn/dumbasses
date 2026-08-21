@@ -246,6 +246,16 @@ CREATE TABLE IF NOT EXISTS company_briefings (
     generated_at       TEXT,
     PRIMARY KEY (company_id, briefing_date)
 );
+
+-- cached portfolio-level rollup of the Monday briefing, one row per SG
+-- calendar day (paired with company_briefings above)
+CREATE TABLE IF NOT EXISTS briefing_overview (
+    briefing_date  TEXT PRIMARY KEY,
+    headline       TEXT,
+    summary        TEXT,
+    watch_items    TEXT,    -- JSON array of strings
+    generated_at   TEXT
+);
 """
 
 TABLES = [

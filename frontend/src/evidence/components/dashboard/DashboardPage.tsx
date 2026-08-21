@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { api, useApi } from "../../lib/api";
 import { useNavigation } from "../../navigation/NavigationContext";
 import MomentumMatrix from "./MomentumMatrix";
-import MondayBriefing from "./MondayBriefing";
+import { BriefingFeed, BriefingOverview } from "./MondayBriefing";
 import ImproverFeed from "./ImproverFeed";
 import ScreenerTable from "./ScreenerTable";
 import { HypothesisBadge } from "../common/badges";
@@ -15,6 +15,7 @@ export default function DashboardPage() {
   const companies = useApi(api.companies, []);
   const matrix = useApi(api.matrix, []);
   const news = useApi(api.news, []);
+  const briefing = useApi(api.briefing, []);
   const [filters, setFilters] = useState<DashFilters>(defaultDashFilters);
 
   const rows = useMemo(() => companies.data ?? [], [companies.data]);
@@ -82,7 +83,7 @@ export default function DashboardPage() {
         </p>
       </header>
 
-      <MondayBriefing onSelect={openCompany} />
+      <BriefingOverview state={briefing} />
 
       <FilterBar rows={rows} filters={filters} setFilters={setFilters} resultCount={filtered.length} />
 
@@ -110,6 +111,7 @@ export default function DashboardPage() {
         </div>
 
         <div className="space-y-5">
+          <BriefingFeed state={briefing} onSelect={openCompany} />
           <ImproverFeed rows={filtered} />
           <QuadrantMix rows={filtered} />
           <ControversyFeed rows={filtered} news={news.data} onSelect={openCompany} />

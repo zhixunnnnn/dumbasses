@@ -248,7 +248,17 @@ export type CompanyBriefing = {
   sentiment: "positive" | "neutral" | "negative" | "mixed";
   generatedAt: string;
 };
-export type BriefingData = { date: string; companies: CompanyBriefing[] };
+export type BriefingOverview = {
+  headline: string;
+  summary: string;
+  watchItems: string[];
+  generatedAt: string;
+};
+export type BriefingData = {
+  date: string;
+  overview: BriefingOverview | null;
+  companies: CompanyBriefing[];
+};
 
 export type LiveResearchSource = {
   url: string;

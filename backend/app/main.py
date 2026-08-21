@@ -458,12 +458,13 @@ def news():
 
 
 @app.get("/api/dashboard/briefing")
-def dashboard_briefing():
-    """Monday-morning manager digest: one LLM-synthesized summary per covered
-    company, cached per Asia/Singapore calendar day."""
+def dashboard_briefing(refresh: bool = False):
+    """Monday-morning manager digest: a desk-level overview plus one
+    LLM-synthesized summary per covered company, cached per Asia/Singapore
+    calendar day. ``refresh=true`` forces regeneration."""
     from backend.engine.briefing import get_or_generate_briefings
 
-    return get_or_generate_briefings()
+    return get_or_generate_briefings(refresh=refresh)
 
 
 @app.get("/api/esg-news/company")

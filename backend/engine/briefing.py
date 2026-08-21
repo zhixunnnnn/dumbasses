@@ -8,6 +8,7 @@ day (see backend/app/main.py: GET /api/dashboard/briefing).
 from __future__ import annotations
 
 import json
+import logging
 import os
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -17,6 +18,7 @@ from .db import bootstrap
 from .llm import OpenRouterLLMClient
 
 SG_TZ = ZoneInfo("Asia/Singapore")
+log = logging.getLogger(__name__)
 
 
 def _today() -> str:
@@ -88,11 +90,22 @@ how much the raters disagree, quadrant = UNDERPRICED_IMPROVER / OVERRATED / HIDD
 etc., news.headlines = recent scraped ESG/controversy headlines with a label of \
 stock/positive/neutral).
 
-For EACH company, write a manager-ready briefing. Be specific and use the numbers given — do \
-not invent facts not present in the data. If news is null or headlines are empty, say so \
-plainly rather than fabricating events.
+Write (a) ONE portfolio-level overview across the whole desk, and (b) a per-company briefing. \
+Be specific and use the numbers given — do not invent facts not present in the data. If news is \
+null or headlines are empty, say so plainly rather than fabricating events.
 
-Return strict JSON: {{"companies": [{{
+The overview is what the manager reads first and may be the ONLY thing they read: lead with the \
+single most consequential thing across the desk this week, name the specific companies that \
+drive it, and quantify where you can (how many are overrated, where controversies landed, which \
+way momentum is going).
+
+Return strict JSON: {{
+"overview": {{
+  "headline": "<one sentence, <=120 chars: the week across the whole desk>",
+  "summary": "<3-5 sentences: the cross-company picture — concentrations of risk, notable moves, what it means for positioning. Name specific companies.>",
+  "watch_items": ["<short phrase: desk-level thing to watch this week>", "... 2-4 items"]
+}},
+"companies": [{{
   "id": "<company id, must match input>",
   "headline": "<one punchy sentence, <=110 chars, the single most important thing this week>",
   "summary": "<2-4 sentences: what changed and why it matters, referencing the actual numbers/headlines given>",
@@ -106,7 +119,9 @@ COMPANIES:
 """
 
 
-def get_or_generate_briefings(company_ids: list[str] | None = None) -> dict:
+def get_or_generate_briefings(
+    company_ids: list[str] | None = None, refresh: bool = False
+) -> dict:
     ids = [c for c in dict.fromkeys(company_ids or _all_company_ids()) if c]
     if not ids:
         return {"date": _today(), "companies": []}
@@ -115,7 +130,7 @@ def get_or_generate_briefings(company_ids: list[str] | None = None) -> dict:
     try:
         today = _today()
         placeholders = ",".join("?" for _ in ids)
-        cached: dict[str, dict] = {
+        cached: dict[str, dict] = {} if refresh else {
             row["company_id"]: _row_to_briefing(row)
             for row in conn.execute(
                 f"SELECT * FROM company_briefings WHERE briefing_date=? "
@@ -123,14 +138,26 @@ def get_or_generate_briefings(company_ids: list[str] | None = None) -> dict:
                 (today, *ids),
             ).fetchall()
         }
+        overview_row = None if refresh else conn.execute(
+            "SELECT * FROM briefing_overview WHERE briefing_date=?", (today,)
+        ).fetchone()
 
-        missing = [c for c in ids if c not in cached]
-        if missing:
-            inputs = [b for b in (_brief_input(c, conn) for c in missing) if b]
+        # The overview reads across every company, so it is only valid alongside a
+        # complete set — regenerate the whole day as one unit when either is missing.
+        if overview_row is None or any(c not in cached for c in ids):
+            inputs = [b for b in (_brief_input(c, conn) for c in ids) if b]
             if inputs:
-                for item in _generate(inputs):
+                overview, companies = _generate(inputs)
+                now = datetime.now(SG_TZ).isoformat()
+                # The model sometimes returns a subset; backfill the rest so the
+                # day's set is always complete and never regenerates on every request.
+                returned = {item.get("id") for item in companies}
+                companies = list(companies) + [
+                    _fallback_briefing(i) for i in inputs if i["id"] not in returned
+                ]
+                for item in companies:
                     cid = item.get("id")
-                    if cid not in missing:
+                    if cid not in ids:
                         continue
                     conn.execute(
                         """
@@ -151,21 +178,53 @@ def get_or_generate_briefings(company_ids: list[str] | None = None) -> dict:
                             json.dumps(item.get("potential_effects") or []),
                             json.dumps(item.get("watch_items") or []),
                             str(item.get("sentiment") or "neutral"),
-                            datetime.now(SG_TZ).isoformat(),
+                            now,
                         ),
                     )
+                conn.execute(
+                    """
+                    INSERT INTO briefing_overview
+                        (briefing_date, headline, summary, watch_items, generated_at)
+                    VALUES (?, ?, ?, ?, ?)
+                    ON CONFLICT(briefing_date) DO UPDATE SET
+                        headline=excluded.headline, summary=excluded.summary,
+                        watch_items=excluded.watch_items, generated_at=excluded.generated_at
+                    """,
+                    (
+                        today,
+                        str(overview.get("headline") or "")[:250],
+                        str(overview.get("summary") or ""),
+                        json.dumps(overview.get("watch_items") or []),
+                        now,
+                    ),
+                )
                 conn.commit()
-                missing_placeholders = ",".join("?" for _ in missing)
                 for row in conn.execute(
                     f"SELECT * FROM company_briefings WHERE briefing_date=? "
-                    f"AND company_id IN ({missing_placeholders})",
-                    (today, *missing),
+                    f"AND company_id IN ({placeholders})",
+                    (today, *ids),
                 ).fetchall():
                     cached[row["company_id"]] = _row_to_briefing(row)
+                overview_row = conn.execute(
+                    "SELECT * FROM briefing_overview WHERE briefing_date=?", (today,)
+                ).fetchone()
     finally:
         conn.close()
 
-    return {"date": today, "companies": [cached[c] for c in ids if c in cached]}
+    return {
+        "date": today,
+        "overview": _row_to_overview(overview_row) if overview_row else None,
+        "companies": [cached[c] for c in ids if c in cached],
+    }
+
+
+def _row_to_overview(row) -> dict:
+    return {
+        "headline": row["headline"],
+        "summary": row["summary"],
+        "watchItems": json.loads(row["watch_items"] or "[]"),
+        "generatedAt": row["generated_at"],
+    }
 
 
 def _row_to_briefing(row) -> dict:
@@ -180,21 +239,43 @@ def _row_to_briefing(row) -> dict:
     }
 
 
-def _generate(inputs: list[dict]) -> list[dict]:
+def _generate(inputs: list[dict]) -> tuple[dict, list[dict]]:
     if not os.environ.get("OPENROUTER_API_KEY"):
-        return [_fallback_briefing(item) for item in inputs]
+        log.warning("briefing: no OPENROUTER_API_KEY — serving deterministic fallback")
+        return _fallback_overview(inputs), [_fallback_briefing(item) for item in inputs]
     try:
         client = OpenRouterLLMClient()
         prompt = PROMPT_TEMPLATE.format(
             companies_json=json.dumps(inputs, ensure_ascii=False)[:12000]
         )
-        data = client.complete_json(prompt, max_tokens=2200)
+        data = client.complete_json(prompt, max_tokens=2600)
         companies = data.get("companies")
+        overview = data.get("overview")
         if not isinstance(companies, list) or not companies:
             raise ValueError("empty briefing response")
-        return companies
+        if not isinstance(overview, dict) or not overview.get("summary"):
+            overview = _fallback_overview(inputs)
+        return overview, companies
     except Exception:
-        return [_fallback_briefing(item) for item in inputs]
+        log.exception("briefing: LLM generation failed — serving deterministic fallback")
+        return _fallback_overview(inputs), [_fallback_briefing(item) for item in inputs]
+
+
+def _fallback_overview(inputs: list[dict]) -> dict:
+    total = len(inputs)
+    overrated = sum(1 for i in inputs if i.get("quadrant") == "OVERRATED")
+    improvers = sum(1 for i in inputs if i.get("isUnderpricedImprover"))
+    controversies = sum((i.get("news") or {}).get("controversy") or 0 for i in inputs)
+    declining = sum(1 for i in inputs if (i.get("momentum") or 0) < 0)
+    return {
+        "headline": f"{total} companies covered · {overrated} overrated · {controversies} controversy flags",
+        "summary": (
+            f"Across the {total} covered companies, {overrated} sit in the Overrated quadrant and "
+            f"{declining} show declining evidence momentum. {improvers} currently qualify as "
+            f"Underpriced Improvers. {controversies} controversy headlines were flagged this cycle."
+        ),
+        "watch_items": [],
+    }
 
 
 def _fallback_briefing(item: dict) -> dict:
