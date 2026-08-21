@@ -11,7 +11,7 @@
   },
   "evidence": {
     "company_id": "9CI",
-    "year": 2023,
+    "year": 2024,
     "total": 64.75,
     "pillars": {
       "E": 78.0,
@@ -21,7 +21,7 @@
     "confidence": 0.402,
     "absent_topics": [],
     "trace": {
-      "label": "Evidence Score 2023",
+      "label": "Evidence Score 2024",
       "value": 64.75,
       "contribution": null,
       "source_sentence": null,
@@ -512,13 +512,13 @@
     },
     {
       "year": 2020,
-      "total": 90.0,
+      "total": 51.75,
       "pillars": {
-        "E": 93.33,
-        "S": 50.0,
-        "G": 100.0
+        "E": 60.67,
+        "S": 25.0,
+        "G": 25.0
       },
-      "confidence": 0.708
+      "confidence": 0.385
     },
     {
       "year": 2021,
@@ -542,6 +542,16 @@
     },
     {
       "year": 2023,
+      "total": 55.5,
+      "pillars": {
+        "E": 60.67,
+        "S": 25.0,
+        "G": 50.0
+      },
+      "confidence": 0.395
+    },
+    {
+      "year": 2024,
       "total": 64.75,
       "pillars": {
         "E": 78.0,
@@ -553,14 +563,58 @@
   ],
   "raters": {
     "company_id": "9CI",
-    "msci_pct": 78.57,
-    "sp_pct": 93.75,
-    "sustainalytics_pct": 93.75,
-    "consensus": 88.69,
-    "divergence": 15.18,
+    "msci_pct": 90.0,
+    "sp_pct": 95.0,
+    "sustainalytics_pct": 95.0,
+    "cdp_pct": null,
+    "real_raters": [
+      "msci"
+    ],
+    "basis": "all companies",
+    "peers": 10,
+    "consensus": 93.33,
+    "divergence": 5.0,
+    "consensus_provenance": "mixed",
+    "divergence_provenance": "mixed",
+    "contributing": [
+      "msci",
+      "sp",
+      "sustainalytics"
+    ],
+    "rater_provenance": {
+      "msci": {
+        "real": true,
+        "source": "CLI GSR 2024",
+        "url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
+        "observed_on": "2024",
+        "value_raw": "AAA"
+      },
+      "sp": {
+        "real": false,
+        "source": null,
+        "url": null,
+        "observed_on": null,
+        "value_raw": null
+      },
+      "sustainalytics": {
+        "real": false,
+        "source": null,
+        "url": null,
+        "observed_on": null,
+        "value_raw": null
+      },
+      "cdp": {
+        "real": false,
+        "source": "CDP public scores table",
+        "url": "https://www.cdp.net/en/data/scores",
+        "observed_on": "2025",
+        "value_raw": null,
+        "status": "did_not_disclose"
+      }
+    },
     "msci_real": true,
-    "msci_source": "KnowESG",
-    "msci_url": "https://knowesg.com/esg-ratings/capitaland-investment-ltd"
+    "msci_source": "CLI GSR 2024",
+    "msci_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf"
   },
   "signal": {
     "company_id": "9CI",
@@ -568,10 +622,16 @@
     "opinion_flat": false,
     "price_flat": true,
     "is_underpriced_improver": false,
-    "evidence_gap": -82.44,
-    "momentum": -4.55,
-    "esg_today": 88.69,
+    "evidence_pct": 85.0,
+    "evidence_basis": "all companies",
+    "evidence_peers": 10,
+    "evidence_gap": -8.33,
+    "momentum": -3.143,
+    "esg_today": 93.33,
     "quadrant": "OVERRATED",
+    "esg_today_provenance": "mixed",
+    "evidence_gap_provenance": "mixed",
+    "quadrant_provenance": "mixed",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -581,15 +641,15 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=False (evidence momentum -4.55/yr, verified-driven)",
-          "value": -4.55,
+          "label": "proof_up=False (evidence momentum -3.143/yr, verified-driven)",
+          "value": -3.143,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "Evidence Score 2023",
+              "label": "Evidence Score 2024",
               "value": 64.75,
               "contribution": null,
               "source_sentence": null,
@@ -1069,8 +1129,8 @@
           ]
         },
         {
-          "label": "opinion_flat=False (divergence=15.18, consensus 68.45->88.69)",
-          "value": 15.18,
+          "label": "opinion_flat=False (divergence=5.0, consensus 85.0->93.33)",
+          "value": 5.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -1087,13 +1147,23 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-82.44 (evidence 6.25 - consensus 88.69)",
-          "value": -82.44,
+          "label": "evidence_gap=-8.33 (evidence 85.0 - consensus 93.33)",
+          "value": -8.33,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
-          "children": []
+          "children": [
+            {
+              "label": "evidence_pct=85.0 vs 10 companies on the all companies rubric",
+              "value": 85.0,
+              "contribution": null,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
         }
       ]
     }
@@ -3088,11 +3158,18 @@
     ],
     "band": [
       {
-        "start_date": "2022-01-02",
+        "start_date": "2021-09-19",
         "end_date": "2023-01-01",
-        "slope": 5.0,
-        "start_score": 90.0,
+        "slope": 21.62,
+        "start_score": 51.75,
         "end_score": 95.0
+      },
+      {
+        "start_date": "2023-12-31",
+        "end_date": "2024-12-29",
+        "slope": 9.25,
+        "start_score": 55.5,
+        "end_score": 64.75
       }
     ],
     "pins": [
@@ -6318,15 +6395,18 @@
       }
     ],
     "flat": {
-      "stock_return": 1.91,
-      "sti_return": 2.23,
-      "rel_return": -0.32,
+      "stock_return": 11.79,
+      "sti_return": 7.04,
+      "rel_return": 4.76,
       "is_flat": true
     }
   },
   "compliance": {
     "company_id": "9CI",
     "score": 0.0,
+    "provenance": "mixed",
+    "scraped_count": 1,
+    "counted": 2,
     "met": [
       {
         "reg_id": "SGX-711B",
@@ -6390,7 +6470,7 @@
           "label": "ASEAN Taxonomy for Sustainable Finance — MET",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, CapitaLand Investment improved energy efficiency across its green building portfolio.",
+          "source_sentence": "In FY2019, CapitaLand Investment improved energy efficiency across its green building portfolio.",
           "source_doc": null,
           "source_page": null,
           "children": []
@@ -6400,77 +6480,36 @@
   },
   "forecast": {
     "company_id": "9CI",
-    "predicted_score": 62.93,
-    "horizon_years": 3,
-    "ci_low": 56.9,
-    "ci_high": 68.95,
-    "feature_contributions": [
-      {
-        "feature": "is_financial",
-        "value": 0.0,
-        "contribution": 2.329
-      },
-      {
-        "feature": "volatility",
-        "value": 21.91,
-        "contribution": -1.147
-      },
-      {
-        "feature": "price_return",
-        "value": -7.64,
-        "contribution": -0.078
-      },
-      {
-        "feature": "news_sentiment",
-        "value": 5.0,
-        "contribution": 0.0
-      }
-    ],
-    "val_error": 6.025,
-    "directional_accuracy": 0.8,
+    "predicted_score": 7.0,
+    "horizon_years": 0,
+    "ci_low": null,
+    "ci_high": null,
+    "feature_contributions": [],
+    "val_error": null,
+    "directional_accuracy": null,
+    "directional_n": null,
+    "predicted_label": "AAA",
+    "last_rating_label": "AAA",
+    "last_rating_year": 2024,
+    "direction": "likely hold",
+    "baseline_only": true,
+    "model_label": "baseline: ratings persistence (insufficient history for a fitted model — 4 real rows)",
     "target_year": 2026,
-    "drift_years": 3,
-    "drift_note": "Live 2026 estimate from real-time signals: real LLM-classified news plus real price/sector data, on a model trained only on real evidence — no seeded inputs.",
+    "drift_years": 0,
+    "drift_note": "Estimates the MSCI ESG rating as of 2026 from signals all dated to 2024 — GDELT headlines published that year, that year's own report evidence, and prices to the end of it. 2024 is the most recent year whose every feature is real; nothing is carried forward to fill the gap. It is not a rater publication; it is what those signals imply the rater would say.",
     "hypothesis": true,
     "trace": {
-      "label": "Live 2026 ESG estimate = 62.9 (real-time, ~80% hit-rate, MAE=6.0)",
-      "value": 62.93,
+      "label": "likely hold — MSCI AAA (baseline: ratings persistence (insufficient history for a fitted model — 4 real rows))",
+      "value": 7.0,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
-          "label": "is_financial=0.0",
-          "value": null,
-          "contribution": 2.329,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "volatility=21.91",
-          "value": null,
-          "contribution": -1.147,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "price_return=-7.64",
-          "value": null,
-          "contribution": -0.078,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "news_sentiment=5.0",
-          "value": null,
-          "contribution": 0.0,
+          "label": "last disclosed rating AAA (2024)",
+          "value": 7.0,
+          "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -6490,7 +6529,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6501,7 +6541,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "energy_management",
@@ -6512,7 +6553,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "water_management",
@@ -6523,7 +6565,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6534,7 +6577,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6545,7 +6589,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6556,7 +6601,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6567,7 +6613,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "climate_resilience",
@@ -6580,7 +6627,8 @@
         "source_page": 1,
         "weight": 0.2,
         "corroboration_url": "https://www.constructionweekonline.in/business/capitaland-investment-launches-its-first-climate-resilience-report",
-        "corroboration_source": "Constructionweekonline"
+        "corroboration_source": "Constructionweekonline",
+        "report_year": 2024
       },
       {
         "topic_id": "climate_resilience",
@@ -6591,7 +6639,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "climate_resilience",
@@ -6602,7 +6651,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6613,7 +6663,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6624,7 +6675,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6635,7 +6687,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "energy_management",
@@ -6646,7 +6699,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "water_management",
@@ -6657,7 +6711,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "energy_management",
@@ -6668,7 +6723,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "climate_resilience",
@@ -6679,7 +6735,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6690,7 +6747,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6701,7 +6759,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6712,7 +6771,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6723,7 +6783,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6734,7 +6795,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6745,7 +6807,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "climate_resilience",
@@ -6756,7 +6819,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "climate_resilience",
@@ -6767,7 +6831,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "climate_resilience",
@@ -6778,7 +6843,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6789,7 +6855,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6800,7 +6867,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "energy_management",
@@ -6811,7 +6879,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6822,7 +6891,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6833,7 +6903,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6844,7 +6915,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6855,7 +6927,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6866,7 +6939,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "energy_management",
@@ -6877,7 +6951,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "energy_management",
@@ -6888,7 +6963,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6899,7 +6975,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6910,7 +6987,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -6921,7 +6999,8 @@
         "source_doc": "CLI GSR 2024",
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "business_ethics",
@@ -6933,7 +7012,8 @@
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": null,
         "weight": 0.15,
-        "inferred": true
+        "inferred": true,
+        "report_year": 2024
       },
       {
         "topic_id": "tenant_sustainability",
@@ -6945,11 +7025,13 @@
         "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
         "source_page": null,
         "weight": 0.1,
-        "inferred": true
+        "inferred": true,
+        "report_year": 2024
       }
     ],
     "absent": [],
     "live": true,
+    "report_year": 2024,
     "source_url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
     "source_title": "CLI GSR 2024"
   },
@@ -6957,7 +7039,36 @@
     {
       "id": "C09",
       "name": "City Developments",
-      "evidence_total": 74.0
+      "evidence_total": 63.5
     }
-  ]
+  ],
+  "latest_real_raters": [
+    {
+      "rater": "msci",
+      "value": "AAA",
+      "year": 2024,
+      "source": "company report",
+      "url": "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf",
+      "provenance": "real"
+    }
+  ],
+  "cdp_disclosure": {
+    "rater": "cdp",
+    "status": "did_not_disclose",
+    "year": 2025,
+    "source": "CDP public scores table",
+    "url": "https://www.cdp.net/en/data/scores"
+  },
+  "benchmark": {
+    "industry": "Real Estate",
+    "peers": 2,
+    "total": 64.12,
+    "pillars": {
+      "E": 72.66,
+      "S": 25.0,
+      "G": 47.5
+    },
+    "source": "panel median (n=2, below peer floor)",
+    "is_override": false
+  }
 }

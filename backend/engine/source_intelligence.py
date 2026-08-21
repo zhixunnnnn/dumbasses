@@ -360,16 +360,23 @@ def get_company_intelligence(company_id: str) -> dict[str, Any]:
         community = [claim for claim in claims if claim["verification"] == "community"]
         community_signal = sum(float(claim["sentiment"]) for claim in community)
         community_signal = max(-2.0, min(2.0, community_signal * COMMUNITY_WEIGHT * 100))
+        # "No evidence found" is ambiguous on a renewables developer: we may have found
+        # plenty of renewable coverage that simply never evidences the company's OWN
+        # consumption (buying a solar farm is not running on solar). Count the mentions
+        # so the UI can say "found, but none evidencing use" instead of implying a gap.
+        renewable_mentions = sum(1 for claim in claims if claim["topic"] == "renewable_energy")
+        renewable_block = dict(renewable) if renewable else {
+            "company_id": company_id,
+            "renewable_status": "No evidence found",
+            "emissions_trend": "No evidence found",
+            "evidence_count": 0,
+            "verified_count": 0,
+            "latest_evidence_at": None,
+        }
+        renewable_block["renewable_mentions"] = renewable_mentions
         return {
             "company": dict(company),
-            "renewable": dict(renewable) if renewable else {
-                "company_id": company_id,
-                "renewable_status": "No evidence found",
-                "emissions_trend": "No evidence found",
-                "evidence_count": 0,
-                "verified_count": 0,
-                "latest_evidence_at": None,
-            },
+            "renewable": renewable_block,
             "claims": claims,
             "community_sentiment_adjustment": round(community_signal, 2),
             "community_sentiment_note": "Applied only to the live news/LLM signal; never to core evidence verification.",

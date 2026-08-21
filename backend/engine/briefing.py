@@ -74,6 +74,7 @@ def _brief_input(company_id: str, conn) -> dict | None:
         "confidence": evidence.get("confidence"),
         "raterConsensus": raters.get("consensus"),
         "raterDivergence": raters.get("divergence"),
+        "raterProvenance": raters.get("consensus_provenance"),
         "quadrant": signal.get("quadrant"),
         "isUnderpricedImprover": signal.get("is_underpriced_improver"),
         "evidenceGap": signal.get("evidence_gap"),

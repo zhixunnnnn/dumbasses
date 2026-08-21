@@ -1,0 +1,141 @@
+{
+  "rows": [
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Estimated carbon emissions avoidance of 73,226 tCO2e/year during the year and achieved improvement in carbon intensity of 0.0501 tCO2e/TB from 0.0665 tCO2e/TB last year",
+      "source_sentence": "Estimated carbon emissions avoidance of 73,226 tCO2e/year during the year and achieved improvement in carbon intensity of 0.0501 tCO2e/TB from 0.0665 tCO2e/TB last year",
+      "source_doc": "Singtel Group Sustainability Report 2021",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2021
+    },
+    {
+      "topic_id": "workforce_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Recognised by the 2021 Bloomberg Gender-Equality Index for the third consecutive year. Included in the Refinitiv Global Diversity & Inclusion Index 2020 for the second time",
+      "source_sentence": "Recognised by the 2021 Bloomberg Gender-Equality Index for the third consecutive year. Included in the Refinitiv Global Diversity & Inclusion Index 2020 for the second time",
+      "source_doc": "Singtel Group Sustainability Report 2021",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+      "source_page": 1,
+      "weight": 0.1,
+      "report_year": 2021
+    },
+    {
+      "topic_id": "product_access",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Launched the Optus Accessibility and Inclusion Action Plan 2020–2023 to support persons with disabilities",
+      "source_sentence": "We launched the Optus Accessibility and Inclusion Action Plan 2020–2023, which will guide us as we build long term opportunities, remove barriers to access and ‘Power Optimism with Options’ for persons with disabilities in our workforce, marketplace and community.",
+      "source_doc": "Singtel Group Sustainability Report 2021",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2021
+    },
+    {
+      "topic_id": "workforce_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Launched the Singtel Digital Silvers programme to empower seniors with digital skills",
+      "source_sentence": "Under Singtel’s digital enablement strategy, we launched the Singtel Digital Silvers programme in Singapore to help bridge those gaps, empowering seniors with digital skills so they feel less displaced by technology.",
+      "source_doc": "Singtel Group Sustainability Report 2021",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+      "source_page": 1,
+      "weight": 0.1,
+      "report_year": 2021
+    },
+    {
+      "topic_id": "workforce_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "88% of seniors expressed more confidence in using mobile phones after attending digital skills sessions",
+      "source_sentence": "88% of them have expressed more confidence in using their mobile phones after attending our sessions.",
+      "source_doc": "Singtel Group Sustainability Report 2021",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+      "source_page": 1,
+      "weight": 0.1,
+      "report_year": 2021
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Endorsed TCFD framework in 2017 and GSMA’s global ambition of achieving net zero emissions by 2050",
+      "source_sentence": "We endorsed the TCFD framework in 2017 and GSMA’s global ambition of achieving net zero emissions by 2050 for the telecommunications sector last year.",
+      "source_doc": "Singtel Group Sustainability Report 2021",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2021
+    },
+    {
+      "topic_id": "workforce_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Singtel approves ESG-linked LTI Performance Share Award, where 20% of LTI is weighted to ESG KPIs, including people sustainability KPIs e.g. diversity and inclusion – women in leadership.",
+      "source_sentence": "• Approves ESG-linked LTI Performance Share Award, where 20% of LTI is weighted to ESG KPIs, including people sustainability KPIs e.g. diversity and inclusion – women in leadership",
+      "source_doc": "Singtel Group Sustainability Report 2021",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+      "source_page": 9,
+      "weight": 0.1,
+      "report_year": 2021
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Singtel aims to reduce absolute carbon emissions by 25% for Scope 1 and 2 by 2025, using 2015 as baseline.",
+      "source_sentence": "Climate Change and Carbon Reduce absolute carbon emissions by 25% for Scope 1 and 2 by 2025, using 2015 as baseline, in line with our 2030 SBTi targets and 2050 net zero ambitions",
+      "source_doc": "Singtel Group Sustainability Report 2021",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+      "source_page": 12,
+      "weight": 0.15,
+      "report_year": 2021
+    },
+    {
+      "topic_id": "data_privacy_security",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "Singtel upholds the highest standards of customer data privacy protection and cyber security measures in adherence to data protection laws.",
+      "source_sentence": "Data Privacy and Cyber Security Uphold the highest standards of customer data privacy protection and cyber security measures in adherence to data protection laws – Personal Data Protection Act (PDPA) in Singapore and the Privacy Act and Telecommunications Act in Australia – with zero major incident",
+      "source_doc": "Singtel Group Sustainability Report 2021",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+      "source_page": 12,
+      "weight": 0.3,
+      "report_year": 2021
+    },
+    {
+      "topic_id": "energy_management",
+      "pillar": "E",
+      "state": "INFERRED",
+      "text": "The company likely prioritizes energy efficiency and renewable energy adoption, particularly in its data centers and network operations, as part of its broader climate action strategy.",
+      "source_sentence": null,
+      "source_doc": "Singtel Group Sustainability Report 2021",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+      "source_page": null,
+      "weight": 0.2,
+      "inferred": true,
+      "report_year": 2021
+    },
+    {
+      "topic_id": "competitive_behavior",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company likely adheres to fair competition practices and regulatory compliance, ensuring ethical pricing and market conduct in line with industry standards.",
+      "source_sentence": null,
+      "source_doc": "Singtel Group Sustainability Report 2021",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+      "source_page": null,
+      "weight": 0.1,
+      "inferred": true,
+      "report_year": 2021
+    }
+  ],
+  "report_year": 2021,
+  "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2021/assets/pdf/downloads/Singtel-Group-Sustainability-Report-2021.pdf",
+  "source_title": "Singtel Group Sustainability Report 2021"
+}

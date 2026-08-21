@@ -1,113 +1,43 @@
-export type ESGGrade = "AAA" | "AA" | "A" | "BBB" | "BB" | "B" | "CCC";
+import type { QuadrantKey } from "./evidence/types";
 
-export type QuadrantKey =
-  | "leaders"
-  | "profitFirst"
-  | "purposeFirst"
-  | "laggards";
+export type { QuadrantKey };
 
-export type Metric = { label: string; value: number };
-
-export type Candle = {
-  label: string;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-};
-
+/** Public identity joined onto the live engine listing. Every numeric field
+ *  below either comes from GET /api/companies or is a published company fact
+ *  (market cap, headcount); nothing here is generated client-side. */
 export type Company = {
+  /** Engine id, e.g. "U96". Also the id used in routes and watchlists. */
   id: string;
+  /** Same as `id` when the engine covers the company; null when it does not. */
+  evidenceId: string | null;
   name: string;
   ticker: string;
   sector: string;
   region: string;
   domain: string;
   color: string;
-  esgScore: number;
-  financialScore: number;
   marketCap: number;
-  grade: ESGGrade;
-  quadrant: QuadrantKey;
-  momentum: number;
-  deviation: number;
-  pillars: {
-    environmental: number;
-    social: number;
-    governance: number;
-  };
-  financials: {
-    revenue: number;
-    netIncome: number;
-    roe: number;
-    profitMargin: number;
-    peRatio: number;
-    dividendYield: number;
-    debtToEquity: number;
-    oneYearReturn: number;
-  };
-  esgMetrics: {
-    carbonIntensity: number;
-    renewableEnergyPct: number;
-    boardIndependencePct: number;
-    genderDiversityPct: number;
-    employeeTurnover: number;
-    controversyLevel: number;
-  };
-  history: {
-    months: string[];
-    esgTrend: number[];
-    priceTrend: number[];
-    emissionsTrend: number[];
-    candles: Candle[];
-  };
-  environmentalBreakdown: Metric[];
-  socialBreakdown: Metric[];
-  governanceBreakdown: Metric[];
   profile: {
     headquarters: string;
     business: string;
     founded: number;
     employees: number;
   };
-  scope: {
-    scope1: number;
-    scope2: number;
-    scope3: number;
-  };
-  controversies: Controversy[];
-};
-
-export type Controversy = {
-  title: string;
-  severity: "low" | "medium" | "high";
-  year: number;
-};
-
-export type QuadrantMeta = {
-  key: QuadrantKey;
-  title: string;
-  blurb: string;
-  accent: string;
-  esgHigh: boolean;
-  finHigh: boolean;
-};
-
-export type Trend = "up" | "down" | "flat";
-
-export type StatSeries = {
-  id: string;
-  label: string;
-  value: string;
-  delta: number;
-  deviation: number;
-  series: number[];
-};
-
-export type SignalLeader = {
-  id: string;
-  company: Company;
-  insight: string;
-  delta: number;
-  deviation: number;
+  /** Rater consensus percentile. Null = not covered. */
+  esgScore: number | null;
+  /** Evidence score. Null = not covered. */
+  evidenceScore: number | null;
+  evidencePct: number | null;
+  evidenceBasis: string | null;
+  evidencePeers: number | null;
+  evidenceGap: number | null;
+  divergence: number | null;
+  confidence: number | null;
+  momentum: number | null;
+  quadrant: QuadrantKey | null;
+  isUnderpricedImprover: boolean;
+  complianceScore: number | null;
+  forecast: number | null;
+  benchmarkTotal: number | null;
+  benchmarkSource: string | null;
 };

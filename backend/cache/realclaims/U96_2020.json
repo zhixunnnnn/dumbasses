@@ -1,0 +1,95 @@
+{
+  "rows": [
+    {
+      "topic_id": "energy_transition",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "In August 2020, directors visited the construction site of the 60 megawatt floating solar photovoltaic (PV) system by Sembcorp Solar on Tengeh Reservoir, which will be one of the world’s largest inland floating solar PV systems when complete.",
+      "source_sentence": "In August 2020, directors visited the construction site of the 60 megawatt floating solar photovoltaic (PV) system by Sembcorp Solar on Tengeh Reservoir, which will be one of the world’s largest inland floating solar PV systems when complete.",
+      "source_doc": "corporate governance statement",
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2020/assets/pdf/esg/corporate_governance_statement.pdf",
+      "source_page": 1,
+      "weight": 0.25,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "workforce_safety",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "The size of the restricted share awards granted in 2020 is based on the achievement of stretched financial and non-financial targets, with emphasis on organisational transformation to meet future challenges and adherence to environment, health and safety standards.",
+      "source_sentence": "The size of the restricted share awards granted in 2020 is based on the achievement of stretched financial and non-financial targets, with emphasis on organisational transformation to meet future challenges and adherence to environment, health and safety standards.",
+      "source_doc": "corporate governance statement",
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2020/assets/pdf/esg/corporate_governance_statement.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "energy_transition",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "The Group completed the transition to an Integrated Assurance Framework (IAF) which emphasises the three lines of defence (LOD) model.",
+      "source_sentence": "The Group completed the transition to an Integrated Assurance Framework (IAF) which emphasises the three lines of defence (LOD) model.",
+      "source_doc": "corporate governance statement",
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2020/assets/pdf/esg/corporate_governance_statement.pdf",
+      "source_page": 1,
+      "weight": 0.25,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "INFERRED",
+      "text": "The company likely addresses GHG emissions through adherence to industry standards and internal policies aimed at reducing carbon footprint, given its focus on sustainability and governance.",
+      "source_sentence": null,
+      "source_doc": "corporate governance statement",
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2020/assets/pdf/esg/corporate_governance_statement.pdf",
+      "source_page": null,
+      "weight": 0.3,
+      "inferred": true,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "air_quality",
+      "pillar": "E",
+      "state": "INFERRED",
+      "text": "The company probably manages air quality by implementing emission control technologies and monitoring systems to minimize NOx, SOx, and particulate emissions, aligning with its commitment to environmental responsibility.",
+      "source_sentence": null,
+      "source_doc": "corporate governance statement",
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2020/assets/pdf/esg/corporate_governance_statement.pdf",
+      "source_page": null,
+      "weight": 0.1,
+      "inferred": true,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "water_management",
+      "pillar": "E",
+      "state": "INFERRED",
+      "text": "The company most likely employs efficient water withdrawal practices and cooling water management systems to ensure sustainable water usage, reflecting its broader environmental stewardship efforts.",
+      "source_sentence": null,
+      "source_doc": "corporate governance statement",
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2020/assets/pdf/esg/corporate_governance_statement.pdf",
+      "source_page": null,
+      "weight": 0.1,
+      "inferred": true,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "grid_resiliency",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company likely enhances grid resiliency through investments in reliable infrastructure and strategic partnerships to ensure supply security, consistent with its focus on operational efficiency and risk management.",
+      "source_sentence": null,
+      "source_doc": "corporate governance statement",
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2020/assets/pdf/esg/corporate_governance_statement.pdf",
+      "source_page": null,
+      "weight": 0.1,
+      "inferred": true,
+      "report_year": 2020
+    }
+  ],
+  "report_year": 2020,
+  "source_url": "https://media.sembcorp.com/data/cms/ar/ar2020/assets/pdf/esg/corporate_governance_statement.pdf",
+  "source_title": "corporate governance statement"
+}

@@ -1,4 +1,4 @@
-"""interpret — why the forecaster produced a given ESG estimate.
+"""interpret — why the forecaster produced a given MSCI rating estimate.
 
 The forecaster is a Ridge regression on four standardized features (see predict.py).
 For a linear model on standardized inputs the SHAP value of feature *i* is exact and
@@ -12,6 +12,10 @@ So the contributions already computed in `predict.forecast` ARE the SHAP values.
 This module surfaces them together with the provenance of each feature's input:
 the news feature is traced back to the individual scraped headlines that produced
 the sentiment count, and the price features to the weekly close series.
+
+When the panel is too thin to fit (predict.beats_baseline is False) there is no Ridge and
+therefore nothing to attribute: the SHAP block reports zero contributions and the model
+card says the served number is naive ratings persistence.
 """
 from __future__ import annotations
 
@@ -31,19 +35,28 @@ FEATURE_META: dict[str, dict[str, str]] = {
     "news_sentiment": {
         "label": "News sentiment",
         "unit": "positive − controversy headlines",
-        "provenance": "live_news",
+        "provenance": "dated_news",
         "description": (
-            "Net count of LLM-classified live news items for the company "
-            "(positive headlines minus controversy headlines)."
+            "Net count of LLM-classified headlines PUBLISHED in the row's own year "
+            "(GDELT DOC 2.0), positive minus controversy — never back-filled from today."
+        ),
+    },
+    "evidence_total": {
+        "label": "Evidence score",
+        "unit": "0–100",
+        "provenance": "report_claims",
+        "description": (
+            "That year's evidence score, built from claims extracted from the company's "
+            "own report for that year."
         ),
     },
     "price_return": {
         "label": "Price return",
-        "unit": "% over the window",
+        "unit": "% over the trailing year",
         "provenance": "market_prices",
         "description": (
-            "Total return of the weekly close series over the analysis window, "
-            "clipped at the target year so no post-target price leaks in."
+            "Trailing 1-year return of the weekly close series, clipped at the feature "
+            "year so no later price leaks in."
         ),
     },
     "volatility": {
@@ -52,15 +65,6 @@ FEATURE_META: dict[str, dict[str, str]] = {
         "provenance": "market_prices",
         "description": (
             "Annualised standard deviation of weekly log returns over the same window."
-        ),
-    },
-    "is_financial": {
-        "label": "Financial sector",
-        "unit": "0 or 1",
-        "provenance": "universe",
-        "description": (
-            "Sector flag — financials disclose a different SASB topic set, which "
-            "shifts the achievable evidence score."
         ),
     },
 }
@@ -80,26 +84,37 @@ def reset_cache() -> None:
 
 
 def model_card() -> dict[str, Any]:
-    """Global model description: the learned weight on each standardized feature,
-    honest accuracy, and the training panel it was fitted on."""
+    """Global model description: the learned weight on each standardized feature, the
+    DIRECTIONAL accuracy with its sample size, and the panel it was fitted on."""
     dataset, model, client = _context()
-    X, y, cids = _panel(dataset, client)
-    coefficients = [float(value) for value in model.ridge.coef_]
-    base_value = float(model.ridge.intercept_)
+    X, y, keys = _panel(dataset, client)
+    ev = model.evaluation
+    coefficients = ([float(v) for v in model.ridge.coef_] if model.ridge is not None
+                    else [0.0] * len(FEATURES))
+    base_value = float(model.ridge.intercept_) if model.ridge is not None else (
+        float(np.mean(y)) if len(y) else 0.0)
     return {
-        "modelType": "Ridge regression (L2, alpha=3.0) on standardized features",
+        "modelType": (f"Ridge regression (L2, alpha={ev.alpha}) on standardized features"
+                      if model.fitted else "Naive ratings persistence (no fit shipped)"),
         "explainer": "Exact linear SHAP — closed form for a linear model, no sampling",
-        "target": f"Verified ESG evidence score, {config.END_YEAR}",
+        "target": "REAL disclosed MSCI ESG rating level (CCC=1 .. AAA=7), same year",
         "targetYear": config.CURRENT_YEAR,
         "baseValue": round(base_value, 3),
         "trainingRows": int(len(y)),
-        "trainingCompanies": cids,
-        "valError": (round(model.val_error, 3) if model.val_error is not None else None),
+        "trainingCompanies": keys,
+        "valError": (round(ev.mae, 3) if ev.mae is not None else None),
         "directionalAccuracy": (
             round(model.directional_accuracy, 3)
-            if model.directional_accuracy is not None
-            else None
+            if model.directional_accuracy is not None else None
         ),
+        "directionalN": model.directional_n,
+        "baselineMovePersistence": ev.move_baseline,
+        "baselineSide": ev.side_baseline,
+        "baselineMaePersistence": ev.baseline_mae_persistence,
+        "maeOnPersistenceRows": ev.mae_on_persistence_rows,
+        "persistenceN": ev.persistence_n,
+        "luckPValue": ev.p_value,
+        "fitted": model.fitted,
         "targetMean": (round(float(np.mean(y)), 2) if len(y) else None),
         "targetStd": (round(float(np.std(y)), 2) if len(y) else None),
         "features": [
@@ -111,27 +126,21 @@ def model_card() -> dict[str, Any]:
                 "std": round(float(model.stds[index]), 4),
                 # Mean |SHAP| across the panel — the model-wide importance ranking.
                 "meanAbsShap": round(
-                    float(
-                        np.mean(
-                            np.abs(
-                                coefficients[index]
-                                * (X[:, index] - model.means[index])
-                                / model.stds[index]
-                            )
-                        )
-                    )
-                    if len(y)
-                    else 0.0,
+                    float(np.mean(np.abs(
+                        coefficients[index]
+                        * (X[:, index] - model.means[index]) / model.stds[index])))
+                    if len(y) else 0.0,
                     4,
                 ),
             }
             for index, name in enumerate(FEATURES)
         ],
         "caveat": (
-            "Free real-time signals only weakly predict how much verified ESG a "
-            "company discloses. Treat this as a low-confidence, directional "
-            "estimate — the accuracy figure is a leave-one-out above/below-median "
-            "hit-rate, not a precision claim."
+            "Ratings are sticky, so the figure that matters is DIRECTION, not precision: "
+            "the accuracy above is the leave-one-out share of upgrade/hold/downgrade calls "
+            "the model got right, with its sample size, against a baseline that always "
+            "says hold. With a panel this small an edge over that baseline can be luck — "
+            "the p-value says how likely."
         ),
     }
 
@@ -146,7 +155,7 @@ def explain(company_id: str) -> dict[str, Any]:
     company = dataset.company(company_id)
     prediction = run_forecast(dataset, company_id, model, client)
     raw_features = _real_features(dataset, company_id)
-    base_value = float(model.ridge.intercept_)
+    base_value = float(model.ridge.intercept_) if model.ridge is not None else 0.0
 
     contributions: list[dict[str, Any]] = []
     for index, name in enumerate(FEATURES):
@@ -167,7 +176,8 @@ def explain(company_id: str) -> dict[str, Any]:
                 "standardizedValue": (
                     round(float(standardized), 3) if standardized is not None else None
                 ),
-                "coefficient": round(float(model.ridge.coef_[index]), 4),
+                "coefficient": (round(float(model.ridge.coef_[index]), 4)
+                                if model.ridge is not None else 0.0),
                 "shap": (round(contribution.contribution, 4) if contribution else 0.0),
                 "direction": (
                     "increases"
@@ -197,13 +207,20 @@ def explain(company_id: str) -> dict[str, Any]:
             "targetYear": prediction.target_year,
             "valError": prediction.val_error,
             "directionalAccuracy": prediction.directional_accuracy,
+            "directionalN": prediction.directional_n,
+            "predictedLabel": prediction.predicted_label,
+            "lastRatingLabel": prediction.last_rating_label,
+            "lastRatingYear": prediction.last_rating_year,
+            "direction": prediction.direction,
+            "baselineOnly": prediction.baseline_only,
+            "modelLabel": prediction.model_label,
             "hypothesis": prediction.hypothesis,
             "note": prediction.drift_note,
             "unavailableReason": (
                 None
                 if prediction.predicted_score is not None
-                else "No usable weekly price history for this company, so the "
-                "market features cannot be computed."
+                else "No real MSCI rating has been extracted for this company, and the "
+                "model has no fitted alternative to fall back on."
             ),
         },
         "shap": {

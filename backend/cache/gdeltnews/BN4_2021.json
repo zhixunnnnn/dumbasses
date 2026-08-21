@@ -1,0 +1,91 @@
+{
+  "company_id": "BN4",
+  "year": 2021,
+  "miss": false,
+  "n_articles": 250,
+  "n_labelled": 49,
+  "positive": 0,
+  "controversy": 1,
+  "sentiment": -1,
+  "headlines": [
+    {
+      "title": "Rustomjee Group and Singapore Keppel Land join hands to build a world - class integrated township in Thane",
+      "url": "https://www.business-standard.com/content/press-releases-ani/rustomjee-group-and-singapore-s-keppel-land-join-hands-to-build-a-world-class-integrated-township-in-thane-121120600807_1.html",
+      "seendate": "20211206T110000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Rustomjee Group and Singapore Keppel Land join hands to build a world - class integrated township in Thane",
+      "url": "https://news.webindia123.com/news/Articles/Business/20211206/3868356.html",
+      "seendate": "20211206T101500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "SPH says Keppel scheme meeting delayed till after Dec 8",
+      "url": "https://www.straitstimes.com/business/companies-markets/sph-says-keppel-scheme-meeting-delayed-till-after-dec-8",
+      "seendate": "20211125T020000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Rustomjee Group and Singapore Keppel Land Join Hands to Build a World - Class Integrated Township in Thane",
+      "url": "https://www.devdiscourse.com/article/science-environment/1835997-rustomjee-group-and-singapores-keppel-land-join-hands-to-build-a-world-class-integrated-township-in-thane",
+      "seendate": "20211206T120000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Regulator clears way for SPH shareholders to vote on Keppel , Cuscaden bids on same day",
+      "url": "https://www.straitstimes.com/business/companies-markets/regulator-clears-way-for-sph-shareholders-to-vote-on-keppel-cuscaden-bids-on-same-day",
+      "seendate": "20211222T204500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Keppel Consortium to Buy Majority Stake in Shell Solar Unit for Up to US$150M",
+      "url": "https://www.marketwatch.com/story/keppel-consortium-to-buy-majority-stake-in-shell-solar-unit-for-up-to-us-150m-271639443457",
+      "seendate": "20211214T011500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Keppel to acquire Shell - backed Cleantech Solar",
+      "url": "https://economictimes.indiatimes.com/industry/renewables/singapores-keppel-to-acquire-shell-backed-cleantech-solar/articleshow/88257542.cms",
+      "seendate": "20211213T120000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Keppel Shareholders Approve Bid to Buy Singapore Press",
+      "url": "https://www.bnnbloomberg.ca/keppel-shareholders-approve-bid-to-buy-singapore-press-1.1693219",
+      "seendate": "20211209T054500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Keppel Data Centres in tie - up to explore Australia liquid hydrogen supply chain",
+      "url": "https://www.straitstimes.com/business/companies-markets/keppel-data-centres-in-tie-up-to-explore-australia-liquid-hydrogen-supply-chain",
+      "seendate": "20211222T034500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Keppel raises bid for SPH by 12 %, says offer is final and irrevocable",
+      "url": "https://www.straitstimes.com/business/companies-markets/keppel-raises-bid-for-sph-by-12-says-offer-is-final-and-irrevocable",
+      "seendate": "20211109T191500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Keppel Raises Offer for Singapore Press Holdings",
+      "url": "https://www.marketwatch.com/story/keppel-raises-offer-for-singapore-press-holdings-271636495749",
+      "seendate": "20211109T223000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Keppel shareholders approve bid to buy media giant Singapore Press Holdings",
+      "url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2021/12/09/keppel-shareholders-approve-bid-to-buy-media-giant-singapore-press-holdings",
+      "seendate": "20211209T131500Z",
+      "label": "stock"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"Keppel\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Keppel%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20210101000000&enddatetime=20211231235959",
+  "window_start": "20210101000000",
+  "window_end": "20211231235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-21T20:43:29+00:00"
+}

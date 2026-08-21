@@ -1,0 +1,142 @@
+{
+  "rows": [
+    {
+      "topic_id": "energy_transition",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We will avoid highly pollutive businesses such as coal-fired plants, emphasise renewables and cleaner energy such as gas, and channel our engineering capabilities as a solutions provider to contribute to the fight against climate change.",
+      "source_sentence": "We will avoid highly pollutive businesses such as coal-fired plants, emphasise renewables and cleaner energy such as gas, and channel our engineering capabilities as a solutions provider to contribute to the fight against climate change.",
+      "source_doc": "keppel corporation ar 19 sustainability framework",
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_page": 1,
+      "weight": 0.25,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We have set targets to reduce waste, water and carbon emissions intensity, and to invest in renewable energy generation.",
+      "source_sentence": "We have set targets to reduce waste, water and carbon emissions intensity, and to invest in renewable energy generation.",
+      "source_doc": "keppel corporation ar 19 sustainability framework",
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_page": 1,
+      "weight": 0.3,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "energy_transition",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "As part of our environmental sustainability strategy, we will avoid highly polluting businesses such as coal, and will work towards growing and expanding renewables and circular economy solutions.",
+      "source_sentence": "As part of our environmental sustainability strategy, we will avoid highly polluting businesses such as coal, and will work towards growing and expanding renewables and circular economy solutions.",
+      "source_doc": "keppel corporation ar 19 sustainability framework",
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_page": 1,
+      "weight": 0.25,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We will be introducing an internal carbon price in the evaluation of all major investment decisions and enhancing our climate risk assessment.",
+      "source_sentence": "We will be introducing an internal carbon price in the evaluation of all major investment decisions and enhancing our climate risk assessment.",
+      "source_doc": "keppel corporation ar 19 sustainability framework",
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_page": 1,
+      "weight": 0.3,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "To support the climate change agenda, we have targets to reduce our carbon emissions intensity.",
+      "source_sentence": "To support the climate change agenda, we have targets to reduce our carbon emissions intensity.",
+      "source_doc": "keppel corporation ar 19 sustainability framework",
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_page": 1,
+      "weight": 0.3,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "We have been tracking our Scope 1 and 2 emissions since 2010, and will start tracking Scope 3 emissions from 2020.",
+      "source_sentence": "We have been tracking our Scope 1 and 2 emissions since 2010, and will start tracking Scope 3 emissions from 2020.",
+      "source_doc": "keppel corporation ar 19 sustainability framework",
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_page": 1,
+      "weight": 0.3,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "workforce_safety",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "We achieved our goal of zero fatalities across our global operations in 2019.",
+      "source_sentence": "We achieved our goal of zero fatalities across our global operations in 2019.",
+      "source_doc": "keppel corporation ar 19 sustainability framework",
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "workforce_safety",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Keppel also clinched 18 awards at the Workplace Safety and Health Awards 2019, which is the high",
+      "source_sentence": "Keppel also clinched 18 awards at the Workplace Safety and Health Awards 2019, which is the high",
+      "source_doc": "keppel corporation ar 19 sustainability framework",
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "air_quality",
+      "pillar": "E",
+      "state": "INFERRED",
+      "text": "The company likely addresses air quality through emissions reduction strategies, adherence to environmental regulations, and investments in cleaner energy solutions.",
+      "source_sentence": null,
+      "source_doc": "keppel corporation ar 19 sustainability framework",
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_page": null,
+      "weight": 0.1,
+      "inferred": true,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "water_management",
+      "pillar": "E",
+      "state": "INFERRED",
+      "text": "The company likely implements efficient water use practices, recycling initiatives, and sustainable water management systems to minimize water withdrawal and optimize cooling water usage.",
+      "source_sentence": null,
+      "source_doc": "keppel corporation ar 19 sustainability framework",
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_page": null,
+      "weight": 0.1,
+      "inferred": true,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "grid_resiliency",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company likely enhances grid resiliency through investments in reliable energy infrastructure, diversified energy sources, and robust supply chain management to ensure energy security.",
+      "source_sentence": null,
+      "source_doc": "keppel corporation ar 19 sustainability framework",
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_page": null,
+      "weight": 0.1,
+      "inferred": true,
+      "report_year": 2019
+    }
+  ],
+  "report_year": 2019,
+  "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+  "source_title": "keppel corporation ar 19 sustainability framework"
+}

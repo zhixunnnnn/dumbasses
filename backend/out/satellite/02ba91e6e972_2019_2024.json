@@ -1,0 +1,56 @@
+{
+  "site": {
+    "site_id": "02ba91e6e972",
+    "company_id": "U96",
+    "name": "Aberdare Power Station",
+    "asset_type": "gas",
+    "lat": 51.69751775,
+    "lon": -3.41610435,
+    "operator": "Sembcorp Energy UK Limited",
+    "registry": "openstreetmap",
+    "registry_url": "https://www.openstreetmap.org/way/1353839293",
+    "match_confidence": 0.9,
+    "footprint": [
+      [
+        51.6977609,
+        -3.4158562
+      ],
+      [
+        51.6976603,
+        -3.416563
+      ],
+      [
+        51.6975887,
+        -3.4165224
+      ],
+      [
+        51.6972746,
+        -3.4163444
+      ],
+      [
+        51.6974151,
+        -3.4156457
+      ],
+      [
+        51.6977609,
+        -3.4158562
+      ]
+    ]
+  },
+  "before": {
+    "scene_id": "S2B_30UVC_20190917_0_L2A",
+    "date": "2019-09-17",
+    "cloud_cover": 5.792427,
+    "image_path": "satellite/02ba91e6e972_2019.png"
+  },
+  "after": {
+    "scene_id": "S2B_30UVC_20240602_0_L2A",
+    "date": "2024-06-02",
+    "cloud_cover": 3.292965,
+    "image_path": "satellite/02ba91e6e972_2024.png"
+  },
+  "index": "ndvi",
+  "change_score": -0.0740476759793661,
+  "changed": false,
+  "note": "On-site vegetation cover barely moved (-0.06). No construction observed — this is not evidence the claim is false."
+}

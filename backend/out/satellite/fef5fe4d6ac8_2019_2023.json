@@ -1,0 +1,60 @@
+{
+  "site": {
+    "site_id": "fef5fe4d6ac8",
+    "company_id": "U96",
+    "name": "Asfordby B",
+    "asset_type": "battery",
+    "lat": 52.77740515,
+    "lon": -0.926761,
+    "operator": "Sembcorp",
+    "registry": "openstreetmap",
+    "registry_url": "https://www.openstreetmap.org/way/737276205",
+    "match_confidence": 0.9,
+    "footprint": [
+      [
+        52.7778212,
+        -0.9269017
+      ],
+      [
+        52.7775229,
+        -0.9260865
+      ],
+      [
+        52.7769891,
+        -0.9266202
+      ],
+      [
+        52.7772874,
+        -0.9274355
+      ],
+      [
+        52.7777709,
+        -0.9269553
+      ],
+      [
+        52.7778005,
+        -0.9269237
+      ],
+      [
+        52.7778212,
+        -0.9269017
+      ]
+    ]
+  },
+  "before": {
+    "scene_id": "S2A_30UXD_20190919_1_L2A",
+    "date": "2019-09-19",
+    "cloud_cover": 0.004277,
+    "image_path": "satellite/fef5fe4d6ac8_2019.png"
+  },
+  "after": {
+    "scene_id": "S2A_30UXD_20230610_0_L2A",
+    "date": "2023-06-10",
+    "cloud_cover": 0.368904,
+    "image_path": "satellite/fef5fe4d6ac8_2023.png"
+  },
+  "index": "ndvi",
+  "change_score": -0.01845297015193232,
+  "changed": false,
+  "note": "On-site vegetation cover barely moved (+0.01). No construction observed — this is not evidence the claim is false."
+}

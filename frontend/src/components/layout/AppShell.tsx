@@ -14,7 +14,7 @@ import { useNavigation } from "../../navigation/NavigationContext";
 import type { RouteName } from "../../navigation/NavigationContext";
 
 type MobileNavItem = {
-  key: Exclude<RouteName, "company" | "evidenceCompany">;
+  key: Exclude<RouteName, "evidenceCompany">;
   label: string;
   icon: React.ReactNode;
 };
@@ -37,11 +37,9 @@ const MOBILE_NAV: MobileNavItem[] = [
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const { route, navigate } = useNavigation();
   const routeKey =
-    route.name === "company"
-      ? `company-${route.id}`
-      : route.name === "evidenceCompany"
-        ? `evidenceCompany-${route.id}`
-        : route.name;
+    route.name === "evidenceCompany"
+      ? `evidenceCompany-${route.id}`
+      : route.name;
   return (
     <div className="flex h-[100dvh] overflow-hidden bg-canvas text-txt">
       <Sidebar />

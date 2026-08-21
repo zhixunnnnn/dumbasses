@@ -9,7 +9,8 @@ export default defineConfig({
     allowedHosts: true,
     proxy: {
       "/api": {
-        target: "http://localhost:8000",
+        // override with VITE_API_TARGET when running a second backend alongside the default
+        target: process.env.VITE_API_TARGET || "http://localhost:8000",
         changeOrigin: true,
       },
     },

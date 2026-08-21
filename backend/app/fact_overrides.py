@@ -60,10 +60,10 @@ OVERRIDABLE_FIELDS: dict[str, dict[str, Any]] = {
         "max": 100.0,
     },
     "forecast.predicted_score": {
-        "label": "Forecast: predicted score",
+        "label": "Forecast: predicted MSCI level",
         "kind": "number",
-        "min": 0.0,
-        "max": 100.0,
+        "min": 1.0,
+        "max": 7.0,
     },
     "report_source": {
         "label": "Report source URL",

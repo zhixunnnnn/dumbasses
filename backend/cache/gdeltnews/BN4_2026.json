@@ -1,0 +1,91 @@
+{
+  "company_id": "BN4",
+  "year": 2026,
+  "miss": false,
+  "n_articles": 250,
+  "n_labelled": 34,
+  "positive": 4,
+  "controversy": 1,
+  "sentiment": 3,
+  "headlines": [
+    {
+      "title": "Keppel should take heart from its success and make a firm pledge on Scope 3 emissions",
+      "url": "https://www.businesstimes.com.sg/companies-markets/keppel-should-take-heart-its-success-and-make-firm-pledge-scope-3-emissions",
+      "seendate": "20260602T153000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Keppel signs $1 . 3b deal for final Bifrost fibre pair",
+      "url": "https://www.dealstreetasia.com/stories/singapores-keppel-signs-1-3b-deal-for-final-bifrost-fibre-pair-488873",
+      "seendate": "20260713T104500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Keppel secures deal for final Bifrost cable pair ; total contracts value hits US$1 . 3 billion",
+      "url": "https://www.businesstimes.com.sg/companies-markets/keppel-secures-deal-final-bifrost-cable-pair-total-contracts-value-hits-us1-3-billion",
+      "seendate": "20260713T070000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Keppel to divest six oil rigs through new private fund for S$1 . 2 billion",
+      "url": "https://www.businesstimes.com.sg/companies-markets/keppel-divest-six-oil-rigs-through-new-private-fund-s1-2-billion",
+      "seendate": "20260727T163000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Keppel enters South Korea data centre market with 60 MW greenfield project",
+      "url": "https://www.businesstimes.com.sg/companies-markets/keppel-enters-south-koreas-data-centre-market-60-mw-greenfield-project",
+      "seendate": "20260609T024500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Keppel on track to hit key emissions target  well ahead  of 2050 : CEO",
+      "url": "https://www.businesstimes.com.sg/companies-markets/keppel-track-hit-key-emissions-target-well-ahead-2050-ceo",
+      "seendate": "20260528T003000Z",
+      "label": "positive"
+    },
+    {
+      "title": "Stocks to watch : Keppel , Starhill Global Reit , Ley Choon",
+      "url": "https://www.businesstimes.com.sg/companies-markets/stocks-watch-keppel-starhill-global-reit-ley-choon",
+      "seendate": "20260609T024500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Analysts upbeat on  New Keppel  core operations despite group net profit plunge",
+      "url": "https://www.businesstimes.com.sg/companies-markets/analysts-upbeat-new-keppel-core-operations-despite-groups-net-profit-plunge",
+      "seendate": "20260804T044500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Keppel exceeds S$100b target for funds under management ahead of schedule",
+      "url": "https://www.businesstimes.com.sg/companies-markets/keppel-exceeds-s100-billion-target-funds-under-management-ahead-schedule",
+      "seendate": "20260728T094500Z",
+      "label": "positive"
+    },
+    {
+      "title": "Apollo Global Management , Inc .: Apollo and Singapore Keppel to Invest in New Offshore Energy Asset Fund",
+      "url": "https://www.finanznachrichten.de/nachrichten-2026-07/69134182-apollo-global-management-inc-apollo-and-singapore-s-keppel-to-invest-in-new-offshore-energy-asset-fund-399.htm",
+      "seendate": "20260727T234500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Keppel H1 net profit drops 59 % to S$155 million on legacy rig impairments , M1 deal fallout",
+      "url": "https://www.businesstimes.com.sg/companies-markets/keppel-h1-net-profit-falls-59-s154-7-million-rig-impairments-m1-deal-fallout-shares-close-4-3-lower",
+      "seendate": "20260730T130000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Singapore Keppel on track to hit monetisation target of up to S$3b",
+      "url": "https://www.dealstreetasia.com/stories/keppel-monetisation-target-490627",
+      "seendate": "20260730T050000Z",
+      "label": "stock"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"Keppel\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Keppel%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20260101000000&enddatetime=20260822235959",
+  "window_start": "20260101000000",
+  "window_end": "20260822235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-21T20:58:35+00:00"
+}

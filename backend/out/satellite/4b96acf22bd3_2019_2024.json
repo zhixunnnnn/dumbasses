@@ -1,0 +1,72 @@
+{
+  "site": {
+    "site_id": "4b96acf22bd3",
+    "company_id": "U96",
+    "name": "Sembcorp Cogen @ Banyan",
+    "asset_type": "gas",
+    "lat": 1.25885445,
+    "lon": 103.66937945000001,
+    "operator": "SembCorp Cogen Pte Ltd",
+    "registry": "openstreetmap",
+    "registry_url": "https://www.openstreetmap.org/way/605288611",
+    "match_confidence": 0.9,
+    "footprint": [
+      [
+        1.2571227,
+        103.6683871
+      ],
+      [
+        1.2583138,
+        103.6699756
+      ],
+      [
+        1.2590476,
+        103.6709543
+      ],
+      [
+        1.2591521,
+        103.6710936
+      ],
+      [
+        1.2605298,
+        103.6704194
+      ],
+      [
+        1.2605862,
+        103.6701283
+      ],
+      [
+        1.2588905,
+        103.6678999
+      ],
+      [
+        1.258647,
+        103.6677194
+      ],
+      [
+        1.2584576,
+        103.6676653
+      ],
+      [
+        1.2571227,
+        103.6683871
+      ]
+    ]
+  },
+  "before": {
+    "scene_id": "S2A_48NUG_20191227_0_L2A",
+    "date": "2019-12-27",
+    "cloud_cover": 8.046951,
+    "image_path": "satellite/4b96acf22bd3_2019.png"
+  },
+  "after": {
+    "scene_id": "S2B_48NUG_20240728_0_L2A",
+    "date": "2024-07-28",
+    "cloud_cover": 14.808747,
+    "image_path": "satellite/4b96acf22bd3_2024.png"
+  },
+  "index": "ndwi",
+  "change_score": -0.014154344645762429,
+  "changed": false,
+  "note": "On-site water cover barely moved (+0.01). No construction observed — this is not evidence the claim is false."
+}

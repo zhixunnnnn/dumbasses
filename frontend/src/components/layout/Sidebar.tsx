@@ -15,7 +15,7 @@ import {
 } from "../../navigation/NavigationContext";
 
 type NavItem = {
-  key: Exclude<RouteName, "company" | "evidenceCompany">;
+  key: Exclude<RouteName, "evidenceCompany">;
   label: string;
   icon: React.ReactNode;
 };

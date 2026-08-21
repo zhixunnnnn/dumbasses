@@ -11,7 +11,7 @@
   },
   "evidence": {
     "company_id": "O39",
-    "year": 2023,
+    "year": 2024,
     "total": 45.0,
     "pillars": {
       "E": 25.0,
@@ -21,7 +21,7 @@
     "confidence": 0.356,
     "absent_topics": [],
     "trace": {
-      "label": "Evidence Score 2023",
+      "label": "Evidence Score 2024",
       "value": 45.0,
       "contribution": null,
       "source_sentence": null,
@@ -245,6 +245,16 @@
     },
     {
       "year": 2023,
+      "total": 87.5,
+      "pillars": {
+        "E": 100.0,
+        "S": 50.0,
+        "G": 100.0
+      },
+      "confidence": 0.658
+    },
+    {
+      "year": 2024,
       "total": 45.0,
       "pillars": {
         "E": 25.0,
@@ -256,14 +266,57 @@
   ],
   "raters": {
     "company_id": "O39",
-    "msci_pct": 75.0,
-    "sp_pct": 41.67,
-    "sustainalytics_pct": 61.11,
-    "consensus": 59.26,
-    "divergence": 33.33,
+    "msci_pct": 60.0,
+    "sp_pct": 65.0,
+    "sustainalytics_pct": 65.0,
+    "cdp_pct": null,
+    "real_raters": [
+      "msci"
+    ],
+    "basis": "all companies",
+    "peers": 10,
+    "consensus": 63.33,
+    "divergence": 5.0,
+    "consensus_provenance": "mixed",
+    "divergence_provenance": "mixed",
+    "contributing": [
+      "msci",
+      "sp",
+      "sustainalytics"
+    ],
+    "rater_provenance": {
+      "msci": {
+        "real": true,
+        "source": "ocbc sustainability report 2024",
+        "url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+        "observed_on": "2024",
+        "value_raw": "AA"
+      },
+      "sp": {
+        "real": false,
+        "source": null,
+        "url": null,
+        "observed_on": null,
+        "value_raw": null
+      },
+      "sustainalytics": {
+        "real": false,
+        "source": null,
+        "url": null,
+        "observed_on": null,
+        "value_raw": null
+      },
+      "cdp": {
+        "real": true,
+        "source": "CDP public scores table",
+        "url": "https://www.cdp.net/en/data/scores",
+        "observed_on": "2025",
+        "value_raw": "C"
+      }
+    },
     "msci_real": true,
-    "msci_source": "KnowESG",
-    "msci_url": "https://knowesg.com/esg-ratings/ocbc-bank"
+    "msci_source": "ocbc sustainability report 2024",
+    "msci_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf"
   },
   "signal": {
     "company_id": "O39",
@@ -271,10 +324,16 @@
     "opinion_flat": true,
     "price_flat": true,
     "is_underpriced_improver": false,
-    "evidence_gap": -42.59,
-    "momentum": -7.0,
-    "esg_today": 59.26,
+    "evidence_pct": 15.0,
+    "evidence_basis": "all companies",
+    "evidence_peers": 10,
+    "evidence_gap": -48.33,
+    "momentum": -5.0,
+    "esg_today": 63.33,
     "quadrant": "OVERRATED",
+    "esg_today_provenance": "mixed",
+    "evidence_gap_provenance": "mixed",
+    "quadrant_provenance": "mixed",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -284,15 +343,15 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=False (evidence momentum -7.0/yr, verified-driven)",
-          "value": -7.0,
+          "label": "proof_up=False (evidence momentum -5.0/yr, verified-driven)",
+          "value": -5.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "Evidence Score 2023",
+              "label": "Evidence Score 2024",
               "value": 45.0,
               "contribution": null,
               "source_sentence": null,
@@ -475,8 +534,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=33.33, consensus 51.39->59.26)",
-          "value": 33.33,
+          "label": "opinion_flat=True (divergence=5.0, consensus 60.0->63.33)",
+          "value": 5.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -493,13 +552,23 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-42.59 (evidence 16.67 - consensus 59.26)",
-          "value": -42.59,
+          "label": "evidence_gap=-48.33 (evidence 15.0 - consensus 63.33)",
+          "value": -48.33,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
-          "children": []
+          "children": [
+            {
+              "label": "evidence_pct=15.0 vs 10 companies on the all companies rubric",
+              "value": 15.0,
+              "contribution": null,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
         }
       ]
     }
@@ -6849,6 +6918,9 @@
   "compliance": {
     "company_id": "O39",
     "score": 0.0,
+    "provenance": "mixed",
+    "scraped_count": 2,
+    "counted": 4,
     "met": [
       {
         "reg_id": "SGX-711B",
@@ -6939,7 +7011,7 @@
           "label": "MAS Guidelines on Environmental Risk Management — MET",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
+          "source_sentence": "In FY2019, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
           "source_doc": null,
           "source_page": null,
           "children": []
@@ -6948,7 +7020,7 @@
           "label": "ASEAN Taxonomy for Sustainable Finance — MET",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
+          "source_sentence": "In FY2019, OCBC expanded sustainable financing and set interim financed emissions targets toward net zero.",
           "source_doc": null,
           "source_page": null,
           "children": []
@@ -6958,77 +7030,36 @@
   },
   "forecast": {
     "company_id": "O39",
-    "predicted_score": 52.33,
-    "horizon_years": 3,
-    "ci_low": 46.3,
-    "ci_high": 58.35,
-    "feature_contributions": [
-      {
-        "feature": "is_financial",
-        "value": 1.0,
-        "contribution": -5.435
-      },
-      {
-        "feature": "volatility",
-        "value": 18.52,
-        "contribution": -4.018
-      },
-      {
-        "feature": "price_return",
-        "value": 14.68,
-        "contribution": -0.044
-      },
-      {
-        "feature": "news_sentiment",
-        "value": 5.0,
-        "contribution": 0.0
-      }
-    ],
-    "val_error": 6.025,
-    "directional_accuracy": 0.8,
+    "predicted_score": 6.0,
+    "horizon_years": 0,
+    "ci_low": null,
+    "ci_high": null,
+    "feature_contributions": [],
+    "val_error": null,
+    "directional_accuracy": null,
+    "directional_n": null,
+    "predicted_label": "AA",
+    "last_rating_label": "AA",
+    "last_rating_year": 2024,
+    "direction": "likely hold",
+    "baseline_only": true,
+    "model_label": "baseline: ratings persistence (insufficient history for a fitted model — 4 real rows)",
     "target_year": 2026,
-    "drift_years": 3,
-    "drift_note": "Live 2026 estimate from real-time signals: real LLM-classified news plus real price/sector data, on a model trained only on real evidence — no seeded inputs.",
+    "drift_years": 0,
+    "drift_note": "No year has a complete set of real features for this company (a year needs dated news, its own extracted report and price history), so this is the last rating the company disclosed, carried as-is and labelled.",
     "hypothesis": true,
     "trace": {
-      "label": "Live 2026 ESG estimate = 52.3 (real-time, ~80% hit-rate, MAE=6.0)",
-      "value": 52.33,
+      "label": "likely hold — MSCI AA (baseline: ratings persistence (insufficient history for a fitted model — 4 real rows))",
+      "value": 6.0,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
-          "label": "is_financial=1.0",
-          "value": null,
-          "contribution": -5.435,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "volatility=18.52",
-          "value": null,
-          "contribution": -4.018,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "price_return=14.68",
-          "value": null,
-          "contribution": -0.044,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "news_sentiment=5.0",
-          "value": null,
-          "contribution": 0.0,
+          "label": "last disclosed rating AA (2024)",
+          "value": 6.0,
+          "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -7048,7 +7079,8 @@
         "source_doc": "ocbc sustainability report 2024",
         "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "business_ethics",
@@ -7059,7 +7091,8 @@
         "source_doc": "ocbc sustainability report 2024",
         "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "financial_inclusion",
@@ -7070,7 +7103,8 @@
         "source_doc": "ocbc sustainability report 2024",
         "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "employee_diversity",
@@ -7081,7 +7115,8 @@
         "source_doc": "ocbc sustainability report 2024",
         "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "systemic_risk",
@@ -7092,7 +7127,8 @@
         "source_doc": "ocbc sustainability report 2024",
         "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "employee_diversity",
@@ -7103,7 +7139,8 @@
         "source_doc": "ocbc sustainability report 2024",
         "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "systemic_risk",
@@ -7114,7 +7151,8 @@
         "source_doc": "ocbc sustainability report 2024",
         "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "financed_emissions",
@@ -7126,7 +7164,8 @@
         "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
         "source_page": null,
         "weight": 0.25,
-        "inferred": true
+        "inferred": true,
+        "report_year": 2024
       },
       {
         "topic_id": "data_security",
@@ -7138,11 +7177,13 @@
         "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
         "source_page": null,
         "weight": 0.15,
-        "inferred": true
+        "inferred": true,
+        "report_year": 2024
       }
     ],
     "absent": [],
     "live": true,
+    "report_year": 2024,
     "source_url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
     "source_title": "ocbc sustainability report 2024"
   },
@@ -7157,5 +7198,36 @@
       "name": "DBS Group",
       "evidence_total": 43.0
     }
-  ]
+  ],
+  "latest_real_raters": [
+    {
+      "rater": "cdp",
+      "value": "C",
+      "year": 2025,
+      "source": "CDP scores table",
+      "url": null,
+      "provenance": "real"
+    },
+    {
+      "rater": "msci",
+      "value": "AA",
+      "year": 2024,
+      "source": "company report",
+      "url": "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf",
+      "provenance": "real"
+    }
+  ],
+  "cdp_disclosure": null,
+  "benchmark": {
+    "industry": "Commercial Banks",
+    "peers": 3,
+    "total": 45.0,
+    "pillars": {
+      "E": 25.0,
+      "S": 70.0,
+      "G": 48.5
+    },
+    "source": "panel median (n=3, below peer floor)",
+    "is_override": false
+  }
 }

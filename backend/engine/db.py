@@ -237,6 +237,34 @@ CREATE TABLE IF NOT EXISTS reg_evidence (
     PRIMARY KEY (company_id, reg_id)
 );
 
+-- hand-entered industry benchmarks (e.g. a published CGSI figure) that override the
+-- computed panel median. User-authored, so deliberately absent from TABLES below:
+-- reset() re-imports the workbook and must not wipe these rows.
+CREATE TABLE IF NOT EXISTS industry_benchmarks (
+    industry   TEXT,
+    metric     TEXT CHECK (metric IN ('total','E','S','G')),
+    value      REAL NOT NULL,
+    source     TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    PRIMARY KEY (industry, metric)
+);
+
+-- REAL rater ratings typed in by a human from the rater's own public page. S&P and
+-- Sustainalytics publish these free but forbid bulk scraping, so a person reads the page
+-- and records what they saw, with the URL and the date. User-authored, so deliberately
+-- absent from TABLES below: reset() must not wipe hand-entered real data.
+CREATE TABLE IF NOT EXISTS manual_rater_scores (
+    company_id  TEXT,
+    rater       TEXT CHECK (rater IN ('msci','sustainalytics','sp','cdp')),
+    value_raw   TEXT NOT NULL,   -- the rater's OWN scale (letter, or number as text)
+    assessment_year INTEGER,     -- the year the RATING is for, as stated by the rater
+    observed_on TEXT NOT NULL,   -- ISO date the human read the page (no provenance, no entry)
+    source_url  TEXT NOT NULL,
+    note        TEXT,
+    updated_at  TEXT NOT NULL,
+    PRIMARY KEY (company_id, rater)
+);
+
 -- cached Monday-morning manager briefing, one row per company per SG calendar
 -- day (regenerated lazily on first request each day; see engine/briefing.py)
 CREATE TABLE IF NOT EXISTS company_briefings (
@@ -279,6 +307,7 @@ def connect(db_path: Path | str | None = None) -> sqlite3.Connection:
 MIGRATIONS = (
     ("source_registry", "is_disabled", "INTEGER NOT NULL DEFAULT 0"),
     ("source_registry", "user_modified", "INTEGER NOT NULL DEFAULT 0"),
+    ("manual_rater_scores", "assessment_year", "INTEGER"),
 )
 
 

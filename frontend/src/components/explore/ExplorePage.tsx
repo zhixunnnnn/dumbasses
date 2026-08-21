@@ -7,10 +7,9 @@ import {
 } from "lucide-react";
 import { useDeferredValue, useMemo, useState } from "react";
 import type { Company } from "../../types";
-import { COMPANIES, REGION_LIST, SECTOR_LIST } from "../../data/companies";
-import { QUADRANTS } from "../../lib/quadrant";
+import { REGION_LIST, SECTOR_LIST, useCompanies } from "../../data/companies";
+import { QUADRANT } from "../../evidence/lib/ui";
 import { usdBillions } from "../../lib/format";
-import { gradeColor } from "../../theme/tokens";
 import { useNavigation } from "../../navigation/NavigationContext";
 import CompanyLogo from "../common/CompanyLogo";
 import DeltaBadge from "../common/DeltaBadge";
@@ -20,14 +19,14 @@ import { useWatchlist } from "../watchlist/WatchlistContext";
 
 type SortKey =
   | "esg-desc"
-  | "financial-desc"
+  | "evidence-desc"
   | "momentum-desc"
   | "market-cap-desc"
   | "name-asc";
 
 const SORT_OPTIONS: { key: SortKey; label: string }[] = [
-  { key: "esg-desc", label: "ESG score" },
-  { key: "financial-desc", label: "Financial score" },
+  { key: "esg-desc", label: "ESG consensus" },
+  { key: "evidence-desc", label: "Evidence score" },
   { key: "momentum-desc", label: "Momentum" },
   { key: "market-cap-desc", label: "Market cap" },
   { key: "name-asc", label: "Company name" },
@@ -37,6 +36,7 @@ const ALL_SECTORS = "All sectors";
 const ALL_REGIONS = "All regions";
 
 export default function ExplorePage() {
+  const { companies, error } = useCompanies();
   const { navigate, openCompany } = useNavigation();
   const {
     watchlistCompanies,
@@ -52,7 +52,7 @@ export default function ExplorePage() {
 
   const filteredCompanies = useMemo(() => {
     const needle = deferredQuery.trim().toLowerCase();
-    return [...COMPANIES]
+    return [...companies]
       .filter((company) => {
         const matchesQuery =
           !needle ||
@@ -71,17 +71,23 @@ export default function ExplorePage() {
         return matchesQuery && matchesSector && matchesRegion;
       })
       .sort((a, b) => sortCompanies(a, b, sort));
-  }, [deferredQuery, region, sector, sort]);
+  }, [companies, deferredQuery, region, sector, sort]);
 
   const summary = useMemo(() => {
-    const avgEsg = average(filteredCompanies.map((company) => company.esgScore));
-    const avgFinancial = average(
-      filteredCompanies.map((company) => company.financialScore),
+    const avgEsg = average(
+      filteredCompanies
+        .map((company) => company.esgScore)
+        .filter((value): value is number => value !== null),
     );
-    const leaders = filteredCompanies.filter(
-      (company) => company.quadrant === "leaders",
+    const avgEvidence = average(
+      filteredCompanies
+        .map((company) => company.evidenceScore)
+        .filter((value): value is number => value !== null),
+    );
+    const improvers = filteredCompanies.filter(
+      (company) => company.isUnderpricedImprover,
     ).length;
-    return { avgEsg, avgFinancial, leaders };
+    return { avgEsg, avgEvidence, improvers };
   }, [filteredCompanies]);
 
   const pageContext = useMemo(
@@ -89,13 +95,13 @@ export default function ExplorePage() {
       route: "explore",
       title: "Explore ESG universe",
       filters: { query, sector, region, sort },
-      totalCompanies: COMPANIES.length,
+      totalCompanies: companies.length,
       visibleCompanies: filteredCompanies.length,
       visibleSample: filteredCompanies.slice(0, 20).map(summaryForAssistant),
       watchlistCount: watchlistCompanies.length,
       watchlistCompanies: watchlistCompanies.map(summaryForAssistant),
     }),
-    [filteredCompanies, query, region, sector, sort, watchlistCompanies],
+    [companies, filteredCompanies, query, region, sector, sort, watchlistCompanies],
   );
   usePublishAssistantPageContext(pageContext);
 
@@ -110,8 +116,9 @@ export default function ExplorePage() {
             Explore ESG Universe
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            Search the full coverage universe, compare core ESG and financial
-            signals, and add companies to your watchlist for deeper tracking.
+            Search the full coverage universe, compare the engine's consensus
+            and evidence signals, and add companies to your watchlist for
+            deeper tracking.
           </p>
         </div>
         <button
@@ -125,6 +132,12 @@ export default function ExplorePage() {
           </span>
         </button>
       </header>
+
+      {error && (
+        <p className="mb-4 rounded-lg border border-neg/30 bg-neg/10 px-3 py-2 text-xs text-neg">
+          {error}
+        </p>
+      )}
 
       <Reveal>
         <section className="rounded-2xl border border-hairline bg-surface p-4 shadow-panel">
@@ -173,12 +186,15 @@ export default function ExplorePage() {
       <Reveal delay={60}>
         <section className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
           <StatCard label="Visible companies" value={`${filteredCompanies.length}`} />
-          <StatCard label="Average ESG" value={formatScore(summary.avgEsg)} />
+          <StatCard label="Average ESG consensus" value={formatScore(summary.avgEsg)} />
           <StatCard
-            label="Average financial"
-            value={formatScore(summary.avgFinancial)}
+            label="Average evidence score"
+            value={formatScore(summary.avgEvidence)}
           />
-          <StatCard label="Leaders" value={`${summary.leaders}`} />
+          <StatCard
+            label="Underpriced improvers"
+            value={`${summary.improvers}`}
+          />
         </section>
       </Reveal>
 
@@ -266,7 +282,7 @@ function CompanyResultCard({
   onOpen: () => void;
   onToggle: () => void;
 }) {
-  const quadrant = QUADRANTS[company.quadrant];
+  const quadrant = company.quadrant ? QUADRANT[company.quadrant] : null;
 
   return (
     <article className="group rounded-xl border border-hairline bg-surface p-4 shadow-panel transition hover:-translate-y-0.5 hover:border-pos/35 hover:bg-raised/40">
@@ -308,26 +324,35 @@ function CompanyResultCard({
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <Metric label="ESG" value={`${company.esgScore}`} />
-        <Metric label="Financial" value={`${company.financialScore}`} />
+        <Metric label="ESG consensus" value={formatValue(company.esgScore)} />
+        <Metric label="Evidence" value={formatValue(company.evidenceScore)} />
         <Metric label="Market cap" value={usdBillions(company.marketCap)} />
-        <Metric label="Momentum" value={<DeltaBadge delta={company.momentum} align="left" />} />
+        <Metric
+          label="Momentum"
+          value={
+            company.momentum === null ? (
+              "N.A."
+            ) : (
+              <DeltaBadge delta={company.momentum} align="left" />
+            )
+          }
+        />
       </div>
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-3">
         <div className="flex flex-wrap items-center gap-2">
-          <span
-            className="rounded-md px-2 py-1 text-xs font-bold text-canvas"
-            style={{ background: gradeColor[company.grade] }}
-          >
-            {company.grade}
-          </span>
-          <span
-            className="rounded-md px-2 py-1 text-xs font-semibold"
-            style={{ background: `${quadrant.accent}1f`, color: quadrant.accent }}
-          >
-            {quadrant.title}
-          </span>
+          {quadrant ? (
+            <span
+              className="rounded-md px-2 py-1 text-xs font-semibold"
+              style={{ background: `${quadrant.color}1f`, color: quadrant.color }}
+            >
+              {quadrant.label}
+            </span>
+          ) : (
+            <span className="rounded-md px-2 py-1 text-xs font-semibold text-faint">
+              Not placed by the engine
+            </span>
+          )}
         </div>
         <button
           onClick={onOpen}
@@ -362,18 +387,30 @@ function Metric({
 
 function sortCompanies(a: Company, b: Company, sort: SortKey) {
   switch (sort) {
-    case "financial-desc":
-      return b.financialScore - a.financialScore;
+    case "evidence-desc":
+      return nullsLast(a.evidenceScore, b.evidenceScore);
     case "momentum-desc":
-      return b.momentum - a.momentum;
+      return nullsLast(a.momentum, b.momentum);
     case "market-cap-desc":
       return b.marketCap - a.marketCap;
     case "name-asc":
       return a.name.localeCompare(b.name);
     case "esg-desc":
     default:
-      return b.esgScore - a.esgScore;
+      return nullsLast(a.esgScore, b.esgScore);
   }
+}
+
+/** Descending, but an absent figure sorts last rather than as a zero. */
+function nullsLast(a: number | null, b: number | null) {
+  if (a === null && b === null) return 0;
+  if (a === null) return 1;
+  if (b === null) return -1;
+  return b - a;
+}
+
+function formatValue(value: number | null) {
+  return value === null ? "N.A." : `${Math.round(value)}`;
 }
 
 function average(values: number[]) {
@@ -391,14 +428,16 @@ function summaryForAssistant(company: Company) {
     ticker: company.ticker,
     sector: company.sector,
     region: company.region,
-    grade: company.grade,
     quadrant: company.quadrant,
-    esgScore: company.esgScore,
-    financialScore: company.financialScore,
+    esgConsensus: company.esgScore,
+    evidenceScore: company.evidenceScore,
+    evidenceBasis: company.evidenceBasis,
+    divergence: company.divergence,
+    confidence: company.confidence,
     momentum: company.momentum,
     marketCap: company.marketCap,
-    carbonIntensity: company.esgMetrics.carbonIntensity,
-    controversyLevel: company.esgMetrics.controversyLevel,
+    complianceScore: company.complianceScore,
+    isUnderpricedImprover: company.isUnderpricedImprover,
     domain: company.domain,
   };
 }

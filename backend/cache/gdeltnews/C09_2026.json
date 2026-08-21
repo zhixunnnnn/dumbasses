@@ -1,0 +1,85 @@
+{
+  "company_id": "C09",
+  "year": 2026,
+  "miss": false,
+  "n_articles": 104,
+  "n_labelled": 11,
+  "positive": 0,
+  "controversy": 0,
+  "sentiment": 0,
+  "headlines": [
+    {
+      "title": "Stocks to watch : CDL , Singapore Kitchen Equipment",
+      "url": "https://www.businesstimes.com.sg/companies-markets/stocks-watch-cdl-singapore-kitchen-equipment",
+      "seendate": "20260612T011500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Is City Development freehold Newport Residences undervalued ? ",
+      "url": "https://www.businesstimes.com.sg/opinion-features/should-buyers-get-more-excited-over-relatively-cheap-freehold-newport-residences",
+      "seendate": "20260525T100000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "CDL shares surge 11 . 2 % on strong H1 earnings , doubling of interim dividend",
+      "url": "https://www.businesstimes.com.sg/companies-markets/cdl-shares-surge-11-2-strong-h1-earnings-doubling-interim-dividend",
+      "seendate": "20260813T020000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Singapore top property firm profits grow , signal recovery",
+      "url": "https://www.freemalaysiatoday.com/category/business/2026/08/13/singapore-s-top-property-firms-profits-grow-signal-recovery",
+      "seendate": "20260813T044500Z",
+      "label": "stock"
+    },
+    {
+      "title": "CDL H1 profit triples to $302m on property , hotel rebound",
+      "url": "https://sbr.com.sg/commercial-property/news/cdl-h1-profit-triples-302m-property-hotel-rebound",
+      "seendate": "20260813T071500Z",
+      "label": "stock"
+    },
+    {
+      "title": "City Developments ( OTCMKTS : CDEVY ) Shares Gap Up – Still a Buy ? ",
+      "url": "https://www.dailypolitical.com/2026/07/08/city-developments-otcmktscdevy-shares-gap-up-still-a-buy.html",
+      "seendate": "20260708T210000Z",
+      "label": "stock"
+    },
+    {
+      "title": "City Developments ( OTCMKTS : CDEVY ) & Next ( OTCMKTS : NXCLF ) Head - To - Head Analysis",
+      "url": "https://www.dailypolitical.com/2026/06/17/city-developments-otcmktscdevy-next-otcmktsnxclf-head-to-head-analysis.html",
+      "seendate": "20260617T111500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Critical Review : City Developments ( OTCMKTS : CDEVY ) and Next ( OTCMKTS : NXCLF ) ",
+      "url": "https://www.themarketsdaily.com/2026/06/10/critical-review-city-developments-otcmktscdevy-and-next-otcmktsnxclf.html",
+      "seendate": "20260610T170000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Head to Head Review : Hang Lung Properties ( OTCMKTS : HLPPY ) vs . City Developments ( OTCMKTS : CDEVY ) ",
+      "url": "https://www.dailypolitical.com/2026/06/16/head-to-head-review-hang-lung-properties-otcmktshlppy-vs-city-developments-otcmktscdevy.html",
+      "seendate": "20260616T190000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Stocks to watch : CDL , IReit , Civmec",
+      "url": "https://www.businesstimes.com.sg/companies-markets/stocks-watch-cdl-ireit-civmec",
+      "seendate": "20260605T014500Z",
+      "label": "stock"
+    },
+    {
+      "title": "CDL , Hong Realty trump 3 other bidders with S$542 . 4 million offer at S$1 , 865 psf ppr for Peck Hay plot",
+      "url": "https://www.businesstimes.com.sg/property/cdl-hong-realty-trump-3-other-bidders-s542-4-million-offer-s1865-psf-ppr-peck-hay-plot",
+      "seendate": "20260611T170000Z",
+      "label": "neutral"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"City Developments\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22City+Developments%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20260101000000&enddatetime=20260822235959",
+  "window_start": "20260101000000",
+  "window_end": "20260822235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-21T20:48:17+00:00"
+}

@@ -9,11 +9,6 @@ export const round = (value: number, dp = 1) => {
 export const signed = (value: number, dp = 2) =>
   `${value >= 0 ? "+" : ""}${value.toFixed(dp)}`;
 
-export const percent = (value: number, dp = 2) => `${value.toFixed(dp)}%`;
-
-export const signedPercent = (value: number, dp = 2) =>
-  `${signed(value, dp)}%`;
-
 export const usdBillions = (value: number) =>
   value >= 1000 ? `$${(value / 1000).toFixed(2)}T` : `$${value.toFixed(0)}B`;
 

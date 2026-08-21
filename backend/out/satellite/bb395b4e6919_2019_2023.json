@@ -1,0 +1,52 @@
+{
+  "site": {
+    "site_id": "bb395b4e6919",
+    "company_id": "U96",
+    "name": "Sembcorp EfW Plant Sakra",
+    "asset_type": "waste",
+    "lat": 1.2554246999999998,
+    "lon": 103.6978102,
+    "operator": "Sembcorp",
+    "registry": "openstreetmap",
+    "registry_url": "https://www.openstreetmap.org/way/1384560210",
+    "match_confidence": 0.9,
+    "footprint": [
+      [
+        1.2557009,
+        103.6971091
+      ],
+      [
+        1.2548164,
+        103.6973656
+      ],
+      [
+        1.2551485,
+        103.6985113
+      ],
+      [
+        1.256033,
+        103.6982547
+      ],
+      [
+        1.2557009,
+        103.6971091
+      ]
+    ]
+  },
+  "before": {
+    "scene_id": "S2A_48NUG_20191227_0_L2A",
+    "date": "2019-12-27",
+    "cloud_cover": 8.046951,
+    "image_path": "satellite/bb395b4e6919_2019.png"
+  },
+  "after": {
+    "scene_id": "S2B_48NUG_20230316_0_L2A",
+    "date": "2023-03-16",
+    "cloud_cover": 8.517069,
+    "image_path": "satellite/bb395b4e6919_2023.png"
+  },
+  "index": "ndvi",
+  "change_score": -0.09538477723102197,
+  "changed": false,
+  "note": "On-site vegetation cover barely moved (-0.07). No construction observed — this is not evidence the claim is false."
+}

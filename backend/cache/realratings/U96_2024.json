@@ -1,0 +1,31 @@
+{
+  "company_id": "U96",
+  "report_year": 2024,
+  "rows": [
+    {
+      "rater": "msci",
+      "kind": "rating",
+      "value_raw": "AA",
+      "assessment_year": 2024,
+      "report_year": 2024,
+      "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+      "source_title": "sci sustainability report 2024",
+      "source_sentence": "rating of AA in the MSCI",
+      "extractor": "regex"
+    },
+    {
+      "rater": "cdp",
+      "kind": "rating",
+      "value_raw": "B",
+      "assessment_year": 2023,
+      "report_year": 2024,
+      "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+      "source_title": "sci sustainability report 2024",
+      "source_sentence": "CDP Climate Change score received in 2023 was a ‘B",
+      "extractor": "regex"
+    }
+  ],
+  "miss": false,
+  "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+  "source_title": "sci sustainability report 2024"
+}

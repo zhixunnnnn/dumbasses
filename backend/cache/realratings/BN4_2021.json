@@ -1,0 +1,31 @@
+{
+  "company_id": "BN4",
+  "report_year": 2021,
+  "rows": [
+    {
+      "rater": "ftse4good",
+      "kind": "membership",
+      "value_raw": "FTSE4Good Index Euronext Vigeo World 120 Index Industry Mover in the",
+      "assessment_year": 2021,
+      "report_year": 2021,
+      "source_url": "https://www.keppel.com/annualreport2021/theme/default/pdf/keppel-corporation-ar-21-sustainability-framework.pdf",
+      "source_title": "keppel corporation ar 21 sustainability framework",
+      "source_sentence": "FTSE4Good Index Euronext Vigeo World 120 Index Industry Mover in the S",
+      "extractor": "regex"
+    },
+    {
+      "rater": "msci",
+      "kind": "rating",
+      "value_raw": "AAA",
+      "assessment_year": 2021,
+      "report_year": 2021,
+      "source_url": "https://www.keppel.com/annualreport2021/theme/default/pdf/keppel-corporation-ar-21-sustainability-framework.pdf",
+      "source_title": "keppel corporation ar 21 sustainability framework",
+      "source_sentence": "AAA rating in the Morgan Stanley Capital International (MSCI",
+      "extractor": "regex"
+    }
+  ],
+  "miss": false,
+  "source_url": "https://www.keppel.com/annualreport2021/theme/default/pdf/keppel-corporation-ar-21-sustainability-framework.pdf",
+  "source_title": "keppel corporation ar 21 sustainability framework"
+}

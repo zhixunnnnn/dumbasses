@@ -11,7 +11,7 @@
   },
   "evidence": {
     "company_id": "BN4",
-    "year": 2023,
+    "year": 2024,
     "total": 59.0,
     "pillars": {
       "E": 61.33,
@@ -21,7 +21,7 @@
     "confidence": 0.39,
     "absent_topics": [],
     "trace": {
-      "label": "Evidence Score 2023",
+      "label": "Evidence Score 2024",
       "value": 59.0,
       "contribution": null,
       "source_sentence": null,
@@ -484,13 +484,13 @@
   "series": [
     {
       "year": 2019,
-      "total": 60.0,
+      "total": 56.5,
       "pillars": {
-        "E": 63.33,
-        "S": 50.0,
-        "G": 50.0
+        "E": 58.0,
+        "S": 70.0,
+        "G": 25.0
       },
-      "confidence": 0.45
+      "confidence": 0.345
     },
     {
       "year": 2020,
@@ -504,13 +504,13 @@
     },
     {
       "year": 2021,
-      "total": 72.5,
+      "total": 56.5,
       "pillars": {
-        "E": 80.0,
-        "S": 50.0,
-        "G": 50.0
+        "E": 58.0,
+        "S": 70.0,
+        "G": 25.0
       },
-      "confidence": 0.54
+      "confidence": 0.379
     },
     {
       "year": 2022,
@@ -524,6 +524,16 @@
     },
     {
       "year": 2023,
+      "total": 85.0,
+      "pillars": {
+        "E": 86.67,
+        "S": 100.0,
+        "G": 50.0
+      },
+      "confidence": 0.693
+    },
+    {
+      "year": 2024,
       "total": 59.0,
       "pillars": {
         "E": 61.33,
@@ -535,25 +545,75 @@
   ],
   "raters": {
     "company_id": "BN4",
-    "msci_pct": 91.67,
-    "sp_pct": 3.85,
-    "sustainalytics_pct": 19.23,
-    "consensus": 38.25,
-    "divergence": 87.82,
+    "msci_pct": 90.0,
+    "sp_pct": 25.0,
+    "sustainalytics_pct": 15.0,
+    "cdp_pct": null,
+    "real_raters": [
+      "msci"
+    ],
+    "basis": "all companies",
+    "peers": 10,
+    "consensus": 43.33,
+    "divergence": 75.0,
+    "consensus_provenance": "mixed",
+    "divergence_provenance": "mixed",
+    "contributing": [
+      "msci",
+      "sp",
+      "sustainalytics"
+    ],
+    "rater_provenance": {
+      "msci": {
+        "real": true,
+        "source": "keppel ltd sustainability report 2024 full report",
+        "url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
+        "observed_on": "2024",
+        "value_raw": "AAA"
+      },
+      "sp": {
+        "real": false,
+        "source": null,
+        "url": null,
+        "observed_on": null,
+        "value_raw": null
+      },
+      "sustainalytics": {
+        "real": false,
+        "source": null,
+        "url": null,
+        "observed_on": null,
+        "value_raw": null
+      },
+      "cdp": {
+        "real": false,
+        "source": "CDP public scores table",
+        "url": "https://www.cdp.net/en/data/scores",
+        "observed_on": "2025",
+        "value_raw": null,
+        "status": "did_not_disclose"
+      }
+    },
     "msci_real": true,
-    "msci_source": "KnowESG",
-    "msci_url": "https://knowesg.com/esg-ratings/keppel-corporation-ltd"
+    "msci_source": "keppel ltd sustainability report 2024 full report",
+    "msci_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf"
   },
   "signal": {
     "company_id": "BN4",
     "proof_up": true,
     "opinion_flat": true,
-    "price_flat": true,
-    "is_underpriced_improver": true,
-    "evidence_gap": -34.68,
-    "momentum": 0.55,
-    "esg_today": 38.25,
+    "price_flat": false,
+    "is_underpriced_improver": false,
+    "evidence_pct": 45.0,
+    "evidence_basis": "all companies",
+    "evidence_peers": 10,
+    "evidence_gap": 1.67,
+    "momentum": 2.1,
+    "esg_today": 43.33,
     "quadrant": "HIDDEN_WINNERS",
+    "esg_today_provenance": "mixed",
+    "evidence_gap_provenance": "mixed",
+    "quadrant_provenance": "mixed",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -563,15 +623,15 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=True (evidence momentum 0.55/yr, verified-driven)",
-          "value": 0.55,
+          "label": "proof_up=True (evidence momentum 2.1/yr, verified-driven)",
+          "value": 2.1,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "Evidence Score 2023",
+              "label": "Evidence Score 2024",
               "value": 59.0,
               "contribution": null,
               "source_sentence": null,
@@ -1033,8 +1093,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=87.82, consensus 14.64->38.25)",
-          "value": 87.82,
+          "label": "opinion_flat=True (divergence=75.0, consensus 16.67->43.33)",
+          "value": 75.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -1042,7 +1102,7 @@
           "children": []
         },
         {
-          "label": "price_flat=True (stock vs STI over the improvement window)",
+          "label": "price_flat=False (stock vs STI over the improvement window)",
           "value": null,
           "contribution": null,
           "source_sentence": null,
@@ -1051,13 +1111,23 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-34.68 (evidence 3.57 - consensus 38.25)",
-          "value": -34.68,
+          "label": "evidence_gap=1.67 (evidence 45.0 - consensus 43.33)",
+          "value": 1.67,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
-          "children": []
+          "children": [
+            {
+              "label": "evidence_pct=45.0 vs 10 companies on the all companies rubric",
+              "value": 45.0,
+              "contribution": null,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
         }
       ]
     }
@@ -4198,16 +4268,16 @@
       {
         "start_date": "2019-12-29",
         "end_date": "2021-01-03",
-        "slope": 12.5,
-        "start_score": 60.0,
+        "slope": 16.0,
+        "start_score": 56.5,
         "end_score": 72.5
       },
       {
         "start_date": "2022-01-02",
-        "end_date": "2023-01-01",
-        "slope": 7.5,
-        "start_score": 72.5,
-        "end_score": 80.0
+        "end_date": "2023-12-31",
+        "slope": 14.25,
+        "start_score": 56.5,
+        "end_score": 85.0
       }
     ],
     "pins": [
@@ -7433,15 +7503,18 @@
       }
     ],
     "flat": {
-      "stock_return": -17.09,
-      "sti_return": -7.58,
-      "rel_return": -9.51,
-      "is_flat": true
+      "stock_return": 117.73,
+      "sti_return": -0.65,
+      "rel_return": 118.38,
+      "is_flat": false
     }
   },
   "compliance": {
     "company_id": "BN4",
     "score": 0.0,
+    "provenance": "mixed",
+    "scraped_count": 1,
+    "counted": 2,
     "met": [
       {
         "reg_id": "SGX-711B",
@@ -7505,7 +7578,7 @@
           "label": "ASEAN Taxonomy for Sustainable Finance — MET",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, Keppel Ltd reduced Scope 1 and Scope 2 carbon emissions intensity.",
+          "source_sentence": "In FY2019, Keppel Ltd reduced Scope 1 and Scope 2 carbon emissions intensity.",
           "source_doc": null,
           "source_page": null,
           "children": []
@@ -7515,77 +7588,36 @@
   },
   "forecast": {
     "company_id": "BN4",
-    "predicted_score": 61.09,
-    "horizon_years": 3,
-    "ci_low": 55.06,
-    "ci_high": 67.11,
-    "feature_contributions": [
-      {
-        "feature": "news_sentiment",
-        "value": 4.0,
-        "contribution": -4.307
-      },
-      {
-        "feature": "is_financial",
-        "value": 0.0,
-        "contribution": 2.329
-      },
-      {
-        "feature": "volatility",
-        "value": 24.65,
-        "contribution": 1.172
-      },
-      {
-        "feature": "price_return",
-        "value": 86.9,
-        "contribution": 0.066
-      }
-    ],
-    "val_error": 6.025,
-    "directional_accuracy": 0.8,
+    "predicted_score": 7.0,
+    "horizon_years": 0,
+    "ci_low": null,
+    "ci_high": null,
+    "feature_contributions": [],
+    "val_error": null,
+    "directional_accuracy": null,
+    "directional_n": null,
+    "predicted_label": "AAA",
+    "last_rating_label": "AAA",
+    "last_rating_year": 2024,
+    "direction": "likely hold",
+    "baseline_only": true,
+    "model_label": "baseline: ratings persistence (insufficient history for a fitted model — 4 real rows)",
     "target_year": 2026,
-    "drift_years": 3,
-    "drift_note": "Live 2026 estimate from real-time signals: real LLM-classified news plus real price/sector data, on a model trained only on real evidence — no seeded inputs.",
+    "drift_years": 0,
+    "drift_note": "Estimates the MSCI ESG rating as of 2026 from signals all dated to 2024 — GDELT headlines published that year, that year's own report evidence, and prices to the end of it. 2024 is the most recent year whose every feature is real; nothing is carried forward to fill the gap. It is not a rater publication; it is what those signals imply the rater would say.",
     "hypothesis": true,
     "trace": {
-      "label": "Live 2026 ESG estimate = 61.1 (real-time, ~80% hit-rate, MAE=6.0)",
-      "value": 61.09,
+      "label": "likely hold — MSCI AAA (baseline: ratings persistence (insufficient history for a fitted model — 4 real rows))",
+      "value": 7.0,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
-          "label": "news_sentiment=4.0",
-          "value": null,
-          "contribution": -4.307,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "is_financial=0.0",
-          "value": null,
-          "contribution": 2.329,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "volatility=24.65",
-          "value": null,
-          "contribution": 1.172,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "price_return=86.9",
-          "value": null,
-          "contribution": 0.066,
+          "label": "last disclosed rating AAA (2024)",
+          "value": 7.0,
+          "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -7605,7 +7637,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7616,7 +7649,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7627,7 +7661,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7638,7 +7673,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7649,7 +7685,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7660,7 +7697,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7671,7 +7709,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "energy_transition",
@@ -7682,7 +7721,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "energy_transition",
@@ -7693,7 +7733,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "water_management",
@@ -7704,7 +7745,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "energy_transition",
@@ -7715,7 +7757,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7726,7 +7769,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7737,7 +7781,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7748,7 +7793,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7759,7 +7805,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7770,7 +7817,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7781,7 +7829,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7792,7 +7841,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7803,7 +7853,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7814,7 +7865,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7825,7 +7877,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7836,7 +7889,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7847,7 +7901,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7858,7 +7913,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7869,7 +7925,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7880,7 +7937,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7891,7 +7949,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7902,7 +7961,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "energy_transition",
@@ -7913,7 +7973,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7924,7 +7985,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7935,7 +7997,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.3
+        "weight": 0.3,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7946,7 +8009,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7957,7 +8021,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7968,7 +8033,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7979,7 +8045,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -7990,7 +8057,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -8001,7 +8069,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "workforce_safety",
@@ -8012,7 +8081,8 @@
         "source_doc": "keppel ltd sustainability report 2024 full report",
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "air_quality",
@@ -8024,7 +8094,8 @@
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": null,
         "weight": 0.1,
-        "inferred": true
+        "inferred": true,
+        "report_year": 2024
       },
       {
         "topic_id": "grid_resiliency",
@@ -8036,11 +8107,13 @@
         "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
         "source_page": null,
         "weight": 0.1,
-        "inferred": true
+        "inferred": true,
+        "report_year": 2024
       }
     ],
     "absent": [],
     "live": true,
+    "report_year": 2024,
     "source_url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
     "source_title": "keppel ltd sustainability report 2024 full report"
   },
@@ -8048,7 +8121,36 @@
     {
       "id": "C6L",
       "name": "Singapore Airlines",
-      "evidence_total": 64.75
+      "evidence_total": 52.0
     }
-  ]
+  ],
+  "latest_real_raters": [
+    {
+      "rater": "msci",
+      "value": "AAA",
+      "year": 2024,
+      "source": "company report",
+      "url": "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf",
+      "provenance": "real"
+    }
+  ],
+  "cdp_disclosure": {
+    "rater": "cdp",
+    "status": "did_not_disclose",
+    "year": 2025,
+    "source": "CDP public scores table",
+    "url": "https://www.cdp.net/en/data/scores"
+  },
+  "benchmark": {
+    "industry": "Electric Utilities & Power Generators",
+    "peers": 2,
+    "total": 61.5,
+    "pillars": {
+      "E": 64.66,
+      "S": 70.0,
+      "G": 25.0
+    },
+    "source": "panel median (n=2, below peer floor)",
+    "is_override": false
+  }
 }

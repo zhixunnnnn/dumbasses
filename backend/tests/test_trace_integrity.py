@@ -19,4 +19,7 @@ def test_T1_every_number_traces_to_a_source_sentence():
         es = evidence_score(ds, cid, config.END_YEAR)
         assert has_source(es.trace), f"{cid}: evidence score has no source"
         assert has_source(sigs[cid].trace), f"{cid}: signal has no source"
-        assert has_source(compliance_gap(ds, cid).trace), f"{cid}: compliance has no source"
+        # a company with no assessment for END_YEAR surfaces N.A., not an untraceable
+        # number — the invariant is "no number without a source", not "always a number"
+        cg = compliance_gap(ds, cid)
+        assert cg.score is None or has_source(cg.trace), f"{cid}: compliance has no source"

@@ -1,0 +1,95 @@
+{
+  "rows": [
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "In our following 2017 stakeholder engagement and materiality review, our stakeholders assessed that our key impact on climate change was mainly from the business’ growing carbon footprint.",
+      "source_sentence": "In our following 2017 stakeholder engagement and materiality review, our stakeholders assessed that our key impact on climate change was mainly from the business’ growing carbon footprint.",
+      "source_doc": "environment",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2019/assets/pdf/downloads/environment.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "ghg_emissions",
+      "pillar": "E",
+      "state": "ASSERTED",
+      "text": "Singtel was an early adopter of the SBTi in 2016, having our carbon targets based on <2°C approved in 2017.",
+      "source_sentence": "Singtel was an early adopter of the SBTi in 2016, having our carbon targets based on <2°C approved in 2017.",
+      "source_doc": "environment",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2019/assets/pdf/downloads/environment.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "workforce_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "To strengthen our network diversity and redundancy, we invested A$2.14 million in another diverse transmission path along the critical Brisbane-Sydney-Melbourne route to reduce any impact if both Optus coastal and inland routes are simultaneously cut.",
+      "source_sentence": "To strengthen our network diversity and redundancy, we invested A$2.14 million in another diverse transmission path along the critical Brisbane-Sydney-Melbourne route to reduce any impact if both Optus coastal and inland routes are simultaneously cut.",
+      "source_doc": "environment",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2019/assets/pdf/downloads/environment.pdf",
+      "source_page": 1,
+      "weight": 0.1,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "data_privacy_security",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company likely prioritizes robust cybersecurity measures and data protection protocols to safeguard customer information and prevent breaches, aligning with industry standards.",
+      "source_sentence": null,
+      "source_doc": "environment",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2019/assets/pdf/downloads/environment.pdf",
+      "source_page": null,
+      "weight": 0.3,
+      "inferred": true,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "product_access",
+      "pillar": "S",
+      "state": "INFERRED",
+      "text": "The company probably supports digital inclusion and connectivity initiatives, ensuring affordable access to its services for underserved communities.",
+      "source_sentence": null,
+      "source_doc": "environment",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2019/assets/pdf/downloads/environment.pdf",
+      "source_page": null,
+      "weight": 0.15,
+      "inferred": true,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "competitive_behavior",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company likely adheres to fair competition practices and ethical pricing strategies, ensuring compliance with regulatory frameworks.",
+      "source_sentence": null,
+      "source_doc": "environment",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2019/assets/pdf/downloads/environment.pdf",
+      "source_page": null,
+      "weight": 0.1,
+      "inferred": true,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "energy_management",
+      "pillar": "E",
+      "state": "INFERRED",
+      "text": "The company likely focuses on energy efficiency and renewable energy adoption in its operations, particularly in data centers and network infrastructure, to reduce its carbon footprint.",
+      "source_sentence": null,
+      "source_doc": "environment",
+      "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2019/assets/pdf/downloads/environment.pdf",
+      "source_page": null,
+      "weight": 0.2,
+      "inferred": true,
+      "report_year": 2019
+    }
+  ],
+  "report_year": 2019,
+  "source_url": "https://cdn.aws.singtel.com/sustainabilityreport/2019/assets/pdf/downloads/environment.pdf",
+  "source_title": "environment"
+}

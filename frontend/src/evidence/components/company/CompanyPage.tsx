@@ -2,7 +2,8 @@ import { useMemo } from "react";
 import { Activity, ArrowLeft, Check, Leaf, Minus, X } from "lucide-react";
 import { api, useApi } from "../../lib/api";
 import type { TraceNode } from "../../types";
-import { na, signed, PILLAR_COLOR } from "../../lib/ui";
+import { na, signed, NA_REASON, PILLAR_COLOR } from "../../lib/ui";
+import ProvenanceBadge from "../common/ProvenanceBadge";
 import { useNavigation } from "../../navigation/NavigationContext";
 import { Gauge, LineChart } from "../charts";
 import Why from "../common/Why";
@@ -10,6 +11,7 @@ import { ImproverPill, QuadrantBadge } from "../common/badges";
 import PriceWitness from "./PriceWitness";
 import ClaimTable from "./ClaimTable";
 import ComplianceGap from "./ComplianceGap";
+import SatelliteVerification from "./SatelliteVerification";
 import ForecastCard from "./ForecastCard";
 import TrustMeter from "./TrustMeter";
 import PeerDistribution from "./PeerDistribution";
@@ -53,13 +55,24 @@ export default function CompanyPage({ id }: { id: string }) {
   if (loading) return <div className="p-10 text-sm text-muted">Loading {id}…</div>;
   if (error || !data) return <div className="p-10 text-sm text-neg">Couldn’t load {id}. {error}</div>;
 
-  const { company, evidence, series, raters, signal, witness, compliance, forecast, claims, peers, liveIntelligence } = data;
+  const { company, evidence, series, raters, signal, witness, compliance, forecast, claims, peers, benchmark, liveIntelligence } = data;
+  const latestReal = data.latest_real_raters ?? null;
+  const cdpDisclosure = data.cdp_disclosure ?? null;
+  // the analysis year comes from the data, not a hardcoded constant that could drift
+  const analysisYear = series.length ? series[series.length - 1].year : undefined;
+  const benchmarkDelta =
+    benchmark && benchmark.total !== null && evidence.total !== null
+      ? evidence.total - benchmark.total
+      : null;
   const seriesPts = series.filter((s) => s.total !== null);
 
-  const consensusTrace = node("Rater consensus (mean of available, higher=better)", raters.consensus, [
+  const realRaters = raters.real_raters ?? [];
+  const consensusTrace = node("Rater consensus (mean of the REAL percentiles, higher=better)", raters.consensus, [
     node(`MSCI percentile`, raters.msci_pct),
     node(`S&P percentile`, raters.sp_pct),
     node(`Sustainalytics percentile (inverted)`, raters.sustainalytics_pct),
+    node(`CDP percentile`, raters.cdp_pct),
+    node(`real ratings: ${realRaters.length ? realRaters.join(", ") : "none"}`, null),
   ]);
 
   return (
@@ -74,6 +87,10 @@ export default function CompanyPage({ id }: { id: string }) {
           <div className="flex items-center gap-2.5">
             <h1 className="text-2xl font-semibold text-txt">{company.name}</h1>
             <QuadrantBadge q={signal.quadrant} />
+            {signal.quadrant && (
+              <ProvenanceBadge provenance={signal.quadrant_provenance}
+                contributing={raters.contributing} real={realRaters} />
+            )}
             {signal.is_underpriced_improver && <ImproverPill />}
           </div>
           <p className="mt-1 font-mono text-[12px] text-faint">
@@ -86,6 +103,22 @@ export default function CompanyPage({ id }: { id: string }) {
             <Why trace={evidence.trace} title="Evidence score" />
           </div>
           <p className="text-[11px] text-faint">Evidence score · confidence {Math.round(evidence.confidence * 100)}%</p>
+          {benchmark && (
+            <p className="text-[11px] text-faint">
+              {benchmark.total === null ? (
+                <>Industry bar: N.A. — {NA_REASON.benchmark}</>
+              ) : (
+                <>
+                  Industry bar: {na(benchmark.total)} ({benchmark.source})
+                  {benchmarkDelta !== null && (
+                    <span className="ml-1 font-mono" style={{ color: benchmarkDelta > 0 ? "#3ecf8e" : "#9a968e" }}>
+                      {signed(benchmarkDelta)}
+                    </span>
+                  )}
+                </>
+              )}
+            </p>
+          )}
         </div>
       </div>
 
@@ -106,8 +139,13 @@ export default function CompanyPage({ id }: { id: string }) {
             <Why trace={node("Divergence = max − min of rater percentiles", raters.divergence, consensusTrace.children)}
               title="Divergence" />
           </div>
-          <p className="mt-1 font-mono text-2xl font-semibold text-txt">{na(raters.divergence)}</p>
-          <TrustMeter raters={raters} />
+          <p className="mt-1 flex items-center gap-2 font-mono text-2xl font-semibold text-txt">
+            {na(raters.divergence)}
+            <ProvenanceBadge provenance={raters.divergence_provenance}
+              contributing={raters.contributing} real={realRaters} />
+          </p>
+          <TrustMeter raters={raters} latestReal={latestReal}
+            cdpDisclosure={cdpDisclosure} year={analysisYear} />
         </div>
       </div>
 
@@ -142,6 +180,15 @@ export default function CompanyPage({ id }: { id: string }) {
           <p className="mt-1 text-[11px] text-faint">
             {liveIntelligence?.renewable.evidence_count ?? 0} grouped claims · {liveIntelligence?.renewable.verified_count ?? 0} verified
           </p>
+          {/* A renewables developer can have plenty of renewable coverage and still
+              evidence none of its OWN use — say that, rather than implying no data. */}
+          {(liveIntelligence?.renewable.evidence_count ?? 0) === 0
+            && (liveIntelligence?.renewable.renewable_mentions ?? 0) > 0 && (
+            <p className="mt-1 text-[11px] text-faint">
+              {liveIntelligence?.renewable.renewable_mentions} renewable claims found, none
+              evidencing the company&apos;s own use.
+            </p>
+          )}
         </div>
         <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
           <div className="flex items-center gap-2 text-muted">
@@ -217,6 +264,8 @@ export default function CompanyPage({ id }: { id: string }) {
         sourceUrl={claims.source_url}
         sourceTitle={claims.source_title}
       />
+
+      <SatelliteVerification companyId={id} />
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <ComplianceGap compliance={compliance} />

@@ -1,0 +1,52 @@
+{
+  "site": {
+    "site_id": "6999f822bb01",
+    "company_id": "U96",
+    "name": "Sembcorp Sakra Energy Storage System",
+    "asset_type": "battery",
+    "lat": 1.25987045,
+    "lon": 103.70050574999999,
+    "operator": "Sembcorp Industries",
+    "registry": "openstreetmap",
+    "registry_url": "https://www.openstreetmap.org/way/1147254944",
+    "match_confidence": 0.9,
+    "footprint": [
+      [
+        1.2605164,
+        103.7007304
+      ],
+      [
+        1.2602764,
+        103.7010562
+      ],
+      [
+        1.2592245,
+        103.7002812
+      ],
+      [
+        1.2594645,
+        103.6999553
+      ],
+      [
+        1.2605164,
+        103.7007304
+      ]
+    ]
+  },
+  "before": {
+    "scene_id": "S2A_48NUG_20191227_0_L2A",
+    "date": "2019-12-27",
+    "cloud_cover": 8.046951,
+    "image_path": "satellite/6999f822bb01_2019.png"
+  },
+  "after": {
+    "scene_id": "S2B_48NUG_20240728_0_L2A",
+    "date": "2024-07-28",
+    "cloud_cover": 14.808747,
+    "image_path": "satellite/6999f822bb01_2024.png"
+  },
+  "index": "ndvi",
+  "change_score": 0.0630265251133981,
+  "changed": false,
+  "note": "On-site vegetation cover barely moved (+0.02). No construction observed — this is not evidence the claim is false."
+}

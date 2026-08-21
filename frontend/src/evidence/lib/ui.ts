@@ -1,4 +1,4 @@
-import type { QuadrantKey, RegQuality, VerifyState } from "../types";
+import type { Provenance, QuadrantKey, RegQuality, VerifyState } from "../types";
 
 export const QUADRANT: Record<
   QuadrantKey,
@@ -52,6 +52,61 @@ export const PILLAR_COLOR: Record<string, string> = {
 
 export const na = (v: number | null | undefined, dp = 1, suffix = ""): string =>
   v === null || v === undefined ? "N.A." : `${v.toFixed(dp)}${suffix}`;
+
+// Why a number is N.A. when it genuinely cannot be computed (no data at all), as opposed
+// to being computed from illustrative inputs — that case is labelled, not blanked.
+export const NA_REASON = {
+  raters: "no rater covers this company",
+  percentile: "needs 5 comparable companies",
+  benchmark: "no scored company in this industry",
+  gap: "needs a consensus and an evidence percentile",
+  momentum: "needs 3 years of evidence",
+} as const;
+
+// Provenance badges. A viewer must never have to guess whether a number was measured.
+export const PROVENANCE: Record<Provenance, { label: string; color: string; hint: string }> = {
+  real: {
+    label: "real",
+    color: "#3ecf8e",
+    hint: "Computed only from real, sourced ratings.",
+  },
+  mixed: {
+    label: "part illustrative",
+    color: "#e0b24a",
+    hint: "Blends real ratings with illustrative (seeded) ones — read the spread with care.",
+  },
+  illustrative: {
+    label: "illustrative",
+    color: "#9a968e",
+    hint: "No real rating covers this company yet; the figure is demo data.",
+  },
+};
+
+// Single-character marks for dense table cells (see ScreenerTable.ProvMark).
+export const PROVENANCE_MARK: Record<Provenance, string> = {
+  real: "",
+  mixed: "\u00b0",
+  illustrative: "~",
+};
+
+// "MSCI and S&P real; Sustainalytics illustrative" — the sentence under a badge.
+export const provenanceDetail = (
+  contributing?: string[] | null,
+  real?: string[] | null,
+): string => {
+  const LABEL: Record<string, string> = {
+    msci: "MSCI", sp: "S&P", sustainalytics: "Sustainalytics", cdp: "CDP",
+  };
+  const used = contributing ?? [];
+  if (!used.length) return "";
+  const realSet = new Set(real ?? []);
+  const isReal = used.filter((k) => realSet.has(k)).map((k) => LABEL[k] ?? k);
+  const seeded = used.filter((k) => !realSet.has(k)).map((k) => LABEL[k] ?? k);
+  const parts: string[] = [];
+  if (isReal.length) parts.push(`${isReal.join(", ")} real`);
+  if (seeded.length) parts.push(`${seeded.join(", ")} illustrative`);
+  return parts.join(" · ");
+};
 
 export const signed = (v: number | null | undefined, dp = 1): string =>
   v === null || v === undefined ? "N.A." : `${v >= 0 ? "+" : ""}${v.toFixed(dp)}`;

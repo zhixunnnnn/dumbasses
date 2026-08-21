@@ -1,14 +1,12 @@
-import { signedPercent, percent } from "../../lib/format";
+import { signed } from "../../lib/format";
 
 type Props = {
   delta: number;
-  deviation?: number;
   align?: "left" | "right";
 };
 
 export default function DeltaBadge({
   delta,
-  deviation,
   align = "right",
 }: Props) {
   const positive = delta >= 0;
@@ -24,13 +22,8 @@ export default function DeltaBadge({
         }`}
       >
         <span className="text-[10px]">{positive ? "▲" : "▼"}</span>
-        {signedPercent(Math.abs(delta) * (positive ? 1 : -1))}
+        {signed(Math.abs(delta) * (positive ? 1 : -1))}
       </span>
-      {deviation !== undefined && (
-        <span className="font-mono text-[11px] tabular-nums text-faint">
-          ±{percent(deviation)}
-        </span>
-      )}
     </div>
   );
 }

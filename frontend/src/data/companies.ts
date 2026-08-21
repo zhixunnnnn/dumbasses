@@ -1,196 +1,84 @@
-import type { Candle, Company, Controversy, Metric } from "../types";
-import { gradeColor } from "../theme/tokens";
-import { clamp, round } from "../lib/format";
-import { hashString, mulberry32, pick, type Rng } from "../lib/random";
-import { classifyQuadrant, gradeFromScore } from "../lib/quadrant";
+import { useEffect, useState } from "react";
+import type { Company } from "../types";
+import { palette } from "../theme/tokens";
+import { QUADRANT } from "../evidence/lib/ui";
+import type { QuadrantKey } from "../evidence/types";
 import { RAW_COMPANIES, type RawCompany } from "./realCompanies";
 
-const MONTHS = [
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-];
-
-const CONTROVERSY_POOL: Record<Controversy["severity"], string[]> = {
-  high: [
-    "Regulatory penalty over disclosure",
-    "Major workplace safety incident",
-    "Antitrust investigation opened",
-    "Environmental remediation order",
-  ],
-  medium: [
-    "Supply-chain labour audit findings",
-    "Data privacy enforcement notice",
-    "Shareholder governance dispute",
-    "Emissions reporting restatement",
-  ],
-  low: [
-    "Minor consumer protection fine",
-    "Localized pollution complaint",
-    "Executive pay shareholder pushback",
-    "Product recall, limited scope",
-  ],
+/** The subset of GET /api/companies this module reads. */
+type ApiCompanyRow = {
+  id: string;
+  ticker: string;
+  evidence_total: number | null;
+  confidence: number | null;
+  consensus: number | null;
+  divergence: number | null;
+  evidence_pct: number | null;
+  evidence_basis: string | null;
+  evidence_peers: number | null;
+  evidence_gap: number | null;
+  momentum: number | null;
+  quadrant: QuadrantKey | null;
+  is_underpriced_improver: boolean;
+  compliance_score: number | null;
+  forecast: number | null;
+  benchmark_total: number | null;
+  benchmark_source: string | null;
 };
 
-function buildCandles(rng: Rng, momentum: number): Candle[] {
-  const candles: Candle[] = [];
-  let price = 100;
-  const drift = momentum / 100 / 16;
-  for (let i = 0; i < 16; i += 1) {
-    const open = price;
-    const move = open * (drift + (rng() - 0.5) * 0.06);
-    const close = Math.max(5, open + move);
-    const wick = open * (0.01 + rng() * 0.03);
-    candles.push({
-      label: `W${i + 1}`,
-      open: round(open, 1),
-      close: round(close, 1),
-      high: round(Math.max(open, close) + wick, 1),
-      low: round(Math.min(open, close) - wick, 1),
-    });
-    price = close;
-  }
-  return candles;
+/** "U96.SI" and "U96" both reduce to "U96", which is also the engine id. */
+function normalizeTicker(ticker: string): string {
+  return ticker.trim().toUpperCase().split(".")[0];
 }
 
-function buildBreakdown(rng: Rng, base: number, labels: string[]): Metric[] {
-  return labels.map((label) => ({
-    label,
-    value: round(clamp(base + (rng() - 0.5) * 22), 0),
-  }));
-}
-
-function buildControversies(rng: Rng, level: number): Controversy[] {
-  const out: Controversy[] = [];
-  const count = Math.min(4, level);
-  for (let i = 0; i < count; i += 1) {
-    const severity: Controversy["severity"] =
-      level >= 4 && i === 0 ? "high" : level >= 3 && i < 2 ? "medium" : "low";
-    out.push({
-      title: pick(rng, CONTROVERSY_POOL[severity]),
-      severity,
-      year: 2022 + Math.floor(rng() * 4),
-    });
-  }
-  return out;
-}
-
-function buildCompany(raw: RawCompany, index: number): Company {
-  const rng = mulberry32(hashString(raw.t + index));
-  const jitter = (spread: number) => (rng() - 0.5) * 2 * spread;
-
-  const esgScore = raw.e;
-  const financialScore = raw.f;
-  const e = esgScore / 100;
-  const f = financialScore / 100;
-  const marketCap = raw.cap;
-
-  const momentum = round((financialScore - 50) / 50 * 14 + jitter(9), 2);
-  const deviation = round(0.8 + rng() * 5.2, 2);
-
-  const environmental = round(clamp(esgScore + jitter(10)), 0);
-  const social = round(clamp(esgScore + jitter(9)), 0);
-  const governance = round(clamp(esgScore + jitter(11)), 0);
-
-  const financials = {
-    revenue: round(marketCap * (0.45 + rng() * 0.7), 1),
-    netIncome: round(marketCap * (0.04 + f * 0.09), 2),
-    roe: round(6 + f * 22 + jitter(3), 1),
-    profitMargin: round(5 + f * 24 + jitter(3), 1),
-    peRatio: round(10 + (1 - f) * 18 + rng() * 12, 1),
-    dividendYield: round(0.5 + (1 - f) * 3.2 + rng(), 2),
-    debtToEquity: round(0.3 + (1 - e) * 1.4 + rng() * 0.4, 2),
-    oneYearReturn: round((f - 0.5) * 70 + jitter(12), 1),
-  };
-
-  const carbonIntensity = round((1 - e) * 320 + 12 + jitter(20), 0);
-  const esgMetrics = {
-    carbonIntensity,
-    renewableEnergyPct: round(clamp(e * 95 + jitter(8)), 0),
-    boardIndependencePct: round(clamp(45 + (governance / 100) * 50 + jitter(5)), 0),
-    genderDiversityPct: round(clamp(20 + (social / 100) * 38 + jitter(6)), 0),
-    employeeTurnover: round(6 + (1 - social / 100) * 18 + jitter(2), 1),
-    controversyLevel: Math.max(
-      0,
-      Math.min(5, Math.round((1 - e) * 5 + jitter(0.8))),
-    ),
-  };
-
-  const totalEmissions = round((carbonIntensity * financials.revenue) / 100, 0);
-  const scope = {
-    scope1: round(totalEmissions * (0.12 + rng() * 0.06), 0),
-    scope2: round(totalEmissions * (0.14 + rng() * 0.06), 0),
-    scope3: round(totalEmissions * (0.62 + rng() * 0.08), 0),
-  };
-
-  const esgTrend: number[] = [];
-  const priceTrend: number[] = [];
-  const emissionsTrend: number[] = [];
-  let price = 100;
-  let emissions = carbonIntensity * 1.25;
-  for (let i = 0; i < 12; i += 1) {
-    const progress = i / 11;
-    esgTrend.push(round(clamp(esgScore - 8 + progress * 8 + jitter(2.4)), 1));
-    price *= 1 + financials.oneYearReturn / 100 / 11 + jitter(0.025);
-    priceTrend.push(round(price, 1));
-    emissions *= (1 - (0.01 + e * 0.03)) * (1 + jitter(0.015));
-    emissionsTrend.push(round(emissions, 0));
-  }
+/** Joins a public identity row onto its live listing row. Nothing is invented:
+ *  a company the engine does not cover keeps nulls all the way to the UI. */
+function buildCompany(raw: RawCompany, real: ApiCompanyRow | undefined): Company {
+  const quadrant = real?.quadrant ?? null;
 
   return {
-    id: raw.t.toLowerCase(),
+    id: normalizeTicker(raw.t),
+    evidenceId: real?.id ?? null,
     name: raw.n,
     ticker: raw.t,
     sector: raw.s,
     region: raw.r,
     domain: raw.web,
-    color: gradeColor[gradeFromScore(esgScore)],
-    esgScore,
-    financialScore,
-    marketCap,
-    grade: gradeFromScore(esgScore),
-    quadrant: classifyQuadrant(esgScore, financialScore),
-    momentum,
-    deviation,
-    pillars: { environmental, social, governance },
-    financials,
-    esgMetrics,
-    history: {
-      months: MONTHS,
-      esgTrend,
-      priceTrend,
-      emissionsTrend,
-      candles: buildCandles(rng, momentum),
-    },
-    environmentalBreakdown: buildBreakdown(rng, environmental, [
-      "Carbon", "Water", "Waste", "Biodiversity",
-    ]),
-    socialBreakdown: buildBreakdown(rng, social, [
-      "Labor", "Safety", "Community", "Privacy",
-    ]),
-    governanceBreakdown: buildBreakdown(rng, governance, [
-      "Board", "Ethics", "Pay", "Transparency",
-    ]),
+    color: quadrant ? QUADRANT[quadrant].color : palette.faint,
+    marketCap: raw.cap,
     profile: {
       headquarters: raw.hq,
       business: raw.bio,
       founded: raw.est,
       employees: raw.emp * 1000,
     },
-    scope,
-    controversies: buildControversies(rng, esgMetrics.controversyLevel),
+    esgScore: real?.consensus ?? null,
+    evidenceScore: real?.evidence_total ?? null,
+    evidencePct: real?.evidence_pct ?? null,
+    evidenceBasis: real?.evidence_basis ?? null,
+    evidencePeers: real?.evidence_peers ?? null,
+    evidenceGap: real?.evidence_gap ?? null,
+    divergence: real?.divergence ?? null,
+    confidence: real?.confidence ?? null,
+    momentum: real?.momentum ?? null,
+    quadrant,
+    isUnderpricedImprover: real?.is_underpriced_improver ?? false,
+    complianceScore: real?.compliance_score ?? null,
+    forecast: real?.forecast ?? null,
+    benchmarkTotal: real?.benchmark_total ?? null,
+    benchmarkSource: real?.benchmark_source ?? null,
   };
 }
 
-export const COMPANIES: Company[] = RAW_COMPANIES.map(buildCompany);
+/** Identity-only universe: real names, sectors and regions, no engine figures.
+ *  Used where a synchronous lookup is enough (watchlist id validation). */
+export const COMPANIES: Company[] = RAW_COMPANIES.map((raw) =>
+  buildCompany(raw, undefined),
+);
 
 export const COMPANY_BY_ID: Record<string, Company> = Object.fromEntries(
   COMPANIES.map((c) => [c.id, c]),
 );
-
-export const SECTORS = [
-  "All sectors",
-  ...Array.from(new Set(COMPANIES.map((c) => c.sector))).sort(),
-];
 
 export const SECTOR_LIST = Array.from(
   new Set(COMPANIES.map((c) => c.sector)),
@@ -199,3 +87,80 @@ export const SECTOR_LIST = Array.from(
 export const REGION_LIST = Array.from(
   new Set(COMPANIES.map((c) => c.region)),
 ).sort();
+
+let companiesPromise: Promise<Company[]> | null = null;
+
+/** Fetch-once join of the identity universe onto the live listing. The two
+ *  cover the same ten issuers, so an unmatched ticker is a wiring bug: it is
+ *  logged loudly rather than quietly degrading to a scoreless row. */
+export function loadCompanies(): Promise<Company[]> {
+  if (!companiesPromise) {
+    companiesPromise = fetch("/api/companies")
+      .then(async (response) => {
+        if (!response.ok) throw new Error(`/api/companies → ${response.status}`);
+        return (await response.json()) as ApiCompanyRow[];
+      })
+      .then((rows) => {
+        const byTicker = new Map<string, ApiCompanyRow>();
+        for (const row of rows) {
+          byTicker.set(normalizeTicker(row.id), row);
+          byTicker.set(normalizeTicker(row.ticker), row);
+        }
+        const companies = RAW_COMPANIES.map((raw) =>
+          buildCompany(raw, byTicker.get(normalizeTicker(raw.t))),
+        );
+        const unmatched = companies.filter((c) => c.evidenceId === null);
+        if (unmatched.length > 0) {
+          console.error(
+            "No /api/companies row for:",
+            unmatched.map((c) => c.ticker).join(", "),
+          );
+        }
+        return companies;
+      })
+      .catch((error) => {
+        companiesPromise = null;
+        throw error;
+      });
+  }
+  return companiesPromise;
+}
+
+type CompaniesState = {
+  companies: Company[];
+  loading: boolean;
+  error: string | null;
+};
+
+/** Legacy pages read the universe through this hook. Until the listing lands
+ *  (or if it fails) the identity-only universe is used, so every engine figure
+ *  reads "N.A." instead of a placeholder number. */
+export function useCompanies(): CompaniesState {
+  const [state, setState] = useState<CompaniesState>({
+    companies: COMPANIES,
+    loading: true,
+    error: null,
+  });
+
+  useEffect(() => {
+    let cancelled = false;
+    loadCompanies()
+      .then((companies) => {
+        if (!cancelled) setState({ companies, loading: false, error: null });
+      })
+      .catch((error) => {
+        if (!cancelled) {
+          setState({
+            companies: COMPANIES,
+            loading: false,
+            error: error instanceof Error ? error.message : "Could not load companies.",
+          });
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return state;
+}

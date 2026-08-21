@@ -1,0 +1,64 @@
+{
+  "site": {
+    "site_id": "1a944860144f",
+    "company_id": "U96",
+    "name": "Sembcorp Banyan Energy Storage System",
+    "asset_type": "battery",
+    "lat": 1.25821965,
+    "lon": 103.67070365000001,
+    "operator": "Sembcorp Industries",
+    "registry": "openstreetmap",
+    "registry_url": "https://www.openstreetmap.org/way/1147254945",
+    "match_confidence": 0.9,
+    "footprint": [
+      [
+        1.2583055,
+        103.6699922
+      ],
+      [
+        1.2574058,
+        103.6705877
+      ],
+      [
+        1.2576311,
+        103.6709117
+      ],
+      [
+        1.257981,
+        103.6714151
+      ],
+      [
+        1.2583492,
+        103.671257
+      ],
+      [
+        1.25839,
+        103.6712395
+      ],
+      [
+        1.2590335,
+        103.6709632
+      ],
+      [
+        1.2583055,
+        103.6699922
+      ]
+    ]
+  },
+  "before": {
+    "scene_id": "S2A_48NUG_20191227_0_L2A",
+    "date": "2019-12-27",
+    "cloud_cover": 8.046951,
+    "image_path": "satellite/1a944860144f_2019.png"
+  },
+  "after": {
+    "scene_id": "S2B_48NUG_20230316_0_L2A",
+    "date": "2023-03-16",
+    "cloud_cover": 8.517069,
+    "image_path": "satellite/1a944860144f_2023.png"
+  },
+  "index": "ndvi",
+  "change_score": -0.6465799832674384,
+  "changed": true,
+  "note": "On-site vegetation cover fell by 0.65 more than the surrounding area over the same period — consistent with construction here."
+}

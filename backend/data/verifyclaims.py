@@ -21,7 +21,7 @@ from backend.app.agent import WebTools, load_env
 from backend.engine import config, ingest
 from backend.engine.llm import OpenRouterLLMClient
 from backend.engine.sasb import topics_for
-from backend.data.realclaims import DOMAINS, cached_claims_for
+from backend.data.realclaims import DOMAINS, cache_path_for, cached_claims_for
 
 
 # Social media, forums, blogs, wikis, and raw file hosts — not credible named sources.
@@ -97,7 +97,7 @@ async def _corroborate(web, client, name: str, domain: str, claim_text: str, top
 
 
 async def _verify_company(cid: str, ds, web, client) -> tuple[str, int]:
-    payload = cached_claims_for(cid)
+    payload = cached_claims_for(cid, year=config.END_YEAR)
     if not payload:
         print(f"  {cid:4} {ds.company(cid).name:24} SKIP (no cached claims)")
         return cid, 0
@@ -141,8 +141,9 @@ async def _verify_company(cid: str, ds, web, client) -> tuple[str, int]:
 def _save(cid: str, rows: list[dict], payload: dict) -> None:
     cache_dir = config.CACHE_DIR / "realclaims"
     cache_dir.mkdir(parents=True, exist_ok=True)
-    (cache_dir / f"{cid}.json").write_text(
-        json.dumps({"rows": rows, "source_url": payload.get("source_url"),
+    cache_path_for(cid, config.END_YEAR).write_text(
+        json.dumps({"rows": rows, "report_year": payload.get("report_year"),
+                    "source_url": payload.get("source_url"),
                     "source_title": payload.get("source_title")}, ensure_ascii=False, indent=2),
         "utf-8",
     )
@@ -150,7 +151,7 @@ def _save(cid: str, rows: list[dict], payload: dict) -> None:
     if out.exists():
         data = json.loads(out.read_text("utf-8"))
         absent = data.get("claims", {}).get("absent", [])
-        data["claims"] = cached_claims_for(cid, absent=absent)
+        data["claims"] = cached_claims_for(cid, absent=absent, year=config.END_YEAR)
         out.write_text(json.dumps(data, ensure_ascii=False, indent=2, default=str), "utf-8")
 
 

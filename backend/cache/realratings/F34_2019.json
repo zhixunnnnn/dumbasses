@@ -1,0 +1,20 @@
+{
+  "company_id": "F34",
+  "report_year": 2019,
+  "rows": [
+    {
+      "rater": "djsi",
+      "kind": "membership",
+      "value_raw": "DJSI, Ecovadis etc",
+      "assessment_year": 2019,
+      "report_year": 2019,
+      "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/cdp-climate-change-2019-(wilmar).pdf?sfvrsn=446d776c_2",
+      "source_title": "cdp climate change 2019 (wilmar)",
+      "source_sentence": "DJSI, Ecovadis etc",
+      "extractor": "regex"
+    }
+  ],
+  "miss": false,
+  "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/cdp-climate-change-2019-(wilmar).pdf?sfvrsn=446d776c_2",
+  "source_title": "cdp climate change 2019 (wilmar)"
+}

@@ -2,6 +2,7 @@ import { ExternalLink } from "lucide-react";
 import type { Compliance } from "../../types";
 import { RegBadge } from "../common/badges";
 import Why from "../common/Why";
+import ProvenanceBadge from "../common/ProvenanceBadge";
 
 export default function ComplianceGap({ compliance }: { compliance: Compliance }) {
   const all = [
@@ -16,13 +17,19 @@ export default function ComplianceGap({ compliance }: { compliance: Compliance }
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-sm font-semibold text-txt">Regulatory compliance gap</h3>
-          <p className="text-[11px] text-faint">SGX · ISSB · MAS · ASEAN Taxonomy</p>
+          <p className="text-[11px] text-faint">
+            SGX · ISSB · MAS · ASEAN Taxonomy
+            {compliance.counted
+              ? ` · ${compliance.scraped_count ?? 0}/${compliance.counted} live-proofed`
+              : ""}
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <span className="font-mono text-lg font-semibold"
             style={{ color: (compliance.score ?? 0) > 0 ? "#e0b24a" : "#3ecf8e" }}>
             {compliance.score === null ? "N.A." : `${Math.round(compliance.score * 100)}%`}
           </span>
+          <ProvenanceBadge provenance={compliance.provenance} />
           <Why trace={compliance.trace} title="Compliance gap" />
         </div>
       </div>

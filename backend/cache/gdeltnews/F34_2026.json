@@ -1,0 +1,91 @@
+{
+  "company_id": "F34",
+  "year": 2026,
+  "miss": false,
+  "n_articles": 98,
+  "n_labelled": 14,
+  "positive": 0,
+  "controversy": 3,
+  "sentiment": -3,
+  "headlines": [
+    {
+      "title": "Wilmar International forms joint venture with TGI Group for West African agri and food businesses",
+      "url": "https://www.premiumtimesng.com/promoted/884612-wilmar-international-forms-joint-venture-with-tgi-group-for-west-african-agri-and-food-businesses.html",
+      "seendate": "20260602T141500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Banks Channel $31 Billion in  Sustainable  Loans to Palm Oil Firms Tied to Deforestation , Global Witness Finds",
+      "url": "https://www.downtoearth.org.in/forests/banks-provided-31-billion-in-sustainable-loans-to-palm-oil-firms-linked-to-deforestation-global-witness-report",
+      "seendate": "20260813T080000Z",
+      "label": "controversy"
+    },
+    {
+      "title": "TGI Group , Wilmar International move to strengthen agricultural growth in West Africa",
+      "url": "https://www.zawya.com/en/economy/africa/tgi-group-wilmar-international-move-to-strengthen-agricultural-growth-in-west-africa-pa9kso8k",
+      "seendate": "20260623T144500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "TGI , Wilmar form $12bn Nigeria - Benin food partnership",
+      "url": "https://punchng.com/tgi-wilmar-strike-12bn-nigeria-benin-food-partnership/",
+      "seendate": "20260605T051500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Wilmar forms agri - food JV with TGI Group",
+      "url": "https://finance.yahoo.com/sectors/energy/articles/wilmar-forms-agri-food-jv-105316149.html",
+      "seendate": "20260603T111500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Wilmar says no official notice received in palm oil export probe - Companies",
+      "url": "https://www.thejakartapost.com/business/2026/05/29/wilmar-says-no-official-notice-received-in-palm-oil-export-probe.html",
+      "seendate": "20260529T111500Z",
+      "label": "controversy"
+    },
+    {
+      "title": "Wilmar International ( OTCMKTS : WLMIY ) Stock Price Crosses Above 50 - Day Moving Average – Here What Happened",
+      "url": "https://www.tickerreport.com/banking-finance/13502997/wilmar-international-otcmktswlmiy-stock-price-crosses-above-50-day-moving-average-heres-what-happened.html",
+      "seendate": "20260714T083000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Wilmar , Musim Mas among palm - oil firms in Indonesia under probe for suspected export under - invoicing",
+      "url": "https://www.businesstimes.com.sg/international/asean/wilmar-musim-mas-among-palm-oil-firms-indonesia-under-probe-suspected-export-under-invoicing",
+      "seendate": "20260526T114500Z",
+      "label": "controversy"
+    },
+    {
+      "title": "Wilmar International Ltd . ( OTCMKTS : WLMIY ) Short Interest Up 177 . 8 % in July",
+      "url": "https://www.themarketsdaily.com/2026/07/28/wilmar-international-ltd-otcmktswlmiy-short-interest-up-177-8-in-july.html",
+      "seendate": "20260728T073000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Wilmar International ( OTCMKTS : WLMIF ) Stock Price Up 1 . 7 % – Should You Buy ? ",
+      "url": "https://www.tickerreport.com/banking-finance/13507300/wilmar-international-otcmktswlmif-stock-price-up-1-7-should-you-buy.html",
+      "seendate": "20260717T194500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Wilmar International ( OTCMKTS : WLMIF ) Trading Down 4 . 8 % – Here What Happened",
+      "url": "https://www.themarketsdaily.com/2026/06/02/wilmar-international-otcmktswlmif-trading-down-4-8-heres-what-happened.html",
+      "seendate": "20260602T061500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Wilmar International H1 net profit grows 2 . 3 % to $779 . 4m",
+      "url": "https://sbr.com.sg/agribusiness/news/wilmar-international-h1-net-profit-grows-23-7794m",
+      "seendate": "20260814T070000Z",
+      "label": "stock"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"Wilmar\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Wilmar%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20260101000000&enddatetime=20260822235959",
+  "window_start": "20260101000000",
+  "window_end": "20260822235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-21T21:02:50+00:00"
+}

@@ -1,0 +1,20 @@
+{
+  "company_id": "C6L",
+  "report_year": 2022,
+  "rows": [
+    {
+      "rater": "djsi",
+      "kind": "membership",
+      "value_raw": "Dow Jones Sustainability World Indexes (DJSI World) 2009 – Pledges its support to IA",
+      "assessment_year": 2022,
+      "report_year": 2022,
+      "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2122.pdf",
+      "source_title": "sustainabilityreport2122",
+      "source_sentence": "Dow Jones Sustainability World Indexes (DJSI World) 2009 – Pledges its support to IATA",
+      "extractor": "regex"
+    }
+  ],
+  "miss": false,
+  "source_url": "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2122.pdf",
+  "source_title": "sustainabilityreport2122"
+}

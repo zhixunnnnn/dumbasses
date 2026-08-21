@@ -1,0 +1,91 @@
+{
+  "company_id": "9CI",
+  "year": 2024,
+  "miss": false,
+  "n_articles": 250,
+  "n_labelled": 33,
+  "positive": 2,
+  "controversy": 0,
+  "sentiment": 2,
+  "headlines": [
+    {
+      "title": "Singapore Capitaland Investment to buy initial 40 % stake in SC Capital Partners",
+      "url": "https://www.dealstreetasia.com/stories/capitaland-investment-sc-capital-partners-420296",
+      "seendate": "20241120T010000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "CICT completes acquisition of 50 % stake in ION Orchard",
+      "url": "https://sbr.com.sg/markets-investing/news/cict-completes-acquisition-50-stake-in-ion-orchard",
+      "seendate": "20241031T041500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Capitaland Investment stake purchase in SCCP to boost footprint in Japan",
+      "url": "https://www.marketscreener.com/quote/stock/CAPITALAND-INVESTMENT-LIM-126877817/news/Singapore-s-Capitaland-Investment-s-stake-purchase-in-SCCP-to-boost-footprint-in-Japan-48410603/",
+      "seendate": "20241120T003000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "CapitaLand China Trust manager taps Gerry Chan as new CEO",
+      "url": "https://sbr.com.sg/commercial-property/news/capitaland-china-trust-manager-taps-gerry-chan-new-ceo",
+      "seendate": "20241209T063000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Thomson View sold for S$810 million to UOL , CapitaLand",
+      "url": "https://www.businesstimes.com.sg/property/thomson-view-sold-s810-million-uol-capitaland",
+      "seendate": "20241125T043000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "CapitaLand Integrated Commercial Trust ( OTCMKTS : CPAMF ) Short Interest Update",
+      "url": "https://www.kopsource.com/2024/10/13/capitaland-integrated-commercial-trust-otcmktscpamf-short-interest-update.html",
+      "seendate": "20241013T204500Z",
+      "label": "stock"
+    },
+    {
+      "title": "CapitaLand Malaysia Trust appoints Yong Su - Lin as CEO designate",
+      "url": "https://www.thestar.com.my/business/business-news/2024/11/14/capitaland-malaysia-trust-appoints-yong-su-lin-as-ceo-designate",
+      "seendate": "20241114T134500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "CLI lands $261m from Mitsui O . S . K . Lines for SEA and India private funds",
+      "url": "https://sbr.com.sg/commercial-property/news/cli-lands-261m-mitsui-osk-lines-sea-and-india-private-funds",
+      "seendate": "20241105T050000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "UOL and CapitaLand acquire Thomson View for $810m",
+      "url": "https://sbr.com.sg/residential-property/news/uol-and-capitaland-acquire-thomson-view-810m",
+      "seendate": "20241028T073000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "CapitaLand Warns of China Losses as Singapore Property Investor Cuts Exposure",
+      "url": "https://www.bnnbloomberg.ca/business/international/2024/11/22/capitaland-warns-of-china-losses-as-singapore-property-investor-cuts-exposure/",
+      "seendate": "20241122T081500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Head - To - Head Analysis : CapitaLand Integrated Commercial Trust ( OTCMKTS : CPAMF ) versus InvenTrust Properties ( NYSE : IVT ) ",
+      "url": "https://www.tickerreport.com/banking-finance/12604112/head-to-head-analysis-capitaland-integrated-commercial-trust-otcmktscpamf-versus-inventrust-properties-nyseivt.html",
+      "seendate": "20241005T024500Z",
+      "label": "stock"
+    },
+    {
+      "title": "CapitaLand celebrates 30 years in Vietnam by creating positive",
+      "url": "https://vietnamnews.vn/brandinfo/1664214/capitaland-celebrates-30-years-in-vietnam-by-creating-positive.html",
+      "seendate": "20241003T063000Z",
+      "label": "positive"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"CapitaLand\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22CapitaLand%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20240101000000&enddatetime=20241231235959",
+  "window_start": "20240101000000",
+  "window_end": "20241231235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-21T20:54:31+00:00"
+}

@@ -187,7 +187,7 @@ export default function InterpretabilityPage() {
           <div>
             <h1 className="text-lg font-semibold text-txt">Interpretability</h1>
             <p className="mt-0.5 max-w-3xl text-sm leading-relaxed text-muted">
-              Every ESG estimate, decomposed. Each prediction is the model&rsquo;s
+              Every MSCI rating estimate, decomposed. Each prediction is the model&rsquo;s
               base value plus one SHAP contribution per input variable, and each
               variable traces back to the raw evidence it came from — down to the
               individual news articles behind the sentiment signal.

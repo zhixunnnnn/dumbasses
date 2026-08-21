@@ -1,0 +1,91 @@
+{
+  "company_id": "C09",
+  "year": 2024,
+  "miss": false,
+  "n_articles": 197,
+  "n_labelled": 12,
+  "positive": 2,
+  "controversy": 0,
+  "sentiment": 2,
+  "headlines": [
+    {
+      "title": "Union Square Residences sells 20 % of units on launch day",
+      "url": "https://www.businesstimes.com.sg/property/union-square-residences-sells-20-units-launch-day",
+      "seendate": "20241110T101500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Billionaire Kwek Leng Beng CDL Sells 84 % Of Singapore Housing Project Amid Resilient Demand",
+      "url": "https://www.forbes.com/sites/jonathanburgos/2024/10/20/billionaire-kwek-leng-bengs-cdl-sells-84-of-singapore-housing-project-amid-resilient-demand/",
+      "seendate": "20241021T040000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Chuan Park moves over 60 % of units during weekend ; Union Square Residences sells about 20 % on Saturday",
+      "url": "https://www.businesstimes.com.sg/property/chuan-park-moves-over-60-units-during-weekend-union-square-residences-sells-about-20-saturday",
+      "seendate": "20241110T150000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Short Interest in City Developments Limited ( OTCMKTS : CDEVY ) Grows By 140 . 0 % ",
+      "url": "https://www.themarketsdaily.com/2024/11/28/short-interest-in-city-developments-limited-otcmktscdevy-grows-by-140-0.html",
+      "seendate": "20241128T213000Z",
+      "label": "stock"
+    },
+    {
+      "title": "City Developments ( OTCMKTS : CDEVY ) Share Price Passes Above 50 Day Moving Average of $4 . 01",
+      "url": "https://www.etfdailynews.com/2024/10/03/city-developments-otcmktscdevy-share-price-passes-above-50-day-moving-average-of-4-01/",
+      "seendate": "20241003T093000Z",
+      "label": "stock"
+    },
+    {
+      "title": "CDL posts mixed Q3 results with strong residential and office gains",
+      "url": "https://sbr.com.sg/commercial-property/news/cdl-posts-mixed-q3-results-strong-residential-and-office-gains",
+      "seendate": "20241125T064500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Singapore CDL buys US$1 . 3 billion Shanghai site as confidence rises in China property",
+      "url": "https://www.scmp.com/business/china-business/article/3285141/singapores-cdl-buys-us13-billion-shanghai-site-confidence-rises-china-property",
+      "seendate": "20241104T114500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "New mixed - use development with condo , retail and office spaces near Singapore River by 2029",
+      "url": "https://www.straitstimes.com/singapore/new-mixed-use-development-with-condos-and-retail-spaces-near-singapore-river-by-2029",
+      "seendate": "20241011T084500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "EdgeProp announces winners of EdgeProp Excellence Awards 2024 ; City Developments , GuocoLand , SingHaiyi Group and UOL Group are Top Developers",
+      "url": "https://www.manilatimes.net/2024/11/01/tmt-newswire/media-outreach-newswire/edgeprop-announces-winners-of-edgeprop-excellence-awards-2024-city-developments-guocoland-singhaiyi-group-and-uol-group-are-top-developers/1995874",
+      "seendate": "20241101T080000Z",
+      "label": "positive"
+    },
+    {
+      "title": "New mixed - use development near Singapore River by 2029",
+      "url": "https://tnp.straitstimes.com/news/singapore/new-mixed-use-development-near-singapore-river-2029",
+      "seendate": "20241011T081500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "CDL and joint ventures post S$611 . 1 million in Q3 sales , driven by Kassia launch",
+      "url": "https://www.businesstimes.com.sg/companies-markets/reits-property/cdl-and-joint-ventures-post-s611-1-million-q3-sales-driven-kassia-launch",
+      "seendate": "20241122T114500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Edgeprop Announces Winners Of Edgeprop Excellence Awards 2024 City Developments , Guocoland , Singhaiyi Group And UOL Group Are Top Developers Media ... ",
+      "url": "https://menafn.com/1108844090/Edgeprop-Announces-Winners-Of-Edgeprop-Excellence-Awards-2024-City-Developments-Guocoland-Singhaiyi-Group-And-UOL-Group-Are-Top-Developers-Media-Outreach-Newswire-APAC",
+      "seendate": "20241103T000000Z",
+      "label": "positive"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"City Developments\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22City+Developments%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20240101000000&enddatetime=20241231235959",
+  "window_start": "20240101000000",
+  "window_end": "20241231235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-21T21:06:46+00:00"
+}

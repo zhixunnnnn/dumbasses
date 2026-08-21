@@ -16,7 +16,6 @@ export type Route =
   | { name: "interpretability" }
   | { name: "governance" }
   | { name: "settings" }
-  | { name: "company"; id: string }
   | { name: "news" }
   | { name: "evidenceCompany"; id: string };
 
@@ -39,8 +38,6 @@ function routeToPath(route: Route): string {
   switch (route.name) {
     case "dashboard":
       return "/";
-    case "company":
-      return `/company/${encodeURIComponent(route.id)}`;
     case "evidenceCompany":
       return `/evidence/company/${encodeURIComponent(route.id)}`;
     default:
@@ -66,10 +63,6 @@ function pathToRoute(pathname: string): Route {
   if (segments.length === 1) {
     const name = SIMPLE_ROUTES.find((candidate) => candidate === segments[0]);
     return name ? ({ name } as Route) : DEFAULT_ROUTE;
-  }
-
-  if (segments.length === 2 && segments[0] === "company") {
-    return { name: "company", id: segments[1] };
   }
 
   if (
@@ -121,13 +114,14 @@ export function NavigationProvider({
     });
   }, []);
 
+  // Company drill-ins go to the evidence profile, keyed by the engine id.
   const openCompany = useCallback(
-    (id: string) => navigate({ name: "company", id }),
+    (id: string) => navigate({ name: "evidenceCompany", id }),
     [navigate],
   );
 
   const goBack = useCallback(() => {
-    setRoute(previous.name === "company" ? DEFAULT_ROUTE : previous);
+    setRoute(previous.name === "evidenceCompany" ? DEFAULT_ROUTE : previous);
   }, [previous]);
 
   const value = useMemo(

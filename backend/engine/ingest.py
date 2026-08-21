@@ -8,6 +8,7 @@ from typing import Optional
 from . import config
 from .db import bootstrap
 from .models import Candle, Company
+from .sasb import warn_unmapped_industries
 
 
 @dataclass
@@ -17,6 +18,9 @@ class RaterRow:
     msci_letter: Optional[str]
     sustainalytics_risk: Optional[float]
     sp_global: Optional[float]
+    # CDP has no seeded column: it only ever arrives from a hand-entered/scraped overlay,
+    # so it is None unless someone recorded a real score.
+    cdp_letter: Optional[str] = None
 
 
 @dataclass
@@ -150,6 +154,7 @@ def load(db_path=None) -> Dataset:
         )
         for r in conn.execute("SELECT * FROM universe")
     }
+    warn_unmapped_industries(companies.values())
     raters = [RaterRow(r["company_id"], r["year"], r["msci_letter"], r["sustainalytics_risk"], r["sp_global"])
               for r in conn.execute("SELECT * FROM rater_scores")]
     try:  # overlay real MSCI (latest year) from cache; no-op if unavailable
@@ -157,6 +162,19 @@ def load(db_path=None) -> Dataset:
         raters = _overlay_raters(raters, lambda cid: companies[cid].ticker)
     except Exception:
         pass
+    try:  # ...then CDP's own public scores table, on its stated assessment year
+        from backend.data.realcdp import overlay as _overlay_cdp
+        raters = _overlay_cdp(raters)
+    except Exception:
+        pass
+    try:  # ...then the ratings companies disclose in their own reports, per assessment
+        from backend.data.realratings import overlay as _overlay_reports   # year
+        raters = _overlay_reports(raters)   # a verbatim citation beats the table
+    except Exception:
+        pass
+    # ...and finally hand-entered ratings, which outrank every automated source
+    from .manual_raters import overlay as _overlay_manual
+    raters = _overlay_manual(raters)
 
     prices: dict[str, list[Candle]] = {}
     for r in conn.execute("SELECT * FROM prices ORDER BY company_id, week_date"):

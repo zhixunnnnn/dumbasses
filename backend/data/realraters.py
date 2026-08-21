@@ -1,10 +1,12 @@
 """Real MSCI ESG letter ratings, scraped once and cached.
 
-Only MSCI is reliably available from a public source (the KnowESG aggregator, which
-embeds the SGX ticker + "MSCI: <letter>" in each company page). Sustainalytics and
-S&P scores are gated / JS-rendered and are NOT scraped — those stay seeded and are
-labelled "illustrative" in the UI. We only have the *current* letter, so the real
-value overlays the latest analysis year (END_YEAR); prior years keep the seeded path.
+Only MSCI is reliably available to a scraper from a public source (the KnowESG
+aggregator, which embeds the SGX ticker + "MSCI: <letter>" in each company page).
+Sustainalytics and S&P publish free public pages but forbid bulk scraping and JS-gate
+them to enforce it, so they are NOT scraped here — enter those by hand instead, via
+engine/manual_raters.py, which outranks this cache. We only have the *current* letter,
+so the real value overlays the latest analysis year (END_YEAR); prior years keep the
+seeded path.
 
     python -m backend.data.realraters          # (re)build the cache
 
@@ -18,6 +20,7 @@ import asyncio
 import json
 import os
 import re
+from dataclasses import replace
 
 from backend.engine import config
 
@@ -59,8 +62,7 @@ def overlay(raters: list, ticker_of) -> list:
     for r in raters:
         info = real.get(r.company_id)
         if info and info.get("msci") and r.year == config.END_YEAR:
-            out.append(r.__class__(r.company_id, r.year, info["msci"],
-                                   r.sustainalytics_risk, r.sp_global))
+            out.append(replace(r, msci_letter=info["msci"]))   # keep every other channel
         else:
             out.append(r)
     return out

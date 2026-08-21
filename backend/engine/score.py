@@ -153,12 +153,12 @@ def _aggregate(ds: Dataset, cid: str, year: int, client: LLMClient) -> ScoreDeta
 
 
 def _live_claim_rows(cid: str, year: int) -> list[dict] | None:
-    if year != config.END_YEAR:
-        return None
+    """Real claims extracted from THAT year's own sustainability report, if we have
+    one cached. None (no cache / a recorded MISS) falls through to the seeded docs."""
     try:
         from backend.data.realclaims import cached_claims_for
 
-        payload = cached_claims_for(cid)
+        payload = cached_claims_for(cid, year=year)
     except Exception:
         return None
     rows = (payload or {}).get("claims") or []
@@ -169,9 +169,13 @@ def _coverage_ratio(aggs: list[TopicAgg], total_weight: float) -> Optional[float
     """Score = evidenced weight*credit over TOTAL material weight, so undisclosed
     (ABSENT) material topics count as zeros and pull the score down — instead of
     being excluded. A company that discloses 1 of 5 material topics no longer
-    scores 100; it scores in proportion to how much it actually evidenced."""
-    if total_weight <= 0:
-        return None
+    scores 100; it scores in proportion to how much it actually evidenced.
+
+    NOT-covered-at-all is different from scoring zero: with no covered topic there is
+    nothing to divide, so the answer is N.A. (config.NA) — a fabricated 0 would read as
+    a confident 'this company is bad' instead of 'we have no evidence'."""
+    if total_weight <= 0 or not aggs:
+        return config.NA
     return round(100.0 * sum(a.weight * a.credit for a in aggs) / total_weight, 2)
 
 
@@ -214,12 +218,18 @@ def evidence_score(ds: Dataset, cid: str, year: int, client: Optional[LLMClient]
                          confidence=confidence, absent_topics=d.absent_topics, trace=trace)
 
 
+def has_evidence(ds: Dataset, cid: str, year: int) -> bool:
+    """A year is scorable if it has a real extracted report OR a seeded document.
+    The live path stands on its own: real years reach past the seeded 2019-2023 window."""
+    return bool(ds.docs_for(cid, year)) or _live_claim_rows(cid, year) is not None
+
+
 def evidence_series(ds: Dataset, cid: str, client: Optional[LLMClient] = None) -> list[EvidenceScore]:
     """Per-year evidence scores (drives the rising-evidence band and proof_up)."""
     client = client or MockLLMClient()
     out = []
     for year in config.YEARS:
-        if ds.docs_for(cid, year):
+        if has_evidence(ds, cid, year):
             out.append(evidence_score(ds, cid, year, client))
     return out
 

@@ -20,4 +20,5 @@ yfinance>=0.2
 requests>=2.31
 playwright>=1.40      # Bright Data Scraping Browser over CDP (no local browser needed)
 apscheduler>=3.10     # weekly Monday refresh of live signals
+pillow>=10.0          # compare before/after satellite scenes (engine/satellite.py)
 pytest>=8.0

@@ -1,0 +1,91 @@
+{
+  "company_id": "BN4",
+  "year": 2023,
+  "miss": false,
+  "n_articles": 250,
+  "n_labelled": 30,
+  "positive": 12,
+  "controversy": 1,
+  "sentiment": 11,
+  "headlines": [
+    {
+      "title": "Dont Race Out To Buy Keppel Infrastructure Trust ( SGX : A7RU ) Just Because It Going Ex - Dividend",
+      "url": "https://finance.yahoo.com/news/dont-race-buy-keppel-infrastructure-071252391.html",
+      "seendate": "20231106T080000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Keppel to buy European real estate fund manager Aermont Capital for $1b",
+      "url": "https://www.dealstreetasia.com/stories/keppel-to-buy-aermont-capital-373052",
+      "seendate": "20231129T191500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Keppel to acquire initial 50 % stake in Aermont Capital for $517m",
+      "url": "https://sbr.com.sg/markets-investing/news/keppel-acquire-initial-50-stake-in-aermont-capital-517m",
+      "seendate": "20231130T030000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Keppel raises $218m for China - focused sustainable urban renewal strategy",
+      "url": "https://www.dealstreetasia.com/stories/keppel-sustainable-urban-renewal-strategy-367674",
+      "seendate": "20231019T054500Z",
+      "label": "positive"
+    },
+    {
+      "title": "Keppel  private fund acquires 2 education assets in Sydney for $175m",
+      "url": "https://sbr.com.sg/commercial-property/news/keppels-private-fund-acquires-2-education-assets-in-sydney-175m",
+      "seendate": "20231013T031500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Greenko Group : Keppel partners AM Green to explore biogenic carbon - based sustainable fuels opportunities in Asia and the Middle East",
+      "url": "https://www.finanznachrichten.de/nachrichten-2023-12/60886664-greenko-group-keppel-partners-am-green-to-explore-biogenic-carbon-based-sustainable-fuels-opportunities-in-asia-and-the-middle-east-008.htm",
+      "seendate": "20231211T050000Z",
+      "label": "positive"
+    },
+    {
+      "title": "Keppel partners AM Green to explore biogenic carbon - based sustainable fuels opportunities in Asia and the Middle East",
+      "url": "https://www.adnkronos.com/immediapress/pr-newswire/keppel-partners-am-green-to-explore-biogenic-carbon-based-sustainable-fuels-opportunities-in-asia-and-the-middle-east_35Hjz5RFieuVDIKuTp9R4s",
+      "seendate": "20231211T050000Z",
+      "label": "positive"
+    },
+    {
+      "title": "Keppel Reit Sydney office development obtains Equifax as anchor tenant",
+      "url": "https://www.straitstimes.com/business/companies-markets/keppel-reit-s-sydney-office-development-obtains-equifax-as-anchor-tenant",
+      "seendate": "20231010T023000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Keppel hits its growth stride , exceeds 3 - year monetisation target",
+      "url": "https://www.straitstimes.com/business/keppel-hits-its-growth-stride-exceeds-3-year-monetisation-target",
+      "seendate": "20231019T120000Z",
+      "label": "positive"
+    },
+    {
+      "title": "Keppel partners AM Green to explore biogenic carbon - based sustainable fuels opportunities in Asia and the Middle East",
+      "url": "https://www.prnewswire.co.uk/news-releases/keppel-partners-am-green-to-explore-biogenic-carbon-based-sustainable-fuels-opportunities-in-asia-and-the-middle-east-302010932.html",
+      "seendate": "20231211T043000Z",
+      "label": "positive"
+    },
+    {
+      "title": "Keppel partners AM Green to explore biogenic carbon - based sustainable fuels opportunities in Asia and the Middle East",
+      "url": "https://news.webindia123.com/news/Articles/Business/20231211/4147987.html",
+      "seendate": "20231211T143000Z",
+      "label": "positive"
+    },
+    {
+      "title": "Keppel partners AM Green to explore biogenic carbon - based sustainable fuels opportunities in Asia and the Middle East",
+      "url": "https://www.theweek.in/wire-updates/business/2023/12/11/dcm42-greenko-group.html",
+      "seendate": "20231211T121500Z",
+      "label": "positive"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"Keppel\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Keppel%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20230101000000&enddatetime=20231231235959",
+  "window_start": "20230101000000",
+  "window_end": "20231231235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-21T20:55:59+00:00"
+}

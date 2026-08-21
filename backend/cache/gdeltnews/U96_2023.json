@@ -1,0 +1,91 @@
+{
+  "company_id": "U96",
+  "year": 2023,
+  "miss": false,
+  "n_articles": 250,
+  "n_labelled": 37,
+  "positive": 20,
+  "controversy": 2,
+  "sentiment": 18,
+  "headlines": [
+    {
+      "title": "Singapore Sembcorp to buy majority stake in Gelex Group units for $160 million",
+      "url": "https://www.marketscreener.com/quote/stock/SEMBCORP-INDUSTRIES-LTD-6491134/news/Singapore-s-Sembcorp-to-buy-majority-stake-in-Gelex-Group-units-for-160-million-45301182/",
+      "seendate": "20231110T171500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Investors in Sembcorp Industries ( SGX : U96 ) have seen enviable returns of 303 % over the past three years",
+      "url": "https://finance.yahoo.com/news/investors-sembcorp-industries-sgx-u96-000328700.html",
+      "seendate": "20231009T020000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Sembcorp to buy wind assets in China , India for $200m",
+      "url": "https://www.straitstimes.com/business/companies-markets/sembcorp-to-buy-wind-assets-in-china-india-for-200m",
+      "seendate": "20231127T124500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Private equity firms among Sembcorp Industries Ltd ( SGX : U96 ) largest shareholders , saw gain in holdings value after stock jumped 4 . 3 % last week",
+      "url": "https://finance.yahoo.com/news/private-equity-firms-among-sembcorp-010056828.html",
+      "seendate": "20231111T023000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Sembcorp to acquire 428 MW wind assets in India , China",
+      "url": "https://economictimes.indiatimes.com/industry/renewables/sembcorp-to-acquire-428-mw-wind-assets-in-india-china/articleshow/105540374.cms",
+      "seendate": "20231127T164500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Sembcorp Industries aims to halve emissions intensity by 2028",
+      "url": "https://www.marketscreener.com/quote/stock/SEMBCORP-INDUSTRIES-LTD-6491134/news/Singapore-s-Sembcorp-Industries-aims-to-halve-emissions-intensity-by-2028-45244467/",
+      "seendate": "20231106T003000Z",
+      "label": "positive"
+    },
+    {
+      "title": "sembcorp : Sembcorp inks deal with Japanese firms to export green ammonia from India",
+      "url": "https://economictimes.indiatimes.com/industry/renewables/sembcorp-inks-deal-with-japanese-firms-to-export-green-ammonia-from-india/articleshow/106077241.cms",
+      "seendate": "20231218T060000Z",
+      "label": "positive"
+    },
+    {
+      "title": "Sembcorp inks deal with Japanese firms to export green ammonia from India",
+      "url": "https://www.thehindu.com/business/Industry/sembcorp-inks-deal-with-japanese-firms-to-export-green-ammonia-from-india/article67649638.ece",
+      "seendate": "20231218T061500Z",
+      "label": "positive"
+    },
+    {
+      "title": "Sembcorp in partnership with two Japan firms",
+      "url": "https://www.thestar.com.my/business/business-news/2023/12/19/sembcorp-in-partnership-with-two-japan-firms",
+      "seendate": "20231219T011500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Sembcorp renewable unit gets 300 MW solar project from NHPC",
+      "url": "https://www.business-standard.com/companies/news/singapore-s-sembcorp-renewables-unit-gets-300-mw-solar-project-from-nhpc-123121400083_1.html",
+      "seendate": "20231214T023000Z",
+      "label": "positive"
+    },
+    {
+      "title": "Sembcorp unit wins  largest  solar project in Singapore by govt agency",
+      "url": "https://www.reuters.com/business/energy/sembcorp-unit-wins-largest-solar-project-singapore-by-govt-agency-2023-12-12/",
+      "seendate": "20231212T134500Z",
+      "label": "positive"
+    },
+    {
+      "title": "Sembcorp to acquire 428 MW wind assets in India , China",
+      "url": "https://www.devdiscourse.com/article/headlines/2725855-sembcorp-to-acquire-428-mw-wind-assets-in-india-china",
+      "seendate": "20231127T131500Z",
+      "label": "neutral"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"Sembcorp\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Sembcorp%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20230101000000&enddatetime=20231231235959",
+  "window_start": "20230101000000",
+  "window_end": "20231231235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-21T21:34:10+00:00"
+}

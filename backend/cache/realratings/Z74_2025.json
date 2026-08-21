@@ -1,0 +1,42 @@
+{
+  "company_id": "Z74",
+  "report_year": 2025,
+  "rows": [
+    {
+      "rater": "cdp",
+      "kind": "rating",
+      "value_raw": "A",
+      "assessment_year": 2025,
+      "report_year": 2025,
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_title": "SR2025",
+      "source_sentence": "CDP Climate Change disclosure “A” score",
+      "extractor": "regex"
+    },
+    {
+      "rater": "ftse4good",
+      "kind": "membership",
+      "value_raw": "FTSE4Good Index for nine years",
+      "assessment_year": 2025,
+      "report_year": 2025,
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_title": "SR2025",
+      "source_sentence": "FTSE4Good Index for nine years",
+      "extractor": "regex"
+    },
+    {
+      "rater": "msci",
+      "kind": "rating",
+      "value_raw": "A",
+      "assessment_year": 2024,
+      "report_year": 2025,
+      "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+      "source_title": "SR2025",
+      "source_sentence": "MSCI ESG Ratings 2024: A",
+      "extractor": "regex"
+    }
+  ],
+  "miss": false,
+  "source_url": "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf",
+  "source_title": "SR2025"
+}

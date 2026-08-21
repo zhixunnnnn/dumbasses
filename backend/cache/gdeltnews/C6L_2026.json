@@ -1,0 +1,91 @@
+{
+  "company_id": "C6L",
+  "year": 2026,
+  "miss": false,
+  "n_articles": 250,
+  "n_labelled": 35,
+  "positive": 4,
+  "controversy": 5,
+  "sentiment": -1,
+  "headlines": [
+    {
+      "title": "Singapore Airline Air India Investment Faces ₹8 , 000 Crore Losses Amid Operational Challenges",
+      "url": "https://www.freepressjournal.in/business/singapore-airlines-air-india-investment-faces-8000-crore-losses-amid-operational-challenges",
+      "seendate": "20260812T094500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Airline Air India bet racks up nearly $800 million loss :  It been annus horribilis  ",
+      "url": "https://www.moneycontrol.com/news/business/singapore-airlines-air-india-bet-racks-up-nearly-800-million-loss-it-s-been-annus-horribilis-14002784.html",
+      "seendate": "20260812T071500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore competition body approves Air India - Vistara merger - ch - aviation",
+      "url": "https://www.ch-aviation.com/news/137908-singapore-competition-body-approves-air-india-vistara-merger",
+      "seendate": "20260723T041500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Airlines open to new Air India capital injections - ch - aviation",
+      "url": "https://www.ch-aviation.com/news/169726-singapore-airlines-open-to-new-air-india-capital-injections",
+      "seendate": "20260723T041500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Airlines , Southwest Airlines partner to expand access to nearly 120 US destinations",
+      "url": "https://www.channelnewsasia.com/business/singapore-airlines-sia-southwest-airlines-single-ticket-us-travel-6170381",
+      "seendate": "20260609T050000Z",
+      "label": "positive"
+    },
+    {
+      "title": "Scoot resumes flights from Singapore to Jeddah",
+      "url": "https://www.asiaone.com:443/singapore/scoot-resume-flights-singapore-jeddah-four-months-iran-war",
+      "seendate": "20260622T150000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Airlines ( SINGY ) vs . Its Peers Head to Head Comparison",
+      "url": "https://www.tickerreport.com/banking-finance/13550414/singapore-airlines-singy-vs-its-peers-head-to-head-comparison.html",
+      "seendate": "20260820T024500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Critical Analysis : Singapore Airlines ( SINGY ) vs . Its Peers",
+      "url": "https://www.dailypolitical.com/2026/08/19/critical-analysis-singapore-airlines-singy-vs-its-peers.html",
+      "seendate": "20260820T034500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Briohny Smyth sues Singapore Airlines after chicken skewer allegedly damages vocal cords",
+      "url": "https://nypost.com/2026/08/05/us-news/former-child-pop-star-sues-airline-after-chicken-satay-skewer-allegedly-damages-vocal-cords/",
+      "seendate": "20260805T130000Z",
+      "label": "controversy"
+    },
+    {
+      "title": "Singapore Airlines ( SINGF ) vs . Its Competitors Head to Head Review",
+      "url": "https://www.themarketsdaily.com/2026/08/16/singapore-airlines-singf-vs-its-competitors-head-to-head-review.html",
+      "seendate": "20260816T133000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Singapore Airlines , ANA sign JV agreement - ch - aviation",
+      "url": "https://www.ch-aviation.com/news/85872-singapore-airlines-ana-sign-jv-agreement",
+      "seendate": "20260729T033000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Brisbane aircraft engineer wins unfair dismissal case over Singapore Airlines Airbus delay",
+      "url": "https://www.perthnow.com.au/news/brisbane-aircraft-engineer-wins-unfair-dismissal-case-over-singapore-airlines-airbus-delay-c-22674617",
+      "seendate": "20260804T071500Z",
+      "label": "controversy"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"Singapore Airlines\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Singapore+Airlines%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20260101000000&enddatetime=20260822235959",
+  "window_start": "20260101000000",
+  "window_end": "20260822235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-21T21:08:20+00:00"
+}

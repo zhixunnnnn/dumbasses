@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import { ArrowUpDown, ExternalLink, Scale } from "lucide-react";
 import type { CompanyRow, RegQuality, RegulationInfo } from "../../types";
-import { na, signed } from "../../lib/ui";
+import type { Provenance } from "../../types";
+import { na, signed, NA_REASON, PROVENANCE, PROVENANCE_MARK } from "../../lib/ui";
 import { api, useApi } from "../../lib/api";
 import { QuadrantBadge, RegBadge } from "../common/badges";
 import { useNavigation } from "../../navigation/NavigationContext";
@@ -10,12 +11,12 @@ type Key = "evidence_total" | "consensus" | "divergence" | "evidence_gap" | "mom
 
 const COLS: { key: Key; label: string; hint: string; lowerBetter?: boolean }[] = [
   { key: "evidence_total", label: "Evidence", hint: "Verified evidence score (0–100)" },
-  { key: "consensus", label: "Consensus", hint: "Rater consensus percentile" },
-  { key: "divergence", label: "Divergence", hint: "Rater disagreement — higher = less trust", lowerBetter: true },
+  { key: "consensus", label: "Consensus", hint: "Mean rater percentile. A ° marks a figure with illustrative input, ~ one that is fully illustrative" },
+  { key: "divergence", label: "Divergence", hint: "Rater disagreement — higher = less trust. A ° marks a figure with illustrative input, ~ one that is fully illustrative", lowerBetter: true },
   { key: "evidence_gap", label: "Gap", hint: "Evidence percentile − consensus" },
   { key: "momentum", label: "Momentum", hint: "Evidence-score slope / yr" },
   { key: "compliance_score", label: "Compl. gap", hint: "Fraction of in-force regs missing", lowerBetter: true },
-  { key: "forecast", label: "Forecast", hint: "Predicted next-yr evidence (HYPOTHESIS)" },
+  { key: "forecast", label: "MSCI est.", hint: "Estimated MSCI ESG rating now (HYPOTHESIS)" },
 ];
 
 const STATUSES: ("ANY" | RegQuality)[] = ["ANY", "MET", "PARTIAL", "MISSING", "NA"];
@@ -187,28 +188,56 @@ export default function ScreenerTable({ rows }: { rows: CompanyRow[] }) {
                   </td>
                 )}
                 <td className="px-3 py-2.5 text-right font-mono text-txt">{na(r.evidence_total)}</td>
-                <td className="px-3 py-2.5 text-right font-mono text-muted">{na(r.consensus)}</td>
+                {/* Every rater-derived cell carries a provenance mark, so a seeded number
+                    can never be read as a measured one at a glance. */}
+                <td className="px-3 py-2.5 text-right font-mono text-muted"
+                  title={r.consensus === null ? NA_REASON.raters
+                    : r.rater_provenance ? PROVENANCE[r.rater_provenance].hint : undefined}>
+                  {na(r.consensus)}
+                  <ProvMark p={r.rater_provenance} />
+                </td>
                 <td className="px-3 py-2.5 text-right font-mono"
+                  title={r.divergence === null ? NA_REASON.raters
+                    : r.rater_provenance ? PROVENANCE[r.rater_provenance].hint : undefined}
                   style={{ color: r.divergence === null ? undefined : r.divergence > 33 ? "#ec6a5e" : "#9a968e" }}>
                   {na(r.divergence)}
+                  <ProvMark p={r.rater_provenance} />
                 </td>
                 <td className="px-3 py-2.5 text-right font-mono"
+                  title={r.evidence_gap === null ? NA_REASON.gap
+                    : r.rater_provenance ? PROVENANCE[r.rater_provenance].hint : undefined}
                   style={{ color: r.evidence_gap === null ? undefined : r.evidence_gap > 0 ? "#3ecf8e" : "#9a968e" }}>
                   {signed(r.evidence_gap)}
+                  <ProvMark p={r.rater_provenance} />
                 </td>
                 <td className="px-3 py-2.5 text-right font-mono"
+                  title={r.momentum === null ? NA_REASON.momentum : undefined}
                   style={{ color: r.momentum === null ? undefined : r.momentum > 0 ? "#3ecf8e" : "#ec6a5e" }}>
                   {signed(r.momentum)}
                 </td>
-                <td className="px-3 py-2.5 text-right font-mono text-muted">
+                <td className="px-3 py-2.5 text-right font-mono text-muted"
+                  title={r.compliance_provenance ? PROVENANCE[r.compliance_provenance].hint : undefined}>
                   {r.compliance_score === null ? "N.A." : `${Math.round(r.compliance_score * 100)}%`}
+                  <ProvMark p={r.compliance_provenance} />
                 </td>
-                <td className="px-3 py-2.5 text-right font-mono text-profit">{na(r.forecast)}</td>
+                <td className="px-3 py-2.5 text-right font-mono text-profit">{r.forecast_label ?? na(r.forecast)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
     </div>
+  );
+}
+
+
+/** A one-character provenance mark for dense table cells: nothing for a fully real
+ *  figure, ° when illustrative data contributed, ~ when it is all illustrative. */
+function ProvMark({ p }: { p?: Provenance | null }) {
+  if (!p || p === "real") return null;
+  return (
+    <span className="ml-0.5 align-super text-[9px]" style={{ color: PROVENANCE[p].color }}>
+      {PROVENANCE_MARK[p]}
+    </span>
   );
 }

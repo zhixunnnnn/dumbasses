@@ -1,0 +1,42 @@
+{
+  "company_id": "U96",
+  "report_year": 2019,
+  "rows": [
+    {
+      "rater": "djsi",
+      "kind": "membership",
+      "value_raw": "Dow Jones Sustainability Asia Pacific Index",
+      "assessment_year": 2019,
+      "report_year": 2019,
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2019/assets/pdf/environmental-social-and-governance-review/sustainability_report.pdf",
+      "source_title": "sustainability report",
+      "source_sentence": "Dow Jones Sustainability Asia Pacific Index",
+      "extractor": "regex"
+    },
+    {
+      "rater": "ftse4good",
+      "kind": "membership",
+      "value_raw": "FTSE4Good Index Series2",
+      "assessment_year": 2019,
+      "report_year": 2019,
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2019/assets/pdf/environmental-social-and-governance-review/sustainability_report.pdf",
+      "source_title": "sustainability report",
+      "source_sentence": "FTSE4Good Index Series2",
+      "extractor": "regex"
+    },
+    {
+      "rater": "cdp",
+      "kind": "rating",
+      "value_raw": "B-",
+      "assessment_year": 2019,
+      "report_year": 2019,
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2019/assets/pdf/environmental-social-and-governance-review/sustainability_report.pdf",
+      "source_title": "sustainability report",
+      "source_sentence": "CDP Climate Change score from C to B-",
+      "extractor": "regex"
+    }
+  ],
+  "miss": false,
+  "source_url": "https://media.sembcorp.com/data/cms/ar/ar2019/assets/pdf/environmental-social-and-governance-review/sustainability_report.pdf",
+  "source_title": "sustainability report"
+}

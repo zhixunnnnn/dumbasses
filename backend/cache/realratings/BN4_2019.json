@@ -1,0 +1,20 @@
+{
+  "company_id": "BN4",
+  "report_year": 2019,
+  "rows": [
+    {
+      "rater": "ftse4good",
+      "kind": "membership",
+      "value_raw": "FTSE4Good Index Highest triple-A rating in the MSCI ESG Ratings2 Euro",
+      "assessment_year": 2019,
+      "report_year": 2019,
+      "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+      "source_title": "keppel corporation ar 19 sustainability framework",
+      "source_sentence": "FTSE4Good Index Highest triple-A rating in the MSCI ESG Ratings2 Euronext",
+      "extractor": "regex"
+    }
+  ],
+  "miss": false,
+  "source_url": "https://www.keppel.com/annualreport2019/theme/default/pdf/keppel-corporation-ar-19-sustainability-framework.pdf",
+  "source_title": "keppel corporation ar 19 sustainability framework"
+}

@@ -1,0 +1,60 @@
+{
+  "site": {
+    "site_id": "1b28dc031c43",
+    "company_id": "U96",
+    "name": "Beaufort Road Power Station",
+    "asset_type": "gas",
+    "lat": 53.4028751,
+    "lon": -3.047173,
+    "operator": "Sembcorp",
+    "registry": "openstreetmap",
+    "registry_url": "https://www.openstreetmap.org/way/1181799005",
+    "match_confidence": 0.9,
+    "footprint": [
+      [
+        53.4027348,
+        -3.0477968
+      ],
+      [
+        53.4032299,
+        -3.0472175
+      ],
+      [
+        53.4029671,
+        -3.0465492
+      ],
+      [
+        53.4027301,
+        -3.0467884
+      ],
+      [
+        53.4026311,
+        -3.0471443
+      ],
+      [
+        53.4025203,
+        -3.047255
+      ],
+      [
+        53.4027348,
+        -3.0477968
+      ]
+    ]
+  },
+  "before": {
+    "scene_id": "S2B_30UVE_20190920_1_L2A",
+    "date": "2019-09-20",
+    "cloud_cover": 2.737741,
+    "image_path": "satellite/1b28dc031c43_2019.png"
+  },
+  "after": {
+    "scene_id": "S2B_30UVE_20240831_0_L2A",
+    "date": "2024-08-31",
+    "cloud_cover": 1.031084,
+    "image_path": "satellite/1b28dc031c43_2024.png"
+  },
+  "index": "ndvi",
+  "change_score": 0.06360040135330919,
+  "changed": false,
+  "note": "On-site vegetation cover barely moved (+0.07). No construction observed — this is not evidence the claim is false."
+}

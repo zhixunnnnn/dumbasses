@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import { useThemeMode } from "../../theme/ThemeContext";
 import ModelProviderPanel from "./ModelProviderPanel";
+import BenchmarksPanel from "./BenchmarksPanel";
+import RatersPanel from "./RatersPanel";
 import FeedbackPanel from "./FeedbackPanel";
 import SelfHostedScrapers from "./SelfHostedScrapers";
 
@@ -105,6 +107,8 @@ const TABS = [
   { id: "appearance", label: "Appearance" },
   { id: "research", label: "Research pipeline" },
   { id: "sources", label: "Sources" },
+  { id: "benchmarks", label: "Industry benchmarks" },
+  { id: "raters", label: "Rater ratings" },
   { id: "models", label: "Models" },
   { id: "feedback", label: "Feedback" },
 ] as const;
@@ -687,6 +691,10 @@ export default function SettingsPage() {
         )}
       </section>
       )}
+
+      {tab === "benchmarks" && <BenchmarksPanel />}
+
+      {tab === "raters" && <RatersPanel />}
 
       {tab === "models" && <ModelProviderPanel />}
 

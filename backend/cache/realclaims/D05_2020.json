@@ -1,0 +1,107 @@
+{
+  "rows": [
+    {
+      "topic_id": "employee_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Another study by the University of Cambridge in 2019 found that Chinese technology small and medium enterprises with gender-balanced management teams performed better during adverse conditions, posting a 19.5% and 24.8% rise in proﬁtability and return on assets, respectively2.",
+      "source_sentence": "Another study by the University of Cambridge in 2019 found that Chinese technology small and medium enterprises with gender-balanced management teams performed better during adverse conditions, posting a 19.5% and 24.8% rise in proﬁtability and return on assets, respectively2.",
+      "source_doc": "DBSTR SustainabilityESG",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/responsible-banking/DBSTR_SustainabilityESG.pdf",
+      "source_page": 1,
+      "weight": 0.1,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "ASSERTED",
+      "text": "Sustainability has proven an eﬀective risk management tool for companies and investors alike.",
+      "source_sentence": "Sustainability has proven an eﬀective risk management tool for companies and investors alike.",
+      "source_doc": "DBSTR SustainabilityESG",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/responsible-banking/DBSTR_SustainabilityESG.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "employee_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Retrieved 2 June, 2020, from https://www.morningstar.com/articles/961765/sustainable-fund-ﬂows-in-2019-smash-previous-records 7 AI-CIO, “CalPERS Puts ‘Laser-Like Focus’ on ESG, Board Diversity, and Executive Pay”.",
+      "source_sentence": "Retrieved 2 June, 2020, from https://www.morningstar.com/articles/961765/sustainable-fund-ﬂows-in-2019-smash-previous-records 7 AI-CIO, “CalPERS Puts ‘Laser-Like Focus’ on ESG, Board Diversity, and Executive Pay”.",
+      "source_doc": "DBSTR SustainabilityESG",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/responsible-banking/DBSTR_SustainabilityESG.pdf",
+      "source_page": 1,
+      "weight": 0.1,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "employee_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Retrieved 3 June 2020, from https://www.ai-cio.com/news/calpers-puts-laser-like-focus-esg-board-diversity-executive-pay/ 8 Bloomberg News, “World’s Biggest Wealth Fund Tells Firms to Give It More ESG Data”.",
+      "source_sentence": "Retrieved 3 June 2020, from https://www.ai-cio.com/news/calpers-puts-laser-like-focus-esg-board-diversity-executive-pay/ 8 Bloomberg News, “World’s Biggest Wealth Fund Tells Firms to Give It More ESG Data”.",
+      "source_doc": "DBSTR SustainabilityESG",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/responsible-banking/DBSTR_SustainabilityESG.pdf",
+      "source_page": 1,
+      "weight": 0.1,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "financed_emissions",
+      "pillar": "E",
+      "state": "INFERRED",
+      "text": "The company likely aligns its portfolio with net-zero goals by prioritizing green financing and sustainable loans, given its emphasis on ESG leadership and risk mitigation.",
+      "source_sentence": null,
+      "source_doc": "DBSTR SustainabilityESG",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/responsible-banking/DBSTR_SustainabilityESG.pdf",
+      "source_page": null,
+      "weight": 0.25,
+      "inferred": true,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "business_ethics",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company probably upholds business ethics through a robust code of conduct and whistleblowing mechanisms, inferred from its focus on corporate governance and ESG compliance.",
+      "source_sentence": null,
+      "source_doc": "DBSTR SustainabilityESG",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/responsible-banking/DBSTR_SustainabilityESG.pdf",
+      "source_page": null,
+      "weight": 0.2,
+      "inferred": true,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "data_security",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company presumably implements stringent cybersecurity measures to protect client data, consistent with its risk-averse approach to ESG and reputation management.",
+      "source_sentence": null,
+      "source_doc": "DBSTR SustainabilityESG",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/responsible-banking/DBSTR_SustainabilityESG.pdf",
+      "source_page": null,
+      "weight": 0.15,
+      "inferred": true,
+      "report_year": 2020
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "INFERRED",
+      "text": "The company likely supports financial inclusion through targeted programs for underserved communities or SMEs, reflecting its alignment with SDGs and social sustainability themes.",
+      "source_sentence": null,
+      "source_doc": "DBSTR SustainabilityESG",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/responsible-banking/DBSTR_SustainabilityESG.pdf",
+      "source_page": null,
+      "weight": 0.15,
+      "inferred": true,
+      "report_year": 2020
+    }
+  ],
+  "report_year": 2020,
+  "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/responsible-banking/DBSTR_SustainabilityESG.pdf",
+  "source_title": "DBSTR SustainabilityESG"
+}

@@ -11,18 +11,18 @@
   },
   "evidence": {
     "company_id": "C09",
-    "year": 2023,
-    "total": 74.0,
+    "year": 2024,
+    "total": 63.5,
     "pillars": {
-      "E": 78.0,
-      "S": 50.0,
+      "E": 67.33,
+      "S": 25.0,
       "G": 70.0
     },
-    "confidence": 0.421,
+    "confidence": 0.395,
     "absent_topics": [],
     "trace": {
-      "label": "Evidence Score 2023",
-      "value": 74.0,
+      "label": "Evidence Score 2024",
+      "value": 63.5,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -30,112 +30,12 @@
       "children": [
         {
           "label": "Pillar E",
-          "value": 78.0,
+          "value": 67.33,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
-            {
-              "label": "ghg_emissions (w=0.2, credit=1.0)",
-              "value": 100.0,
-              "contribution": 0.2,
-              "source_sentence": null,
-              "source_doc": null,
-              "source_page": null,
-              "children": [
-                {
-                  "label": "[VERIFIED] Founded on our ethos, ‘Conserving as We Construct’ for three decades, CDL prioritises sust",
-                  "value": null,
-                  "contribution": 0.2,
-                  "source_sentence": "Founded on our ethos, ‘Conserving as We Construct’ for three decades, CDL prioritises sustainable construction practices, incorporating low-carbon and energy-efficient technologies in the way we design, build and manage our buildings.",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Cooling and decarbonising by greening will be our strategic focus as we move towards a nat",
-                  "value": null,
-                  "contribution": 0.1,
-                  "source_sentence": "Cooling and decarbonising by greening will be our strategic focus as we move towards a nature-positive future, by actively monitoring our processes and mitigating nature-related risks.",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Launched CDL SME Supplier Decarbonisation Queen Bee Programme with partners to empower our",
-                  "value": null,
-                  "contribution": 0.1,
-                  "source_sentence": "Launched CDL SME Supplier Decarbonisation Queen Bee Programme with partners to empower our supply chain towards a low-carbon future",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Businesses play a crucial role in the global endeavour to achieve net-zero emissions and p",
-                  "value": null,
-                  "contribution": 0.1,
-                  "source_sentence": "Businesses play a crucial role in the global endeavour to achieve net-zero emissions and protect nature.",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] In September 2024, the Singapore Exchange Regulation (SGX RegCo) announced that beginning ",
-                  "value": null,
-                  "contribution": 0.1,
-                  "source_sentence": "In September 2024, the Singapore Exchange Regulation (SGX RegCo) announced that beginning with financial year (FY) 2025, all listed issuers will be required to report their Scope 1 and Scope 2 greenhouse gases (GHG) emissions, incorporating the climate-related requirements aligned with the International Financial Reporting Standards (IFRS) Sustainability Disclosure Standards issued by the International Sustainability Standards Board (ISSB).",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Larger issuers by market capitalisation will likely need to report Scope 3 GHG emissions f",
-                  "value": null,
-                  "contribution": 0.1,
-                  "source_sentence": "Larger issuers by market capitalisation will likely need to report Scope 3 GHG emissions from FY2026.",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] We have been pragmatically integrating sustainability solutions into our GET (Growth, Enha",
-                  "value": null,
-                  "contribution": 0.1,
-                  "source_sentence": "We have been pragmatically integrating sustainability solutions into our GET (Growth, Enhancement and Transformation) strategy, focusing on four key sustainability pillars – Integration, Innovation, Investment and Impact – with four key deliverables: “Decarbonisation”, “Digitalisation and Innovation”, “Disclosure and Communication”, and “Defence through mitigation and adaptation”.",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Implemented a carbon sequestration and activation system for Ready Mixed Concrete for the ",
-                  "value": null,
-                  "contribution": 0.1,
-                  "source_sentence": "At our Executive Condominium (EC) project, Copen Grand, we implemented a carbon sequestration and activation system for Ready Mixed Concrete for the clubhouse structures.",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] The concrete at Copen Grand has up to 80% cement replacement and uses carbon dioxide to en",
-                  "value": null,
-                  "contribution": 0.1,
-                  "source_sentence": "The concrete has up to 80% cement replacement and uses carbon dioxide to enhance the properties of the concrete.",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Replaced diesel-powered generators at Irwell Hill Residences project site with an energy s",
-                  "value": null,
-                  "contribution": 0.1,
-                  "source_sentence": "In 2022, we replaced diesel-powered generators at our Irwell Hill Residences project site with an energy storage system, reducing construction-related carbon emissions by up to 80%.",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                }
-              ]
-            },
             {
               "label": "climate_resilience (w=0.2, credit=0.7)",
               "value": 70.0,
@@ -145,47 +45,327 @@
               "source_page": null,
               "children": [
                 {
-                  "label": "[ASSERTED] By taking responsibility for our impact, we continue to build stakeholder confidence and l",
+                  "label": "[ASSERTED] The Company’s pioneering and voluntary adoption of the TCFD Recommendations since 2017 pro",
                   "value": null,
                   "contribution": 0.1,
-                  "source_sentence": "By taking responsibility for our impact, we continue to build stakeholder confidence and long-term resilience for our business.",
-                  "source_doc": "CDL ISR 2025",
+                  "source_sentence": "The Company’s pioneering and voluntary adoption of the TCFD Recommendations since 2017 provides climate-related financial information for ESG investors to make informed investment decisions.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
                   "source_page": 1,
                   "children": []
                 },
                 {
-                  "label": "[ASSERTED] Regulators, investors, insurers and banks are progressively using sustainability criteria ",
+                  "label": "[ASSERTED] The findings of our 2023 materiality assessment revealed that “Climate Resilience and Adap",
                   "value": null,
                   "contribution": 0.1,
-                  "source_sentence": "Regulators, investors, insurers and banks are progressively using sustainability criteria alongside financial performance to evaluate companies’ long-term resilience and prospects.",
-                  "source_doc": "CDL ISR 2025",
+                  "source_sentence": "The findings of our 2023 materiality assessment revealed that “Climate Resilience and Adaptation” remains one of our top three material ESG issues.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
                   "source_page": 1,
                   "children": []
                 },
                 {
-                  "label": "[ASSERTED] Maintaining Supply Chain and Operational Resilience Amidst ongoing global uncertainties, c",
+                  "label": "[ASSERTED] CDL is proud to be one of the first few companies in Singapore to have adopted TCFD report",
                   "value": null,
                   "contribution": 0.1,
-                  "source_sentence": "Maintaining Supply Chain and Operational Resilience Amidst ongoing global uncertainties, challenges and shifting priorities, CDL remains steadfast in integrating sustainability principles into our business model and future-ready strategy.",
-                  "source_doc": "CDL ISR 2025",
+                  "source_sentence": "CDL is proud to be one of the first few companies in Singapore to have adopted TCFD reporting in 2017, and has been consistently expanding our level of disclosure since.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
                   "source_page": 1,
                   "children": []
                 },
                 {
-                  "label": "[ASSERTED] The health of our planet is inextricably linked to the resilience of our people, economies",
+                  "label": "[ASSERTED] Climate resilience and adaptation remained one of the Group’s top three material topics in",
                   "value": null,
                   "contribution": 0.1,
-                  "source_sentence": "The health of our planet is inextricably linked to the resilience of our people, economies and businesses.",
-                  "source_doc": "CDL ISR 2025",
+                  "source_sentence": "Climate resilience and adaptation remained one of the Group’s top three material topics in 2023.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
                   "source_page": 1,
                   "children": []
                 },
                 {
-                  "label": "[ASSERTED] The ‘We Love Our Planet’ exhibition highlighted the indispensable role of nature and biodi",
+                  "label": "[ASSERTED] The Group recognises that climate risks are business risks.",
                   "value": null,
                   "contribution": 0.1,
-                  "source_sentence": "This exhibition highlighted the indispensable role of nature and biodiversity in supporting ecosystem resilience and addressing the climate crisis.",
-                  "source_doc": "CDL ISR 2025",
+                  "source_sentence": "The Group recognises that climate risks are business risks.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "label": "ghg_emissions (w=0.2, credit=0.7)",
+              "value": 70.0,
+              "contribution": 0.14,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": [
+                {
+                  "label": "[ASSERTED] The Group’s carbon mitigation strategy has been largely focused on addressing Scope 2 emis",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "The Group’s carbon mitigation strategy has been largely focused on addressing Scope 2 emissions as electricity usage forms the largest source of emissions for our core operations in Singapore.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] In December 2023, the Company became the first Singapore corporate to secure the OCBC 1.5°",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "In December 2023, the Company became the first Singapore corporate to secure the OCBC 1.5°C loan, Singapore’s first net-zero-aligned loan for corporates to drive the transition to a low carbon economy.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] The Company is dedicated to strengthening the climate resiliency of our portfolio by setti",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "The Company is dedicated to strengthening the climate resiliency of our portfolio by setting targets towards carbon mitigation and environmental protection.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] Our net-zero commitment covers Scope 1, 2 and 3 emissions and includes different phases of",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "Our net-zero commitment covers Scope 1, 2 and 3 emissions and includes different phases of strategic action required by key stakeholders, to tackle the transition process identified under each scope.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] The team explores innovative carbon reduction solutions and partnerships in tandem with th",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "The team explores innovative carbon reduction solutions and partnerships in tandem with the Company’s Enterprise Innovation Committee, formed in 2018 to promote cross-departmental collaboration to accelerate the Group’s innovation journey.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] In 2018, we were the first real estate company in Singapore to set carbon emissions reduct",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "In 2018, we were the first real estate company in Singapore to set carbon emissions reduction targets validated by the SBTi based on a 2°C warmer scenario.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] In 2021, we stepped up our decarbonisation commitment with more ambitious SBTi-validated t",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "In 2021, we stepped up our decarbonisation commitment with more ambitious SBTi-validated targets, aligned with a 1.5°C scenario.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] The revised SBTi-validated targets also support our WorldGBC Net Zero Carbon Buildings Com",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "The revised SBTi-validated targets also support our WorldGBC Net Zero Carbon Buildings Commitment.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] The Company was the first real estate conglomerate in Southeast Asia to sign the commitmen",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "The Company was the first real estate conglomerate in Southeast Asia to sign the commitment in February 2021 to achieve net-zero operational carbon by 2030.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] The Company has since extended our pledge towards a net-zero whole life carbon-built envir",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "The Company has since extended our pledge towards a net-zero whole life carbon-built environment, including reducing embodied carbon.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] Through this expanded commitment, new and existing wholly-owned assets under our direct ma",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "Through this expanded commitment, new and existing wholly-owned assets under our direct management and operational control, will operate at net-zero carbon and achieve maximum embodied carbon reduction in new developments, compensating for any remaining residual operational and upfront embodied emissions via offsetting by 2030.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] Commit to achieving net-zero operational carbon for new and existing wholly-owned assets u",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "Commit to achieving net-zero operational carbon for new and existing wholly-owned assets under direct operational and management control.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] Maximise reduction in embodied carbon and compensate for any residual upfront emissions vi",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "Maximise reduction in embodied carbon and compensate for any residual upfront emissions via offsetting for new developments and major renovations.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] Measure and publicly disclose Scope 1 and 2 emissions, embodied carbon emissions and energ",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "Measure and publicly disclose Scope 1 and 2 emissions, embodied carbon emissions and energy consumption by assessing annual asset and portfolio energy demand and carbon emissions against set targets.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] Adopt sustainable building designs, materials and supply chain practices to reduce upfront",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "Adopt sustainable building designs, materials and supply chain practices to reduce upfront embodied carbon and offset any residual upfront emissions.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] Verify and report lifecycle assessment for embodied carbon at asset level for new developm",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "Verify and report lifecycle assessment for embodied carbon at asset level for new developments.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] Engage and influence value chain and building users to support and build towards a wider t",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "Engage and influence value chain and building users to support and build towards a wider transition to a net-zero whole life carbon-built environment.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] By 2030, all new buildings, infrastructure and renovations will have at least 40% less emb",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "By 2030, all new buildings, infrastructure and renovations will have at least 40% less embodied carbon with significant upfront carbon reduction and all new buildings will be net-zero operational carbon.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] By 2050, new buildings, infrastructure and renovations will have net-zero embodied carbon ",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "By 2050, new buildings, infrastructure and renovations will have net-zero embodied carbon and all buildings, including existing buildings must be net-zero operational carbon.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] Aside from physical risks arising from climate change, regulatory transition risks can res",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "Aside from physical risks arising from climate change, regulatory transition risks can result in stricter emission standards, increased carbon tax and water pricing, and stricter building design requirements.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] To align with globally-recognised standards in carbon emissions measurement and reporting,",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "To align with globally-recognised standards in carbon emissions measurement and reporting, we became the first developer in Singapore in 2016 to validate our GHG emissions data against the stringent ISO 14064 certification in GHG emissions reporting.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] The verification covers stringent audits of processes on GHG emissions control and a revie",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "e assurance level, the verification covers stringent audits of processes on GHG emissions control and a review of emission factors used for diesel, petrol, refrigerant gases, electricity grid, transmission and distribution losses, employee commuting and business air travel.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] Electricity consumption has long been identified as a significant climate-related risk for",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "Electricity consumption has long been identified as a significant climate-related risk for the Company, as it forms the largest source of emissions for our core operations in Singapore (reported as Scope 2 emissions).",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] Key metrics include carbon emissions, embodied carbon, energy and water usage, and waste m",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "Key metrics include carbon emissions, embodied carbon, energy and water usage, and waste management, which are published in our quarterly reports and ISR.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] The Group has been disclosing Scope 1, 2 and 3 GHG emissions for our core operations and s",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "The Group has been disclosing Scope 1, 2 and 3 GHG emissions for our core operations and six key subsidiaries in our ISRs since 2015.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] To ensure proper accounting of our GHG emissions, we scope our emission streams in accorda",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "To ensure proper accounting of our GHG emissions, we scope our emission streams in accordance with the GHG Protocol Corporate Accounting and Reporting Standard.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] To further demonstrate our environmental practices’ alignment with international best prac",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "To further demonstrate our environmental practices’ alignment with international best practices, we were the first Singapore developer in 2016 to have our GHG emissions data, for our corporate office, industrial buildings, commercial buildings and development sites, externally validated against ISO 14064 on GHG verification.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] In February 2023, we were the first organisation to be verified by LRQA in Singapore for t",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "In February 2023, we were the first organisation to be verified by LRQA in Singapore for the indirect GHG emissions from products used in relation to its building construction projects in Singapore in accordance with category 4 of the ISO 14064-1:2018 standard.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] The Company’s climate-related targets such as those related to GHG emissions, water and en",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "The Company’s climate-related targets such as those related to GHG emissions, water and energy usage, and waste generation, in line with regulatory and voluntary requirements, are published in our annual ISR.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": 1,
+                  "children": []
+                },
+                {
+                  "label": "[ASSERTED] We established our first carbon emissions intensity reduction target in 2011 and voluntari",
+                  "value": null,
+                  "contribution": 0.1,
+                  "source_sentence": "We established our first carbon emissions intensity reduction target in 2011 and voluntarily raised the target from 25% to 38% by 2030 (from 2007 levels) in 2017.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
                   "source_page": 1,
                   "children": []
                 }
@@ -200,57 +380,39 @@
               "source_page": null,
               "children": [
                 {
-                  "label": "[ASSERTED] Achieved BCA Green Mark Platinum SLE awards for City House, Palais Renaissance, The Orie, ",
+                  "label": "[ASSERTED] Reduce energy consumption for construction and operations of assets, by implementing energ",
                   "value": null,
                   "contribution": 0.125,
-                  "source_sentence": "Achieved BCA Green Mark Platinum SLE awards for City House, Palais Renaissance, The Orie, Norwood Grand and Union Square Residences",
-                  "source_doc": "CDL ISR 2025",
+                  "source_sentence": "Reduce energy consumption for construction and operations of assets, by implementing energy efficiency measures and transition to 100% renewable energy via on-site production or procurement of clean energy, e.g., Renewable Energy Certificates.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
                   "source_page": 1,
                   "children": []
                 },
                 {
-                  "label": "[ASSERTED] 129 BCA Green Mark certifications for our developments and office interiors* – one of the ",
+                  "label": "[ASSERTED] With the urgency of the global energy transition, “Energy Efficiency and Adoption of Renew",
                   "value": null,
                   "contribution": 0.125,
-                  "source_sentence": "129 BCA Green Mark certifications for our developments and office interiors* – one of the leading private developers with most awarded BCA Green Mark Platinum certificates",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] First Singapore real estate developer to sign World Green Building Council’s (WorldGBC) Ne",
-                  "value": null,
-                  "contribution": 0.125,
-                  "source_sentence": "First Singapore real estate developer to sign World Green Building Council’s (WorldGBC) Net Zero Carbon Buildings Commitment",
-                  "source_doc": "CDL ISR 2025",
+                  "source_sentence": "With the urgency of the global energy transition, “Energy Efficiency and Adoption of Renewables” rose to become the top materiality issue in 2023, followed by “Climate Resilience and Adaptation” and “Innovation”.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
                   "source_page": 1,
                   "children": []
                 }
               ]
             },
             {
-              "label": "water_management (w=0.1, credit=0.7)",
-              "value": 70.0,
-              "contribution": 0.07,
+              "label": "water_management (w=0.1, credit=0.5)",
+              "value": 50.0,
+              "contribution": 0.05,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
               "children": [
                 {
-                  "label": "[ASSERTED] Maintained Double ‘A’s in CDP for climate change (since 2018) and water security (since 20",
+                  "label": "[ASSERTED] Beyond managing climate-related risks and opportunities under the ERM framework, the Compa",
                   "value": null,
                   "contribution": 0.05,
-                  "source_sentence": "Maintained Double ‘A’s in CDP for climate change (since 2018) and water security (since 2019)",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] We maintained our position on 14 international benchmarks and achieved double ‘A’s in the ",
-                  "value": null,
-                  "contribution": 0.05,
-                  "source_sentence": "We maintained our position on 14 international benchmarks and achieved double ‘A’s in the 2024 CDP A List for corporate climate action and water security.",
-                  "source_doc": "CDL ISR 2025",
+                  "source_sentence": "Beyond managing climate-related risks and opportunities under the ERM framework, the Company also manages operational risks pertaining to energy, water and supply of raw materials by adopting ISO management system standards that are internationally recognised and widely adopted.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
                   "source_page": 1,
                   "children": []
                 }
@@ -260,27 +422,27 @@
         },
         {
           "label": "Pillar S",
-          "value": 50.0,
+          "value": 25.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "tenant_sustainability (w=0.1, credit=0.5)",
-              "value": 50.0,
-              "contribution": 0.05,
+              "label": "tenant_sustainability (w=0.1, credit=0.25)",
+              "value": 25.0,
+              "contribution": 0.025,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
               "children": [
                 {
-                  "label": "[ASSERTED] First Singapore real estate company to roll out Green Lease campaign in 2014, in partnersh",
+                  "label": "[INFERRED] The company likely promotes tenant sustainability through green lease clauses and engageme",
                   "value": null,
-                  "contribution": 0.05,
-                  "source_sentence": "First Singapore real estate company to roll out Green Lease campaign in 2014, in partnership with Tuas Power and supported by BCA, and first to launch the City Green Tenant Bonus Programme in 2024; achieved 100% retail and office tenant participation in CDL Green Lease Partnership Programme since 2017",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
+                  "contribution": 0.025,
+                  "source_sentence": "The company likely promotes tenant sustainability through green lease clauses and engagement programs, given its strong focus on climate resilience and green building practices in its portfolio.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
+                  "source_page": null,
                   "children": []
                 }
               ]
@@ -304,29 +466,20 @@
               "source_page": null,
               "children": [
                 {
-                  "label": "[ASSERTED] CDL integrates sustainability at the highest governance level to enable strategic oversigh",
+                  "label": "[ASSERTED] This assessment determines the key economic, environmental, social and governance (EESG) i",
                   "value": null,
                   "contribution": 0.075,
-                  "source_sentence": "At CDL, integrating sustainability at the highest governance level enables strategic oversight of ESG issues for long-term value creation.",
-                  "source_doc": "CDL ISR 2025",
+                  "source_sentence": "This assessment determines the key economic, environmental, social and governance (EESG) issues that are important to our stakeholders.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
                   "source_page": 1,
                   "children": []
                 },
                 {
-                  "label": "[ASSERTED] CDL’s sustainability governance, management and disclosures are in line with or ahead of g",
+                  "label": "[ASSERTED] The Board is responsible for the governance of risk across the Group, while ensuring that ",
                   "value": null,
                   "contribution": 0.075,
-                  "source_sentence": "The Company’s sustainability governance, management and disclosures are in line with or ahead of the global best practices and SGX RegCo’s mandate on climate disclosures and board supervision.",
-                  "source_doc": "CDL ISR 2025",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] 30% of CDL’s ExCo members’ remuneration is contingent on hitting the Group’s ESG targets, ",
-                  "value": null,
-                  "contribution": 0.075,
-                  "source_sentence": "30% of our ExCo members’ remuneration is contingent on hitting the Group’s ESG targets, with a respective weightage of 5% for Environmental, 10% for Governance targets and 15% for Social targets.",
-                  "source_doc": "CDL ISR 2025",
+                  "source_sentence": "The Board is responsible for the governance of risk across the Group, while ensuring that Management maintains a sound system of risk management and internal controls.",
+                  "source_doc": "TCFD SASB Reporting ISR2024",
                   "source_page": 1,
                   "children": []
                 }
@@ -340,36 +493,46 @@
   "series": [
     {
       "year": 2019,
-      "total": 95.0,
+      "total": 42.75,
       "pillars": {
-        "E": 100.0,
+        "E": 45.33,
         "S": 50.0,
-        "G": 100.0
+        "G": 25.0
       },
-      "confidence": 0.792
+      "confidence": 0.325
     },
     {
       "year": 2020,
-      "total": 95.0,
+      "total": 42.75,
       "pillars": {
-        "E": 100.0,
-        "S": 50.0,
-        "G": 100.0
+        "E": 48.67,
+        "S": 25.0,
+        "G": 25.0
       },
-      "confidence": 0.792
+      "confidence": 0.333
     },
     {
       "year": 2021,
-      "total": 95.0,
+      "total": 57.25,
       "pillars": {
-        "E": 100.0,
+        "E": 64.67,
         "S": 50.0,
-        "G": 100.0
+        "G": 25.0
       },
-      "confidence": 0.792
+      "confidence": 0.39
     },
     {
       "year": 2022,
+      "total": 53.0,
+      "pillars": {
+        "E": 60.67,
+        "S": null,
+        "G": 50.0
+      },
+      "confidence": 0.32
+    },
+    {
+      "year": 2023,
       "total": 90.0,
       "pillars": {
         "E": 93.33,
@@ -379,37 +542,84 @@
       "confidence": 0.708
     },
     {
-      "year": 2023,
-      "total": 74.0,
+      "year": 2024,
+      "total": 63.5,
       "pillars": {
-        "E": 78.0,
-        "S": 50.0,
+        "E": 67.33,
+        "S": 25.0,
         "G": 70.0
       },
-      "confidence": 0.421
+      "confidence": 0.395
     }
   ],
   "raters": {
     "company_id": "C09",
-    "msci_pct": 42.86,
-    "sp_pct": 81.25,
-    "sustainalytics_pct": 81.25,
-    "consensus": 68.45,
-    "divergence": 38.39,
+    "msci_pct": 60.0,
+    "sp_pct": 85.0,
+    "sustainalytics_pct": 80.0,
+    "cdp_pct": null,
+    "real_raters": [],
+    "basis": "all companies",
+    "peers": 10,
+    "consensus": 75.0,
+    "divergence": 25.0,
+    "consensus_provenance": "illustrative",
+    "divergence_provenance": "illustrative",
+    "contributing": [
+      "msci",
+      "sp",
+      "sustainalytics"
+    ],
+    "rater_provenance": {
+      "msci": {
+        "real": false,
+        "source": null,
+        "url": null,
+        "observed_on": null,
+        "value_raw": null
+      },
+      "sp": {
+        "real": false,
+        "source": null,
+        "url": null,
+        "observed_on": null,
+        "value_raw": null
+      },
+      "sustainalytics": {
+        "real": false,
+        "source": null,
+        "url": null,
+        "observed_on": null,
+        "value_raw": null
+      },
+      "cdp": {
+        "real": true,
+        "source": "CDP public scores table",
+        "url": "https://www.cdp.net/en/data/scores",
+        "observed_on": "2025",
+        "value_raw": "A"
+      }
+    },
     "msci_real": false,
     "msci_source": null,
     "msci_url": null
   },
   "signal": {
     "company_id": "C09",
-    "proof_up": false,
+    "proof_up": true,
     "opinion_flat": true,
-    "price_flat": null,
-    "is_underpriced_improver": false,
-    "evidence_gap": -37.2,
-    "momentum": -4.7,
-    "esg_today": 68.45,
-    "quadrant": "OVERRATED",
+    "price_flat": true,
+    "is_underpriced_improver": true,
+    "evidence_pct": 65.0,
+    "evidence_basis": "all companies",
+    "evidence_peers": 10,
+    "evidence_gap": -10.0,
+    "momentum": 6.893,
+    "esg_today": 75.0,
+    "quadrant": "FUTURE_LEADERS",
+    "esg_today_provenance": "illustrative",
+    "evidence_gap_provenance": "illustrative",
+    "quadrant_provenance": "illustrative",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -419,16 +629,16 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=False (evidence momentum -4.7/yr, verified-driven)",
-          "value": -4.7,
+          "label": "proof_up=True (evidence momentum 6.893/yr, verified-driven)",
+          "value": 6.893,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "Evidence Score 2023",
-              "value": 74.0,
+              "label": "Evidence Score 2024",
+              "value": 63.5,
               "contribution": null,
               "source_sentence": null,
               "source_doc": null,
@@ -436,112 +646,12 @@
               "children": [
                 {
                   "label": "Pillar E",
-                  "value": 78.0,
+                  "value": 67.33,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
-                    {
-                      "label": "ghg_emissions (w=0.2, credit=1.0)",
-                      "value": 100.0,
-                      "contribution": 0.2,
-                      "source_sentence": null,
-                      "source_doc": null,
-                      "source_page": null,
-                      "children": [
-                        {
-                          "label": "[VERIFIED] Founded on our ethos, ‘Conserving as We Construct’ for three decades, CDL prioritises sust",
-                          "value": null,
-                          "contribution": 0.2,
-                          "source_sentence": "Founded on our ethos, ‘Conserving as We Construct’ for three decades, CDL prioritises sustainable construction practices, incorporating low-carbon and energy-efficient technologies in the way we design, build and manage our buildings.",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Cooling and decarbonising by greening will be our strategic focus as we move towards a nat",
-                          "value": null,
-                          "contribution": 0.1,
-                          "source_sentence": "Cooling and decarbonising by greening will be our strategic focus as we move towards a nature-positive future, by actively monitoring our processes and mitigating nature-related risks.",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Launched CDL SME Supplier Decarbonisation Queen Bee Programme with partners to empower our",
-                          "value": null,
-                          "contribution": 0.1,
-                          "source_sentence": "Launched CDL SME Supplier Decarbonisation Queen Bee Programme with partners to empower our supply chain towards a low-carbon future",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Businesses play a crucial role in the global endeavour to achieve net-zero emissions and p",
-                          "value": null,
-                          "contribution": 0.1,
-                          "source_sentence": "Businesses play a crucial role in the global endeavour to achieve net-zero emissions and protect nature.",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] In September 2024, the Singapore Exchange Regulation (SGX RegCo) announced that beginning ",
-                          "value": null,
-                          "contribution": 0.1,
-                          "source_sentence": "In September 2024, the Singapore Exchange Regulation (SGX RegCo) announced that beginning with financial year (FY) 2025, all listed issuers will be required to report their Scope 1 and Scope 2 greenhouse gases (GHG) emissions, incorporating the climate-related requirements aligned with the International Financial Reporting Standards (IFRS) Sustainability Disclosure Standards issued by the International Sustainability Standards Board (ISSB).",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Larger issuers by market capitalisation will likely need to report Scope 3 GHG emissions f",
-                          "value": null,
-                          "contribution": 0.1,
-                          "source_sentence": "Larger issuers by market capitalisation will likely need to report Scope 3 GHG emissions from FY2026.",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] We have been pragmatically integrating sustainability solutions into our GET (Growth, Enha",
-                          "value": null,
-                          "contribution": 0.1,
-                          "source_sentence": "We have been pragmatically integrating sustainability solutions into our GET (Growth, Enhancement and Transformation) strategy, focusing on four key sustainability pillars – Integration, Innovation, Investment and Impact – with four key deliverables: “Decarbonisation”, “Digitalisation and Innovation”, “Disclosure and Communication”, and “Defence through mitigation and adaptation”.",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Implemented a carbon sequestration and activation system for Ready Mixed Concrete for the ",
-                          "value": null,
-                          "contribution": 0.1,
-                          "source_sentence": "At our Executive Condominium (EC) project, Copen Grand, we implemented a carbon sequestration and activation system for Ready Mixed Concrete for the clubhouse structures.",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] The concrete at Copen Grand has up to 80% cement replacement and uses carbon dioxide to en",
-                          "value": null,
-                          "contribution": 0.1,
-                          "source_sentence": "The concrete has up to 80% cement replacement and uses carbon dioxide to enhance the properties of the concrete.",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Replaced diesel-powered generators at Irwell Hill Residences project site with an energy s",
-                          "value": null,
-                          "contribution": 0.1,
-                          "source_sentence": "In 2022, we replaced diesel-powered generators at our Irwell Hill Residences project site with an energy storage system, reducing construction-related carbon emissions by up to 80%.",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        }
-                      ]
-                    },
                     {
                       "label": "climate_resilience (w=0.2, credit=0.7)",
                       "value": 70.0,
@@ -551,47 +661,327 @@
                       "source_page": null,
                       "children": [
                         {
-                          "label": "[ASSERTED] By taking responsibility for our impact, we continue to build stakeholder confidence and l",
+                          "label": "[ASSERTED] The Company’s pioneering and voluntary adoption of the TCFD Recommendations since 2017 pro",
                           "value": null,
                           "contribution": 0.1,
-                          "source_sentence": "By taking responsibility for our impact, we continue to build stakeholder confidence and long-term resilience for our business.",
-                          "source_doc": "CDL ISR 2025",
+                          "source_sentence": "The Company’s pioneering and voluntary adoption of the TCFD Recommendations since 2017 provides climate-related financial information for ESG investors to make informed investment decisions.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
                           "source_page": 1,
                           "children": []
                         },
                         {
-                          "label": "[ASSERTED] Regulators, investors, insurers and banks are progressively using sustainability criteria ",
+                          "label": "[ASSERTED] The findings of our 2023 materiality assessment revealed that “Climate Resilience and Adap",
                           "value": null,
                           "contribution": 0.1,
-                          "source_sentence": "Regulators, investors, insurers and banks are progressively using sustainability criteria alongside financial performance to evaluate companies’ long-term resilience and prospects.",
-                          "source_doc": "CDL ISR 2025",
+                          "source_sentence": "The findings of our 2023 materiality assessment revealed that “Climate Resilience and Adaptation” remains one of our top three material ESG issues.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
                           "source_page": 1,
                           "children": []
                         },
                         {
-                          "label": "[ASSERTED] Maintaining Supply Chain and Operational Resilience Amidst ongoing global uncertainties, c",
+                          "label": "[ASSERTED] CDL is proud to be one of the first few companies in Singapore to have adopted TCFD report",
                           "value": null,
                           "contribution": 0.1,
-                          "source_sentence": "Maintaining Supply Chain and Operational Resilience Amidst ongoing global uncertainties, challenges and shifting priorities, CDL remains steadfast in integrating sustainability principles into our business model and future-ready strategy.",
-                          "source_doc": "CDL ISR 2025",
+                          "source_sentence": "CDL is proud to be one of the first few companies in Singapore to have adopted TCFD reporting in 2017, and has been consistently expanding our level of disclosure since.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
                           "source_page": 1,
                           "children": []
                         },
                         {
-                          "label": "[ASSERTED] The health of our planet is inextricably linked to the resilience of our people, economies",
+                          "label": "[ASSERTED] Climate resilience and adaptation remained one of the Group’s top three material topics in",
                           "value": null,
                           "contribution": 0.1,
-                          "source_sentence": "The health of our planet is inextricably linked to the resilience of our people, economies and businesses.",
-                          "source_doc": "CDL ISR 2025",
+                          "source_sentence": "Climate resilience and adaptation remained one of the Group’s top three material topics in 2023.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
                           "source_page": 1,
                           "children": []
                         },
                         {
-                          "label": "[ASSERTED] The ‘We Love Our Planet’ exhibition highlighted the indispensable role of nature and biodi",
+                          "label": "[ASSERTED] The Group recognises that climate risks are business risks.",
                           "value": null,
                           "contribution": 0.1,
-                          "source_sentence": "This exhibition highlighted the indispensable role of nature and biodiversity in supporting ecosystem resilience and addressing the climate crisis.",
-                          "source_doc": "CDL ISR 2025",
+                          "source_sentence": "The Group recognises that climate risks are business risks.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "label": "ghg_emissions (w=0.2, credit=0.7)",
+                      "value": 70.0,
+                      "contribution": 0.14,
+                      "source_sentence": null,
+                      "source_doc": null,
+                      "source_page": null,
+                      "children": [
+                        {
+                          "label": "[ASSERTED] The Group’s carbon mitigation strategy has been largely focused on addressing Scope 2 emis",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "The Group’s carbon mitigation strategy has been largely focused on addressing Scope 2 emissions as electricity usage forms the largest source of emissions for our core operations in Singapore.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] In December 2023, the Company became the first Singapore corporate to secure the OCBC 1.5°",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "In December 2023, the Company became the first Singapore corporate to secure the OCBC 1.5°C loan, Singapore’s first net-zero-aligned loan for corporates to drive the transition to a low carbon economy.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] The Company is dedicated to strengthening the climate resiliency of our portfolio by setti",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "The Company is dedicated to strengthening the climate resiliency of our portfolio by setting targets towards carbon mitigation and environmental protection.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] Our net-zero commitment covers Scope 1, 2 and 3 emissions and includes different phases of",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "Our net-zero commitment covers Scope 1, 2 and 3 emissions and includes different phases of strategic action required by key stakeholders, to tackle the transition process identified under each scope.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] The team explores innovative carbon reduction solutions and partnerships in tandem with th",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "The team explores innovative carbon reduction solutions and partnerships in tandem with the Company’s Enterprise Innovation Committee, formed in 2018 to promote cross-departmental collaboration to accelerate the Group’s innovation journey.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] In 2018, we were the first real estate company in Singapore to set carbon emissions reduct",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "In 2018, we were the first real estate company in Singapore to set carbon emissions reduction targets validated by the SBTi based on a 2°C warmer scenario.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] In 2021, we stepped up our decarbonisation commitment with more ambitious SBTi-validated t",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "In 2021, we stepped up our decarbonisation commitment with more ambitious SBTi-validated targets, aligned with a 1.5°C scenario.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] The revised SBTi-validated targets also support our WorldGBC Net Zero Carbon Buildings Com",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "The revised SBTi-validated targets also support our WorldGBC Net Zero Carbon Buildings Commitment.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] The Company was the first real estate conglomerate in Southeast Asia to sign the commitmen",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "The Company was the first real estate conglomerate in Southeast Asia to sign the commitment in February 2021 to achieve net-zero operational carbon by 2030.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] The Company has since extended our pledge towards a net-zero whole life carbon-built envir",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "The Company has since extended our pledge towards a net-zero whole life carbon-built environment, including reducing embodied carbon.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] Through this expanded commitment, new and existing wholly-owned assets under our direct ma",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "Through this expanded commitment, new and existing wholly-owned assets under our direct management and operational control, will operate at net-zero carbon and achieve maximum embodied carbon reduction in new developments, compensating for any remaining residual operational and upfront embodied emissions via offsetting by 2030.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] Commit to achieving net-zero operational carbon for new and existing wholly-owned assets u",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "Commit to achieving net-zero operational carbon for new and existing wholly-owned assets under direct operational and management control.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] Maximise reduction in embodied carbon and compensate for any residual upfront emissions vi",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "Maximise reduction in embodied carbon and compensate for any residual upfront emissions via offsetting for new developments and major renovations.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] Measure and publicly disclose Scope 1 and 2 emissions, embodied carbon emissions and energ",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "Measure and publicly disclose Scope 1 and 2 emissions, embodied carbon emissions and energy consumption by assessing annual asset and portfolio energy demand and carbon emissions against set targets.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] Adopt sustainable building designs, materials and supply chain practices to reduce upfront",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "Adopt sustainable building designs, materials and supply chain practices to reduce upfront embodied carbon and offset any residual upfront emissions.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] Verify and report lifecycle assessment for embodied carbon at asset level for new developm",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "Verify and report lifecycle assessment for embodied carbon at asset level for new developments.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] Engage and influence value chain and building users to support and build towards a wider t",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "Engage and influence value chain and building users to support and build towards a wider transition to a net-zero whole life carbon-built environment.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] By 2030, all new buildings, infrastructure and renovations will have at least 40% less emb",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "By 2030, all new buildings, infrastructure and renovations will have at least 40% less embodied carbon with significant upfront carbon reduction and all new buildings will be net-zero operational carbon.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] By 2050, new buildings, infrastructure and renovations will have net-zero embodied carbon ",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "By 2050, new buildings, infrastructure and renovations will have net-zero embodied carbon and all buildings, including existing buildings must be net-zero operational carbon.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] Aside from physical risks arising from climate change, regulatory transition risks can res",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "Aside from physical risks arising from climate change, regulatory transition risks can result in stricter emission standards, increased carbon tax and water pricing, and stricter building design requirements.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] To align with globally-recognised standards in carbon emissions measurement and reporting,",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "To align with globally-recognised standards in carbon emissions measurement and reporting, we became the first developer in Singapore in 2016 to validate our GHG emissions data against the stringent ISO 14064 certification in GHG emissions reporting.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] The verification covers stringent audits of processes on GHG emissions control and a revie",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "e assurance level, the verification covers stringent audits of processes on GHG emissions control and a review of emission factors used for diesel, petrol, refrigerant gases, electricity grid, transmission and distribution losses, employee commuting and business air travel.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] Electricity consumption has long been identified as a significant climate-related risk for",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "Electricity consumption has long been identified as a significant climate-related risk for the Company, as it forms the largest source of emissions for our core operations in Singapore (reported as Scope 2 emissions).",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] Key metrics include carbon emissions, embodied carbon, energy and water usage, and waste m",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "Key metrics include carbon emissions, embodied carbon, energy and water usage, and waste management, which are published in our quarterly reports and ISR.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] The Group has been disclosing Scope 1, 2 and 3 GHG emissions for our core operations and s",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "The Group has been disclosing Scope 1, 2 and 3 GHG emissions for our core operations and six key subsidiaries in our ISRs since 2015.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] To ensure proper accounting of our GHG emissions, we scope our emission streams in accorda",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "To ensure proper accounting of our GHG emissions, we scope our emission streams in accordance with the GHG Protocol Corporate Accounting and Reporting Standard.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] To further demonstrate our environmental practices’ alignment with international best prac",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "To further demonstrate our environmental practices’ alignment with international best practices, we were the first Singapore developer in 2016 to have our GHG emissions data, for our corporate office, industrial buildings, commercial buildings and development sites, externally validated against ISO 14064 on GHG verification.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] In February 2023, we were the first organisation to be verified by LRQA in Singapore for t",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "In February 2023, we were the first organisation to be verified by LRQA in Singapore for the indirect GHG emissions from products used in relation to its building construction projects in Singapore in accordance with category 4 of the ISO 14064-1:2018 standard.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] The Company’s climate-related targets such as those related to GHG emissions, water and en",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "The Company’s climate-related targets such as those related to GHG emissions, water and energy usage, and waste generation, in line with regulatory and voluntary requirements, are published in our annual ISR.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": 1,
+                          "children": []
+                        },
+                        {
+                          "label": "[ASSERTED] We established our first carbon emissions intensity reduction target in 2011 and voluntari",
+                          "value": null,
+                          "contribution": 0.1,
+                          "source_sentence": "We established our first carbon emissions intensity reduction target in 2011 and voluntarily raised the target from 25% to 38% by 2030 (from 2007 levels) in 2017.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
                           "source_page": 1,
                           "children": []
                         }
@@ -606,57 +996,39 @@
                       "source_page": null,
                       "children": [
                         {
-                          "label": "[ASSERTED] Achieved BCA Green Mark Platinum SLE awards for City House, Palais Renaissance, The Orie, ",
+                          "label": "[ASSERTED] Reduce energy consumption for construction and operations of assets, by implementing energ",
                           "value": null,
                           "contribution": 0.125,
-                          "source_sentence": "Achieved BCA Green Mark Platinum SLE awards for City House, Palais Renaissance, The Orie, Norwood Grand and Union Square Residences",
-                          "source_doc": "CDL ISR 2025",
+                          "source_sentence": "Reduce energy consumption for construction and operations of assets, by implementing energy efficiency measures and transition to 100% renewable energy via on-site production or procurement of clean energy, e.g., Renewable Energy Certificates.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
                           "source_page": 1,
                           "children": []
                         },
                         {
-                          "label": "[ASSERTED] 129 BCA Green Mark certifications for our developments and office interiors* – one of the ",
+                          "label": "[ASSERTED] With the urgency of the global energy transition, “Energy Efficiency and Adoption of Renew",
                           "value": null,
                           "contribution": 0.125,
-                          "source_sentence": "129 BCA Green Mark certifications for our developments and office interiors* – one of the leading private developers with most awarded BCA Green Mark Platinum certificates",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] First Singapore real estate developer to sign World Green Building Council’s (WorldGBC) Ne",
-                          "value": null,
-                          "contribution": 0.125,
-                          "source_sentence": "First Singapore real estate developer to sign World Green Building Council’s (WorldGBC) Net Zero Carbon Buildings Commitment",
-                          "source_doc": "CDL ISR 2025",
+                          "source_sentence": "With the urgency of the global energy transition, “Energy Efficiency and Adoption of Renewables” rose to become the top materiality issue in 2023, followed by “Climate Resilience and Adaptation” and “Innovation”.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
                           "source_page": 1,
                           "children": []
                         }
                       ]
                     },
                     {
-                      "label": "water_management (w=0.1, credit=0.7)",
-                      "value": 70.0,
-                      "contribution": 0.07,
+                      "label": "water_management (w=0.1, credit=0.5)",
+                      "value": 50.0,
+                      "contribution": 0.05,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
                       "children": [
                         {
-                          "label": "[ASSERTED] Maintained Double ‘A’s in CDP for climate change (since 2018) and water security (since 20",
+                          "label": "[ASSERTED] Beyond managing climate-related risks and opportunities under the ERM framework, the Compa",
                           "value": null,
                           "contribution": 0.05,
-                          "source_sentence": "Maintained Double ‘A’s in CDP for climate change (since 2018) and water security (since 2019)",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] We maintained our position on 14 international benchmarks and achieved double ‘A’s in the ",
-                          "value": null,
-                          "contribution": 0.05,
-                          "source_sentence": "We maintained our position on 14 international benchmarks and achieved double ‘A’s in the 2024 CDP A List for corporate climate action and water security.",
-                          "source_doc": "CDL ISR 2025",
+                          "source_sentence": "Beyond managing climate-related risks and opportunities under the ERM framework, the Company also manages operational risks pertaining to energy, water and supply of raw materials by adopting ISO management system standards that are internationally recognised and widely adopted.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
                           "source_page": 1,
                           "children": []
                         }
@@ -666,27 +1038,27 @@
                 },
                 {
                   "label": "Pillar S",
-                  "value": 50.0,
+                  "value": 25.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "tenant_sustainability (w=0.1, credit=0.5)",
-                      "value": 50.0,
-                      "contribution": 0.05,
+                      "label": "tenant_sustainability (w=0.1, credit=0.25)",
+                      "value": 25.0,
+                      "contribution": 0.025,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
                       "children": [
                         {
-                          "label": "[ASSERTED] First Singapore real estate company to roll out Green Lease campaign in 2014, in partnersh",
+                          "label": "[INFERRED] The company likely promotes tenant sustainability through green lease clauses and engageme",
                           "value": null,
-                          "contribution": 0.05,
-                          "source_sentence": "First Singapore real estate company to roll out Green Lease campaign in 2014, in partnership with Tuas Power and supported by BCA, and first to launch the City Green Tenant Bonus Programme in 2024; achieved 100% retail and office tenant participation in CDL Green Lease Partnership Programme since 2017",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
+                          "contribution": 0.025,
+                          "source_sentence": "The company likely promotes tenant sustainability through green lease clauses and engagement programs, given its strong focus on climate resilience and green building practices in its portfolio.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
+                          "source_page": null,
                           "children": []
                         }
                       ]
@@ -710,29 +1082,20 @@
                       "source_page": null,
                       "children": [
                         {
-                          "label": "[ASSERTED] CDL integrates sustainability at the highest governance level to enable strategic oversigh",
+                          "label": "[ASSERTED] This assessment determines the key economic, environmental, social and governance (EESG) i",
                           "value": null,
                           "contribution": 0.075,
-                          "source_sentence": "At CDL, integrating sustainability at the highest governance level enables strategic oversight of ESG issues for long-term value creation.",
-                          "source_doc": "CDL ISR 2025",
+                          "source_sentence": "This assessment determines the key economic, environmental, social and governance (EESG) issues that are important to our stakeholders.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
                           "source_page": 1,
                           "children": []
                         },
                         {
-                          "label": "[ASSERTED] CDL’s sustainability governance, management and disclosures are in line with or ahead of g",
+                          "label": "[ASSERTED] The Board is responsible for the governance of risk across the Group, while ensuring that ",
                           "value": null,
                           "contribution": 0.075,
-                          "source_sentence": "The Company’s sustainability governance, management and disclosures are in line with or ahead of the global best practices and SGX RegCo’s mandate on climate disclosures and board supervision.",
-                          "source_doc": "CDL ISR 2025",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] 30% of CDL’s ExCo members’ remuneration is contingent on hitting the Group’s ESG targets, ",
-                          "value": null,
-                          "contribution": 0.075,
-                          "source_sentence": "30% of our ExCo members’ remuneration is contingent on hitting the Group’s ESG targets, with a respective weightage of 5% for Environmental, 10% for Governance targets and 15% for Social targets.",
-                          "source_doc": "CDL ISR 2025",
+                          "source_sentence": "The Board is responsible for the governance of risk across the Group, while ensuring that Management maintains a sound system of risk management and internal controls.",
+                          "source_doc": "TCFD SASB Reporting ISR2024",
                           "source_page": 1,
                           "children": []
                         }
@@ -745,8 +1108,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=38.39, consensus 88.69->68.45)",
-          "value": 38.39,
+          "label": "opinion_flat=True (divergence=25.0, consensus 95.0->75.0)",
+          "value": 25.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -754,7 +1117,7 @@
           "children": []
         },
         {
-          "label": "price_flat=None (stock vs STI over the improvement window)",
+          "label": "price_flat=True (stock vs STI over the improvement window)",
           "value": null,
           "contribution": null,
           "source_sentence": null,
@@ -763,13 +1126,23 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-37.2 (evidence 31.25 - consensus 68.45)",
-          "value": -37.2,
+          "label": "evidence_gap=-10.0 (evidence 65.0 - consensus 75.0)",
+          "value": -10.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
-          "children": []
+          "children": [
+            {
+              "label": "evidence_pct=65.0 vs 10 companies on the all companies rubric",
+              "value": 65.0,
+              "contribution": null,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
         }
       ]
     }
@@ -3906,7 +4279,22 @@
         "volume": 1134000.0
       }
     ],
-    "band": [],
+    "band": [
+      {
+        "start_date": "2021-01-03",
+        "end_date": "2022-01-02",
+        "slope": 14.5,
+        "start_score": 42.75,
+        "end_score": 57.25
+      },
+      {
+        "start_date": "2023-01-01",
+        "end_date": "2023-12-31",
+        "slope": 37.0,
+        "start_score": 53.0,
+        "end_score": 90.0
+      }
+    ],
     "pins": [
       {
         "date": "2019-12-29",
@@ -7102,15 +7490,18 @@
       }
     ],
     "flat": {
-      "stock_return": null,
-      "sti_return": null,
-      "rel_return": null,
-      "is_flat": null
+      "stock_return": -6.95,
+      "sti_return": 7.09,
+      "rel_return": -14.03,
+      "is_flat": true
     }
   },
   "compliance": {
     "company_id": "C09",
     "score": 0.0,
+    "provenance": "mixed",
+    "scraped_count": 1,
+    "counted": 2,
     "met": [
       {
         "reg_id": "SGX-711B",
@@ -7174,7 +7565,7 @@
           "label": "ASEAN Taxonomy for Sustainable Finance — MET",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2023, City Developments improved energy efficiency across its green building portfolio.",
+          "source_sentence": "In FY2019, City Developments improved energy efficiency across its green building portfolio.",
           "source_doc": null,
           "source_page": null,
           "children": []
@@ -7184,77 +7575,36 @@
   },
   "forecast": {
     "company_id": "C09",
-    "predicted_score": 71.63,
-    "horizon_years": 3,
-    "ci_low": 65.6,
-    "ci_high": 77.65,
-    "feature_contributions": [
-      {
-        "feature": "news_sentiment",
-        "value": 6.0,
-        "contribution": 4.307
-      },
-      {
-        "feature": "volatility",
-        "value": 27.12,
-        "contribution": 3.261
-      },
-      {
-        "feature": "is_financial",
-        "value": 0.0,
-        "contribution": 2.329
-      },
-      {
-        "feature": "price_return",
-        "value": -18.89,
-        "contribution": -0.095
-      }
-    ],
-    "val_error": 6.025,
-    "directional_accuracy": 0.8,
+    "predicted_score": 7.0,
+    "horizon_years": 0,
+    "ci_low": null,
+    "ci_high": null,
+    "feature_contributions": [],
+    "val_error": null,
+    "directional_accuracy": null,
+    "directional_n": null,
+    "predicted_label": "AAA",
+    "last_rating_label": "AAA",
+    "last_rating_year": 2025,
+    "direction": "likely hold",
+    "baseline_only": true,
+    "model_label": "baseline: ratings persistence (insufficient history for a fitted model — 4 real rows)",
     "target_year": 2026,
-    "drift_years": 3,
-    "drift_note": "Live 2026 estimate from real-time signals: real LLM-classified news plus real price/sector data, on a model trained only on real evidence — no seeded inputs.",
+    "drift_years": 0,
+    "drift_note": "Estimates the MSCI ESG rating as of 2026 from signals all dated to 2025 — GDELT headlines published that year, that year's own report evidence, and prices to the end of it. 2025 is the most recent year whose every feature is real; nothing is carried forward to fill the gap. It is not a rater publication; it is what those signals imply the rater would say.",
     "hypothesis": true,
     "trace": {
-      "label": "Live 2026 ESG estimate = 71.6 (real-time, ~80% hit-rate, MAE=6.0)",
-      "value": 71.63,
+      "label": "likely hold — MSCI AAA (baseline: ratings persistence (insufficient history for a fitted model — 4 real rows))",
+      "value": 7.0,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
       "children": [
         {
-          "label": "news_sentiment=6.0",
-          "value": null,
-          "contribution": 4.307,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "volatility=27.12",
-          "value": null,
-          "contribution": 3.261,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "is_financial=0.0",
-          "value": null,
-          "contribution": 2.329,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "price_return=-18.89",
-          "value": null,
-          "contribution": -0.095,
+          "label": "last disclosed rating AAA (2025)",
+          "value": 7.0,
+          "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
@@ -7266,276 +7616,504 @@
   "claims": {
     "claims": [
       {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "VERIFIED",
-        "text": "Founded on our ethos, ‘Conserving as We Construct’ for three decades, CDL prioritises sustainable construction practices, incorporating low-carbon and energy-efficient technologies in the way we design, build and manage our buildings.",
-        "source_sentence": "Founded on our ethos, ‘Conserving as We Construct’ for three decades, CDL prioritises sustainable construction practices, incorporating low-carbon and energy-efficient technologies in the way we design, build and manage our buildings.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2,
-        "corroboration_url": "https://worldgbc.org/signatory/cdl/",
-        "corroboration_source": "Worldgbc"
-      },
-      {
-        "topic_id": "ghg_emissions",
+        "topic_id": "climate_resilience",
         "pillar": "E",
         "state": "ASSERTED",
-        "text": "Cooling and decarbonising by greening will be our strategic focus as we move towards a nature-positive future, by actively monitoring our processes and mitigating nature-related risks.",
-        "source_sentence": "Cooling and decarbonising by greening will be our strategic focus as we move towards a nature-positive future, by actively monitoring our processes and mitigating nature-related risks.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+        "text": "The Company’s pioneering and voluntary adoption of the TCFD Recommendations since 2017 provides climate-related financial information for ESG investors to make informed investment decisions.",
+        "source_sentence": "The Company’s pioneering and voluntary adoption of the TCFD Recommendations since 2017 provides climate-related financial information for ESG investors to make informed investment decisions.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "climate_resilience",
         "pillar": "E",
         "state": "ASSERTED",
-        "text": "By taking responsibility for our impact, we continue to build stakeholder confidence and long-term resilience for our business.",
-        "source_sentence": "By taking responsibility for our impact, we continue to build stakeholder confidence and long-term resilience for our business.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+        "text": "The findings of our 2023 materiality assessment revealed that “Climate Resilience and Adaptation” remains one of our top three material ESG issues.",
+        "source_sentence": "The findings of our 2023 materiality assessment revealed that “Climate Resilience and Adaptation” remains one of our top three material ESG issues.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
-        "topic_id": "energy_management",
+        "topic_id": "climate_resilience",
         "pillar": "E",
         "state": "ASSERTED",
-        "text": "Achieved BCA Green Mark Platinum SLE awards for City House, Palais Renaissance, The Orie, Norwood Grand and Union Square Residences",
-        "source_sentence": "Achieved BCA Green Mark Platinum SLE awards for City House, Palais Renaissance, The Orie, Norwood Grand and Union Square Residences",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+        "text": "CDL is proud to be one of the first few companies in Singapore to have adopted TCFD reporting in 2017, and has been consistently expanding our level of disclosure since.",
+        "source_sentence": "CDL is proud to be one of the first few companies in Singapore to have adopted TCFD reporting in 2017, and has been consistently expanding our level of disclosure since.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "climate_resilience",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Climate resilience and adaptation remained one of the Group’s top three material topics in 2023.",
+        "source_sentence": "Climate resilience and adaptation remained one of the Group’s top three material topics in 2023.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
         "pillar": "E",
         "state": "ASSERTED",
-        "text": "Launched CDL SME Supplier Decarbonisation Queen Bee Programme with partners to empower our supply chain towards a low-carbon future",
-        "source_sentence": "Launched CDL SME Supplier Decarbonisation Queen Bee Programme with partners to empower our supply chain towards a low-carbon future",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+        "text": "The Group’s carbon mitigation strategy has been largely focused on addressing Scope 2 emissions as electricity usage forms the largest source of emissions for our core operations in Singapore.",
+        "source_sentence": "The Group’s carbon mitigation strategy has been largely focused on addressing Scope 2 emissions as electricity usage forms the largest source of emissions for our core operations in Singapore.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "In December 2023, the Company became the first Singapore corporate to secure the OCBC 1.5°C loan, Singapore’s first net-zero-aligned loan for corporates to drive the transition to a low carbon economy.",
+        "source_sentence": "In December 2023, the Company became the first Singapore corporate to secure the OCBC 1.5°C loan, Singapore’s first net-zero-aligned loan for corporates to drive the transition to a low carbon economy.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "The Company is dedicated to strengthening the climate resiliency of our portfolio by setting targets towards carbon mitigation and environmental protection.",
+        "source_sentence": "The Company is dedicated to strengthening the climate resiliency of our portfolio by setting targets towards carbon mitigation and environmental protection.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Our net-zero commitment covers Scope 1, 2 and 3 emissions and includes different phases of strategic action required by key stakeholders, to tackle the transition process identified under each scope.",
+        "source_sentence": "Our net-zero commitment covers Scope 1, 2 and 3 emissions and includes different phases of strategic action required by key stakeholders, to tackle the transition process identified under each scope.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "The team explores innovative carbon reduction solutions and partnerships in tandem with the Company’s Enterprise Innovation Committee, formed in 2018 to promote cross-departmental collaboration to accelerate the Group’s innovation journey.",
+        "source_sentence": "The team explores innovative carbon reduction solutions and partnerships in tandem with the Company’s Enterprise Innovation Committee, formed in 2018 to promote cross-departmental collaboration to accelerate the Group’s innovation journey.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "In 2018, we were the first real estate company in Singapore to set carbon emissions reduction targets validated by the SBTi based on a 2°C warmer scenario.",
+        "source_sentence": "In 2018, we were the first real estate company in Singapore to set carbon emissions reduction targets validated by the SBTi based on a 2°C warmer scenario.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "In 2021, we stepped up our decarbonisation commitment with more ambitious SBTi-validated targets, aligned with a 1.5°C scenario.",
+        "source_sentence": "In 2021, we stepped up our decarbonisation commitment with more ambitious SBTi-validated targets, aligned with a 1.5°C scenario.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "The revised SBTi-validated targets also support our WorldGBC Net Zero Carbon Buildings Commitment.",
+        "source_sentence": "The revised SBTi-validated targets also support our WorldGBC Net Zero Carbon Buildings Commitment.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "The Company was the first real estate conglomerate in Southeast Asia to sign the commitment in February 2021 to achieve net-zero operational carbon by 2030.",
+        "source_sentence": "The Company was the first real estate conglomerate in Southeast Asia to sign the commitment in February 2021 to achieve net-zero operational carbon by 2030.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "The Company has since extended our pledge towards a net-zero whole life carbon-built environment, including reducing embodied carbon.",
+        "source_sentence": "The Company has since extended our pledge towards a net-zero whole life carbon-built environment, including reducing embodied carbon.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Through this expanded commitment, new and existing wholly-owned assets under our direct management and operational control, will operate at net-zero carbon and achieve maximum embodied carbon reduction in new developments, compensating for any remaining residual operational and upfront embodied emissions via offsetting by 2030.",
+        "source_sentence": "Through this expanded commitment, new and existing wholly-owned assets under our direct management and operational control, will operate at net-zero carbon and achieve maximum embodied carbon reduction in new developments, compensating for any remaining residual operational and upfront embodied emissions via offsetting by 2030.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Commit to achieving net-zero operational carbon for new and existing wholly-owned assets under direct operational and management control.",
+        "source_sentence": "Commit to achieving net-zero operational carbon for new and existing wholly-owned assets under direct operational and management control.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Maximise reduction in embodied carbon and compensate for any residual upfront emissions via offsetting for new developments and major renovations.",
+        "source_sentence": "Maximise reduction in embodied carbon and compensate for any residual upfront emissions via offsetting for new developments and major renovations.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Measure and publicly disclose Scope 1 and 2 emissions, embodied carbon emissions and energy consumption by assessing annual asset and portfolio energy demand and carbon emissions against set targets.",
+        "source_sentence": "Measure and publicly disclose Scope 1 and 2 emissions, embodied carbon emissions and energy consumption by assessing annual asset and portfolio energy demand and carbon emissions against set targets.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "energy_management",
         "pillar": "E",
         "state": "ASSERTED",
-        "text": "129 BCA Green Mark certifications for our developments and office interiors* – one of the leading private developers with most awarded BCA Green Mark Platinum certificates",
-        "source_sentence": "129 BCA Green Mark certifications for our developments and office interiors* – one of the leading private developers with most awarded BCA Green Mark Platinum certificates",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+        "text": "Reduce energy consumption for construction and operations of assets, by implementing energy efficiency measures and transition to 100% renewable energy via on-site production or procurement of clean energy, e.g., Renewable Energy Certificates.",
+        "source_sentence": "Reduce energy consumption for construction and operations of assets, by implementing energy efficiency measures and transition to 100% renewable energy via on-site production or procurement of clean energy, e.g., Renewable Energy Certificates.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Adopt sustainable building designs, materials and supply chain practices to reduce upfront embodied carbon and offset any residual upfront emissions.",
+        "source_sentence": "Adopt sustainable building designs, materials and supply chain practices to reduce upfront embodied carbon and offset any residual upfront emissions.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Verify and report lifecycle assessment for embodied carbon at asset level for new developments.",
+        "source_sentence": "Verify and report lifecycle assessment for embodied carbon at asset level for new developments.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Engage and influence value chain and building users to support and build towards a wider transition to a net-zero whole life carbon-built environment.",
+        "source_sentence": "Engage and influence value chain and building users to support and build towards a wider transition to a net-zero whole life carbon-built environment.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "By 2030, all new buildings, infrastructure and renovations will have at least 40% less embodied carbon with significant upfront carbon reduction and all new buildings will be net-zero operational carbon.",
+        "source_sentence": "By 2030, all new buildings, infrastructure and renovations will have at least 40% less embodied carbon with significant upfront carbon reduction and all new buildings will be net-zero operational carbon.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "By 2050, new buildings, infrastructure and renovations will have net-zero embodied carbon and all buildings, including existing buildings must be net-zero operational carbon.",
+        "source_sentence": "By 2050, new buildings, infrastructure and renovations will have net-zero embodied carbon and all buildings, including existing buildings must be net-zero operational carbon.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "business_ethics",
+        "pillar": "G",
+        "state": "ASSERTED",
+        "text": "This assessment determines the key economic, environmental, social and governance (EESG) issues that are important to our stakeholders.",
+        "source_sentence": "This assessment determines the key economic, environmental, social and governance (EESG) issues that are important to our stakeholders.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.15,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "energy_management",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "With the urgency of the global energy transition, “Energy Efficiency and Adoption of Renewables” rose to become the top materiality issue in 2023, followed by “Climate Resilience and Adaptation” and “Innovation”.",
+        "source_sentence": "With the urgency of the global energy transition, “Energy Efficiency and Adoption of Renewables” rose to become the top materiality issue in 2023, followed by “Climate Resilience and Adaptation” and “Innovation”.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.25,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "business_ethics",
+        "pillar": "G",
+        "state": "ASSERTED",
+        "text": "The Board is responsible for the governance of risk across the Group, while ensuring that Management maintains a sound system of risk management and internal controls.",
+        "source_sentence": "The Board is responsible for the governance of risk across the Group, while ensuring that Management maintains a sound system of risk management and internal controls.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.15,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "climate_resilience",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "The Group recognises that climate risks are business risks.",
+        "source_sentence": "The Group recognises that climate risks are business risks.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Aside from physical risks arising from climate change, regulatory transition risks can result in stricter emission standards, increased carbon tax and water pricing, and stricter building design requirements.",
+        "source_sentence": "Aside from physical risks arising from climate change, regulatory transition risks can result in stricter emission standards, increased carbon tax and water pricing, and stricter building design requirements.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "water_management",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Beyond managing climate-related risks and opportunities under the ERM framework, the Company also manages operational risks pertaining to energy, water and supply of raw materials by adopting ISO management system standards that are internationally recognised and widely adopted.",
+        "source_sentence": "Beyond managing climate-related risks and opportunities under the ERM framework, the Company also manages operational risks pertaining to energy, water and supply of raw materials by adopting ISO management system standards that are internationally recognised and widely adopted.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.1,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "To align with globally-recognised standards in carbon emissions measurement and reporting, we became the first developer in Singapore in 2016 to validate our GHG emissions data against the stringent ISO 14064 certification in GHG emissions reporting.",
+        "source_sentence": "To align with globally-recognised standards in carbon emissions measurement and reporting, we became the first developer in Singapore in 2016 to validate our GHG emissions data against the stringent ISO 14064 certification in GHG emissions reporting.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "The verification covers stringent audits of processes on GHG emissions control and a review of emission factors used for diesel, petrol, refrigerant gases, electricity grid, transmission and distribution losses, employee commuting and business air travel.",
+        "source_sentence": "e assurance level, the verification covers stringent audits of processes on GHG emissions control and a review of emission factors used for diesel, petrol, refrigerant gases, electricity grid, transmission and distribution losses, employee commuting and business air travel.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Electricity consumption has long been identified as a significant climate-related risk for the Company, as it forms the largest source of emissions for our core operations in Singapore (reported as Scope 2 emissions).",
+        "source_sentence": "Electricity consumption has long been identified as a significant climate-related risk for the Company, as it forms the largest source of emissions for our core operations in Singapore (reported as Scope 2 emissions).",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "Key metrics include carbon emissions, embodied carbon, energy and water usage, and waste management, which are published in our quarterly reports and ISR.",
+        "source_sentence": "Key metrics include carbon emissions, embodied carbon, energy and water usage, and waste management, which are published in our quarterly reports and ISR.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "The Group has been disclosing Scope 1, 2 and 3 GHG emissions for our core operations and six key subsidiaries in our ISRs since 2015.",
+        "source_sentence": "The Group has been disclosing Scope 1, 2 and 3 GHG emissions for our core operations and six key subsidiaries in our ISRs since 2015.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "To ensure proper accounting of our GHG emissions, we scope our emission streams in accordance with the GHG Protocol Corporate Accounting and Reporting Standard.",
+        "source_sentence": "To ensure proper accounting of our GHG emissions, we scope our emission streams in accordance with the GHG Protocol Corporate Accounting and Reporting Standard.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "To further demonstrate our environmental practices’ alignment with international best practices, we were the first Singapore developer in 2016 to have our GHG emissions data, for our corporate office, industrial buildings, commercial buildings and development sites, externally validated against ISO 14064 on GHG verification.",
+        "source_sentence": "To further demonstrate our environmental practices’ alignment with international best practices, we were the first Singapore developer in 2016 to have our GHG emissions data, for our corporate office, industrial buildings, commercial buildings and development sites, externally validated against ISO 14064 on GHG verification.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "In February 2023, we were the first organisation to be verified by LRQA in Singapore for the indirect GHG emissions from products used in relation to its building construction projects in Singapore in accordance with category 4 of the ISO 14064-1:2018 standard.",
+        "source_sentence": "In February 2023, we were the first organisation to be verified by LRQA in Singapore for the indirect GHG emissions from products used in relation to its building construction projects in Singapore in accordance with category 4 of the ISO 14064-1:2018 standard.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "The Company’s climate-related targets such as those related to GHG emissions, water and energy usage, and waste generation, in line with regulatory and voluntary requirements, are published in our annual ISR.",
+        "source_sentence": "The Company’s climate-related targets such as those related to GHG emissions, water and energy usage, and waste generation, in line with regulatory and voluntary requirements, are published in our annual ISR.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
+      },
+      {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "ASSERTED",
+        "text": "We established our first carbon emissions intensity reduction target in 2011 and voluntarily raised the target from 25% to 38% by 2030 (from 2007 levels) in 2017.",
+        "source_sentence": "We established our first carbon emissions intensity reduction target in 2011 and voluntarily raised the target from 25% to 38% by 2030 (from 2007 levels) in 2017.",
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": 1,
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "tenant_sustainability",
         "pillar": "S",
-        "state": "ASSERTED",
-        "text": "First Singapore real estate company to roll out Green Lease campaign in 2014, in partnership with Tuas Power and supported by BCA, and first to launch the City Green Tenant Bonus Programme in 2024; achieved 100% retail and office tenant participation in CDL Green Lease Partnership Programme since 2017",
-        "source_sentence": "First Singapore real estate company to roll out Green Lease campaign in 2014, in partnership with Tuas Power and supported by BCA, and first to launch the City Green Tenant Bonus Programme in 2024; achieved 100% retail and office tenant participation in CDL Green Lease Partnership Programme since 2017",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.1
-      },
-      {
-        "topic_id": "energy_management",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "First Singapore real estate developer to sign World Green Building Council’s (WorldGBC) Net Zero Carbon Buildings Commitment",
-        "source_sentence": "First Singapore real estate developer to sign World Green Building Council’s (WorldGBC) Net Zero Carbon Buildings Commitment",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.25
-      },
-      {
-        "topic_id": "water_management",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Maintained Double ‘A’s in CDP for climate change (since 2018) and water security (since 2019)",
-        "source_sentence": "Maintained Double ‘A’s in CDP for climate change (since 2018) and water security (since 2019)",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.1
-      },
-      {
-        "topic_id": "climate_resilience",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Regulators, investors, insurers and banks are progressively using sustainability criteria alongside financial performance to evaluate companies’ long-term resilience and prospects.",
-        "source_sentence": "Regulators, investors, insurers and banks are progressively using sustainability criteria alongside financial performance to evaluate companies’ long-term resilience and prospects.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2
-      },
-      {
-        "topic_id": "water_management",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "We maintained our position on 14 international benchmarks and achieved double ‘A’s in the 2024 CDP A List for corporate climate action and water security.",
-        "source_sentence": "We maintained our position on 14 international benchmarks and achieved double ‘A’s in the 2024 CDP A List for corporate climate action and water security.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.1
-      },
-      {
-        "topic_id": "climate_resilience",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Maintaining Supply Chain and Operational Resilience Amidst ongoing global uncertainties, challenges and shifting priorities, CDL remains steadfast in integrating sustainability principles into our business model and future-ready strategy.",
-        "source_sentence": "Maintaining Supply Chain and Operational Resilience Amidst ongoing global uncertainties, challenges and shifting priorities, CDL remains steadfast in integrating sustainability principles into our business model and future-ready strategy.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Businesses play a crucial role in the global endeavour to achieve net-zero emissions and protect nature.",
-        "source_sentence": "Businesses play a crucial role in the global endeavour to achieve net-zero emissions and protect nature.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2
-      },
-      {
-        "topic_id": "climate_resilience",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "The health of our planet is inextricably linked to the resilience of our people, economies and businesses.",
-        "source_sentence": "The health of our planet is inextricably linked to the resilience of our people, economies and businesses.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "In September 2024, the Singapore Exchange Regulation (SGX RegCo) announced that beginning with financial year (FY) 2025, all listed issuers will be required to report their Scope 1 and Scope 2 greenhouse gases (GHG) emissions, incorporating the climate-related requirements aligned with the International Financial Reporting Standards (IFRS) Sustainability Disclosure Standards issued by the International Sustainability Standards Board (ISSB).",
-        "source_sentence": "In September 2024, the Singapore Exchange Regulation (SGX RegCo) announced that beginning with financial year (FY) 2025, all listed issuers will be required to report their Scope 1 and Scope 2 greenhouse gases (GHG) emissions, incorporating the climate-related requirements aligned with the International Financial Reporting Standards (IFRS) Sustainability Disclosure Standards issued by the International Sustainability Standards Board (ISSB).",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Larger issuers by market capitalisation will likely need to report Scope 3 GHG emissions from FY2026.",
-        "source_sentence": "Larger issuers by market capitalisation will likely need to report Scope 3 GHG emissions from FY2026.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "We have been pragmatically integrating sustainability solutions into our GET (Growth, Enhancement and Transformation) strategy, focusing on four key sustainability pillars – Integration, Innovation, Investment and Impact – with four key deliverables: “Decarbonisation”, “Digitalisation and Innovation”, “Disclosure and Communication”, and “Defence through mitigation and adaptation”.",
-        "source_sentence": "We have been pragmatically integrating sustainability solutions into our GET (Growth, Enhancement and Transformation) strategy, focusing on four key sustainability pillars – Integration, Innovation, Investment and Impact – with four key deliverables: “Decarbonisation”, “Digitalisation and Innovation”, “Disclosure and Communication”, and “Defence through mitigation and adaptation”.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Implemented a carbon sequestration and activation system for Ready Mixed Concrete for the clubhouse structures at Copen Grand.",
-        "source_sentence": "At our Executive Condominium (EC) project, Copen Grand, we implemented a carbon sequestration and activation system for Ready Mixed Concrete for the clubhouse structures.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "The concrete at Copen Grand has up to 80% cement replacement and uses carbon dioxide to enhance the properties of the concrete.",
-        "source_sentence": "The concrete has up to 80% cement replacement and uses carbon dioxide to enhance the properties of the concrete.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Replaced diesel-powered generators at Irwell Hill Residences project site with an energy storage system, reducing construction-related carbon emissions by up to 80%.",
-        "source_sentence": "In 2022, we replaced diesel-powered generators at our Irwell Hill Residences project site with an energy storage system, reducing construction-related carbon emissions by up to 80%.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2
-      },
-      {
-        "topic_id": "climate_resilience",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "The ‘We Love Our Planet’ exhibition highlighted the indispensable role of nature and biodiversity in supporting ecosystem resilience and addressing the climate crisis.",
-        "source_sentence": "This exhibition highlighted the indispensable role of nature and biodiversity in supporting ecosystem resilience and addressing the climate crisis.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.2
-      },
-      {
-        "topic_id": "business_ethics",
-        "pillar": "G",
-        "state": "ASSERTED",
-        "text": "CDL integrates sustainability at the highest governance level to enable strategic oversight of ESG issues for long-term value creation.",
-        "source_sentence": "At CDL, integrating sustainability at the highest governance level enables strategic oversight of ESG issues for long-term value creation.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.15
-      },
-      {
-        "topic_id": "business_ethics",
-        "pillar": "G",
-        "state": "ASSERTED",
-        "text": "CDL’s sustainability governance, management and disclosures are in line with or ahead of global best practices and SGX RegCo’s mandate on climate disclosures and board supervision.",
-        "source_sentence": "The Company’s sustainability governance, management and disclosures are in line with or ahead of the global best practices and SGX RegCo’s mandate on climate disclosures and board supervision.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.15
-      },
-      {
-        "topic_id": "business_ethics",
-        "pillar": "G",
-        "state": "ASSERTED",
-        "text": "30% of CDL’s ExCo members’ remuneration is contingent on hitting the Group’s ESG targets, with respective weightages for Environmental, Governance and Social targets.",
-        "source_sentence": "30% of our ExCo members’ remuneration is contingent on hitting the Group’s ESG targets, with a respective weightage of 5% for Environmental, 10% for Governance targets and 15% for Social targets.",
-        "source_doc": "CDL ISR 2025",
-        "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-        "source_page": 1,
-        "weight": 0.15
+        "state": "INFERRED",
+        "text": "The company likely promotes tenant sustainability through green lease clauses and engagement programs, given its strong focus on climate resilience and green building practices in its portfolio.",
+        "source_sentence": null,
+        "source_doc": "TCFD SASB Reporting ISR2024",
+        "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+        "source_page": null,
+        "weight": 0.1,
+        "inferred": true,
+        "report_year": 2024
       }
     ],
     "absent": [],
     "live": true,
-    "source_url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
-    "source_title": "CDL ISR 2025"
+    "report_year": 2024,
+    "source_url": "https://cdlsustainability.com/pdf/TCFD_SASB_Reporting_ISR2024.pdf",
+    "source_title": "TCFD SASB Reporting ISR2024"
   },
   "peers": [
     {
@@ -7543,5 +8121,36 @@
       "name": "CapitaLand Investment",
       "evidence_total": 64.75
     }
-  ]
+  ],
+  "latest_real_raters": [
+    {
+      "rater": "cdp",
+      "value": "A",
+      "year": 2025,
+      "source": "CDP scores table",
+      "url": null,
+      "provenance": "real"
+    },
+    {
+      "rater": "msci",
+      "value": "AAA",
+      "year": 2025,
+      "source": "company report",
+      "url": "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf",
+      "provenance": "real"
+    }
+  ],
+  "cdp_disclosure": null,
+  "benchmark": {
+    "industry": "Real Estate",
+    "peers": 2,
+    "total": 64.12,
+    "pillars": {
+      "E": 72.66,
+      "S": 25.0,
+      "G": 47.5
+    },
+    "source": "panel median (n=2, below peer floor)",
+    "is_override": false
+  }
 }

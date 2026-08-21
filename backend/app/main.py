@@ -18,10 +18,16 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse
 from pydantic import BaseModel
 
 from backend.engine import config
+from backend.engine.benchmarks import delete_benchmark, get_benchmarks, set_benchmark
+from backend.engine.manual_raters import (
+    delete_manual_rater,
+    get_manual_raters,
+    set_manual_rater,
+)
 from backend.engine.model_settings import get_model_settings, save_model_settings
 from backend.engine.pipeline import build
 from backend.engine.scrape_settings import get_scrape_settings, save_scrape_settings
@@ -107,6 +113,23 @@ class ResearchRunRequest(BaseModel):
 class SourceReviewRequest(BaseModel):
     domain: str
     decision: str
+
+
+class BenchmarkUpsertRequest(BaseModel):
+    industry: str
+    metric: str
+    value: float
+    source: str
+
+
+class ManualRaterUpsertRequest(BaseModel):
+    companyId: str
+    rater: str
+    valueRaw: str            # the rater's OWN scale — letter or number, validated server-side
+    observedOn: str          # ISO date the value was read off the rater's page
+    sourceUrl: str
+    note: str | None = None
+    assessmentYear: int | None = None   # the year the rating is FOR (defaults to END_YEAR)
 
 
 class SourceUpsertRequest(BaseModel):
@@ -304,8 +327,56 @@ def update_model_settings(request: ModelSettingsUpdate):
         raise HTTPException(status_code=422, detail=str(exc)) from exc
 
 
+@app.get("/api/settings/benchmarks")
+def benchmark_settings():
+    return {"benchmarks": get_benchmarks()}
+
+
+@app.put("/api/settings/benchmarks")
+def update_benchmark(request: BenchmarkUpsertRequest):
+    try:
+        return {"benchmarks": set_benchmark(
+            request.industry, request.metric, request.value, request.source)}
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.delete("/api/settings/benchmarks/{industry}/{metric}")
+def remove_benchmark(industry: str, metric: str):
+    try:
+        return {"benchmarks": delete_benchmark(industry, metric)}
+    except KeyError as exc:
+        raise HTTPException(
+            status_code=404, detail=f"No stored benchmark for {industry}/{metric}.") from exc
+
+
+@app.get("/api/settings/raters")
+def rater_settings():
+    return {"raters": get_manual_raters()}
+
+
+@app.put("/api/settings/raters")
+def update_manual_rater(request: ManualRaterUpsertRequest):
+    try:
+        return {"raters": set_manual_rater(
+            request.companyId, request.rater, request.valueRaw,
+            request.observedOn, request.sourceUrl, request.note,
+            request.assessmentYear)}
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
+@app.delete("/api/settings/raters/{company_id}/{rater}")
+def remove_manual_rater(company_id: str, rater: str):
+    try:
+        return {"raters": delete_manual_rater(company_id, rater)}
+    except KeyError as exc:
+        raise HTTPException(
+            status_code=404, detail=f"No hand-entered {rater} rating for {company_id}.") from exc
+
+
 # --------------------------------------------------------------------------- #
-# Interpretability — why the forecaster produced a given ESG estimate.
+# Interpretability — why the forecaster produced a given MSCI rating estimate.
 # --------------------------------------------------------------------------- #
 @app.get("/api/interpretability/model-card")
 def interpretability_model_card():
@@ -521,6 +592,59 @@ def company(company_id: str):
     except KeyError:
         payload["liveIntelligence"] = None
     return payload
+
+
+@app.get("/api/satellite/{company_id}")
+def satellite(company_id: str, before: int = 2019, after: int = config.END_YEAR,
+              limit: int = 6, asset_type: str | None = None, compute: bool = False,
+              refresh: bool = False):
+    """Before/after satellite observations of this company's registry-located assets.
+
+    Reads what a batch run (`python -m backend.data.satverify`) already computed. Pass
+    `compute=true` to fetch imagery inline — that costs four renders per site and can take
+    minutes, so it is never the default for a page load.
+    """
+    from backend.engine.ingest import load
+    from backend.engine.satellite import company_sites, observation_payload, observe_company
+
+    try:
+        comp = load().company(company_id)
+    except KeyError:
+        raise HTTPException(status_code=404, detail=f"unknown company {company_id}")
+
+    types = [t.strip() for t in asset_type.split(",")] if asset_type else None
+    read_only = not (compute or refresh)
+    located = company_sites(comp.company_id, comp.name, limit, types, offline=read_only)
+    observations = observe_company(comp.company_id, comp.name, before, after,
+                                   limit=limit, asset_types=types, refresh=refresh,
+                                   cached_only=not (compute or refresh))
+    return {
+        "company_id": comp.company_id,
+        "company": comp.name,
+        "before_year": before,
+        "after_year": after,
+        "located": len(located),
+        "observations": [observation_payload(o) for o in observations],
+        "disclosure": ("Coordinates come from OpenStreetMap; the dated before/after is "
+                       "Sentinel-2 L2A via Element84 Earth Search. An NOT OBSERVED or "
+                       "INCONCLUSIVE result means we could not observe construction — it is "
+                       "not evidence a claim is false."),
+    }
+
+
+@app.get("/api/satellite/image/{name}")
+def satellite_image(name: str):
+    """Serve one rendered scene. Name is a flat filename — no traversal."""
+    suffix = name.rsplit(".", 1)[-1].lower() if "." in name else ""
+    if "/" in name or "\\" in name or suffix not in ("png", "jpg"):
+        raise HTTPException(status_code=400, detail="bad image name")
+    path = (config.OUT_DIR / "satellite" / name).resolve()
+    if not path.is_file() or path.parent != (config.OUT_DIR / "satellite").resolve():
+        raise HTTPException(status_code=404, detail="image not found")
+    media = "image/png" if suffix == "png" else "image/jpeg"
+    # these are content-addressed by site id and never mutate in place
+    return FileResponse(path, media_type=media,
+                        headers={"Cache-Control": "public, max-age=86400"})
 
 
 @app.get("/api/news")

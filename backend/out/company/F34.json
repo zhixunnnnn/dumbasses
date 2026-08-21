@@ -11,7 +11,7 @@
   },
   "evidence": {
     "company_id": "F34",
-    "year": 2023,
+    "year": 2024,
     "total": 76.5,
     "pillars": {
       "E": 85.0,
@@ -23,7 +23,7 @@
       "workforce_health_safety"
     ],
     "trace": {
-      "label": "Evidence Score 2023",
+      "label": "Evidence Score 2024",
       "value": 76.5,
       "contribution": null,
       "source_sentence": null,
@@ -486,13 +486,13 @@
   "series": [
     {
       "year": 2019,
-      "total": 60.0,
+      "total": 63.0,
       "pillars": {
-        "E": 50.0,
-        "S": 75.0,
-        "G": 50.0
+        "E": 70.0,
+        "S": 52.5,
+        "G": 70.0
       },
-      "confidence": 0.488
+      "confidence": 0.36
     },
     {
       "year": 2020,
@@ -526,6 +526,16 @@
     },
     {
       "year": 2023,
+      "total": 55.0,
+      "pillars": {
+        "E": 70.0,
+        "S": 43.75,
+        "G": 25.0
+      },
+      "confidence": 0.387
+    },
+    {
+      "year": 2024,
       "total": 76.5,
       "pillars": {
         "E": 85.0,
@@ -537,25 +547,72 @@
   ],
   "raters": {
     "company_id": "F34",
-    "msci_pct": 57.14,
-    "sp_pct": 10.0,
-    "sustainalytics_pct": 70.0,
-    "consensus": 45.71,
-    "divergence": 60.0,
-    "msci_real": true,
-    "msci_source": "KnowESG",
+    "msci_pct": 20.0,
+    "sp_pct": 15.0,
+    "sustainalytics_pct": 35.0,
+    "cdp_pct": null,
+    "real_raters": [],
+    "basis": "all companies",
+    "peers": 10,
+    "consensus": 23.33,
+    "divergence": 20.0,
+    "consensus_provenance": "illustrative",
+    "divergence_provenance": "illustrative",
+    "contributing": [
+      "msci",
+      "sp",
+      "sustainalytics"
+    ],
+    "rater_provenance": {
+      "msci": {
+        "real": false,
+        "source": "KnowESG (stale)",
+        "url": "https://knowesg.com/esg-ratings/wilmar-international-ltd",
+        "observed_on": null,
+        "value_raw": "A"
+      },
+      "sp": {
+        "real": false,
+        "source": null,
+        "url": null,
+        "observed_on": null,
+        "value_raw": null
+      },
+      "sustainalytics": {
+        "real": false,
+        "source": null,
+        "url": null,
+        "observed_on": null,
+        "value_raw": null
+      },
+      "cdp": {
+        "real": true,
+        "source": "CDP public scores table",
+        "url": "https://www.cdp.net/en/data/scores",
+        "observed_on": "2025",
+        "value_raw": "B"
+      }
+    },
+    "msci_real": false,
+    "msci_source": "KnowESG (stale)",
     "msci_url": "https://knowesg.com/esg-ratings/wilmar-international-ltd"
   },
   "signal": {
     "company_id": "F34",
     "proof_up": true,
-    "opinion_flat": true,
+    "opinion_flat": false,
     "price_flat": true,
-    "is_underpriced_improver": true,
-    "evidence_gap": -38.57,
-    "momentum": 3.3,
-    "esg_today": 45.71,
+    "is_underpriced_improver": false,
+    "evidence_pct": 95.0,
+    "evidence_basis": "all companies",
+    "evidence_peers": 10,
+    "evidence_gap": 71.67,
+    "momentum": 1.929,
+    "esg_today": 23.33,
     "quadrant": "HIDDEN_WINNERS",
+    "esg_today_provenance": "illustrative",
+    "evidence_gap_provenance": "illustrative",
+    "quadrant_provenance": "illustrative",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -565,15 +622,15 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=True (evidence momentum 3.3/yr, verified-driven)",
-          "value": 3.3,
+          "label": "proof_up=True (evidence momentum 1.929/yr, verified-driven)",
+          "value": 1.929,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "Evidence Score 2023",
+              "label": "Evidence Score 2024",
               "value": 76.5,
               "contribution": null,
               "source_sentence": null,
@@ -1035,8 +1092,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=60.0, consensus 38.57->45.71)",
-          "value": 60.0,
+          "label": "opinion_flat=False (divergence=20.0, consensus 41.67->23.33)",
+          "value": 20.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -1053,13 +1110,23 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-38.57 (evidence 7.14 - consensus 45.71)",
-          "value": -38.57,
+          "label": "evidence_gap=71.67 (evidence 95.0 - consensus 23.33)",
+          "value": 71.67,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
-          "children": []
+          "children": [
+            {
+              "label": "evidence_pct=95.0 vs 10 companies on the all companies rubric",
+              "value": 95.0,
+              "contribution": null,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
         }
       ]
     }
@@ -4198,8 +4265,8 @@
     ],
     "band": [
       {
-        "start_date": "2023-01-01",
-        "end_date": "2023-12-31",
+        "start_date": "2023-12-31",
+        "end_date": "2024-12-29",
         "slope": 21.5,
         "start_score": 55.0,
         "end_score": 76.5
@@ -7414,15 +7481,18 @@
       }
     ],
     "flat": {
-      "stock_return": -14.73,
-      "sti_return": -2.82,
-      "rel_return": -11.91,
+      "stock_return": -12.18,
+      "sti_return": 19.39,
+      "rel_return": -31.57,
       "is_flat": true
     }
   },
   "compliance": {
     "company_id": "F34",
     "score": 0.333,
+    "provenance": "mixed",
+    "scraped_count": 2,
+    "counted": 3,
     "met": [
       {
         "reg_id": "SGX-711B",
@@ -7516,83 +7586,32 @@
   },
   "forecast": {
     "company_id": "F34",
-    "predicted_score": 72.53,
-    "horizon_years": 3,
-    "ci_low": 66.51,
-    "ci_high": 78.56,
-    "feature_contributions": [
-      {
-        "feature": "news_sentiment",
-        "value": 7.0,
-        "contribution": 8.614
-      },
-      {
-        "feature": "is_financial",
-        "value": 0.0,
-        "contribution": 2.329
-      },
-      {
-        "feature": "volatility",
-        "value": 23.05,
-        "contribution": -0.187
-      },
-      {
-        "feature": "price_return",
-        "value": 12.78,
-        "contribution": -0.047
-      }
-    ],
-    "val_error": 6.025,
-    "directional_accuracy": 0.8,
-    "target_year": 2026,
-    "drift_years": 3,
-    "drift_note": "Live 2026 estimate from real-time signals: real LLM-classified news plus real price/sector data, on a model trained only on real evidence — no seeded inputs.",
+    "predicted_score": null,
+    "horizon_years": 1,
+    "ci_low": null,
+    "ci_high": null,
+    "feature_contributions": [],
+    "val_error": null,
+    "directional_accuracy": null,
+    "directional_n": null,
+    "predicted_label": null,
+    "last_rating_label": null,
+    "last_rating_year": null,
+    "direction": null,
+    "baseline_only": false,
+    "model_label": "No real MSCI rating disclosed for this company",
+    "target_year": null,
+    "drift_years": null,
+    "drift_note": null,
     "hypothesis": true,
     "trace": {
-      "label": "Live 2026 ESG estimate = 72.5 (real-time, ~80% hit-rate, MAE=6.0)",
-      "value": 72.53,
+      "label": "MSCI rating estimate — N.A. (no real rating)",
+      "value": null,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
       "source_page": null,
-      "children": [
-        {
-          "label": "news_sentiment=7.0",
-          "value": null,
-          "contribution": 8.614,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "is_financial=0.0",
-          "value": null,
-          "contribution": 2.329,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "volatility=23.05",
-          "value": null,
-          "contribution": -0.187,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "price_return=12.78",
-          "value": null,
-          "contribution": -0.047,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        }
-      ]
+      "children": []
     }
   },
   "claims": {
@@ -7606,7 +7625,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7617,7 +7637,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7628,7 +7649,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -7641,7 +7663,8 @@
         "source_page": 1,
         "weight": 0.25,
         "corroboration_url": "https://www.spott.org/palm-oil/wilmar-international-ltd/",
-        "corroboration_source": "Spott"
+        "corroboration_source": "Spott",
+        "report_year": 2024
       },
       {
         "topic_id": "food_safety",
@@ -7652,7 +7675,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7663,7 +7687,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -7674,7 +7699,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -7685,7 +7711,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -7696,7 +7723,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "business_ethics",
@@ -7707,7 +7735,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "business_ethics",
@@ -7718,7 +7747,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "business_ethics",
@@ -7729,7 +7759,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "supply_chain_traceability",
@@ -7742,7 +7773,8 @@
         "source_page": 1,
         "weight": 0.2,
         "corroboration_url": "https://www.spott.org/palm-oil/wilmar-international-ltd/",
-        "corroboration_source": "Spott"
+        "corroboration_source": "Spott",
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -7753,7 +7785,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "water_management",
@@ -7764,7 +7797,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -7775,7 +7809,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7786,7 +7821,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "ghg_emissions",
@@ -7797,7 +7833,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.15
+        "weight": 0.15,
+        "report_year": 2024
       },
       {
         "topic_id": "water_management",
@@ -7808,7 +7845,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "water_management",
@@ -7819,7 +7857,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "water_management",
@@ -7830,7 +7869,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "supply_chain_traceability",
@@ -7841,7 +7881,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "supply_chain_traceability",
@@ -7852,7 +7893,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "supply_chain_traceability",
@@ -7863,7 +7905,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "water_management",
@@ -7874,7 +7917,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "supply_chain_traceability",
@@ -7885,7 +7929,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "food_safety",
@@ -7896,7 +7941,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "supply_chain_traceability",
@@ -7907,7 +7953,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "supply_chain_traceability",
@@ -7918,7 +7965,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "supply_chain_traceability",
@@ -7929,7 +7977,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.2
+        "weight": 0.2,
+        "report_year": 2024
       },
       {
         "topic_id": "business_ethics",
@@ -7940,7 +7989,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "business_ethics",
@@ -7951,7 +8001,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "water_management",
@@ -7962,7 +8013,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -7973,7 +8025,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -7984,7 +8037,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -7995,7 +8049,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -8006,7 +8061,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -8017,7 +8073,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "land_use_deforestation",
@@ -8028,7 +8085,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.25
+        "weight": 0.25,
+        "report_year": 2024
       },
       {
         "topic_id": "water_management",
@@ -8039,7 +8097,8 @@
         "source_doc": "24 0151 wilmar 2024 sr v7 27 may",
         "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
         "source_page": 1,
-        "weight": 0.1
+        "weight": 0.1,
+        "report_year": 2024
       }
     ],
     "absent": [
@@ -8049,8 +8108,32 @@
       }
     ],
     "live": true,
+    "report_year": 2024,
     "source_url": "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8",
     "source_title": "24 0151 wilmar 2024 sr v7 27 may"
   },
-  "peers": []
+  "peers": [],
+  "latest_real_raters": [
+    {
+      "rater": "cdp",
+      "value": "B",
+      "year": 2025,
+      "source": "CDP scores table",
+      "url": null,
+      "provenance": "real"
+    }
+  ],
+  "cdp_disclosure": null,
+  "benchmark": {
+    "industry": "Agricultural Products",
+    "peers": 1,
+    "total": 76.5,
+    "pillars": {
+      "E": 85.0,
+      "S": 67.5,
+      "G": 70.0
+    },
+    "source": "panel median (n=1, below peer floor)",
+    "is_override": false
+  }
 }

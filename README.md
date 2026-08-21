@@ -38,6 +38,107 @@ The frontend proxies `/api/*` requests to `http://localhost:8000`.
 
 - **AI Assistant** — chat sessions, streaming research agent, source-backed PDF reports (`/api/assistant/*`).
 - **ESG Evidence Engine** — scoring/signal/witness/forecast over a Singapore universe, served as `/api/companies`, `/api/matrix`, `/api/signals`, `/api/company/{id}`, and live `/api/news`. UI lives under the "Evidence Engine" and "Live News" sidebar sections.
+- **Satellite verification** — check a physical claim ("we built a solar farm") against dated imagery, served as `/api/satellite/{id}`. See below.
+
+## Satellite verification
+
+Answers one narrow question well: *did the physical asset the company describes actually
+get built?* It covers claims about things large enough to see from orbit — solar and wind
+farms, plants, land clearing. It says nothing about emissions figures, board composition or
+supplier audits, which is most of an ESG report.
+
+No API keys. Every service is open:
+
+| Step | Source |
+| --- | --- |
+| Asset coordinates + outline | OpenStreetMap via Overpass (`power=plant`, matched on `operator`/`name`) |
+| Dated imagery | Sentinel-2 L2A via Element84 Earth Search (STAC over AWS open data) |
+| Rendering a bbox to PNG | TiTiler |
+
+```bash
+python -m backend.engine.geolocate --company U96      # what can we locate?
+python -m backend.engine.satellite --company U96 --type solar   # observe, print verdicts
+python -m backend.data.satverify   U96                # observe AND apply to the score
+```
+
+Imagery is **precomputed in batch, never on page load** — a cold site costs four renders.
+`/api/satellite/{id}` serves what `satverify` already wrote and never touches the network;
+pass `compute=true` to fetch inline.
+
+Detection is a **difference-in-differences** on a spectral index:
+
+```
+DiD = (index_after - index_before) on the asset footprint
+    - (index_after - index_before) in the surrounding control area
+```
+
+The control leg cancels season, sun angle, haze and regional drift. Two indices are tried
+and the stronger wins — NDWI (water cover) catches building over water, NDVI (vegetation
+cover) catches building over land. A verdict of CHANGED additionally requires the asset
+itself to have moved, so a big DiD caused purely by the *neighbours* building does not get
+credited to this site.
+
+Worked example — Sembcorp's Tengeh Floating Solar Farm, 2019 vs 2023: on-site NDWI falls
+from +0.48 (open water) to +0.09 (panels) while the surrounding area drifts only −0.05.
+DiD −0.33 → CHANGED.
+
+### Effect on the ESG score
+
+`satverify.py` is the satellite sibling of `verifyclaims.py`: imagery is simply another
+independent corroborator, writing the same `state` / `corroboration_url` /
+`corroboration_source` fields into the claims cache. A matched claim therefore moves
+CREDIT_ASSERTED (0.5) → CREDIT_VERIFIED (1.0), its topic cap lifts ASSERTED_TOPIC_CAP (0.7)
+→ 1.0, and its confidence 0.4 → 0.9. No change to `score.py`; the T3 invariant is untouched.
+
+**The gate is the whole design.** An observation verifies a SITE; a claim is prose. Seeing
+one farm get built says nothing about a portfolio total, so a claim is corroborated only
+when all four hold:
+
+1. the observation is OBSERVED (never NOT OBSERVED or INCONCLUSIVE);
+2. the asset class may speak to that SASB topic — a gas plant never corroborates an
+   energy-transition claim;
+3. the claim asserts construction or operation, not intent — "committed to advancing the
+   solar industry" is not "we built a solar farm";
+4. the claim is not a portfolio aggregate ("3.8 GW across the group").
+
+An earlier, looser gate upgraded a staff-training claim on the strength of a battery site,
+because "Sembcorp" appears both in the site name and in nearly every claim the company
+makes. The company's own name is now stripped from site-name matching, and every one of
+those false positives is pinned by a test in `backend/tests/test_satverify.py`.
+
+### In the app
+
+- **Company page** — a "Ground truth" panel per located asset: a high-resolution view with
+  the registry footprint outlined, a Sentinel-2 before/after with capture dates and cloud
+  cover, the scene ids, and links out to OpenStreetMap, Google Maps and Google Earth so a
+  reader can check independently.
+- **Chat** — `get_satellite_verification` returns the same findings with image URLs the
+  assistant can render inline.
+
+Only **OBSERVED** is coloured. NOT OBSERVED and INCONCLUSIVE stay neutral: rendering them
+in red would tell the reader the company lied, which is exactly what the engine refuses to
+claim.
+
+### What it will not do
+
+- **Three states only: CHANGED / UNCHANGED / INCONCLUSIVE, and INCONCLUSIVE is the
+  default.** No imagery, too much cloud, no registry match, or an ambiguous metric never
+  becomes a verdict.
+- **A negative is never "the company lied."** It is "we could not observe it." Pixels do
+  not support the stronger claim, and publishing it about a named company would be
+  defamation-adjacent.
+- **Coordinates are never inferred by a model.** They come from a registry row with a
+  citable permalink, or the site is skipped (guardrail T7).
+
+Registered in `source_authority.json` as a **specialist** domain, so a positive observation
+can raise a claim while a miss costs nothing — the same asymmetry `verify.py` already
+applies to CDP and EcoVadis. Cloud cover is common enough in Southeast Asia that any other
+rule would quietly penalise companies for the weather.
+
+Known limits: OSM coverage is patchy outside Europe (Sembcorp's Indian wind is absent, so
+the one claim that most wants checking cannot be); cloud is rejected per-scene rather than
+per-pixel (the SCL band would fix this); and the matching gate is keyword-based, so it is
+deliberately biased toward refusing rather than over-verifying.
 
 ## Scraper providers
 

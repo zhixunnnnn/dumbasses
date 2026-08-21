@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import type { Company } from "../../types";
-import { COMPANY_BY_ID } from "../../data/companies";
+import { COMPANY_BY_ID, useCompanies } from "../../data/companies";
 
 const STORAGE_KEY = "polyfintech.watchlist.v1";
 
@@ -41,6 +41,7 @@ function readStoredIds(): string[] {
 
 export function WatchlistProvider({ children }: { children: ReactNode }) {
   const [watchlistIds, setWatchlistIds] = useState<string[]>(readStoredIds);
+  const { companies } = useCompanies();
 
   useEffect(() => {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(watchlistIds));
@@ -73,13 +74,12 @@ export function WatchlistProvider({ children }: { children: ReactNode }) {
     setWatchlistIds([]);
   }, []);
 
-  const watchlistCompanies = useMemo(
-    () =>
-      watchlistIds
-        .map((id) => COMPANY_BY_ID[id])
-        .filter((company): company is Company => Boolean(company)),
-    [watchlistIds],
-  );
+  const watchlistCompanies = useMemo(() => {
+    const byId = new Map(companies.map((company) => [company.id, company]));
+    return watchlistIds
+      .map((id) => byId.get(id))
+      .filter((company): company is Company => Boolean(company));
+  }, [companies, watchlistIds]);
 
   const watchlistSet = useMemo(() => new Set(watchlistIds), [watchlistIds]);
 

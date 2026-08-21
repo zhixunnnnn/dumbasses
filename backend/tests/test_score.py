@@ -6,7 +6,8 @@ import json
 import pytest
 
 from backend.engine import config, ingest, sasb
-from backend.engine.score import evidence_score
+from backend.data.realclaims import cached_claims_for
+from backend.engine.score import _live_claim_rows, evidence_score
 from backend.engine.trace import has_source
 from backend.tests.conftest import EvidenceRow, make_company, make_dataset
 from backend.tests.conftest import DocumentRow
@@ -106,3 +107,62 @@ def test_latest_score_prefers_live_report_claim_cache(_patched_materiality, monk
     assert score.total == 20.0
     assert score.absent_topics == ["alpha"]
     assert score.trace.children[0].children[0].children[0].source_doc == "Live Report"
+
+
+# --- unknown industry: Default fallback must be visible, never silent -----------
+def test_unmapped_industry_is_warned_about(_patched_materiality, caplog):
+    """topics_for() falls back to the generic Default rubric for an unknown industry;
+    warn_unmapped_industries is what makes that fallback audible at load time."""
+    companies = [make_company("AA", industry="X6"), make_company("ZZ", industry="Deep Sea Mining")]
+    with caplog.at_level("WARNING"):
+        unmapped = sasb.warn_unmapped_industries(companies)
+    assert unmapped == {"Deep Sea Mining": ["ZZ"]}
+    assert "Deep Sea Mining" in caplog.text and "ZZ" in caplog.text
+    assert "Default" in caplog.text
+
+
+# --- per-year live cache: the evidence series is real for EVERY year, not just END_YEAR
+def _write_live_cache(cache_dir, name, payload):
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    (cache_dir / name).write_text(json.dumps(payload), encoding="utf-8")
+
+
+_LIVE_ROW = {
+    "topic_id": "bravo", "pillar": "G", "state": "ASSERTED",
+    "text": "Live 2021 report improved bravo controls.",
+    "source_sentence": "Live 2021 report improved bravo controls.",
+    "source_doc": "Live Report 2021", "source_page": 4, "weight": 0.2,
+    "report_year": 2021,
+}
+
+
+def test_live_claim_cache_is_looked_up_per_year(_patched_materiality, monkeypatch, tmp_path):
+    monkeypatch.setattr(config, "CACHE_DIR", tmp_path)
+    _write_live_cache(tmp_path / "realclaims", "AA_2021.json",
+                      {"rows": [_LIVE_ROW], "report_year": 2021,
+                       "source_url": "https://example.com/sr2021.pdf",
+                       "source_title": "Live Report 2021"})
+
+    score = evidence_score(_build("AA", "X2"), "AA", 2021, client=None)
+
+    assert score.total == 20.0, "2021 must score off 2021's own report"
+    assert score.trace.children[0].children[0].children[0].source_doc == "Live Report 2021"
+
+
+def test_live_claim_rows_are_none_for_a_year_with_no_cache(_patched_materiality, monkeypatch, tmp_path):
+    monkeypatch.setattr(config, "CACHE_DIR", tmp_path)
+    _write_live_cache(tmp_path / "realclaims", "AA_2021.json", {"rows": [_LIVE_ROW], "report_year": 2021})
+
+    assert _live_claim_rows("AA", 2021) is not None
+    assert _live_claim_rows("AA", 2020) is None, "no cache for 2020 -> fall through, never borrow 2021"
+
+
+def test_recorded_miss_yields_no_claims(_patched_materiality, monkeypatch, tmp_path):
+    """A year whose report genuinely does not exist is an honest MISS: no claims,
+    and emphatically not another year's rows."""
+    monkeypatch.setattr(config, "CACHE_DIR", tmp_path)
+    _write_live_cache(tmp_path / "realclaims", "AA_2020.json", {"rows": [], "miss": True, "report_year": 2020})
+    _write_live_cache(tmp_path / "realclaims", "AA_2021.json", {"rows": [_LIVE_ROW], "report_year": 2021})
+
+    assert _live_claim_rows("AA", 2020) is None
+    assert cached_claims_for("AA", year=2020) is None

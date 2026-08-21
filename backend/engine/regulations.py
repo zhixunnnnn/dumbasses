@@ -116,8 +116,28 @@ def compliance_gap(ds: Dataset, cid: str, year: int = config.END_YEAR) -> Compli
             children.append(TraceNode(label=f"{reg.name} — MISSING (required, undisclosed)"))
         # status None (unknown) -> excluded entirely (never counted as MISSING)
 
+    # The MISSING tier only ever comes from the curated rows (snippet absence is not
+    # proof of non-compliance). With no curated row for this year the numerator is
+    # structurally zero, so a ratio would read "no gaps" when it means "not assessed".
+    # The live MET/PARTIAL proofs still show; the gap ratio itself is N.A.
+    # Provenance of the ratio: live scraped proofs are real, seeded statuses are not.
+    # Reported alongside the number so a 0% gap built from seed rows can never be read as
+    # a verified clean bill of health.
+    counted_rows = met + partial + missing
+    scraped_count = sum(1 for rs in counted_rows if rs.scraped)
+    if not counted_rows:
+        gap_provenance = None
+    elif scraped_count == len(counted_rows):
+        gap_provenance = "real"
+    elif scraped_count:
+        gap_provenance = "mixed"
+    else:
+        gap_provenance = "illustrative"
+
     denom = len(met) + len(partial) + len(missing)
-    score = round(len(missing) / denom, 3) if denom else None
+    score = round(len(missing) / denom, 3) if (denom and comp_rows) else None
     trace = TraceNode(label="Compliance gap", value=score, children=children)
     return ComplianceGap(company_id=cid, score=score, met=met, partial=partial,
-                         missing=missing, not_in_force=not_in_force, trace=trace)
+                         missing=missing, not_in_force=not_in_force,
+                         provenance=gap_provenance, scraped_count=scraped_count,
+                         counted=len(counted_rows), trace=trace)

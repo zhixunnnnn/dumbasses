@@ -3,24 +3,28 @@
 import { useMemo } from "react";
 import { ExternalLink } from "lucide-react";
 import type { CompanyRow, NewsData, QuadrantKey } from "../../types";
-import { QUADRANT, na } from "../../lib/ui";
+import { QUADRANT, PROVENANCE, na } from "../../lib/ui";
 
 // ---- stat cards ------------------------------------------------------------
 export function StatRow({ rows, news }: { rows: CompanyRow[]; news: NewsData | null }) {
   const scores = rows.map((r) => r.evidence_total).filter((v): v is number => v != null);
   const avg = scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : null;
   const improvers = rows.filter((r) => r.is_underpriced_improver).length;
-  const hidden = rows.filter((r) => r.quadrant === "HIDDEN_WINNERS").length;
   const ids = new Set(rows.map((r) => r.id));
   const controversies = (news?.companies ?? [])
     .filter((c) => ids.has(c.company_id))
     .reduce((sum, c) => sum + (c.controversy || 0), 0);
 
-  const cards: { label: string; value: string; accent?: string }[] = [
+  // Rater figures now fall back to illustrative data, so the headline a viewer needs is
+  // how many of them are actually backed by a real rating.
+  const realBacked = rows.filter((r) => r.rater_provenance && r.rater_provenance !== "illustrative").length;
+  const cards: { label: string; value: string; accent?: string; note?: string }[] = [
     { label: "SG companies screened", value: `${rows.length}` },
     { label: "Avg evidence score", value: na(avg) },
+    { label: "Rater figures with real input", value: `${realBacked}/${rows.length}`,
+      accent: realBacked ? undefined : PROVENANCE.illustrative.color,
+      note: realBacked ? undefined : "all rater figures are illustrative" },
     { label: "Underpriced Improvers", value: `${improvers}`, accent: "#3ecf8e" },
-    { label: "Hidden Winners", value: `${hidden}`, accent: "#3ecf8e" },
     { label: "Controversy flags", value: `${controversies}`, accent: controversies ? "#ec6a5e" : undefined },
   ];
   return (
@@ -31,6 +35,7 @@ export function StatRow({ rows, news }: { rows: CompanyRow[]; news: NewsData | n
             {c.value}
           </p>
           <p className="mt-0.5 text-[11px] leading-snug text-faint">{c.label}</p>
+          {c.note && <p className="mt-0.5 text-[10px] leading-snug text-faint">{c.note}</p>}
         </div>
       ))}
     </section>

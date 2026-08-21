@@ -1,10 +1,8 @@
 import { ArrowRight, BookMarked, Trash2 } from "lucide-react";
 import { useMemo } from "react";
 import type { Company } from "../../types";
-import { sectorStats } from "../../data/selectors";
-import { QUADRANTS } from "../../lib/quadrant";
+import { QUADRANT } from "../../evidence/lib/ui";
 import { usdBillions } from "../../lib/format";
-import { gradeColor } from "../../theme/tokens";
 import { useNavigation } from "../../navigation/NavigationContext";
 import CompanyLogo from "../common/CompanyLogo";
 import DeltaBadge from "../common/DeltaBadge";
@@ -71,10 +69,10 @@ export default function WatchlistsPage() {
       <Reveal>
         <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           <StatCard label="Companies" value={`${watchlistCompanies.length}`} />
-          <StatCard label="Average ESG" value={formatScore(stats.averageEsg)} />
+          <StatCard label="Average ESG consensus" value={formatScore(stats.averageEsg)} />
           <StatCard
-            label="Average financial"
-            value={formatScore(stats.averageFinancial)}
+            label="Average evidence score"
+            value={formatScore(stats.averageEvidence)}
           />
           <StatCard label="Market cap" value={usdBillions(stats.marketCap)} />
         </section>
@@ -170,7 +168,7 @@ function WatchlistCompanyCard({
   onOpen: () => void;
   onRemove: () => void;
 }) {
-  const quadrant = QUADRANTS[company.quadrant];
+  const quadrant = company.quadrant ? QUADRANT[company.quadrant] : null;
 
   return (
     <article className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
@@ -205,20 +203,35 @@ function WatchlistCompanyCard({
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-5">
-        <Metric label="ESG" value={`${company.esgScore}`} />
-        <Metric label="Financial" value={`${company.financialScore}`} />
-        <Metric label="Grade" value={company.grade} color={gradeColor[company.grade]} />
+        <Metric label="ESG consensus" value={formatValue(company.esgScore)} />
+        <Metric label="Evidence" value={formatValue(company.evidenceScore)} />
+        <Metric label="Divergence" value={formatValue(company.divergence)} />
         <Metric label="Market cap" value={usdBillions(company.marketCap)} />
-        <Metric label="Momentum" value={<DeltaBadge delta={company.momentum} align="left" />} />
+        <Metric
+          label="Momentum"
+          value={
+            company.momentum === null ? (
+              "N.A."
+            ) : (
+              <DeltaBadge delta={company.momentum} align="left" />
+            )
+          }
+        />
       </div>
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-3">
-        <span
-          className="rounded-md px-2 py-1 text-xs font-semibold"
-          style={{ background: `${quadrant.accent}1f`, color: quadrant.accent }}
-        >
-          {quadrant.title} - {quadrant.blurb}
-        </span>
+        {quadrant ? (
+          <span
+            className="rounded-md px-2 py-1 text-xs font-semibold"
+            style={{ background: `${quadrant.color}1f`, color: quadrant.color }}
+          >
+            {quadrant.label} - {quadrant.blurb}
+          </span>
+        ) : (
+          <span className="rounded-md px-2 py-1 text-xs font-semibold text-faint">
+            No ESG consensus on record
+          </span>
+        )}
         <button
           onClick={onOpen}
           className="inline-flex items-center gap-1.5 text-xs font-medium text-muted transition hover:text-txt"
@@ -264,21 +277,16 @@ function StatCard({ label, value }: { label: string; value: string }) {
 function Metric({
   label,
   value,
-  color,
 }: {
   label: string;
   value: string | React.ReactNode;
-  color?: string;
 }) {
   return (
     <div className="rounded-lg border border-hairline bg-canvas/55 p-2.5">
       <p className="text-[10px] font-semibold uppercase tracking-wide text-faint">
         {label}
       </p>
-      <div
-        className="mt-1 font-mono text-sm font-semibold tabular-nums text-txt"
-        style={color ? { color } : undefined}
-      >
+      <div className="mt-1 font-mono text-sm font-semibold tabular-nums text-txt">
         {value}
       </div>
     </div>
@@ -286,9 +294,15 @@ function Metric({
 }
 
 function buildWatchlistStats(companies: Company[]) {
-  const averageEsg = average(companies.map((company) => company.esgScore));
-  const averageFinancial = average(
-    companies.map((company) => company.financialScore),
+  const averageEsg = average(
+    companies
+      .map((company) => company.esgScore)
+      .filter((value): value is number => value !== null),
+  );
+  const averageEvidence = average(
+    companies
+      .map((company) => company.evidenceScore)
+      .filter((value): value is number => value !== null),
   );
   const marketCap = companies.reduce(
     (sum, company) => sum + company.marketCap,
@@ -297,10 +311,22 @@ function buildWatchlistStats(companies: Company[]) {
 
   return {
     averageEsg,
-    averageFinancial,
+    averageEvidence,
     marketCap,
-    sectors: sectorStats(companies),
+    sectors: sectorCounts(companies),
   };
+}
+
+/** How many saved companies sit in each sector -- a count of the list itself,
+ *  not a score. */
+function sectorCounts(companies: Company[]): { sector: string; count: number }[] {
+  const counts = new Map<string, number>();
+  for (const company of companies) {
+    counts.set(company.sector, (counts.get(company.sector) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([sector, count]) => ({ sector, count }))
+    .sort((a, b) => b.count - a.count);
 }
 
 function average(values: number[]) {
@@ -312,20 +338,26 @@ function formatScore(value: number) {
   return value ? value.toFixed(1) : "-";
 }
 
+function formatValue(value: number | null) {
+  return value === null ? "N.A." : `${Math.round(value)}`;
+}
+
 function summaryForAssistant(company: Company) {
   return {
     name: company.name,
     ticker: company.ticker,
     sector: company.sector,
     region: company.region,
-    grade: company.grade,
     quadrant: company.quadrant,
-    esgScore: company.esgScore,
-    financialScore: company.financialScore,
+    esgConsensus: company.esgScore,
+    evidenceScore: company.evidenceScore,
+    evidenceBasis: company.evidenceBasis,
+    divergence: company.divergence,
+    confidence: company.confidence,
     momentum: company.momentum,
     marketCap: company.marketCap,
-    carbonIntensity: company.esgMetrics.carbonIntensity,
-    controversyLevel: company.esgMetrics.controversyLevel,
+    complianceScore: company.complianceScore,
+    isUnderpricedImprover: company.isUnderpricedImprover,
     domain: company.domain,
   };
 }

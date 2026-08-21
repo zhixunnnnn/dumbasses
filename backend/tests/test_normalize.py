@@ -1,12 +1,38 @@
-"""T2 (flip) and T6 (rank-based normalization)."""
+"""T2 (flip), T6 (rank-based normalization) and the realness gate on consensus/divergence."""
 from __future__ import annotations
 
-from backend.engine import config
+import pytest
+
+from backend.engine import config, normalize
 from backend.engine.divergence import divergence_index
-from backend.engine.normalize import normalize_raters
+from backend.engine.normalize import consensus, normalize_raters
 from backend.tests.conftest import RaterRow, make_company, make_dataset
 
 YEAR = config.END_YEAR
+
+
+@pytest.fixture
+def strict_mode(monkeypatch):
+    """Turn the illustrative fallback OFF — the real-only mode config keeps reachable."""
+    monkeypatch.setattr(config, "ALLOW_ILLUSTRATIVE_FALLBACK", False)
+
+
+@pytest.fixture
+def fallback_mode(monkeypatch):
+    """Turn the illustrative fallback ON (the prototype default)."""
+    monkeypatch.setattr(config, "ALLOW_ILLUSTRATIVE_FALLBACK", True)
+
+
+@pytest.fixture
+def real_channels(monkeypatch):
+    """Declare which rater channels count as REAL, without touching the on-disk caches."""
+    def _set(*keys, companies=None):
+        monkeypatch.setattr(normalize, "real_raters_cache", lambda: {})
+        monkeypatch.setattr(
+            normalize, "manual_raters_cache",
+            lambda: {cid: {YEAR: list(keys)}
+                     for cid in (companies or ["STRONG", "WEAK", "F1", "F2", "F3", "F4"])})
+    return _set
 
 
 def _bank_dataset(sp_scale: float = 1.0):
@@ -43,7 +69,13 @@ def test_T6_rank_based_invariant_to_scale():
         assert base[cid].sp_pct == scaled[cid].sp_pct, f"{cid} percentile moved on a pure rescale"
 
 
-def test_divergence_needs_two_raters():
+@pytest.mark.parametrize("fallback", [True, False])
+def test_divergence_needs_two_raters(real_channels, monkeypatch, fallback):
+    """MIN_RATERS_FOR_DIVERGENCE is a data absence, not a policy: one rater yields no
+    spread in EITHER mode."""
+    monkeypatch.setattr(config, "ALLOW_ILLUSTRATIVE_FALLBACK", fallback)
+    real_channels("msci", "sustainalytics", "sp",
+                  companies=[f"P{i}" for i in range(5)] + ["ONLY"])
     companies = [make_company("ONLY")] + [make_company(f"P{i}") for i in range(5)]
     raters = [RaterRow("ONLY", YEAR, "A", None, None)] + [
         RaterRow(f"P{i}", YEAR, "BBB", 20.0, 60.0) for i in range(5)
@@ -52,3 +84,82 @@ def test_divergence_needs_two_raters():
     pcts = normalize_raters(ds, YEAR)
     assert divergence_index(pcts["ONLY"]) is None  # 1 rater -> N.A., never fabricated
     assert divergence_index(pcts["P0"]) is not None
+
+
+def test_strict_mode_is_na_with_one_real_rater(real_channels, strict_mode):
+    """Strict mode (ALLOW_ILLUSTRATIVE_FALLBACK=False) still refuses to splice a real MSCI
+    onto seeded S&P/Sustainalytics — that blend is what made Keppel's 87.8 misleading."""
+    real_channels("msci")
+    strong = normalize_raters(_bank_dataset(), YEAR)["STRONG"]
+    assert strong.real_raters == ["msci"]
+    assert len(strong.real_available()) == 1
+    assert divergence_index(strong) is None
+    assert consensus(strong) is None
+
+
+def test_fallback_mode_computes_but_labels_the_blend(real_channels, fallback_mode):
+    """With the fallback on the same figures compute from every channel — and are labelled
+    "mixed", never "real", because seeded percentiles contributed."""
+    real_channels("msci")
+    strong = normalize_raters(_bank_dataset(), YEAR)["STRONG"]
+    assert set(strong.contributing()) == {"msci", "sp", "sustainalytics"}
+    assert consensus(strong) is not None and divergence_index(strong) is not None
+    assert strong.provenance() == "mixed"
+
+
+def test_fallback_with_no_real_rater_is_labelled_illustrative(real_channels, fallback_mode):
+    real_channels(companies=["STRONG"])          # no channel declared real
+    strong = normalize_raters(_bank_dataset(), YEAR)["STRONG"]
+    assert consensus(strong) is not None
+    assert strong.provenance() == "illustrative"
+
+
+def test_a_blended_figure_is_never_labelled_real(real_channels, fallback_mode):
+    """The invariant the whole exercise exists to protect."""
+    for keys in (("msci",), ("msci", "sp"), ("msci", "sp", "sustainalytics")):
+        real_channels(*keys)
+        p = normalize_raters(_bank_dataset(), YEAR)["STRONG"]
+        seeded = [k for k in p.contributing() if k not in p.real_raters]
+        if seeded:
+            assert p.provenance() != "real", f"{keys} + seeded {seeded} labelled real"
+        else:
+            assert p.provenance() == "real"
+
+
+def test_divergence_and_consensus_computed_once_two_raters_are_real(real_channels, strict_mode):
+    """The gate is satisfiable, not a permanent off switch: hand-enter a second real
+    rating and both numbers come back — over the REAL channels only."""
+    real_channels("msci", "sp", companies=["SPLIT"])
+    ds = _bank_dataset()
+    # SPLIT is top-of-scale on MSCI and bottom on S&P — a genuine disagreement
+    ds.raters.append(RaterRow("SPLIT", YEAR, "AAA", 44.0, 39.0))
+    ds.companies["SPLIT"] = make_company("SPLIT")
+    split = normalize_raters(ds, YEAR)["SPLIT"]
+    real = split.real_available()
+    assert real == [split.msci_pct, split.sp_pct]     # seeded Sustainalytics excluded
+    assert divergence_index(split) == round(max(real) - min(real), 2) > 0
+    assert consensus(split) == round(sum(real) / len(real), 2)
+
+
+def test_percentile_is_na_below_the_peer_floor(real_channels, fallback_mode):
+    """A rank over fewer than MIN_PEERS_FOR_SECTOR_RANK names in TOTAL is noise."""
+    real_channels("msci", "sust", "sp", companies=["A1", "A2"])
+    n = config.MIN_PEERS_FOR_SECTOR_RANK - 3
+    assert n >= 1
+    companies = [make_company(f"A{i}") for i in range(1, n + 1)]
+    raters = [RaterRow(f"A{i}", YEAR, "A", 20.0, 60.0) for i in range(1, n + 1)]
+    pcts = normalize_raters(make_dataset(companies=companies, raters=raters), YEAR)
+    only = pcts["A1"]
+    assert only.msci_pct is None and only.sp_pct is None and only.sustainalytics_pct is None
+    assert divergence_index(only) is None and consensus(only) is None
+
+
+def test_year_with_no_rater_row_is_na_not_carried_forward():
+    """Moving END_YEAR past the raters' coverage must yield N.A., never the last
+    year's value dressed up as this year's."""
+    ds = _bank_dataset()                      # raters exist only for YEAR
+    pcts = normalize_raters(ds, YEAR + 1)
+    p = pcts["STRONG"]
+    assert (p.msci_pct, p.sp_pct, p.sustainalytics_pct) == (None, None, None)
+    assert consensus(p) is None
+    assert divergence_index(p) is None

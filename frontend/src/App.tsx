@@ -4,7 +4,6 @@ import {
 } from "./navigation/NavigationContext";
 import AppShell from "./components/layout/AppShell";
 import ChatPage from "./components/chat/ChatPage";
-import CompanyPage from "./components/company/CompanyPage";
 import SettingsPage from "./components/settings/SettingsPage";
 import InterpretabilityPage from "./components/interpretability/InterpretabilityPage";
 import GovernancePage from "./components/governance/GovernancePage";
@@ -31,7 +30,6 @@ function Routed() {
         {route.name === "interpretability" && <InterpretabilityPage />}
         {route.name === "governance" && <GovernancePage />}
         {route.name === "settings" && <SettingsPage />}
-        {route.name === "company" && <CompanyPage id={route.id} />}
         {route.name === "news" && <EvidenceNews />}
         {route.name === "evidenceCompany" && (
           <EvidenceCompany id={route.id} />

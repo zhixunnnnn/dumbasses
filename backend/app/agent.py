@@ -841,15 +841,18 @@ def make_system_prompt(page_context: dict[str, Any]) -> str:
         "company's ESG estimate, why a company scored or is estimated as it is, or its "
         "underpriced-improver/quadrant status — it returns the same numbers the dashboard "
         "shows plus the estimate's feature drivers. Do not web-search for the app's own "
-        "score/estimate; call get_company_esg. The estimate is EXPERIMENTAL — a model "
-        "trained ONLY on real data (real evidence vs real news + price/sector signals); "
-        "free signals weakly predict ESG, so present it as low-confidence (~60-80% "
-        "hit-rate on a 10-company sample), cite its error, and explain 'why' via top_drivers. "
+        "score/estimate; call get_company_esg. The estimate is EXPERIMENTAL — it estimates "
+        "the RATER'S MSCI rating now, from signals dated to the same period (news "
+        "published that year, that year's report evidence, prices to that year), trained "
+        "only on MSCI letters companies disclosed in their own reports. Ratings are "
+        "sticky, so lead with the DIRECTION (likely upgrade/hold/downgrade) and quote the "
+        "directional accuracy WITH its sample size; if it is serving the persistence "
+        "baseline, say so plainly. Explain 'why' via top_drivers. "
         "CRITICAL — when asked for a company's ESG score, the answer is the current "
         "EVIDENCE SCORE (that IS the ESG score). Lead with it: e.g. 'OCBC's ESG score is "
-        "45/100.' Do NOT lead with, bold, or headline the forecast/2026 estimate as the "
-        "score, and never conflate the two. The forecast is a separate forward-looking "
-        "projection — mention it only afterwards, in its own clearly-labelled section, and "
+        "45/100.' Do NOT lead with, bold, or headline the MSCI rating estimate as the "
+        "score, and never conflate the two: one is our evidence measurement, the other is "
+        "an estimate of a rater's letter — mention it only afterwards, clearly labelled, and "
         "only if relevant. One number is the answer (evidence score); the estimate is extra. "
         "Use research_company_esg_news when the user asks for current ESG news, "
         "recent sustainability developments, controversies, why a company score is "
@@ -1213,7 +1216,14 @@ def _engine_company_payload(company: str) -> dict | None:
             "ci_low": fc.get("ci_low"),
             "ci_high": fc.get("ci_high"),
             "validation_mae": fc.get("val_error"),
-            "hit_rate": fc.get("directional_accuracy"),
+            "predicted_rating": fc.get("predicted_label"),
+            "last_disclosed_rating": fc.get("last_rating_label"),
+            "last_disclosed_year": fc.get("last_rating_year"),
+            "direction": fc.get("direction"),
+            "directional_accuracy": fc.get("directional_accuracy"),
+            "directional_n": fc.get("directional_n"),
+            "baseline_only": fc.get("baseline_only", False),
+            "model_label": fc.get("model_label"),
             "is_hypothesis": fc.get("hypothesis", True),
             "reliability_note": fc.get("drift_note"),
             "top_drivers": drivers,
@@ -1533,9 +1543,10 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
                                "result": {"company": company}}, ensure_ascii=False)
         name = payload["company"]["name"]
         fc = payload["forecast"]
-        summary = (f"{name}: ESG evidence {payload['evidence_score']}, live "
-                   f"{fc.get('target_year') or ''} estimate {fc['predicted_score']} "
-                   f"(real-time, MAE {fc['validation_mae']}).")
+        summary = (f"{name}: ESG evidence {payload['evidence_score']}; MSCI rating "
+                   f"estimate {fc.get('target_year') or ''} — {fc.get('direction') or 'N.A.'} "
+                   f"to {fc.get('predicted_rating') or fc['predicted_score']} "
+                   f"({fc.get('model_label') or 'model'}).")
         sources = []
         if payload.get("report_source"):
             sources = [AssistantSource(title=f"{name} sustainability report",
@@ -1697,9 +1708,107 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
                            "result": {"company_a": left, "company_b": right,
                                       "validated_evidence": live}}, ensure_ascii=False)
 
+    @tool
+    async def get_satellite_verification(company: str) -> str:
+        """Look up what dated satellite imagery shows at a covered company's physical
+        assets — solar and wind farms, plants — and return image URLs the user can open.
+
+        Use when asked whether a company really built something, or for proof/evidence
+        that a physical asset exists. Verdicts are OBSERVED (construction seen),
+        NOT OBSERVED, or INCONCLUSIVE. NOT OBSERVED and INCONCLUSIVE mean we could not
+        see it — never that the company lied. Only reports what was precomputed.
+        """
+        from backend.engine import config
+        from backend.engine.satellite import cached_observation, company_sites
+
+        payload = await asyncio.to_thread(_engine_company_payload, company)
+        if not payload:
+            summary = f"No covered company matched '{company}'."
+            emit_workflow_step("Read satellite evidence", "error", summary,
+                               "get_satellite_verification")
+            return json.dumps({"tool": "get_satellite_verification", "status": "error",
+                               "summary": summary, "sources": [], "result": {}},
+                              ensure_ascii=False)
+
+        cid = payload["company"]["id"]
+        name = payload["company"]["name"]
+        emit_workflow_step(label="Reading satellite evidence", status="running",
+                           detail=f"Checking located assets for {name}",
+                           tool_name="get_satellite_verification")
+
+        def _collect() -> tuple[int, list[dict]]:
+            sites = company_sites(cid, name, limit=8, offline=True)
+            rows = []
+            for site in sites:
+                obs = (cached_observation(site, 2019, config.END_YEAR)
+                       or cached_observation(site, 2019, config.END_YEAR - 1))
+                if obs is None:
+                    continue
+                verdict = {True: "OBSERVED", False: "NOT OBSERVED",
+                           None: "INCONCLUSIVE"}[obs.changed]
+                rows.append({
+                    "asset": site.name,
+                    "type": site.asset_type,
+                    "verdict": verdict,
+                    "finding": obs.note,
+                    "coordinates": f"{site.lat:.4f}, {site.lon:.4f}",
+                    "before": (f"{obs.before.date} ({obs.before.cloud_cover:.0f}% cloud)"
+                               if obs.before else None),
+                    "after": (f"{obs.after.date} ({obs.after.cloud_cover:.0f}% cloud)"
+                              if obs.after else None),
+                    "before_image_url": (f"/api/satellite/image/"
+                                         f"{obs.before.image_path.split('/')[-1]}"
+                                         if obs.before and obs.before.image_path else None),
+                    "after_image_url": (f"/api/satellite/image/"
+                                        f"{obs.after.image_path.split('/')[-1]}"
+                                        if obs.after and obs.after.image_path else None),
+                    "detail_image_url": f"/api/satellite/image/{site.site_id}_detail.jpg",
+                    "registry_url": site.registry_url,
+                    "google_maps_url": (f"https://www.google.com/maps/@{site.lat},"
+                                        f"{site.lon},17z/data=!3m1!1e3"),
+                })
+            return len(sites), rows
+
+        located, observations = await asyncio.to_thread(_collect)
+
+        if not observations:
+            summary = (f"{name}: {located} asset(s) located in OpenStreetMap, but no "
+                       f"imagery has been precomputed yet."
+                       if located else
+                       f"{name}: no physical assets on file. Satellite checks only apply "
+                       f"to plants, farms and land — a bank or telco usually has none.")
+            emit_workflow_step("Read satellite evidence", "ok", summary,
+                               "get_satellite_verification")
+            return json.dumps({"tool": "get_satellite_verification", "status": "ok",
+                               "summary": summary, "sources": [],
+                               "result": {"company": name, "located": located,
+                                          "observations": []}}, ensure_ascii=False)
+
+        observed = [o for o in observations if o["verdict"] == "OBSERVED"]
+        summary = (f"{name}: {len(observations)} asset(s) checked against Sentinel-2, "
+                   f"{len(observed)} with construction observed.")
+        sources = [{"title": f"{o['asset']} — OpenStreetMap", "url": o["registry_url"]}
+                   for o in observations if o.get("registry_url")]
+        emit_workflow_step("Read satellite evidence", "ok", summary,
+                           "get_satellite_verification")
+        return json.dumps({
+            "tool": "get_satellite_verification", "status": "ok", "summary": summary,
+            "sources": sources,
+            "result": {
+                "company": name, "located": located, "observations": observations,
+                "disclosure": ("NOT OBSERVED and INCONCLUSIVE mean construction could not "
+                               "be seen — cloud, a stale outline or phased work all look "
+                               "the same. Never present either as proof a claim is false."),
+                "rendering": ("Show the images to the user with markdown, e.g. "
+                              "![Tengeh 2023](/api/satellite/image/xxx_2023.png)."),
+            },
+        }, ensure_ascii=False)
+
+
     return [web_search, scrape_url, research_company_esg_news,
             research_esg_scoring, get_company_esg, get_validated_esg_evidence,
-            refresh_company_esg_research, compare_company_esg]
+            refresh_company_esg_research, compare_company_esg,
+            get_satellite_verification]
 
 
 async def collect_company_esg_news(
@@ -2292,6 +2401,7 @@ def workflow_label_for_tool(tool_name: str) -> str:
         "research_company_esg_news": "Collected company ESG news",
         "research_esg_scoring": "Collected ESG references",
         "agent_recovery": "Recovered agent run",
+        "get_satellite_verification": "Checked satellite imagery",
     }
     return labels.get(tool_name, tool_name.replace("_", " ").title())
 

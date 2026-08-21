@@ -1,0 +1,31 @@
+{
+  "company_id": "U96",
+  "report_year": 2021,
+  "rows": [
+    {
+      "rater": "ftse4good",
+      "kind": "membership",
+      "value_raw": "FTSE4Good criteria, and has satisfied the requirements to become a co",
+      "assessment_year": 2021,
+      "report_year": 2021,
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2021/assets/pdf/esg/sustainability_report.pdf",
+      "source_title": "sustainability report",
+      "source_sentence": "FTSE4Good criteria, and has satisfied the requirements to become a constituent",
+      "extractor": "regex"
+    },
+    {
+      "rater": "cdp",
+      "kind": "rating",
+      "value_raw": "B",
+      "assessment_year": 2021,
+      "report_year": 2021,
+      "source_url": "https://media.sembcorp.com/data/cms/ar/ar2021/assets/pdf/esg/sustainability_report.pdf",
+      "source_title": "sustainability report",
+      "source_sentence": "CDP Climate Change score “B",
+      "extractor": "regex"
+    }
+  ],
+  "miss": false,
+  "source_url": "https://media.sembcorp.com/data/cms/ar/ar2021/assets/pdf/esg/sustainability_report.pdf",
+  "source_title": "sustainability report"
+}

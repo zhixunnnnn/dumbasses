@@ -1,0 +1,107 @@
+{
+  "rows": [
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "The WLB2 will create sustainable livelihoods for over 250,000 underserved women across the Asia Pacific",
+      "source_sentence": "The WLB2 will create sustainable livelihoods for over 250,000 underserved women across the Asia Pacific",
+      "source_doc": "dbs progress on SDGs 2019",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/our-approach/pdf/dbs-progress-on-SDGs-2019.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Offered SMEs a variety of financial services, including supply chain finance, loan insurance scheme, fixed asset financing and others",
+      "source_sentence": "Offered SMEs a variety of financial services, including supply chain finance, loan insurance scheme, fixed asset financing and others",
+      "source_doc": "dbs progress on SDGs 2019",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/our-approach/pdf/dbs-progress-on-SDGs-2019.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "financial_inclusion",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Provided more than SGD 37.2 billion in financing for SMEs in 2019",
+      "source_sentence": "Provided more than SGD 37.2 billion in financing for SMEs in 2019",
+      "source_doc": "dbs progress on SDGs 2019",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/our-approach/pdf/dbs-progress-on-SDGs-2019.pdf",
+      "source_page": 1,
+      "weight": 0.15,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "employee_diversity",
+      "pillar": "S",
+      "state": "ASSERTED",
+      "text": "Established a Board Diversity Policy to promote diversity amongst Board of Directors",
+      "source_sentence": "Established a Board Diversity Policy to promote diversity amongst Board of Directors",
+      "source_doc": "dbs progress on SDGs 2019",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/our-approach/pdf/dbs-progress-on-SDGs-2019.pdf",
+      "source_page": 1,
+      "weight": 0.1,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "financed_emissions",
+      "pillar": "E",
+      "state": "INFERRED",
+      "text": "The company likely addresses financed emissions by integrating sustainability criteria into its lending portfolio and prioritizing green financing initiatives.",
+      "source_sentence": null,
+      "source_doc": "dbs progress on SDGs 2019",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/our-approach/pdf/dbs-progress-on-SDGs-2019.pdf",
+      "source_page": null,
+      "weight": 0.25,
+      "inferred": true,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "business_ethics",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company likely upholds business ethics through a comprehensive code of conduct, anti-corruption policies, and whistleblowing mechanisms.",
+      "source_sentence": null,
+      "source_doc": "dbs progress on SDGs 2019",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/our-approach/pdf/dbs-progress-on-SDGs-2019.pdf",
+      "source_page": null,
+      "weight": 0.2,
+      "inferred": true,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "data_security",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company likely ensures data security through robust cybersecurity measures and adherence to data protection regulations.",
+      "source_sentence": null,
+      "source_doc": "dbs progress on SDGs 2019",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/our-approach/pdf/dbs-progress-on-SDGs-2019.pdf",
+      "source_page": null,
+      "weight": 0.15,
+      "inferred": true,
+      "report_year": 2019
+    },
+    {
+      "topic_id": "systemic_risk",
+      "pillar": "G",
+      "state": "INFERRED",
+      "text": "The company likely manages systemic risk through rigorous stress testing and capital adequacy frameworks.",
+      "source_sentence": null,
+      "source_doc": "dbs progress on SDGs 2019",
+      "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/our-approach/pdf/dbs-progress-on-SDGs-2019.pdf",
+      "source_page": null,
+      "weight": 0.15,
+      "inferred": true,
+      "report_year": 2019
+    }
+  ],
+  "report_year": 2019,
+  "source_url": "https://www.dbs.com/iwov-resources/images/sustainability/our-approach/pdf/dbs-progress-on-SDGs-2019.pdf",
+  "source_title": "dbs progress on SDGs 2019"
+}
