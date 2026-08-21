@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
   Check,
   Database,
+  Globe,
   LoaderCircle,
   Moon,
   Palette,
@@ -69,8 +70,14 @@ type SourceCandidate = {
 };
 
 type SourceRegistryResponse = {
-  sources: Array<{ domain: string; source_class: string; reason?: string | null }>;
+  sources: Array<{
+    domain: string;
+    source_class: string;
+    reason?: string | null;
+    is_builtin?: number;
+  }>;
   candidates: SourceCandidate[];
+  observed: Array<{ domain: string; pages: number; last_fetched: string }>;
 };
 
 type ResearchStatus = {
@@ -84,11 +91,22 @@ type ResearchStatus = {
   message?: string | null;
 };
 
+const TABS = [
+  { id: "appearance", label: "Appearance" },
+  { id: "research", label: "Research pipeline" },
+  { id: "sources", label: "Sources" },
+  { id: "models", label: "Models" },
+  { id: "feedback", label: "Feedback" },
+] as const;
+
+type TabId = (typeof TABS)[number]["id"];
+
 const FREQUENCIES = ["daily", "weekly", "monthly"] as const;
 const COMPANY_COUNTS = [5, 10, 25, 50] as const;
 
 export default function SettingsPage() {
   const { mode, setMode } = useThemeMode();
+  const [tab, setTab] = useState<TabId>("appearance");
   const [scraping, setScraping] = useState<ScrapeSettings | null>(null);
   const [scrapeError, setScrapeError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -215,6 +233,13 @@ export default function SettingsPage() {
     setSourceRegistry((await response.json()) as SourceRegistryResponse);
   };
 
+  const verifiedSources = sourceRegistry?.sources.filter((item) => item.source_class === "verified") ?? [];
+  const communitySources = sourceRegistry?.sources.filter((item) => item.source_class === "community") ?? [];
+  const observedSources = sourceRegistry?.observed ?? [];
+  const pendingCandidates = sourceRegistry?.candidates.filter((item) => item.status === "pending") ?? [];
+  const reviewedCandidates = sourceRegistry?.candidates.filter((item) => item.status !== "pending") ?? [];
+  const pendingCount = pendingCandidates.length;
+
   const toggleProvider = (providerId: string) => {
     if (!scraping || !scraping.providerStatus[providerId]?.available) return;
     void saveScraping({
@@ -251,6 +276,31 @@ export default function SettingsPage() {
         </div>
       </header>
 
+      <nav className="-mx-1 mb-5 flex gap-1 overflow-x-auto border-b border-hairline pb-px">
+        {TABS.map((item) => {
+          const active = tab === item.id;
+          return (
+            <button
+              key={item.id}
+              onClick={() => setTab(item.id)}
+              className={`shrink-0 border-b-2 px-3 py-2 text-sm font-semibold transition ${
+                active
+                  ? "border-pos text-txt"
+                  : "border-transparent text-muted hover:text-txt"
+              }`}
+            >
+              {item.label}
+              {item.id === "sources" && pendingCount > 0 && (
+                <span className="ml-2 rounded-full bg-pos/15 px-1.5 py-0.5 text-[10px] font-semibold text-pos">
+                  {pendingCount}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </nav>
+
+      {tab === "appearance" && (
       <section className="grid gap-5 lg:grid-cols-[minmax(0,0.9fr)_minmax(320px,0.55fr)]">
         <div className="rounded-2xl border border-hairline bg-surface p-5 shadow-panel">
           <div className="flex items-start justify-between gap-4">
@@ -322,8 +372,10 @@ export default function SettingsPage() {
           </div>
         </div>
       </section>
+      )}
 
-      <section className="mt-5 rounded-2xl border border-hairline bg-surface p-5 shadow-panel">
+      {tab === "research" && (
+      <section className="rounded-2xl border border-hairline bg-surface p-5 shadow-panel">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex items-start gap-3">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-pos/15 text-pos">
@@ -528,12 +580,116 @@ export default function SettingsPage() {
           </>
         )}
       </section>
+      )}
 
-      <ModelProviderPanel />
+      {tab === "models" && <ModelProviderPanel />}
 
-      <FeedbackPanel />
+      {tab === "feedback" && <FeedbackPanel />}
 
-      <section className="my-5 rounded-2xl border border-hairline bg-surface p-5 shadow-panel">
+      {tab === "sources" && (
+      <div className="space-y-5 pb-5">
+      <section className="rounded-2xl border border-hairline bg-surface p-5 shadow-panel">
+        <div className="flex items-start gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-pos/15 text-pos">
+            <ShieldCheck size={18} />
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-faint">Source registry</p>
+            <h2 className="mt-1 text-xl font-semibold text-txt">Domains by trust class</h2>
+            <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted">
+              Verified and community domains are seeded from the built-in registry and extended by approved promotions. Any other domain a run fetches is treated as non-verified by default.
+            </p>
+          </div>
+        </div>
+
+        {!sourceRegistry ? (
+          <div className="mt-5 flex items-center gap-2 text-sm text-muted">
+            <LoaderCircle size={15} className="animate-spin" /> Loading source registry
+          </div>
+        ) : (
+          <div className="mt-5 grid gap-4 lg:grid-cols-3">
+            <div className="rounded-xl border border-hairline bg-canvas/40 p-4">
+              <div className="flex items-center justify-between gap-2">
+                <span className="flex items-center gap-1.5 text-sm font-semibold text-txt">
+                  <ShieldCheck size={14} className="text-pos" /> Verified
+                </span>
+                <span className="text-xs text-faint">{verifiedSources.length}</span>
+              </div>
+              <ul className="mt-3 max-h-72 space-y-1.5 overflow-y-auto pr-1">
+                {verifiedSources.map((item) => (
+                  <li key={item.domain} className="flex items-baseline justify-between gap-2">
+                    <span className="truncate text-xs text-txt" title={item.reason ?? undefined}>
+                      {item.domain}
+                    </span>
+                    {!item.is_builtin && (
+                      <span className="shrink-0 text-[10px] font-semibold uppercase text-pos">promoted</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-hairline bg-canvas/40 p-4">
+              <div className="flex items-center justify-between gap-2">
+                <span className="flex items-center gap-1.5 text-sm font-semibold text-txt">
+                  <Globe size={14} className="text-faint" /> Non-verified in use
+                </span>
+                <span className="text-xs text-faint">{observedSources.length}</span>
+              </div>
+              <p className="mt-1 text-[11px] leading-relaxed text-faint">
+                Observed in cached pages, not a fixed list.
+              </p>
+              <ul className="mt-3 max-h-72 space-y-1.5 overflow-y-auto pr-1">
+                {observedSources.map((item) => (
+                  <li key={item.domain} className="flex items-baseline justify-between gap-2">
+                    <span className="truncate text-xs text-txt">{item.domain}</span>
+                    <span className="shrink-0 text-[10px] text-faint">{item.pages}</span>
+                  </li>
+                ))}
+                {observedSources.length === 0 && (
+                  <li className="text-xs text-muted">No cached non-verified pages yet.</li>
+                )}
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-hairline bg-canvas/40 p-4">
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-sm font-semibold text-txt">Community</span>
+                <span className="text-xs text-faint">{communitySources.length}</span>
+              </div>
+              <p className="mt-1 text-[11px] leading-relaxed text-faint">
+                Sentiment signal only, capped at two points.
+              </p>
+              <ul className="mt-3 space-y-1.5">
+                {communitySources.map((item) => (
+                  <li key={item.domain} className="truncate text-xs text-txt">{item.domain}</li>
+                ))}
+              </ul>
+              {reviewedCandidates.length > 0 && (
+                <>
+                  <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-faint">
+                    Reviewed
+                  </p>
+                  <ul className="mt-2 max-h-40 space-y-1.5 overflow-y-auto pr-1">
+                    {reviewedCandidates.map((item) => (
+                      <li key={item.domain} className="flex items-baseline justify-between gap-2">
+                        <span className="truncate text-xs text-txt">{item.domain}</span>
+                        <span className={`shrink-0 text-[10px] font-semibold uppercase ${
+                          item.status === "approved" ? "text-pos" : "text-muted"
+                        }`}>
+                          {item.status}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
+          </div>
+        )}
+      </section>
+
+      <section className="rounded-2xl border border-hairline bg-surface p-5 shadow-panel">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-faint">Trust governance</p>
@@ -543,11 +699,11 @@ export default function SettingsPage() {
             </p>
           </div>
           <span className="shrink-0 rounded-full border border-hairline bg-canvas/45 px-3 py-1 text-xs text-muted">
-            {sourceRegistry?.candidates.filter((item) => item.status === "pending").length ?? 0} pending
+            {pendingCount} pending
           </span>
         </div>
         <div className="mt-4 space-y-2">
-          {sourceRegistry?.candidates.filter((item) => item.status === "pending").map((candidate) => (
+          {pendingCandidates.map((candidate) => (
             <div key={candidate.domain} className="flex flex-col gap-3 rounded-xl border border-hairline bg-canvas/40 p-3 sm:flex-row sm:items-center sm:justify-between">
               <div className="min-w-0">
                 <p className="truncate text-sm font-semibold text-txt">{candidate.domain}</p>
@@ -565,7 +721,7 @@ export default function SettingsPage() {
               </div>
             </div>
           ))}
-          {sourceRegistry && sourceRegistry.candidates.every((item) => item.status !== "pending") && (
+          {sourceRegistry && pendingCount === 0 && (
             <div className="rounded-xl border border-dashed border-hairline p-4 text-sm text-muted">
               No domains currently meet the promotion threshold.
             </div>
@@ -577,6 +733,8 @@ export default function SettingsPage() {
           )}
         </div>
       </section>
+      </div>
+      )}
     </div>
   );
 }

@@ -173,7 +173,17 @@ def list_source_registry() -> dict[str, Any]:
         )]
         for item in candidates:
             item["matched_verified_domains"] = json.loads(item["matched_verified_domains"])
-        return {"sources": sources, "candidates": candidates}
+        observed = [dict(row) for row in conn.execute(
+            """
+            SELECT domain, COUNT(*) AS pages, MAX(fetched_at) AS last_fetched
+            FROM scraped_pages
+            WHERE source_class = 'non_verified'
+            GROUP BY domain
+            ORDER BY pages DESC, domain
+            LIMIT 200
+            """
+        )]
+        return {"sources": sources, "candidates": candidates, "observed": observed}
     finally:
         conn.close()
 

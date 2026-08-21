@@ -1,6 +1,6 @@
 """Orchestrate the engine and precompute the dashboard JSON.
 
-    python -m backend.engine.pipeline            # live LLM if OPENAI_API_KEY set
+    python -m backend.engine.pipeline            # live LLM if OPENROUTER_API_KEY set
     python -m backend.engine.pipeline --offline  # demo mode: SQLite + cache + saved model, zero network
 
 Writes backend/out/{companies,matrix,signals}.json and out/company/{id}.json.
