@@ -379,7 +379,10 @@ export default function SettingsPage() {
         </div>
       </header>
 
-      <nav className="-mx-1 mb-5 flex gap-1 overflow-x-auto border-b border-hairline pb-px">
+      {/* shrink-0: overflow-x-auto zeroes the flex automatic minimum size, so in
+          this h-full column the bar collapses to its border when the page is
+          zoomed in far enough to run the viewport short. */}
+      <nav className="-mx-1 mb-5 flex shrink-0 gap-1 overflow-x-auto border-b border-hairline pb-px">
         {TABS.map((item) => {
           const active = tab === item.id;
           return (
