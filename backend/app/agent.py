@@ -1190,7 +1190,7 @@ def _engine_company_payload(company: str) -> dict | None:
         fc.get("feature_contributions", []) or [],
         key=lambda c: -abs(c.get("contribution") or 0),
     )[:5]
-    return {
+    payload = {
         "company": {"id": match["id"], "name": match.get("name"),
                     "ticker": match.get("ticker"), "sector": match.get("sector")},
         "evidence_score": ev.get("total"),
@@ -1220,6 +1220,15 @@ def _engine_company_payload(company: str) -> dict | None:
         },
         "report_source": (d.get("claims", {}) or {}).get("source_url"),
     }
+    # Reviewer corrections win over the engine's own output. Applied here rather
+    # than per tool so every ESG read goes through the same patch.
+    try:
+        from .fact_overrides import FactOverrideStore
+
+        return FactOverrideStore().apply(payload, match["id"])
+    except Exception:
+        # A broken override store must never take the ESG tools down with it.
+        return payload
 
 
 def build_langchain_tools(web_tools: WebTools) -> list[Any]:

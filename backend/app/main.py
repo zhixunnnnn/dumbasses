@@ -57,6 +57,12 @@ from .feedback import (
     FeedbackReview,
     FeedbackStore,
 )
+from .fact_overrides import (
+    OVERRIDABLE_FIELDS,
+    FactOverrideStore,
+    OverrideCreate,
+    OverrideRecord,
+)
 
 
 class Product(BaseModel):
@@ -113,6 +119,7 @@ app = FastAPI(title="PolyFintech 2026 API", version="1.0.0")
 agent = OpenRouterAgent()
 chat_history = ChatHistoryStore()
 feedback_store = FeedbackStore()
+override_store = FactOverrideStore()
 _research_lock = threading.Lock()
 _research_scheduler = None
 
@@ -368,6 +375,52 @@ def review_feedback(feedback_id: str, request: FeedbackReview) -> FeedbackRecord
 def delete_feedback(feedback_id: str) -> Response:
     if not feedback_store.delete(feedback_id):
         raise HTTPException(status_code=404, detail="Feedback not found.")
+    return Response(status_code=204)
+
+
+@app.get("/api/assistant/overrides/fields")
+def override_fields():
+    """The whitelist the Governance form renders. Kept server-side so the UI and
+    the validator cannot drift apart."""
+    return [
+        {
+            "field": field,
+            "label": spec.get("label", field),
+            "kind": spec["kind"],
+            "min": spec.get("min"),
+            "max": spec.get("max"),
+            "hint": spec.get("hint", ""),
+        }
+        for field, spec in OVERRIDABLE_FIELDS.items()
+    ]
+
+
+@app.get("/api/assistant/overrides", response_model=list[OverrideRecord])
+def list_overrides(
+    company: str | None = None, include_expired: bool = True
+) -> list[OverrideRecord]:
+    return override_store.list(company_id=company, include_expired=include_expired)
+
+
+@app.get("/api/assistant/overrides/stats")
+def override_stats():
+    return override_store.stats()
+
+
+@app.post("/api/assistant/overrides", response_model=OverrideRecord, status_code=201)
+def create_override(request: OverrideCreate) -> OverrideRecord:
+    """Upsert by (companyId, field) — re-pinning a field replaces its value
+    rather than stacking a second, ambiguous override."""
+    try:
+        return override_store.upsert(request)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.delete("/api/assistant/overrides/{override_id}", status_code=204)
+def delete_override(override_id: str) -> Response:
+    if not override_store.delete(override_id):
+        raise HTTPException(status_code=404, detail="Override not found.")
     return Response(status_code=204)
 
 

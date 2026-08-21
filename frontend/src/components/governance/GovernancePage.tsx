@@ -5,11 +5,14 @@ import {
   ExternalLink,
   Flag,
   LoaderCircle,
+  Pin,
   RefreshCw,
   ShieldAlert,
   Trash2,
   X,
 } from "lucide-react";
+import { OverrideForm, OverridesPanel, inferCompanyId } from "./FactOverrides";
+import { loadOverrideStats, type OverrideStats } from "../../lib/overrides";
 import {
   STATUS_LABELS,
   deleteFeedback,
@@ -38,9 +41,11 @@ const STATUS_TONE: Record<FeedbackStatus, string> = {
 };
 
 export default function GovernancePage() {
+  const [view, setView] = useState<"queue" | "overrides">("queue");
   const [filter, setFilter] = useState<FeedbackStatus | "all">("open");
   const [records, setRecords] = useState<FeedbackRecord[] | null>(null);
   const [stats, setStats] = useState<FeedbackStats | null>(null);
+  const [overrideStats, setOverrideStats] = useState<OverrideStats | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -48,12 +53,14 @@ export default function GovernancePage() {
     setRefreshing(true);
     setError(null);
     try {
-      const [rows, summary] = await Promise.all([
+      const [rows, summary, overrides] = await Promise.all([
         listFeedback(filter),
         loadFeedbackStats(),
+        loadOverrideStats().catch(() => null),
       ]);
       setRecords(rows);
       setStats(summary);
+      setOverrideStats(overrides);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not load the review queue.");
       setRecords([]);
@@ -110,7 +117,9 @@ export default function GovernancePage() {
               <p className="mt-0.5 max-w-2xl text-sm leading-relaxed text-muted">
                 Every agent response flagged in the workspace lands here for human
                 review. Confirm what went wrong, write the answer the agent should
-                have given, and the pair becomes RLHF training data.
+                have given, and the pair becomes RLHF training data. When the
+                mistake was a specific figure, pin the right one — the agent reads
+                the corrected value on the very next question.
               </p>
             </div>
           </div>
@@ -137,16 +146,53 @@ export default function GovernancePage() {
         <div className="mt-5 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
           <StatTile label="Flags raised" value={stats?.total ?? 0} />
           <StatTile label="Awaiting review" value={counts.open ?? 0} tone="neg" />
-          <StatTile label="Resolved" value={counts.resolved ?? 0} tone="pos" />
           <StatTile
             label="Training pairs ready"
             value={stats?.trainablePairs ?? 0}
             tone="pos"
             hint="Resolved flags that carry a human-written correction"
           />
+          <StatTile
+            label="Values pinned"
+            value={overrideStats?.active ?? 0}
+            tone="pos"
+            hint="Live fact overrides the agent reads instead of the engine's own output"
+          />
         </div>
       </header>
 
+      <div className="flex gap-2 pb-3">
+        {(
+          [
+            { id: "queue", label: "Review queue" },
+            { id: "overrides", label: "Fact overrides" },
+          ] as const
+        ).map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setView(tab.id)}
+            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+              view === tab.id
+                ? "bg-raised text-txt"
+                : "text-muted hover:text-txt"
+            }`}
+          >
+            {tab.label}
+            {tab.id === "overrides" && overrideStats?.active ? (
+              <span className="ml-1.5 text-faint">{overrideStats.active}</span>
+            ) : null}
+          </button>
+        ))}
+      </div>
+
+      {view === "overrides" ? (
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <OverridesPanel
+            onChanged={() => void loadOverrideStats().then(setOverrideStats)}
+          />
+        </div>
+      ) : (
+        <>
       <div className="flex flex-wrap gap-2 border-b border-hairline pb-4">
         {FILTERS.map((item) => (
           <button
@@ -194,10 +240,13 @@ export default function GovernancePage() {
               record={record}
               onReview={applyReview}
               onDelete={removeRecord}
+              onPinned={() => void loadOverrideStats().then(setOverrideStats)}
             />
           ))
         )}
       </div>
+        </>
+      )}
     </div>
   );
 }
@@ -229,6 +278,7 @@ function ReviewCard({
   record,
   onReview,
   onDelete,
+  onPinned,
 }: {
   record: FeedbackRecord;
   onReview: (
@@ -236,10 +286,12 @@ function ReviewCard({
     payload: Parameters<typeof reviewFeedback>[1],
   ) => Promise<void>;
   onDelete: (id: string) => Promise<void>;
+  onPinned: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
   const [note, setNote] = useState(record.reviewerNote);
   const [correction, setCorrection] = useState(record.correctedResponse);
+  const [pinning, setPinning] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const dirty =
@@ -365,6 +417,28 @@ function ReviewCard({
             className="mt-1.5 w-full resize-y rounded-lg border border-hairline bg-canvas/50 px-3 py-2 text-sm text-txt outline-none placeholder:text-faint"
           />
         </label>
+      </div>
+
+      <div className="mt-3 rounded-lg border border-hairline bg-canvas/40">
+        <button
+          onClick={() => setPinning((value) => !value)}
+          className="flex w-full items-center gap-1.5 px-3 py-2 text-left text-xs font-semibold text-muted transition hover:text-txt"
+        >
+          <Pin size={13} />
+          {pinning ? "Hide" : "Got a figure wrong? Pin the correct value"}
+          <span className="ml-auto font-normal text-faint">
+            Applied before the agent reads it
+          </span>
+        </button>
+        {pinning && (
+          <div className="border-t border-hairline p-3">
+            <OverrideForm
+              defaultCompanyId={inferCompanyId(record.pageContext)}
+              feedbackId={record.id}
+              onSaved={onPinned}
+            />
+          </div>
+        )}
       </div>
 
       <div className="mt-3 flex flex-wrap items-center gap-2">
