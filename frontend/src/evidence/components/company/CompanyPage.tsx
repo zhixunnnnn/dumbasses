@@ -2,7 +2,8 @@ import { useMemo } from "react";
 import { Activity, ArrowLeft, Check, Leaf, Minus, X } from "lucide-react";
 import { api, useApi } from "../../lib/api";
 import type { TraceNode } from "../../types";
-import { na, signed, PILLAR_COLOR } from "../../lib/ui";
+import { na, signed, NA_REASON, PILLAR_COLOR } from "../../lib/ui";
+import ProvenanceBadge from "../common/ProvenanceBadge";
 import { useNavigation } from "../../navigation/NavigationContext";
 import { Gauge, LineChart } from "../charts";
 import Why from "../common/Why";
@@ -12,6 +13,7 @@ import ClaimTable from "./ClaimTable";
 import ComplianceGap from "./ComplianceGap";
 import ForecastCard from "./ForecastCard";
 import TrustMeter from "./TrustMeter";
+import PeerDistribution from "./PeerDistribution";
 import LiveNews from "./LiveNews";
 import { usePublishAssistantPageContext } from "../../../components/chat/PageContext";
 
@@ -52,13 +54,24 @@ export default function CompanyPage({ id }: { id: string }) {
   if (loading) return <div className="p-10 text-sm text-muted">Loading {id}…</div>;
   if (error || !data) return <div className="p-10 text-sm text-neg">Couldn’t load {id}. {error}</div>;
 
-  const { company, evidence, series, raters, signal, witness, compliance, forecast, claims, peers, liveIntelligence } = data;
+  const { company, evidence, series, raters, signal, witness, compliance, forecast, claims, peers, benchmark, liveIntelligence } = data;
+  const latestReal = data.latest_real_raters ?? null;
+  const cdpDisclosure = data.cdp_disclosure ?? null;
+  // the analysis year comes from the data, not a hardcoded constant that could drift
+  const analysisYear = series.length ? series[series.length - 1].year : undefined;
+  const benchmarkDelta =
+    benchmark && benchmark.total !== null && evidence.total !== null
+      ? evidence.total - benchmark.total
+      : null;
   const seriesPts = series.filter((s) => s.total !== null);
 
-  const consensusTrace = node("Rater consensus (mean of available, higher=better)", raters.consensus, [
+  const realRaters = raters.real_raters ?? [];
+  const consensusTrace = node("Rater consensus (mean of the REAL percentiles, higher=better)", raters.consensus, [
     node(`MSCI percentile`, raters.msci_pct),
     node(`S&P percentile`, raters.sp_pct),
     node(`Sustainalytics percentile (inverted)`, raters.sustainalytics_pct),
+    node(`CDP percentile`, raters.cdp_pct),
+    node(`real ratings: ${realRaters.length ? realRaters.join(", ") : "none"}`, null),
   ]);
 
   return (
@@ -73,6 +86,10 @@ export default function CompanyPage({ id }: { id: string }) {
           <div className="flex items-center gap-2.5">
             <h1 className="text-2xl font-semibold text-txt">{company.name}</h1>
             <QuadrantBadge q={signal.quadrant} />
+            {signal.quadrant && (
+              <ProvenanceBadge provenance={signal.quadrant_provenance}
+                contributing={raters.contributing} real={realRaters} />
+            )}
             {signal.is_underpriced_improver && <ImproverPill />}
           </div>
           <p className="mt-1 font-mono text-[12px] text-faint">
@@ -85,18 +102,35 @@ export default function CompanyPage({ id }: { id: string }) {
             <Why trace={evidence.trace} title="Evidence score" />
           </div>
           <p className="text-[11px] text-faint">Evidence score · confidence {Math.round(evidence.confidence * 100)}%</p>
+          {benchmark && (
+            <p className="text-[11px] text-faint">
+              {benchmark.total === null ? (
+                <>Industry bar: N.A. — {NA_REASON.benchmark}</>
+              ) : (
+                <>
+                  Industry bar: {na(benchmark.total)} ({benchmark.source})
+                  {benchmarkDelta !== null && (
+                    <span className="ml-1 font-mono" style={{ color: benchmarkDelta > 0 ? "#3ecf8e" : "#9a968e" }}>
+                      {signed(benchmarkDelta)}
+                    </span>
+                  )}
+                </>
+              )}
+            </p>
+          )}
         </div>
       </div>
 
-      {/* the three numbers */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      {/* the two panels */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
           <div className="flex items-center justify-between">
-            <p className="text-[12px] font-medium text-muted">Rater consensus</p>
-            <Why trace={consensusTrace} title="Consensus" />
+            <p className="text-[12px] font-medium text-muted">Peer distribution · {company.sector}</p>
+            <Why trace={node(`Evidence scores of ${company.sector} companies in the panel; the green bar is ${company.name}`, evidence.total)}
+              title="Peer distribution" />
           </div>
-          <p className="mt-1 font-mono text-2xl font-semibold text-txt">{na(raters.consensus)}</p>
-          <p className="text-[11px] text-faint">percentile vs sector</p>
+          <PeerDistribution self={evidence.total} selfName={company.name}
+            peers={peers} sector={company.sector} />
         </div>
         <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
           <div className="flex items-center justify-between">
@@ -104,25 +138,20 @@ export default function CompanyPage({ id }: { id: string }) {
             <Why trace={node("Divergence = max − min of rater percentiles", raters.divergence, consensusTrace.children)}
               title="Divergence" />
           </div>
-          <p className="mt-1 font-mono text-2xl font-semibold text-txt">{na(raters.divergence)}</p>
-          <TrustMeter raters={raters} />
-        </div>
-        <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
-          <div className="flex items-center justify-between">
-            <p className="text-[12px] font-medium text-muted">Evidence gap</p>
-            <Why trace={signal.trace} title="Underpriced Improver signal" />
-          </div>
-          <p className="mt-1 font-mono text-2xl font-semibold"
-            style={{ color: (signal.evidence_gap ?? 0) > 0 ? "#3ecf8e" : "#9a968e" }}>
-            {signed(signal.evidence_gap)}
+          <p className="mt-1 flex items-center gap-2 font-mono text-2xl font-semibold text-txt">
+            {na(raters.divergence)}
+            <ProvenanceBadge provenance={raters.divergence_provenance}
+              contributing={raters.contributing} real={realRaters} />
           </p>
-          <p className="text-[11px] text-faint">evidence percentile − consensus</p>
+          <TrustMeter raters={raters} latestReal={latestReal}
+            cdpDisclosure={cdpDisclosure} year={analysisYear} />
         </div>
       </div>
 
       {/* signal legs */}
       <div className="flex flex-wrap items-center gap-2 rounded-xl border border-hairline bg-surface px-4 py-3 shadow-panel">
         <span className="text-[12px] font-medium text-muted">Underpriced Improver =</span>
+        <Why trace={signal.trace} title="Underpriced Improver signal" />
         <Leg ok={signal.proof_up} label="proof_up (verified evidence ↑)" />
         <Leg ok={signal.opinion_flat} label="opinion_flat (raters stale/split)" />
         <Leg ok={signal.price_flat} label="price_flat (market hasn't reacted)" />
