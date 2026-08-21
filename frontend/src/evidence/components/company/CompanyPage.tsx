@@ -34,8 +34,6 @@ function Leg({ ok, label }: { ok: boolean | null; label: string }) {
 export default function CompanyPage({ id }: { id: string }) {
   const { goBack, navigate } = useNavigation();
   const { data, loading, error } = useApi(() => api.company(id), [id]);
-  // whole-panel scores back the peer-distribution card when the sector has no peers
-  const { data: panelRows } = useApi(api.companies, []);
   const pageContext = useMemo(() => data ? ({
     route: "evidenceCompany",
     title: `${data.company.name} ESG evidence profile`,
@@ -100,7 +98,7 @@ export default function CompanyPage({ id }: { id: string }) {
               title="Peer distribution" />
           </div>
           <PeerDistribution self={evidence.total} selfId={id} selfName={company.name}
-            peers={peers} sector={company.sector} panel={panelRows} />
+            peers={peers} sector={company.sector} />
         </div>
         <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
           <div className="flex items-center justify-between">

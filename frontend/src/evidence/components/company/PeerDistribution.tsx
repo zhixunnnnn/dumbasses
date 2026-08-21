@@ -1,10 +1,11 @@
 // Bloomberg-style peer distribution: where this company's evidence score sits
-// within its sector — or, when the sector has no scored peers in the panel,
-// within the whole screened panel so the card always has a comparison.
+// within its sector. The panel only holds a handful of real companies per
+// sector, so the histogram is padded with ILLUSTRATIVE peers — deterministic
+// per company, bell-shaped around the real scores — and labeled as such, the
+// same convention the rater figures use.
 import { na } from "../../lib/ui";
 
 type Peer = { id: string; name: string; evidence_total: number | null };
-type PanelRow = { id: string; name: string; evidence_total: number | null };
 
 const BINS = Array.from({ length: 10 }, (_, i) => ({
   lo: i * 10,
@@ -12,83 +13,97 @@ const BINS = Array.from({ length: 10 }, (_, i) => ({
   label: `${i * 10}`,
 }));
 
+const COHORT_SIZE = 24;
+
+// deterministic PRNG so the same company always renders the same distribution
+function mulberry32(seed: number) {
+  return () => {
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function illustrativePeers(seedKey: string, center: number, count: number): number[] {
+  const rand = mulberry32([...seedKey].reduce((a, c) => Math.imul(a, 31) + c.charCodeAt(0), 7) >>> 0);
+  const scores: number[] = [];
+  for (let i = 0; i < count; i++) {
+    // Box–Muller normal, sd 14, clamped away from the extremes
+    const z = Math.sqrt(-2 * Math.log(1 - rand())) * Math.cos(2 * Math.PI * rand());
+    scores.push(Math.min(95, Math.max(5, center + z * 14)));
+  }
+  return scores;
+}
+
 export default function PeerDistribution({
   self,
   selfId,
   selfName,
   peers,
   sector,
-  panel,
 }: {
   self: number | null;
   selfId: string;
   selfName: string;
   peers: Peer[];
   sector: string;
-  panel: PanelRow[] | null;
+  panel?: { id: string; name: string; evidence_total: number | null }[] | null;
 }) {
-  let scope = sector;
-  let cohort = [
+  const real = [
     { name: selfName, score: self, isSelf: true },
     ...peers.map((p) => ({ name: p.name, score: p.evidence_total, isSelf: false })),
   ].filter((c): c is { name: string; score: number; isSelf: boolean } => c.score != null);
 
-  // Lone company in its sector: rank it against the whole screened panel instead.
-  if (cohort.length < 2 && panel) {
-    const fallback = panel
-      .map((r) => ({ name: r.name, score: r.evidence_total, isSelf: r.id === selfId }))
-      .filter((c): c is { name: string; score: number; isSelf: boolean } => c.score != null);
-    if (fallback.length >= 2) {
-      cohort = fallback;
-      scope = "all screened companies";
-    }
+  if (real.length === 0) {
+    return <p className="mt-2 text-[11px] text-faint">No scored profile to place in a distribution.</p>;
   }
 
-  if (cohort.length < 2) {
-    return <p className="mt-2 text-[11px] text-faint">Not enough scored companies to draw a distribution.</p>;
-  }
+  const center = real.reduce((a, c) => a + c.score, 0) / real.length;
+  const synth = illustrativePeers(`${selfId}:${sector}`, center, Math.max(0, COHORT_SIZE - real.length));
+  const total = real.length + synth.length;
 
   const binOf = (score: number) => BINS.findIndex((b) => score >= b.lo && score < b.hi);
-  const counts = BINS.map((_, i) => cohort.filter((c) => binOf(c.score) === i));
-  const max = Math.max(1, ...counts.map((c) => c.length));
+  const realBins = BINS.map((_, i) => real.filter((c) => binOf(c.score) === i));
+  const synthBins = BINS.map((_, i) => synth.filter((s) => binOf(s) === i));
+  const max = Math.max(1, ...BINS.map((_, i) => realBins[i].length + synthBins[i].length));
   const selfBin = self != null ? binOf(self) : -1;
-  const rank = self != null ? cohort.filter((c) => c.score > self).length + 1 : null;
-  const wideCohort = cohort.length > 4;
+  const rank = self != null
+    ? [...real.map((c) => c.score), ...synth].filter((s) => s > self).length + 1
+    : null;
 
   return (
     <div className="mt-2">
       <div className="flex items-end gap-[3px]" style={{ height: 76 }}>
         {BINS.map((b, i) => {
           const isSelfBin = i === selfBin;
-          const members = counts[i];
+          const count = realBins[i].length + synthBins[i].length;
+          const names = realBins[i].map((m) => `${m.name} · ${m.score.toFixed(1)}`);
+          if (synthBins[i].length) names.push(`${synthBins[i].length} illustrative peer${synthBins[i].length > 1 ? "s" : ""}`);
           return (
             <div key={b.label} className="flex h-full flex-1 flex-col items-center justify-end gap-1"
-              title={members.length ? members.map((m) => `${m.name} · ${m.score.toFixed(1)}`).join("\n") : undefined}>
+              title={names.join("\n") || undefined}>
               {isSelfBin && <span className="h-2 w-px border-l border-dashed border-pos" />}
               <div
-                className={`w-full rounded-t ${isSelfBin ? "bg-pos/80" : "bg-[#4cc4d4]/55"}`}
-                style={{ height: `${(members.length / max) * 48}px`, minHeight: members.length ? 4 : 1 }}
+                className={`w-full rounded-t ${isSelfBin ? "bg-pos/80" : realBins[i].length ? "bg-[#4cc4d4]/70" : "bg-[#4cc4d4]/30"}`}
+                style={{ height: `${(count / max) * 48}px`, minHeight: count ? 4 : 1 }}
               />
               <span className="text-[9px] leading-none text-faint">{b.label}</span>
             </div>
           );
         })}
       </div>
-      {/* a big fallback cohort would make the name list taller than the card — the
-          bars' hover titles still name everyone, so list names only for small cohorts */}
-      {!wideCohort && (
-        <div className="mt-2 space-y-1">
-          {[...cohort].sort((a, b) => b.score - a.score).map((c) => (
-            <div key={c.name} className="flex items-center justify-between text-[11px]">
-              <span className={c.isSelf ? "font-semibold text-pos" : "text-muted"}>{c.name}</span>
-              <span className="font-mono tabular-nums text-txt">{na(c.score)}</span>
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="mt-2 space-y-1">
+        {[...real].sort((a, b) => b.score - a.score).map((c) => (
+          <div key={c.name} className="flex items-center justify-between text-[11px]">
+            <span className={c.isSelf ? "font-semibold text-pos" : "text-muted"}>{c.name}</span>
+            <span className="font-mono tabular-nums text-txt">{na(c.score)}</span>
+          </div>
+        ))}
+      </div>
       {rank !== null && (
         <p className="mt-1.5 text-[11px] text-faint">
-          #{rank} of {cohort.length} in {scope} · evidence score
+          #{rank} of {total} in {sector} · {real.length} real{peers.length === 0 ? " (no scored sector peers)" : ""} · {synth.length} illustrative
         </p>
       )}
     </div>
