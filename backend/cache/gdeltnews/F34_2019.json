@@ -1,0 +1,91 @@
+{
+  "company_id": "F34",
+  "year": 2019,
+  "miss": false,
+  "n_articles": 250,
+  "n_labelled": 38,
+  "positive": 0,
+  "controversy": 1,
+  "sentiment": -1,
+  "headlines": [
+    {
+      "title": "Can You Imagine How Wilmar International ( SGX : F34 ) Shareholders Feel About The 30 % Share Price Increase ? ",
+      "url": "https://news.yahoo.com/imagine-wilmar-internationals-sgx-f34-044715419.html",
+      "seendate": "20191217T054500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Can You Imagine How Wilmar International ( SGX : F34 ) Shareholders Feel About The 30 % Share Price Increase ? ",
+      "url": "https://finance.yahoo.com/news/imagine-wilmar-internationals-sgx-f34-044715419.html",
+      "seendate": "20191217T061500Z",
+      "label": "stock"
+    },
+    {
+      "title": "PPB associate Wilmar to build largest rice mill in Myanmar economic zone",
+      "url": "https://www.theedgemarkets.com/article/ppb-associate-wilmar-build-largest-rice-mill-myanmar-economic-zone",
+      "seendate": "20191106T051500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "What Does Wilmar International Limited ( SGX : F34 ) P / E Ratio Tell You ? ",
+      "url": "https://news.yahoo.com/does-wilmar-international-limiteds-sgx-021431189.html",
+      "seendate": "20191117T040000Z",
+      "label": "stock"
+    },
+    {
+      "title": "What Does Wilmar International Limited ( SGX : F34 ) P / E Ratio Tell You ? ",
+      "url": "https://finance.yahoo.com/news/does-wilmar-international-limiteds-sgx-021431189.html",
+      "seendate": "20191118T014500Z",
+      "label": "stock"
+    },
+    {
+      "title": "We Think Wilmar International ( SGX : F34 ) Is Taking Some Risk With Its Debt",
+      "url": "https://finance.yahoo.com/news/think-wilmar-international-sgx-f34-001440465.html",
+      "seendate": "20191022T014500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "We Think Wilmar International ( SGX : F34 ) Is Taking Some Risk With Its Debt",
+      "url": "https://news.yahoo.com/think-wilmar-international-sgx-f34-001440465.html",
+      "seendate": "20191022T010000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Wilmar eyes regulator approval for China IPO in early 2020",
+      "url": "https://www.thehindubusinessline.com/markets/singapores-wilmar-eyes-regulators-approval-for-china-ipo-in-early-2020/article30034907.ece",
+      "seendate": "20191121T074500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "SG Wilmar eyes regulator approval for China IPO early next year",
+      "url": "https://www.dealstreetasia.com/stories/wilmar-china-ipo-163606/",
+      "seendate": "20191121T101500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Wilmar eyes regulator nod for China IPO in early 2020",
+      "url": "https://www.businesstimes.com.sg/companies-markets/wilmar-eyes-regulators-nod-for-china-ipo-in-early-2020",
+      "seendate": "20191121T061500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Wilmar eyes regulator approval for China IPO in early 2020",
+      "url": "https://in.reuters.com/article/us-wilmar-ipo-china-idINKBN1XV0EV",
+      "seendate": "20191121T053000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore Wilmar eyes regulator approval for China IPO in early 2020",
+      "url": "https://www.theedgemarkets.com/article/singapores-wilmar-eyes-regulators-approval-china-ipo-early-2020",
+      "seendate": "20191121T170000Z",
+      "label": "neutral"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"Wilmar\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Wilmar%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20190101000000&enddatetime=20191231235959",
+  "window_start": "20190101000000",
+  "window_end": "20191231235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-22T16:55:28+00:00"
+}

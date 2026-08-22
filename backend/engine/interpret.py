@@ -28,7 +28,7 @@ from . import config, ingest
 from .llm import get_default_client
 from .predict import FEATURES, _real_features, _panel
 from .pipeline import _load_or_train
-from .predict import forecast as run_forecast
+from .predict import _accuracy_block, forecast as run_forecast
 from .score import evidence_score
 
 FEATURE_META: dict[str, dict[str, str]] = {
@@ -67,6 +67,16 @@ FEATURE_META: dict[str, dict[str, str]] = {
             "Annualised standard deviation of weekly log returns over the same window."
         ),
     },
+    "prev_rating_level": {
+        "label": "Last known rating",
+        "unit": "MSCI level 1–7",
+        "provenance": "prior_rating",
+        "description": (
+            "The company's rating from a STRICTLY EARLIER year — never the year being "
+            "predicted. It makes the model a correction to persistence rather than a "
+            "guess from scratch, and the evaluation still has to beat persistence."
+        ),
+    },
 }
 
 
@@ -97,7 +107,9 @@ def model_card() -> dict[str, Any]:
         "modelType": (f"Ridge regression (L2, alpha={ev.alpha}) on standardized features"
                       if model.fitted else "Naive ratings persistence (no fit shipped)"),
         "explainer": "Exact linear SHAP — closed form for a linear model, no sampling",
-        "target": "REAL disclosed MSCI ESG rating level (CCC=1 .. AAA=7), same year",
+        "target": ("MSCI ESG rating level (CCC=1 .. AAA=7), same year — REAL disclosed "
+                   "letters where a company published one, the illustrative seeded curve "
+                   "otherwise, flagged per row"),
         "targetYear": config.CURRENT_YEAR,
         "baseValue": round(base_value, 3),
         "trainingRows": int(len(y)),
@@ -108,6 +120,21 @@ def model_card() -> dict[str, Any]:
             if model.directional_accuracy is not None else None
         ),
         "directionalN": model.directional_n,
+        # the honesty split: the headline above is measured partly on seeded targets, so
+        # the real-target figures ship beside it and are never merged into it
+        "accuracyBasis": ("full panel incl. illustrative targets"
+                          if model.rows_illustrative else "real targets only"),
+        "accuracyNote": _accuracy_block(model)[4],
+        "panelRowsReal": model.rows_real,
+        "panelRowsIllustrative": model.rows_illustrative,
+        "realDirectionalAccuracy": (
+            None if model.real_evaluation is None else model.real_evaluation.move_acc),
+        "realDirectionalN": (
+            None if model.real_evaluation is None else model.real_evaluation.move_n),
+        "realMoveBaseline": (
+            None if model.real_evaluation is None else model.real_evaluation.move_baseline),
+        "realLuckPValue": (
+            None if model.real_evaluation is None else model.real_evaluation.p_value),
         "baselineMovePersistence": ev.move_baseline,
         "baselineSide": ev.side_baseline,
         "baselineMaePersistence": ev.baseline_mae_persistence,
@@ -140,7 +167,11 @@ def model_card() -> dict[str, Any]:
             "the accuracy above is the leave-one-out share of upgrade/hold/downgrade calls "
             "the model got right, with its sample size, against a baseline that always "
             "says hold. With a panel this small an edge over that baseline can be luck — "
-            "the p-value says how likely."
+            "the p-value says how likely. Read `accuracyNote` before quoting any of it: "
+            "the panel is padded with ILLUSTRATIVE (seeded) rating targets so that a fit "
+            "is possible at all, so `directionalAccuracy` is NOT a measurement on ratings "
+            "anyone published. `realDirectionalAccuracy` is, over `realDirectionalN` rows, "
+            "and that is the only figure that may be described as a real result."
         ),
     }
 
@@ -249,8 +280,12 @@ def explain(company_id: str) -> dict[str, Any]:
 
 
 def news_evidence(company_id: str) -> dict[str, Any]:
-    """The scraped headlines behind the `news_sentiment` feature, so a reader can
-    click through from the prediction to the article that moved it."""
+    """The scraped headline snapshot for this company.
+
+    NOTE: `news_sentiment` is no longer a model feature (GDELT DOC 2.0 covers too few of
+    the panel's company-years to use consistently — see predict.FEATURES). These headlines
+    are current-day context for a reader, NOT an input the prediction rests on, and the UI
+    must not present them as a driver of the number."""
     from .db import bootstrap
 
     conn = bootstrap()

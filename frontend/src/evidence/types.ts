@@ -57,6 +57,8 @@ export type CompanyRow = {
   forecast_label?: string | null;          // that level as a letter
   forecast_direction?: string | null;      // "likely upgrade" | "likely hold" | ...
   forecast_baseline_only?: boolean;
+  forecast_provenance?: Provenance | null;
+  forecast_accuracy_note?: string | null;
   rater_provenance?: Provenance | null;
   benchmark_total?: number | null;
   benchmark_source?: string | null;
@@ -260,6 +262,18 @@ export type Forecast = {
   val_error: number | null;
   directional_accuracy?: number | null;
   directional_n?: number | null;
+  // Which rows `directional_accuracy` was measured on. The training panel is padded with
+  // illustrative (seeded) rating targets, so the headline figure is NOT a measurement on
+  // published ratings; `accuracy_note` is the qualified sentence and the card shows it
+  // verbatim rather than rendering a bare percentage.
+  accuracy_basis?: string | null;
+  accuracy_note?: string | null;
+  real_directional_accuracy?: number | null;
+  real_directional_n?: number | null;
+  panel_rows?: number | null;
+  panel_rows_real?: number | null;
+  panel_rows_illustrative?: number | null;
+  provenance?: Provenance | null;
   predicted_label?: string | null;
   last_rating_label?: string | null;
   last_rating_year?: number | null;

@@ -550,18 +550,27 @@
     "msci_pct": 20.0,
     "sp_pct": 15.0,
     "sustainalytics_pct": 35.0,
-    "cdp_pct": null,
-    "real_raters": [],
+    "cdp_pct": 42.86,
+    "real_raters": [
+      "cdp"
+    ],
+    "rater_years": {
+      "msci": 2024,
+      "sustainalytics": 2024,
+      "sp": 2024,
+      "cdp": 2025
+    },
     "basis": "all companies",
     "peers": 10,
-    "consensus": 23.33,
-    "divergence": 20.0,
-    "consensus_provenance": "illustrative",
-    "divergence_provenance": "illustrative",
+    "consensus": 28.21,
+    "divergence": 27.86,
+    "consensus_provenance": "mixed",
+    "divergence_provenance": "mixed",
     "contributing": [
       "msci",
       "sp",
-      "sustainalytics"
+      "sustainalytics",
+      "cdp"
     ],
     "rater_provenance": {
       "msci": {
@@ -600,19 +609,19 @@
   "signal": {
     "company_id": "F34",
     "proof_up": true,
-    "opinion_flat": false,
+    "opinion_flat": true,
     "price_flat": true,
-    "is_underpriced_improver": false,
+    "is_underpriced_improver": true,
     "evidence_pct": 95.0,
     "evidence_basis": "all companies",
     "evidence_peers": 10,
-    "evidence_gap": 71.67,
+    "evidence_gap": 66.79,
     "momentum": 1.929,
-    "esg_today": 23.33,
+    "esg_today": 28.21,
     "quadrant": "HIDDEN_WINNERS",
-    "esg_today_provenance": "illustrative",
-    "evidence_gap_provenance": "illustrative",
-    "quadrant_provenance": "illustrative",
+    "esg_today_provenance": "mixed",
+    "evidence_gap_provenance": "mixed",
+    "quadrant_provenance": "mixed",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -1092,8 +1101,8 @@
           ]
         },
         {
-          "label": "opinion_flat=False (divergence=20.0, consensus 41.67->23.33)",
-          "value": 20.0,
+          "label": "opinion_flat=True (divergence=27.86, consensus 41.97->28.21)",
+          "value": 27.86,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -1110,8 +1119,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=71.67 (evidence 95.0 - consensus 23.33)",
-          "value": 71.67,
+          "label": "evidence_gap=66.79 (evidence 95.0 - consensus 28.21)",
+          "value": 66.79,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -7594,6 +7603,14 @@
     "val_error": null,
     "directional_accuracy": null,
     "directional_n": null,
+    "accuracy_basis": null,
+    "accuracy_note": "No prediction was made, so there is no accuracy.",
+    "real_directional_accuracy": null,
+    "real_directional_n": null,
+    "panel_rows": null,
+    "panel_rows_real": null,
+    "panel_rows_illustrative": null,
+    "provenance": "illustrative",
     "predicted_label": null,
     "last_rating_label": null,
     "last_rating_year": null,

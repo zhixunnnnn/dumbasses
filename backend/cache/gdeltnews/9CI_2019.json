@@ -1,0 +1,91 @@
+{
+  "company_id": "9CI",
+  "year": 2019,
+  "miss": false,
+  "n_articles": 250,
+  "n_labelled": 43,
+  "positive": 1,
+  "controversy": 0,
+  "sentiment": 1,
+  "headlines": [
+    {
+      "title": "CapitaLand spirit of giving",
+      "url": "https://www.businesstimes.com.sg/focus/capitaland-gives-back/capitalands-spirit-of-giving",
+      "seendate": "20191127T224500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "CapitaLand launches perpetual deal",
+      "url": "https://www.businesstimes.com.sg/companies-markets/capitaland-launches-perpetual-deal",
+      "seendate": "20191010T073000Z",
+      "label": "stock"
+    },
+    {
+      "title": "CapitaLand to divest 30 business park properties in the united states and Singapore to Ascendas Reit for S$1 . 66 billion",
+      "url": "https://www.capitaland.com/international/en/about-capitaland/newsroom/news-releases/international/2019/nov/CapitaLand_to_divest_30_business_park_properties_in_USA_and_SG_to_AReit.html",
+      "seendate": "20191101T050000Z",
+      "label": "stock"
+    },
+    {
+      "title": "CapitaLand Q3 profit falls 7 . 8 % to $333 . 9m after lower portfolio gains",
+      "url": "https://www.straitstimes.com/business/companies-markets/capitaland-q3-profit-falls-78-to-3339m-after-lower-portfolio-gains",
+      "seendate": "20191105T024500Z",
+      "label": "stock"
+    },
+    {
+      "title": "CapitaLand Q3 earnings drop 7 . 8 % to S$333 . 9m",
+      "url": "https://www.businesstimes.com.sg/companies-markets/capitaland-q3-earnings-drop-78-to-s3339m",
+      "seendate": "20191105T023000Z",
+      "label": "stock"
+    },
+    {
+      "title": "CapitaLand : India a key part of our global strategy : Lee Chee Koon , CEO , CapitaLand , Real Estate News , ET RealEstate",
+      "url": "https://realty.economictimes.indiatimes.com/news/industry/india-a-key-part-of-our-global-strategy-lee-chee-koon-ceo-capitaland/71497013",
+      "seendate": "20191009T043000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "CapitaLand gives $750 , 000 to support 2 , 000 NTUC First Campu pre - schoolers from low - income families",
+      "url": "https://www.straitstimes.com/singapore/capitaland-gives-750000-to-support-2000-ntuc-first-campus-pre-schoolers-from-low-income",
+      "seendate": "20191011T083000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "CapitaLand prices S$500m perpetual notes at 3 . 65 % ",
+      "url": "https://www.businesstimes.com.sg/companies-markets/capitaland-prices-s500m-perpetual-notes-at-365",
+      "seendate": "20191011T053000Z",
+      "label": "stock"
+    },
+    {
+      "title": "New Creation Church business arm to acquire The Star Vista from Capitaland",
+      "url": "https://www.msn.com/en-in/news/other/new-creation-churchs-business-arm-to-acquire-the-star-vista-from-capitaland/ar-BBX4tLd",
+      "seendate": "20191121T030000Z",
+      "label": "stock"
+    },
+    {
+      "title": "CapitaLand sells business parks to Ascendas in US$1 . 2b deal",
+      "url": "https://www.thestar.com.my/business/business-news/2019/11/01/capitaland-sells-business-parks-to-ascendas-in-us12b-deal",
+      "seendate": "20191101T103000Z",
+      "label": "stock"
+    },
+    {
+      "title": "CapitaLand divests The Star Vista for S$296 million",
+      "url": "https://www.capitaland.com/international/en/about-capitaland/newsroom/news-releases/international/2019/nov/CapitaLand-divests-The-Star-Vista.html",
+      "seendate": "20191120T104500Z",
+      "label": "stock"
+    },
+    {
+      "title": "India a key part of our global strategy : CapitaLand CEO",
+      "url": "https://economictimes.indiatimes.com/industry/services/property-/-cstruction/india-a-key-part-of-our-global-strategy-capitaland-ceo/articleshow/71496926.cms",
+      "seendate": "20191009T021500Z",
+      "label": "neutral"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"CapitaLand\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22CapitaLand%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20190101000000&enddatetime=20191231235959",
+  "window_start": "20190101000000",
+  "window_end": "20191231235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-22T16:56:57+00:00"
+}

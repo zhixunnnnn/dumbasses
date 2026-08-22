@@ -135,6 +135,10 @@ class RaterPercentiles(BaseModel):
     # which channels carry a REAL rating (hand-entered or scraped); the rest are
     # illustrative seed. Derived at normalization time — never hand-maintained here.
     real_raters: list[str] = Field(default_factory=list)   # subset of RATER_KEYS
+    # the year each channel's ranked observation was actually made in. Usually the
+    # analysis year; a real reading that sits outside it keeps its OWN year here rather
+    # than being re-dated (e.g. a 2025 CDP score under a 2024 window).
+    rater_years: dict[str, int] = Field(default_factory=dict)
     basis: Optional[str] = None      # cohort these percentiles were ranked against
     peers: Optional[int] = None      # size of that cohort (a rank over 2 names is noise)
 
@@ -242,6 +246,17 @@ class Forecast(BaseModel):
     val_error: Optional[float] = None        # honest test-set MAE
     directional_accuracy: Optional[float] = None  # LOO-CV: % of up/down calls correct
     directional_n: Optional[int] = None      # how many rows that accuracy was measured on
+    # WHICH rows `directional_accuracy` was measured on. The training panel is padded with
+    # illustrative (seeded) rating targets so the model can fit at all, so the headline
+    # accuracy is NOT a measurement on published ratings and must never be shown as one.
+    accuracy_basis: Optional[str] = None     # "full panel incl. illustrative targets" | ...
+    accuracy_note: Optional[str] = None      # the qualified sentence the card renders verbatim
+    real_directional_accuracy: Optional[float] = None   # same model, scored on REAL targets
+    real_directional_n: Optional[int] = None            # None -> it could not be computed
+    panel_rows: Optional[int] = None
+    panel_rows_real: Optional[int] = None
+    panel_rows_illustrative: Optional[int] = None
+    provenance: Optional[Provenance] = None  # this COMPANY's own rating history
     predicted_label: Optional[str] = None    # the rating letter the level maps to
     last_rating_label: Optional[str] = None  # last REAL disclosed rating, for the comparison
     last_rating_year: Optional[int] = None

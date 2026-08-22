@@ -557,18 +557,27 @@
     "msci_pct": 60.0,
     "sp_pct": 85.0,
     "sustainalytics_pct": 80.0,
-    "cdp_pct": null,
-    "real_raters": [],
+    "cdp_pct": 85.71,
+    "real_raters": [
+      "cdp"
+    ],
+    "rater_years": {
+      "msci": 2024,
+      "sustainalytics": 2024,
+      "sp": 2024,
+      "cdp": 2025
+    },
     "basis": "all companies",
     "peers": 10,
-    "consensus": 75.0,
-    "divergence": 25.0,
-    "consensus_provenance": "illustrative",
-    "divergence_provenance": "illustrative",
+    "consensus": 77.68,
+    "divergence": 25.71,
+    "consensus_provenance": "mixed",
+    "divergence_provenance": "mixed",
     "contributing": [
       "msci",
       "sp",
-      "sustainalytics"
+      "sustainalytics",
+      "cdp"
     ],
     "rater_provenance": {
       "msci": {
@@ -613,13 +622,13 @@
     "evidence_pct": 65.0,
     "evidence_basis": "all companies",
     "evidence_peers": 10,
-    "evidence_gap": -10.0,
+    "evidence_gap": -12.68,
     "momentum": 6.893,
-    "esg_today": 75.0,
+    "esg_today": 77.68,
     "quadrant": "FUTURE_LEADERS",
-    "esg_today_provenance": "illustrative",
-    "evidence_gap_provenance": "illustrative",
-    "quadrant_provenance": "illustrative",
+    "esg_today_provenance": "mixed",
+    "evidence_gap_provenance": "mixed",
+    "quadrant_provenance": "mixed",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -1108,8 +1117,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=25.0, consensus 95.0->75.0)",
-          "value": 25.0,
+          "label": "opinion_flat=True (divergence=25.71, consensus 92.68->77.68)",
+          "value": 25.71,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -1126,8 +1135,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-10.0 (evidence 65.0 - consensus 75.0)",
-          "value": -10.0,
+          "label": "evidence_gap=-12.68 (evidence 65.0 - consensus 77.68)",
+          "value": -12.68,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -7575,27 +7584,56 @@
   },
   "forecast": {
     "company_id": "C09",
-    "predicted_score": 7.0,
+    "predicted_score": 6.46,
     "horizon_years": 0,
-    "ci_low": null,
-    "ci_high": null,
-    "feature_contributions": [],
-    "val_error": null,
-    "directional_accuracy": null,
-    "directional_n": null,
-    "predicted_label": "AAA",
+    "ci_low": 5.53,
+    "ci_high": 7.0,
+    "feature_contributions": [
+      {
+        "feature": "prev_rating_level",
+        "value": 7.0,
+        "contribution": 0.973
+      },
+      {
+        "feature": "price_return",
+        "value": 57.56,
+        "contribution": -0.505
+      },
+      {
+        "feature": "evidence_total",
+        "value": 74.0,
+        "contribution": 0.502
+      },
+      {
+        "feature": "volatility",
+        "value": 24.79,
+        "contribution": -0.056
+      }
+    ],
+    "val_error": 0.934,
+    "directional_accuracy": 0.517,
+    "directional_n": 29,
+    "accuracy_basis": "full panel incl. illustrative targets",
+    "accuracy_note": "direction 52% vs naive 59% (n=29, incl. illustrative targets); on real targets only: 80% vs naive 40% (n=10)",
+    "real_directional_accuracy": 0.8,
+    "real_directional_n": 10,
+    "panel_rows": 29,
+    "panel_rows_real": 10,
+    "panel_rows_illustrative": 19,
+    "provenance": "mixed",
+    "predicted_label": "AA",
     "last_rating_label": "AAA",
     "last_rating_year": 2025,
-    "direction": "likely hold",
-    "baseline_only": true,
-    "model_label": "baseline: ratings persistence (insufficient history for a fitted model — 4 real rows)",
+    "direction": "likely downgrade",
+    "baseline_only": false,
+    "model_label": "MSCI rating nowcast (Ridge on real dated signals; 29 panel rows — 10 real targets, 19 illustrative)",
     "target_year": 2026,
     "drift_years": 0,
     "drift_note": "Estimates the MSCI ESG rating as of 2026 from signals all dated to 2025 — GDELT headlines published that year, that year's own report evidence, and prices to the end of it. 2025 is the most recent year whose every feature is real; nothing is carried forward to fill the gap. It is not a rater publication; it is what those signals imply the rater would say.",
     "hypothesis": true,
     "trace": {
-      "label": "likely hold — MSCI AAA (baseline: ratings persistence (insufficient history for a fitted model — 4 real rows))",
-      "value": 7.0,
+      "label": "likely downgrade — MSCI AA (MSCI rating nowcast (Ridge on real dated signals; 29 panel rows — 10 real targets, 19 illustrative), direction 52% vs naive 59% (n=29, incl. illustrative targets); on real targets only: 80% vs naive 40% (n=10))",
+      "value": 6.46,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -7605,6 +7643,42 @@
           "label": "last disclosed rating AAA (2025)",
           "value": 7.0,
           "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "prev_rating_level=7.0",
+          "value": null,
+          "contribution": 0.973,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "price_return=57.56",
+          "value": null,
+          "contribution": -0.505,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "evidence_total=74.0",
+          "value": null,
+          "contribution": 0.502,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "volatility=24.79",
+          "value": null,
+          "contribution": -0.056,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

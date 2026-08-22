@@ -611,9 +611,12 @@ function NewsTrace({ news }: { news: Explanation["newsEvidence"] }) {
           <Newspaper size={15} className="text-purpose" />
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-faint">
-              News behind the sentiment feature
+              Current news — context, not a model input
             </p>
-            <p className="mt-0.5 text-[11px] text-muted">{news.source}</p>
+            <p className="mt-0.5 text-[11px] text-muted">
+              {news.source} · news sentiment is not a feature of this model: GDELT covers
+              too few of the panel's company-years to use it consistently
+            </p>
           </div>
         </div>
         <div className="flex gap-2">

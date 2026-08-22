@@ -163,3 +163,59 @@ def test_year_with_no_rater_row_is_na_not_carried_forward():
     assert (p.msci_pct, p.sp_pct, p.sustainalytics_pct) == (None, None, None)
     assert consensus(p) is None
     assert divergence_index(p) is None
+
+
+# --- a real observation OUTSIDE the analysis year is used, and keeps its own year -----
+def test_latest_real_rating_is_ranked_without_being_re_dated(monkeypatch, fallback_mode):
+    """A rating measured after END_YEAR must still count, on ITS OWN year.
+
+    Re-dating it onto END_YEAR would falsify the observation; ignoring it would hide real
+    data. So the value is ranked inside its own year's cohort and `rater_years` carries the
+    year it was actually measured in.
+    """
+    later = YEAR + 1
+    companies = [make_company(c) for c in ["STRONG", "WEAK", "F1", "F2", "F3", "F4"]]
+    raters = [r for r in _bank_dataset().raters]
+    # a whole cohort of CDP readings that exist only in `later` — exactly the shape of the
+    # 2025 CDP scores table under a 2024 window
+    cdp = {"STRONG": "A", "WEAK": "D", "F1": "B", "F2": "A-", "F3": "C", "F4": "C-"}
+    for cid, letter in cdp.items():
+        raters.append(RaterRow(cid, later, None, None, None, letter))
+    ds = make_dataset(companies=companies, raters=raters)
+
+    monkeypatch.setattr(normalize, "real_raters_cache", lambda: {})
+    monkeypatch.setattr(normalize, "manual_raters_cache", lambda: {})
+    monkeypatch.setattr(normalize, "report_raters_cache",
+                        lambda: {cid: {later: ["cdp"]} for cid in cdp})
+
+    pcts = normalize_raters(ds, YEAR)
+    strong, weak = pcts["STRONG"], pcts["WEAK"]
+
+    # the later reading is ranked ...
+    assert strong.cdp_pct is not None and weak.cdp_pct is not None
+    assert strong.cdp_pct > weak.cdp_pct
+    # ... it is REAL, so the figure stops being purely illustrative ...
+    assert "cdp" in strong.real_raters
+    assert strong.provenance() == "mixed"
+    # ... and it is NOT re-dated: the year travels with the value.
+    assert strong.rater_years["cdp"] == later
+    assert strong.rater_years["msci"] == YEAR     # the seeded channels stay in their year
+    # nothing was written back into the analysis year's row
+    end_row = next(r for r in ds.raters if r.company_id == "STRONG" and r.year == YEAR)
+    assert end_row.cdp_letter is None
+
+
+def test_a_real_year_is_skipped_when_its_cohort_is_too_thin(monkeypatch, fallback_mode):
+    """One lone observation in a later year cannot be ranked, so the analysis year's value
+    is used instead — the fallback never invents a percentile out of a cohort of one."""
+    later = YEAR + 1
+    ds = _bank_dataset()
+    raters = list(ds.raters) + [RaterRow("STRONG", later, "AAA", None, None)]
+    ds = make_dataset(companies=list(ds.companies.values()), raters=raters)
+    monkeypatch.setattr(normalize, "real_raters_cache", lambda: {})
+    monkeypatch.setattr(normalize, "manual_raters_cache", lambda: {})
+    monkeypatch.setattr(normalize, "report_raters_cache", lambda: {"STRONG": {later: ["msci"]}})
+
+    p = normalize_raters(ds, YEAR)["STRONG"]
+    assert p.rater_years["msci"] == YEAR
+    assert "msci" not in p.real_raters      # the YEAR reading is seeded, and says so

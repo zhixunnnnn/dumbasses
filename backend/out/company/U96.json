@@ -516,6 +516,11 @@
     "real_raters": [
       "msci"
     ],
+    "rater_years": {
+      "msci": 2024,
+      "sustainalytics": 2024,
+      "sp": 2024
+    },
     "basis": "all companies",
     "peers": 10,
     "consensus": 23.33,
@@ -1021,7 +1026,7 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=55.0, consensus 5.0->23.33)",
+          "label": "opinion_flat=True (divergence=55.0, consensus 23.33->23.33)",
           "value": 55.0,
           "contribution": null,
           "source_sentence": null,
@@ -7527,27 +7532,56 @@
   },
   "forecast": {
     "company_id": "U96",
-    "predicted_score": 6.0,
+    "predicted_score": 6.28,
     "horizon_years": 0,
-    "ci_low": null,
-    "ci_high": null,
-    "feature_contributions": [],
-    "val_error": null,
-    "directional_accuracy": null,
-    "directional_n": null,
+    "ci_low": 5.35,
+    "ci_high": 7.0,
+    "feature_contributions": [
+      {
+        "feature": "prev_rating_level",
+        "value": 6.0,
+        "contribution": 0.495
+      },
+      {
+        "feature": "evidence_total",
+        "value": 64.0,
+        "contribution": 0.24
+      },
+      {
+        "feature": "volatility",
+        "value": 23.38,
+        "contribution": -0.032
+      },
+      {
+        "feature": "price_return",
+        "value": 2.21,
+        "contribution": 0.029
+      }
+    ],
+    "val_error": 0.934,
+    "directional_accuracy": 0.517,
+    "directional_n": 29,
+    "accuracy_basis": "full panel incl. illustrative targets",
+    "accuracy_note": "direction 52% vs naive 59% (n=29, incl. illustrative targets); on real targets only: 80% vs naive 40% (n=10)",
+    "real_directional_accuracy": 0.8,
+    "real_directional_n": 10,
+    "panel_rows": 29,
+    "panel_rows_real": 10,
+    "panel_rows_illustrative": 19,
+    "provenance": "mixed",
     "predicted_label": "AA",
     "last_rating_label": "AA",
     "last_rating_year": 2024,
     "direction": "likely hold",
-    "baseline_only": true,
-    "model_label": "baseline: ratings persistence (insufficient history for a fitted model — 4 real rows)",
+    "baseline_only": false,
+    "model_label": "MSCI rating nowcast (Ridge on real dated signals; 29 panel rows — 10 real targets, 19 illustrative)",
     "target_year": 2026,
     "drift_years": 0,
-    "drift_note": "No year has a complete set of real features for this company (a year needs dated news, its own extracted report and price history), so this is the last rating the company disclosed, carried as-is and labelled.",
+    "drift_note": "Estimates the MSCI ESG rating as of 2026 from signals all dated to 2024 — GDELT headlines published that year, that year's own report evidence, and prices to the end of it. 2024 is the most recent year whose every feature is real; nothing is carried forward to fill the gap. It is not a rater publication; it is what those signals imply the rater would say.",
     "hypothesis": true,
     "trace": {
-      "label": "likely hold — MSCI AA (baseline: ratings persistence (insufficient history for a fitted model — 4 real rows))",
-      "value": 6.0,
+      "label": "likely hold — MSCI AA (MSCI rating nowcast (Ridge on real dated signals; 29 panel rows — 10 real targets, 19 illustrative), direction 52% vs naive 59% (n=29, incl. illustrative targets); on real targets only: 80% vs naive 40% (n=10))",
+      "value": 6.28,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -7557,6 +7591,42 @@
           "label": "last disclosed rating AA (2024)",
           "value": 6.0,
           "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "prev_rating_level=6.0",
+          "value": null,
+          "contribution": 0.495,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "evidence_total=64.0",
+          "value": null,
+          "contribution": 0.24,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "volatility=23.38",
+          "value": null,
+          "contribution": -0.032,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "price_return=2.21",
+          "value": null,
+          "contribution": 0.029,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

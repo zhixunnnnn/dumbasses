@@ -1,0 +1,91 @@
+{
+  "company_id": "U96",
+  "year": 2020,
+  "miss": false,
+  "n_articles": 244,
+  "n_labelled": 30,
+  "positive": 2,
+  "controversy": 0,
+  "sentiment": 2,
+  "headlines": [
+    {
+      "title": "Singapore Top Stock of 2020 Faces a Rougher Ride Next Year",
+      "url": "http://www.msn.com/en-us/money/other/singapore-s-top-stock-of-2020-faces-a-rougher-ride-next-year/ar-BB1c3sye",
+      "seendate": "20201219T040000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Singapore Top Stock of 2020 Faces a Rougher Ride Next Year",
+      "url": "http://www.msn.com/en-us/money/topstories/singapore-s-top-stock-of-2020-faces-a-rougher-ride-next-year/ar-BB1c3sye",
+      "seendate": "20201221T023000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Singapore Top Stock of 2020 Faces a Rougher Ride Next Year",
+      "url": "https://www.msn.com/en-us/money/topstories/singapore-s-top-stock-of-2020-faces-a-rougher-ride-next-year/ar-BB1c3sye",
+      "seendate": "20201221T051500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Spore top stock of 2020 faces rougher ride ahead",
+      "url": "https://www.thestar.com.my/business/business-news/2020/12/21/spore-top-stock-of-2020-faces-rougher-ride-ahead",
+      "seendate": "20201221T020000Z",
+      "label": "stock"
+    },
+    {
+      "title": "STI top gainer Sembcorp faces rougher ride next year",
+      "url": "https://www.businesstimes.com.sg/companies-markets/sti-top-gainer-sembcorp-faces-rougher-ride-next-year",
+      "seendate": "20201219T084500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Sembcorp flags full - year loss on $89m in second - half impairments",
+      "url": "https://www.straitstimes.com/business/companies-markets/sembcorp-flags-full-year-loss-on-89m-in-second-half-impairments",
+      "seendate": "20201207T021500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Sembcorp expects fiscal 2020 loss after recording S$89m in impairments",
+      "url": "https://www.businesstimes.com.sg/companies-markets/sembcorp-expects-fiscal-2020-loss-after-recording-s89m-in-impairments",
+      "seendate": "20201207T013000Z",
+      "label": "stock"
+    },
+    {
+      "title": "Sembcorp sells Panama water business , gets S$21m net gain",
+      "url": "https://www.businesstimes.com.sg/companies-markets/sembcorp-sells-panama-water-business-gets-s21m-net-gain",
+      "seendate": "20201109T101500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Indian units of Sembcorp , Saudi firm win govt auctions to sell solar power",
+      "url": "https://www.straitstimes.com/business/companies-markets/indian-units-of-sembcorp-saudi-firm-win-govt-auctions-to-sell-solar-power",
+      "seendate": "20201124T020000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore , Saudi companies push Indian solar tariffs to record low",
+      "url": "https://www.thedailystar.net/business/news/singapore-saudi-companies-push-indian-solar-tariffs-record-low-2000569",
+      "seendate": "20201124T190000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore , Saudi companies push Indian solar tariffs to record low",
+      "url": "https://www.tribuneindia.com/news/business/singapore-saudi-companies-push-indian-solar-tariffs-to-record-low-174748",
+      "seendate": "20201123T204500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Singapore , Saudi companies push Indian solar tariffs to record low",
+      "url": "https://www.msn.com/en-in/money/other/singapore-saudi-companies-push-indian-solar-tariffs-to-record-low/ar-BB1bhLvP",
+      "seendate": "20201123T173000Z",
+      "label": "neutral"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"Sembcorp\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Sembcorp%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20200101000000&enddatetime=20201231235959",
+  "window_start": "20200101000000",
+  "window_end": "20201231235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-22T17:08:24+00:00"
+}

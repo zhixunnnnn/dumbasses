@@ -39,6 +39,9 @@ from . import config
 from .ingest import Dataset, RaterRow
 from .models import RaterPercentiles
 
+# store keys -> the channel names this module ranks on
+RATER_ALIAS = {"sust": "sustainalytics"}
+
 
 def msci_to_num(letter: Optional[str]) -> Optional[float]:
     if letter is None:
@@ -140,37 +143,78 @@ def real_rater_keys(cid: str, year: int, real: Optional[dict] = None,
     return sorted(keys)
 
 
+def real_years_by_channel(cid: str, report: Optional[dict] = None,
+                          manual: Optional[dict] = None) -> dict[str, list[int]]:
+    """{rater: [years with a REAL observation, newest first]} for one company.
+
+    Built from the same two stores real_rater_keys trusts, so "real" means one thing in
+    this module. No year is invented and no value is copied between years here — this only
+    says WHERE a real reading exists.
+    """
+    out: dict[str, set[int]] = {}
+    for store in (report_raters_cache() if report is None else report,
+                  manual_raters_cache() if manual is None else manual):
+        for yr, keys in (store.get(cid) or {}).items():
+            for key in keys or []:
+                out.setdefault(RATER_ALIAS.get(key, key), set()).add(int(yr))
+    return {k: sorted(v, reverse=True) for k, v in out.items()}
+
+
 def normalize_raters(ds: Dataset, year: int = config.END_YEAR) -> dict[str, RaterPercentiles]:
-    """Return per-company percentiles for a given year (all higher=better)."""
+    """Return per-company percentiles for a given year (all higher=better).
+
+    A channel is read at the LATEST year it carries a real observation, falling back to
+    `year` when it has none (or when that year's cohort is too thin to rank against). The
+    observation keeps its own year — `rater_years` ships it so the UI can say "CDP A ·
+    2025" — and no value is ever re-dated onto `year`. That is what stops a genuine 2025
+    CDP score from being invisible just because the analysis window ends in 2024.
+    """
     getters = {
         "msci": lambda r: msci_to_num(r.msci_letter),
-        "sust": lambda r: sustainalytics_to_num(r.sustainalytics_risk),
+        "sustainalytics": lambda r: sustainalytics_to_num(r.sustainalytics_risk),
         "sp": lambda r: (None if r.sp_global is None else float(r.sp_global)),
         "cdp": lambda r: cdp_to_num(r.cdp_letter),
     }
     real = real_raters_cache()          # read every store once, not once per company
     manual = manual_raters_cache()
     report = report_raters_cache()
+    rows_by_key = {(r.company_id, r.year): r for r in ds.raters}
     out: dict[str, RaterPercentiles] = {}
     for cid, comp in ds.companies.items():
-        row = next((r for r in ds.raters if r.company_id == cid and r.year == year), None)
-        if row is None:
+        if (cid, year) not in rows_by_key and not real_years_by_channel(cid, report, manual):
             out[cid] = RaterPercentiles(company_id=cid)
             continue
-        pct, basis, peers = {}, None, None
+        real_years = real_years_by_channel(cid, report, manual)
+        pct: dict[str, Optional[float]] = {}
+        years: dict[str, int] = {}
+        real_keys: set[str] = set()
+        basis, peers = None, None
         for key, get in getters.items():
-            v = get(row)
-            pop, pop_basis = ([], None) if v is None else _population(ds, comp.sector, year, get)
-            if v is None or len(pop) < config.MIN_PEERS_FOR_SECTOR_RANK:
-                pct[key] = None          # too few peers to rank against -> N.A., not a guess
-                continue
-            pct[key] = round(_percentile(pop, v), 2)
-            if basis is None:            # all channels share the cohort rule; report the first
-                basis, peers = pop_basis, len(pop)
+            # newest first, over the real observation years plus the analysis year itself
+            candidates = sorted({*real_years.get(key, []), year}, reverse=True)
+            for cand in candidates:
+                row = rows_by_key.get((cid, cand))
+                v = None if row is None else get(row)
+                if v is None:
+                    continue
+                pop, pop_basis = _population(ds, comp.sector, cand, get)
+                if len(pop) < config.MIN_PEERS_FOR_SECTOR_RANK:
+                    continue             # too few peers to rank against -> try an older year
+                pct[key] = round(_percentile(pop, v), 2)
+                years[key] = cand
+                if key in real_rater_keys(cid, cand, real, manual, report):
+                    real_keys.add(key)
+                if basis is None:        # all channels share the cohort rule; report the first
+                    basis, peers = pop_basis, len(pop)
+                break
+            else:
+                pct[key] = None          # no rankable observation on this channel -> N.A.
         out[cid] = RaterPercentiles(company_id=cid, msci_pct=pct["msci"],
-                                    sp_pct=pct["sp"], sustainalytics_pct=pct["sust"],
+                                    sp_pct=pct["sp"],
+                                    sustainalytics_pct=pct["sustainalytics"],
                                     cdp_pct=pct["cdp"],
-                                    real_raters=real_rater_keys(cid, year, real, manual, report),
+                                    real_raters=sorted(real_keys),
+                                    rater_years=years,
                                     basis=basis, peers=peers)
     return out
 

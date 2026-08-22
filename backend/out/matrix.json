@@ -20,16 +20,16 @@
   {
     "id": "F34",
     "name": "Wilmar International",
-    "x": 23.33,
+    "x": 28.21,
     "y": 1.929,
     "quadrant": "HIDDEN_WINNERS",
     "size": 76.5,
-    "is_underpriced_improver": false
+    "is_underpriced_improver": true
   },
   {
     "id": "C6L",
     "name": "Singapore Airlines",
-    "x": 30.0,
+    "x": 27.86,
     "y": -4.864,
     "quadrant": "VALUE_TRAPS",
     "size": 52.0,
@@ -38,7 +38,7 @@
   {
     "id": "D05",
     "name": "DBS Group",
-    "x": 58.33,
+    "x": 54.47,
     "y": 2.471,
     "quadrant": "FUTURE_LEADERS",
     "size": 43.0,
@@ -47,16 +47,16 @@
   {
     "id": "O39",
     "name": "OCBC",
-    "x": 63.33,
+    "x": 49.28,
     "y": -5.0,
-    "quadrant": "OVERRATED",
+    "quadrant": "VALUE_TRAPS",
     "size": 45.0,
     "is_underpriced_improver": false
   },
   {
     "id": "U11",
     "name": "UOB",
-    "x": 50.0,
+    "x": 53.57,
     "y": -2.364,
     "quadrant": "OVERRATED",
     "size": 63.25,
@@ -74,7 +74,7 @@
   {
     "id": "C09",
     "name": "City Developments",
-    "x": 75.0,
+    "x": 77.68,
     "y": 6.893,
     "quadrant": "FUTURE_LEADERS",
     "size": 63.5,
@@ -83,9 +83,9 @@
   {
     "id": "Z74",
     "name": "Singtel",
-    "x": 40.0,
+    "x": 51.43,
     "y": 1.4,
-    "quadrant": "HIDDEN_WINNERS",
+    "quadrant": "FUTURE_LEADERS",
     "size": 49.0,
     "is_underpriced_improver": true
   }

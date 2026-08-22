@@ -1,0 +1,91 @@
+{
+  "company_id": "C09",
+  "year": 2019,
+  "miss": false,
+  "n_articles": 250,
+  "n_labelled": 22,
+  "positive": 3,
+  "controversy": 0,
+  "sentiment": 3,
+  "headlines": [
+    {
+      "title": "Oxley Holdings and CDL clinch major wins at EdgeProp Singapore Excellence Awards 2019 , unveiling the ultimate benchmark of excellence in Singapore property development community",
+      "url": "https://sina.com.hk/news/article/20191021/0/2/40/Oxley-Holdings-and-CDL-clinch-major-wins-at-EdgeProp-Singapore-Excellence-Awards-2019-unveiling-the-ultimate-benchmark-of-excellence-in-Singapores-property-development-community-10737845.html",
+      "seendate": "20191021T064500Z",
+      "label": "positive"
+    },
+    {
+      "title": "City Developments 3Q Revenue Exceeded Expectations Earnings Review",
+      "url": "https://www.morningstar.com/news/dow-jones/2019111214670/city-developments-3q-revenue-exceeded-expectations-earnings-review",
+      "seendate": "20191113T024500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Liang Court rejuvenation to unlock value , yield synergies",
+      "url": "https://www.businesstimes.com.sg/companies-markets/liang-courts-rejuvenation-to-unlock-value-yield-synergies",
+      "seendate": "20191122T014500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "Change - Announcement of Appointment :: Appointment of Executive Chairman of Millennium & Copthorne Hotels Limited",
+      "url": "https://www.marketscreener.com/CITY-DEVELOPMENTS-LIMITED-6491120/news/Change-Announcement-of-Appointment-Appointment-of-Executive-Chairman-of-Millennium-Copthorne-Ho-29614433/",
+      "seendate": "20191120T103000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "City Dev , CapitaLand lead consortium to redevelop Liang Court site at Clarke Quay",
+      "url": "https://www.theedgemarkets.com/article/city-dev-capitaland-lead-consortium-redevelop-liang-court-site-clarke-quay",
+      "seendate": "20191121T170000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "CapitaLand , CityDev to open doors to highly - anticipated Sengkang Central development on Oct 25",
+      "url": "https://www.theedgemarkets.com/article/capitaland-citydev-open-doors-highlyanticipated-sengkang-central-development-oct-25",
+      "seendate": "20191023T141500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "City Developments 3Q Net Profit Fell 34 % on Year",
+      "url": "https://www.morningstar.com/news/dow-jones/2019111214388/city-developments-3q-net-profit-fell-34-on-year",
+      "seendate": "20191113T024500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Change - Announcement of Appointment :: Appointment of Executive Director of Millennium & Copthorne Hotels Limited",
+      "url": "https://www.marketscreener.com/CITY-DEVELOPMENTS-LIMITED-6491120/news/Change-Announcement-of-Appointment-Appointment-of-Executive-Director-of-Millennium-Copthorne-Ho-29614429/",
+      "seendate": "20191120T103000Z",
+      "label": "neutral"
+    },
+    {
+      "title": "City Developments ( OTCMKTS : CDEVY ) Hits New 1 - Year High at $8 . 13",
+      "url": "https://www.dailypolitical.com/2019/11/03/city-developments-otcmktscdevy-hits-new-1-year-high-at-8-13.html",
+      "seendate": "20191103T164500Z",
+      "label": "stock"
+    },
+    {
+      "title": "Hot stock : CDL jumps 3 . 5 % in morning trade",
+      "url": "https://www.businesstimes.com.sg/companies-markets/hot-stock-cdl-jumps-35-in-morning-trade",
+      "seendate": "20191017T060000Z",
+      "label": "stock"
+    },
+    {
+      "title": "CDL and Distrii JV unveil proprietary smart office app",
+      "url": "https://sbr.com.sg/commercial-property/more-news/cdl-and-distrii-jv-unveil-proprietary-smart-office-app",
+      "seendate": "20191016T121500Z",
+      "label": "neutral"
+    },
+    {
+      "title": "City Developments ( OTCMKTS : CDEVY ) Reaches New 52 - Week High at $7 . 86",
+      "url": "https://www.dailypolitical.com/2019/10/24/city-developments-otcmktscdevy-reaches-new-52-week-high-at-7-86.html",
+      "seendate": "20191025T063000Z",
+      "label": "stock"
+    }
+  ],
+  "source": "GDELT DOC 2.0 (artlist)",
+  "query": "\"City Developments\"",
+  "query_url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22City+Developments%22+sourcelang%3Aenglish&mode=artlist&maxrecords=250&sort=hybridrel&format=json&startdatetime=20190101000000&enddatetime=20191231235959",
+  "window_start": "20190101000000",
+  "window_end": "20191231235959",
+  "labeller": "llm",
+  "fetched_at": "2026-08-22T16:58:50+00:00"
+}

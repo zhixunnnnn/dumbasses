@@ -282,6 +282,10 @@ def build(offline: bool = True, retrain: bool = False) -> dict:
             "forecast": fc.predicted_score,
             "forecast_label": fc.predicted_label, "forecast_direction": fc.direction,
             "forecast_baseline_only": fc.baseline_only,
+            # same real/mixed/illustrative convention as rater_provenance, but for the
+            # company's own rating HISTORY — which is what the prediction rests on
+            "forecast_provenance": fc.provenance,
+            "forecast_accuracy_note": fc.accuracy_note,
             "benchmark_total": bench["total"], "benchmark_source": bench["source"],
             "benchmark_peers": bench["peers"],
             "regulations": reg_cells,

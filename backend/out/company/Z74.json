@@ -296,20 +296,28 @@
     "msci_pct": 20.0,
     "sp_pct": 55.0,
     "sustainalytics_pct": 45.0,
-    "cdp_pct": null,
+    "cdp_pct": 85.71,
     "real_raters": [
+      "cdp",
       "msci"
     ],
+    "rater_years": {
+      "msci": 2024,
+      "sustainalytics": 2024,
+      "sp": 2024,
+      "cdp": 2025
+    },
     "basis": "all companies",
     "peers": 10,
-    "consensus": 40.0,
-    "divergence": 35.0,
+    "consensus": 51.43,
+    "divergence": 65.71,
     "consensus_provenance": "mixed",
     "divergence_provenance": "mixed",
     "contributing": [
       "msci",
       "sp",
-      "sustainalytics"
+      "sustainalytics",
+      "cdp"
     ],
     "rater_provenance": {
       "msci": {
@@ -354,10 +362,10 @@
     "evidence_pct": 25.0,
     "evidence_basis": "all companies",
     "evidence_peers": 10,
-    "evidence_gap": -15.0,
+    "evidence_gap": -26.43,
     "momentum": 1.4,
-    "esg_today": 40.0,
-    "quadrant": "HIDDEN_WINNERS",
+    "esg_today": 51.43,
+    "quadrant": "FUTURE_LEADERS",
     "esg_today_provenance": "mixed",
     "evidence_gap_provenance": "mixed",
     "quadrant_provenance": "mixed",
@@ -588,8 +596,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=35.0, consensus 48.33->40.0)",
-          "value": 35.0,
+          "label": "opinion_flat=True (divergence=65.71, consensus 47.68->51.43)",
+          "value": 65.71,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -606,8 +614,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-15.0 (evidence 25.0 - consensus 40.0)",
-          "value": -15.0,
+          "label": "evidence_gap=-26.43 (evidence 25.0 - consensus 51.43)",
+          "value": -26.43,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -7055,27 +7063,56 @@
   },
   "forecast": {
     "company_id": "Z74",
-    "predicted_score": 5.0,
+    "predicted_score": 5.42,
     "horizon_years": 0,
-    "ci_low": null,
-    "ci_high": null,
-    "feature_contributions": [],
-    "val_error": null,
-    "directional_accuracy": null,
-    "directional_n": null,
+    "ci_low": 4.49,
+    "ci_high": 6.35,
+    "feature_contributions": [
+      {
+        "feature": "price_return",
+        "value": 49.19,
+        "contribution": -0.424
+      },
+      {
+        "feature": "evidence_total",
+        "value": 64.0,
+        "contribution": 0.24
+      },
+      {
+        "feature": "volatility",
+        "value": 19.41,
+        "contribution": 0.037
+      },
+      {
+        "feature": "prev_rating_level",
+        "value": 5.0,
+        "contribution": 0.016
+      }
+    ],
+    "val_error": 0.934,
+    "directional_accuracy": 0.517,
+    "directional_n": 29,
+    "accuracy_basis": "full panel incl. illustrative targets",
+    "accuracy_note": "direction 52% vs naive 59% (n=29, incl. illustrative targets); on real targets only: 80% vs naive 40% (n=10)",
+    "real_directional_accuracy": 0.8,
+    "real_directional_n": 10,
+    "panel_rows": 29,
+    "panel_rows_real": 10,
+    "panel_rows_illustrative": 19,
+    "provenance": "mixed",
     "predicted_label": "A",
     "last_rating_label": "A",
     "last_rating_year": 2024,
     "direction": "likely hold",
-    "baseline_only": true,
-    "model_label": "baseline: ratings persistence (insufficient history for a fitted model — 4 real rows)",
+    "baseline_only": false,
+    "model_label": "MSCI rating nowcast (Ridge on real dated signals; 29 panel rows — 10 real targets, 19 illustrative)",
     "target_year": 2026,
     "drift_years": 0,
-    "drift_note": "No year has a complete set of real features for this company (a year needs dated news, its own extracted report and price history), so this is the last rating the company disclosed, carried as-is and labelled.",
+    "drift_note": "Estimates the MSCI ESG rating as of 2026 from signals all dated to 2025 — GDELT headlines published that year, that year's own report evidence, and prices to the end of it. 2025 is the most recent year whose every feature is real; nothing is carried forward to fill the gap. It is not a rater publication; it is what those signals imply the rater would say.",
     "hypothesis": true,
     "trace": {
-      "label": "likely hold — MSCI A (baseline: ratings persistence (insufficient history for a fitted model — 4 real rows))",
-      "value": 5.0,
+      "label": "likely hold — MSCI A (MSCI rating nowcast (Ridge on real dated signals; 29 panel rows — 10 real targets, 19 illustrative), direction 52% vs naive 59% (n=29, incl. illustrative targets); on real targets only: 80% vs naive 40% (n=10))",
+      "value": 5.42,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -7085,6 +7122,42 @@
           "label": "last disclosed rating A (2024)",
           "value": 5.0,
           "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "price_return=49.19",
+          "value": null,
+          "contribution": -0.424,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "evidence_total=64.0",
+          "value": null,
+          "contribution": 0.24,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "volatility=19.41",
+          "value": null,
+          "contribution": 0.037,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": []
+        },
+        {
+          "label": "prev_rating_level=5.0",
+          "value": null,
+          "contribution": 0.016,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,

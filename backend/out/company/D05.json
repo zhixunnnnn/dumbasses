@@ -377,18 +377,27 @@
     "msci_pct": 20.0,
     "sp_pct": 75.0,
     "sustainalytics_pct": 80.0,
-    "cdp_pct": null,
-    "real_raters": [],
+    "cdp_pct": 42.86,
+    "real_raters": [
+      "cdp"
+    ],
+    "rater_years": {
+      "msci": 2024,
+      "sustainalytics": 2024,
+      "sp": 2024,
+      "cdp": 2025
+    },
     "basis": "all companies",
     "peers": 10,
-    "consensus": 58.33,
+    "consensus": 54.47,
     "divergence": 60.0,
-    "consensus_provenance": "illustrative",
-    "divergence_provenance": "illustrative",
+    "consensus_provenance": "mixed",
+    "divergence_provenance": "mixed",
     "contributing": [
       "msci",
       "sp",
-      "sustainalytics"
+      "sustainalytics",
+      "cdp"
     ],
     "rater_provenance": {
       "msci": {
@@ -433,13 +442,13 @@
     "evidence_pct": 5.0,
     "evidence_basis": "all companies",
     "evidence_peers": 10,
-    "evidence_gap": -53.33,
+    "evidence_gap": -49.47,
     "momentum": 2.471,
-    "esg_today": 58.33,
+    "esg_today": 54.47,
     "quadrant": "FUTURE_LEADERS",
-    "esg_today_provenance": "illustrative",
-    "evidence_gap_provenance": "illustrative",
-    "quadrant_provenance": "illustrative",
+    "esg_today_provenance": "mixed",
+    "evidence_gap_provenance": "mixed",
+    "quadrant_provenance": "mixed",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -748,7 +757,7 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=60.0, consensus 66.67->58.33)",
+          "label": "opinion_flat=True (divergence=60.0, consensus 60.72->54.47)",
           "value": 60.0,
           "contribution": null,
           "source_sentence": null,
@@ -766,8 +775,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-53.33 (evidence 5.0 - consensus 58.33)",
-          "value": -53.33,
+          "label": "evidence_gap=-49.47 (evidence 5.0 - consensus 54.47)",
+          "value": -49.47,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -7252,6 +7261,14 @@
     "val_error": null,
     "directional_accuracy": null,
     "directional_n": null,
+    "accuracy_basis": null,
+    "accuracy_note": "No prediction was made, so there is no accuracy.",
+    "real_directional_accuracy": null,
+    "real_directional_n": null,
+    "panel_rows": null,
+    "panel_rows_real": null,
+    "panel_rows_illustrative": null,
+    "provenance": "illustrative",
     "predicted_label": null,
     "last_rating_label": null,
     "last_rating_year": null,

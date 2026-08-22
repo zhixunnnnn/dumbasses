@@ -1,6 +1,7 @@
 import type { Forecast } from "../../types";
 import { na } from "../../lib/ui";
 import { HypothesisBadge } from "../common/badges";
+import ProvenanceBadge from "../common/ProvenanceBadge";
 import Why from "../common/Why";
 
 // Ratings barely move, so the direction is the claim and the level is the detail — the
@@ -16,10 +17,10 @@ export default function ForecastCard({ forecast }: { forecast: Forecast }) {
   const fc = forecast;
   const maxAbs = Math.max(0.1, ...fc.feature_contributions.map((c) => Math.abs(c.contribution)));
   const tone = DIRECTION_TONE[fc.direction ?? ""] ?? "text-purpose";
-  const reliability =
-    fc.directional_accuracy != null
-      ? `direction ${Math.round(fc.directional_accuracy * 100)}% of n=${fc.directional_n ?? "?"}`
-      : "direction not yet measurable";
+  // The backend composes the one sentence that is safe to show: it names the subset every
+  // figure came from, and when the real-target accuracy could not be computed it says that
+  // instead of silently reusing the full-panel number. The card never re-derives it.
+  const reliability = fc.accuracy_note ?? "direction not yet measurable";
 
   return (
     <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
@@ -29,10 +30,14 @@ export default function ForecastCard({ forecast }: { forecast: Forecast }) {
             MSCI rating estimate{fc.target_year ? ` · ${fc.target_year}` : ""}
           </h3>
           <p className="text-[11px] text-faint">
-            What the rater would likely say now, from news + evidence dated to the same period
+            What the rater would likely say now, from report evidence and prices dated to the
+            same period
           </p>
         </div>
-        <HypothesisBadge note={`${fc.model_label ?? "model"} · ${reliability}`} />
+        <div className="flex shrink-0 items-center gap-1.5">
+          {fc.provenance && <ProvenanceBadge provenance={fc.provenance} />}
+          <HypothesisBadge note={`${fc.model_label ?? "model"} · ${reliability}`} />
+        </div>
       </div>
 
       {fc.predicted_score === null ? (
@@ -50,7 +55,10 @@ export default function ForecastCard({ forecast }: { forecast: Forecast }) {
             <span className="pb-1 ml-auto"><Why trace={fc.trace} title="Estimate drivers" /></span>
           </div>
           <p className="mt-1 font-mono text-[11px] text-faint">
-            level {na(fc.predicted_score)} of 7 · CI {na(fc.ci_low)} – {na(fc.ci_high)} · {reliability}
+            level {na(fc.predicted_score)} of 7 · CI {na(fc.ci_low)} – {na(fc.ci_high)}
+          </p>
+          <p className="mt-1.5 rounded border border-hairline bg-base px-2 py-1.5 font-mono text-[11px] text-muted">
+            {reliability}
           </p>
 
           {fc.baseline_only && (
