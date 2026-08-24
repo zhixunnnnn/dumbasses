@@ -16,6 +16,9 @@ import ForecastCard from "./ForecastCard";
 import TrustMeter from "./TrustMeter";
 import PeerDistribution from "./PeerDistribution";
 import LiveNews from "./LiveNews";
+import PeerTable from "./PeerTable";
+import MomentumBars from "./MomentumBars";
+import LiveResearchClaims from "./LiveResearchClaims";
 import { usePublishAssistantPageContext } from "../../../components/chat/PageContext";
 
 function node(label: string, value: number | null, children: TraceNode[] = []): TraceNode {
@@ -34,7 +37,7 @@ function Leg({ ok, label }: { ok: boolean | null; label: string }) {
 }
 
 export default function CompanyPage({ id }: { id: string }) {
-  const { goBack, navigate } = useNavigation();
+  const { goBack } = useNavigation();
   const { data, loading, error } = useApi(() => api.company(id), [id]);
   const pageContext = useMemo(() => data ? ({
     route: "evidenceCompany",
@@ -241,6 +244,7 @@ export default function CompanyPage({ id }: { id: string }) {
           <p className="mt-1 text-[11px] text-faint">
             {seriesPts.map((s) => s.year).join(" → ")} · momentum {signed(signal.momentum)} / yr
           </p>
+          <MomentumBars series={series} />
         </div>
       </div>
 
@@ -265,6 +269,10 @@ export default function CompanyPage({ id }: { id: string }) {
         sourceTitle={claims.source_title}
       />
 
+      {liveIntelligence && liveIntelligence.claims.length > 0 && (
+        <LiveResearchClaims claims={liveIntelligence.claims} />
+      )}
+
       <SatelliteVerification companyId={id} />
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -274,22 +282,16 @@ export default function CompanyPage({ id }: { id: string }) {
 
       <LiveNews companyId={id} />
 
-      {/* peers */}
       {peers.length > 0 && (
-        <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
-          <h3 className="mb-2 text-sm font-semibold text-txt">Sector peers</h3>
-          <div className="flex flex-wrap gap-2">
-            {peers.map((p) => (
-              <button
-                key={p.id}
-                onClick={() => navigate({ name: "evidenceCompany", id: p.id })}
-                className="rounded-md border border-hairline bg-canvas/40 px-3 py-1.5 text-[12px] text-muted transition hover:border-pos/40 hover:text-txt">
-                {p.name} <span className="font-mono text-faint">· {na(p.evidence_total)}</span>
-              </button>
-            ))}
-          </div>
-        </div>
+        <PeerTable
+          peers={peers}
+          selfId={id}
+          selfName={company.name}
+          selfTotal={evidence.total}
+          sector={company.sector ?? null}
+        />
       )}
+
     </div>
   );
 }
