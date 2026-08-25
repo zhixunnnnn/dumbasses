@@ -2,91 +2,91 @@
   {
     "id": "U96",
     "name": "Sembcorp Industries",
-    "x": 23.33,
-    "y": 3.743,
-    "quadrant": "HIDDEN_WINNERS",
-    "size": 64.0,
-    "is_underpriced_improver": false
-  },
-  {
-    "id": "BN4",
-    "name": "Keppel Ltd",
-    "x": 43.33,
-    "y": 2.1,
-    "quadrant": "HIDDEN_WINNERS",
-    "size": 59.0,
-    "is_underpriced_improver": false
-  },
-  {
-    "id": "F34",
-    "name": "Wilmar International",
-    "x": 28.21,
-    "y": 1.929,
-    "quadrant": "HIDDEN_WINNERS",
-    "size": 76.5,
-    "is_underpriced_improver": true
-  },
-  {
-    "id": "C6L",
-    "name": "Singapore Airlines",
-    "x": 27.86,
-    "y": -4.864,
-    "quadrant": "VALUE_TRAPS",
-    "size": 52.0,
-    "is_underpriced_improver": false
-  },
-  {
-    "id": "D05",
-    "name": "DBS Group",
-    "x": 54.47,
-    "y": 2.471,
+    "x": 57.5,
+    "y": 6.8,
     "quadrant": "FUTURE_LEADERS",
-    "size": 43.0,
+    "size": 80.0,
     "is_underpriced_improver": false
   },
   {
-    "id": "O39",
-    "name": "OCBC",
-    "x": 49.28,
-    "y": -5.0,
-    "quadrant": "VALUE_TRAPS",
-    "size": 45.0,
-    "is_underpriced_improver": false
-  },
-  {
-    "id": "U11",
-    "name": "UOB",
-    "x": 53.57,
-    "y": -2.364,
+    "id": "TNB",
+    "name": "Tenaga Nasional",
+    "x": 85.0,
+    "y": -5.7,
     "quadrant": "OVERRATED",
-    "size": 63.25,
+    "size": 56.0,
     "is_underpriced_improver": false
   },
   {
-    "id": "9CI",
-    "name": "CapitaLand Investment",
-    "x": 93.33,
-    "y": -3.143,
+    "id": "YTLP",
+    "name": "YTL Power International",
+    "x": 35.0,
+    "y": 3.4,
+    "quadrant": "HIDDEN_WINNERS",
+    "size": 80.0,
+    "is_underpriced_improver": true
+  },
+  {
+    "id": "EGCO",
+    "name": "Electricity Generating",
+    "x": 30.0,
+    "y": -9.05,
+    "quadrant": "VALUE_TRAPS",
+    "size": 38.5,
+    "is_underpriced_improver": false
+  },
+  {
+    "id": "RATCH",
+    "name": "Ratch Group",
+    "x": 40.0,
+    "y": -8.6,
+    "quadrant": "VALUE_TRAPS",
+    "size": 44.0,
+    "is_underpriced_improver": false
+  },
+  {
+    "id": "BGRIM",
+    "name": "B.Grimm Power",
+    "x": 67.5,
+    "y": -3.65,
     "quadrant": "OVERRATED",
-    "size": 64.75,
+    "size": 50.5,
     "is_underpriced_improver": false
   },
   {
-    "id": "C09",
-    "name": "City Developments",
-    "x": 77.68,
-    "y": 6.893,
-    "quadrant": "FUTURE_LEADERS",
-    "size": 63.5,
-    "is_underpriced_improver": true
+    "id": "GULF",
+    "name": "Gulf Development",
+    "x": 77.5,
+    "y": -12.1,
+    "quadrant": "OVERRATED",
+    "size": 30.5,
+    "is_underpriced_improver": false
   },
   {
-    "id": "Z74",
-    "name": "Singtel",
-    "x": 51.43,
-    "y": 1.4,
-    "quadrant": "FUTURE_LEADERS",
-    "size": 49.0,
-    "is_underpriced_improver": true
+    "id": "PGAS",
+    "name": "Perusahaan Gas Negara",
+    "x": 70.0,
+    "y": -1.0,
+    "quadrant": "OVERRATED",
+    "size": 50.0,
+    "is_underpriced_improver": false
+  },
+  {
+    "id": "POWR",
+    "name": "Cikarang Listrindo",
+    "x": 22.5,
+    "y": 0.0,
+    "quadrant": "VALUE_TRAPS",
+    "size": 55.0,
+    "is_underpriced_improver": false
+  },
+  {
+    "id": "POW",
+    "name": "PetroVietnam Power",
+    "x": 15.0,
+    "y": 3.0,
+    "quadrant": "HIDDEN_WINNERS",
+    "size": 55.0,
+    "is_underpriced_improver": false
   }
 ]

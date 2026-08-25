@@ -1,56 +1,46 @@
 {
-  "fetched_at": "2026-08-21T18:20:51.348565+00:00",
+  "fetched_at": "2026-08-24T05:33:21.561407+00:00",
   "source": "CDP public scores table",
   "url": "https://www.cdp.net/en/data/scores",
   "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed",
   "terms": "internal, non-commercial use only; commercial use or public redistribution requires prior written consent from CDP",
   "companies": {
-    "9CI": {
+    "BGRIM": {
       "cdp": null,
       "status": "did_not_disclose",
       "assessment_year": 2025,
-      "table_name": "CapitaLand Investment Limited",
-      "country": "Singapore",
+      "table_name": "BGrimm Power PCL",
+      "country": "Thailand",
       "source": "CDP public scores table",
       "url": "https://www.cdp.net/en/data/scores",
       "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed"
     },
-    "C09": {
-      "cdp": "A",
-      "status": null,
-      "assessment_year": 2025,
-      "table_name": "City Developments Limited",
-      "country": "Singapore",
-      "source": "CDP public scores table",
-      "url": "https://www.cdp.net/en/data/scores",
-      "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed"
-    },
-    "D05": {
-      "cdp": "B",
-      "status": null,
-      "assessment_year": 2025,
-      "table_name": "DBS Group Holdings",
-      "country": "Singapore",
-      "source": "CDP public scores table",
-      "url": "https://www.cdp.net/en/data/scores",
-      "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed"
-    },
-    "BN4": {
+    "POWR": {
       "cdp": null,
       "status": "did_not_disclose",
       "assessment_year": 2025,
-      "table_name": "Keppel Ltd.",
-      "country": "Singapore",
+      "table_name": "CIKARANG LISTRINDO TBK PT",
+      "country": "Indonesia",
       "source": "CDP public scores table",
       "url": "https://www.cdp.net/en/data/scores",
       "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed"
     },
-    "O39": {
-      "cdp": "C",
-      "status": null,
+    "PGAS": {
+      "cdp": null,
+      "status": "see_parent",
       "assessment_year": 2025,
-      "table_name": "Oversea-Chinese Banking Corporation",
-      "country": "Singapore",
+      "table_name": "PT Perusahaan Gas Negara Tbk",
+      "country": "Indonesia",
+      "source": "CDP public scores table",
+      "url": "https://www.cdp.net/en/data/scores",
+      "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed"
+    },
+    "RATCH": {
+      "cdp": null,
+      "status": "did_not_disclose",
+      "assessment_year": 2025,
+      "table_name": "Ratch Group PCL",
+      "country": "Thailand",
       "source": "CDP public scores table",
       "url": "https://www.cdp.net/en/data/scores",
       "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed"
@@ -65,42 +55,32 @@
       "url": "https://www.cdp.net/en/data/scores",
       "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed"
     },
-    "C6L": {
-      "cdp": "B-",
+    "TNB": {
+      "cdp": "C",
       "status": null,
       "assessment_year": 2025,
-      "table_name": "Singapore Airlines",
-      "country": "Singapore",
+      "table_name": "Tenaga Nasional",
+      "country": "Malaysia",
       "source": "CDP public scores table",
       "url": "https://www.cdp.net/en/data/scores",
       "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed"
     },
-    "Z74": {
-      "cdp": "A",
-      "status": null,
+    "EGCO": {
+      "cdp": null,
+      "status": "did_not_disclose",
       "assessment_year": 2025,
-      "table_name": "Singtel",
-      "country": "Singapore",
+      "table_name": "The Electricity Generating Public Company Limited",
+      "country": "Thailand",
       "source": "CDP public scores table",
       "url": "https://www.cdp.net/en/data/scores",
       "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed"
     },
-    "U11": {
-      "cdp": "A-",
-      "status": null,
+    "YTLP": {
+      "cdp": null,
+      "status": "did_not_disclose",
       "assessment_year": 2025,
-      "table_name": "United Overseas Bank Limited (UOB)",
-      "country": "Singapore",
-      "source": "CDP public scores table",
-      "url": "https://www.cdp.net/en/data/scores",
-      "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed"
-    },
-    "F34": {
-      "cdp": "B",
-      "status": null,
-      "assessment_year": 2025,
-      "table_name": "Wilmar International Limited",
-      "country": "Singapore",
+      "table_name": "YTL Power International Berhad",
+      "country": "Malaysia",
       "source": "CDP public scores table",
       "url": "https://www.cdp.net/en/data/scores",
       "dataset_url": "https://flo.uri.sh/visualisation/28119771/embed"

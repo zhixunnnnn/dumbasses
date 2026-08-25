@@ -11,18 +11,20 @@
   },
   "evidence": {
     "company_id": "U96",
-    "year": 2024,
-    "total": 64.0,
+    "year": 2023,
+    "total": 80.0,
     "pillars": {
-      "E": 68.0,
-      "S": 70.0,
-      "G": 25.0
+      "E": 80.0,
+      "S": 100.0,
+      "G": 50.0
     },
-    "confidence": 0.397,
-    "absent_topics": [],
+    "confidence": 0.603,
+    "absent_topics": [
+      "water_management"
+    ],
     "trace": {
-      "label": "Evidence Score 2024",
-      "value": 64.0,
+      "label": "Evidence Score 2023",
+      "value": 80.0,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -30,12 +32,31 @@
       "children": [
         {
           "label": "Pillar E",
-          "value": 68.0,
+          "value": 80.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
+            {
+              "label": "ghg_emissions (w=0.3, credit=1.0)",
+              "value": 100.0,
+              "contribution": 0.3,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": [
+                {
+                  "label": "[VERIFIED] Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity in FY2023.",
+                  "value": null,
+                  "contribution": 0.3,
+                  "source_sentence": "In FY2023, Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity.",
+                  "source_doc": "U96-SR2023",
+                  "source_page": 1,
+                  "children": []
+                }
+              ]
+            },
             {
               "label": "energy_transition (w=0.25, credit=1.0)",
               "value": 100.0,
@@ -45,285 +66,31 @@
               "source_page": null,
               "children": [
                 {
-                  "label": "[VERIFIED] Sembcorp’s wind assets are located at Gujarat, India.",
+                  "label": "[VERIFIED] Sembcorp Industries grew its renewables and solar capacity as part of its decarbonisation ",
                   "value": null,
                   "contribution": 0.25,
-                  "source_sentence": "Sembcorp’s wind assets located at Gujarat, India",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Energy companies play a transformative role in an inclusive energy transition.",
-                  "value": null,
-                  "contribution": 0.125,
-                  "source_sentence": "Energy companies play a transformative role in an inclusive energy transition.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] In line with our purpose to drive the energy transition, we have adopted SDG 7 (Affordable",
-                  "value": null,
-                  "contribution": 0.125,
-                  "source_sentence": "In line with our purpose to drive the energy transition, we have adopted SDG 7 (Affordable and Clean Energy) and SDG 13 (Climate Action) as our priority SDGs.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] We are driven to support Asia’s transition to a clean and responsible future.",
-                  "value": null,
-                  "contribution": 0.125,
-                  "source_sentence": "We are driven to support Asia’s transition to a clean and responsible future.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] In the fast-evolving energy transition landscape, employees equipped with the right compet",
-                  "value": null,
-                  "contribution": 0.125,
-                  "source_sentence": "In the fast-evolving energy transition landscape, employees equipped with the right competencies and experience position us to capture opportunities while meeting the energy needs of our stakeholders securely, sustainably and affordably.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Our Talent Management Framework forms the foundation of our approach to building a workfor",
-                  "value": null,
-                  "contribution": 0.125,
-                  "source_sentence": "Our Talent Management Framework forms the foundation of our approach to building a workforce equipped to advance the energy transition.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Sembcorp Solar Singapore was appointed as the first SkillsFuture Queen Bee for the Energy ",
-                  "value": null,
-                  "contribution": 0.125,
-                  "source_sentence": "stone in our Upgrade programme in 2024 was the appointment of Sembcorp Solar Singapore as the first SkillsFuture Queen Bee for the Energy and Power sector.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] The SkillsFuture Queen Bee programme underscores Sembcorp's commitment to advance the sola",
-                  "value": null,
-                  "contribution": 0.125,
-                  "source_sentence": "This programme underscores our commitment to advance the solar industry in Singapore.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Sembcorp is committed to making the energy transition inclusive for the communities where ",
-                  "value": null,
-                  "contribution": 0.125,
-                  "source_sentence": "At Sembcorp, we are committed to making the energy transition an inclusive one for the communities where we operate.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Climate change is causing shifts in global wind patterns and average temperatures, which m",
-                  "value": null,
-                  "contribution": 0.125,
-                  "source_sentence": "Increasingly, climate change is also causing shifts in global wind patterns and average temperatures, which may affect renewable energy generation.",
-                  "source_doc": "sci sustainability report 2024",
+                  "source_sentence": "In FY2023, Sembcorp Industries grew its renewables and solar capacity as part of its decarbonisation transition.",
+                  "source_doc": "U96-SR2023",
                   "source_page": 1,
                   "children": []
                 }
               ]
             },
             {
-              "label": "ghg_emissions (w=0.3, credit=0.7)",
-              "value": 70.0,
-              "contribution": 0.21,
+              "label": "air_quality (w=0.1, credit=0.5)",
+              "value": 50.0,
+              "contribution": 0.05,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
               "children": [
                 {
-                  "label": "[ASSERTED] We also have opportunities to drive the growth and development of low-carbon solutions to ",
+                  "label": "[ASSERTED] Sembcorp Industries cut NOx and particulate air quality emissions at its plants in FY2023.",
                   "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "Conversely, we also have opportunities to drive the growth and development of low-carbon solutions to enable the global energy transition.",
-                  "source_doc": "sci sustainability report 2024",
+                  "contribution": 0.05,
+                  "source_sentence": "In FY2023, Sembcorp Industries cut NOx and particulate air quality emissions at its plants.",
+                  "source_doc": "U96-SR2023",
                   "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] We recognise our role in driving the collective transition towards a lower-carbon economy.",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "We recognise our role in driving the collective transition towards a lower-carbon economy.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] We remain focused on executing on our 2028 targets to grow our renewables portfolio and re",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "We remain focused on executing on our 2028 targets to grow our renewables portfolio and reduce our emissions intensity.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] We work with partners to grow our renewable energy capacity and explore new decarbonisatio",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "We work with partners to grow our renewable energy capacity and explore new decarbonisation technologies.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] The ERCC supports the inclusion of sustainability-linked KPIs and targets such as GHG emis",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "The ERCC supports the inclusion of sustainability-linked KPIs and targets such as GHG emissions intensity and gross installed renewable energy capacity for key management personnel.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Absolute GHG emissions (Scope 1 and 2) decreased to 9.3 million tonnes of carbon dioxide e",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "Absolute GHG emissions (Scope 1 and 2) decreased to 9.3 million tonnes of carbon dioxide equivalent (million tCO2e), primarily due to the concession expiry of the Phu My 3 Power Plant in February 2024.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] GHG emissions intensity2 reduced to 0.27 tonnes of carbon dioxide equivalent per megawatt-",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "GHG emissions intensity2 reduced to 0.27 tonnes of carbon dioxide equivalent per megawatt-hour (tCO2e/MWh), driven by the reduction in absolute GHG emissions and increase in our renewable energy generation.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Scope 3 emissions3 decreased by 6% to 15.7 million tCO2e in 2024. This is mainly driven by",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "Scope 3 emissions3 decreased by 6% to 15.7 million tCO2e in 2024. This is mainly driven by a reduction in emissions under Category 15 – Investments, attributed to the repayment of the Deferred Payment Note following the sale of Sembcorp Energy India Limited (SEIL).",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] The renewable energy generated by our operating assets is equivalent to approximately 9.4 ",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "The renewable energy generated by our operating assets is equivalent to approximately 9.4 million tCO2e emissions avoided.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] We have engaged DNV Business Assurance Singapore Pte. Ltd. (DNV) to undertake an independe",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "We have engaged DNV Business Assurance Singapore Pte. Ltd. (DNV) to undertake an independent limited assurance of our Scope 1 and 2 emissions data.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] The SSP1-2.6 scenario envisions global consumption oriented towards low material growth as",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "SSP1-2.6 (“Sustainability”) Global consumption is oriented towards low material growth as well as lower resource and energy intensity. Carbon emissions would fall from current levels and reach net-zero by around 2075",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] The SSP2-4.5 scenario reflects slow progress in achieving sustainable development goals, w",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "2.7ºC SSP2-4.5 (“Middle-of-the-road”) Slow progress in achieving sustainable development goals. Carbon emissions would remain high until 2050, before starting to decline post-2050 but no net-zero is achieved",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] The SSP5-8.5 scenario describes a push for economic and social development coupled with ex",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "4.4ºC SSP5-8.5 (“Fossil-fuelled Development”) The push for economic and social development is coupled with exploitation of abundant fossil fuel sources and resource and energy intensive lifestyles. Carbon emissions would double from current levels by 2050 and continue to rise until the end of century",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Transition risks stem from uncertainties brought about by the global shift towards a low-c",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "Transition risks stem from uncertainties brought about by the global shift towards a low-carbon economy. These risks can arise from changes in climate-related policy and regulations, as well as technological advancements, amongst others.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Sembcorp monitors the regulatory framework and conducts risk-based scenario analysis to as",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "We monitor the regulatory framework and conduct risk-based scenario analysis to assess exposure to carbon pricing.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Sembcorp applies a market-specific internal carbon price to evaluate the financial impact ",
-                  "value": null,
-                  "contribution": 0.15,
-                  "source_sentence": "We apply a market-specific internal carbon price to evaluate the financial impact of carbon pricing regulations on the profitability of our gas and related energy assets.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                }
-              ]
-            },
-            {
-              "label": "air_quality (w=0.1, credit=0.25)",
-              "value": 25.0,
-              "contribution": 0.025,
-              "source_sentence": null,
-              "source_doc": null,
-              "source_page": null,
-              "children": [
-                {
-                  "label": "[INFERRED] The company likely monitors and mitigates air quality impacts through adherence to environ",
-                  "value": null,
-                  "contribution": 0.025,
-                  "source_sentence": "The company likely monitors and mitigates air quality impacts through adherence to environmental regulations and implementation of emission control technologies, given its focus on decarbonisation and resource management.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": null,
-                  "children": []
-                }
-              ]
-            },
-            {
-              "label": "water_management (w=0.1, credit=0.25)",
-              "value": 25.0,
-              "contribution": 0.025,
-              "source_sentence": null,
-              "source_doc": null,
-              "source_page": null,
-              "children": [
-                {
-                  "label": "[INFERRED] The company probably employs efficient water management practices, including recycling and",
-                  "value": null,
-                  "contribution": 0.025,
-                  "source_sentence": "The company probably employs efficient water management practices, including recycling and conservation measures, to minimise water withdrawal and ensure sustainable cooling water usage in its operations.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": null,
                   "children": []
                 }
               ]
@@ -332,80 +99,26 @@
         },
         {
           "label": "Pillar S",
-          "value": 70.0,
+          "value": 100.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "workforce_safety (w=0.15, credit=0.7)",
-              "value": 70.0,
-              "contribution": 0.105,
+              "label": "workforce_safety (w=0.15, credit=1.0)",
+              "value": 100.0,
+              "contribution": 0.15,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
               "children": [
                 {
-                  "label": "[ASSERTED] These risks include corruption, non-compliance with laws, as well as health and safety.",
+                  "label": "[VERIFIED] Sembcorp Industries reduced lost-time injuries through occupational health and safety prog",
                   "value": null,
-                  "contribution": 0.075,
-                  "source_sentence": "These risks include corruption, non-compliance with laws, as well as health and safety.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Sembcorp is committed to having a robust health and safety management system to mitigate r",
-                  "value": null,
-                  "contribution": 0.075,
-                  "source_sentence": "It is why we are committed to having a robust health and safety management system that is supported by strong implementation and monitoring, to mitigate any risk of unintended impact on people, minimise operational disruptions and improve business resilience.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Sembcorp recognises the right to life, health, and safe working conditions and is committe",
-                  "value": null,
-                  "contribution": 0.075,
-                  "source_sentence": "We recognise the right to life, health and safe working conditions, and are committed to reducing health and safety risks in our operations.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Sembcorp requires its contractors to comply with its health and safety requirements to pre",
-                  "value": null,
-                  "contribution": 0.075,
-                  "source_sentence": "We also require our contractors to comply with our health and safety requirements to prevent and manage health and safety risks.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Sembcorp's Group HSSE management system is internally audited and conforms to relevant Occ",
-                  "value": null,
-                  "contribution": 0.075,
-                  "source_sentence": "Our Group HSSE management system is internally audited and conforms to the relevant Occupational Health and Safety Assessment Series and ISO Standards, and applies to all employees.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Three contractor fatalities occurred at Sembcorp's sites in 2024, involving incidents in I",
-                  "value": null,
-                  "contribution": 0.075,
-                  "source_sentence": "Regrettably, three contractor fatalities occurred at our sites during the year, involving two incidents in India and one in Oman.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": 1,
-                  "children": []
-                },
-                {
-                  "label": "[ASSERTED] Sembcorp's lost time injury rate and total recordable injury rate remained the same at 0.5",
-                  "value": null,
-                  "contribution": 0.075,
-                  "source_sentence": "Overall, the lost time injury rate and total recordable injury rate remained the same at 0.5 and 1.0, respectively, in 2024.",
-                  "source_doc": "sci sustainability report 2024",
+                  "contribution": 0.15,
+                  "source_sentence": "In FY2023, Sembcorp Industries reduced lost-time injuries through occupational health and safety programmes.",
+                  "source_doc": "U96-SR2023",
                   "source_page": 1,
                   "children": []
                 }
@@ -415,27 +128,27 @@
         },
         {
           "label": "Pillar G",
-          "value": 25.0,
+          "value": 50.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "grid_resiliency (w=0.1, credit=0.25)",
-              "value": 25.0,
-              "contribution": 0.025,
+              "label": "grid_resiliency (w=0.1, credit=0.5)",
+              "value": 50.0,
+              "contribution": 0.05,
               "source_sentence": null,
               "source_doc": null,
               "source_page": null,
               "children": [
                 {
-                  "label": "[INFERRED] The company likely invests in grid infrastructure and technologies to enhance reliability ",
+                  "label": "[ASSERTED] Sembcorp Industries improved grid reliability and supply security in FY2023.",
                   "value": null,
-                  "contribution": 0.025,
-                  "source_sentence": "The company likely invests in grid infrastructure and technologies to enhance reliability and supply security, aligning with its commitment to supporting Asia’s energy transition and resilient business practices.",
-                  "source_doc": "sci sustainability report 2024",
-                  "source_page": null,
+                  "contribution": 0.05,
+                  "source_sentence": "In FY2023, Sembcorp Industries improved grid reliability and supply security.",
+                  "source_doc": "U96-SR2023",
+                  "source_page": 1,
                   "children": []
                 }
               ]
@@ -495,50 +208,38 @@
         "G": 50.0
       },
       "confidence": 0.603
-    },
-    {
-      "year": 2024,
-      "total": 64.0,
-      "pillars": {
-        "E": 68.0,
-        "S": 70.0,
-        "G": 25.0
-      },
-      "confidence": 0.397
     }
   ],
   "raters": {
     "company_id": "U96",
-    "msci_pct": 60.0,
-    "sp_pct": 5.0,
-    "sustainalytics_pct": 5.0,
+    "msci_pct": 95.0,
+    "sp_pct": null,
+    "sustainalytics_pct": 20.0,
     "cdp_pct": null,
     "real_raters": [
       "msci"
     ],
     "rater_years": {
-      "msci": 2024,
-      "sustainalytics": 2024,
-      "sp": 2024
+      "msci": 2023,
+      "sustainalytics": 2023
     },
-    "basis": "all companies",
+    "basis": "Utilities",
     "peers": 10,
-    "consensus": 23.33,
-    "divergence": 55.0,
+    "consensus": 57.5,
+    "divergence": 75.0,
     "consensus_provenance": "mixed",
     "divergence_provenance": "mixed",
     "contributing": [
       "msci",
-      "sp",
       "sustainalytics"
     ],
     "rater_provenance": {
       "msci": {
         "real": true,
-        "source": "sci sustainability report 2024",
-        "url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "observed_on": "2024",
-        "value_raw": "AA"
+        "source": "MarketScreener (stale)",
+        "url": "https://www.marketscreener.com/quote/stock/SEMBCORP-INDUSTRIES-LTD-6491134/ratings/",
+        "observed_on": null,
+        "value_raw": "AAA"
       },
       "sp": {
         "real": false,
@@ -555,17 +256,16 @@
         "value_raw": null
       },
       "cdp": {
-        "real": false,
-        "source": "CDP public scores table",
-        "url": "https://www.cdp.net/en/data/scores",
-        "observed_on": "2025",
-        "value_raw": null,
-        "status": "did_not_disclose"
+        "real": true,
+        "source": "sci sustainability report 2024",
+        "url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+        "observed_on": "2023",
+        "value_raw": "B"
       }
     },
     "msci_real": true,
-    "msci_source": "sci sustainability report 2024",
-    "msci_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf"
+    "msci_source": "MarketScreener (stale)",
+    "msci_url": "https://www.marketscreener.com/quote/stock/SEMBCORP-INDUSTRIES-LTD-6491134/ratings/"
   },
   "signal": {
     "company_id": "U96",
@@ -573,13 +273,13 @@
     "opinion_flat": true,
     "price_flat": false,
     "is_underpriced_improver": false,
-    "evidence_pct": 75.0,
-    "evidence_basis": "all companies",
+    "evidence_pct": 90.0,
+    "evidence_basis": "Electric Utilities & Power Generators",
     "evidence_peers": 10,
-    "evidence_gap": 51.67,
-    "momentum": 3.743,
-    "esg_today": 23.33,
-    "quadrant": "HIDDEN_WINNERS",
+    "evidence_gap": 32.5,
+    "momentum": 6.8,
+    "esg_today": 57.5,
+    "quadrant": "FUTURE_LEADERS",
     "esg_today_provenance": "mixed",
     "evidence_gap_provenance": "mixed",
     "quadrant_provenance": "mixed",
@@ -592,16 +292,16 @@
       "source_page": null,
       "children": [
         {
-          "label": "proof_up=True (evidence momentum 3.743/yr, verified-driven)",
-          "value": 3.743,
+          "label": "proof_up=True (evidence momentum 6.8/yr, verified-driven)",
+          "value": 6.8,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "Evidence Score 2024",
-              "value": 64.0,
+              "label": "Evidence Score 2023",
+              "value": 80.0,
               "contribution": null,
               "source_sentence": null,
               "source_doc": null,
@@ -609,12 +309,31 @@
               "children": [
                 {
                   "label": "Pillar E",
-                  "value": 68.0,
+                  "value": 80.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
+                    {
+                      "label": "ghg_emissions (w=0.3, credit=1.0)",
+                      "value": 100.0,
+                      "contribution": 0.3,
+                      "source_sentence": null,
+                      "source_doc": null,
+                      "source_page": null,
+                      "children": [
+                        {
+                          "label": "[VERIFIED] Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity in FY2023.",
+                          "value": null,
+                          "contribution": 0.3,
+                          "source_sentence": "In FY2023, Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity.",
+                          "source_doc": "U96-SR2023",
+                          "source_page": 1,
+                          "children": []
+                        }
+                      ]
+                    },
                     {
                       "label": "energy_transition (w=0.25, credit=1.0)",
                       "value": 100.0,
@@ -624,285 +343,31 @@
                       "source_page": null,
                       "children": [
                         {
-                          "label": "[VERIFIED] Sembcorp’s wind assets are located at Gujarat, India.",
+                          "label": "[VERIFIED] Sembcorp Industries grew its renewables and solar capacity as part of its decarbonisation ",
                           "value": null,
                           "contribution": 0.25,
-                          "source_sentence": "Sembcorp’s wind assets located at Gujarat, India",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Energy companies play a transformative role in an inclusive energy transition.",
-                          "value": null,
-                          "contribution": 0.125,
-                          "source_sentence": "Energy companies play a transformative role in an inclusive energy transition.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] In line with our purpose to drive the energy transition, we have adopted SDG 7 (Affordable",
-                          "value": null,
-                          "contribution": 0.125,
-                          "source_sentence": "In line with our purpose to drive the energy transition, we have adopted SDG 7 (Affordable and Clean Energy) and SDG 13 (Climate Action) as our priority SDGs.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] We are driven to support Asia’s transition to a clean and responsible future.",
-                          "value": null,
-                          "contribution": 0.125,
-                          "source_sentence": "We are driven to support Asia’s transition to a clean and responsible future.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] In the fast-evolving energy transition landscape, employees equipped with the right compet",
-                          "value": null,
-                          "contribution": 0.125,
-                          "source_sentence": "In the fast-evolving energy transition landscape, employees equipped with the right competencies and experience position us to capture opportunities while meeting the energy needs of our stakeholders securely, sustainably and affordably.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Our Talent Management Framework forms the foundation of our approach to building a workfor",
-                          "value": null,
-                          "contribution": 0.125,
-                          "source_sentence": "Our Talent Management Framework forms the foundation of our approach to building a workforce equipped to advance the energy transition.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Sembcorp Solar Singapore was appointed as the first SkillsFuture Queen Bee for the Energy ",
-                          "value": null,
-                          "contribution": 0.125,
-                          "source_sentence": "stone in our Upgrade programme in 2024 was the appointment of Sembcorp Solar Singapore as the first SkillsFuture Queen Bee for the Energy and Power sector.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] The SkillsFuture Queen Bee programme underscores Sembcorp's commitment to advance the sola",
-                          "value": null,
-                          "contribution": 0.125,
-                          "source_sentence": "This programme underscores our commitment to advance the solar industry in Singapore.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Sembcorp is committed to making the energy transition inclusive for the communities where ",
-                          "value": null,
-                          "contribution": 0.125,
-                          "source_sentence": "At Sembcorp, we are committed to making the energy transition an inclusive one for the communities where we operate.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Climate change is causing shifts in global wind patterns and average temperatures, which m",
-                          "value": null,
-                          "contribution": 0.125,
-                          "source_sentence": "Increasingly, climate change is also causing shifts in global wind patterns and average temperatures, which may affect renewable energy generation.",
-                          "source_doc": "sci sustainability report 2024",
+                          "source_sentence": "In FY2023, Sembcorp Industries grew its renewables and solar capacity as part of its decarbonisation transition.",
+                          "source_doc": "U96-SR2023",
                           "source_page": 1,
                           "children": []
                         }
                       ]
                     },
                     {
-                      "label": "ghg_emissions (w=0.3, credit=0.7)",
-                      "value": 70.0,
-                      "contribution": 0.21,
+                      "label": "air_quality (w=0.1, credit=0.5)",
+                      "value": 50.0,
+                      "contribution": 0.05,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
                       "children": [
                         {
-                          "label": "[ASSERTED] We also have opportunities to drive the growth and development of low-carbon solutions to ",
+                          "label": "[ASSERTED] Sembcorp Industries cut NOx and particulate air quality emissions at its plants in FY2023.",
                           "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "Conversely, we also have opportunities to drive the growth and development of low-carbon solutions to enable the global energy transition.",
-                          "source_doc": "sci sustainability report 2024",
+                          "contribution": 0.05,
+                          "source_sentence": "In FY2023, Sembcorp Industries cut NOx and particulate air quality emissions at its plants.",
+                          "source_doc": "U96-SR2023",
                           "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] We recognise our role in driving the collective transition towards a lower-carbon economy.",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "We recognise our role in driving the collective transition towards a lower-carbon economy.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] We remain focused on executing on our 2028 targets to grow our renewables portfolio and re",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "We remain focused on executing on our 2028 targets to grow our renewables portfolio and reduce our emissions intensity.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] We work with partners to grow our renewable energy capacity and explore new decarbonisatio",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "We work with partners to grow our renewable energy capacity and explore new decarbonisation technologies.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] The ERCC supports the inclusion of sustainability-linked KPIs and targets such as GHG emis",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "The ERCC supports the inclusion of sustainability-linked KPIs and targets such as GHG emissions intensity and gross installed renewable energy capacity for key management personnel.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Absolute GHG emissions (Scope 1 and 2) decreased to 9.3 million tonnes of carbon dioxide e",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "Absolute GHG emissions (Scope 1 and 2) decreased to 9.3 million tonnes of carbon dioxide equivalent (million tCO2e), primarily due to the concession expiry of the Phu My 3 Power Plant in February 2024.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] GHG emissions intensity2 reduced to 0.27 tonnes of carbon dioxide equivalent per megawatt-",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "GHG emissions intensity2 reduced to 0.27 tonnes of carbon dioxide equivalent per megawatt-hour (tCO2e/MWh), driven by the reduction in absolute GHG emissions and increase in our renewable energy generation.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Scope 3 emissions3 decreased by 6% to 15.7 million tCO2e in 2024. This is mainly driven by",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "Scope 3 emissions3 decreased by 6% to 15.7 million tCO2e in 2024. This is mainly driven by a reduction in emissions under Category 15 – Investments, attributed to the repayment of the Deferred Payment Note following the sale of Sembcorp Energy India Limited (SEIL).",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] The renewable energy generated by our operating assets is equivalent to approximately 9.4 ",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "The renewable energy generated by our operating assets is equivalent to approximately 9.4 million tCO2e emissions avoided.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] We have engaged DNV Business Assurance Singapore Pte. Ltd. (DNV) to undertake an independe",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "We have engaged DNV Business Assurance Singapore Pte. Ltd. (DNV) to undertake an independent limited assurance of our Scope 1 and 2 emissions data.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] The SSP1-2.6 scenario envisions global consumption oriented towards low material growth as",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "SSP1-2.6 (“Sustainability”) Global consumption is oriented towards low material growth as well as lower resource and energy intensity. Carbon emissions would fall from current levels and reach net-zero by around 2075",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] The SSP2-4.5 scenario reflects slow progress in achieving sustainable development goals, w",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "2.7ºC SSP2-4.5 (“Middle-of-the-road”) Slow progress in achieving sustainable development goals. Carbon emissions would remain high until 2050, before starting to decline post-2050 but no net-zero is achieved",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] The SSP5-8.5 scenario describes a push for economic and social development coupled with ex",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "4.4ºC SSP5-8.5 (“Fossil-fuelled Development”) The push for economic and social development is coupled with exploitation of abundant fossil fuel sources and resource and energy intensive lifestyles. Carbon emissions would double from current levels by 2050 and continue to rise until the end of century",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Transition risks stem from uncertainties brought about by the global shift towards a low-c",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "Transition risks stem from uncertainties brought about by the global shift towards a low-carbon economy. These risks can arise from changes in climate-related policy and regulations, as well as technological advancements, amongst others.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Sembcorp monitors the regulatory framework and conducts risk-based scenario analysis to as",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "We monitor the regulatory framework and conduct risk-based scenario analysis to assess exposure to carbon pricing.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Sembcorp applies a market-specific internal carbon price to evaluate the financial impact ",
-                          "value": null,
-                          "contribution": 0.15,
-                          "source_sentence": "We apply a market-specific internal carbon price to evaluate the financial impact of carbon pricing regulations on the profitability of our gas and related energy assets.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "label": "air_quality (w=0.1, credit=0.25)",
-                      "value": 25.0,
-                      "contribution": 0.025,
-                      "source_sentence": null,
-                      "source_doc": null,
-                      "source_page": null,
-                      "children": [
-                        {
-                          "label": "[INFERRED] The company likely monitors and mitigates air quality impacts through adherence to environ",
-                          "value": null,
-                          "contribution": 0.025,
-                          "source_sentence": "The company likely monitors and mitigates air quality impacts through adherence to environmental regulations and implementation of emission control technologies, given its focus on decarbonisation and resource management.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": null,
-                          "children": []
-                        }
-                      ]
-                    },
-                    {
-                      "label": "water_management (w=0.1, credit=0.25)",
-                      "value": 25.0,
-                      "contribution": 0.025,
-                      "source_sentence": null,
-                      "source_doc": null,
-                      "source_page": null,
-                      "children": [
-                        {
-                          "label": "[INFERRED] The company probably employs efficient water management practices, including recycling and",
-                          "value": null,
-                          "contribution": 0.025,
-                          "source_sentence": "The company probably employs efficient water management practices, including recycling and conservation measures, to minimise water withdrawal and ensure sustainable cooling water usage in its operations.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": null,
                           "children": []
                         }
                       ]
@@ -911,80 +376,26 @@
                 },
                 {
                   "label": "Pillar S",
-                  "value": 70.0,
+                  "value": 100.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "workforce_safety (w=0.15, credit=0.7)",
-                      "value": 70.0,
-                      "contribution": 0.105,
+                      "label": "workforce_safety (w=0.15, credit=1.0)",
+                      "value": 100.0,
+                      "contribution": 0.15,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
                       "children": [
                         {
-                          "label": "[ASSERTED] These risks include corruption, non-compliance with laws, as well as health and safety.",
+                          "label": "[VERIFIED] Sembcorp Industries reduced lost-time injuries through occupational health and safety prog",
                           "value": null,
-                          "contribution": 0.075,
-                          "source_sentence": "These risks include corruption, non-compliance with laws, as well as health and safety.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Sembcorp is committed to having a robust health and safety management system to mitigate r",
-                          "value": null,
-                          "contribution": 0.075,
-                          "source_sentence": "It is why we are committed to having a robust health and safety management system that is supported by strong implementation and monitoring, to mitigate any risk of unintended impact on people, minimise operational disruptions and improve business resilience.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Sembcorp recognises the right to life, health, and safe working conditions and is committe",
-                          "value": null,
-                          "contribution": 0.075,
-                          "source_sentence": "We recognise the right to life, health and safe working conditions, and are committed to reducing health and safety risks in our operations.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Sembcorp requires its contractors to comply with its health and safety requirements to pre",
-                          "value": null,
-                          "contribution": 0.075,
-                          "source_sentence": "We also require our contractors to comply with our health and safety requirements to prevent and manage health and safety risks.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Sembcorp's Group HSSE management system is internally audited and conforms to relevant Occ",
-                          "value": null,
-                          "contribution": 0.075,
-                          "source_sentence": "Our Group HSSE management system is internally audited and conforms to the relevant Occupational Health and Safety Assessment Series and ISO Standards, and applies to all employees.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Three contractor fatalities occurred at Sembcorp's sites in 2024, involving incidents in I",
-                          "value": null,
-                          "contribution": 0.075,
-                          "source_sentence": "Regrettably, three contractor fatalities occurred at our sites during the year, involving two incidents in India and one in Oman.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": 1,
-                          "children": []
-                        },
-                        {
-                          "label": "[ASSERTED] Sembcorp's lost time injury rate and total recordable injury rate remained the same at 0.5",
-                          "value": null,
-                          "contribution": 0.075,
-                          "source_sentence": "Overall, the lost time injury rate and total recordable injury rate remained the same at 0.5 and 1.0, respectively, in 2024.",
-                          "source_doc": "sci sustainability report 2024",
+                          "contribution": 0.15,
+                          "source_sentence": "In FY2023, Sembcorp Industries reduced lost-time injuries through occupational health and safety programmes.",
+                          "source_doc": "U96-SR2023",
                           "source_page": 1,
                           "children": []
                         }
@@ -994,27 +405,27 @@
                 },
                 {
                   "label": "Pillar G",
-                  "value": 25.0,
+                  "value": 50.0,
                   "contribution": null,
                   "source_sentence": null,
                   "source_doc": null,
                   "source_page": null,
                   "children": [
                     {
-                      "label": "grid_resiliency (w=0.1, credit=0.25)",
-                      "value": 25.0,
-                      "contribution": 0.025,
+                      "label": "grid_resiliency (w=0.1, credit=0.5)",
+                      "value": 50.0,
+                      "contribution": 0.05,
                       "source_sentence": null,
                       "source_doc": null,
                       "source_page": null,
                       "children": [
                         {
-                          "label": "[INFERRED] The company likely invests in grid infrastructure and technologies to enhance reliability ",
+                          "label": "[ASSERTED] Sembcorp Industries improved grid reliability and supply security in FY2023.",
                           "value": null,
-                          "contribution": 0.025,
-                          "source_sentence": "The company likely invests in grid infrastructure and technologies to enhance reliability and supply security, aligning with its commitment to supporting Asia’s energy transition and resilient business practices.",
-                          "source_doc": "sci sustainability report 2024",
-                          "source_page": null,
+                          "contribution": 0.05,
+                          "source_sentence": "In FY2023, Sembcorp Industries improved grid reliability and supply security.",
+                          "source_doc": "U96-SR2023",
+                          "source_page": 1,
                           "children": []
                         }
                       ]
@@ -1026,8 +437,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=55.0, consensus 23.33->23.33)",
-          "value": 55.0,
+          "label": "opinion_flat=True (divergence=75.0, consensus 15.0->57.5)",
+          "value": 75.0,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -1044,16 +455,16 @@
           "children": []
         },
         {
-          "label": "evidence_gap=51.67 (evidence 75.0 - consensus 23.33)",
-          "value": 51.67,
+          "label": "evidence_gap=32.5 (evidence 90.0 - consensus 57.5)",
+          "value": 32.5,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
           "source_page": null,
           "children": [
             {
-              "label": "evidence_pct=75.0 vs 10 companies on the all companies rubric",
-              "value": 75.0,
+              "label": "evidence_pct=90.0 vs 10 companies on the Electric Utilities & Power Generators rubric",
+              "value": 90.0,
               "contribution": null,
               "source_sentence": null,
               "source_doc": null,
@@ -4183,18 +3594,98 @@
       {
         "week_date": "2026-06-14",
         "open": 6.19,
-        "high": 6.3,
-        "low": 6.19,
-        "close": 6.21,
-        "volume": 4919700.0
+        "high": 6.41,
+        "low": 6.18,
+        "close": 6.32,
+        "volume": 22029900.0
       },
       {
-        "week_date": "2026-06-16",
-        "open": 6.23,
-        "high": 6.32,
-        "low": 6.18,
-        "close": 6.28,
-        "volume": 1805700.0
+        "week_date": "2026-06-21",
+        "open": 6.38,
+        "high": 6.56,
+        "low": 6.3,
+        "close": 6.46,
+        "volume": 22191000.0
+      },
+      {
+        "week_date": "2026-06-28",
+        "open": 6.48,
+        "high": 6.49,
+        "low": 5.91,
+        "close": 5.98,
+        "volume": 38221300.0
+      },
+      {
+        "week_date": "2026-07-05",
+        "open": 5.95,
+        "high": 5.95,
+        "low": 5.59,
+        "close": 5.68,
+        "volume": 76914685.0
+      },
+      {
+        "week_date": "2026-07-12",
+        "open": 5.71,
+        "high": 5.71,
+        "low": 5.34,
+        "close": 5.36,
+        "volume": 47230600.0
+      },
+      {
+        "week_date": "2026-07-19",
+        "open": 5.35,
+        "high": 5.48,
+        "low": 5.23,
+        "close": 5.27,
+        "volume": 38210800.0
+      },
+      {
+        "week_date": "2026-07-26",
+        "open": 5.28,
+        "high": 5.59,
+        "low": 5.22,
+        "close": 5.52,
+        "volume": 40687397.0
+      },
+      {
+        "week_date": "2026-08-02",
+        "open": 5.53,
+        "high": 5.62,
+        "low": 5.5,
+        "close": 5.6,
+        "volume": 27309800.0
+      },
+      {
+        "week_date": "2026-08-09",
+        "open": 5.62,
+        "high": 5.85,
+        "low": 5.5,
+        "close": 5.83,
+        "volume": 46201600.0
+      },
+      {
+        "week_date": "2026-08-16",
+        "open": 5.92,
+        "high": 6.1,
+        "low": 5.85,
+        "close": 6.04,
+        "volume": 38719100.0
+      },
+      {
+        "week_date": "2026-08-23",
+        "open": 6.03,
+        "high": 6.08,
+        "low": 5.93,
+        "close": 5.99,
+        "volume": 6272400.0
+      },
+      {
+        "week_date": "2026-08-25",
+        "open": 6.0,
+        "high": 6.0,
+        "low": 5.96,
+        "close": 5.96,
+        "volume": 120100.0
       }
     ],
     "band": [
@@ -7420,11 +6911,99 @@
         "volume": 1599432800.0
       },
       {
-        "week_date": "2026-06-16",
-        "open": 5078.28,
-        "high": 5112.39,
-        "low": 5075.34,
-        "close": 5111.4,
+        "week_date": "2026-06-14",
+        "open": 5061.05,
+        "high": 5226.03,
+        "low": 5061.05,
+        "close": 5192.7,
+        "volume": 1689364400.0
+      },
+      {
+        "week_date": "2026-06-21",
+        "open": 5189.14,
+        "high": 5241.8,
+        "low": 5155.95,
+        "close": 5191.73,
+        "volume": 1546815400.0
+      },
+      {
+        "week_date": "2026-06-28",
+        "open": 5201.34,
+        "high": 5244.29,
+        "low": 5158.63,
+        "close": 5244.29,
+        "volume": 1243720700.0
+      },
+      {
+        "week_date": "2026-07-05",
+        "open": 5239.98,
+        "high": 5472.1,
+        "low": 5233.21,
+        "close": 5469.29,
+        "volume": 1277308700.0
+      },
+      {
+        "week_date": "2026-07-12",
+        "open": 5452.36,
+        "high": 5561.42,
+        "low": 5411.59,
+        "close": 5509.43,
+        "volume": 1359903100.0
+      },
+      {
+        "week_date": "2026-07-19",
+        "open": 5518.55,
+        "high": 5595.42,
+        "low": 5483.04,
+        "close": 5588.34,
+        "volume": 1356862300.0
+      },
+      {
+        "week_date": "2026-07-26",
+        "open": 5576.84,
+        "high": 5713.19,
+        "low": 5549.18,
+        "close": 5628.5,
+        "volume": 1858545000.0
+      },
+      {
+        "week_date": "2026-08-02",
+        "open": 5604.08,
+        "high": 5700.07,
+        "low": 5568.48,
+        "close": 5698.43,
+        "volume": 1486947400.0
+      },
+      {
+        "week_date": "2026-08-09",
+        "open": 5695.18,
+        "high": 5774.21,
+        "low": 5667.05,
+        "close": 5743.59,
+        "volume": 1632812500.0
+      },
+      {
+        "week_date": "2026-08-16",
+        "open": 5694.18,
+        "high": 5768.46,
+        "low": 5640.06,
+        "close": 5688.96,
+        "volume": 1632401100.0
+      },
+      {
+        "week_date": "2026-08-23",
+        "open": 5694.82,
+        "high": 5715.47,
+        "low": 5673.71,
+        "close": 5680.46,
+        "volume": 217681600.0
+      },
+      {
+        "week_date": "2026-08-25",
+        "open": 5674.36,
+        "high": 5684.22,
+        "low": 5674.23,
+        "close": 5683.23,
         "volume": 0.0
       }
     ],
@@ -7459,18 +7038,19 @@
         "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
         "source_excerpt": "Our climate-related financial disclosures, which were mandatory with effect from financial year 2023, are guided by the recommendations of the Task Force on Climate-related Financial Disclosures (TCFD). …",
         "scraped": true
-      },
+      }
+    ],
+    "partial": [
       {
         "reg_id": "ASEAN-TAXO",
         "name": "ASEAN Taxonomy for Sustainable Finance",
-        "status": "MET",
+        "status": "PARTIAL",
         "evidence_ref": null,
         "source_url": null,
         "source_excerpt": null,
         "scraped": false
       }
     ],
-    "partial": [],
     "missing": [],
     "not_in_force": [
       {
@@ -7519,10 +7099,10 @@
           "children": []
         },
         {
-          "label": "ASEAN Taxonomy for Sustainable Finance — MET",
+          "label": "ASEAN Taxonomy for Sustainable Finance — PARTIAL",
           "value": null,
           "contribution": null,
-          "source_sentence": "In FY2019, Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity.",
+          "source_sentence": "In FY2023, Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity.",
           "source_doc": null,
           "source_page": null,
           "children": []
@@ -7532,56 +7112,35 @@
   },
   "forecast": {
     "company_id": "U96",
-    "predicted_score": 6.28,
+    "predicted_score": 6.0,
     "horizon_years": 0,
-    "ci_low": 5.35,
-    "ci_high": 7.0,
-    "feature_contributions": [
-      {
-        "feature": "prev_rating_level",
-        "value": 6.0,
-        "contribution": 0.495
-      },
-      {
-        "feature": "evidence_total",
-        "value": 64.0,
-        "contribution": 0.24
-      },
-      {
-        "feature": "volatility",
-        "value": 23.38,
-        "contribution": -0.032
-      },
-      {
-        "feature": "price_return",
-        "value": 2.21,
-        "contribution": 0.029
-      }
-    ],
-    "val_error": 0.934,
-    "directional_accuracy": 0.517,
-    "directional_n": 29,
-    "accuracy_basis": "full panel incl. illustrative targets",
-    "accuracy_note": "direction 52% vs naive 59% (n=29, incl. illustrative targets); on real targets only: 80% vs naive 40% (n=10)",
-    "real_directional_accuracy": 0.8,
-    "real_directional_n": 10,
-    "panel_rows": 29,
-    "panel_rows_real": 10,
-    "panel_rows_illustrative": 19,
+    "ci_low": null,
+    "ci_high": null,
+    "feature_contributions": [],
+    "val_error": null,
+    "directional_accuracy": null,
+    "directional_n": null,
+    "accuracy_basis": null,
+    "accuracy_note": "Naive persistence carries no cross-validated accuracy: it is the last published rating, repeated.",
+    "real_directional_accuracy": null,
+    "real_directional_n": null,
+    "panel_rows": 11,
+    "panel_rows_real": 1,
+    "panel_rows_illustrative": 10,
     "provenance": "mixed",
     "predicted_label": "AA",
     "last_rating_label": "AA",
     "last_rating_year": 2024,
     "direction": "likely hold",
-    "baseline_only": false,
-    "model_label": "MSCI rating nowcast (Ridge on real dated signals; 29 panel rows — 10 real targets, 19 illustrative)",
+    "baseline_only": true,
+    "model_label": "baseline: ratings persistence (insufficient history for a fitted model — 11 panel rows)",
     "target_year": 2026,
     "drift_years": 0,
     "drift_note": "Estimates the MSCI ESG rating as of 2026 from signals all dated to 2024 — GDELT headlines published that year, that year's own report evidence, and prices to the end of it. 2024 is the most recent year whose every feature is real; nothing is carried forward to fill the gap. It is not a rater publication; it is what those signals imply the rater would say.",
     "hypothesis": true,
     "trace": {
-      "label": "likely hold — MSCI AA (MSCI rating nowcast (Ridge on real dated signals; 29 panel rows — 10 real targets, 19 illustrative), direction 52% vs naive 59% (n=29, incl. illustrative targets); on real targets only: 80% vs naive 40% (n=10))",
-      "value": 6.28,
+      "label": "likely hold — MSCI AA (baseline: ratings persistence (insufficient history for a fitted model — 11 panel rows))",
+      "value": 6.0,
       "contribution": null,
       "source_sentence": null,
       "source_doc": null,
@@ -7595,42 +7154,6 @@
           "source_doc": null,
           "source_page": null,
           "children": []
-        },
-        {
-          "label": "prev_rating_level=6.0",
-          "value": null,
-          "contribution": 0.495,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "evidence_total=64.0",
-          "value": null,
-          "contribution": 0.24,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "volatility=23.38",
-          "value": null,
-          "contribution": -0.032,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
-        },
-        {
-          "label": "price_return=2.21",
-          "value": null,
-          "contribution": 0.029,
-          "source_sentence": null,
-          "source_doc": null,
-          "source_page": null,
-          "children": []
         }
       ]
     }
@@ -7638,450 +7161,110 @@
   "claims": {
     "claims": [
       {
+        "topic_id": "ghg_emissions",
+        "pillar": "E",
+        "state": "VERIFIED",
+        "text": "Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity in FY2023.",
+        "source_sentence": "In FY2023, Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity.",
+        "source_doc": "U96-SR2023",
+        "source_page": 1,
+        "weight": 0.3
+      },
+      {
         "topic_id": "energy_transition",
         "pillar": "E",
         "state": "VERIFIED",
-        "text": "Sembcorp’s wind assets are located at Gujarat, India.",
-        "source_sentence": "Sembcorp’s wind assets located at Gujarat, India",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+        "text": "Sembcorp Industries grew its renewables and solar capacity as part of its decarbonisation ",
+        "source_sentence": "In FY2023, Sembcorp Industries grew its renewables and solar capacity as part of its decarbonisation transition.",
+        "source_doc": "U96-SR2023",
         "source_page": 1,
-        "weight": 0.25,
-        "corroboration_url": "https://www.eqmagpro.com/sembcorp-awarded-440-mw-wind-solar-hybrid-power-project-in-india-eq/",
-        "corroboration_source": "Eqmagpro",
-        "report_year": 2024
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Energy companies play a transformative role in an inclusive energy transition.",
-        "source_sentence": "Energy companies play a transformative role in an inclusive energy transition.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.25,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "We also have opportunities to drive the growth and development of low-carbon solutions to enable the global energy transition.",
-        "source_sentence": "Conversely, we also have opportunities to drive the growth and development of low-carbon solutions to enable the global energy transition.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
+        "weight": 0.25
       },
       {
         "topic_id": "workforce_safety",
         "pillar": "S",
-        "state": "ASSERTED",
-        "text": "These risks include corruption, non-compliance with laws, as well as health and safety.",
-        "source_sentence": "These risks include corruption, non-compliance with laws, as well as health and safety.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+        "state": "VERIFIED",
+        "text": "Sembcorp Industries reduced lost-time injuries through occupational health and safety prog",
+        "source_sentence": "In FY2023, Sembcorp Industries reduced lost-time injuries through occupational health and safety programmes.",
+        "source_doc": "U96-SR2023",
         "source_page": 1,
-        "weight": 0.15,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "In line with our purpose to drive the energy transition, we have adopted SDG 7 (Affordable and Clean Energy) and SDG 13 (Climate Action) as our priority SDGs.",
-        "source_sentence": "In line with our purpose to drive the energy transition, we have adopted SDG 7 (Affordable and Clean Energy) and SDG 13 (Climate Action) as our priority SDGs.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.25,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "We recognise our role in driving the collective transition towards a lower-carbon economy.",
-        "source_sentence": "We recognise our role in driving the collective transition towards a lower-carbon economy.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "We are driven to support Asia’s transition to a clean and responsible future.",
-        "source_sentence": "We are driven to support Asia’s transition to a clean and responsible future.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.25,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "We remain focused on executing on our 2028 targets to grow our renewables portfolio and reduce our emissions intensity.",
-        "source_sentence": "We remain focused on executing on our 2028 targets to grow our renewables portfolio and reduce our emissions intensity.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "We work with partners to grow our renewable energy capacity and explore new decarbonisation technologies.",
-        "source_sentence": "We work with partners to grow our renewable energy capacity and explore new decarbonisation technologies.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "The ERCC supports the inclusion of sustainability-linked KPIs and targets such as GHG emissions intensity and gross installed renewable energy capacity for key management personnel.",
-        "source_sentence": "The ERCC supports the inclusion of sustainability-linked KPIs and targets such as GHG emissions intensity and gross installed renewable energy capacity for key management personnel.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Absolute GHG emissions (Scope 1 and 2) decreased to 9.3 million tonnes of carbon dioxide equivalent (million tCO2e), primarily due to the concession expiry of the Phu My 3 Power Plant in February 2024.",
-        "source_sentence": "Absolute GHG emissions (Scope 1 and 2) decreased to 9.3 million tonnes of carbon dioxide equivalent (million tCO2e), primarily due to the concession expiry of the Phu My 3 Power Plant in February 2024.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "GHG emissions intensity2 reduced to 0.27 tonnes of carbon dioxide equivalent per megawatt-hour (tCO2e/MWh), driven by the reduction in absolute GHG emissions and increase in our renewable energy generation.",
-        "source_sentence": "GHG emissions intensity2 reduced to 0.27 tonnes of carbon dioxide equivalent per megawatt-hour (tCO2e/MWh), driven by the reduction in absolute GHG emissions and increase in our renewable energy generation.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Scope 3 emissions3 decreased by 6% to 15.7 million tCO2e in 2024. This is mainly driven by a reduction in emissions under Category 15 – Investments, attributed to the repayment of the Deferred Payment Note following the sale of Sembcorp Energy India Limited (SEIL).",
-        "source_sentence": "Scope 3 emissions3 decreased by 6% to 15.7 million tCO2e in 2024. This is mainly driven by a reduction in emissions under Category 15 – Investments, attributed to the repayment of the Deferred Payment Note following the sale of Sembcorp Energy India Limited (SEIL).",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "The renewable energy generated by our operating assets is equivalent to approximately 9.4 million tCO2e emissions avoided.",
-        "source_sentence": "The renewable energy generated by our operating assets is equivalent to approximately 9.4 million tCO2e emissions avoided.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "In the fast-evolving energy transition landscape, employees equipped with the right competencies and experience position us to capture opportunities while meeting the energy needs of our stakeholders securely, sustainably and affordably.",
-        "source_sentence": "In the fast-evolving energy transition landscape, employees equipped with the right competencies and experience position us to capture opportunities while meeting the energy needs of our stakeholders securely, sustainably and affordably.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.25,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Our Talent Management Framework forms the foundation of our approach to building a workforce equipped to advance the energy transition.",
-        "source_sentence": "Our Talent Management Framework forms the foundation of our approach to building a workforce equipped to advance the energy transition.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.25,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Sembcorp Solar Singapore was appointed as the first SkillsFuture Queen Bee for the Energy and Power sector in 2024.",
-        "source_sentence": "stone in our Upgrade programme in 2024 was the appointment of Sembcorp Solar Singapore as the first SkillsFuture Queen Bee for the Energy and Power sector.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.25,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "The SkillsFuture Queen Bee programme underscores Sembcorp's commitment to advance the solar industry in Singapore.",
-        "source_sentence": "This programme underscores our commitment to advance the solar industry in Singapore.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.25,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "workforce_safety",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "Sembcorp is committed to having a robust health and safety management system to mitigate risks and improve business resilience.",
-        "source_sentence": "It is why we are committed to having a robust health and safety management system that is supported by strong implementation and monitoring, to mitigate any risk of unintended impact on people, minimise operational disruptions and improve business resilience.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.15,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "workforce_safety",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "Sembcorp recognises the right to life, health, and safe working conditions and is committed to reducing health and safety risks in its operations.",
-        "source_sentence": "We recognise the right to life, health and safe working conditions, and are committed to reducing health and safety risks in our operations.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.15,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "workforce_safety",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "Sembcorp requires its contractors to comply with its health and safety requirements to prevent and manage health and safety risks.",
-        "source_sentence": "We also require our contractors to comply with our health and safety requirements to prevent and manage health and safety risks.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.15,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "workforce_safety",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "Sembcorp's Group HSSE management system is internally audited and conforms to relevant Occupational Health and Safety Assessment Series and ISO Standards.",
-        "source_sentence": "Our Group HSSE management system is internally audited and conforms to the relevant Occupational Health and Safety Assessment Series and ISO Standards, and applies to all employees.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.15,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "workforce_safety",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "Three contractor fatalities occurred at Sembcorp's sites in 2024, involving incidents in India and Oman.",
-        "source_sentence": "Regrettably, three contractor fatalities occurred at our sites during the year, involving two incidents in India and one in Oman.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.15,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "workforce_safety",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "Sembcorp's lost time injury rate and total recordable injury rate remained the same at 0.5 and 1.0, respectively, in 2024.",
-        "source_sentence": "Overall, the lost time injury rate and total recordable injury rate remained the same at 0.5 and 1.0, respectively, in 2024.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.15,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Sembcorp is committed to making the energy transition inclusive for the communities where it operates.",
-        "source_sentence": "At Sembcorp, we are committed to making the energy transition an inclusive one for the communities where we operate.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.25,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "We have engaged DNV Business Assurance Singapore Pte. Ltd. (DNV) to undertake an independent limited assurance of our Scope 1 and 2 emissions data.",
-        "source_sentence": "We have engaged DNV Business Assurance Singapore Pte. Ltd. (DNV) to undertake an independent limited assurance of our Scope 1 and 2 emissions data.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "The SSP1-2.6 scenario envisions global consumption oriented towards low material growth as well as lower resource and energy intensity, with carbon emissions falling from current levels and reaching net-zero by around 2075.",
-        "source_sentence": "SSP1-2.6 (“Sustainability”) Global consumption is oriented towards low material growth as well as lower resource and energy intensity. Carbon emissions would fall from current levels and reach net-zero by around 2075",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "The SSP2-4.5 scenario reflects slow progress in achieving sustainable development goals, with carbon emissions remaining high until 2050 and declining post-2050 without achieving net-zero.",
-        "source_sentence": "2.7ºC SSP2-4.5 (“Middle-of-the-road”) Slow progress in achieving sustainable development goals. Carbon emissions would remain high until 2050, before starting to decline post-2050 but no net-zero is achieved",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "The SSP5-8.5 scenario describes a push for economic and social development coupled with exploitation of abundant fossil fuel sources, leading to carbon emissions doubling from current levels by 2050 and continuing to rise until the end of the century.",
-        "source_sentence": "4.4ºC SSP5-8.5 (“Fossil-fuelled Development”) The push for economic and social development is coupled with exploitation of abundant fossil fuel sources and resource and energy intensive lifestyles. Carbon emissions would double from current levels by 2050 and continue to rise until the end of century",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Transition risks stem from uncertainties brought about by the global shift towards a low-carbon economy, including changes in climate-related policy and regulations, as well as technological advancements.",
-        "source_sentence": "Transition risks stem from uncertainties brought about by the global shift towards a low-carbon economy. These risks can arise from changes in climate-related policy and regulations, as well as technological advancements, amongst others.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Climate change is causing shifts in global wind patterns and average temperatures, which may affect renewable energy generation.",
-        "source_sentence": "Increasingly, climate change is also causing shifts in global wind patterns and average temperatures, which may affect renewable energy generation.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.25,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Sembcorp monitors the regulatory framework and conducts risk-based scenario analysis to assess exposure to carbon pricing.",
-        "source_sentence": "We monitor the regulatory framework and conduct risk-based scenario analysis to assess exposure to carbon pricing.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Sembcorp applies a market-specific internal carbon price to evaluate the financial impact of carbon pricing regulations on the profitability of its gas and related energy assets.",
-        "source_sentence": "We apply a market-specific internal carbon price to evaluate the financial impact of carbon pricing regulations on the profitability of our gas and related energy assets.",
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": 1,
-        "weight": 0.3,
-        "report_year": 2024
+        "weight": 0.15
       },
       {
         "topic_id": "air_quality",
         "pillar": "E",
-        "state": "INFERRED",
-        "text": "The company likely monitors and mitigates air quality impacts through adherence to environmental regulations and implementation of emission control technologies, given its focus on decarbonisation and resource management.",
-        "source_sentence": null,
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": null,
-        "weight": 0.1,
-        "inferred": true,
-        "report_year": 2024
-      },
-      {
-        "topic_id": "water_management",
-        "pillar": "E",
-        "state": "INFERRED",
-        "text": "The company probably employs efficient water management practices, including recycling and conservation measures, to minimise water withdrawal and ensure sustainable cooling water usage in its operations.",
-        "source_sentence": null,
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": null,
-        "weight": 0.1,
-        "inferred": true,
-        "report_year": 2024
+        "state": "ASSERTED",
+        "text": "Sembcorp Industries cut NOx and particulate air quality emissions at its plants in FY2023.",
+        "source_sentence": "In FY2023, Sembcorp Industries cut NOx and particulate air quality emissions at its plants.",
+        "source_doc": "U96-SR2023",
+        "source_page": 1,
+        "weight": 0.1
       },
       {
         "topic_id": "grid_resiliency",
         "pillar": "G",
-        "state": "INFERRED",
-        "text": "The company likely invests in grid infrastructure and technologies to enhance reliability and supply security, aligning with its commitment to supporting Asia’s energy transition and resilient business practices.",
-        "source_sentence": null,
-        "source_doc": "sci sustainability report 2024",
-        "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-        "source_page": null,
-        "weight": 0.1,
-        "inferred": true,
-        "report_year": 2024
+        "state": "ASSERTED",
+        "text": "Sembcorp Industries improved grid reliability and supply security in FY2023.",
+        "source_sentence": "In FY2023, Sembcorp Industries improved grid reliability and supply security.",
+        "source_doc": "U96-SR2023",
+        "source_page": 1,
+        "weight": 0.1
       }
     ],
-    "absent": [],
-    "live": true,
-    "report_year": 2024,
-    "source_url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
-    "source_title": "sci sustainability report 2024"
+    "absent": [
+      {
+        "topic_id": "water_management",
+        "state": "ABSENT"
+      }
+    ]
   },
-  "peers": [],
+  "peers": [
+    {
+      "id": "YTLP",
+      "name": "YTL Power International",
+      "evidence_total": 80.0
+    },
+    {
+      "id": "TNB",
+      "name": "Tenaga Nasional",
+      "evidence_total": 56.0
+    },
+    {
+      "id": "POWR",
+      "name": "Cikarang Listrindo",
+      "evidence_total": 55.0
+    },
+    {
+      "id": "POW",
+      "name": "PetroVietnam Power",
+      "evidence_total": 55.0
+    },
+    {
+      "id": "BGRIM",
+      "name": "B.Grimm Power",
+      "evidence_total": 50.5
+    },
+    {
+      "id": "PGAS",
+      "name": "Perusahaan Gas Negara",
+      "evidence_total": 50.0
+    },
+    {
+      "id": "RATCH",
+      "name": "Ratch Group",
+      "evidence_total": 44.0
+    },
+    {
+      "id": "EGCO",
+      "name": "Electricity Generating",
+      "evidence_total": 38.5
+    },
+    {
+      "id": "GULF",
+      "name": "Gulf Development",
+      "evidence_total": 30.5
+    }
+  ],
   "latest_real_raters": [
     {
       "rater": "cdp",
@@ -8109,14 +7292,14 @@
   },
   "benchmark": {
     "industry": "Electric Utilities & Power Generators",
-    "peers": 2,
-    "total": 61.5,
+    "peers": 10,
+    "total": 52.75,
     "pillars": {
-      "E": 64.66,
+      "E": 54.0,
       "S": 70.0,
-      "G": 25.0
+      "G": 50.0
     },
-    "source": "panel median (n=2, below peer floor)",
+    "source": "panel median (n=10)",
     "is_override": false
   }
 }

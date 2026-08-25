@@ -1,37 +1,47 @@
 {
-  "C6L": {
-    "msci": "A",
-    "url": "https://knowesg.com/esg-ratings/singapore-airlines",
-    "source": "KnowESG"
-  },
-  "O39": {
-    "msci": "AA",
-    "url": "https://knowesg.com/esg-ratings/ocbc-bank",
-    "source": "KnowESG"
-  },
-  "BN4": {
+  "U96": {
     "msci": "AAA",
-    "url": "https://knowesg.com/esg-ratings/keppel-corporation-ltd",
-    "source": "KnowESG"
+    "url": "https://www.marketscreener.com/quote/stock/SEMBCORP-INDUSTRIES-LTD-6491134/ratings/",
+    "source": "MarketScreener"
   },
-  "F34": {
-    "msci": "A",
-    "url": "https://knowesg.com/esg-ratings/wilmar-international-ltd",
-    "source": "KnowESG"
-  },
-  "D05": {
-    "msci": "A",
-    "url": "https://knowesg.com/esg-ratings/dbs",
-    "source": "KnowESG"
-  },
-  "U11": {
+  "TNB": {
     "msci": "AA",
-    "url": "https://knowesg.com/esg-ratings/united-overseas-bank-ltd",
-    "source": "KnowESG"
+    "url": "https://www.marketscreener.com/quote/stock/TENAGA-NASIONAL-6491357/ratings/",
+    "source": "MarketScreener"
   },
-  "9CI": {
-    "msci": "AAA",
-    "url": "https://knowesg.com/esg-ratings/capitaland-investment-ltd",
-    "source": "KnowESG"
+  "YTLP": {
+    "msci": "BB",
+    "url": "https://www.marketscreener.com/quote/stock/YTL-POWER-INTL-6491745/ratings/",
+    "source": "MarketScreener"
+  },
+  "EGCO": {
+    "msci": "BB",
+    "url": "https://www.marketscreener.com/quote/stock/ELECTRICITY-GENERATING-6492378/ratings/",
+    "source": "MarketScreener"
+  },
+  "RATCH": {
+    "msci": "BB",
+    "url": "https://www.marketscreener.com/quote/stock/RATCH-GROUP-57476342/ratings/",
+    "source": "MarketScreener"
+  },
+  "BGRIM": {
+    "msci": "BBB",
+    "url": "https://www.marketscreener.com/quote/stock/B-GRIMM-POWER-38626796/ratings/",
+    "source": "MarketScreener"
+  },
+  "GULF": {
+    "msci": "BBB",
+    "url": "https://www.marketscreener.com/quote/stock/GULF-ENERGY-DEVELOPMENT-185691951/ratings/",
+    "source": "MarketScreener"
+  },
+  "PGAS": {
+    "msci": "A",
+    "url": "https://www.marketscreener.com/quote/stock/PT-PERUSAHAAN-GAS-NEGARA--6496664/ratings/",
+    "source": "MarketScreener"
+  },
+  "POWR": {
+    "msci": "BB",
+    "url": "https://www.marketscreener.com/quote/stock/PT-CIKARANG-LISTRINDO-TBK-30640072/ratings/",
+    "source": "MarketScreener"
   }
 }
