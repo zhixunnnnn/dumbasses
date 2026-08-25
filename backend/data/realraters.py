@@ -1,12 +1,16 @@
 """Real MSCI ESG letter ratings, scraped once and cached.
 
-Only MSCI is reliably available to a scraper from a public source (the KnowESG
-aggregator, which embeds the SGX ticker + "MSCI: <letter>" in each company page).
-Sustainalytics and S&P publish free public pages but forbid bulk scraping and JS-gate
-them to enforce it, so they are NOT scraped here — enter those by hand instead, via
-engine/manual_raters.py, which outranks this cache. We only have the *current* letter,
-so the real value overlays the latest analysis year (END_YEAR); prior years keep the
-seeded path.
+MSCI is read from each company's MarketScreener /ratings/ page, which renders the
+agency's letter in its Ratings panel as "<LETTER> Ratings ESG MSCI". KnowESG was the
+previous source but covers almost no ASEAN utility outside Singapore.
+
+S&P Global is NOT scraped: no public S&P ESG score could be obtained for this panel, so
+that channel is NULL by decision (see data/seed.py) rather than seeded with a number.
+Sustainalytics publishes free public pages but forbids bulk scraping and JS-gates them to
+enforce it, so it is not scraped here either — enter it by hand via
+engine/manual_raters.py, which outranks this cache. We only have the *current* letter, so
+the real value overlays the latest analysis year (END_YEAR); prior years keep the seeded
+path.
 
     python -m backend.data.realraters          # (re)build the cache
 
@@ -24,21 +28,28 @@ from dataclasses import replace
 
 from backend.engine import config
 
-# Pinned, ticker-validated KnowESG pages (the 7 SGX names KnowESG actually covers).
-# Sembcorp (U96), City Developments (C09) and Singtel (Z74) are not on KnowESG ->
-# they keep their seeded MSCI letter.
+# Pinned MarketScreener quote pages, resolved by search and checked one by one so a
+# company is never confused with a subsidiary. PETROVIETNAM-POWER-NHONTR, for instance, is
+# Nhon Trach 2 (ticker NT2) and NOT PV Power — identity here is pinned, never fuzzy.
+#
+# PV Power (POW) is pinned but MarketScreener publishes no ESG MSCI letter for it, so it
+# resolves to None and its MSCI channel stays N.A. That is a real absence of coverage.
+_MS = "https://www.marketscreener.com/quote/stock/"
 PINNED = {
-    "BN4": "https://knowesg.com/esg-ratings/keppel-corporation-ltd",
-    "F34": "https://knowesg.com/esg-ratings/wilmar-international-ltd",
-    "D05": "https://knowesg.com/esg-ratings/dbs",
-    "U11": "https://knowesg.com/esg-ratings/united-overseas-bank-ltd",
-    "9CI": "https://knowesg.com/esg-ratings/capitaland-investment-ltd",
-    "C6L": "https://knowesg.com/esg-ratings/singapore-airlines",
-    "O39": "https://knowesg.com/esg-ratings/ocbc-bank",
+    "U96":   f"{_MS}SEMBCORP-INDUSTRIES-LTD-6491134/ratings/",
+    "TNB":   f"{_MS}TENAGA-NASIONAL-6491357/ratings/",
+    "YTLP":  f"{_MS}YTL-POWER-INTL-6491745/ratings/",
+    "EGCO":  f"{_MS}ELECTRICITY-GENERATING-6492378/ratings/",
+    "RATCH": f"{_MS}RATCH-GROUP-57476342/ratings/",
+    "BGRIM": f"{_MS}B-GRIMM-POWER-38626796/ratings/",
+    "GULF":  f"{_MS}GULF-ENERGY-DEVELOPMENT-185691951/ratings/",
+    "PGAS":  f"{_MS}PT-PERUSAHAAN-GAS-NEGARA--6496664/ratings/",
+    "POWR":  f"{_MS}PT-CIKARANG-LISTRINDO-TBK-30640072/ratings/",
+    "POW":   f"{_MS}PETROVIETNAM-POWER-CORPOR-55125609/ratings/",
 }
 _LETTER = r"(AAA|AA|A|BBB|BB|B|CCC)"
 CACHE_FILE = config.CACHE_DIR / "realraters.json"
-SOURCE = "KnowESG"
+SOURCE = "MarketScreener"
 
 
 def cached_real_raters() -> dict:
@@ -68,22 +79,35 @@ def overlay(raters: list, ticker_of) -> list:
     return out
 
 
+# The badge renders as "<LETTER> Ratings ESG MSCI"; the reversed form is a fallback for
+# layout changes. Both are anchored on the words "ESG MSCI" so a stray letter elsewhere on
+# the page (a credit rating, a share class) cannot be mistaken for the ESG rating.
+_MSCI_PATTERNS = (
+    re.compile(r"\b" + _LETTER + r"\s+Ratings\s+ESG\s*MSCI", re.I),
+    re.compile(r"ESG\s*MSCI\s+" + _LETTER + r"\b", re.I),
+)
+
+
 async def _fetch_one(web, cid: str, url: str, ticker: str, attempts: int = 3) -> tuple[str, dict | None]:
-    code = ticker.split(".")[0]                      # F34.SI -> F34
-    # KnowESG is inconsistent: some pages show "(F34)", others "(C6L.SI)" — accept both.
-    guard = re.compile(r"\(" + re.escape(code) + r"(\.SI)?\)")
+    code = ticker.split(".")[0]                      # 5347.KL -> 5347
+    # Wrong-company guard: the page must name the ticker code or the exchange symbol.
+    guard = re.compile(re.escape(code), re.I)
     # Bright Data fetches are flaky; retry a few times before giving up.
     for _ in range(attempts):
         try:
-            res = await web.fetch_url(url, max_chars=600)
-            head = re.sub(r"\s+", " ", (res.get("text") or res.get("content") or ""))[:500]
+            res = await web.fetch_url(url, max_chars=60000)
+            text = re.sub(r"[ \t]+", " ", res.get("text") or "")
         except Exception:
             continue
-        if not guard.search(head):          # wrong-company guard (e.g. Citigroup vs City Dev)
+        if not text:
             continue
-        m = re.search(r"MSCI:?\s*" + _LETTER, head)
-        if m:
-            return cid, {"msci": m.group(1), "url": url, "source": SOURCE}
+        if not guard.search(text):          # wrong-company guard
+            continue
+        for pat in _MSCI_PATTERNS:
+            m = pat.search(text)
+            if m:
+                return cid, {"msci": m.group(1).upper(), "url": url, "source": SOURCE}
+        return cid, None                    # page loaded and simply carries no ESG MSCI
     return cid, None
 
 

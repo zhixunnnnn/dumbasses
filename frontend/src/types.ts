@@ -20,8 +20,8 @@ export type Company = {
   profile: {
     headquarters: string;
     business: string;
-    founded: number;
-    employees: number;
+    founded: number | null;
+    employees: number | null;
   };
   /** Rater consensus percentile. Null = not covered. */
   esgScore: number | null;

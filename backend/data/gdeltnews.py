@@ -44,9 +44,18 @@ MAX_HEADLINES_LABELLED = 60  # one LLM call per company-year, same prompt as scr
 # OR-groups returned nothing for these names, so recall comes from the shortest phrase
 # that is still unambiguous, and the LLM labeller drops whatever is not about the company.
 QUERIES = {
-    "D05": '"DBS Bank"', "O39": '"OCBC"', "U11": '"UOB"', "Z74": '"Singtel"',
-    "C6L": '"Singapore Airlines"', "BN4": '"Keppel"', "U96": '"Sembcorp"',
-    "9CI": '"CapitaLand"', "C09": '"City Developments"', "F34": '"Wilmar"',
+    "U96": '"Sembcorp"',
+    "TNB": '"Tenaga Nasional"',
+    "YTLP": '"YTL Power"',
+    "EGCO": '"Electricity Generating Public"',
+    "RATCH": '"Ratch Group"',
+    "BGRIM": '"B.Grimm Power"',
+    # "Gulf" alone matches the Persian Gulf, Gulf of Mexico and several banks, so the
+    # company name is never shortened here.
+    "GULF": '"Gulf Development" OR "Gulf Energy Development"',
+    "PGAS": '"Perusahaan Gas Negara"',
+    "POWR": '"Cikarang Listrindo"',
+    "POW": '"PetroVietnam Power" OR "PV Power"',
 }
 
 

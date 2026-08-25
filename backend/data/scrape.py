@@ -206,11 +206,19 @@ _NO_RESULT = ["didn't find", "did not find", "no se han encontrado", "no results
 
 # We keep ONLY company-specific ESG news and stock/market news. Everything else
 # (generic ESG think-pieces, unrelated articles that merely matched the keyword) is dropped.
+# Aliases must stay unambiguous: a bare "gulf" or "power" would sweep in unrelated
+# articles, and the whole point of this filter is to drop those.
 _COMPANY_ALIASES = {
-    "U96": ["sembcorp"], "BN4": ["keppel"], "F34": ["wilmar"],
-    "C6L": ["singapore airlines", "sia "], "D05": ["dbs"], "O39": ["ocbc"],
-    "U11": ["uob", "united overseas bank"], "9CI": ["capitaland"],
-    "C09": ["city developments", "cdl"], "Z74": ["singtel", "singapore telecom"],
+    "U96": ["sembcorp"],
+    "TNB": ["tenaga nasional", "tenaga"],
+    "YTLP": ["ytl power", "ytl powerinternational"],
+    "EGCO": ["electricity generating public", "egco"],
+    "RATCH": ["ratch group", "ratchaburi electricity"],
+    "BGRIM": ["b.grimm power", "b grimm power", "bgrimm power"],
+    "GULF": ["gulf development", "gulf energy development"],
+    "PGAS": ["perusahaan gas negara", "pgn "],
+    "POWR": ["cikarang listrindo"],
+    "POW": ["petrovietnam power", "pv power"],
 }
 
 _ESG_KW = ["esg", "sustainab", "emission", "carbon", "climate", "governance", "renewable",

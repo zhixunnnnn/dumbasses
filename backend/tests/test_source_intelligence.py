@@ -38,7 +38,7 @@ def test_builtin_registry_classifies_subdomains(monkeypatch, tmp_path):
     monkeypatch.setattr(config, "DB_PATH", tmp_path / "research.sqlite3")
     initialize_source_registry()
 
-    assert classify_domain("sustainability.dbs.com") == "verified"
+    assert classify_domain("sustainability.egco.com") == "verified"
     assert classify_domain("reddit.com") == "community"
     assert classify_domain("unknown.example") == "non_verified"
 

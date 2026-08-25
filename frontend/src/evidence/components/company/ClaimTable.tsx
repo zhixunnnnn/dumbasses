@@ -30,7 +30,7 @@ export default function ClaimTable({
             Each claim verified against the most authoritative source. Absence lowers confidence, never the score.
           </p>
         </div>
-        {live && sourceUrl && (
+        {live && sourceUrl ? (
           <a
             href={sourceUrl}
             target="_blank"
@@ -41,8 +41,25 @@ export default function ClaimTable({
             <Radio size={11} /> LIVE · from report
             <ExternalLink size={11} />
           </a>
+        ) : (
+          <span
+            title="No sustainability report was found for this company-year, so these claims are illustrative seed data — not extracted from a real disclosure."
+            className="flex shrink-0 items-center gap-1.5 rounded-full border border-profit/40 bg-profit/10 px-2.5 py-1 text-[10px] font-semibold text-profit"
+          >
+            <Sparkles size={11} /> ILLUSTRATIVE · no report found
+          </span>
         )}
       </div>
+      {!live && (
+        <div className="border-b border-hairline bg-profit/[0.06] px-4 py-2">
+          <p className="text-[11px] leading-snug text-profit">
+            No real sustainability report was found for this company at the analysis year.
+            The claims below are <span className="font-semibold">illustrative seed data</span>,
+            shown so the peer distribution stays populated — they are not extracted from a real
+            disclosure, and their VERIFIED/ASSERTED states carry no evidential weight.
+          </p>
+        </div>
+      )}
       <div className={`divide-y divide-hairline/60${showAll ? " max-h-[440px] overflow-y-auto" : ""}`}>
         {shown.map((c, i) => (
           <div key={i}>

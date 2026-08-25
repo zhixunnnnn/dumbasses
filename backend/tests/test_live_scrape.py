@@ -14,13 +14,13 @@ def test_scrape_news_uses_request_api_when_scraping_browser_is_unavailable(
     conn.execute(
         "INSERT INTO universe VALUES (?,?,?,?,?,?,?,?)",
         (
-            "D05",
-            "D05.SI",
-            "DBS Group",
-            "Singapore",
-            "SGX",
-            "Financials",
-            "Commercial Banks",
+            "TNB",
+            "5347.KL",
+            "Tenaga Nasional",
+            "Malaysia",
+            "KLSE",
+            "Utilities",
+            "Electric Utilities & Power Generators",
             "demo",
         ),
     )
@@ -35,11 +35,11 @@ def test_scrape_news_uses_request_api_when_scraping_browser_is_unavailable(
                 "results": [
                     {
                         "title": (
-                            "DBS Group expands sustainable finance and net zero "
+                            "Tenaga Nasional expands renewable energy and net zero "
                             "transition targets"
                         ),
-                        "url": "https://example.com/dbs-esg",
-                        "snippet": "DBS sustainability ESG climate progress",
+                        "url": "https://example.com/tnb-esg",
+                        "snippet": "Tenaga Nasional sustainability ESG climate progress",
                         "source": "bright_data",
                     },
                     {
@@ -63,13 +63,13 @@ def test_scrape_news_uses_request_api_when_scraping_browser_is_unavailable(
     result = scrape.scrape_news(conn, offline=False)
 
     assert queries == [
-        "DBS Group sustainability ESG news",
-        "DBS Group stock earnings results news",
+        "Tenaga Nasional sustainability ESG news",
+        "Tenaga Nasional stock earnings results news",
     ]
-    assert result["companies"][0]["company_id"] == "D05"
+    assert result["companies"][0]["company_id"] == "TNB"
     assert result["companies"][0]["n_items"] == 1
     assert result["companies"][0]["positive"] == 1
-    assert result["companies"][0]["headlines"][0]["url"] == "https://example.com/dbs-esg"
+    assert result["companies"][0]["headlines"][0]["url"] == "https://example.com/tnb-esg"
     assert result["source"] == "Bright Data Request API - Bing News"
 
 
@@ -263,25 +263,36 @@ def test_press_releases_and_filings_are_not_accepted_as_the_report():
     """SERP for "<name> sustainability report <year>" returns credit research, press
     releases and financial statements; those misattribute the year, so they are out."""
     assert realclaims._looks_like_report(
-        "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf", "dbs sr2024")
+        "https://www.tnb.com.my/assets/annual_report/TNB_Sustainability_Report_2022.pdf",
+        "TNB Sustainability Report 2022", "tnb.com.my")
     assert not realclaims._looks_like_report(
         "https://media.sembcorp.com/data/cms/ar/ar2025/assets/pdf/Consolidated_Financial_Statements.pdf",
-        "Consolidated Financial Statements")
+        "Consolidated Financial Statements", "sembcorp.com")
     assert not realclaims._looks_like_report(
-        "https://www.ocbc.com/pdf/Credit%20Research/2025/oc.pdf", "OCBC Credit Research Sustainable Finance")
+        "https://sustainability.gulf.co.th/pdf/newsroom/2025/gulf-press-release.pdf",
+        "Gulf press release", "gulf.co.th")
+    # Fail closed: with no known company domain we cannot say whose report a candidate is,
+    # so it is rejected outright. (An empty domain used to disable the check, which let a
+    # German industrial's annual report be accepted as Tenaga Nasional's.)
     assert not realclaims._looks_like_report(
-        "https://www.uobgroup.com/web-resources/pdf/newsroom/2025/uob-nature.pdf", "uob nature risks")
+        "https://www.tnb.com.my/assets/annual_report/TNB_Sustainability_Report_2022.pdf",
+        "TNB Sustainability Report 2022")
 
 
 def test_a_peers_report_is_never_accepted_for_this_company():
-    """SERP for "CapitaLand sustainability report 2025" returned Mapletree's annual
-    report; extracting from it would attribute a peer's claims to CapitaLand."""
+    """SERP for "<company> sustainability report <year>" happily returns a PEER's report;
+    extracting from it would attribute a peer's claims to this company."""
     assert not realclaims._looks_like_report(
-        "https://www.mapletree.com.sg/uploads/2025/01/Sustainability-Report-2025.pdf",
-        "Mapletree Sustainability Report", "capitaland.com")
-    # a company's own sustainability microsite still counts as the company
+        "https://www.egco.com/storage/sustainability-report-2023.pdf",
+        "EGCO Sustainability Report", "gulf.co.th")
+    # a company's own sustainability subdomain still counts as the company
     assert realclaims._looks_like_report(
-        "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf", "CDL ISR 2025", "cdl.com.sg")
+        "https://sustainability.gulf.co.th/storage/document/sustainability-reports/2023/sr-2023-en.pdf",
+        "Gulf Sustainability Report 2023", "gulf.co.th")
+    # a lookalike registrable domain (gulfnews.com) must NOT satisfy gulf.co.th
+    assert not realclaims._looks_like_report(
+        "https://www.gulfnews.com/business/gulf-sustainability-2023.pdf",
+        "Gulf sustainability 2023", "gulf.co.th")
 
 
 def test_two_digit_report_stamps_are_read_as_years():

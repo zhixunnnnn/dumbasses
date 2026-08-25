@@ -35,12 +35,16 @@ from backend.engine.ingest import DocumentRow
 from backend.engine.llm import MockLLMClient, OpenRouterLLMClient
 from backend.engine.sasb import map_to_sasb, topics_for
 
-# Official corporate domains for the tracked universe (used to prefer the primary disclosure).
-DOMAINS = {
-    "D05": "dbs.com", "O39": "ocbc.com", "U11": "uobgroup.com", "Z74": "singtel.com",
-    "C6L": "singaporeair.com", "BN4": "keppel.com", "U96": "sembcorp.com",
-    "9CI": "capitaland.com", "C09": "cdl.com.sg", "F34": "wilmar-international.com",
-}
+# Official corporate domains, read from engine/config/source_registry.json so there is ONE
+# source of truth. This used to be a second hardcoded dict, and when the universe changed
+# it silently went stale: DOMAINS.get("TNB") returned "", which disabled the
+# hosted-by-the-company guard in _looks_like_report and let a German industrial's annual
+# report (takkt.de) be accepted as Tenaga Nasional's sustainability report.
+def _load_domains() -> dict[str, str]:
+    return dict(config.load_json("source_registry.json").get("company_domains") or {})
+
+
+DOMAINS = _load_domains()
 DEFAULT_SUBSET = list(DOMAINS)
 MAX_CLAIMS = 40            # display cap (scoring only needs topic coverage)
 # Read the report's first ~60k chars (CEO letter + highlights + key metrics) — that
@@ -48,25 +52,15 @@ MAX_CLAIMS = 40            # display cap (scoring only needs topic coverage)
 REPORT_CHARS = 64000
 CHUNK_CHARS = 12000       # extract per chunk (larger inputs drop verbatim matches)
 MAX_CHUNKS = 5            # cap LLM calls/cost per company (~5 extract + 1 infer)
-MAX_CANDIDATES = 6        # PDFs we are willing to fetch per company-year before calling a MISS
+MAX_CANDIDATES = 8        # PDFs we are willing to fetch per company-year before calling a MISS
 
 # Pinned official report PDFs, keyed by the REPORT's own year — removes SERP roulette
 # for the years we have already verified by hand. SERP discovery runs for the rest.
 PINNED_REPORTS: dict[str, dict[int, str]] = {
-    "D05": {2024: "https://www.dbs.com/annualreports/2024/i/pdf/dbs_sr2024.pdf"},
-    "O39": {2024: "https://www.ocbc.com/iwov-resources/sg/ocbc/gbc/pdf/ocbc-sustainability-report-2024.pdf"},
-    "U11": {2024: "https://www.uobgroup.com/investor-relations/assets/pdfs/investor/annual/uob-sustainability-report-2024.pdf"},
-    "Z74": {2025: "https://cdn1.singteldigital.com/content/dam/singtel/investorRelations/annualReports/2025/SR2025.pdf"},
-    # SIA reports on a March year-end, so its editions are named by the FY span (2324 = FY2023/24).
-    "C6L": {2025: "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2425.pdf",
-            2024: "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2324.pdf",
-            2023: "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2223.pdf",
-            2022: "https://www.singaporeair.com/content/dam/sia/web-assets/pdfs/about-us/information-for-investors/annual-report/sustainabilityreport2122.pdf"},
-    "BN4": {2024: "https://www.keppel.com/file/sustainability/sustainability-reports/keppel-ltd-sustainability-report-2024-full-report.pdf"},
-    "U96": {2024: "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf"},
-    "9CI": {2024: "https://www.capitaland.com/content/dam/capitalandinvestment/sustainability/global-sustainability-reports/CLI-GSR-2024.pdf"},
-    "C09": {2025: "https://cdlsustainability.com/pdf/CDL_ISR_2025.pdf"},
-    "F34": {2024: "https://www.wilmar-international.com/docs/default-source/default-document-library/sustainability/resource/wilmar-sustainability-reports/24_0151_wilmar_2024_sr-v7-27-may.pdf?sfvrsn=f6d89876_8"},
+    # Hand-verified official report PDFs keyed by the REPORT's own year, which removes SERP
+    # roulette for the years we have checked. Empty for the ASEAN utilities roster: none has
+    # been verified by hand yet, so every company-year goes through SERP discovery and an
+    # unfindable year is recorded as a MISS rather than filled from a neighbouring year.
 }
 
 MIN_REPORT_YEAR = 2015                 # older than this is never a report we track
@@ -84,7 +78,7 @@ DENY_URL_PARTS = (
     "/media/", "/newsroom/", "/news/", "press-release", "pressrelease", "news-release",
     "newsrelease", "media-release", "announcement", "credit research", "credit%20research",
     "/research/", "/lease/", "presentation", "transcript", "factsheet", "fact-sheet",
-    "circular", "prospectus", "-agm-", "newsroom",
+    "circular", "prospectus", "-agm-", "newsroom", "/newsclip/", "newsclip",
     "financial_statements", "financial-statements", "financialstatements",
     # instrument- and framework-level documents cover a bond, not the company-year
     "green bond", "green-bond", "green_bond", "green%20bond", "sustainability-linked",
@@ -95,7 +89,11 @@ DENY_URL_PARTS = (
 DENY_FILENAME_PARTS = ("annual-report", "annual_report", "annualreport", "ar20")
 # ...and a candidate must positively identify itself as a sustainability/ESG report.
 REPORT_TOKENS = ("sustainab", "esg", "gsr", "-isr", "_isr", "sr20", "sr-20", "sr_20",
-                 "sr25", "csr", "climate")
+                 "sr25", "csr", "climate",
+                 # Thai/Indonesian filers publish a combined "One Report" (56-1) that
+                 # carries the full sustainability section; it is the primary disclosure
+                 # for those names, so it counts as a report.
+                 "one-report", "one report", "onereport", "56-1", "one_report")
 
 
 def _looks_like_report(url: str, title: str, domain: str = "") -> bool:
@@ -107,7 +105,15 @@ def _looks_like_report(url: str, title: str, domain: str = "") -> bool:
         return False
     # It must be hosted by the company itself. SERP happily returns a PEER's report for
     # "<company> sustainability report <year>", and those claims would be pure fiction.
-    if domain and domain.split(".")[0] not in urlparse(url).netloc.lower():
+    #
+    # Fails CLOSED: with no known domain we cannot establish whose report this is, so it is
+    # rejected. Treating an unknown domain as "no constraint" is what let takkt.de through.
+    # Matched on the registrable domain rather than its first label, so `gulf.co.th` cannot
+    # be satisfied by `gulfnews.com`.
+    if not domain:
+        return False
+    netloc = urlparse(url).netloc.lower().split(":")[0]
+    if netloc != domain and not netloc.endswith("." + domain):
         return False
     return any(tok in low for tok in REPORT_TOKENS)
 
@@ -165,6 +171,8 @@ async def _fetch_report(web: WebTools, name: str, url: str, year: int) -> dict |
 async def _find_report(web: WebTools, name: str, domain: str, year: int) -> dict | None:
     """Discover + fetch THAT YEAR's sustainability-report PDF; None if it cannot be
     found or its year cannot be confirmed. Never falls back to another year."""
+    if not domain:
+        return None          # cannot verify whose report a candidate is -> honest MISS
     queries = [
         f"site:{domain} sustainability report {year} filetype:pdf",
         f'"{name}" sustainability report {year} filetype:pdf',
@@ -187,17 +195,28 @@ async def _find_report(web: WebTools, name: str, domain: str, year: int) -> dict
 
     def score(u: str, title: str) -> int:
         low = (u + " " + title).lower()
+        fname = low.split("?", 1)[0].rsplit("/", 1)[-1]
         s = 0
         if domain and domain in u:
             s += 10
-        if any(k in low for k in ("sustainab", "esg", "/sr", "sr2", "_sr", "-sr")):
-            s += 6
+        # The report signal must come from the FILENAME, not a sustainability-mentioning
+        # title: that is what stops a `/newsclip/...2022.pdf` scoring like the real report.
+        if any(k in fname for k in ("sustainab", "esg", "-sr", "_sr", "sr20", "one-report",
+                                    "onereport", "56-1")):
+            s += 8
+        elif any(k in low for k in ("sustainab", "esg")):
+            s += 2      # only the title says so -> weak signal
         years = _years_in(u) | _years_in(title)
         if year in years:
             s += 8      # the target year is named -> most likely that year's edition
         elif years:
             s -= 6      # names a DIFFERENT year -> almost certainly the wrong edition
-        if any(k in low for k in ("annual-report", "annualreport", "ar20", "10-k", "agm")):
+        # A One Report legitimately lives under an annual-report path, so only penalise the
+        # annual report when there is no sustainability/one-report signal in the filename.
+        is_report_file = any(k in fname for k in ("sustainab", "esg", "-sr", "_sr", "sr20",
+                                                  "one-report", "onereport", "56-1"))
+        if not is_report_file and any(k in low for k in ("annual-report", "annualreport",
+                                                         "ar20", "10-k", "agm")):
             s -= 3  # bias away from pure financial annual reports
         return s
 

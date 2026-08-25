@@ -553,11 +553,15 @@ def _accuracy_block(model: _Model) -> tuple[Optional[float], Optional[int], Opti
     head = f"direction {round(acc * 100)}%{vs(base)} (n={n}{incl})"
     if racc is not None and rn >= MIN_EVALUABLE_ROWS:
         tail = f"; on real targets only: {round(racc * 100)}%{vs(rbase)} (n={rn})"
-    else:
-        tail = (f"; real-target accuracy not computed — only {rn or 0} of the "
-                f"{model.rows} panel rows carry a rating a rater actually published, "
-                "too few to cross-validate")
-    return acc, n, racc, (rn or None), head + tail
+        return acc, n, racc, rn, head + tail
+    # Too few real targets to cross-validate: the note says so AND the returned real
+    # accuracy is None, so the payload can never surface a 1- or 2-row figure the sentence
+    # just disowned. (With END_YEAR=2023 the ASEAN utilities carry only one real
+    # rating-change target, which is exactly this case.)
+    tail = (f"; real-target accuracy not computed — only {rn or 0} of the "
+            f"{model.rows} panel rows carry a rating a rater actually published, "
+            "too few to cross-validate")
+    return acc, n, None, None, head + tail
 
 
 def forecast(ds: Dataset, cid: str, model: _Model, client: Optional[LLMClient] = None) -> Forecast:

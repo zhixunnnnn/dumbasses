@@ -52,8 +52,9 @@ if DB_PATH != _BUNDLED_DB_PATH and not DB_PATH.exists() and _BUNDLED_DB_PATH.exi
 
 # ----- analysis window ---------------------------------------------------------
 START_YEAR = 2019
-END_YEAR = 2024                  # latest year with real, year-verified reports for 9/10 names
-                                 # (2025 reaches only 5/10 — FY2025 disclosures are not out yet)
+END_YEAR = 2023                  # ASEAN utilities roster: 2023 is the year with the most real,
+                                 # year-verified reports (5/10). 2024 disclosures are largely not
+                                 # yet published or discoverable for these names.
 YEARS = list(range(START_YEAR, END_YEAR + 1))
 WINDOW_START = "2019-01-04"      # first Friday of the window
 WINDOW_END = "2024-12-27"        # last Friday of the window
@@ -107,11 +108,12 @@ MIN_REAL_RATERS_FOR_DIVERGENCE = 2
 # measured one. Flip to False to restore strict real-only mode: consensus, divergence and
 # thin industry medians become N.A. instead of falling back.
 ALLOW_ILLUSTRATIVE_FALLBACK = True
-# KnowESG (data/realraters.py) stopped publishing numeric scores, so its cached MSCI
-# letters can no longer be re-fetched, re-dated or checked. They still overlay the seed —
-# a real letter beats an invented one — but they do NOT count towards the floor above.
-# Flip to True only if that source becomes reproducible again.
-TRUST_SCRAPED_RATERS_AS_REAL = False
+# The scraped MSCI source is now MarketScreener (data/realraters.py), whose /ratings/ page
+# renders the agency letter live and can be re-fetched, re-checked and re-dated at will —
+# unlike the retired KnowESG source, which had dropped its numeric scores and forced this
+# to False. Because the source is reproducible again, its letters count as REAL: they feed
+# consensus/divergence and the real-rater floor, not merely overlay the seeded letter.
+TRUST_SCRAPED_RATERS_AS_REAL = True
 HIGH_DIVERGENCE = 25.0           # percentile-point spread that counts as "raters disagree" (loosened for demo)
 STALE_CONSENSUS_EPS = 8.0        # consensus moved < this over the window => "stale" (loosened for demo)
 PROOF_UP_MIN_SLOPE = 0.5         # evidence-score points/year to count as improving (loosened for demo)

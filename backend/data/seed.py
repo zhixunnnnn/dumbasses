@@ -96,7 +96,7 @@ def claim_sentence(name: str, year: int, topic_id: str) -> str:
 
 
 # ---------------------------------------------------------------------------
-# demo universe (10 SGX large caps) with story parameters
+# demo universe (10 ASEAN utilities) with story parameters
 #   vf = per-year verified fraction (2019..2023) controlling the evidence trajectory
 #   absent = topic_ids deliberately left undisclosed (material -> ABSENT, lowers confidence only)
 #   raters = (msci letters per yr, sustainalytics risk per yr, sp per yr); None = N.A.
@@ -153,10 +153,13 @@ def extend_letters(values, n):
 def demo_series(c):
     """(msci, sust, sp, vf) for a DEMO company, extended to cover every config.YEARS."""
     n = len(config.YEARS)
+    sp = c.get("sp")
     return (
         extend_letters(c["msci"], n),
         extend_numeric(c["sust"], n, 0.0, config.SUSTAINALYTICS_MAX),
-        extend_numeric(c["sp"], n, 0.0, config.SP_GLOBAL_MAX),
+        # A channel with no obtainable public score stays None for every year rather than
+        # being seeded — a missing rater must read N.A., never as a number.
+        ([None] * n if sp is None else extend_numeric(sp, n, 0.0, config.SP_GLOBAL_MAX)),
         extend_numeric(c["vf"], n, 0.0, 1.0),
     )
 
@@ -164,106 +167,119 @@ def demo_series(c):
 DEMO = [
     {
         "id": "U96", "ticker": "U96.SI", "name": "Sembcorp Industries", "country": "Singapore",
+        "exchange": "SGX", "domain": "sembcorp.com",
         "sector": "Utilities", "industry": "Electric Utilities & Power Generators",
         "vf": [0.10, 0.18, 0.30, 0.45, 0.58], "absent": [],
-        "price": (3.2, 0.02, 0.30),  # start, annual_drift (flat-ish), vol
+        "price": (2.4, 0.14, 0.30),
         # raters STUCK LOW and FLAT while verified evidence climbs -> the gap the market hasn't priced
         "msci": ["B", "B", "B", "B", "B"],
-        "sust": [44, 44, 44, 44, 44], "sp": [34, 34, 34, 34, 34],
-        "story": "HERO Hidden Winner: verified renewables transition rising, price flat, raters lagging.",
+        "sust": [44, 44, 44, 44, 44], "sp": None,
+        "story": "HERO Hidden Winner: verified renewables transition rising, raters lagging.",
     },
     {
-        "id": "BN4", "ticker": "BN4.SI", "name": "Keppel Ltd", "country": "Singapore",
-        "sector": "Industrials", "industry": "Electric Utilities & Power Generators",
-        "vf": [0.20, 0.28, 0.40, 0.52, 0.62], "absent": [],
-        "price": (5.5, 0.04, 0.28),
-        # raters STUCK (stale consensus) and low while verified evidence climbs -> underpriced
-        "msci": ["BB", "BB", "BB", "BB", "BB"],
-        "sust": [38, 38, 38, 38, 38], "sp": [42, 42, 42, 42, 42],
-        "story": "Hidden Winner: O&M -> green infra; verified evidence ahead of the raters.",
-    },
-    {
-        "id": "F34", "ticker": "F34.SI", "name": "Wilmar International", "country": "Singapore",
-        "sector": "Consumer Staples", "industry": "Agricultural Products",
-        "vf": [0.45, 0.40, 0.35, 0.30, 0.28], "absent": ["land_use_deforestation"],
-        "price": (4.2, -0.03, 0.30),
-        # DIVERGENT raters (controversial name -> Trust Meter demo): MSCI low, Sustainalytics
-        # comparatively kind, S&P low -> wide spread
-        "msci": ["BBB", "BB", "BB", "B", "B"],
-        "sust": [18, 19, 20, 21, 22], "sp": [42, 40, 39, 38, 37],
-        "controversy_year": 2021,
-        "story": "Value Trap: declining evidence, deforestation controversy, raters split.",
-    },
-    {
-        "id": "C6L", "ticker": "C6L.SI", "name": "Singapore Airlines", "country": "Singapore",
-        "sector": "Industrials", "industry": "Airlines",
-        "vf": [0.30, 0.28, 0.35, 0.45, 0.52], "absent": [],
-        "price": (9.0, -0.02, 0.32),
-        "msci": ["BBB", "BBB", "BBB", "A", "A"],
-        "sust": [30, 29, 28, 27, 26], "sp": [52, 54, 56, 58, 60],
-        "story": "Improver: SAF / climate claims verified over time.",
-    },
-    {
-        "id": "D05", "ticker": "D05.SI", "name": "DBS Group", "country": "Singapore",
-        "sector": "Financials", "industry": "Commercial Banks",
-        "vf": [0.62, 0.66, 0.70, 0.74, 0.78], "absent": [],
-        "price": (25.0, 0.06, 0.22),
-        "msci": ["A", "AA", "AA", "AA", "AA"],
-        "sust": [22, 20, 18, 17, 16], "sp": [70, 73, 76, 78, 80],
-        "story": "Consensus leader: high score, raters agree (low divergence).",
-    },
-    {
-        "id": "O39", "ticker": "O39.SI", "name": "OCBC", "country": "Singapore",
-        "sector": "Financials", "industry": "Commercial Banks",
-        "vf": [0.58, 0.60, 0.64, 0.68, 0.70], "absent": [],
-        "price": (11.0, 0.04, 0.22),
+        "id": "TNB", "ticker": "5347.KL", "name": "Tenaga Nasional", "country": "Malaysia",
+        "exchange": "KLSE", "domain": "tnb.com.my",
+        "sector": "Utilities", "industry": "Electric Utilities & Power Generators",
+        "vf": [0.38, 0.42, 0.48, 0.52, 0.56], "absent": [],
+        "price": (13.5, 0.01, 0.20),
         "msci": ["A", "A", "AA", "AA", "AA"],
-        "sust": [24, 22, 20, 19, 18], "sp": [66, 69, 72, 74, 76],
-        "story": "Leader.",
+        "sust": [30, 29, 28, 27, 26], "sp": None,
+        "story": "National incumbent: steady disclosure, raters already generous.",
     },
     {
-        "id": "U11", "ticker": "U11.SI", "name": "UOB", "country": "Singapore",
-        "sector": "Financials", "industry": "Commercial Banks",
-        "vf": [0.55, 0.57, 0.60, 0.63, 0.66], "absent": [],
-        "price": (26.0, 0.03, 0.22),
-        "msci": ["A", "A", "A", "AA", "AA"],
-        "sust": [26, 24, 22, 21, 20], "sp": [62, 65, 68, 70, 72],
-        "story": "Leader.",
+        "id": "YTLP", "ticker": "6742.KL", "name": "YTL Power International", "country": "Malaysia",
+        "exchange": "KLSE", "domain": "ytlpowerinternational.com",
+        "sector": "Utilities", "industry": "Electric Utilities & Power Generators",
+        "vf": [0.22, 0.28, 0.36, 0.46, 0.55], "absent": ["water_management"],
+        "price": (0.78, 0.35, 0.38),
+        "msci": ["BB", "BB", "BB", "BB", "BB"],
+        "sust": [40, 39, 38, 37, 36], "sp": None,
+        "story": "Improver: overseas generation plus data-centre build-out; raters stale.",
     },
     {
-        "id": "9CI", "ticker": "9CI.SI", "name": "CapitaLand Investment", "country": "Singapore",
-        "sector": "Real Estate", "industry": "Real Estate",
-        "vf": [0.60, 0.66, 0.72, 0.78, 0.84], "absent": [],
-        "price": (3.6, 0.05, 0.24),
-        "msci": ["AA", "AA", "AAA", "AAA", "AAA"],
-        "sust": [16, 15, 14, 13, 12], "sp": [80, 82, 84, 86, 88],
-        "story": "Future Leader: high score and still improving.",
+        "id": "EGCO", "ticker": "EGCO.BK", "name": "Electricity Generating", "country": "Thailand",
+        "exchange": "SET", "domain": "egco.com",
+        "sector": "Utilities", "industry": "Electric Utilities & Power Generators",
+        "vf": [0.52, 0.48, 0.44, 0.40, 0.36], "absent": [],
+        "price": (320.0, -0.14, 0.26),
+        "msci": ["BBB", "BBB", "BB", "BB", "BB"],
+        "sust": [34, 35, 36, 37, 38], "sp": None,
+        "story": "Value Trap: evidence deteriorating as the thermal fleet ages.",
     },
     {
-        "id": "C09", "ticker": "C09.SI", "name": "City Developments", "country": "Singapore",
-        "sector": "Real Estate", "industry": "Real Estate",
-        "vf": [0.82, 0.80, 0.78, 0.75, 0.72], "absent": [],
-        "price": (8.5, -0.04, 0.26),
-        # raters still HIGH (market pays a premium) while evidence quietly deteriorates
-        "msci": ["AAA", "AAA", "AAA", "AA", "AA"],
-        "sust": [12, 12, 13, 13, 14], "sp": [88, 88, 87, 86, 85],
-        "story": "Overrated Leader: high score but deteriorating; market still pays premium.",
+        "id": "RATCH", "ticker": "RATCH.BK", "name": "Ratch Group", "country": "Thailand",
+        "exchange": "SET", "domain": "ratch.co.th",
+        "sector": "Utilities", "industry": "Electric Utilities & Power Generators",
+        "vf": [0.44, 0.45, 0.46, 0.46, 0.47], "absent": [],
+        "price": (70.0, -0.12, 0.24),
+        "msci": ["BB", "BB", "BB", "BB", "BB"],
+        "sust": [36, 36, 35, 35, 34], "sp": None,
+        "story": "Mid-pack and flat: disclosure plateaued, raters unmoved.",
     },
     {
-        "id": "Z74", "ticker": "Z74.SI", "name": "Singtel", "country": "Singapore",
-        "sector": "Telecoms", "industry": "Telecommunication Services",
-        "vf": [0.48, 0.50, 0.54, 0.58, 0.62], "absent": [],
-        "price": (3.3, 0.01, 0.24),
-        "msci": ["A", "A", "A", "AA", "AA"],
-        "sust": [26, 25, 24, 23, 22], "sp": [60, 62, 64, 66, 68],
-        "story": "Mid-pack improver; digital-transformation angle.",
+        "id": "BGRIM", "ticker": "BGRIM.BK", "name": "B.Grimm Power", "country": "Thailand",
+        "exchange": "SET", "domain": "bgrimmpower.com",
+        "sector": "Utilities", "industry": "Electric Utilities & Power Generators",
+        "vf": [0.30, 0.38, 0.47, 0.56, 0.64], "absent": [],
+        "price": (45.0, -0.14, 0.32),
+        "msci": ["BBB", "BBB", "BBB", "BBB", "BBB"],
+        "sust": [32, 30, 29, 28, 27], "sp": None,
+        "story": "Hidden Winner: fastest renewables shift in the panel, price de-rated.",
+    },
+    {
+        "id": "GULF", "ticker": "GULF.BK", "name": "Gulf Development", "country": "Thailand",
+        "exchange": "SET", "domain": "gulf.co.th",
+        "sector": "Utilities", "industry": "Electric Utilities & Power Generators",
+        "vf": [0.40, 0.48, 0.56, 0.64, 0.72], "absent": [],
+        "price": (52.0, 0.05, 0.28),
+        "msci": ["BBB", "BBB", "A", "A", "A"],
+        "sust": [28, 26, 25, 24, 23], "sp": None,
+        "story": "Future Leader: high disclosure and still climbing.",
+    },
+    {
+        "id": "PGAS", "ticker": "PGAS.JK", "name": "Perusahaan Gas Negara", "country": "Indonesia",
+        "exchange": "IDX", "domain": "pgn.co.id",
+        "sector": "Utilities", "industry": "Electric Utilities & Power Generators",
+        "vf": [0.62, 0.60, 0.56, 0.52, 0.48], "absent": ["ghg_emissions"],
+        "price": (2200.0, -0.08, 0.30),
+        # raters still HIGH while evidence quietly deteriorates -> overrated
+        "msci": ["A", "A", "A", "A", "A"],
+        "sust": [26, 27, 28, 29, 30], "sp": None,
+        "story": "Overrated Leader: gas transition story, evidence sliding, raters generous.",
+    },
+    {
+        "id": "POWR", "ticker": "POWR.JK", "name": "Cikarang Listrindo", "country": "Indonesia",
+        "exchange": "IDX", "domain": "listrindo.com",
+        "sector": "Utilities", "industry": "Electric Utilities & Power Generators",
+        "vf": [0.18, 0.20, 0.24, 0.28, 0.32], "absent": ["water_management", "air_quality"],
+        "price": (500.0, 0.11, 0.26),
+        "msci": ["BB", "BB", "BB", "BB", "BB"],
+        "sust": [46, 45, 45, 44, 44], "sp": None,
+        "story": "Thin discloser: small industrial-estate utility, little verifiable evidence.",
+    },
+    {
+        "id": "POW", "ticker": "POW.VN", "name": "PetroVietnam Power", "country": "Vietnam",
+        "exchange": "HOSE", "domain": "pvpower.vn",
+        "sector": "Utilities", "industry": "Electric Utilities & Power Generators",
+        "vf": [0.12, 0.14, 0.18, 0.22, 0.26], "absent": ["water_management", "air_quality"],
+        "price": (14000.0, 0.0, 0.30),
+        # No MSCI coverage exists for PV Power; the seed keeps a placeholder but the real
+        # channel stays N.A. because MarketScreener publishes no ESG MSCI letter for it.
+        "msci": ["BB", "BB", "BB", "BB", "BB"],
+        "sust": [50, 50, 49, 49, 48], "sp": None,
+        "story": "Lowest disclosure in the panel; no MSCI coverage at all.",
     },
 ]
 
-# There is no reference panel. An invented ASEAN peer group made every percentile and
-# every industry median a rank against companies that do not exist; the panel is the ten
-# real SGX names and nothing else. Cohorts are therefore small, and the engine returns
-# N.A. below config.MIN_PEERS_FOR_SECTOR_RANK rather than a number with no meaning.
+# There is no reference panel. An invented peer group made every percentile and every
+# industry median a rank against companies that do not exist; the panel is these ten real
+# ASEAN utilities and nothing else. All ten share one sector and one SASB rubric, so
+# percentiles rank utility-against-utility and config.MIN_PEERS_FOR_SECTOR_RANK is met by
+# the sector cohort itself rather than falling back to the whole panel.
+#
+# S&P Global is absent by decision, not by oversight: no public S&P ESG score could be
+# obtained for these names, so "sp" is None throughout and sp_global is written NULL. The
+# contributing rater channels are MSCI (real, from MarketScreener) and Sustainalytics.
 
 
 def build():
@@ -320,7 +336,8 @@ def _insert_demo_rows(conn, c, rng, regs):
     for i, year in enumerate(config.YEARS):
         conn.execute(
             "INSERT OR REPLACE INTO rater_scores VALUES (?,?,?,?,?)",
-            (cid, year, msci[i], float(sust[i]), float(sp[i])),
+            (cid, year, msci[i], float(sust[i]),
+             None if sp[i] is None else float(sp[i])),
         )
     start, drift, vol = c["price"]
     for row in gen_prices(rng, start, drift, vol):

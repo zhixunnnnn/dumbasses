@@ -41,6 +41,7 @@ from __future__ import annotations
 
 import json
 import re
+import time
 import sys
 import urllib.request
 from datetime import datetime, timezone
@@ -55,21 +56,39 @@ SOURCE = "CDP public scores table"
 THEME_COLUMN = "Climate"        # CDP scores Climate, Forests and Water separately; the
                                 # rater channel is climate only, matching realratings.py
 FETCH_TIMEOUT = 120
+_MIN_HTML_BYTES = 3_000_000   # the real embed page is ~4.2MB; anything less is a truncated read
 USER_AGENT = "Mozilla/5.0 (compatible; polyfintech-esg-prototype/1.0)"
 
 # Exact table name + country. Verified against the live table; a name that stops matching
 # is a MISS we report, never a near-miss we accept.
+# Every pair below was read off the live table, and each was checked against a
+# near-miss that must NOT be accepted:
+#   EGCO   is "The Electricity Generating Public Company Limited", NOT "Electricity
+#          Generating Authority of Thailand (EGAT)" — a different, state-owned entity.
+#   BGRIM  is "BGrimm Power PCL", NOT "BGRIMM Technology Co., Ltd." (unrelated, China).
+#   PGAS   is "PT Perusahaan Gas Negara Tbk", NOT "PT Perusahaan Listrik Negara
+#          (Persero)" (PLN, the state electricity utility).
+#   RATCH  is "Ratch Group PCL", NOT "RATCHTHANI LEASING PCL" or "NEXIF RATCH ENERGY".
+#   YTLP   is "YTL Power International Berhad", NOT the parent "YTL Corp".
+#   U96    is "SembCorp Industries" in Singapore, NOT "Sembcorp Salalah Power & Water
+#          Company SAOG" in Oman — which is why the country is part of the key.
+#
+# GULF (Gulf Development) and POW (PetroVietnam Power) have NO row in the table at all,
+# so they are deliberately absent here rather than pinned to a lookalike.
+#
+# Of the eight pinned, only Tenaga Nasional carries an actual score (Climate C, 2025).
+# The other seven read "Did not disclose" or "See disclosing organisation" — those are
+# disclosure states, not grades, and NON_SCORES keeps them out of the rater channel while
+# still letting the UI say "did not disclose", which is itself a fact worth showing.
 PINNED = {
-    "U96": ("SembCorp Industries", "Singapore"),
-    "BN4": ("Keppel Ltd.", "Singapore"),
-    "F34": ("Wilmar International Limited", "Singapore"),
-    "C6L": ("Singapore Airlines", "Singapore"),
-    "D05": ("DBS Group Holdings", "Singapore"),
-    "O39": ("Oversea-Chinese Banking Corporation", "Singapore"),
-    "U11": ("United Overseas Bank Limited (UOB)", "Singapore"),
-    "9CI": ("CapitaLand Investment Limited", "Singapore"),
-    "C09": ("City Developments Limited", "Singapore"),
-    "Z74": ("Singtel", "Singapore"),
+    "U96":   ("SembCorp Industries", "Singapore"),
+    "TNB":   ("Tenaga Nasional", "Malaysia"),
+    "YTLP":  ("YTL Power International Berhad", "Malaysia"),
+    "EGCO":  ("The Electricity Generating Public Company Limited", "Thailand"),
+    "RATCH": ("Ratch Group PCL", "Thailand"),
+    "BGRIM": ("BGrimm Power PCL", "Thailand"),
+    "PGAS":  ("PT Perusahaan Gas Negara Tbk", "Indonesia"),
+    "POWR":  ("CIKARANG LISTRINDO TBK PT", "Indonesia"),
 }
 
 # Non-score cells, normalised. These are disclosure states, not grades.
@@ -219,10 +238,30 @@ def overlay(raters: list) -> list:
 # --------------------------------------------------------------------------- #
 # build
 # --------------------------------------------------------------------------- #
-def fetch_html(url: str = SCORES_URL) -> str:
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(request, timeout=FETCH_TIMEOUT) as response:
-        return response.read().decode("utf-8", "replace")
+def fetch_html(url: str = SCORES_URL, attempts: int = 4) -> str:
+    """Fetch the embed page, retrying truncated reads.
+
+    The response is ~4MB of chunked transfer and the server intermittently cuts it short,
+    raising http.client.IncompleteRead. A short read must NOT be treated as the dataset:
+    parse_scores would find no pinned rows and the caller would silently keep a stale
+    cache, which is how a whole roster can read "NOT FOUND" while the table is fine.
+    """
+    last: Exception | None = None
+    for attempt in range(attempts):
+        try:
+            request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+            with urllib.request.urlopen(request, timeout=FETCH_TIMEOUT) as response:
+                html = response.read().decode("utf-8", "replace")
+        except Exception as exc:                     # IncompleteRead, timeouts, resets
+            last = exc
+            time.sleep(2 * (attempt + 1))
+            continue
+        if len(html) < _MIN_HTML_BYTES:
+            last = ValueError(f"short read: {len(html)} bytes < {_MIN_HTML_BYTES}")
+            time.sleep(2 * (attempt + 1))
+            continue
+        return html
+    raise RuntimeError(f"CDP fetch failed after {attempts} attempts: {last}")
 
 
 def build_real_cdp() -> dict:

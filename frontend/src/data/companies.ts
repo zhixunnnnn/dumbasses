@@ -26,7 +26,8 @@ type ApiCompanyRow = {
   benchmark_source: string | null;
 };
 
-/** "U96.SI" and "U96" both reduce to "U96", which is also the engine id. */
+/** Ticker root, used only to match an API row that reports a ticker rather than an id.
+ *  It is NOT the engine id: "5347.KL" reduces to "5347" while the engine id is "TNB". */
 function normalizeTicker(ticker: string): string {
   return ticker.trim().toUpperCase().split(".")[0];
 }
@@ -37,7 +38,7 @@ function buildCompany(raw: RawCompany, real: ApiCompanyRow | undefined): Company
   const quadrant = real?.quadrant ?? null;
 
   return {
-    id: normalizeTicker(raw.t),
+    id: raw.id,
     evidenceId: real?.id ?? null,
     name: raw.n,
     ticker: raw.t,
@@ -49,8 +50,9 @@ function buildCompany(raw: RawCompany, real: ApiCompanyRow | undefined): Company
     profile: {
       headquarters: raw.hq,
       business: raw.bio,
+      // null where no value could be sourced — never a stand-in zero.
       founded: raw.est,
-      employees: raw.emp * 1000,
+      employees: raw.emp,
     },
     esgScore: real?.consensus ?? null,
     evidenceScore: real?.evidence_total ?? null,
