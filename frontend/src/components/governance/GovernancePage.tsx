@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
+  Activity,
+  ArrowRight,
   Check,
+  Clock3,
   Download,
   ExternalLink,
   Flag,
@@ -159,6 +162,8 @@ export default function GovernancePage() {
             hint="Live fact overrides the agent reads instead of the engine's own output"
           />
         </div>
+
+        <GovernanceOverview stats={stats} />
       </header>
 
       <div className="flex gap-2 pb-3">
@@ -247,6 +252,146 @@ export default function GovernancePage() {
       </div>
         </>
       )}
+    </div>
+  );
+}
+
+function GovernanceOverview({ stats }: { stats: FeedbackStats | null }) {
+  const total = stats?.total ?? 0;
+  const resolved = stats?.byStatus.resolved ?? 0;
+  const active =
+    (stats?.byStatus.open ?? 0) + (stats?.byStatus.reviewing ?? 0);
+  const resolutionRate = total > 0 ? Math.round((resolved / total) * 100) : 0;
+  const correctionCoverage =
+    resolved > 0
+      ? Math.min(
+          100,
+          Math.round(((stats?.trainablePairs ?? 0) / resolved) * 100),
+        )
+      : 0;
+  const issueMix = Object.entries(stats?.byReason ?? {})
+    .filter(([, count]) => count > 0)
+    .sort(([, a], [, b]) => b - a)
+    .slice(0, 5);
+  const largestIssue = Math.max(1, ...issueMix.map(([, count]) => count));
+
+  return (
+    <div className="mt-3 grid gap-2.5 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+      <section className="rounded-xl border border-hairline bg-surface p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="flex items-center gap-1.5 text-xs font-semibold text-txt">
+              <Activity size={14} className="text-pos" /> Review health
+            </p>
+            <p className="mt-1 text-[11px] text-muted">
+              Current control-loop throughput and correction coverage.
+            </p>
+          </div>
+          <span className="rounded-full border border-hairline bg-canvas/50 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-faint">
+            Live queue
+          </span>
+        </div>
+
+        <div className="mt-4 space-y-3">
+          <ProgressMetric
+            label="Resolution rate"
+            value={resolutionRate}
+            detail={`${resolved} of ${total} flags`}
+          />
+          <ProgressMetric
+            label="Correction coverage"
+            value={correctionCoverage}
+            detail={`${stats?.trainablePairs ?? 0} training pairs`}
+          />
+        </div>
+
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-hairline pt-3 text-[11px] text-muted">
+          <span className="flex items-center gap-1.5">
+            <Clock3 size={12} className="text-profit" /> {active} active reviews
+          </span>
+          <span>
+            Latest flag: {stats?.latestAt ? formatWhen(stats.latestAt) : "None yet"}
+          </span>
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-hairline bg-surface p-4">
+        <div>
+          <p className="text-xs font-semibold text-txt">Issue mix</p>
+          <p className="mt-1 text-[11px] text-muted">
+            Flag reasons ranked by frequency across the review history.
+          </p>
+        </div>
+
+        {issueMix.length === 0 ? (
+          <div className="mt-4 rounded-lg border border-dashed border-hairline px-3 py-5 text-center text-xs text-muted">
+            Issue distribution will appear after the first response is flagged.
+          </div>
+        ) : (
+          <div className="mt-4 space-y-2.5">
+            {issueMix.map(([reason, count]) => (
+              <div key={reason} className="grid grid-cols-[minmax(110px,0.8fr)_minmax(120px,1fr)_2rem] items-center gap-2">
+                <span className="truncate text-[11px] text-muted">
+                  {stats?.reasonLabels[reason] ?? reason}
+                </span>
+                <div className="h-1.5 overflow-hidden rounded-full bg-raised">
+                  <div
+                    className="h-full rounded-full bg-profit"
+                    style={{ width: `${Math.max(6, (count / largestIssue) * 100)}%` }}
+                  />
+                </div>
+                <span className="text-right font-mono text-[11px] tabular-nums text-txt">
+                  {count}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-hairline pt-3 text-[10px] font-semibold uppercase tracking-wider text-faint">
+          <span>Detect</span>
+          <ArrowRight size={11} />
+          <span>Review</span>
+          <ArrowRight size={11} />
+          <span>Correct and pin</span>
+          <ArrowRight size={11} />
+          <span>Export</span>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function ProgressMetric({
+  label,
+  value,
+  detail,
+}: {
+  label: string;
+  value: number;
+  detail: string;
+}) {
+  return (
+    <div>
+      <div className="mb-1.5 flex items-center justify-between gap-3 text-[11px]">
+        <span className="text-muted">{label}</span>
+        <span className="font-mono tabular-nums text-txt">
+          {value}% <span className="text-faint">· {detail}</span>
+        </span>
+      </div>
+      <div
+        className="h-1.5 overflow-hidden rounded-full bg-raised"
+        role="progressbar"
+        aria-label={label}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={value}
+      >
+        <div
+          className="h-full rounded-full bg-pos"
+          style={{ width: `${value}%` }}
+        />
+      </div>
     </div>
   );
 }

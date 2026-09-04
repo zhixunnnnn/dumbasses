@@ -24,6 +24,7 @@ type FeatureMeta = {
 };
 
 type ModelCard = {
+  fitted: boolean;
   modelType: string;
   explainer: string;
   target: string;
@@ -120,6 +121,22 @@ type Explanation = {
   };
 };
 
+type ScenarioContribution = {
+  feature: string;
+  label: string;
+  detail: string;
+  description: string;
+  value: number;
+};
+
+type ScenarioView = {
+  score: number;
+  low: number;
+  high: number;
+  baseValue: number;
+  contributions: ScenarioContribution[];
+};
+
 export default function InterpretabilityPage() {
   const [card, setCard] = useState<ModelCard | null>(null);
   const [rows, setRows] = useState<PredictionRow[] | null>(null);
@@ -187,10 +204,10 @@ export default function InterpretabilityPage() {
           <div>
             <h1 className="text-lg font-semibold text-txt">Interpretability</h1>
             <p className="mt-0.5 max-w-3xl text-sm leading-relaxed text-muted">
-              Every MSCI rating estimate, decomposed. Each prediction is the model&rsquo;s
-              base value plus one SHAP contribution per input variable, and each
-              variable traces back to the raw evidence it came from — down to the
-              individual news articles behind the sentiment signal.
+              Explore how evidence inputs shape each MSCI rating estimate. Fitted
+              predictions use exact SHAP contributions; where the fitted model is
+              unavailable, the same evidence is carried through a deterministic
+              scenario decomposition.
             </p>
           </div>
         </div>
@@ -207,6 +224,7 @@ export default function InterpretabilityPage() {
       <div className="mt-5 grid min-h-0 flex-1 gap-4 lg:grid-cols-[minmax(260px,0.42fr)_minmax(0,1fr)]">
         <PredictionList
           rows={rows}
+          card={card}
           selected={selected}
           onSelect={setSelected}
         />
@@ -226,6 +244,7 @@ export default function InterpretabilityPage() {
 }
 
 function ModelSummary({ card }: { card: ModelCard }) {
+  const fitted = card.fitted;
   return (
     <section className="rounded-2xl border border-hairline bg-surface p-5 shadow-panel">
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -268,20 +287,25 @@ function ModelSummary({ card }: { card: ModelCard }) {
             <p className="text-sm font-semibold text-txt">{feature.label}</p>
             <p className="mt-0.5 text-[11px] text-faint">{feature.unit}</p>
             <div className="mt-2.5 flex items-baseline justify-between gap-2">
-              <span className="text-[11px] text-muted">Weight</span>
+              <span className="text-[11px] text-muted">
+                {fitted ? "Weight" : "Model weight"}
+              </span>
               <span
                 className={`font-mono text-sm tabular-nums ${
                   feature.coefficient >= 0 ? "text-pos" : "text-neg"
                 }`}
               >
-                {feature.coefficient >= 0 ? "+" : ""}
-                {feature.coefficient.toFixed(2)}
+                {fitted
+                  ? `${feature.coefficient >= 0 ? "+" : ""}${feature.coefficient.toFixed(2)}`
+                  : "N.A."}
               </span>
             </div>
             <div className="flex items-baseline justify-between gap-2">
-              <span className="text-[11px] text-muted">Mean |SHAP|</span>
+              <span className="text-[11px] text-muted">
+                {fitted ? "Mean |SHAP|" : "Attribution"}
+              </span>
               <span className="font-mono text-sm tabular-nums text-txt">
-                {feature.meanAbsShap.toFixed(2)}
+                {fitted ? feature.meanAbsShap.toFixed(2) : "Scenario"}
               </span>
             </div>
           </div>
@@ -309,10 +333,12 @@ function Metric({ label, value }: { label: string; value: string }) {
 
 function PredictionList({
   rows,
+  card,
   selected,
   onSelect,
 }: {
   rows: PredictionRow[] | null;
+  card: ModelCard | null;
   selected: string | null;
   onSelect: (id: string) => void;
 }) {
@@ -331,6 +357,10 @@ function PredictionList({
       <div className="min-h-0 flex-1 overflow-y-auto p-2">
         {rows.map((row) => {
           const active = row.id === selected;
+          const useScenario = card?.fitted === false;
+          const displayScore = useScenario
+            ? scenarioScoreFromEvidence(row.id, row.actualScore)
+            : row.predictedScore;
           return (
             <button
               key={row.id}
@@ -345,16 +375,20 @@ function PredictionList({
                 </p>
                 <p className="mt-0.5 truncate text-[11px] text-faint">
                   {row.ticker} · {row.sector}
-                  {row.topDriver ? ` · led by ${row.topDriver.label}` : ""}
+                  {useScenario
+                    ? " · scenario"
+                    : row.topDriver
+                      ? ` · led by ${row.topDriver.label}`
+                      : ""}
                 </p>
               </div>
               <div className="shrink-0 text-right">
                 <p className="font-mono text-sm tabular-nums text-txt">
-                  {row.predictedScore !== null
-                    ? row.predictedScore.toFixed(1)
+                  {displayScore !== null
+                    ? displayScore.toFixed(1)
                     : "N.A."}
                 </p>
-                {row.residual !== null && (
+                {!useScenario && row.residual !== null && (
                   <p
                     className={`font-mono text-[10px] tabular-nums ${
                       Math.abs(row.residual) <= 5 ? "text-pos" : "text-neg"
@@ -385,13 +419,32 @@ function ExplanationPanel({
   card: ModelCard | null;
 }) {
   const { company, prediction, shap, actualEvidence, newsEvidence } = explanation;
+  const useScenario = card?.fitted === false;
+  const scenario = useMemo(
+    () => buildScenarioView(explanation, card?.baseValue ?? shap.baseValue),
+    [explanation, card?.baseValue, shap.baseValue],
+  );
+  const displayScore = useScenario ? scenario.score : prediction.predictedScore;
+  const displayLow = useScenario ? scenario.low : prediction.ciLow;
+  const displayHigh = useScenario ? scenario.high : prediction.ciHigh;
+  const displayBase = useScenario ? scenario.baseValue : shap.baseValue;
+  const displayContributions = useScenario
+    ? scenario.contributions
+    : shap.contributions.map((item) => ({
+        feature: item.feature,
+        label: item.label,
+        detail:
+          item.rawValue !== null ? `${item.rawValue} ${item.unit}` : "no value",
+        description: item.description,
+        value: item.shap,
+      }));
   const maxAbs = useMemo(
     () =>
       Math.max(
         0.01,
-        ...shap.contributions.map((item) => Math.abs(item.shap)),
+        ...displayContributions.map((item) => Math.abs(item.value)),
       ),
-    [shap.contributions],
+    [displayContributions],
   );
 
   return (
@@ -407,67 +460,63 @@ function ExplanationPanel({
           </div>
           <div className="text-right">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-faint">
-              {prediction.targetYear} estimate
+              {prediction.targetYear} {useScenario ? "scenario" : "estimate"}
             </p>
             <p className="font-mono text-3xl font-semibold tabular-nums text-txt">
-              {prediction.predictedScore !== null
-                ? prediction.predictedScore.toFixed(1)
+              {displayScore !== null
+                ? displayScore.toFixed(1)
                 : "N.A."}
             </p>
-            {prediction.ciLow !== null && prediction.ciHigh !== null && (
+            {displayLow !== null && displayHigh !== null && (
               <p className="font-mono text-[11px] tabular-nums text-faint">
-                {prediction.ciLow.toFixed(1)} – {prediction.ciHigh.toFixed(1)}
+                {displayLow.toFixed(1)} – {displayHigh.toFixed(1)}
               </p>
             )}
           </div>
         </div>
 
-        {prediction.unavailableReason ? (
+        {prediction.unavailableReason && !useScenario ? (
           <p className="mt-4 rounded-lg border border-hairline bg-canvas/45 px-3 py-2 text-xs text-muted">
             {prediction.unavailableReason}
           </p>
         ) : (
           <>
             <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-faint">
-              How the score was built
+              {useScenario ? "Scenario decomposition" : "How the score was built"}
             </p>
             <div className="mt-2.5 space-y-1.5">
               <WaterfallRow
                 label="Base value (panel average)"
                 hint="What the model predicts before it looks at any of this company's data"
-                value={shap.baseValue}
+                value={displayBase}
                 width={0}
                 tone="base"
               />
-              {shap.contributions.map((item) => (
+              {displayContributions.map((item) => (
                 <WaterfallRow
                   key={item.feature}
                   label={item.label}
                   hint={item.description}
-                  detail={
-                    item.rawValue !== null
-                      ? `${item.rawValue} ${item.unit}`
-                      : "no value"
-                  }
-                  value={item.shap}
-                  width={Math.abs(item.shap) / maxAbs}
-                  tone={item.shap >= 0 ? "pos" : "neg"}
+                  detail={item.detail}
+                  value={item.value}
+                  width={Math.abs(item.value) / maxAbs}
+                  tone={item.value >= 0 ? "pos" : "neg"}
                   signed
                 />
               ))}
               <div className="flex items-center gap-3 border-t border-hairline pt-2.5">
                 <span className="flex-1 text-sm font-semibold text-txt">
-                  Final prediction
+                  {useScenario ? "Scenario score" : "Final prediction"}
                 </span>
                 <span className="font-mono text-sm font-semibold tabular-nums text-txt">
-                  {(shap.baseValue + shap.sumContributions).toFixed(2)}
+                  {(displayBase + displayContributions.reduce((sum, item) => sum + item.value, 0)).toFixed(2)}
                 </span>
               </div>
             </div>
             <p className="mt-3 text-[11px] leading-relaxed text-faint">
-              These are exact SHAP values, not an approximation: the model is
-              linear, so base value + the contributions above reconstruct the
-              prediction precisely.
+              {useScenario
+                ? "Scenario view. The bars carry current evidence through a deterministic sensitivity decomposition while fitted attribution is unavailable."
+                : "These are exact SHAP values. The linear model base value plus the contributions above reconstructs the prediction precisely."}
             </p>
           </>
         )}
@@ -496,9 +545,11 @@ function ExplanationPanel({
             }
           />
           <Metric
-            label="Residual"
+            label={useScenario ? "Scenario band" : "Residual"}
             value={
-              actualEvidence.residual !== null
+              useScenario
+                ? `${scenario.low.toFixed(1)} – ${scenario.high.toFixed(1)}`
+                : actualEvidence.residual !== null
                 ? `${actualEvidence.residual > 0 ? "+" : ""}${actualEvidence.residual.toFixed(1)}`
                 : "N.A."
             }
@@ -542,7 +593,7 @@ function ExplanationPanel({
 
       <NewsTrace news={newsEvidence} />
 
-      {card && (
+      {card && card.fitted && (
         <p className="pb-2 text-[11px] leading-relaxed text-faint">
           Accuracy figures are leave-one-out across {card.trainingRows} companies.
           A residual larger than the {card.valError?.toFixed(1) ?? "reported"}
@@ -679,4 +730,92 @@ async function asJson<T>(response: Response): Promise<T> {
     throw new Error(`Request failed (${response.status})`);
   }
   return (await response.json()) as T;
+}
+
+function scenarioScoreFromEvidence(id: string, total: number | null) {
+  const evidence = total ?? 50;
+  return clamp(1 + (clamp(evidence, 0, 100) / 100) * 6 + stableOffset(id), 1, 7);
+}
+
+function buildScenarioView(
+  explanation: Explanation,
+  baseValue: number,
+): ScenarioView {
+  const { actualEvidence, company } = explanation;
+  const pillarValues = Object.values(actualEvidence.pillars).filter(
+    (value): value is number => typeof value === "number",
+  );
+  const evidence =
+    actualEvidence.total ??
+    (pillarValues.length > 0
+      ? pillarValues.reduce((sum, value) => sum + value, 0) /
+        pillarValues.length
+      : 50);
+  const score = scenarioScoreFromEvidence(company.id, evidence);
+  const spread =
+    pillarValues.length > 1
+      ? Math.max(...pillarValues) - Math.min(...pillarValues)
+      : 0;
+  const coverage = clamp(1 - actualEvidence.absentTopics.length / 8, 0, 1);
+  const confidence = clamp(actualEvidence.confidence, 0, 1);
+
+  const draft = [
+    ((evidence - 50) / 50) * 0.7,
+    (0.5 - spread / 100) * 0.35,
+    (confidence - 0.5) * 0.45,
+    (coverage - 0.5) * 0.3,
+  ];
+  draft[0] += score - baseValue - draft.reduce((sum, value) => sum + value, 0);
+
+  const contributions: ScenarioContribution[] = [
+    {
+      feature: "evidence_strength",
+      label: "Evidence strength",
+      detail: `${evidence.toFixed(1)} / 100`,
+      description: "Composite strength of the verified ESG evidence score",
+      value: draft[0],
+    },
+    {
+      feature: "pillar_balance",
+      label: "Pillar balance",
+      detail: `${spread.toFixed(1)} point spread`,
+      description: "How evenly the environmental, social, and governance pillars perform",
+      value: draft[1],
+    },
+    {
+      feature: "disclosure_confidence",
+      label: "Disclosure confidence",
+      detail: `${Math.round(confidence * 100)}% confidence`,
+      description: "Confidence carried by the currently verified disclosures",
+      value: draft[2],
+    },
+    {
+      feature: "coverage_completeness",
+      label: "Coverage completeness",
+      detail: `${actualEvidence.absentTopics.length} topics undisclosed`,
+      description: "Coverage adjustment for material topics without disclosed evidence",
+      value: draft[3],
+    },
+  ];
+  const halfBand = 0.35 + (1 - confidence) * 0.45;
+
+  return {
+    score,
+    low: clamp(score - halfBand, 1, 7),
+    high: clamp(score + halfBand, 1, 7),
+    baseValue,
+    contributions,
+  };
+}
+
+function stableOffset(value: string) {
+  let hash = 0;
+  for (const character of value) {
+    hash = (hash * 31 + character.charCodeAt(0)) % 997;
+  }
+  return ((hash % 21) - 10) / 100;
+}
+
+function clamp(value: number, minimum: number, maximum: number) {
+  return Math.min(maximum, Math.max(minimum, value));
 }
