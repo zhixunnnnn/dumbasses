@@ -10,7 +10,9 @@ import {
 import type { Company } from "../../types";
 import { COMPANY_BY_ID, useCompanies } from "../../data/companies";
 
-const STORAGE_KEY = "polyfintech.watchlist.v1";
+const STORAGE_KEY = "polyfintech.watchlist.v2";
+const LEGACY_STORAGE_KEY = "polyfintech.watchlist.v1";
+const DEFAULT_WATCHLIST_IDS = ["U96", "TNB", "GULF", "PGAS"];
 
 type WatchlistValue = {
   watchlistIds: string[];
@@ -27,15 +29,28 @@ const WatchlistContext = createContext<WatchlistValue | null>(null);
 function readStoredIds(): string[] {
   if (typeof window === "undefined") return [];
 
+  const stored = parseStoredIds(window.localStorage.getItem(STORAGE_KEY));
+  if (stored !== null) return stored;
+
+  const legacy = parseStoredIds(
+    window.localStorage.getItem(LEGACY_STORAGE_KEY),
+  );
+  if (legacy?.length) return legacy;
+
+  return DEFAULT_WATCHLIST_IDS;
+}
+
+function parseStoredIds(raw: string | null): string[] | null {
+  if (raw === null) return null;
+
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    const parsed = raw ? JSON.parse(raw) : [];
-    if (!Array.isArray(parsed)) return [];
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return null;
     return parsed.filter(
       (id): id is string => typeof id === "string" && id in COMPANY_BY_ID,
     );
   } catch {
-    return [];
+    return null;
   }
 }
 
