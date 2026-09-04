@@ -73,6 +73,76 @@ def test_scrape_news_uses_request_api_when_scraping_browser_is_unavailable(
     assert result["source"] == "Bright Data Request API - Bing News"
 
 
+def test_load_news_merges_greenwashing_cache_for_current_universe(monkeypatch, tmp_path):
+    conn = bootstrap(tmp_path / "news-merge.sqlite3")
+    for cid, ticker, name in (
+        ("U96", "U96.SI", "Sembcorp Industries"),
+        ("TNB", "5347.KL", "Tenaga Nasional"),
+    ):
+        conn.execute(
+            "INSERT INTO universe VALUES (?,?,?,?,?,?,?,?)",
+            (cid, ticker, name, "ASEAN", "Exchange", "Utilities",
+             "Electric Utilities & Power Generators", "demo"),
+        )
+    scrape.store_news(conn, [{
+        "company_id": "U96", "name": "Sembcorp Industries", "n_items": 1,
+        "controversy": 0, "positive": 1, "sentiment": 1,
+        "headlines": [{
+            "title": "Sembcorp expands renewable capacity",
+            "url": "https://example.com/sembcorp-renewables", "label": "positive",
+        }],
+    }], "2026-09-05T00:00:00")
+
+    from backend.data import greenwashing
+
+    monkeypatch.setattr(greenwashing, "cached", lambda: {"companies": {
+        "U96": {"headlines": [{
+            "title": "Sembcorp faces pollution fine",
+            "url": "https://example.com/sembcorp-fine",
+        }]},
+        "TNB": {"headlines": [{
+            "title": "Tenaga investigated over billing claims",
+            "url": "https://example.com/tenaga-probe",
+        }]},
+    }})
+
+    result = scrape.load_news(conn)
+    by_id = {row["company_id"]: row for row in result["companies"]}
+
+    assert set(by_id) == {"U96", "TNB"}
+    assert by_id["U96"]["positive"] == 1
+    assert by_id["U96"]["controversy"] == 1
+    assert by_id["U96"]["n_items"] == 2
+    assert by_id["TNB"]["controversy"] == 1
+    assert by_id["TNB"]["headlines"][0]["label"] == "controversy"
+
+
+def test_load_news_deduplicates_matching_controversy_titles(monkeypatch, tmp_path):
+    conn = bootstrap(tmp_path / "news-dedupe.sqlite3")
+    conn.execute(
+        "INSERT INTO universe VALUES (?,?,?,?,?,?,?,?)",
+        ("TNB", "5347.KL", "Tenaga Nasional", "Malaysia", "KLSE", "Utilities",
+         "Electric Utilities & Power Generators", "demo"),
+    )
+    headline = "Tenaga investigated over billing claims"
+    scrape.store_news(conn, [{
+        "company_id": "TNB", "name": "Tenaga Nasional", "n_items": 1,
+        "controversy": 1, "positive": 0, "sentiment": -1,
+        "headlines": [{"title": headline, "url": "https://publisher.example/story",
+                       "label": "controversy"}],
+    }], "2026-09-05T00:00:00")
+
+    from backend.data import greenwashing
+
+    monkeypatch.setattr(greenwashing, "cached", lambda: {"companies": {"TNB": {
+        "headlines": [{"title": headline, "url": "https://news.google.com/rss/story"}],
+    }}})
+
+    row = scrape.load_news(conn)["companies"][0]
+    assert row["controversy"] == 1
+    assert len(row["headlines"]) == 1
+
+
 def test_real_claims_default_subset_covers_all_ten_companies():
     assert set(realclaims.DEFAULT_SUBSET) == set(realclaims.DOMAINS)
     assert len(realclaims.DEFAULT_SUBSET) == 10

@@ -9,6 +9,10 @@ export default function ImproverFeed({ rows }: { rows: CompanyRow[] }) {
   const improvers = rows
     .filter((r) => r.is_underpriced_improver)
     .sort((a, b) => (b.evidence_gap ?? 0) - (a.evidence_gap ?? 0));
+  const closest = rows
+    .filter((r) => !r.is_underpriced_improver && r.momentum != null && r.momentum > 0)
+    .sort((a, b) => (b.momentum ?? 0) - (a.momentum ?? 0))
+    .slice(0, 3);
 
   return (
     <div className="flex h-full flex-col rounded-xl border border-hairline bg-surface shadow-panel">
@@ -20,8 +24,31 @@ export default function ImproverFeed({ rows }: { rows: CompanyRow[] }) {
         </div>
       </div>
       <div className="flex-1 space-y-2 overflow-y-auto p-3">
-        {improvers.length === 0 && (
-          <p className="px-2 py-6 text-center text-[12px] text-faint">No underpriced improvers right now.</p>
+        {improvers.length === 0 && closest.length === 0 && (
+          <p className="px-2 py-6 text-center text-[12px] text-faint">
+            No company is currently cutting emissions.
+          </p>
+        )}
+        {improvers.length === 0 && closest.length > 0 && (
+          <div className="space-y-2">
+            <p className="px-1 text-[11px] leading-snug text-faint">
+              No company passes the full emissions-and-price alert rule. Closest monitored decarboniser:
+            </p>
+            {closest.map((r) => (
+              <button key={r.id} onClick={() => navigate({ name: "evidenceCompany", id: r.id })}
+                className="group w-full rounded-lg border border-hairline bg-canvas/40 p-3 text-left transition hover:border-pos/40">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate text-[13px] font-medium text-txt">{r.name}</p>
+                    <p className="font-mono text-[10px] text-faint">{r.ticker} · below alert threshold</p>
+                  </div>
+                  <span className="shrink-0 font-mono text-[11px] text-pos">
+                    emissions {signed(r.momentum)}%/yr
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
         )}
         {improvers.map((r) => (
           <button key={r.id} onClick={() => navigate({ name: "evidenceCompany", id: r.id })}

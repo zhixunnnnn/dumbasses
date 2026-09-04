@@ -20,6 +20,7 @@ import csv
 import datetime as dt
 from io import StringIO
 import json
+import re
 
 from backend.engine import brightdata, config
 from backend.engine.db import bootstrap
@@ -258,23 +259,61 @@ def store_news(conn, results: list[dict], fetched_at: str) -> None:
 
 
 def load_news(conn) -> dict:
-    """Read the latest news snapshot from the DB (used by /api/news)."""
+    """Read news for the current demo universe and merge audited controversy cache.
+
+    The general news scraper and the double-materiality greenwashing scraper are
+    intentionally separate collectors, but the dashboard's controversy feed needs
+    one coherent view.  Build that view here so stale news rows from an older roster
+    are excluded and cached controversy headlines remain visible between live runs.
+    """
+    try:
+        from backend.data.greenwashing import cached as cached_greenwashing
+
+        greenwashing = cached_greenwashing().get("companies", {})
+    except Exception:  # a missing/broken cache must not take down /api/news
+        greenwashing = {}
+
     companies = []
     for n in conn.execute(
-            "SELECT nw.*, u.name AS cname, u.sector AS sector, u.ticker AS ticker FROM news nw "
-            "LEFT JOIN universe u ON u.company_id = nw.company_id ORDER BY nw.company_id"):
+            "SELECT u.company_id, u.name AS cname, u.sector, u.ticker, "
+            "nw.fetched_at, nw.n_items, nw.controversy, nw.positive, nw.sentiment "
+            "FROM universe u LEFT JOIN news nw ON nw.company_id = u.company_id "
+            "WHERE u.scope='demo' ORDER BY u.company_id"):
         cid = n["company_id"]
         heads = [{"title": h["title"], "url": h["url"], "label": h["label"]}
                  for h in conn.execute(
                      "SELECT * FROM news_headlines WHERE company_id=?", (cid,))]
+
+        # Google News RSS URLs often differ from the publisher URLs returned by the
+        # live collector, so deduplicate on normalized title as well as URL.
+        seen_titles = {_headline_key(h["title"]) for h in heads}
+        seen_urls = {h["url"] for h in heads if h.get("url")}
+        for item in (greenwashing.get(cid, {}) or {}).get("headlines", []):
+            title = str(item.get("title") or "").strip()
+            url = str(item.get("url") or "").strip() or None
+            title_key = _headline_key(title)
+            if not title or title_key in seen_titles or (url and url in seen_urls):
+                continue
+            heads.append({"title": title, "url": url, "label": "controversy"})
+            seen_titles.add(title_key)
+            if url:
+                seen_urls.add(url)
+
+        controversy = sum(h["label"] == "controversy" for h in heads)
+        positive = sum(h["label"] == "positive" for h in heads)
         companies.append({"company_id": cid, "name": n["cname"] or cid,
-                          "sector": n["sector"], "ticker": n["ticker"], "n_items": n["n_items"],
-                          "controversy": n["controversy"], "positive": n["positive"],
-                          "sentiment": n["sentiment"], "fetched_at": n["fetched_at"],
+                          "sector": n["sector"], "ticker": n["ticker"], "n_items": len(heads),
+                          "controversy": controversy, "positive": positive,
+                          "sentiment": positive - controversy, "fetched_at": n["fetched_at"],
                           "headlines": heads})
     log = conn.execute("SELECT * FROM scrape_log WHERE source='news'").fetchone()
-    return {"source": "Bright Data Request API - Bing News",
+    return {"source": "Live news + Google News RSS controversy cache",
             "last_run": log["last_run"] if log else None, "companies": companies}
+
+
+def _headline_key(title: str) -> str:
+    """Stable title key used to merge the two news collectors without duplicates."""
+    return re.sub(r"\W+", " ", title.lower()).strip()
 
 
 def _relevant_label(title: str, cid: str):
