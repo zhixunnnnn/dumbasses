@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Activity, ArrowLeft, Check, Leaf, Minus, X } from "lucide-react";
 import { api, useApi } from "../../lib/api";
 import type { TraceNode } from "../../types";
-import { na, signed, NA_REASON, PILLAR_COLOR } from "../../lib/ui";
+import { na, PILLAR_COLOR } from "../../lib/ui";
 import ProvenanceBadge from "../common/ProvenanceBadge";
 import { useNavigation } from "../../navigation/NavigationContext";
 import { Gauge, LineChart } from "../charts";
@@ -17,8 +17,11 @@ import TrustMeter from "./TrustMeter";
 import PeerDistribution from "./PeerDistribution";
 import LiveNews from "./LiveNews";
 import PeerTable from "./PeerTable";
-import MomentumBars from "./MomentumBars";
 import LiveResearchClaims from "./LiveResearchClaims";
+import ImpactMateriality from "./ImpactMateriality";
+import FinancialsPanel from "./FinancialsPanel";
+import MaterialityWeights from "./MaterialityWeights";
+import DoubleMaterialityPanel from "./DoubleMaterialityPanel";
 import { usePublishAssistantPageContext } from "../../../components/chat/PageContext";
 
 function node(label: string, value: number | null, children: TraceNode[] = []): TraceNode {
@@ -43,6 +46,11 @@ export default function CompanyPage({ id }: { id: string }) {
     route: "evidenceCompany",
     title: `${data.company.name} ESG evidence profile`,
     company: data.company,
+    rating: data.rating,
+    ratingSeries: data.rating_series,
+    impact: data.impact ?? null,
+    doubleMateriality: data.double_materiality ?? null,
+    fundamentals: data.fundamentals ?? null,
     evidence: data.evidence,
     evidenceSeries: data.series,
     raters: data.raters,
@@ -58,21 +66,24 @@ export default function CompanyPage({ id }: { id: string }) {
   if (loading) return <div className="p-10 text-sm text-muted">Loading {id}…</div>;
   if (error || !data) return <div className="p-10 text-sm text-neg">Couldn’t load {id}. {error}</div>;
 
-  const { company, evidence, series, raters, signal, witness, compliance, forecast, claims, peers, benchmark, liveIntelligence } = data;
+  const { company, rating, impact, series, raters, signal, witness, compliance, forecast, claims, peers, liveIntelligence } = data;
   const latestReal = data.latest_real_raters ?? null;
   const cdpDisclosure = data.cdp_disclosure ?? null;
   // the analysis year comes from the data, not a hardcoded constant that could drift
   const analysisYear = series.length ? series[series.length - 1].year : undefined;
-  const benchmarkDelta =
-    benchmark && benchmark.total !== null && evidence.total !== null
-      ? evidence.total - benchmark.total
-      : null;
   const seriesPts = series.filter((s) => s.total !== null);
+  // peers carry both scores; the peer widgets read `evidence_total`, so pass the RATING
+  // through that field to reuse them unchanged now that the rating is the headline score.
+  const ratingPeers = peers.map((p) => ({ id: p.id, name: p.name, evidence_total: p.rating_total }));
+  // SASB materiality share per pillar (sum of its topics' weights) — the pillar weighting
+  // used in the total, driven by materiality %, never by a topic count.
+  const pillarWeight = (p: "E" | "S" | "G") =>
+    (rating.topic_breakdown ?? []).filter((t) => t.pillar === p).reduce((a, t) => a + t.weight, 0);
 
   const realRaters = raters.real_raters ?? [];
+  // S&P is dropped (not publicly obtainable), so it is not shown as a rater channel.
   const consensusTrace = node("Rater consensus (mean of the REAL percentiles, higher=better)", raters.consensus, [
     node(`MSCI percentile`, raters.msci_pct),
-    node(`S&P percentile`, raters.sp_pct),
     node(`Sustainalytics percentile (inverted)`, raters.sustainalytics_pct),
     node(`CDP percentile`, raters.cdp_pct),
     node(`real ratings: ${realRaters.length ? realRaters.join(", ") : "none"}`, null),
@@ -102,39 +113,35 @@ export default function CompanyPage({ id }: { id: string }) {
         </div>
         <div className="text-right">
           <div className="flex items-center justify-end gap-2">
-            <span className="font-mono text-3xl font-semibold text-txt">{na(evidence.total)}</span>
-            <Why trace={evidence.trace} title="Evidence score" />
+            <span className="font-mono text-3xl font-semibold text-txt">{na(rating.total)}</span>
+            <Why trace={rating.trace} title="ESG rating" />
+            {rating.provenance && (
+              <ProvenanceBadge provenance={rating.provenance}
+                contributing={raters.contributing} real={realRaters} />
+            )}
           </div>
-          <p className="text-[11px] text-faint">Evidence score · confidence {Math.round(evidence.confidence * 100)}%</p>
-          {benchmark && (
-            <p className="text-[11px] text-faint">
-              {benchmark.total === null ? (
-                <>Industry bar: N.A. — {NA_REASON.benchmark}</>
-              ) : (
-                <>
-                  Industry bar: {na(benchmark.total)} ({benchmark.source})
-                  {benchmarkDelta !== null && (
-                    <span className="ml-1 font-mono" style={{ color: benchmarkDelta > 0 ? "#3ecf8e" : "#9a968e" }}>
-                      {signed(benchmarkDelta)}
-                    </span>
-                  )}
-                </>
-              )}
-            </p>
-          )}
+          <p className="text-[11px] text-faint">
+            ESG Rating · SASB-weighted · E objective, S/G agency-referenced
+          </p>
+          <p className="text-[11px] text-faint">
+            E: CDP + Climate TRACE · S/G ref: {rating.agencies.length ? rating.agencies.map((a) => a.toUpperCase()).join(", ") : "none"}
+          </p>
         </div>
       </div>
+
+      {/* CGS finance view — valuation, analyst target, dividend — leads the page */}
+      <FinancialsPanel f={data.fundamentals} />
 
       {/* the two panels */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
           <div className="flex items-center justify-between">
             <p className="text-[12px] font-medium text-muted">Peer distribution</p>
-            <Why trace={node(`Evidence scores of ${company.sector} companies in the panel; the green bar is ${company.name}`, evidence.total)}
+            <Why trace={node(`ESG ratings of ${company.sector} companies in the panel; the green bar is ${company.name}`, rating.total)}
               title="Peer distribution" />
           </div>
-          <PeerDistribution self={evidence.total} selfId={id} selfName={company.name}
-            peers={peers} sector={company.sector} />
+          <PeerDistribution self={rating.total} selfId={id} selfName={company.name}
+            peers={ratingPeers} sector={company.sector} />
         </div>
         <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
           <div className="flex items-center justify-between">
@@ -144,25 +151,27 @@ export default function CompanyPage({ id }: { id: string }) {
           </div>
           <p className="mt-1 flex items-center gap-2 font-mono text-2xl font-semibold text-txt">
             {na(raters.divergence)}
-            <ProvenanceBadge provenance={raters.divergence_provenance}
-              contributing={raters.contributing} real={realRaters} />
+            {/* divergence is real-only; the badge only appears when a real number exists */}
+            {raters.divergence !== null && (
+              <ProvenanceBadge provenance={raters.divergence_provenance}
+                contributing={raters.contributing} real={realRaters} />
+            )}
           </p>
           <TrustMeter raters={raters} latestReal={latestReal}
             cdpDisclosure={cdpDisclosure} year={analysisYear} />
         </div>
       </div>
 
-      {/* signal legs */}
+      {/* signal legs — redefined around the real emission trajectory */}
       <div className="flex flex-wrap items-center gap-2 rounded-xl border border-hairline bg-surface px-4 py-3 shadow-panel">
-        <span className="text-[12px] font-medium text-muted">Underpriced Improver =</span>
-        <Why trace={signal.trace} title="Underpriced Improver signal" />
-        <Leg ok={signal.proof_up} label="proof_up (verified evidence ↑)" />
-        <Leg ok={signal.opinion_flat} label="opinion_flat (raters stale/split)" />
-        <Leg ok={signal.price_flat} label="price_flat (market hasn't reacted)" />
+        <span className="text-[12px] font-medium text-muted">Decarbonising Improver =</span>
+        <Leg ok={signal.momentum == null ? null : signal.momentum >= 3}
+          label="emissions falling ≥3%/yr (Climate TRACE)" />
+        <Leg ok={signal.price_flat} label="price flat (market hasn't priced it)" />
         <span className="ml-1 text-[12px] text-muted">→</span>
         {signal.is_underpriced_improver
-          ? <span className="text-[12px] font-semibold text-pos">(the gap the market missed)</span>
-          : <span className="text-[12px] text-faint">not all three legs met</span>}
+          ? <span className="text-[12px] font-semibold text-pos">(decarbonising, unpriced)</span>
+          : <span className="text-[12px] text-faint">not both met</span>}
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -221,32 +230,62 @@ export default function CompanyPage({ id }: { id: string }) {
       {/* pillars + evidence trajectory */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1.3fr]">
         <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
-          <h3 className="mb-2 text-sm font-semibold text-txt">Evidence by pillar</h3>
+          <h3 className="mb-2 text-sm font-semibold text-txt">ESG rating by pillar</h3>
           <div className="flex justify-around">
-            {(["E", "S", "G"] as const).map((p) => (
-              <Gauge key={p} value={evidence.pillars[p] ?? 0}
-                label={p === "E" ? "Environmental" : p === "S" ? "Social" : "Governance"}
-                color={PILLAR_COLOR[p]} size={92} />
-            ))}
+            {(["E", "S", "G"] as const).map((p) => {
+              const w = (rating.topic_breakdown ?? [])
+                .filter((t) => t.pillar === p)
+                .reduce((a, t) => a + t.weight, 0);
+              return (
+                <div key={p} className="flex flex-col items-center">
+                  <Gauge value={rating.pillars[p] ?? 0}
+                    label={p === "E" ? "Environmental" : p === "S" ? "Social" : "Governance"}
+                    color={PILLAR_COLOR[p]} size={92} />
+                  <span className="mt-0.5 font-mono text-[10px] text-faint">
+                    SASB weight {Math.round(w)}%
+                  </span>
+                </div>
+              );
+            })}
           </div>
-          {evidence.absent_topics.length > 0 && (
-            <p className="mt-2 text-[11px] text-faint">
-              Undisclosed material topics: {evidence.absent_topics.join(", ")} — lowers confidence, not the score.
+          <p className="mt-2 text-[11px] text-faint">
+            Pillars are weighted into the rating by <span className="text-muted">SASB materiality</span>{" "}
+            (E {Math.round(pillarWeight("E"))}% · S {Math.round(pillarWeight("S"))}% · G {Math.round(pillarWeight("G"))}%
+            for {company.sasb_industry}) — the materiality %, never a topic count. Each pillar uses
+            REAL evidence where we have it: <span className="text-muted">E</span> from CDP + Climate
+            TRACE, <span className="text-muted">S</span> from the company&apos;s workforce-safety
+            disclosures, <span className="text-muted">G</span> from its grid-resiliency disclosures.
+            A pillar with no real signal falls back to the rating agencies as a reference.
+          </p>
+        </div>
+        <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
+          <h3 className="mb-2 text-sm font-semibold text-txt">Emission trajectory</h3>
+          {impact && impact.annual && impact.annual.length > 1 ? (
+            <>
+              <LineChart data={impact.annual.map((a) => Math.round((a.emissions / 1e6) * 100) / 100)}
+                labels={impact.annual.map((a) => String(a.year))} color="#ec6f63" valueSuffix=" Mt" />
+              <p className="mt-1 text-[11px] text-faint">
+                {impact.annual.map((a) => a.year).join(" → ")} · real owned-asset CO₂e (Climate TRACE)
+                {(() => {
+                  const a = impact.annual;
+                  const d = (a[a.length - 1].emissions - a[0].emissions) / 1e6;
+                  return ` · ${d >= 0 ? "↑" : "↓"} ${Math.abs(d).toFixed(1)} Mt since ${a[0].year}`;
+                })()}
+              </p>
+            </>
+          ) : (
+            <p className="text-[12px] text-faint">
+              No multi-year Climate TRACE coverage for this owner — trajectory N.A.
             </p>
           )}
         </div>
-        <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
-          <h3 className="mb-2 text-sm font-semibold text-txt">Verified-evidence trajectory</h3>
-          {seriesPts.length > 1 && (
-            <LineChart data={seriesPts.map((s) => s.total as number)}
-              labels={seriesPts.map((s) => String(s.year))} color="#4cc4d4" valueSuffix="" />
-          )}
-          <p className="mt-1 text-[11px] text-faint">
-            {seriesPts.map((s) => s.year).join(" → ")} · momentum {signed(signal.momentum)} / yr
-          </p>
-          <MomentumBars series={series} />
-        </div>
       </div>
+
+      <MaterialityWeights rating={rating} industry={company.sasb_industry} />
+
+      <ImpactMateriality impact={impact} />
+
+      <DoubleMaterialityPanel dm={data.double_materiality} />
 
       {/* PRICE WITNESS */}
       <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
@@ -284,10 +323,10 @@ export default function CompanyPage({ id }: { id: string }) {
 
       {peers.length > 0 && (
         <PeerTable
-          peers={peers}
+          peers={ratingPeers}
           selfId={id}
           selfName={company.name}
-          selfTotal={evidence.total}
+          selfTotal={rating.total}
           sector={company.sector ?? null}
         />
       )}

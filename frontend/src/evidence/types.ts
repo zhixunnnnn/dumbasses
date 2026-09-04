@@ -43,12 +43,19 @@ export type CompanyRow = {
   ticker: string;
   sector: string;
   country: string;
+  rating_total: number | null;           // headline ESG rating (agency consensus, SASB-weighted)
+  rating_provenance?: Provenance | null;
+  rating_coverage?: number | null;
+  price?: number | null;                 // last close (local currency)
+  price_chg?: number | null;             // weekly % change
+  spark?: number[] | null;               // recent closes for the trend sparkline
   evidence_total: number | null;
   confidence: number;
   consensus: number | null;
   divergence: number | null;
   evidence_gap: number | null;
-  momentum: number | null;
+  momentum: number | null;               // redefined: emission momentum (decarbonising = +)
+  emission_momentum?: number | null;
   quadrant: QuadrantKey | null;
   is_underpriced_improver: boolean;
   compliance_score: number | null;
@@ -109,6 +116,110 @@ export type SeriesPoint = {
   total: number | null;
   pillars: Record<string, number | null>;
   confidence: number;
+};
+
+// The ESG RATING: agency consensus (MSCI / Sustainalytics / CDP), SASB-material-weighted,
+// on one 0..100 quality scale. This is the headline ESG score (replaces evidence.total).
+export type RatingScore = {
+  company_id: string;
+  year: number;
+  total: number | null;
+  pillars: { E: number | null; S: number | null; G: number | null };
+  coverage: number;
+  contributions: Record<string, number>;
+  topic_breakdown: {
+    topic_id: string; name: string; pillar: "E" | "S" | "G";
+    weight: number; score: number | null; contribution: number | null;
+  }[];
+  agencies: string[];
+  provenance: Provenance | null;
+  trace: TraceNode;
+};
+
+export type RatingSeriesPoint = {
+  year: number;
+  total: number | null;
+  pillars: Record<string, number | null>;
+  provenance: Provenance | null;
+};
+
+// ESRS double-materiality composite: financial (ESG rating) × impact (carbon intensity) − greenwashing.
+export type DoubleMateriality = {
+  company_id: string;
+  financial: number | null;
+  impact: number | null;
+  composite: number | null;
+  weight_financial: number;
+  weight_impact: number;
+  carbon_intensity: number | null;
+  intensity_rank: number | null;
+  intensity_peers: number | null;
+  greenwashing_penalty: number;
+  greenwashing_drivers: { label: string; points: number; detail: string }[];
+  greenwashing_headlines?: { title: string; source: string; url: string }[];
+  under_attributed: boolean;
+  provenance: Provenance | null;
+  note: string | null;
+};
+
+// Real Yahoo fundamentals — the CGS-investor finance panel (ported from smartass).
+export type CompanyFundamentals = {
+  profile: {
+    name: string | null; sector: string | null; industry: string | null;
+    employees: number | null; summary: string | null; website: string | null;
+    city: string | null; country: string | null; ceo: string | null; exchange: string | null;
+  };
+  financials: {
+    currency: string | null; market_cap: number | null; market_cap_fmt: string | null;
+    enterprise_value: number | null; revenue: number | null; revenue_fmt: string | null;
+    ebitda: number | null; gross_margin: number | null; operating_margin: number | null;
+    profit_margin: number | null; roe: number | null; roa: number | null;
+    revenue_growth: number | null; debt_to_equity: number | null;
+    free_cashflow: number | null; current_ratio: number | null;
+  };
+  valuation: {
+    trailing_pe: number | null; forward_pe: number | null; price_to_book: number | null;
+    peg: number | null; ev_to_ebitda: number | null; eps_trailing: number | null;
+    book_value: number | null; beta: number | null; dividend_yield: number | null;
+    dividend_rate: number | null; payout_ratio: number | null;
+    fifty_two_high: number | null; fifty_two_low: number | null;
+  };
+  ratings: {
+    recommendation: string | null; recommendation_mean: number | null; n_analysts: number | null;
+    target_mean: number | null; target_high: number | null; target_low: number | null;
+    current_price: number | null;
+    distribution: { strongBuy: number; buy: number; hold: number; sell: number; strongSell: number } | null;
+  };
+};
+
+// Impact materiality: the REAL CO2e of the company's owned power assets, from Climate TRACE.
+// The outward half of double materiality (the rating is the inward half). null => N.A.
+export type ImpactAsset = {
+  name: string | null;
+  subsector: string | null;
+  country: string | null;
+  emissions: number | null;   // tCO2e
+};
+
+export type ImpactMateriality = {
+  company_id: string;
+  owner_id: string | null;
+  owner_name: string | null;
+  note: string | null;
+  year: number;
+  gas: string;
+  total_emissions_tonnes: number | null;
+  asset_count: number;
+  top_assets: ImpactAsset[];
+  subsector_mix: { subsector: string; emissions: number }[];
+  monthly: { month: number; emissions: number }[];
+  annual: { year: number; emissions: number }[];
+  rank: number | null;
+  peers: number | null;
+  panel_share: number | null;
+  provenance: Provenance | null;
+  source: string;
+  source_url: string | null;
 };
 
 export type RaterKey = "msci" | "sp" | "sustainalytics" | "cdp";
@@ -456,6 +567,11 @@ export type CompanyDetail = {
     sasb_industry: string;
     scope: string;
   };
+  rating: RatingScore;
+  rating_series: RatingSeriesPoint[];
+  impact?: ImpactMateriality | null;
+  double_materiality?: DoubleMateriality | null;
+  fundamentals?: CompanyFundamentals | null;
   evidence: EvidenceScore;
   series: SeriesPoint[];
   raters: Raters;
@@ -470,7 +586,7 @@ export type CompanyDetail = {
     source_url?: string;
     source_title?: string;
   };
-  peers: { id: string; name: string; evidence_total: number | null }[];
+  peers: { id: string; name: string; evidence_total: number | null; rating_total: number | null }[];
   latest_real_raters?: LatestRealRater[] | null;
   cdp_disclosure?: CdpDisclosure | null;
   benchmark?: IndustryBenchmark | null;

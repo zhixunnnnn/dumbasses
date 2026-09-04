@@ -1,0 +1,639 @@
+{
+ "meta": {
+  "generated": "2026-08-29T06:00:09.611870+00:00",
+  "source": "Yahoo Finance quoteSummary",
+  "is_real": true
+ },
+ "companies": {
+  "U96": {
+   "profile": {
+    "name": "Sembcorp Industries Ltd",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified",
+    "employees": 4629,
+    "summary": "Sembcorp Industries Ltd, an investment holding company, engages in providing industrial and urban solutions in Singapore, China, India, Vietnam, the UK, Oman, Rest of Middle East and Rest of Asia, and internationally. The company operates through five segments: Gas and Related Services, Renewables, Integrated Urban Solutions, Decarbonisation Solutions, and Other Businesses and Corporate. The Gas and Related Service segment engages in the sale of energy molecules, including natural gas, steam, and electricity from various fossil fuels, such as natural gas; and water products. The Renewables segment provides electricity from solar and wind resources and energy storage solutions, as well as system services that support integration of renewables into grid. This segment also includes the development and provision of installation, operation, and maintenance of solar, wind, and energy storage assets. The Integrated Urban Solutions segment develops large-scale integrated urban and integrated townships, such as industrial parks, business, commercial and residential spaces, and production and reclamation of water and industrial wastewater treatment, as well as solid waste management and waste-to-resource solutions. The Decarbonisation Solutions segment trades in environmental attributes, green hydrogen and ammonia, and power, as well as engages in carbon capture, utilization, and storage business. The Other Businesses and Corporate segment engages in the construction and minting activities; and insurance and financial services. The company was formerly known as Minaret Limited and changed its name to Sembcorp Industries Ltd in July 1998. Sembcorp Industries Ltd was incorporated in 1998 and is headquartered in Singapore.",
+    "website": "https://www.sembcorp.com",
+    "city": "Singapore",
+    "country": "Singapore",
+    "ceo": "Mr. Kim Yin  Wong",
+    "exchange": "SES"
+   },
+   "financials": {
+    "currency": "SGD",
+    "market_cap": 10700291072,
+    "market_cap_fmt": "10.70B",
+    "enterprise_value": 24857944064,
+    "revenue": 6627999744,
+    "revenue_fmt": "6.63B",
+    "ebitda": 1298000000,
+    "gross_margin": 0.18422002,
+    "operating_margin": 0.09865,
+    "profit_margin": 0.090220004,
+    "roe": 0.11178,
+    "roa": 0.02369,
+    "revenue_growth": 0.282,
+    "debt_to_equity": 267.426,
+    "free_cashflow": -630750016,
+    "current_ratio": 1.156
+   },
+   "valuation": {
+    "trailing_pe": 18.212122,
+    "forward_pe": 9.610772,
+    "price_to_book": 1.9576548,
+    "peg": 2.85,
+    "ev_to_ebitda": 19.151,
+    "eps_trailing": 0.33,
+    "book_value": 3.07,
+    "beta": 0.063,
+    "dividend_yield": 0.0361,
+    "dividend_rate": 0.22,
+    "payout_ratio": 0.7499,
+    "fifty_two_high": 7.2,
+    "fifty_two_low": 5.22
+   },
+   "ratings": {
+    "recommendation": "buy",
+    "recommendation_mean": 1.76923,
+    "n_analysts": 13,
+    "target_mean": 6.52769,
+    "target_high": 7.3,
+    "target_low": 5.25,
+    "current_price": 6.01,
+    "distribution": {
+     "strongBuy": 2,
+     "buy": 7,
+     "hold": 4,
+     "sell": 0,
+     "strongSell": 0
+    }
+   }
+  },
+  "TNB": {
+   "profile": {
+    "name": "Tenaga Nasional Berhad",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric",
+    "employees": 31063,
+    "summary": "Tenaga Nasional Berhad engages in the generation, transmission, distribution, and sale of electricity in Malaysia, the United Kingdom, Kuwait, the Republic of Ireland, Australia, and internationally. It operates and maintains thermal and hydroelectric power plants; and operates and manages the National Grid that is connected to Thailand's transmission system, as well as Singapore's transmission system at Senoko. The company also supplies fuel and coal for power generation; generates, distributes, supplies, deals in, and sells various energy sources, as well as provides related technical services; develops district cooling systems; operates and maintains co-generation works; manufactures, sells, and repairs distribution, power, and earthing transformers; and owns, develops, and manages dry bulk terminals. In addition, it provides turnkey contracting services to transmission substations; repair and maintenance services to heavy industries and other related services; operation and maintenance services to telecommunication equipment and data centres; higher education, telecommunication, and IT infrastructure solution and services; research and development services in the areas of engineering, information technology, business, accountancy, and liberal studies; and training courses. Further, the company offers insurance and reinsurance, technical and laboratory, consultancy, and other services; manufactures and distributes power and general cables, and aluminum rods; operates an integrated district cooling systems for air conditioning systems of office buildings; assembles, manufactures, tests, reconditions, and distributes high and medium voltage switchgears and control gears for transmission and distribution of electric power; and operates wind assets. It primarily serves commercial, industrial, and residential customers. The company was founded in 1949 and is headquartered in Kuala Lumpur, Malaysia.",
+    "website": "https://www.tnb.com.my",
+    "city": "Kuala Lumpur",
+    "country": "Malaysia",
+    "ceo": "Mr. Shamsul  Bin Ahmad",
+    "exchange": "Kuala Lumpur"
+   },
+   "financials": {
+    "currency": "MYR",
+    "market_cap": 82424070144,
+    "market_cap_fmt": "82.42B",
+    "enterprise_value": 162064072704,
+    "revenue": 67868200960,
+    "revenue_fmt": "67.87B",
+    "ebitda": 17075300352,
+    "gross_margin": 0.35298002,
+    "operating_margin": 0.1113,
+    "profit_margin": 0.06687,
+    "roe": 0.07814,
+    "roa": 0.024530001,
+    "revenue_growth": 0.154,
+    "debt_to_equity": 172.593,
+    "free_cashflow": -755787520,
+    "current_ratio": 0.91
+   },
+   "valuation": {
+    "trailing_pe": 18.128206,
+    "forward_pe": 15.745401,
+    "price_to_book": 1.6228623,
+    "peg": 1.32,
+    "ev_to_ebitda": 9.491,
+    "eps_trailing": 0.78,
+    "book_value": 8.713,
+    "beta": 0.332,
+    "dividend_yield": 0.0396,
+    "dividend_rate": 0.56,
+    "payout_ratio": 0.6807,
+    "fifty_two_high": 14.9,
+    "fifty_two_low": 12.5
+   },
+   "ratings": {
+    "recommendation": "strong_buy",
+    "recommendation_mean": 1.38095,
+    "n_analysts": 21,
+    "target_mean": 16.54914,
+    "target_high": 18.15,
+    "target_low": 14.18,
+    "current_price": 14.14,
+    "distribution": {
+     "strongBuy": 4,
+     "buy": 15,
+     "hold": 2,
+     "sell": 0,
+     "strongSell": 0
+    }
+   }
+  },
+  "YTLP": {
+   "profile": {
+    "name": "YTL Power International Berhad",
+    "sector": "Utilities",
+    "industry": "Utilities - Diversified",
+    "employees": null,
+    "summary": "YTL Power International Berhad, an investment holding company, provides electricity, clean water, sewerage system, and telecommunication services in Malaysia, Singapore, the United Kingdom, and internationally. It operates through four segments: Power Generation, Water and Sewerage, Telecommunications, and Investment Holding Activities. The company develops, constructs, owns, and operates solar photovoltaic power plants; constructs telecommunications infrastructure; and generates electricity from green energy sources, as well as provides engineering, procurement, construction, and commissioning services; supplies water and treats sewage; and wastewater services. It also provides consultancy services in energy management and clean energy system; 4G and 5G services under the YES brand; provides wired line and wireless broadband access, and other related services; and oil trading and oil storage tank leasing and bunkering, computer systems integration, housing development, construction management, and consultancy services, as well as engages in financing activities. In addition, the company issues bonds; develops web environment products; operates as a license reseller for virtual learning educational platforms; operates electric vehicle charging station; and designs and constructs power generating facilities. Further, it engages in the transmission, distribution, and sale of electricity; trading of fuel related derivative instruments; hotel and food waste treatment business; processing of digital payments through e-money platform; sale of by-products from the electricity generation process; development, operation, and marketing of data center projects and related infrastructure, services, and activities; cloud computing services; and letting commercial properties, as well as arena development. The company was incorporated in 1996 and is headquartered in Kuala Lumpur, Malaysia.",
+    "website": "https://www.ytlpowerinternational.com",
+    "city": "Kuala Lumpur",
+    "country": "Malaysia",
+    "ceo": "Sir Sock Ping Yeoh B.Sc., CBE, DPMP, DPMS, FICE, Hon LLD, J.P., JMN",
+    "exchange": "Kuala Lumpur"
+   },
+   "financials": {
+    "currency": "MYR",
+    "market_cap": 49853071360,
+    "market_cap_fmt": "49.85B",
+    "enterprise_value": 80690069504,
+    "revenue": 22022809600,
+    "revenue_fmt": "22.02B",
+    "ebitda": 5679874048,
+    "gross_margin": 0.21687001,
+    "operating_margin": 0.15883,
+    "profit_margin": 0.07658,
+    "roe": 0.080170006,
+    "roa": 0.02984,
+    "revenue_growth": 0.14,
+    "debt_to_equity": 181.184,
+    "free_cashflow": -4832485376,
+    "current_ratio": 1.232
+   },
+   "valuation": {
+    "trailing_pe": 30.263159,
+    "forward_pe": 19.281067,
+    "price_to_book": 2.2478497,
+    "peg": 3.38,
+    "ev_to_ebitda": 14.206,
+    "eps_trailing": 0.19,
+    "book_value": 2.558,
+    "beta": -0.01,
+    "dividend_yield": 0.0139,
+    "dividend_rate": 0.08,
+    "payout_ratio": 0.432,
+    "fifty_two_high": 6.02,
+    "fifty_two_low": 2.51
+   },
+   "ratings": {
+    "recommendation": "strong_buy",
+    "recommendation_mean": 1.5,
+    "n_analysts": 14,
+    "target_mean": 6.285,
+    "target_high": 8.01,
+    "target_low": 4.43,
+    "current_price": 5.75,
+    "distribution": {
+     "strongBuy": 1,
+     "buy": 10,
+     "hold": 3,
+     "sell": 0,
+     "strongSell": 0
+    }
+   }
+  },
+  "EGCO": {
+   "profile": {
+    "name": "Electricity Generating Public Company Limited",
+    "sector": "Utilities",
+    "industry": "Utilities - Independent Power Producers",
+    "employees": null,
+    "summary": "Electricity Generating Public Company Limited, together with its subsidiaries, generates and sells electricity to government sector and industrial users primarily in Thailand, Laos, the Philippines, Indonesia, Australia, South Korea, Taiwan, and the United States. It operates through Electricity Generation and Other Businesses segments. The company generates electricity from various resources, such as biomass, hydropower, solar and wind power, battery energy, and fuel cell. It also involved in operation, maintenance, engineering and construction services to power plants, petrochemical plants, oil refineries and other industries; coal mining, management, and oil pipeline business. The company was incorporated in 1992 and is based in Bangkok, Thailand.",
+    "website": "https://www.egco.com/th/home",
+    "city": "Bangkok",
+    "country": "Thailand",
+    "ceo": "Mr. Tawatchai  Sumranwanich",
+    "exchange": "Thailand"
+   },
+   "financials": {
+    "currency": "THB",
+    "market_cap": 71336009728,
+    "market_cap_fmt": "71.34B",
+    "enterprise_value": 134028156928,
+    "revenue": 30124808192,
+    "revenue_fmt": "30.12B",
+    "ebitda": 3100958976,
+    "gross_margin": 0.11847,
+    "operating_margin": 0.084989995,
+    "profit_margin": 0.01763,
+    "roe": 0.00504,
+    "roa": 0.0029300002,
+    "revenue_growth": -0.09,
+    "debt_to_equity": 99.999,
+    "free_cashflow": -3689925120,
+    "current_ratio": 1.288
+   },
+   "valuation": {
+    "trailing_pe": 132.84314,
+    "forward_pe": 11.308422,
+    "price_to_book": 0.7053655,
+    "peg": 1.09,
+    "ev_to_ebitda": 43.222,
+    "eps_trailing": 1.02,
+    "book_value": 192.099,
+    "beta": 0.31,
+    "dividend_yield": 0.049099997,
+    "dividend_rate": 6.5,
+    "payout_ratio": 6.4356,
+    "fifty_two_high": 143.0,
+    "fifty_two_low": 107.0
+   },
+   "ratings": {
+    "recommendation": "buy",
+    "recommendation_mean": 2.11111,
+    "n_analysts": 9,
+    "target_mean": 142.66667,
+    "target_high": 187.0,
+    "target_low": 100.0,
+    "current_price": 135.5,
+    "distribution": {
+     "strongBuy": 0,
+     "buy": 4,
+     "hold": 5,
+     "sell": 0,
+     "strongSell": 0
+    }
+   }
+  },
+  "RATCH": {
+   "profile": {
+    "name": "Ratch Group Public Company Limited",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Electric",
+    "employees": null,
+    "summary": "Ratch Group Public Company Limited, an energy and infrastructure company, engages in the generation and sales of electricity and steam in Thailand, Australia, Singapore, Indonesia, and internationally. The company operates through four segments: Domestic Electricity Generating, Domestic Renewable Energy, International Power Projects, and Domestic Related Business and Infrastructure. It generates electricity through natural gas, coal, and fuel oil, as well as invests in renewable power generation including solar, wind, biomass and hydro power. The company also offers power plant operation and maintenance services, as well as invests in the power energy business. Ratch Group Public Company Limited was incorporated in 2000 and is headquartered in Nonthaburi, Thailand.",
+    "website": "https://www.ratch.co.th",
+    "city": "Nonthaburi",
+    "country": "Thailand",
+    "ceo": "Mr. Nitus  Voraphonpiput",
+    "exchange": "Thailand"
+   },
+   "financials": {
+    "currency": "THB",
+    "market_cap": 82650005504,
+    "market_cap_fmt": "82.65B",
+    "enterprise_value": 188341501952,
+    "revenue": 34060904448,
+    "revenue_fmt": "34.06B",
+    "ebitda": 3157214720,
+    "gross_margin": 0.074099995,
+    "operating_margin": -0.011720001,
+    "profit_margin": 0.16357,
+    "roe": 0.06091,
+    "roa": -0.0018600001,
+    "revenue_growth": 0.852,
+    "debt_to_equity": 100.332,
+    "free_cashflow": -5269194240,
+    "current_ratio": 1.104
+   },
+   "valuation": {
+    "trailing_pe": 14.84375,
+    "forward_pe": 11.725753,
+    "price_to_book": 0.82068115,
+    "peg": 6.2,
+    "ev_to_ebitda": 59.654,
+    "eps_trailing": 2.56,
+    "book_value": 46.303,
+    "beta": 0.143,
+    "dividend_yield": 0.0368,
+    "dividend_rate": 1.4,
+    "payout_ratio": 0.625,
+    "fifty_two_high": 39.75,
+    "fifty_two_low": 25.5
+   },
+   "ratings": {
+    "recommendation": "buy",
+    "recommendation_mean": 1.88889,
+    "n_analysts": 9,
+    "target_mean": 39.36667,
+    "target_high": 45.0,
+    "target_low": 32.0,
+    "current_price": 38.0,
+    "distribution": {
+     "strongBuy": 1,
+     "buy": 5,
+     "hold": 2,
+     "sell": 0,
+     "strongSell": 1
+    }
+   }
+  },
+  "BGRIM": {
+   "profile": {
+    "name": "B.Grimm Power Public Company Limited",
+    "sector": "Utilities",
+    "industry": "Utilities - Independent Power Producers",
+    "employees": null,
+    "summary": "B.Grimm Power Public Company Limited, together with its subsidiaries, engages in the development, financing, construction, and operation of green-field power plants in Thailand and internationally. The company operates through Electricity Generating and Other Businesses segments. The Electricity Generation segment generates and distributes electricity for the government sectors and industrial users and procure and wholesale liquefied natural gas. The Other Businesses segment provides investment holding, maintenance, and operating services for power plants. It generates electricity through solar, hydro, and wind power; invests in electric, solar, and renewable power business; develops electricity generation systems; and manages smart grid networks. The company is also involved in solar power plant project management; procurement and wholesale natural gas; land development for power plant project; and operation and maintenance service, as well as management consulting. In addition, it It generates and distributes electricity for the government sectors and industrial users. The company operates in Vietnam, Cambodia, the United States, the Republic of Korea, and the Philippines. B.Grimm Power Public Company Limited was founded in 1878 and is headquartered in Bangkok, Thailand.",
+    "website": "https://www.bgrimmpower.com",
+    "city": "Bangkok",
+    "country": "Thailand",
+    "ceo": "Ms. Siriwong  Borvornboonrutai",
+    "exchange": "Thailand"
+   },
+   "financials": {
+    "currency": "THB",
+    "market_cap": 53962829824,
+    "market_cap_fmt": "53.96B",
+    "enterprise_value": 180066828288,
+    "revenue": 54462464000,
+    "revenue_fmt": "54.46B",
+    "ebitda": 12784234496,
+    "gross_margin": 0.19195999,
+    "operating_margin": 0.11238,
+    "profit_margin": 0.04428,
+    "roe": 0.07742,
+    "roa": 0.025020001,
+    "revenue_growth": 0.004,
+    "debt_to_equity": 263.305,
+    "free_cashflow": 2775573504,
+    "current_ratio": 1.189
+   },
+   "valuation": {
+    "trailing_pe": 36.315792,
+    "forward_pe": 21.550154,
+    "price_to_book": 2.8575375,
+    "peg": 2.65,
+    "ev_to_ebitda": 14.085,
+    "eps_trailing": 0.57,
+    "book_value": 7.244,
+    "beta": 0.926,
+    "dividend_yield": 0.0198,
+    "dividend_rate": 0.41,
+    "payout_ratio": 0.7228,
+    "fifty_two_high": 21.4,
+    "fifty_two_low": 10.3
+   },
+   "ratings": {
+    "recommendation": "buy",
+    "recommendation_mean": 1.8125,
+    "n_analysts": 16,
+    "target_mean": 19.48125,
+    "target_high": 25.0,
+    "target_low": 14.8,
+    "current_price": 20.7,
+    "distribution": {
+     "strongBuy": 1,
+     "buy": 9,
+     "hold": 6,
+     "sell": 0,
+     "strongSell": 0
+    }
+   }
+  },
+  "GULF": {
+   "profile": {
+    "name": "Gulf Development Public Company Limited",
+    "sector": "Utilities",
+    "industry": "Utilities - Independent Power Producers",
+    "employees": null,
+    "summary": "Gulf Development Public Company Limited generates and sells electricity and steam to public and private clients in Thailand and internationally. The company operates through Power Business, Consulting Business, Infrastructure Business and Satellite and Digital Business segments. It generates electricity through gas-fired, solar, biomass hydroelectric, waste-to-energy, and wind power projects under independent power producers and small power producers. The company undertakes infrastructure and logistics projects; distributes, supplies, and sells natural gas; and operates a digital infrastructure. In addition, the company is involved in the management, technical support, technology, investment services; storing and converting natural gas; satellite and related services; sale of direct television and satellite equipment; transponder services; engineering and development services; broadband network and content services; and broadcasting, television, and telecommunication services. Further, it provides system integration consultancy services for broadband network and technology systems, products and services related to artificial intelligence and space technology. Gulf Development Public Company Limited was founded in 2007 and is based in Bangkok, Thailand.",
+    "website": "https://www.gulf.co.th",
+    "city": "Bangkok",
+    "country": "Thailand",
+    "ceo": "Mr. Sarath  Ratanavadi",
+    "exchange": "Thailand"
+   },
+   "financials": {
+    "currency": "THB",
+    "market_cap": 944944709632,
+    "market_cap_fmt": "944.94B",
+    "enterprise_value": 1345461682176,
+    "revenue": 142484258816,
+    "revenue_fmt": "142.48B",
+    "ebitda": 31873703936,
+    "gross_margin": 0.19944,
+    "operating_margin": 0.17593001,
+    "profit_margin": 0.26451,
+    "roe": 0.12365,
+    "roa": 0.021170001,
+    "revenue_growth": 0.155,
+    "debt_to_equity": 122.337,
+    "free_cashflow": -23589826560,
+    "current_ratio": 1.034
+   },
+   "valuation": {
+    "trailing_pe": 36.142857,
+    "forward_pe": 24.82797,
+    "price_to_book": 2.994083,
+    "peg": 2.87,
+    "ev_to_ebitda": 42.212,
+    "eps_trailing": 1.75,
+    "book_value": 21.125,
+    "beta": null,
+    "dividend_yield": 0.0166,
+    "dividend_rate": 1.05,
+    "payout_ratio": 0.0,
+    "fifty_two_high": 68.5,
+    "fifty_two_low": 39.75
+   },
+   "ratings": {
+    "recommendation": "strong_buy",
+    "recommendation_mean": 1.11765,
+    "n_analysts": 16,
+    "target_mean": 78.41812,
+    "target_high": 91.0,
+    "target_low": 68.0,
+    "current_price": 63.25,
+    "distribution": {
+     "strongBuy": 2,
+     "buy": 15,
+     "hold": 0,
+     "sell": 0,
+     "strongSell": 0
+    }
+   }
+  },
+  "PGAS": {
+   "profile": {
+    "name": "PT Perusahaan Gas Negara (Persero) Tbk",
+    "sector": "Utilities",
+    "industry": "Utilities - Regulated Gas",
+    "employees": 3319,
+    "summary": "PT Perusahaan Gas Negara (Persero) Tbk, together with its subsidiaries, engages in the transmission and distribution of natural gas in Indonesia. It operates through three segments: Trading and Transmission, Exploration and Production of Oil and Gas, and Other Operations. The company is involved in the trading and transmission of oil and gas; processing of liquefied natural gas (LNG) to industrial, commercial and household customers; and trading of LNG and natural gas. It also engages in exploration, exploitation, and business development in oil and gas; provision of fiber optic for network services, as well as construction and maintenance services to customers and management; management and leasing buildings and equipment; and distribution of oil and natural gas. In addition, the company provides telecommunication, engineering, consultancy and services. The company was formerly known as PT Perusahaan Gas Negara Tbk and changed its name to PT Perusahaan Gas Negara (Persero) Tbk in January 2026. The company was founded in 1859 and is headquartered in Jakarta, Indonesia. As of April 30, 2018, PT Perusahaan Gas Negara (Persero) Tbk operates as a subsidiary of PT Pertamina (Persero).",
+    "website": "https://pgn.co.id",
+    "city": "Jakarta",
+    "country": "Indonesia",
+    "ceo": "Mr. Fadjar Harianto Widodo",
+    "exchange": "Jakarta"
+   },
+   "financials": {
+    "currency": "IDR",
+    "market_cap": 36604676669440,
+    "market_cap_fmt": "36.60T",
+    "enterprise_value": 36605297426432,
+    "revenue": 3938916352,
+    "revenue_fmt": "3.94B",
+    "ebitda": 864728384,
+    "gross_margin": 0.18101999,
+    "operating_margin": 0.13191,
+    "profit_margin": 0.061890002,
+    "roe": 0.10092,
+    "roa": 0.05302,
+    "revenue_growth": -0.038,
+    "debt_to_equity": 29.053,
+    "free_cashflow": 228038624,
+    "current_ratio": 2.006
+   },
+   "valuation": {
+    "trailing_pe": 8.488869,
+    "forward_pe": 119841.27,
+    "price_to_book": 12905.983,
+    "peg": 0.42,
+    "ev_to_ebitda": 42331.555,
+    "eps_trailing": 177.88,
+    "book_value": 0.117,
+    "beta": 0.088,
+    "dividend_yield": 0.08180001,
+    "dividend_rate": 125.61,
+    "payout_ratio": 1.1209999,
+    "fifty_two_high": 2520.0,
+    "fifty_two_low": 1350.0
+   },
+   "ratings": {
+    "recommendation": "buy",
+    "recommendation_mean": 1.71429,
+    "n_analysts": 14,
+    "target_mean": 1970.6395,
+    "target_high": 2617.3801,
+    "target_low": 1379.43,
+    "current_price": 1510.0,
+    "distribution": {
+     "strongBuy": 2,
+     "buy": 8,
+     "hold": 4,
+     "sell": 0,
+     "strongSell": 0
+    }
+   }
+  },
+  "POWR": {
+   "profile": {
+    "name": "PT Cikarang Listrindo Tbk",
+    "sector": "Utilities",
+    "industry": "Utilities - Independent Power Producers",
+    "employees": 849,
+    "summary": "PT Cikarang Listrindo Tbk engages in the generation, transmission, and distribution of electricity in Indonesia. The company owns and operates gas and coal power plants with a total installed capacity of 1,144 MW and a rooftop solar power of 35.8 MWp; transmission line of 150 kV; and distribution line of 20kV. It also offers public electric vehicle charging station. It serves light and medium manufacturing, such as automotive, electronic, plastic, food, chemical, consumer goods, heavy, data center, and other industries. PT Cikarang Listrindo Tbk was founded in 1990 and is headquartered in Jakarta, Indonesia.",
+    "website": "https://www.listrindo.com",
+    "city": "Jakarta",
+    "country": "Indonesia",
+    "ceo": "Mr. Andrew K. Labbaika",
+    "exchange": "Jakarta"
+   },
+   "financials": {
+    "currency": "IDR",
+    "market_cap": 14266349387776,
+    "market_cap_fmt": "14.27T",
+    "enterprise_value": 14266395525120,
+    "revenue": 556940480,
+    "revenue_fmt": "556.94M",
+    "ebitda": 171874016,
+    "gross_margin": 0.443,
+    "operating_margin": 0.24263,
+    "profit_margin": 0.12488,
+    "roe": 0.09866,
+    "roa": 0.05799,
+    "revenue_growth": 0.079,
+    "debt_to_equity": 48.847,
+    "free_cashflow": 50021056,
+    "current_ratio": 7.114
+   },
+   "valuation": {
+    "trailing_pe": 11.556241,
+    "forward_pe": 180000.0,
+    "price_to_book": 20000.0,
+    "peg": null,
+    "ev_to_ebitda": 83004.95,
+    "eps_trailing": 77.88,
+    "book_value": 0.045,
+    "beta": 0.021,
+    "dividend_yield": 0.0797,
+    "dividend_rate": 73.73,
+    "payout_ratio": 0.96089995,
+    "fifty_two_high": 945.0,
+    "fifty_two_low": 670.0
+   },
+   "ratings": {
+    "recommendation": "none",
+    "recommendation_mean": null,
+    "n_analysts": 1,
+    "target_mean": 831.19495,
+    "target_high": 831.19495,
+    "target_low": 831.19495,
+    "current_price": 900.0,
+    "distribution": {
+     "strongBuy": 0,
+     "buy": 1,
+     "hold": 0,
+     "sell": 0,
+     "strongSell": 0
+    }
+   }
+  },
+  "POW": {
+   "profile": {
+    "name": "PetroVietnam Power Corporation - JSC",
+    "sector": "Utilities",
+    "industry": "Utilities - Independent Power Producers",
+    "employees": 2182,
+    "summary": "PetroVietnam Power Corporation - JSC, together with its subsidiaries, engages in the production and distribution of industrial and consumer electricity in Vietnam. The company manages and operates power plants; provides short-term and specialized training services; offers labor for operation and maintenance of industrial facilities, and power plants; installs electrical systems at construction sites; provides management services for power projects and electrical construction consulting services; offers warehousing and storage of goods; and wholesales solid, liquid, gaseous fuel, and related products. It also constructs power plants and electrical industry projects; constructs and develops power infrastructure, and medium and low voltage grids; invests in and constructs independent power producer projects; constructs, develops, and manages clean development mechanism power projects; purchases electrical systems at construction sites; trades in equipment, materials, and spare parts for electricity production and trading; provides information technology and certified emission reductions from power plants; and researches and applies technological advancements in power project investment and development. The company provides technical, repair, and operation services; human resource training for operation management; and maintenance services for electricity production and business, as well as rents means of transport, cranes, and towing; trades in ash, slag, and scrap products; and imports and exports energy, raw materials, equipment, supplies, and spare parts for electricity production and business. It also imports and exports commodities. The company was incorporated in 2007 and is based in Hanoi, Vietnam. PetroVietnam Power Corporation - JSC is a subsidiary of Vietnam Oil and Gas Group.",
+    "website": "https://pvpower.vn",
+    "city": "Hanoi",
+    "country": "Vietnam",
+    "ceo": "Mr. Linh Nhu Le",
+    "exchange": "HOSE"
+   },
+   "financials": {
+    "currency": "VND",
+    "market_cap": 40188776546304,
+    "market_cap_fmt": "40.19T",
+    "enterprise_value": 54993684004864,
+    "revenue": 49392123904000,
+    "revenue_fmt": "49.39T",
+    "ebitda": 10987504664576,
+    "gross_margin": 0.18261999,
+    "operating_margin": 0.21169001,
+    "profit_margin": 0.12345,
+    "roe": 0.1691,
+    "roa": 0.0495,
+    "revenue_growth": 1.161,
+    "debt_to_equity": 85.279,
+    "free_cashflow": -6337809350656,
+    "current_ratio": 1.375
+   },
+   "valuation": {
+    "trailing_pe": 6.6769285,
+    "forward_pe": 18.089758,
+    "price_to_book": 0.97136503,
+    "peg": null,
+    "ev_to_ebitda": 5.005,
+    "eps_trailing": 1961.98,
+    "book_value": 13486.176,
+    "beta": 0.689,
+    "dividend_yield": null,
+    "dividend_rate": null,
+    "payout_ratio": 0.0,
+    "fifty_two_high": 16850.0,
+    "fifty_two_low": 10840.336
+   },
+   "ratings": {
+    "recommendation": "buy",
+    "recommendation_mean": 1.66667,
+    "n_analysts": 9,
+    "target_mean": 16233.333,
+    "target_high": 17800.0,
+    "target_low": 15000.0,
+    "current_price": 13100.0,
+    "distribution": {
+     "strongBuy": 0,
+     "buy": 6,
+     "hold": 3,
+     "sell": 0,
+     "strongSell": 0
+    }
+   }
+  }
+ }
+}

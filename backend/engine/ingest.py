@@ -172,6 +172,11 @@ def load(db_path=None) -> Dataset:
         raters = _overlay_reports(raters)   # a verbatim citation beats the table
     except Exception:
         pass
+    try:  # ...then real Sustainalytics ESG Risk Ratings (Morningstar), on their own year
+        from backend.data.realsustainalytics import overlay as _overlay_sustain
+        raters = _overlay_sustain(raters)
+    except Exception:
+        pass
     # ...and finally hand-entered ratings, which outrank every automated source
     from .manual_raters import overlay as _overlay_manual
     raters = _overlay_manual(raters)

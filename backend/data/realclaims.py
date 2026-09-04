@@ -58,9 +58,12 @@ MAX_CANDIDATES = 8        # PDFs we are willing to fetch per company-year before
 # for the years we have already verified by hand. SERP discovery runs for the rest.
 PINNED_REPORTS: dict[str, dict[int, str]] = {
     # Hand-verified official report PDFs keyed by the REPORT's own year, which removes SERP
-    # roulette for the years we have checked. Empty for the ASEAN utilities roster: none has
-    # been verified by hand yet, so every company-year goes through SERP discovery and an
-    # unfindable year is recorded as a MISS rather than filled from a neighbouring year.
+    # roulette for the years we have checked. Sembcorp folds its ESG disclosures into the
+    # integrated annual report (no standalone sustainability-report PDF), so SERP discovery —
+    # which excludes annual reports to avoid misattribution — never finds it. Pinning the AR
+    # directly is the hand-verified exception: it carries Sembcorp's real workforce-safety (S)
+    # and governance (G) disclosures.
+    "U96": {2023: "https://www.sembcorp.com/media/2eungaft/sembcorp_ar2023.pdf"},
 }
 
 MIN_REPORT_YEAR = 2015                 # older than this is never a report we track

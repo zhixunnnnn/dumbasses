@@ -9,6 +9,7 @@ import { RAW_COMPANIES, type RawCompany } from "./realCompanies";
 type ApiCompanyRow = {
   id: string;
   ticker: string;
+  rating_total: number | null;
   evidence_total: number | null;
   confidence: number | null;
   consensus: number | null;
@@ -54,7 +55,9 @@ function buildCompany(raw: RawCompany, real: ApiCompanyRow | undefined): Company
       founded: raw.est,
       employees: raw.emp,
     },
-    esgScore: real?.consensus ?? null,
+    // The headline ESG number is now the agency-consensus RATING (SASB-weighted), not the
+    // rater percentile consensus. evidenceScore is kept as supporting disclosure evidence.
+    esgScore: real?.rating_total ?? null,
     evidenceScore: real?.evidence_total ?? null,
     evidencePct: real?.evidence_pct ?? null,
     evidenceBasis: real?.evidence_basis ?? null,

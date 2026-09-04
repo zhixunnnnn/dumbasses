@@ -1,0 +1,16 @@
+{
+  "_comment": "REAL Sustainalytics ESG Risk Ratings, hand-recorded from the Morningstar Sustainalytics rating pages (Morningstar is Sustainalytics' distributor; Sustainalytics retired its own free lookup and Yahoo removed its sustainability tab, so this is the reliable public surface). Each value is the company's current ESG Risk Rating on Sustainalytics' own scale (LOWER = better; the engine inverts it). The assessment year is 2026 — the rating shown 'as of' late Aug 2026 — recorded on its own year exactly as real MSCI (2024) and CDP scores are, never re-dated onto the 2023 analysis window. GULF and POW are intentionally absent: Morningstar shows no Sustainalytics ESG Risk Rating for them, so they keep their seeded (illustrative) value rather than a fabricated one.",
+  "source": "Morningstar Sustainalytics ESG Risk Rating",
+  "observed_on": "2026-08-29",
+  "assessment_year": 2026,
+  "companies": {
+    "U96":  { "value": 28.6, "url": "https://www.morningstar.com/stocks/xses/u96/sustainability" },
+    "TNB":  { "value": 27.3, "url": "https://www.morningstar.com/stocks/xkls/5347/sustainability" },
+    "YTLP": { "value": 44.1, "url": "https://www.morningstar.com/stocks/xkls/6742/sustainability" },
+    "EGCO": { "value": 33.9, "url": "https://www.morningstar.com/stocks/xbkk/egco/sustainability" },
+    "RATCH":{ "value": 26.8, "url": "https://www.morningstar.com/stocks/xbkk/ratch/sustainability" },
+    "BGRIM":{ "value": 29.8, "url": "https://www.morningstar.com/stocks/xbkk/bgrim/sustainability" },
+    "PGAS": { "value": 26.5, "url": "https://www.morningstar.com/stocks/xidx/pgas/sustainability" },
+    "POWR": { "value": 26.4, "url": "https://www.morningstar.com/stocks/xidx/powr/sustainability" }
+  }
+}

@@ -9,6 +9,468 @@
     "sasb_industry": "Electric Utilities & Power Generators",
     "scope": "demo"
   },
+  "rating": {
+    "company_id": "U96",
+    "year": 2023,
+    "total": 81.7,
+    "pillars": {
+      "E": 80.3,
+      "S": 85.7,
+      "G": 85.7
+    },
+    "coverage": 1.0,
+    "contributions": {
+      "ghg_emissions": 24.09,
+      "energy_transition": 20.07,
+      "workforce_safety": 12.86,
+      "air_quality": 8.03,
+      "water_management": 8.03,
+      "grid_resiliency": 8.57
+    },
+    "topic_breakdown": [
+      {
+        "topic_id": "ghg_emissions",
+        "name": "GHG emissions",
+        "pillar": "E",
+        "weight": 30.0,
+        "score": 80.3,
+        "contribution": 24.09
+      },
+      {
+        "topic_id": "energy_transition",
+        "name": "Energy transition",
+        "pillar": "E",
+        "weight": 25.0,
+        "score": 80.3,
+        "contribution": 20.07
+      },
+      {
+        "topic_id": "workforce_safety",
+        "name": "Workforce safety",
+        "pillar": "S",
+        "weight": 15.0,
+        "score": 85.7,
+        "contribution": 12.86
+      },
+      {
+        "topic_id": "air_quality",
+        "name": "Air quality",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 80.3,
+        "contribution": 8.03
+      },
+      {
+        "topic_id": "water_management",
+        "name": "Water management",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 80.3,
+        "contribution": 8.03
+      },
+      {
+        "topic_id": "grid_resiliency",
+        "name": "Grid resiliency",
+        "pillar": "G",
+        "weight": 10.0,
+        "score": 85.7,
+        "contribution": 8.57
+      }
+    ],
+    "agencies": [
+      "msci",
+      "sustainalytics"
+    ],
+    "provenance": "real",
+    "trace": {
+      "label": "ESG rating 2023 = SASB-weighted agency consensus",
+      "value": 81.7,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "Agency inputs (normalized 0..100)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "MSCI → 100.0/100 (real, 2023)",
+              "value": 100.0,
+              "contribution": null,
+              "source_sentence": "MSCI rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "Sustainalytics → 71.4/100 (real, 2026)",
+              "value": 71.4,
+              "contribution": null,
+              "source_sentence": "Sustainalytics rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "Material topics (renormalized over covered weight)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "ghg_emissions · pillar E · w=0.3 (from CDP, Climate TRACE intensity)",
+              "value": 80.3,
+              "contribution": 24.09,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "energy_transition · pillar E · w=0.25 (from CDP, Climate TRACE intensity)",
+              "value": 80.3,
+              "contribution": 20.07,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "workforce_safety · pillar S · w=0.15 (from MSCI, Sustainalytics)",
+              "value": 85.7,
+              "contribution": 12.86,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "air_quality · pillar E · w=0.1 (from CDP, Climate TRACE intensity)",
+              "value": 80.3,
+              "contribution": 8.03,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "water_management · pillar E · w=0.1 (from CDP, Climate TRACE intensity)",
+              "value": 80.3,
+              "contribution": 8.03,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "grid_resiliency · pillar G · w=0.1 (from MSCI, Sustainalytics)",
+              "value": 85.7,
+              "contribution": 8.57,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "rating_series": [
+    {
+      "year": 2019,
+      "total": 71.4,
+      "pillars": {
+        "E": 71.4,
+        "S": 71.4,
+        "G": 71.4
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2020,
+      "total": 71.4,
+      "pillars": {
+        "E": 71.4,
+        "S": 71.4,
+        "G": 71.4
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2021,
+      "total": 71.4,
+      "pillars": {
+        "E": 71.4,
+        "S": 71.4,
+        "G": 71.4
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2022,
+      "total": 71.4,
+      "pillars": {
+        "E": 71.4,
+        "S": 71.4,
+        "G": 71.4
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2023,
+      "total": 81.7,
+      "pillars": {
+        "E": 80.3,
+        "S": 85.7,
+        "G": 85.7
+      },
+      "provenance": "real"
+    }
+  ],
+  "impact": {
+    "owner_id": "E100000000909",
+    "owner_name": "Sembcorp Industries Ltd",
+    "note": null,
+    "year": 2023,
+    "gas": "co2e_100yr",
+    "total_emissions_tonnes": 4630220,
+    "asset_count": 3,
+    "top_assets": [
+      {
+        "name": "Sirajgonj power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "BGD",
+        "emissions": 2513000
+      },
+      {
+        "name": "Pulau Sakra power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "SGP",
+        "emissions": 1958100
+      },
+      {
+        "name": "Wilton International power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "GBR",
+        "emissions": 159120
+      }
+    ],
+    "subsector_mix": [
+      {
+        "subsector": "electricity-generation",
+        "emissions": 4630220.0
+      }
+    ],
+    "monthly": [
+      {
+        "month": 1,
+        "emissions": 346450
+      },
+      {
+        "month": 2,
+        "emissions": 314700
+      },
+      {
+        "month": 3,
+        "emissions": 384220
+      },
+      {
+        "month": 4,
+        "emissions": 405020
+      },
+      {
+        "month": 5,
+        "emissions": 413050
+      },
+      {
+        "month": 6,
+        "emissions": 421480
+      },
+      {
+        "month": 7,
+        "emissions": 432160
+      },
+      {
+        "month": 8,
+        "emissions": 424240
+      },
+      {
+        "month": 9,
+        "emissions": 404410
+      },
+      {
+        "month": 10,
+        "emissions": 389860
+      },
+      {
+        "month": 11,
+        "emissions": 347840
+      },
+      {
+        "month": 12,
+        "emissions": 346790
+      }
+    ],
+    "provenance": "real",
+    "source": "Climate TRACE v7",
+    "source_url": "https://api.climatetrace.org/v7",
+    "annual": [
+      {
+        "year": 2021,
+        "emissions": 4711570
+      },
+      {
+        "year": 2022,
+        "emissions": 4727140
+      },
+      {
+        "year": 2023,
+        "emissions": 4630220
+      },
+      {
+        "year": 2024,
+        "emissions": 4584190
+      },
+      {
+        "year": 2025,
+        "emissions": 4411380
+      }
+    ],
+    "company_id": "U96",
+    "rank": 4,
+    "peers": 9,
+    "panel_share": 0.072
+  },
+  "double_materiality": {
+    "company_id": "U96",
+    "financial": 81.7,
+    "impact": 85.7,
+    "composite": 65.3,
+    "weight_financial": 0.6,
+    "weight_impact": 0.4,
+    "carbon_intensity": 554.8,
+    "intensity_rank": 2,
+    "intensity_peers": 8,
+    "greenwashing_penalty": 18.0,
+    "greenwashing_drivers": [
+      {
+        "label": "Recent controversies",
+        "points": 18.0,
+        "detail": "6 recent ESG controversy headline(s)."
+      }
+    ],
+    "greenwashing_headlines": [
+      {
+        "title": "Temasek-backed Sembcorp Industries accused of greenwashing in India coal sale",
+        "source": "CNBC TV18",
+        "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQejJ6ZlFibV83Q0xwSVBYZXRlS1BUd3IyZlRvcWxhRzNGS25ETnVqbkw3Y1J5V2xPQllKM0xRZG80ZS11a09jM3Q2amdLR1l5aERHVXpqdGhENnl4dlVBd0FQdzVSajBjUng1QjNXSGhqbVNRZlAybllCbkxydWVaUmRlVmgzeXl0T2ZQSF83bTdJY1lVV015MmdGN3R1Z1FhUThmM3UwcjcybmtFa1pud1FvcnRFNno4OWdQVTRySmM4M0FxYk9RRTloSEhMZXfSAdQBQVVfeXFMT2Jsc3N4cV9mSXhBb2J5Tkp5bWxiYmhUb3F3MWNFaWd4cUVGRjJmRU84X3dGcjNzRElXSXdTTEhhQmhUdVhZYzRfdUZNbjUzQ3BDc214amxZSzkwbmg4eXJnTVRXUE5hak83M2p0dHB5UlAtZHlvVlNCbEt4WkQ5aVA4eEgyd3VfZ1VHdDROM0llSWhKQWM0QTBZZDlsYVVQeVVRTXBXZHFNMElyZnNPdmNKdjNCTld6ajl5NUZfQ2RpX2lYbE92Yl9nelEtZ01QR2FOOU0?oc=5"
+      },
+      {
+        "title": "Sembcorp Industries settling lawsuit against OK Lim, his children for US$50.9 million",
+        "source": "The Business Times",
+        "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPRXNSMDF4amg0WEZXNFEwUVVFLUtOZURTdG9zb3lLanhjR05CalZEUjUwWDVNRUYzMHpFdm0yUDVQSlFqV0cyQmtqTnRLcjh4OUV4NzU1bmF0bEVod2tvSlpVMHUxN1hsNEZ3Y1lndHhZTm9HQl8zRkZJUTY3czFXVk1XenRadGQzVmM5UGFVUnBOUDZmTXR5bldVU2V3WjJSNTNpTGhSNW1FOW1GRTZ0ZzJfNTVXdllmVUk0ajJtQ09aQzNLWDR6MzBNa0pIQjNYN01YMEo4emlaNFpDMmJ0YkdrQQ?oc=5"
+      },
+      {
+        "title": "Sembcorp Industries' Nanjing water-treatment JV fined S$10m for pollution offences; key execs jailed",
+        "source": "The Business Times",
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPV2NTb1A0OU1zM2JZa2ZTeVI5Vm81TVBQYU0xUXM0UXpNTzBpelB3LVFWOWFMNmhuVkJHUEY2VERSTGRfLXJuMnpNT1dOQWZtRFlyZGdDc3JJamI1eWxsdElnVzZyckQ2T01hTURNa2F6UEFrNUI2eTl6X2Y3VnJ1b0xYQVZrVTFiSkpOV0c4LU9qSXQ0UzhrNnFiUmIwcFVNTVVJaTNhVmQwaFYyTnZJN0xLSTVSV1llREJwQTRPU0Y2c2VfbURNYjd1UQ?oc=5"
+      },
+      {
+        "title": "Sembcorp Marine commercial executive charged with corruption",
+        "source": "The Business Times",
+        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxONURlS0ZDeWJfWGhjVTBKOWttYmN5WnQyb2NVTXhxUzZrdENTcG5pWTFKOTNFMWtMOHk5M3R1emMyaDZBa0NndWNEMHFPS1lPN3gwOVUzRWFZRFZyOHFsd3FxT1V2czVvSmdhQ2VNVlFNWFhxS3ZzYU9lMVlDMUhPNExxc2ZoSDNMWFRIbkN0NExyaDdmM3ZmdVlrdmZwYmd2WEhrbWI5T1lSQQ?oc=5"
+      },
+      {
+        "title": "Sembcorp’s subsidiary settles legal dispute with Universal Terminal, final terms confidential",
+        "source": "The Edge Singapore",
+        "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQSEtuUGY4SGFBSktYMWk0eGpwZWpYakRSQ0tpUnU0djFteEFGbzMwd28xb1VfU0NNaEhLbVpNSlFfTXhSb3ZNVVU0Q3dYVUl0SjZYWjFEZ2NtVXhLVVZNX0ttbGZNTkM4V3JaczJYTk95Nmo1NEZTQ09nU0luNlJqTzFaNGx2MmhELWlaVzFXdDdOSFRVTTRZc2k4V0JVZ1RnX0N6dVdGLS15R1ppQ0h4aFFlbmwyejZOTUdHS09zZi1Mdw?oc=5"
+      },
+      {
+        "title": "Sembcorp unit agrees to settle gasoil claims dispute",
+        "source": "Singapore Business Review",
+        "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5RSnZQbjZwOVhIR0I2bWJkUDA1UG9Ybi1kemJ4dEtRUU4ycHVQU2lpUWo0MmZmbHpxekhEZmRsNUFuSExGVk1HS0pwSDJPNk02d0hScHVlMmtYRzNtRGt2YUFpVVc1b01KNnMtVkJhNi1ob0UxX0pCMlRTSFJUUQ?oc=5"
+      }
+    ],
+    "under_attributed": false,
+    "provenance": "real",
+    "note": null
+  },
+  "fundamentals": {
+    "profile": {
+      "name": "Sembcorp Industries Ltd",
+      "sector": "Utilities",
+      "industry": "Utilities - Diversified",
+      "employees": 4629,
+      "summary": "Sembcorp Industries Ltd, an investment holding company, engages in providing industrial and urban solutions in Singapore, China, India, Vietnam, the UK, Oman, Rest of Middle East and Rest of Asia, and internationally. The company operates through five segments: Gas and Related Services, Renewables, Integrated Urban Solutions, Decarbonisation Solutions, and Other Businesses and Corporate. The Gas and Related Service segment engages in the sale of energy molecules, including natural gas, steam, and electricity from various fossil fuels, such as natural gas; and water products. The Renewables segment provides electricity from solar and wind resources and energy storage solutions, as well as system services that support integration of renewables into grid. This segment also includes the development and provision of installation, operation, and maintenance of solar, wind, and energy storage assets. The Integrated Urban Solutions segment develops large-scale integrated urban and integrated townships, such as industrial parks, business, commercial and residential spaces, and production and reclamation of water and industrial wastewater treatment, as well as solid waste management and waste-to-resource solutions. The Decarbonisation Solutions segment trades in environmental attributes, green hydrogen and ammonia, and power, as well as engages in carbon capture, utilization, and storage business. The Other Businesses and Corporate segment engages in the construction and minting activities; and insurance and financial services. The company was formerly known as Minaret Limited and changed its name to Sembcorp Industries Ltd in July 1998. Sembcorp Industries Ltd was incorporated in 1998 and is headquartered in Singapore.",
+      "website": "https://www.sembcorp.com",
+      "city": "Singapore",
+      "country": "Singapore",
+      "ceo": "Mr. Kim Yin  Wong",
+      "exchange": "SES"
+    },
+    "financials": {
+      "currency": "SGD",
+      "market_cap": 10700291072,
+      "market_cap_fmt": "10.70B",
+      "enterprise_value": 24857944064,
+      "revenue": 6627999744,
+      "revenue_fmt": "6.63B",
+      "ebitda": 1298000000,
+      "gross_margin": 0.18422002,
+      "operating_margin": 0.09865,
+      "profit_margin": 0.090220004,
+      "roe": 0.11178,
+      "roa": 0.02369,
+      "revenue_growth": 0.282,
+      "debt_to_equity": 267.426,
+      "free_cashflow": -630750016,
+      "current_ratio": 1.156
+    },
+    "valuation": {
+      "trailing_pe": 18.212122,
+      "forward_pe": 9.610772,
+      "price_to_book": 1.9576548,
+      "peg": 2.85,
+      "ev_to_ebitda": 19.151,
+      "eps_trailing": 0.33,
+      "book_value": 3.07,
+      "beta": 0.063,
+      "dividend_yield": 0.0361,
+      "dividend_rate": 0.22,
+      "payout_ratio": 0.7499,
+      "fifty_two_high": 7.2,
+      "fifty_two_low": 5.22
+    },
+    "ratings": {
+      "recommendation": "buy",
+      "recommendation_mean": 1.76923,
+      "n_analysts": 13,
+      "target_mean": 6.52769,
+      "target_high": 7.3,
+      "target_low": 5.25,
+      "current_price": 6.01,
+      "distribution": {
+        "strongBuy": 2,
+        "buy": 7,
+        "hold": 4,
+        "sell": 0,
+        "strongSell": 0
+      }
+    }
+  },
   "evidence": {
     "company_id": "U96",
     "year": 2023,
@@ -214,21 +676,22 @@
     "company_id": "U96",
     "msci_pct": 95.0,
     "sp_pct": null,
-    "sustainalytics_pct": 20.0,
+    "sustainalytics_pct": 43.75,
     "cdp_pct": null,
     "real_raters": [
-      "msci"
+      "msci",
+      "sustainalytics"
     ],
     "rater_years": {
       "msci": 2023,
-      "sustainalytics": 2023
+      "sustainalytics": 2026
     },
     "basis": "Utilities",
     "peers": 10,
-    "consensus": 57.5,
-    "divergence": 75.0,
-    "consensus_provenance": "mixed",
-    "divergence_provenance": "mixed",
+    "consensus": 69.38,
+    "divergence": 51.25,
+    "consensus_provenance": "real",
+    "divergence_provenance": "real",
     "contributing": [
       "msci",
       "sustainalytics"
@@ -276,13 +739,13 @@
     "evidence_pct": 90.0,
     "evidence_basis": "Electric Utilities & Power Generators",
     "evidence_peers": 10,
-    "evidence_gap": 32.5,
-    "momentum": 6.8,
-    "esg_today": 57.5,
+    "evidence_gap": 20.62,
+    "momentum": 1.6,
+    "esg_today": 69.38,
     "quadrant": "FUTURE_LEADERS",
-    "esg_today_provenance": "mixed",
-    "evidence_gap_provenance": "mixed",
-    "quadrant_provenance": "mixed",
+    "esg_today_provenance": "real",
+    "evidence_gap_provenance": "real",
+    "quadrant_provenance": "real",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -437,8 +900,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=75.0, consensus 15.0->57.5)",
-          "value": 75.0,
+          "label": "opinion_flat=True (divergence=51.25, consensus 24.38->69.38)",
+          "value": 51.25,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -455,8 +918,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=32.5 (evidence 90.0 - consensus 57.5)",
-          "value": 32.5,
+          "label": "evidence_gap=20.62 (evidence 90.0 - consensus 69.38)",
+          "value": 20.62,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -7159,110 +7622,64 @@
     }
   },
   "claims": {
-    "claims": [
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "VERIFIED",
-        "text": "Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity in FY2023.",
-        "source_sentence": "In FY2023, Sembcorp Industries reduced Scope 1 and Scope 2 carbon emissions intensity.",
-        "source_doc": "U96-SR2023",
-        "source_page": 1,
-        "weight": 0.3
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "VERIFIED",
-        "text": "Sembcorp Industries grew its renewables and solar capacity as part of its decarbonisation ",
-        "source_sentence": "In FY2023, Sembcorp Industries grew its renewables and solar capacity as part of its decarbonisation transition.",
-        "source_doc": "U96-SR2023",
-        "source_page": 1,
-        "weight": 0.25
-      },
-      {
-        "topic_id": "workforce_safety",
-        "pillar": "S",
-        "state": "VERIFIED",
-        "text": "Sembcorp Industries reduced lost-time injuries through occupational health and safety prog",
-        "source_sentence": "In FY2023, Sembcorp Industries reduced lost-time injuries through occupational health and safety programmes.",
-        "source_doc": "U96-SR2023",
-        "source_page": 1,
-        "weight": 0.15
-      },
-      {
-        "topic_id": "air_quality",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "Sembcorp Industries cut NOx and particulate air quality emissions at its plants in FY2023.",
-        "source_sentence": "In FY2023, Sembcorp Industries cut NOx and particulate air quality emissions at its plants.",
-        "source_doc": "U96-SR2023",
-        "source_page": 1,
-        "weight": 0.1
-      },
-      {
-        "topic_id": "grid_resiliency",
-        "pillar": "G",
-        "state": "ASSERTED",
-        "text": "Sembcorp Industries improved grid reliability and supply security in FY2023.",
-        "source_sentence": "In FY2023, Sembcorp Industries improved grid reliability and supply security.",
-        "source_doc": "U96-SR2023",
-        "source_page": 1,
-        "weight": 0.1
-      }
-    ],
-    "absent": [
-      {
-        "topic_id": "water_management",
-        "state": "ABSENT"
-      }
-    ]
+    "claims": [],
+    "absent": [],
+    "live": false
   },
   "peers": [
     {
       "id": "YTLP",
       "name": "YTL Power International",
-      "evidence_total": 80.0
-    },
-    {
-      "id": "TNB",
-      "name": "Tenaga Nasional",
-      "evidence_total": 56.0
-    },
-    {
-      "id": "POWR",
-      "name": "Cikarang Listrindo",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "POW",
-      "name": "PetroVietnam Power",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "BGRIM",
-      "name": "B.Grimm Power",
-      "evidence_total": 50.5
+      "evidence_total": 80.0,
+      "rating_total": 87.3
     },
     {
       "id": "PGAS",
       "name": "Perusahaan Gas Negara",
-      "evidence_total": 50.0
+      "evidence_total": 50.0,
+      "rating_total": 72.5
     },
     {
-      "id": "RATCH",
-      "name": "Ratch Group",
-      "evidence_total": 44.0
+      "id": "TNB",
+      "name": "Tenaga Nasional",
+      "evidence_total": 56.0,
+      "rating_total": 63.0
     },
     {
-      "id": "EGCO",
-      "name": "Electricity Generating",
-      "evidence_total": 38.5
+      "id": "BGRIM",
+      "name": "B.Grimm Power",
+      "evidence_total": 50.5,
+      "rating_total": 59.4
     },
     {
       "id": "GULF",
       "name": "Gulf Development",
-      "evidence_total": 30.5
+      "evidence_total": 30.5,
+      "rating_total": 58.3
+    },
+    {
+      "id": "EGCO",
+      "name": "Electricity Generating",
+      "evidence_total": 38.5,
+      "rating_total": 45.8
+    },
+    {
+      "id": "POWR",
+      "name": "Cikarang Listrindo",
+      "evidence_total": 55.0,
+      "rating_total": 36.0
+    },
+    {
+      "id": "RATCH",
+      "name": "Ratch Group",
+      "evidence_total": 44.0,
+      "rating_total": 27.0
+    },
+    {
+      "id": "POW",
+      "name": "PetroVietnam Power",
+      "evidence_total": 55.0,
+      "rating_total": 0.0
     }
   ],
   "latest_real_raters": [

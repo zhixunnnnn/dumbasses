@@ -9,6 +9,423 @@
     "sasb_industry": "Electric Utilities & Power Generators",
     "scope": "demo"
   },
+  "rating": {
+    "company_id": "POWR",
+    "year": 2023,
+    "total": 36.0,
+    "pillars": {
+      "E": 28.6,
+      "S": 58.2,
+      "G": 58.2
+    },
+    "coverage": 1.0,
+    "contributions": {
+      "ghg_emissions": 8.58,
+      "energy_transition": 7.15,
+      "workforce_safety": 8.73,
+      "air_quality": 2.86,
+      "water_management": 2.86,
+      "grid_resiliency": 5.82
+    },
+    "topic_breakdown": [
+      {
+        "topic_id": "ghg_emissions",
+        "name": "GHG emissions",
+        "pillar": "E",
+        "weight": 30.0,
+        "score": 28.6,
+        "contribution": 8.58
+      },
+      {
+        "topic_id": "energy_transition",
+        "name": "Energy transition",
+        "pillar": "E",
+        "weight": 25.0,
+        "score": 28.6,
+        "contribution": 7.15
+      },
+      {
+        "topic_id": "workforce_safety",
+        "name": "Workforce safety",
+        "pillar": "S",
+        "weight": 15.0,
+        "score": 58.2,
+        "contribution": 8.73
+      },
+      {
+        "topic_id": "air_quality",
+        "name": "Air quality",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 28.6,
+        "contribution": 2.86
+      },
+      {
+        "topic_id": "water_management",
+        "name": "Water management",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 28.6,
+        "contribution": 2.86
+      },
+      {
+        "topic_id": "grid_resiliency",
+        "name": "Grid resiliency",
+        "pillar": "G",
+        "weight": 10.0,
+        "score": 58.2,
+        "contribution": 5.82
+      }
+    ],
+    "agencies": [
+      "msci",
+      "sustainalytics"
+    ],
+    "provenance": "real",
+    "trace": {
+      "label": "ESG rating 2023 = SASB-weighted agency consensus",
+      "value": 36.0,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "Agency inputs (normalized 0..100)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "MSCI → 42.9/100 (real, 2023)",
+              "value": 42.9,
+              "contribution": null,
+              "source_sentence": "MSCI rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "Sustainalytics → 73.6/100 (real, 2026)",
+              "value": 73.6,
+              "contribution": null,
+              "source_sentence": "Sustainalytics rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "Material topics (renormalized over covered weight)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "ghg_emissions · pillar E · w=0.3 (from Climate TRACE intensity)",
+              "value": 28.6,
+              "contribution": 8.58,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "energy_transition · pillar E · w=0.25 (from Climate TRACE intensity)",
+              "value": 28.6,
+              "contribution": 7.15,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "workforce_safety · pillar S · w=0.15 (from MSCI, Sustainalytics)",
+              "value": 58.2,
+              "contribution": 8.73,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "air_quality · pillar E · w=0.1 (from Climate TRACE intensity)",
+              "value": 28.6,
+              "contribution": 2.86,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "water_management · pillar E · w=0.1 (from Climate TRACE intensity)",
+              "value": 28.6,
+              "contribution": 2.86,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "grid_resiliency · pillar G · w=0.1 (from MSCI, Sustainalytics)",
+              "value": 58.2,
+              "contribution": 5.82,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "rating_series": [
+    {
+      "year": 2019,
+      "total": 73.6,
+      "pillars": {
+        "E": 73.6,
+        "S": 73.6,
+        "G": 73.6
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2020,
+      "total": 73.6,
+      "pillars": {
+        "E": 73.6,
+        "S": 73.6,
+        "G": 73.6
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2021,
+      "total": 73.6,
+      "pillars": {
+        "E": 73.6,
+        "S": 73.6,
+        "G": 73.6
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2022,
+      "total": 73.6,
+      "pillars": {
+        "E": 73.6,
+        "S": 73.6,
+        "G": 73.6
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2023,
+      "total": 36.0,
+      "pillars": {
+        "E": 28.6,
+        "S": 58.2,
+        "G": 58.2
+      },
+      "provenance": "real"
+    }
+  ],
+  "impact": {
+    "owner_id": "E100000001946",
+    "owner_name": "PT Cikarang Listrindo Tbk",
+    "note": null,
+    "year": 2023,
+    "gas": "co2e_100yr",
+    "total_emissions_tonnes": 2145300,
+    "asset_count": 1,
+    "top_assets": [
+      {
+        "name": "Jababeka Industrial Estate power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "IDN",
+        "emissions": 2145300
+      }
+    ],
+    "subsector_mix": [
+      {
+        "subsector": "electricity-generation",
+        "emissions": 2145300.0
+      }
+    ],
+    "monthly": [
+      {
+        "month": 1,
+        "emissions": 177200
+      },
+      {
+        "month": 2,
+        "emissions": 161700
+      },
+      {
+        "month": 3,
+        "emissions": 187500
+      },
+      {
+        "month": 4,
+        "emissions": 181800
+      },
+      {
+        "month": 5,
+        "emissions": 184800
+      },
+      {
+        "month": 6,
+        "emissions": 175400
+      },
+      {
+        "month": 7,
+        "emissions": 171600
+      },
+      {
+        "month": 8,
+        "emissions": 178500
+      },
+      {
+        "month": 9,
+        "emissions": 178500
+      },
+      {
+        "month": 10,
+        "emissions": 189400
+      },
+      {
+        "month": 11,
+        "emissions": 175700
+      },
+      {
+        "month": 12,
+        "emissions": 183200
+      }
+    ],
+    "provenance": "real",
+    "source": "Climate TRACE v7",
+    "source_url": "https://api.climatetrace.org/v7",
+    "annual": [
+      {
+        "year": 2021,
+        "emissions": 2141300
+      },
+      {
+        "year": 2022,
+        "emissions": 2188100
+      },
+      {
+        "year": 2023,
+        "emissions": 2145300
+      },
+      {
+        "year": 2024,
+        "emissions": 2175800
+      },
+      {
+        "year": 2025,
+        "emissions": 2170000
+      }
+    ],
+    "company_id": "POWR",
+    "rank": 8,
+    "peers": 9,
+    "panel_share": 0.034
+  },
+  "double_materiality": {
+    "company_id": "POWR",
+    "financial": 36.0,
+    "impact": 28.6,
+    "composite": 30.8,
+    "weight_financial": 0.6,
+    "weight_impact": 0.4,
+    "carbon_intensity": 2445.1,
+    "intensity_rank": 6,
+    "intensity_peers": 8,
+    "greenwashing_penalty": 2.2,
+    "greenwashing_drivers": [
+      {
+        "label": "Materiality gap",
+        "points": 2.2,
+        "detail": "Rated 36/100 on ESG but runs at 29/100 on actual carbon intensity — a 7-point reputation-vs-reality gap."
+      }
+    ],
+    "greenwashing_headlines": [],
+    "under_attributed": false,
+    "provenance": "real",
+    "note": null
+  },
+  "fundamentals": {
+    "profile": {
+      "name": "PT Cikarang Listrindo Tbk",
+      "sector": "Utilities",
+      "industry": "Utilities - Independent Power Producers",
+      "employees": 849,
+      "summary": "PT Cikarang Listrindo Tbk engages in the generation, transmission, and distribution of electricity in Indonesia. The company owns and operates gas and coal power plants with a total installed capacity of 1,144 MW and a rooftop solar power of 35.8 MWp; transmission line of 150 kV; and distribution line of 20kV. It also offers public electric vehicle charging station. It serves light and medium manufacturing, such as automotive, electronic, plastic, food, chemical, consumer goods, heavy, data center, and other industries. PT Cikarang Listrindo Tbk was founded in 1990 and is headquartered in Jakarta, Indonesia.",
+      "website": "https://www.listrindo.com",
+      "city": "Jakarta",
+      "country": "Indonesia",
+      "ceo": "Mr. Andrew K. Labbaika",
+      "exchange": "Jakarta"
+    },
+    "financials": {
+      "currency": "IDR",
+      "market_cap": 14266349387776,
+      "market_cap_fmt": "14.27T",
+      "enterprise_value": 14266395525120,
+      "revenue": 556940480,
+      "revenue_fmt": "556.94M",
+      "ebitda": 171874016,
+      "gross_margin": 0.443,
+      "operating_margin": 0.24263,
+      "profit_margin": 0.12488,
+      "roe": 0.09866,
+      "roa": 0.05799,
+      "revenue_growth": 0.079,
+      "debt_to_equity": 48.847,
+      "free_cashflow": 50021056,
+      "current_ratio": 7.114
+    },
+    "valuation": {
+      "trailing_pe": 11.556241,
+      "forward_pe": 180000.0,
+      "price_to_book": 20000.0,
+      "peg": null,
+      "ev_to_ebitda": 83004.95,
+      "eps_trailing": 77.88,
+      "book_value": 0.045,
+      "beta": 0.021,
+      "dividend_yield": 0.0797,
+      "dividend_rate": 73.73,
+      "payout_ratio": 0.96089995,
+      "fifty_two_high": 945.0,
+      "fifty_two_low": 670.0
+    },
+    "ratings": {
+      "recommendation": "none",
+      "recommendation_mean": null,
+      "n_analysts": 1,
+      "target_mean": 831.19495,
+      "target_high": 831.19495,
+      "target_low": 831.19495,
+      "current_price": 900.0,
+      "distribution": {
+        "strongBuy": 0,
+        "buy": 1,
+        "hold": 0,
+        "sell": 0,
+        "strongSell": 0
+      }
+    }
+  },
   "evidence": {
     "company_id": "POWR",
     "year": 2023,
@@ -196,21 +613,22 @@
     "company_id": "POWR",
     "msci_pct": 25.0,
     "sp_pct": null,
-    "sustainalytics_pct": 20.0,
+    "sustainalytics_pct": 93.75,
     "cdp_pct": null,
     "real_raters": [
-      "msci"
+      "msci",
+      "sustainalytics"
     ],
     "rater_years": {
       "msci": 2023,
-      "sustainalytics": 2023
+      "sustainalytics": 2026
     },
     "basis": "Utilities",
     "peers": 10,
-    "consensus": 22.5,
-    "divergence": 5.0,
-    "consensus_provenance": "mixed",
-    "divergence_provenance": "mixed",
+    "consensus": 59.38,
+    "divergence": 68.75,
+    "consensus_provenance": "real",
+    "divergence_provenance": "real",
     "contributing": [
       "msci",
       "sustainalytics"
@@ -259,13 +677,13 @@
     "evidence_pct": 60.0,
     "evidence_basis": "Electric Utilities & Power Generators",
     "evidence_peers": 10,
-    "evidence_gap": 37.5,
-    "momentum": 0.0,
-    "esg_today": 22.5,
+    "evidence_gap": 0.62,
+    "momentum": -0.2,
+    "esg_today": 59.38,
     "quadrant": "VALUE_TRAPS",
-    "esg_today_provenance": "mixed",
-    "evidence_gap_provenance": "mixed",
-    "quadrant_provenance": "mixed",
+    "esg_today_provenance": "real",
+    "evidence_gap_provenance": "real",
+    "quadrant_provenance": "real",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -401,8 +819,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=5.0, consensus 22.5->22.5)",
-          "value": 5.0,
+          "label": "opinion_flat=True (divergence=68.75, consensus 61.88->59.38)",
+          "value": 68.75,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -419,8 +837,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=37.5 (evidence 60.0 - consensus 22.5)",
-          "value": 37.5,
+          "label": "evidence_gap=0.62 (evidence 60.0 - consensus 59.38)",
+          "value": 0.62,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -7039,104 +7457,64 @@
     }
   },
   "claims": {
-    "claims": [
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "VERIFIED",
-        "text": "In FY2023, Cikarang Listrindo reduced Scope 1 and Scope 2 carbon emissions intensity.",
-        "source_sentence": "In FY2023, Cikarang Listrindo reduced Scope 1 and Scope 2 carbon emissions intensity.",
-        "source_doc": "POWR-SR2023",
-        "source_page": 1,
-        "weight": 0.3
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "In FY2023, Cikarang Listrindo grew its renewables and solar capacity as part of its decarb",
-        "source_sentence": "In FY2023, Cikarang Listrindo grew its renewables and solar capacity as part of its decarbonisation transition.",
-        "source_doc": "POWR-SR2023",
-        "source_page": 1,
-        "weight": 0.25
-      },
-      {
-        "topic_id": "workforce_safety",
-        "pillar": "S",
-        "state": "ASSERTED",
-        "text": "In FY2023, Cikarang Listrindo reduced lost-time injuries through occupational health and s",
-        "source_sentence": "In FY2023, Cikarang Listrindo reduced lost-time injuries through occupational health and safety programmes.",
-        "source_doc": "POWR-SR2023",
-        "source_page": 1,
-        "weight": 0.15
-      },
-      {
-        "topic_id": "grid_resiliency",
-        "pillar": "G",
-        "state": "ASSERTED",
-        "text": "In FY2023, Cikarang Listrindo improved grid reliability and supply security.",
-        "source_sentence": "In FY2023, Cikarang Listrindo improved grid reliability and supply security.",
-        "source_doc": "POWR-SR2023",
-        "source_page": 1,
-        "weight": 0.1
-      }
-    ],
-    "absent": [
-      {
-        "topic_id": "air_quality",
-        "state": "ABSENT"
-      },
-      {
-        "topic_id": "water_management",
-        "state": "ABSENT"
-      }
-    ]
+    "claims": [],
+    "absent": [],
+    "live": false
   },
   "peers": [
     {
-      "id": "U96",
-      "name": "Sembcorp Industries",
-      "evidence_total": 80.0
-    },
-    {
       "id": "YTLP",
       "name": "YTL Power International",
-      "evidence_total": 80.0
+      "evidence_total": 80.0,
+      "rating_total": 87.3
     },
     {
-      "id": "TNB",
-      "name": "Tenaga Nasional",
-      "evidence_total": 56.0
-    },
-    {
-      "id": "POW",
-      "name": "PetroVietnam Power",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "BGRIM",
-      "name": "B.Grimm Power",
-      "evidence_total": 50.5
+      "id": "U96",
+      "name": "Sembcorp Industries",
+      "evidence_total": 80.0,
+      "rating_total": 81.7
     },
     {
       "id": "PGAS",
       "name": "Perusahaan Gas Negara",
-      "evidence_total": 50.0
+      "evidence_total": 50.0,
+      "rating_total": 72.5
     },
     {
-      "id": "RATCH",
-      "name": "Ratch Group",
-      "evidence_total": 44.0
+      "id": "TNB",
+      "name": "Tenaga Nasional",
+      "evidence_total": 56.0,
+      "rating_total": 63.0
     },
     {
-      "id": "EGCO",
-      "name": "Electricity Generating",
-      "evidence_total": 38.5
+      "id": "BGRIM",
+      "name": "B.Grimm Power",
+      "evidence_total": 50.5,
+      "rating_total": 59.4
     },
     {
       "id": "GULF",
       "name": "Gulf Development",
-      "evidence_total": 30.5
+      "evidence_total": 30.5,
+      "rating_total": 58.3
+    },
+    {
+      "id": "EGCO",
+      "name": "Electricity Generating",
+      "evidence_total": 38.5,
+      "rating_total": 45.8
+    },
+    {
+      "id": "RATCH",
+      "name": "Ratch Group",
+      "evidence_total": 44.0,
+      "rating_total": 27.0
+    },
+    {
+      "id": "POW",
+      "name": "PetroVietnam Power",
+      "evidence_total": 55.0,
+      "rating_total": 0.0
     }
   ],
   "latest_real_raters": [],

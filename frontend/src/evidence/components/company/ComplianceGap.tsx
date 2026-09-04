@@ -5,6 +5,9 @@ import Why from "../common/Why";
 import ProvenanceBadge from "../common/ProvenanceBadge";
 
 export default function ComplianceGap({ compliance }: { compliance: Compliance }) {
+  // Per-company compliance status is illustrative unless live-scraped; a CGS terminal shows
+  // no seeded statuses, so the panel appears only when the tally is fully real.
+  if (compliance.provenance !== "real") return null;
   const all = [
     ...compliance.met,
     ...compliance.partial,

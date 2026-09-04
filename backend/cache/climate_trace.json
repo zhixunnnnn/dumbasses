@@ -1,0 +1,1110 @@
+{
+ "year": 2023,
+ "gas": "co2e_100yr",
+ "resolved_on": "2026-08-29",
+ "source": "https://api.climatetrace.org/v7",
+ "companies": {
+  "U96": {
+   "owner_id": "E100000000909",
+   "owner_name": "Sembcorp Industries Ltd",
+   "note": null,
+   "year": 2023,
+   "gas": "co2e_100yr",
+   "total_emissions_tonnes": 4630220,
+   "asset_count": 3,
+   "top_assets": [
+    {
+     "name": "Sirajgonj power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "BGD",
+     "emissions": 2513000
+    },
+    {
+     "name": "Pulau Sakra power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "SGP",
+     "emissions": 1958100
+    },
+    {
+     "name": "Wilton International power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "GBR",
+     "emissions": 159120
+    }
+   ],
+   "subsector_mix": [
+    {
+     "subsector": "electricity-generation",
+     "emissions": 4630220.0
+    }
+   ],
+   "monthly": [
+    {
+     "month": 1,
+     "emissions": 346450
+    },
+    {
+     "month": 2,
+     "emissions": 314700
+    },
+    {
+     "month": 3,
+     "emissions": 384220
+    },
+    {
+     "month": 4,
+     "emissions": 405020
+    },
+    {
+     "month": 5,
+     "emissions": 413050
+    },
+    {
+     "month": 6,
+     "emissions": 421480
+    },
+    {
+     "month": 7,
+     "emissions": 432160
+    },
+    {
+     "month": 8,
+     "emissions": 424240
+    },
+    {
+     "month": 9,
+     "emissions": 404410
+    },
+    {
+     "month": 10,
+     "emissions": 389860
+    },
+    {
+     "month": 11,
+     "emissions": 347840
+    },
+    {
+     "month": 12,
+     "emissions": 346790
+    }
+   ],
+   "provenance": "real",
+   "source": "Climate TRACE v7",
+   "source_url": "https://api.climatetrace.org/v7",
+   "annual": [
+    {
+     "year": 2021,
+     "emissions": 4711570
+    },
+    {
+     "year": 2022,
+     "emissions": 4727140
+    },
+    {
+     "year": 2023,
+     "emissions": 4630220
+    },
+    {
+     "year": 2024,
+     "emissions": 4584190
+    },
+    {
+     "year": 2025,
+     "emissions": 4411380
+    },
+    {
+     "year": 2026,
+     "emissions": 2180730
+    }
+   ]
+  },
+  "TNB": {
+   "owner_id": "E100000000706",
+   "owner_name": "Tenaga Nasional Bhd",
+   "note": null,
+   "year": 2023,
+   "gas": "co2e_100yr",
+   "total_emissions_tonnes": 19809750,
+   "asset_count": 6,
+   "top_assets": [
+    {
+     "name": "Sultan Aziz power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "MYS",
+     "emissions": 10784300
+    },
+    {
+     "name": "Lumut SEV power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "MYS",
+     "emissions": 2723100
+    },
+    {
+     "name": "Tuanku Jaafar power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "MYS",
+     "emissions": 2170200
+    },
+    {
+     "name": "Putrajaya power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "MYS",
+     "emissions": 1859800
+    },
+    {
+     "name": "Pasir Gudang (TNB) power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "MYS",
+     "emissions": 1821500
+    },
+    {
+     "name": "Gelugor power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "MYS",
+     "emissions": 450850
+    }
+   ],
+   "subsector_mix": [
+    {
+     "subsector": "electricity-generation",
+     "emissions": 19809750.0
+    }
+   ],
+   "monthly": [
+    {
+     "month": 1,
+     "emissions": 1611290
+    },
+    {
+     "month": 2,
+     "emissions": 1431580
+    },
+    {
+     "month": 3,
+     "emissions": 1784600
+    },
+    {
+     "month": 4,
+     "emissions": 1705680
+    },
+    {
+     "month": 5,
+     "emissions": 1791740
+    },
+    {
+     "month": 6,
+     "emissions": 1767820
+    },
+    {
+     "month": 7,
+     "emissions": 1742540
+    },
+    {
+     "month": 8,
+     "emissions": 1692290
+    },
+    {
+     "month": 9,
+     "emissions": 1550200
+    },
+    {
+     "month": 10,
+     "emissions": 1625650
+    },
+    {
+     "month": 11,
+     "emissions": 1542720
+    },
+    {
+     "month": 12,
+     "emissions": 1563640
+    }
+   ],
+   "provenance": "real",
+   "source": "Climate TRACE v7",
+   "source_url": "https://api.climatetrace.org/v7",
+   "annual": [
+    {
+     "year": 2021,
+     "emissions": 18520140
+    },
+    {
+     "year": 2022,
+     "emissions": 19385320
+    },
+    {
+     "year": 2023,
+     "emissions": 19809750
+    },
+    {
+     "year": 2024,
+     "emissions": 20311560
+    },
+    {
+     "year": 2025,
+     "emissions": 20084580
+    },
+    {
+     "year": 2026,
+     "emissions": 10225460
+    }
+   ]
+  },
+  "YTLP": {
+   "owner_id": "E100000004352",
+   "owner_name": "YTL PowerSeraya Pte Ltd",
+   "note": "The group's Singapore generation subsidiary; the YTL Power International holding company (E100000004351) carries no directly-attributed assets in Climate TRACE.",
+   "year": 2023,
+   "gas": "co2e_100yr",
+   "total_emissions_tonnes": 4502772,
+   "asset_count": 3,
+   "top_assets": [
+    {
+     "name": "Pulau Seraya power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "SGP",
+     "emissions": 3629600
+    },
+    {
+     "name": "Tuaspring Desalinisation power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "SGP",
+     "emissions": 829780
+    },
+    {
+     "name": "Jurong Power Station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "SGP",
+     "emissions": 43392
+    }
+   ],
+   "subsector_mix": [
+    {
+     "subsector": "electricity-generation",
+     "emissions": 4502772.0
+    }
+   ],
+   "monthly": [
+    {
+     "month": 1,
+     "emissions": 355162
+    },
+    {
+     "month": 2,
+     "emissions": 309775
+    },
+    {
+     "month": 3,
+     "emissions": 383466
+    },
+    {
+     "month": 4,
+     "emissions": 400964
+    },
+    {
+     "month": 5,
+     "emissions": 415716
+    },
+    {
+     "month": 6,
+     "emissions": 405538
+    },
+    {
+     "month": 7,
+     "emissions": 405669
+    },
+    {
+     "month": 8,
+     "emissions": 400449
+    },
+    {
+     "month": 9,
+     "emissions": 365088
+    },
+    {
+     "month": 10,
+     "emissions": 359646
+    },
+    {
+     "month": 11,
+     "emissions": 346368
+    },
+    {
+     "month": 12,
+     "emissions": 354931
+    }
+   ],
+   "provenance": "real",
+   "source": "Climate TRACE v7",
+   "source_url": "https://api.climatetrace.org/v7",
+   "annual": [
+    {
+     "year": 2021,
+     "emissions": 4245496
+    },
+    {
+     "year": 2022,
+     "emissions": 4611536
+    },
+    {
+     "year": 2023,
+     "emissions": 4502772
+    },
+    {
+     "year": 2024,
+     "emissions": 4634942
+    },
+    {
+     "year": 2025,
+     "emissions": 4623641
+    },
+    {
+     "year": 2026,
+     "emissions": 2331494
+    }
+   ]
+  },
+  "EGCO": {
+   "owner_id": "E100000002130",
+   "owner_name": "Electricity Generating PCL",
+   "note": null,
+   "year": 2023,
+   "gas": "co2e_100yr",
+   "total_emissions_tonnes": 4032212,
+   "asset_count": 7,
+   "top_assets": [
+    {
+     "name": "Kaeng Khoi 2 power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 1619400
+    },
+    {
+     "name": "Khanom power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 1479700
+    },
+    {
+     "name": "BANPONG TP and SK COGEN",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 387040
+    },
+    {
+     "name": "EGCO cogeneration (Rayong) power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 137820
+    },
+    {
+     "name": "Klong Luang power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 137500
+    },
+    {
+     "name": "Samutprakarn power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 135459
+    },
+    {
+     "name": "Nong Khae power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 135293
+    }
+   ],
+   "subsector_mix": [
+    {
+     "subsector": "electricity-generation",
+     "emissions": 4032212.0
+    }
+   ],
+   "monthly": [
+    {
+     "month": 1,
+     "emissions": 301200
+    },
+    {
+     "month": 2,
+     "emissions": 296509
+    },
+    {
+     "month": 3,
+     "emissions": 370830
+    },
+    {
+     "month": 4,
+     "emissions": 373280
+    },
+    {
+     "month": 5,
+     "emissions": 391870
+    },
+    {
+     "month": 6,
+     "emissions": 362490
+    },
+    {
+     "month": 7,
+     "emissions": 336990
+    },
+    {
+     "month": 8,
+     "emissions": 352610
+    },
+    {
+     "month": 9,
+     "emissions": 318240
+    },
+    {
+     "month": 10,
+     "emissions": 322940
+    },
+    {
+     "month": 11,
+     "emissions": 311210
+    },
+    {
+     "month": 12,
+     "emissions": 294043
+    }
+   ],
+   "provenance": "real",
+   "source": "Climate TRACE v7",
+   "source_url": "https://api.climatetrace.org/v7",
+   "annual": [
+    {
+     "year": 2021,
+     "emissions": 3981415
+    },
+    {
+     "year": 2022,
+     "emissions": 3720994
+    },
+    {
+     "year": 2023,
+     "emissions": 4032212
+    },
+    {
+     "year": 2024,
+     "emissions": 3999264
+    },
+    {
+     "year": 2025,
+     "emissions": 3988855
+    },
+    {
+     "year": 2026,
+     "emissions": 2073793
+    }
+   ]
+  },
+  "RATCH": {
+   "owner_id": "E100001011068",
+   "owner_name": "Ratchaburi Electricity Generating Co Ltd",
+   "note": null,
+   "year": 2023,
+   "gas": "co2e_100yr",
+   "total_emissions_tonnes": 6933900,
+   "asset_count": 1,
+   "top_assets": [
+    {
+     "name": "Ratchaburi (RATCHGEN) power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 6933900
+    }
+   ],
+   "subsector_mix": [
+    {
+     "subsector": "electricity-generation",
+     "emissions": 6933900.0
+    }
+   ],
+   "monthly": [
+    {
+     "month": 1,
+     "emissions": 517900
+    },
+    {
+     "month": 2,
+     "emissions": 509900
+    },
+    {
+     "month": 3,
+     "emissions": 637800
+    },
+    {
+     "month": 4,
+     "emissions": 641900
+    },
+    {
+     "month": 5,
+     "emissions": 673800
+    },
+    {
+     "month": 6,
+     "emissions": 623400
+    },
+    {
+     "month": 7,
+     "emissions": 579500
+    },
+    {
+     "month": 8,
+     "emissions": 606400
+    },
+    {
+     "month": 9,
+     "emissions": 547200
+    },
+    {
+     "month": 10,
+     "emissions": 555400
+    },
+    {
+     "month": 11,
+     "emissions": 535100
+    },
+    {
+     "month": 12,
+     "emissions": 505600
+    }
+   ],
+   "provenance": "real",
+   "source": "Climate TRACE v7",
+   "source_url": "https://api.climatetrace.org/v7",
+   "annual": [
+    {
+     "year": 2021,
+     "emissions": 6845400
+    },
+    {
+     "year": 2022,
+     "emissions": 6402100
+    },
+    {
+     "year": 2023,
+     "emissions": 6933900
+    },
+    {
+     "year": 2024,
+     "emissions": 6875100
+    },
+    {
+     "year": 2025,
+     "emissions": 6857100
+    },
+    {
+     "year": 2026,
+     "emissions": 3564800
+    }
+   ]
+  },
+  "BGRIM": {
+   "owner_id": "E100000001023",
+   "owner_name": "B.Grimm Power PCL",
+   "note": null,
+   "year": 2023,
+   "gas": "co2e_100yr",
+   "total_emissions_tonnes": 2999690,
+   "asset_count": 8,
+   "top_assets": [
+    {
+     "name": "Amata (Chonburi) power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 847620
+    },
+    {
+     "name": "Amata (Rayong) power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 711690
+    },
+    {
+     "name": "Ratchaburi (B.Grimm) power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 436530
+    },
+    {
+     "name": "Glow SPP 1 power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 427200
+    },
+    {
+     "name": "Laem Chabang power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 154590
+    },
+    {
+     "name": "Bangkadi Industrial Park power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 145900
+    },
+    {
+     "name": "Hemaraj Industrial Estate power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 138080
+    },
+    {
+     "name": "Chaiyo power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "THA",
+     "emissions": 138080
+    }
+   ],
+   "subsector_mix": [
+    {
+     "subsector": "electricity-generation",
+     "emissions": 2999690.0
+    }
+   ],
+   "monthly": [
+    {
+     "month": 1,
+     "emissions": 224060
+    },
+    {
+     "month": 2,
+     "emissions": 220570
+    },
+    {
+     "month": 3,
+     "emissions": 275900
+    },
+    {
+     "month": 4,
+     "emissions": 277700
+    },
+    {
+     "month": 5,
+     "emissions": 291500
+    },
+    {
+     "month": 6,
+     "emissions": 269700
+    },
+    {
+     "month": 7,
+     "emissions": 250700
+    },
+    {
+     "month": 8,
+     "emissions": 262350
+    },
+    {
+     "month": 9,
+     "emissions": 236720
+    },
+    {
+     "month": 10,
+     "emissions": 240250
+    },
+    {
+     "month": 11,
+     "emissions": 231500
+    },
+    {
+     "month": 12,
+     "emissions": 218740
+    }
+   ],
+   "provenance": "real",
+   "source": "Climate TRACE v7",
+   "source_url": "https://api.climatetrace.org/v7",
+   "annual": [
+    {
+     "year": 2021,
+     "emissions": 2519880
+    },
+    {
+     "year": 2022,
+     "emissions": 2515588
+    },
+    {
+     "year": 2023,
+     "emissions": 2999690
+    },
+    {
+     "year": 2024,
+     "emissions": 2967028
+    },
+    {
+     "year": 2025,
+     "emissions": 2959252
+    },
+    {
+     "year": 2026,
+     "emissions": 1538414
+    }
+   ]
+  },
+  "GULF": {
+   "owner_id": "E100000001030",
+   "owner_name": "Gulf Development PCL",
+   "note": null,
+   "year": 2023,
+   "gas": "co2e_100yr",
+   "total_emissions_tonnes": 404870,
+   "asset_count": 1,
+   "top_assets": [
+    {
+     "name": "Duqm Independent Water and power plant",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "OMN",
+     "emissions": 404870
+    }
+   ],
+   "subsector_mix": [
+    {
+     "subsector": "electricity-generation",
+     "emissions": 404870.0
+    }
+   ],
+   "monthly": [
+    {
+     "month": 1,
+     "emissions": 27670
+    },
+    {
+     "month": 2,
+     "emissions": 25610
+    },
+    {
+     "month": 3,
+     "emissions": 29020
+    },
+    {
+     "month": 4,
+     "emissions": 32390
+    },
+    {
+     "month": 5,
+     "emissions": 40650
+    },
+    {
+     "month": 6,
+     "emissions": 40970
+    },
+    {
+     "month": 7,
+     "emissions": 41480
+    },
+    {
+     "month": 8,
+     "emissions": 40350
+    },
+    {
+     "month": 9,
+     "emissions": 35760
+    },
+    {
+     "month": 10,
+     "emissions": 34620
+    },
+    {
+     "month": 11,
+     "emissions": 28110
+    },
+    {
+     "month": 12,
+     "emissions": 28240
+    }
+   ],
+   "provenance": "real",
+   "source": "Climate TRACE v7",
+   "source_url": "https://api.climatetrace.org/v7",
+   "annual": [
+    {
+     "year": 2021,
+     "emissions": 386570
+    },
+    {
+     "year": 2022,
+     "emissions": 400560
+    },
+    {
+     "year": 2023,
+     "emissions": 404870
+    },
+    {
+     "year": 2024,
+     "emissions": 412260
+    },
+    {
+     "year": 2025,
+     "emissions": 411340
+    },
+    {
+     "year": 2026,
+     "emissions": 199450
+    }
+   ]
+  },
+  "POWR": {
+   "owner_id": "E100000001946",
+   "owner_name": "PT Cikarang Listrindo Tbk",
+   "note": null,
+   "year": 2023,
+   "gas": "co2e_100yr",
+   "total_emissions_tonnes": 2145300,
+   "asset_count": 1,
+   "top_assets": [
+    {
+     "name": "Jababeka Industrial Estate power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "IDN",
+     "emissions": 2145300
+    }
+   ],
+   "subsector_mix": [
+    {
+     "subsector": "electricity-generation",
+     "emissions": 2145300.0
+    }
+   ],
+   "monthly": [
+    {
+     "month": 1,
+     "emissions": 177200
+    },
+    {
+     "month": 2,
+     "emissions": 161700
+    },
+    {
+     "month": 3,
+     "emissions": 187500
+    },
+    {
+     "month": 4,
+     "emissions": 181800
+    },
+    {
+     "month": 5,
+     "emissions": 184800
+    },
+    {
+     "month": 6,
+     "emissions": 175400
+    },
+    {
+     "month": 7,
+     "emissions": 171600
+    },
+    {
+     "month": 8,
+     "emissions": 178500
+    },
+    {
+     "month": 9,
+     "emissions": 178500
+    },
+    {
+     "month": 10,
+     "emissions": 189400
+    },
+    {
+     "month": 11,
+     "emissions": 175700
+    },
+    {
+     "month": 12,
+     "emissions": 183200
+    }
+   ],
+   "provenance": "real",
+   "source": "Climate TRACE v7",
+   "source_url": "https://api.climatetrace.org/v7",
+   "annual": [
+    {
+     "year": 2021,
+     "emissions": 2141300
+    },
+    {
+     "year": 2022,
+     "emissions": 2188100
+    },
+    {
+     "year": 2023,
+     "emissions": 2145300
+    },
+    {
+     "year": 2024,
+     "emissions": 2175800
+    },
+    {
+     "year": 2025,
+     "emissions": 2170000
+    },
+    {
+     "year": 2026,
+     "emissions": 1080800
+    }
+   ]
+  },
+  "POW": {
+   "owner_id": "E100000003809",
+   "owner_name": "PetroVietnam Power Corporation JSC",
+   "note": null,
+   "year": 2023,
+   "gas": "co2e_100yr",
+   "total_emissions_tonnes": 18499900,
+   "asset_count": 4,
+   "top_assets": [
+    {
+     "name": "Thai Binh Power Center",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "VNM",
+     "emissions": 8047500
+    },
+    {
+     "name": "Vung Ang power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "VNM",
+     "emissions": 5487600
+    },
+    {
+     "name": "Song Hau Thermal Power Plant",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "VNM",
+     "emissions": 3364500
+    },
+    {
+     "name": "Nhon Trach power station",
+     "sector": "power",
+     "subsector": "electricity-generation",
+     "country": "VNM",
+     "emissions": 1600300
+    }
+   ],
+   "subsector_mix": [
+    {
+     "subsector": "electricity-generation",
+     "emissions": 18499900.0
+    }
+   ],
+   "monthly": [
+    {
+     "month": 1,
+     "emissions": 1394700
+    },
+    {
+     "month": 2,
+     "emissions": 1337200
+    },
+    {
+     "month": 3,
+     "emissions": 1585900
+    },
+    {
+     "month": 4,
+     "emissions": 1622200
+    },
+    {
+     "month": 5,
+     "emissions": 1768200
+    },
+    {
+     "month": 6,
+     "emissions": 1614000
+    },
+    {
+     "month": 7,
+     "emissions": 1611100
+    },
+    {
+     "month": 8,
+     "emissions": 1636200
+    },
+    {
+     "month": 9,
+     "emissions": 1553600
+    },
+    {
+     "month": 10,
+     "emissions": 1525700
+    },
+    {
+     "month": 11,
+     "emissions": 1460600
+    },
+    {
+     "month": 12,
+     "emissions": 1390500
+    }
+   ],
+   "provenance": "real",
+   "source": "Climate TRACE v7",
+   "source_url": "https://api.climatetrace.org/v7",
+   "annual": [
+    {
+     "year": 2021,
+     "emissions": 12212600
+    },
+    {
+     "year": 2022,
+     "emissions": 12647700
+    },
+    {
+     "year": 2023,
+     "emissions": 18499900
+    },
+    {
+     "year": 2024,
+     "emissions": 20758310
+    },
+    {
+     "year": 2025,
+     "emissions": 25868300
+    },
+    {
+     "year": 2026,
+     "emissions": 13276400
+    }
+   ]
+  }
+ }
+}

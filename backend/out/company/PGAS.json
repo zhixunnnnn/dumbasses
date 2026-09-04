@@ -9,6 +9,342 @@
     "sasb_industry": "Electric Utilities & Power Generators",
     "scope": "demo"
   },
+  "rating": {
+    "company_id": "PGAS",
+    "year": 2023,
+    "total": 72.5,
+    "pillars": {
+      "E": 72.5,
+      "S": 72.5,
+      "G": 72.5
+    },
+    "coverage": 1.0,
+    "contributions": {
+      "ghg_emissions": 21.75,
+      "energy_transition": 18.12,
+      "workforce_safety": 10.88,
+      "air_quality": 7.25,
+      "water_management": 7.25,
+      "grid_resiliency": 7.25
+    },
+    "topic_breakdown": [
+      {
+        "topic_id": "ghg_emissions",
+        "name": "GHG emissions",
+        "pillar": "E",
+        "weight": 30.0,
+        "score": 72.5,
+        "contribution": 21.75
+      },
+      {
+        "topic_id": "energy_transition",
+        "name": "Energy transition",
+        "pillar": "E",
+        "weight": 25.0,
+        "score": 72.5,
+        "contribution": 18.12
+      },
+      {
+        "topic_id": "workforce_safety",
+        "name": "Workforce safety",
+        "pillar": "S",
+        "weight": 15.0,
+        "score": 72.5,
+        "contribution": 10.88
+      },
+      {
+        "topic_id": "air_quality",
+        "name": "Air quality",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 72.5,
+        "contribution": 7.25
+      },
+      {
+        "topic_id": "water_management",
+        "name": "Water management",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 72.5,
+        "contribution": 7.25
+      },
+      {
+        "topic_id": "grid_resiliency",
+        "name": "Grid resiliency",
+        "pillar": "G",
+        "weight": 10.0,
+        "score": 72.5,
+        "contribution": 7.25
+      }
+    ],
+    "agencies": [
+      "msci",
+      "sustainalytics"
+    ],
+    "provenance": "real",
+    "trace": {
+      "label": "ESG rating 2023 = SASB-weighted agency consensus",
+      "value": 72.5,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "Agency inputs (normalized 0..100)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "MSCI → 71.4/100 (real, 2023)",
+              "value": 71.4,
+              "contribution": null,
+              "source_sentence": "MSCI rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "Sustainalytics → 73.5/100 (real, 2026)",
+              "value": 73.5,
+              "contribution": null,
+              "source_sentence": "Sustainalytics rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "Material topics (renormalized over covered weight)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "ghg_emissions · pillar E · w=0.3 (from MSCI, Sustainalytics)",
+              "value": 72.5,
+              "contribution": 21.75,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "energy_transition · pillar E · w=0.25 (from MSCI, Sustainalytics)",
+              "value": 72.5,
+              "contribution": 18.12,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "workforce_safety · pillar S · w=0.15 (from MSCI, Sustainalytics)",
+              "value": 72.5,
+              "contribution": 10.88,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "air_quality · pillar E · w=0.1 (from MSCI, Sustainalytics)",
+              "value": 72.5,
+              "contribution": 7.25,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "water_management · pillar E · w=0.1 (from MSCI, Sustainalytics)",
+              "value": 72.5,
+              "contribution": 7.25,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "grid_resiliency · pillar G · w=0.1 (from MSCI, Sustainalytics)",
+              "value": 72.5,
+              "contribution": 7.25,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "rating_series": [
+    {
+      "year": 2019,
+      "total": 73.5,
+      "pillars": {
+        "E": 73.5,
+        "S": 73.5,
+        "G": 73.5
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2020,
+      "total": 73.5,
+      "pillars": {
+        "E": 73.5,
+        "S": 73.5,
+        "G": 73.5
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2021,
+      "total": 73.5,
+      "pillars": {
+        "E": 73.5,
+        "S": 73.5,
+        "G": 73.5
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2022,
+      "total": 73.5,
+      "pillars": {
+        "E": 73.5,
+        "S": 73.5,
+        "G": 73.5
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2023,
+      "total": 72.5,
+      "pillars": {
+        "E": 72.5,
+        "S": 72.5,
+        "G": 72.5
+      },
+      "provenance": "real"
+    }
+  ],
+  "impact": null,
+  "double_materiality": {
+    "company_id": "PGAS",
+    "financial": 72.5,
+    "impact": null,
+    "composite": 60.5,
+    "weight_financial": 0.6,
+    "weight_impact": 0.4,
+    "carbon_intensity": null,
+    "intensity_rank": null,
+    "intensity_peers": 8,
+    "greenwashing_penalty": 12.0,
+    "greenwashing_drivers": [
+      {
+        "label": "Recent controversies",
+        "points": 12.0,
+        "detail": "4 recent ESG controversy headline(s)."
+      }
+    ],
+    "greenwashing_headlines": [
+      {
+        "title": "KPK summons PGN executives for corruption investigation in gas transactions",
+        "source": "Indonesia Business Post",
+        "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPNFJlUUFRN0pMOFZ3SDJWbUllelgta0ZCejlUNGJ6SUdiVm1VMTBwS3poRm5icVhPUzVxNi01dFplaDF0MjV2dlJKOW51em9mWUpUZGlJNWFfOXI0UFZ0dTJFZnRiTW9RYjRycmtKNS0wRzAtcGZNSGtienRJU19OT0NENVJvOVZydW96VTRMOGoxcmlhamw5LW1VZllUUGNoS3ZjNFN1YXdZUHB4V196Ym1WMUk5cmlZUjdRRzFqYVk?oc=5"
+      },
+      {
+        "title": "KPK Names Two Suspects in PGN Gas Trade Corruption Case",
+        "source": "Tempo.co English",
+        "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOdFVFcWcwVTVfVUlFZVB4d19sSkludlFUWXVVbWF2V3l4Z2p4RWp6Z0poOTJsazFncF90RTE5YTZNRWdDTzZNd1l4UVNnVlkzY3ZtZk1ubXQyZWtjbXFKeXYtajBqVmpUbGlHcjVjU2hkVGViZXY1S0Y0OUZNbHlkQ2VvOGVCMnZmWWdoVlZiS1JGdw?oc=5"
+      },
+      {
+        "title": "KPK investigates alleged corruption in PT Perusahaan Gas Negara",
+        "source": "Indonesia Business Post",
+        "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOQ2NsalhKNUItTVpBWlI3cmdyRG5vRkczSlVQeFJPNE9yVFdxaU1Ka1haTWpzcXJKRndIUmtYTVAwTlAwdlRxQ09PRHBKdlRJa2tUNEhxNDVtNlN2eWctcXZNUGI3aU52S1V2M01GSlBnNU16WFI0M2FaTU5RcmpKdDhvYkJjSU5yMlRJVEkyV0dBR1lCYWdmYXlqR1N0QUdzRE9RUXhUQVQxOW9vM0VfWg?oc=5"
+      },
+      {
+        "title": "PGN to File Lawsuit against Petronas for Business Woes",
+        "source": "Tempo.co English",
+        "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPWGluTEo0V0FiR0F3NDY1SDhyS29UN1hrYkpLZU1mdi1WWExkNy1ZUHJ6dXZRWTZpd0JSYTJhN0ZHbktHdHkwVGJSQmFjTEtyS3ctRHJMUVQwTjNqZ0JsUTFfcU1UZFBWV25vYnBKSkc5Sk5JNmdNY0JnY2xDRVYyVjRlQno0c1ktQUEteDhPbw?oc=5"
+      }
+    ],
+    "under_attributed": false,
+    "provenance": "real",
+    "note": "No impact score (no emissions/revenue match) — composite is the financial half only."
+  },
+  "fundamentals": {
+    "profile": {
+      "name": "PT Perusahaan Gas Negara (Persero) Tbk",
+      "sector": "Utilities",
+      "industry": "Utilities - Regulated Gas",
+      "employees": 3319,
+      "summary": "PT Perusahaan Gas Negara (Persero) Tbk, together with its subsidiaries, engages in the transmission and distribution of natural gas in Indonesia. It operates through three segments: Trading and Transmission, Exploration and Production of Oil and Gas, and Other Operations. The company is involved in the trading and transmission of oil and gas; processing of liquefied natural gas (LNG) to industrial, commercial and household customers; and trading of LNG and natural gas. It also engages in exploration, exploitation, and business development in oil and gas; provision of fiber optic for network services, as well as construction and maintenance services to customers and management; management and leasing buildings and equipment; and distribution of oil and natural gas. In addition, the company provides telecommunication, engineering, consultancy and services. The company was formerly known as PT Perusahaan Gas Negara Tbk and changed its name to PT Perusahaan Gas Negara (Persero) Tbk in January 2026. The company was founded in 1859 and is headquartered in Jakarta, Indonesia. As of April 30, 2018, PT Perusahaan Gas Negara (Persero) Tbk operates as a subsidiary of PT Pertamina (Persero).",
+      "website": "https://pgn.co.id",
+      "city": "Jakarta",
+      "country": "Indonesia",
+      "ceo": "Mr. Fadjar Harianto Widodo",
+      "exchange": "Jakarta"
+    },
+    "financials": {
+      "currency": "IDR",
+      "market_cap": 36604676669440,
+      "market_cap_fmt": "36.60T",
+      "enterprise_value": 36605297426432,
+      "revenue": 3938916352,
+      "revenue_fmt": "3.94B",
+      "ebitda": 864728384,
+      "gross_margin": 0.18101999,
+      "operating_margin": 0.13191,
+      "profit_margin": 0.061890002,
+      "roe": 0.10092,
+      "roa": 0.05302,
+      "revenue_growth": -0.038,
+      "debt_to_equity": 29.053,
+      "free_cashflow": 228038624,
+      "current_ratio": 2.006
+    },
+    "valuation": {
+      "trailing_pe": 8.488869,
+      "forward_pe": 119841.27,
+      "price_to_book": 12905.983,
+      "peg": 0.42,
+      "ev_to_ebitda": 42331.555,
+      "eps_trailing": 177.88,
+      "book_value": 0.117,
+      "beta": 0.088,
+      "dividend_yield": 0.08180001,
+      "dividend_rate": 125.61,
+      "payout_ratio": 1.1209999,
+      "fifty_two_high": 2520.0,
+      "fifty_two_low": 1350.0
+    },
+    "ratings": {
+      "recommendation": "buy",
+      "recommendation_mean": 1.71429,
+      "n_analysts": 14,
+      "target_mean": 1970.6395,
+      "target_high": 2617.3801,
+      "target_low": 1379.43,
+      "current_price": 1510.0,
+      "distribution": {
+        "strongBuy": 2,
+        "buy": 8,
+        "hold": 4,
+        "sell": 0,
+        "strongSell": 0
+      }
+    }
+  },
   "evidence": {
     "company_id": "PGAS",
     "year": 2023,
@@ -196,21 +532,22 @@
     "company_id": "PGAS",
     "msci_pct": 75.0,
     "sp_pct": null,
-    "sustainalytics_pct": 65.0,
+    "sustainalytics_pct": 81.25,
     "cdp_pct": null,
     "real_raters": [
-      "msci"
+      "msci",
+      "sustainalytics"
     ],
     "rater_years": {
       "msci": 2023,
-      "sustainalytics": 2023
+      "sustainalytics": 2026
     },
     "basis": "Utilities",
     "peers": 10,
-    "consensus": 70.0,
-    "divergence": 10.0,
-    "consensus_provenance": "mixed",
-    "divergence_provenance": "mixed",
+    "consensus": 78.12,
+    "divergence": 6.25,
+    "consensus_provenance": "real",
+    "divergence_provenance": "real",
     "contributing": [
       "msci",
       "sustainalytics"
@@ -253,19 +590,19 @@
   "signal": {
     "company_id": "PGAS",
     "proof_up": false,
-    "opinion_flat": false,
+    "opinion_flat": true,
     "price_flat": null,
     "is_underpriced_improver": false,
     "evidence_pct": 35.0,
     "evidence_basis": "Electric Utilities & Power Generators",
     "evidence_peers": 10,
-    "evidence_gap": -35.0,
-    "momentum": -1.0,
-    "esg_today": 70.0,
-    "quadrant": "OVERRATED",
-    "esg_today_provenance": "mixed",
-    "evidence_gap_provenance": "mixed",
-    "quadrant_provenance": "mixed",
+    "evidence_gap": -43.12,
+    "momentum": null,
+    "esg_today": 78.12,
+    "quadrant": null,
+    "esg_today_provenance": "real",
+    "evidence_gap_provenance": "real",
+    "quadrant_provenance": "real",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -401,8 +738,8 @@
           ]
         },
         {
-          "label": "opinion_flat=False (divergence=10.0, consensus 92.5->70.0)",
-          "value": 10.0,
+          "label": "opinion_flat=True (divergence=6.25, consensus 85.62->78.12)",
+          "value": 6.25,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -419,8 +756,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-35.0 (evidence 35.0 - consensus 70.0)",
-          "value": -35.0,
+          "label": "evidence_gap=-43.12 (evidence 35.0 - consensus 78.12)",
+          "value": -43.12,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -7039,104 +7376,64 @@
     }
   },
   "claims": {
-    "claims": [
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "VERIFIED",
-        "text": "In FY2023, Perusahaan Gas Negara grew its renewables and solar capacity as part of its dec",
-        "source_sentence": "In FY2023, Perusahaan Gas Negara grew its renewables and solar capacity as part of its decarbonisation transition.",
-        "source_doc": "PGAS-SR2023",
-        "source_page": 1,
-        "weight": 0.25
-      },
-      {
-        "topic_id": "workforce_safety",
-        "pillar": "S",
-        "state": "VERIFIED",
-        "text": "In FY2023, Perusahaan Gas Negara reduced lost-time injuries through occupational health an",
-        "source_sentence": "In FY2023, Perusahaan Gas Negara reduced lost-time injuries through occupational health and safety programmes.",
-        "source_doc": "PGAS-SR2023",
-        "source_page": 1,
-        "weight": 0.15
-      },
-      {
-        "topic_id": "air_quality",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "In FY2023, Perusahaan Gas Negara cut NOx and particulate air quality emissions at its plan",
-        "source_sentence": "In FY2023, Perusahaan Gas Negara cut NOx and particulate air quality emissions at its plants.",
-        "source_doc": "PGAS-SR2023",
-        "source_page": 1,
-        "weight": 0.1
-      },
-      {
-        "topic_id": "grid_resiliency",
-        "pillar": "G",
-        "state": "ASSERTED",
-        "text": "In FY2023, Perusahaan Gas Negara improved grid reliability and supply security.",
-        "source_sentence": "In FY2023, Perusahaan Gas Negara improved grid reliability and supply security.",
-        "source_doc": "PGAS-SR2023",
-        "source_page": 1,
-        "weight": 0.1
-      }
-    ],
-    "absent": [
-      {
-        "topic_id": "ghg_emissions",
-        "state": "ABSENT"
-      },
-      {
-        "topic_id": "water_management",
-        "state": "ABSENT"
-      }
-    ]
+    "claims": [],
+    "absent": [],
+    "live": false
   },
   "peers": [
     {
-      "id": "U96",
-      "name": "Sembcorp Industries",
-      "evidence_total": 80.0
-    },
-    {
       "id": "YTLP",
       "name": "YTL Power International",
-      "evidence_total": 80.0
+      "evidence_total": 80.0,
+      "rating_total": 87.3
+    },
+    {
+      "id": "U96",
+      "name": "Sembcorp Industries",
+      "evidence_total": 80.0,
+      "rating_total": 81.7
     },
     {
       "id": "TNB",
       "name": "Tenaga Nasional",
-      "evidence_total": 56.0
-    },
-    {
-      "id": "POWR",
-      "name": "Cikarang Listrindo",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "POW",
-      "name": "PetroVietnam Power",
-      "evidence_total": 55.0
+      "evidence_total": 56.0,
+      "rating_total": 63.0
     },
     {
       "id": "BGRIM",
       "name": "B.Grimm Power",
-      "evidence_total": 50.5
-    },
-    {
-      "id": "RATCH",
-      "name": "Ratch Group",
-      "evidence_total": 44.0
-    },
-    {
-      "id": "EGCO",
-      "name": "Electricity Generating",
-      "evidence_total": 38.5
+      "evidence_total": 50.5,
+      "rating_total": 59.4
     },
     {
       "id": "GULF",
       "name": "Gulf Development",
-      "evidence_total": 30.5
+      "evidence_total": 30.5,
+      "rating_total": 58.3
+    },
+    {
+      "id": "EGCO",
+      "name": "Electricity Generating",
+      "evidence_total": 38.5,
+      "rating_total": 45.8
+    },
+    {
+      "id": "POWR",
+      "name": "Cikarang Listrindo",
+      "evidence_total": 55.0,
+      "rating_total": 36.0
+    },
+    {
+      "id": "RATCH",
+      "name": "Ratch Group",
+      "evidence_total": 44.0,
+      "rating_total": 27.0
+    },
+    {
+      "id": "POW",
+      "name": "PetroVietnam Power",
+      "evidence_total": 55.0,
+      "rating_total": 0.0
     }
   ],
   "latest_real_raters": [],

@@ -99,7 +99,8 @@ def report_raters_cache() -> dict[str, dict[int, list[str]]]:
     companies' own reports, plus CDP's public scores table. "Did not disclose" is not in
     here — declining to answer is not a rating."""
     out: dict[str, dict[int, list[str]]] = {}
-    for loader in ("backend.data.realratings", "backend.data.realcdp"):
+    for loader in ("backend.data.realratings", "backend.data.realcdp",
+                   "backend.data.realsustainalytics"):
         try:
             module = __import__(loader, fromlist=["scored_by_year"])
             for cid, years in module.scored_by_year().items():
@@ -169,10 +170,13 @@ def normalize_raters(ds: Dataset, year: int = config.END_YEAR) -> dict[str, Rate
     2025" — and no value is ever re-dated onto `year`. That is what stops a genuine 2025
     CDP score from being invisible just because the analysis window ends in 2024.
     """
+    # S&P Global is dropped: its ESG score pages are not publicly obtainable (Akamai-gated),
+    # so every seeded S&P value was illustrative and never became a real rating. Rather than
+    # carry an agency we can never source, it is excluded from every rater-derived figure
+    # (rating, consensus, divergence). sp_pct therefore stays None by construction.
     getters = {
         "msci": lambda r: msci_to_num(r.msci_letter),
         "sustainalytics": lambda r: sustainalytics_to_num(r.sustainalytics_risk),
-        "sp": lambda r: (None if r.sp_global is None else float(r.sp_global)),
         "cdp": lambda r: cdp_to_num(r.cdp_letter),
     }
     real = real_raters_cache()          # read every store once, not once per company
@@ -210,7 +214,7 @@ def normalize_raters(ds: Dataset, year: int = config.END_YEAR) -> dict[str, Rate
             else:
                 pct[key] = None          # no rankable observation on this channel -> N.A.
         out[cid] = RaterPercentiles(company_id=cid, msci_pct=pct["msci"],
-                                    sp_pct=pct["sp"],
+                                    sp_pct=None,   # S&P dropped — see getters above
                                     sustainalytics_pct=pct["sustainalytics"],
                                     cdp_pct=pct["cdp"],
                                     real_raters=sorted(real_keys),

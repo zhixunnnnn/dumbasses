@@ -54,7 +54,7 @@ export function QuadrantBadge({ q }: { q: QuadrantKey | null }) {
 export function ImproverPill() {
   return (
     <span className="inline-flex items-center gap-1 rounded-full bg-pos/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-pos">
-      ● Underpriced Improver
+      ● Decarbonising Improver
     </span>
   );
 }

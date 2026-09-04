@@ -7,7 +7,7 @@ import { QUADRANT, PROVENANCE, na } from "../../lib/ui";
 
 // ---- stat cards ------------------------------------------------------------
 export function StatRow({ rows, news }: { rows: CompanyRow[]; news: NewsData | null }) {
-  const scores = rows.map((r) => r.evidence_total).filter((v): v is number => v != null);
+  const scores = rows.map((r) => r.rating_total).filter((v): v is number => v != null);
   const avg = scores.length ? scores.reduce((a, b) => a + b, 0) / scores.length : null;
   const improvers = rows.filter((r) => r.is_underpriced_improver).length;
   const ids = new Set(rows.map((r) => r.id));
@@ -19,12 +19,12 @@ export function StatRow({ rows, news }: { rows: CompanyRow[]; news: NewsData | n
   // how many of them are actually backed by a real rating.
   const realBacked = rows.filter((r) => r.rater_provenance && r.rater_provenance !== "illustrative").length;
   const cards: { label: string; value: string; accent?: string; note?: string }[] = [
-    { label: "SG companies screened", value: `${rows.length}` },
-    { label: "Avg evidence score", value: na(avg) },
+    { label: "Companies screened", value: `${rows.length}` },
+    { label: "Avg ESG rating", value: na(avg) },
     { label: "Rater figures with real input", value: `${realBacked}/${rows.length}`,
       accent: realBacked ? undefined : PROVENANCE.illustrative.color,
       note: realBacked ? undefined : "all rater figures are illustrative" },
-    { label: "Underpriced Improvers", value: `${improvers}`, accent: "#3ecf8e" },
+    { label: "Decarbonising Improvers", value: `${improvers}`, accent: "#3ecf8e" },
     { label: "Controversy flags", value: `${controversies}`, accent: controversies ? "#ec6a5e" : undefined },
   ];
   return (
@@ -47,8 +47,8 @@ export function SectorLeaderboard({ rows }: { rows: CompanyRow[] }) {
   const sectors = useMemo(() => {
     const by = new Map<string, number[]>();
     for (const r of rows) {
-      if (r.evidence_total == null) continue;
-      (by.get(r.sector) ?? by.set(r.sector, []).get(r.sector)!).push(r.evidence_total);
+      if (r.rating_total == null) continue;
+      (by.get(r.sector) ?? by.set(r.sector, []).get(r.sector)!).push(r.rating_total);
     }
     return [...by.entries()]
       .map(([sector, vals]) => ({ sector, avg: vals.reduce((a, b) => a + b, 0) / vals.length, n: vals.length }))
@@ -58,7 +58,7 @@ export function SectorLeaderboard({ rows }: { rows: CompanyRow[] }) {
   return (
     <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
       <h3 className="text-sm font-semibold text-txt">Sector leaderboard</h3>
-      <p className="mb-3 text-[11px] text-faint">Average evidence score by sector</p>
+      <p className="mb-3 text-[11px] text-faint">Average ESG rating by sector</p>
       <div className="space-y-2">
         {sectors.map((s) => (
           <div key={s.sector} className="flex items-center gap-3">
@@ -88,12 +88,12 @@ const BINS = [
   { lo: 85, hi: 101, label: "85–100" },
 ];
 export function ScoreHistogram({ rows }: { rows: CompanyRow[] }) {
-  const counts = BINS.map((b) => rows.filter((r) => r.evidence_total != null && r.evidence_total >= b.lo && r.evidence_total < b.hi).length);
+  const counts = BINS.map((b) => rows.filter((r) => r.rating_total != null && r.rating_total >= b.lo && r.rating_total < b.hi).length);
   const max = Math.max(1, ...counts);
   return (
     <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
-      <h3 className="text-sm font-semibold text-txt">Evidence score distribution</h3>
-      <p className="mb-3 text-[11px] text-faint">Companies by verified-evidence score</p>
+      <h3 className="text-sm font-semibold text-txt">ESG rating distribution</h3>
+      <p className="mb-3 text-[11px] text-faint">Companies by ESG rating</p>
       <div className="flex items-end gap-2" style={{ height: 96 }}>
         {BINS.map((b, i) => (
           <div key={b.label} className="flex flex-1 flex-col items-center justify-end gap-1.5">

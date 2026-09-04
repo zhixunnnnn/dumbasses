@@ -9,6 +9,367 @@
     "sasb_industry": "Electric Utilities & Power Generators",
     "scope": "demo"
   },
+  "rating": {
+    "company_id": "GULF",
+    "year": 2023,
+    "total": 58.3,
+    "pillars": {
+      "E": 57.1,
+      "S": 70.0,
+      "G": 50.0
+    },
+    "coverage": 1.0,
+    "contributions": {
+      "ghg_emissions": 17.13,
+      "energy_transition": 14.28,
+      "workforce_safety": 10.5,
+      "air_quality": 5.71,
+      "water_management": 5.71,
+      "grid_resiliency": 5.0
+    },
+    "topic_breakdown": [
+      {
+        "topic_id": "ghg_emissions",
+        "name": "GHG emissions",
+        "pillar": "E",
+        "weight": 30.0,
+        "score": 57.1,
+        "contribution": 17.13
+      },
+      {
+        "topic_id": "energy_transition",
+        "name": "Energy transition",
+        "pillar": "E",
+        "weight": 25.0,
+        "score": 57.1,
+        "contribution": 14.28
+      },
+      {
+        "topic_id": "workforce_safety",
+        "name": "Workforce safety",
+        "pillar": "S",
+        "weight": 15.0,
+        "score": 70.0,
+        "contribution": 10.5
+      },
+      {
+        "topic_id": "air_quality",
+        "name": "Air quality",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 57.1,
+        "contribution": 5.71
+      },
+      {
+        "topic_id": "water_management",
+        "name": "Water management",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 57.1,
+        "contribution": 5.71
+      },
+      {
+        "topic_id": "grid_resiliency",
+        "name": "Grid resiliency",
+        "pillar": "G",
+        "weight": 10.0,
+        "score": 50.0,
+        "contribution": 5.0
+      }
+    ],
+    "agencies": [
+      "msci"
+    ],
+    "provenance": "real",
+    "trace": {
+      "label": "ESG rating 2023 = SASB-weighted agency consensus",
+      "value": 58.3,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "Agency inputs (normalized 0..100)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "MSCI → 57.1/100 (real, 2023)",
+              "value": 57.1,
+              "contribution": null,
+              "source_sentence": "MSCI rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "Material topics (renormalized over covered weight)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "ghg_emissions · pillar E · w=0.3 (from MSCI)",
+              "value": 57.1,
+              "contribution": 17.13,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "energy_transition · pillar E · w=0.25 (from MSCI)",
+              "value": 57.1,
+              "contribution": 14.28,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "workforce_safety · pillar S · w=0.15 (from company report · workforce safety)",
+              "value": 70.0,
+              "contribution": 10.5,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "air_quality · pillar E · w=0.1 (from MSCI)",
+              "value": 57.1,
+              "contribution": 5.71,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "water_management · pillar E · w=0.1 (from MSCI)",
+              "value": 57.1,
+              "contribution": 5.71,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "grid_resiliency · pillar G · w=0.1 (from company report · grid resiliency)",
+              "value": 50.0,
+              "contribution": 5.0,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "rating_series": [
+    {
+      "year": 2023,
+      "total": 58.3,
+      "pillars": {
+        "E": 57.1,
+        "S": 70.0,
+        "G": 50.0
+      },
+      "provenance": "real"
+    }
+  ],
+  "impact": {
+    "owner_id": "E100000001030",
+    "owner_name": "Gulf Development PCL",
+    "note": null,
+    "year": 2023,
+    "gas": "co2e_100yr",
+    "total_emissions_tonnes": 404870,
+    "asset_count": 1,
+    "top_assets": [
+      {
+        "name": "Duqm Independent Water and power plant",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "OMN",
+        "emissions": 404870
+      }
+    ],
+    "subsector_mix": [
+      {
+        "subsector": "electricity-generation",
+        "emissions": 404870.0
+      }
+    ],
+    "monthly": [
+      {
+        "month": 1,
+        "emissions": 27670
+      },
+      {
+        "month": 2,
+        "emissions": 25610
+      },
+      {
+        "month": 3,
+        "emissions": 29020
+      },
+      {
+        "month": 4,
+        "emissions": 32390
+      },
+      {
+        "month": 5,
+        "emissions": 40650
+      },
+      {
+        "month": 6,
+        "emissions": 40970
+      },
+      {
+        "month": 7,
+        "emissions": 41480
+      },
+      {
+        "month": 8,
+        "emissions": 40350
+      },
+      {
+        "month": 9,
+        "emissions": 35760
+      },
+      {
+        "month": 10,
+        "emissions": 34620
+      },
+      {
+        "month": 11,
+        "emissions": 28110
+      },
+      {
+        "month": 12,
+        "emissions": 28240
+      }
+    ],
+    "provenance": "real",
+    "source": "Climate TRACE v7",
+    "source_url": "https://api.climatetrace.org/v7",
+    "annual": [
+      {
+        "year": 2021,
+        "emissions": 386570
+      },
+      {
+        "year": 2022,
+        "emissions": 400560
+      },
+      {
+        "year": 2023,
+        "emissions": 404870
+      },
+      {
+        "year": 2024,
+        "emissions": 412260
+      },
+      {
+        "year": 2025,
+        "emissions": 411340
+      }
+    ],
+    "company_id": "GULF",
+    "rank": 9,
+    "peers": 9,
+    "panel_share": 0.006
+  },
+  "double_materiality": {
+    "company_id": "GULF",
+    "financial": 58.3,
+    "impact": null,
+    "composite": 58.3,
+    "weight_financial": 0.6,
+    "weight_impact": 0.4,
+    "carbon_intensity": null,
+    "intensity_rank": null,
+    "intensity_peers": 8,
+    "greenwashing_penalty": 0.0,
+    "greenwashing_drivers": [],
+    "greenwashing_headlines": [],
+    "under_attributed": true,
+    "provenance": "real",
+    "note": "Climate TRACE appears to under-attribute this owner's emissions (too few assets for its size), so the impact half is excluded and the composite is the financial half only."
+  },
+  "fundamentals": {
+    "profile": {
+      "name": "Gulf Development Public Company Limited",
+      "sector": "Utilities",
+      "industry": "Utilities - Independent Power Producers",
+      "employees": null,
+      "summary": "Gulf Development Public Company Limited generates and sells electricity and steam to public and private clients in Thailand and internationally. The company operates through Power Business, Consulting Business, Infrastructure Business and Satellite and Digital Business segments. It generates electricity through gas-fired, solar, biomass hydroelectric, waste-to-energy, and wind power projects under independent power producers and small power producers. The company undertakes infrastructure and logistics projects; distributes, supplies, and sells natural gas; and operates a digital infrastructure. In addition, the company is involved in the management, technical support, technology, investment services; storing and converting natural gas; satellite and related services; sale of direct television and satellite equipment; transponder services; engineering and development services; broadband network and content services; and broadcasting, television, and telecommunication services. Further, it provides system integration consultancy services for broadband network and technology systems, products and services related to artificial intelligence and space technology. Gulf Development Public Company Limited was founded in 2007 and is based in Bangkok, Thailand.",
+      "website": "https://www.gulf.co.th",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "ceo": "Mr. Sarath  Ratanavadi",
+      "exchange": "Thailand"
+    },
+    "financials": {
+      "currency": "THB",
+      "market_cap": 944944709632,
+      "market_cap_fmt": "944.94B",
+      "enterprise_value": 1345461682176,
+      "revenue": 142484258816,
+      "revenue_fmt": "142.48B",
+      "ebitda": 31873703936,
+      "gross_margin": 0.19944,
+      "operating_margin": 0.17593001,
+      "profit_margin": 0.26451,
+      "roe": 0.12365,
+      "roa": 0.021170001,
+      "revenue_growth": 0.155,
+      "debt_to_equity": 122.337,
+      "free_cashflow": -23589826560,
+      "current_ratio": 1.034
+    },
+    "valuation": {
+      "trailing_pe": 36.142857,
+      "forward_pe": 24.82797,
+      "price_to_book": 2.994083,
+      "peg": 2.87,
+      "ev_to_ebitda": 42.212,
+      "eps_trailing": 1.75,
+      "book_value": 21.125,
+      "beta": null,
+      "dividend_yield": 0.0166,
+      "dividend_rate": 1.05,
+      "payout_ratio": 0.0,
+      "fifty_two_high": 68.5,
+      "fifty_two_low": 39.75
+    },
+    "ratings": {
+      "recommendation": "strong_buy",
+      "recommendation_mean": 1.11765,
+      "n_analysts": 16,
+      "target_mean": 78.41812,
+      "target_high": 91.0,
+      "target_low": 68.0,
+      "current_price": 63.25,
+      "distribution": {
+        "strongBuy": 2,
+        "buy": 15,
+        "hold": 0,
+        "sell": 0,
+        "strongSell": 0
+      }
+    }
+  },
   "evidence": {
     "company_id": "GULF",
     "year": 2023,
@@ -243,8 +604,8 @@
     },
     "basis": "Utilities",
     "peers": 10,
-    "consensus": 77.5,
-    "divergence": 35.0,
+    "consensus": null,
+    "divergence": null,
     "consensus_provenance": "mixed",
     "divergence_provenance": "mixed",
     "contributing": [
@@ -295,12 +656,12 @@
     "evidence_basis": "Electric Utilities & Power Generators",
     "evidence_peers": 10,
     "evidence_gap": -72.5,
-    "momentum": -12.1,
+    "momentum": -1.5,
     "esg_today": 77.5,
     "quadrant": "OVERRATED",
     "esg_today_provenance": "mixed",
     "evidence_gap_provenance": "mixed",
-    "quadrant_provenance": "mixed",
+    "quadrant_provenance": "real",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -4647,20 +5008,7 @@
         "report_year": 2023
       }
     ],
-    "absent": [
-      {
-        "topic_id": "energy_transition",
-        "state": "ABSENT"
-      },
-      {
-        "topic_id": "air_quality",
-        "state": "ABSENT"
-      },
-      {
-        "topic_id": "water_management",
-        "state": "ABSENT"
-      }
-    ],
+    "absent": [],
     "live": true,
     "report_year": 2023,
     "source_url": "https://sustainability.gulf.co.th/storage/document/sustainability-reports/2023/assurance-statement-2023-en.pdf",
@@ -4668,49 +5016,58 @@
   },
   "peers": [
     {
-      "id": "U96",
-      "name": "Sembcorp Industries",
-      "evidence_total": 80.0
-    },
-    {
       "id": "YTLP",
       "name": "YTL Power International",
-      "evidence_total": 80.0
+      "evidence_total": 80.0,
+      "rating_total": 87.3
     },
     {
-      "id": "TNB",
-      "name": "Tenaga Nasional",
-      "evidence_total": 56.0
-    },
-    {
-      "id": "POWR",
-      "name": "Cikarang Listrindo",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "POW",
-      "name": "PetroVietnam Power",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "BGRIM",
-      "name": "B.Grimm Power",
-      "evidence_total": 50.5
+      "id": "U96",
+      "name": "Sembcorp Industries",
+      "evidence_total": 80.0,
+      "rating_total": 81.7
     },
     {
       "id": "PGAS",
       "name": "Perusahaan Gas Negara",
-      "evidence_total": 50.0
+      "evidence_total": 50.0,
+      "rating_total": 72.5
     },
     {
-      "id": "RATCH",
-      "name": "Ratch Group",
-      "evidence_total": 44.0
+      "id": "TNB",
+      "name": "Tenaga Nasional",
+      "evidence_total": 56.0,
+      "rating_total": 63.0
+    },
+    {
+      "id": "BGRIM",
+      "name": "B.Grimm Power",
+      "evidence_total": 50.5,
+      "rating_total": 59.4
     },
     {
       "id": "EGCO",
       "name": "Electricity Generating",
-      "evidence_total": 38.5
+      "evidence_total": 38.5,
+      "rating_total": 45.8
+    },
+    {
+      "id": "POWR",
+      "name": "Cikarang Listrindo",
+      "evidence_total": 55.0,
+      "rating_total": 36.0
+    },
+    {
+      "id": "RATCH",
+      "name": "Ratch Group",
+      "evidence_total": 44.0,
+      "rating_total": 27.0
+    },
+    {
+      "id": "POW",
+      "name": "PetroVietnam Power",
+      "evidence_total": 55.0,
+      "rating_total": 0.0
     }
   ],
   "latest_real_raters": [],

@@ -9,6 +9,465 @@
     "sasb_industry": "Electric Utilities & Power Generators",
     "scope": "demo"
   },
+  "rating": {
+    "company_id": "EGCO",
+    "year": 2023,
+    "total": 45.8,
+    "pillars": {
+      "E": 42.9,
+      "S": 54.5,
+      "G": 54.5
+    },
+    "coverage": 1.0,
+    "contributions": {
+      "ghg_emissions": 12.87,
+      "energy_transition": 10.72,
+      "workforce_safety": 8.17,
+      "air_quality": 4.29,
+      "water_management": 4.29,
+      "grid_resiliency": 5.45
+    },
+    "topic_breakdown": [
+      {
+        "topic_id": "ghg_emissions",
+        "name": "GHG emissions",
+        "pillar": "E",
+        "weight": 30.0,
+        "score": 42.9,
+        "contribution": 12.87
+      },
+      {
+        "topic_id": "energy_transition",
+        "name": "Energy transition",
+        "pillar": "E",
+        "weight": 25.0,
+        "score": 42.9,
+        "contribution": 10.72
+      },
+      {
+        "topic_id": "workforce_safety",
+        "name": "Workforce safety",
+        "pillar": "S",
+        "weight": 15.0,
+        "score": 54.5,
+        "contribution": 8.17
+      },
+      {
+        "topic_id": "air_quality",
+        "name": "Air quality",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 42.9,
+        "contribution": 4.29
+      },
+      {
+        "topic_id": "water_management",
+        "name": "Water management",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 42.9,
+        "contribution": 4.29
+      },
+      {
+        "topic_id": "grid_resiliency",
+        "name": "Grid resiliency",
+        "pillar": "G",
+        "weight": 10.0,
+        "score": 54.5,
+        "contribution": 5.45
+      }
+    ],
+    "agencies": [
+      "msci",
+      "sustainalytics"
+    ],
+    "provenance": "real",
+    "trace": {
+      "label": "ESG rating 2023 = SASB-weighted agency consensus",
+      "value": 45.8,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "Agency inputs (normalized 0..100)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "MSCI → 42.9/100 (real, 2023)",
+              "value": 42.9,
+              "contribution": null,
+              "source_sentence": "MSCI rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "Sustainalytics → 66.1/100 (real, 2026)",
+              "value": 66.1,
+              "contribution": null,
+              "source_sentence": "Sustainalytics rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "Material topics (renormalized over covered weight)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "ghg_emissions · pillar E · w=0.3 (from Climate TRACE intensity)",
+              "value": 42.9,
+              "contribution": 12.87,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "energy_transition · pillar E · w=0.25 (from Climate TRACE intensity)",
+              "value": 42.9,
+              "contribution": 10.72,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "workforce_safety · pillar S · w=0.15 (from MSCI, Sustainalytics)",
+              "value": 54.5,
+              "contribution": 8.17,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "air_quality · pillar E · w=0.1 (from Climate TRACE intensity)",
+              "value": 42.9,
+              "contribution": 4.29,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "water_management · pillar E · w=0.1 (from Climate TRACE intensity)",
+              "value": 42.9,
+              "contribution": 4.29,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "grid_resiliency · pillar G · w=0.1 (from MSCI, Sustainalytics)",
+              "value": 54.5,
+              "contribution": 5.45,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "rating_series": [
+    {
+      "year": 2019,
+      "total": 66.1,
+      "pillars": {
+        "E": 66.1,
+        "S": 66.1,
+        "G": 66.1
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2020,
+      "total": 66.1,
+      "pillars": {
+        "E": 66.1,
+        "S": 66.1,
+        "G": 66.1
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2021,
+      "total": 66.1,
+      "pillars": {
+        "E": 66.1,
+        "S": 66.1,
+        "G": 66.1
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2022,
+      "total": 66.1,
+      "pillars": {
+        "E": 66.1,
+        "S": 66.1,
+        "G": 66.1
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2023,
+      "total": 45.8,
+      "pillars": {
+        "E": 42.9,
+        "S": 54.5,
+        "G": 54.5
+      },
+      "provenance": "real"
+    }
+  ],
+  "impact": {
+    "owner_id": "E100000002130",
+    "owner_name": "Electricity Generating PCL",
+    "note": null,
+    "year": 2023,
+    "gas": "co2e_100yr",
+    "total_emissions_tonnes": 4032212,
+    "asset_count": 7,
+    "top_assets": [
+      {
+        "name": "Kaeng Khoi 2 power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "THA",
+        "emissions": 1619400
+      },
+      {
+        "name": "Khanom power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "THA",
+        "emissions": 1479700
+      },
+      {
+        "name": "BANPONG TP and SK COGEN",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "THA",
+        "emissions": 387040
+      },
+      {
+        "name": "EGCO cogeneration (Rayong) power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "THA",
+        "emissions": 137820
+      },
+      {
+        "name": "Klong Luang power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "THA",
+        "emissions": 137500
+      },
+      {
+        "name": "Samutprakarn power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "THA",
+        "emissions": 135459
+      },
+      {
+        "name": "Nong Khae power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "THA",
+        "emissions": 135293
+      }
+    ],
+    "subsector_mix": [
+      {
+        "subsector": "electricity-generation",
+        "emissions": 4032212.0
+      }
+    ],
+    "monthly": [
+      {
+        "month": 1,
+        "emissions": 301200
+      },
+      {
+        "month": 2,
+        "emissions": 296509
+      },
+      {
+        "month": 3,
+        "emissions": 370830
+      },
+      {
+        "month": 4,
+        "emissions": 373280
+      },
+      {
+        "month": 5,
+        "emissions": 391870
+      },
+      {
+        "month": 6,
+        "emissions": 362490
+      },
+      {
+        "month": 7,
+        "emissions": 336990
+      },
+      {
+        "month": 8,
+        "emissions": 352610
+      },
+      {
+        "month": 9,
+        "emissions": 318240
+      },
+      {
+        "month": 10,
+        "emissions": 322940
+      },
+      {
+        "month": 11,
+        "emissions": 311210
+      },
+      {
+        "month": 12,
+        "emissions": 294043
+      }
+    ],
+    "provenance": "real",
+    "source": "Climate TRACE v7",
+    "source_url": "https://api.climatetrace.org/v7",
+    "annual": [
+      {
+        "year": 2021,
+        "emissions": 3981415
+      },
+      {
+        "year": 2022,
+        "emissions": 3720994
+      },
+      {
+        "year": 2023,
+        "emissions": 4032212
+      },
+      {
+        "year": 2024,
+        "emissions": 3999264
+      },
+      {
+        "year": 2025,
+        "emissions": 3988855
+      }
+    ],
+    "company_id": "EGCO",
+    "rank": 6,
+    "peers": 9,
+    "panel_share": 0.063
+  },
+  "double_materiality": {
+    "company_id": "EGCO",
+    "financial": 45.8,
+    "impact": 42.9,
+    "composite": 43.7,
+    "weight_financial": 0.6,
+    "weight_impact": 0.4,
+    "carbon_intensity": 1949.1,
+    "intensity_rank": 5,
+    "intensity_peers": 8,
+    "greenwashing_penalty": 0.9,
+    "greenwashing_drivers": [
+      {
+        "label": "Materiality gap",
+        "points": 0.9,
+        "detail": "Rated 46/100 on ESG but runs at 43/100 on actual carbon intensity — a 3-point reputation-vs-reality gap."
+      }
+    ],
+    "greenwashing_headlines": [],
+    "under_attributed": false,
+    "provenance": "real",
+    "note": null
+  },
+  "fundamentals": {
+    "profile": {
+      "name": "Electricity Generating Public Company Limited",
+      "sector": "Utilities",
+      "industry": "Utilities - Independent Power Producers",
+      "employees": null,
+      "summary": "Electricity Generating Public Company Limited, together with its subsidiaries, generates and sells electricity to government sector and industrial users primarily in Thailand, Laos, the Philippines, Indonesia, Australia, South Korea, Taiwan, and the United States. It operates through Electricity Generation and Other Businesses segments. The company generates electricity from various resources, such as biomass, hydropower, solar and wind power, battery energy, and fuel cell. It also involved in operation, maintenance, engineering and construction services to power plants, petrochemical plants, oil refineries and other industries; coal mining, management, and oil pipeline business. The company was incorporated in 1992 and is based in Bangkok, Thailand.",
+      "website": "https://www.egco.com/th/home",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "ceo": "Mr. Tawatchai  Sumranwanich",
+      "exchange": "Thailand"
+    },
+    "financials": {
+      "currency": "THB",
+      "market_cap": 71336009728,
+      "market_cap_fmt": "71.34B",
+      "enterprise_value": 134028156928,
+      "revenue": 30124808192,
+      "revenue_fmt": "30.12B",
+      "ebitda": 3100958976,
+      "gross_margin": 0.11847,
+      "operating_margin": 0.084989995,
+      "profit_margin": 0.01763,
+      "roe": 0.00504,
+      "roa": 0.0029300002,
+      "revenue_growth": -0.09,
+      "debt_to_equity": 99.999,
+      "free_cashflow": -3689925120,
+      "current_ratio": 1.288
+    },
+    "valuation": {
+      "trailing_pe": 132.84314,
+      "forward_pe": 11.308422,
+      "price_to_book": 0.7053655,
+      "peg": 1.09,
+      "ev_to_ebitda": 43.222,
+      "eps_trailing": 1.02,
+      "book_value": 192.099,
+      "beta": 0.31,
+      "dividend_yield": 0.049099997,
+      "dividend_rate": 6.5,
+      "payout_ratio": 6.4356,
+      "fifty_two_high": 143.0,
+      "fifty_two_low": 107.0
+    },
+    "ratings": {
+      "recommendation": "buy",
+      "recommendation_mean": 2.11111,
+      "n_analysts": 9,
+      "target_mean": 142.66667,
+      "target_high": 187.0,
+      "target_low": 100.0,
+      "current_price": 135.5,
+      "distribution": {
+        "strongBuy": 0,
+        "buy": 4,
+        "hold": 5,
+        "sell": 0,
+        "strongSell": 0
+      }
+    }
+  },
   "evidence": {
     "company_id": "EGCO",
     "year": 2023,
@@ -482,21 +941,22 @@
     "company_id": "EGCO",
     "msci_pct": 25.0,
     "sp_pct": null,
-    "sustainalytics_pct": 35.0,
+    "sustainalytics_pct": 18.75,
     "cdp_pct": null,
     "real_raters": [
-      "msci"
+      "msci",
+      "sustainalytics"
     ],
     "rater_years": {
       "msci": 2023,
-      "sustainalytics": 2023
+      "sustainalytics": 2026
     },
     "basis": "Utilities",
     "peers": 10,
-    "consensus": 30.0,
-    "divergence": 10.0,
-    "consensus_provenance": "mixed",
-    "divergence_provenance": "mixed",
+    "consensus": 21.88,
+    "divergence": 6.25,
+    "consensus_provenance": "real",
+    "divergence_provenance": "real",
     "contributing": [
       "msci",
       "sustainalytics"
@@ -545,13 +1005,13 @@
     "evidence_pct": 15.0,
     "evidence_basis": "Electric Utilities & Power Generators",
     "evidence_peers": 10,
-    "evidence_gap": -15.0,
-    "momentum": -9.05,
-    "esg_today": 30.0,
+    "evidence_gap": -6.88,
+    "momentum": -0.7,
+    "esg_today": 21.88,
     "quadrant": "VALUE_TRAPS",
-    "esg_today_provenance": "mixed",
-    "evidence_gap_provenance": "mixed",
-    "quadrant_provenance": "mixed",
+    "esg_today_provenance": "real",
+    "evidence_gap_provenance": "real",
+    "quadrant_provenance": "real",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -971,8 +1431,8 @@
           ]
         },
         {
-          "label": "opinion_flat=False (divergence=10.0, consensus 60.0->30.0)",
-          "value": 10.0,
+          "label": "opinion_flat=False (divergence=6.25, consensus 41.88->21.88)",
+          "value": 6.25,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -989,8 +1449,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-15.0 (evidence 15.0 - consensus 30.0)",
-          "value": -15.0,
+          "label": "evidence_gap=-6.88 (evidence 15.0 - consensus 21.88)",
+          "value": -6.88,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -8099,24 +8559,7 @@
         "report_year": 2023
       }
     ],
-    "absent": [
-      {
-        "topic_id": "workforce_safety",
-        "state": "ABSENT"
-      },
-      {
-        "topic_id": "air_quality",
-        "state": "ABSENT"
-      },
-      {
-        "topic_id": "water_management",
-        "state": "ABSENT"
-      },
-      {
-        "topic_id": "grid_resiliency",
-        "state": "ABSENT"
-      }
-    ],
+    "absent": [],
     "live": true,
     "report_year": 2023,
     "source_url": "https://sustainability.egco.com/storage/document/climate-strategy-and-market-opportunities/egco-tcfd-en.pdf",
@@ -8124,49 +8567,58 @@
   },
   "peers": [
     {
-      "id": "U96",
-      "name": "Sembcorp Industries",
-      "evidence_total": 80.0
-    },
-    {
       "id": "YTLP",
       "name": "YTL Power International",
-      "evidence_total": 80.0
+      "evidence_total": 80.0,
+      "rating_total": 87.3
     },
     {
-      "id": "TNB",
-      "name": "Tenaga Nasional",
-      "evidence_total": 56.0
-    },
-    {
-      "id": "POWR",
-      "name": "Cikarang Listrindo",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "POW",
-      "name": "PetroVietnam Power",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "BGRIM",
-      "name": "B.Grimm Power",
-      "evidence_total": 50.5
+      "id": "U96",
+      "name": "Sembcorp Industries",
+      "evidence_total": 80.0,
+      "rating_total": 81.7
     },
     {
       "id": "PGAS",
       "name": "Perusahaan Gas Negara",
-      "evidence_total": 50.0
+      "evidence_total": 50.0,
+      "rating_total": 72.5
     },
     {
-      "id": "RATCH",
-      "name": "Ratch Group",
-      "evidence_total": 44.0
+      "id": "TNB",
+      "name": "Tenaga Nasional",
+      "evidence_total": 56.0,
+      "rating_total": 63.0
+    },
+    {
+      "id": "BGRIM",
+      "name": "B.Grimm Power",
+      "evidence_total": 50.5,
+      "rating_total": 59.4
     },
     {
       "id": "GULF",
       "name": "Gulf Development",
-      "evidence_total": 30.5
+      "evidence_total": 30.5,
+      "rating_total": 58.3
+    },
+    {
+      "id": "POWR",
+      "name": "Cikarang Listrindo",
+      "evidence_total": 55.0,
+      "rating_total": 36.0
+    },
+    {
+      "id": "RATCH",
+      "name": "Ratch Group",
+      "evidence_total": 44.0,
+      "rating_total": 27.0
+    },
+    {
+      "id": "POW",
+      "name": "PetroVietnam Power",
+      "evidence_total": 55.0,
+      "rating_total": 0.0
     }
   ],
   "latest_real_raters": [],

@@ -26,14 +26,15 @@ export default function DashboardPage() {
   }, [matrix.data, filtered]);
   const pageContext = useMemo(() => ({
     route: "dashboard",
-    title: "Singapore ESG Evidence Dashboard",
-    scope: "10 covered Singapore-listed companies",
+    title: "ASEAN Utilities ESG Terminal",
+    scope: "10 ASEAN-listed power, energy & utilities companies",
     filters,
     companies: filtered.map((row) => ({
       id: row.id,
       name: row.name,
       ticker: row.ticker,
       sector: row.sector,
+      esgRating: row.rating_total,
       evidenceScore: row.evidence_total,
       confidence: row.confidence,
       consensus: row.consensus,
@@ -70,10 +71,7 @@ export default function DashboardPage() {
   return (
     <div className="mx-auto max-w-[1680px] space-y-5 p-5 md:p-7">
       <header>
-        <p className="text-[11px] font-semibold uppercase tracking-wider text-pos">
-          Singapore · 2019–2023 · evidence over opinion
-        </p>
-        <h1 className="mt-1 text-2xl font-semibold tracking-tight text-txt">
+        <h1 className="text-2xl font-semibold tracking-tight text-txt">
           Don’t measure ESG. <span className="text-pos">Find what the market mispriced.</span>
         </h1>
         <p className="mt-1.5 max-w-2xl text-[13px] leading-relaxed text-muted">
@@ -97,12 +95,12 @@ export default function DashboardPage() {
               <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
                 <div className="mb-1 flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm font-semibold text-txt">ESG Momentum Matrix</h3>
+                    <h3 className="text-sm font-semibold text-txt">ESG rating × emission momentum</h3>
                     <p className="text-[11px] text-faint">
-                      Where the market rates them today × where the evidence is heading. Click a point.
+                      The ESG rating (x) against where real emissions are heading (y). Top-right = rated well and decarbonising; bottom-right = rated well but emissions rising. Click a point.
                     </p>
                   </div>
-                  <HypothesisBadge note="That improvers outperform is the thesis under test — not yet backtested on this set." />
+                  <HypothesisBadge note="Whether decarbonising names outperform is a thesis under test — not yet backtested on this set." />
                 </div>
                 <MomentumMatrix points={filteredMatrix} />
               </div>
@@ -125,7 +123,8 @@ export default function DashboardPage() {
 
         {/* Below xl the rail stacks; keep it next to the overview instead of below the screener. */}
         <aside className="order-first xl:order-none xl:sticky xl:top-5 xl:max-h-[calc(100dvh-2.5rem)] xl:overflow-y-auto">
-          <BriefingFeed state={briefing} onSelect={openCompany} />
+          <BriefingFeed state={briefing} onSelect={openCompany}
+            ratingById={new Map(filtered.map((r) => [r.id, r.rating_total]))} />
         </aside>
       </div>
     </div>

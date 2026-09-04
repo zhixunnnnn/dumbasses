@@ -1,0 +1,169 @@
+{
+ "source": "Google News RSS",
+ "companies": {
+  "U96": {
+   "controversy_count": 6,
+   "headlines": [
+    {
+     "title": "Temasek-backed Sembcorp Industries accused of greenwashing in India coal sale",
+     "source": "CNBC TV18",
+     "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQejJ6ZlFibV83Q0xwSVBYZXRlS1BUd3IyZlRvcWxhRzNGS25ETnVqbkw3Y1J5V2xPQllKM0xRZG80ZS11a09jM3Q2amdLR1l5aERHVXpqdGhENnl4dlVBd0FQdzVSajBjUng1QjNXSGhqbVNRZlAybllCbkxydWVaUmRlVmgzeXl0T2ZQSF83bTdJY1lVV015MmdGN3R1Z1FhUThmM3UwcjcybmtFa1pud1FvcnRFNno4OWdQVTRySmM4M0FxYk9RRTloSEhMZXfSAdQBQVVfeXFMT2Jsc3N4cV9mSXhBb2J5Tkp5bWxiYmhUb3F3MWNFaWd4cUVGRjJmRU84X3dGcjNzRElXSXdTTEhhQmhUdVhZYzRfdUZNbjUzQ3BDc214amxZSzkwbmg4eXJnTVRXUE5hak83M2p0dHB5UlAtZHlvVlNCbEt4WkQ5aVA4eEgyd3VfZ1VHdDROM0llSWhKQWM0QTBZZDlsYVVQeVVRTXBXZHFNMElyZnNPdmNKdjNCTld6ajl5NUZfQ2RpX2lYbE92Yl9nelEtZ01QR2FOOU0?oc=5"
+    },
+    {
+     "title": "Sembcorp Industries settling lawsuit against OK Lim, his children for US$50.9 million",
+     "source": "The Business Times",
+     "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPRXNSMDF4amg0WEZXNFEwUVVFLUtOZURTdG9zb3lLanhjR05CalZEUjUwWDVNRUYzMHpFdm0yUDVQSlFqV0cyQmtqTnRLcjh4OUV4NzU1bmF0bEVod2tvSlpVMHUxN1hsNEZ3Y1lndHhZTm9HQl8zRkZJUTY3czFXVk1XenRadGQzVmM5UGFVUnBOUDZmTXR5bldVU2V3WjJSNTNpTGhSNW1FOW1GRTZ0ZzJfNTVXdllmVUk0ajJtQ09aQzNLWDR6MzBNa0pIQjNYN01YMEo4emlaNFpDMmJ0YkdrQQ?oc=5"
+    },
+    {
+     "title": "Sembcorp Industries' Nanjing water-treatment JV fined S$10m for pollution offences; key execs jailed",
+     "source": "The Business Times",
+     "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPV2NTb1A0OU1zM2JZa2ZTeVI5Vm81TVBQYU0xUXM0UXpNTzBpelB3LVFWOWFMNmhuVkJHUEY2VERSTGRfLXJuMnpNT1dOQWZtRFlyZGdDc3JJamI1eWxsdElnVzZyckQ2T01hTURNa2F6UEFrNUI2eTl6X2Y3VnJ1b0xYQVZrVTFiSkpOV0c4LU9qSXQ0UzhrNnFiUmIwcFVNTVVJaTNhVmQwaFYyTnZJN0xLSTVSV1llREJwQTRPU0Y2c2VfbURNYjd1UQ?oc=5"
+    },
+    {
+     "title": "Sembcorp Marine commercial executive charged with corruption",
+     "source": "The Business Times",
+     "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxONURlS0ZDeWJfWGhjVTBKOWttYmN5WnQyb2NVTXhxUzZrdENTcG5pWTFKOTNFMWtMOHk5M3R1emMyaDZBa0NndWNEMHFPS1lPN3gwOVUzRWFZRFZyOHFsd3FxT1V2czVvSmdhQ2VNVlFNWFhxS3ZzYU9lMVlDMUhPNExxc2ZoSDNMWFRIbkN0NExyaDdmM3ZmdVlrdmZwYmd2WEhrbWI5T1lSQQ?oc=5"
+    },
+    {
+     "title": "Sembcorp\u2019s subsidiary settles legal dispute with Universal Terminal, final terms confidential",
+     "source": "The Edge Singapore",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQSEtuUGY4SGFBSktYMWk0eGpwZWpYakRSQ0tpUnU0djFteEFGbzMwd28xb1VfU0NNaEhLbVpNSlFfTXhSb3ZNVVU0Q3dYVUl0SjZYWjFEZ2NtVXhLVVZNX0ttbGZNTkM4V3JaczJYTk95Nmo1NEZTQ09nU0luNlJqTzFaNGx2MmhELWlaVzFXdDdOSFRVTTRZc2k4V0JVZ1RnX0N6dVdGLS15R1ppQ0h4aFFlbmwyejZOTUdHS09zZi1Mdw?oc=5"
+    },
+    {
+     "title": "Sembcorp unit agrees to settle gasoil claims dispute",
+     "source": "Singapore Business Review",
+     "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5RSnZQbjZwOVhIR0I2bWJkUDA1UG9Ybi1kemJ4dEtRUU4ycHVQU2lpUWo0MmZmbHpxekhEZmRsNUFuSExGVk1HS0pwSDJPNk02d0hScHVlMmtYRzNtRGt2YUFpVVc1b01KNnMtVkJhNi1ob0UxX0pCMlRTSFJUUQ?oc=5"
+    }
+   ],
+   "query_name": "Sembcorp Industries"
+  },
+  "TNB": {
+   "controversy_count": 6,
+   "headlines": [
+    {
+     "title": "TNB ready to assist in KLIA power disruption probe",
+     "source": "The Star",
+     "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNX25YcmRlU3JPWGpqZFBabUQyZnFPMVJIX205X1NFcnhZbDBTY0VSeFl4RzNOOWJHS3MxWlNoU1RicDVoWElCOGZtc1lsWXhaVzJOS3pvanB0OW1LVTlMMDVncUdJQk11Tl81S20xRU85RHBnS3owZ1A0YmFFR2JSNm9aemdQZjZ2LXpzODAwb3lqYU9GRTFscHFhVHhNQTZIaUE?oc=5"
+    },
+    {
+     "title": "Knusford\u2019s unit named as fourth-party defendant in lawsuit filed by Tenaga Nasional",
+     "source": "The Malaysian Reserve",
+     "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQd25QT1hDOEpVQjdZTmtYcDFaNW4yWmpacmpMaU50ckFLQzNEU0lqNGpDaVVHUk1NR1dsS0QtdzhkY2UzNEJsY0UzVWJndTJ5VkYxeUFQRnlHazFXMU9lSmZaQlFYLVNqT3lfMkxvTjBRTjFleWRudm1oWVV1dFNEVXI4S21CM18zdDNnYTl6TnloQzBnV2RCWm1VQzUzMWdZNEF3YXNwT1ZhaTc4TWtuaU9URUZqbW5Ed3o2U1Qtc2JDQzFf?oc=5"
+    },
+    {
+     "title": "TNB drops lawsuit in RM1.4b tax dispute, as it shifts strategy and seeks utility incentives",
+     "source": "The Edge Malaysia",
+     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1BTWo4Z2FMa2M3QTYtYnU1YXR6VUJVVVg2NEN0UC1Pd2lWV2w2S3V4VGJSWndGc1RXaFNCNTE0d1lub3JCaHdjWEpTbVZFUnFr?oc=5"
+    },
+    {
+     "title": "Tenaga bags High Court win in long-running tax disputes with IRB",
+     "source": "The Edge Malaysia",
+     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE92MWZGQzZ5WGNQeXA5UXR2amxWWlFLamItLXZELVlpeGp0aGt3UWlFNHJGLUFuRHdCWFJHTU8yYjA0cVJOQmxjdHpybmF3MXdt?oc=5"
+    },
+    {
+     "title": "IRB appeals High Court decision in Tenaga\u2019s Southern Power Generation tax dispute case",
+     "source": "The Edge Malaysia",
+     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBLVmpaSm9rcW0zWS1WOHhOZXBHeDFhQV9VLVdVd2drQUh6NjRtRFlmSkRHMHdhV1pRbzNJakw3STNJMHFSWHMwMjhIelc5MjFl?oc=5"
+    },
+    {
+     "title": "Probes into claims of TNB overcharged electricity bills",
+     "source": "The Malaysian Reserve",
+     "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakZON2I1WlI5eFFmY2kxYUdsLUp5WF8ta3ZrZjF0LTRRRWNNNnBJY1FId0MyblEweXB1RDlvQ0ZGdDNoYndybEZXZmtlQTNiSnc4Nzd0a2MxRTlSQzNqR0JVcWp1Y01odm9TWUQ1eG84ZGkzcjFaUkJNenFqak0wWTdzbHhvM3NzVXhOOWg3anAyUnZqQkNuRnRIMzdrU3dX?oc=5"
+    }
+   ],
+   "query_name": "Tenaga Nasional"
+  },
+  "YTLP": {
+   "controversy_count": 6,
+   "headlines": [
+    {
+     "title": "YTL Power mulls action over 1BestariNet \u2018accusations by irresponsible parties\u2019, says \u2018committed to transparency\u2019 in MACC probe",
+     "source": "The Edge Malaysia",
+     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE16dTFUQS1wYWhjZ1Jja29TUkx6a0E1bUwtOXFfR016UGQ0XzFWMi1OSmRYbmctNXRabk9WdzZvT2lsWU03dDlBbndPVjdEeDIw?oc=5"
+    },
+    {
+     "title": "YTL Power, YTL Corp surge as MACC clears group of wrongdoing in 1BestariNet probe",
+     "source": "The Star",
+     "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOYlVSOUFFRDVCVWNfdkhMMWJKQVdYeGdna3A2Y3hkS0l5azc4NGhKVWZwUU1sbU5md3NraGhCWG9FMEdHRVBwVVBhQ2FxcEpRSF9aV3VnN0F5b294Y2NfR0VRQm81UW9ZMTJMVGYwdHFkMHBBMjZpWjVxZG1FVEpsZzNKbHZOMWZYeTFTNVB0TVBQV1hBN1lJNmRERmNJRGZGVGQ1el8wa3lVS2dCVGF2MFpNemo2aEh2VDlhMzFkb0tVVzY0YV9hNDdZeEdqY09vQ29IZmZ4eWo?oc=5"
+    },
+    {
+     "title": "YTL Counters Tumble Amid MACC Investigation Related To 1Bestarinet",
+     "source": "BernamaBiz",
+     "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBzd2VhNHN0YTlmN2RxNVkwc1NBZWlmUU5yeEh3a0hpOVlqUWNPazdTR2JnOVc1djFRYk5JZ1JfNVBCa0wtSlhpcF9DQTRlNzJvTzYyMDBMV0hJVnc?oc=5"
+    },
+    {
+     "title": "YTL Power denies contractual breach for 1Bestarinet project",
+     "source": "The Malaysian Reserve",
+     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQOTNjSktRUk5iUDJxOWc5QjY0SURMbkdPTU1VMzBPQ2ptRjFPZEhBVFQ1U1ZRbGxCUWloR3h3MjlKdm5fdm9ZNWhSSmpJUTNNVC1NbktRR0wxeXE5SjZjemkweG4wTTdoaDRVSGp4cExDTVVwWVJZbHdPazdmUm4xbDF4UUFnTHJnT0dtT2FBY1JFbkU2Z3IwMGZMUE9WV2FhUWZCRUFn?oc=5"
+    },
+    {
+     "title": "YTL, related stocks slip amid news reports on 1BestariNet investigation",
+     "source": "The Edge Malaysia",
+     "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9MT0xaMkwxcXBRX0o0UExiVmdkTWI3cUpiM3NUbVhoNUFBNFZIaTVXYVNGMkFFd1hLNnZqV1VQcnlpODliVW1pQXkxS1BnMHpf?oc=5"
+    },
+    {
+     "title": "MACC clears YTL Communications in 1BestariNet probe",
+     "source": "Free Malaysia Today",
+     "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPdGxxSmxvaTMzQUMxTEVmTkc5U2VIV202SVczMW1DS1VHbWtLYTBXdi1nQ0NyYWVXNk5jbnN0UzNMOGZQOFJPSDJIbE8xR2RWcjVDd2I2UDlxbnBMRVYyMnVzSnN0emZVTjdGMzVhbUcxUmZ4RHRvY2lqQ3FnaDJCLXlTaUhyYXBWN3VEZ1JUdzZsSUdscFpRQ0dVWjVGaTh3Y3pfeEktMU9lWXA4VnRmUU1R?oc=5"
+    }
+   ],
+   "query_name": "YTL Power International"
+  },
+  "EGCO": {
+   "controversy_count": 0,
+   "headlines": [],
+   "query_name": "Electricity Generating Public"
+  },
+  "RATCH": {
+   "controversy_count": 0,
+   "headlines": [],
+   "query_name": "Ratch Group"
+  },
+  "BGRIM": {
+   "controversy_count": 0,
+   "headlines": [],
+   "query_name": "B.Grimm Power"
+  },
+  "GULF": {
+   "controversy_count": 0,
+   "headlines": [],
+   "query_name": "Gulf Development"
+  },
+  "PGAS": {
+   "controversy_count": 4,
+   "headlines": [
+    {
+     "title": "KPK summons PGN executives for corruption investigation in gas transactions",
+     "source": "Indonesia Business Post",
+     "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPNFJlUUFRN0pMOFZ3SDJWbUllelgta0ZCejlUNGJ6SUdiVm1VMTBwS3poRm5icVhPUzVxNi01dFplaDF0MjV2dlJKOW51em9mWUpUZGlJNWFfOXI0UFZ0dTJFZnRiTW9RYjRycmtKNS0wRzAtcGZNSGtienRJU19OT0NENVJvOVZydW96VTRMOGoxcmlhamw5LW1VZllUUGNoS3ZjNFN1YXdZUHB4V196Ym1WMUk5cmlZUjdRRzFqYVk?oc=5"
+    },
+    {
+     "title": "KPK Names Two Suspects in PGN Gas Trade Corruption Case",
+     "source": "Tempo.co English",
+     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOdFVFcWcwVTVfVUlFZVB4d19sSkludlFUWXVVbWF2V3l4Z2p4RWp6Z0poOTJsazFncF90RTE5YTZNRWdDTzZNd1l4UVNnVlkzY3ZtZk1ubXQyZWtjbXFKeXYtajBqVmpUbGlHcjVjU2hkVGViZXY1S0Y0OUZNbHlkQ2VvOGVCMnZmWWdoVlZiS1JGdw?oc=5"
+    },
+    {
+     "title": "KPK investigates alleged corruption in PT Perusahaan Gas Negara",
+     "source": "Indonesia Business Post",
+     "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOQ2NsalhKNUItTVpBWlI3cmdyRG5vRkczSlVQeFJPNE9yVFdxaU1Ka1haTWpzcXJKRndIUmtYTVAwTlAwdlRxQ09PRHBKdlRJa2tUNEhxNDVtNlN2eWctcXZNUGI3aU52S1V2M01GSlBnNU16WFI0M2FaTU5RcmpKdDhvYkJjSU5yMlRJVEkyV0dBR1lCYWdmYXlqR1N0QUdzRE9RUXhUQVQxOW9vM0VfWg?oc=5"
+    },
+    {
+     "title": "PGN to File Lawsuit against Petronas for Business Woes",
+     "source": "Tempo.co English",
+     "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPWGluTEo0V0FiR0F3NDY1SDhyS29UN1hrYkpLZU1mdi1WWExkNy1ZUHJ6dXZRWTZpd0JSYTJhN0ZHbktHdHkwVGJSQmFjTEtyS3ctRHJMUVQwTjNqZ0JsUTFfcU1UZFBWV25vYnBKSkc5Sk5JNmdNY0JnY2xDRVYyVjRlQno0c1ktQUEteDhPbw?oc=5"
+    }
+   ],
+   "query_name": "Perusahaan Gas Negara"
+  },
+  "POWR": {
+   "controversy_count": 0,
+   "headlines": [],
+   "query_name": "Cikarang Listrindo"
+  },
+  "POW": {
+   "controversy_count": 0,
+   "headlines": [],
+   "query_name": "PetroVietnam Power"
+  }
+ }
+}

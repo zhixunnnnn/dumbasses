@@ -7,25 +7,25 @@ export const QUADRANT: Record<
   HIDDEN_WINNERS: {
     label: "Hidden Winners",
     color: "#3ecf8e",
-    blurb: "Low score today, improving fast — the market hasn't priced it yet.",
+    blurb: "Rated low but cutting emissions — a decarbonisation the score hasn't caught up to.",
     emoji: "🚀",
   },
   FUTURE_LEADERS: {
     label: "Future Leaders",
     color: "#4cc4d4",
-    blurb: "High score and still improving — a compounding ESG moat.",
+    blurb: "Rated well AND emissions falling — genuine, evidenced ESG quality.",
     emoji: "🌟",
   },
   VALUE_TRAPS: {
     label: "Value Traps",
     color: "#e0b24a",
-    blurb: "Low score and declining — structural ESG risk.",
+    blurb: "Rated low and emissions rising — structural transition risk.",
     emoji: "⚠️",
   },
   OVERRATED: {
     label: "Overrated Leaders",
     color: "#ec6a5e",
-    blurb: "High score but deteriorating — the market still pays a premium.",
+    blurb: "Rated well but emissions rising — the rating flatters a worsening carbon path.",
     emoji: "🧱",
   },
 };

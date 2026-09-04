@@ -1,6 +1,6 @@
 """Monday-morning manager briefing.
 
-An LLM-synthesized digest of live news + verified-evidence signals for every
+An LLM-synthesized digest of live news + ESG rating and real-emission signals for every
 company the Evidence Dashboard covers, cached once per Asia/Singapore
 calendar day so the dashboard loads instantly after the first request each
 day (see backend/app/main.py: GET /api/dashboard/briefing).
@@ -61,7 +61,8 @@ def _brief_input(company_id: str, conn) -> dict | None:
     if not payload:
         return None
     core = payload.get("company", {})
-    evidence = payload.get("evidence", {})
+    rating = payload.get("rating", {})
+    dm = payload.get("double_materiality") or {}
     raters = payload.get("raters", {})
     signal = payload.get("signal", {})
     return {
@@ -69,36 +70,40 @@ def _brief_input(company_id: str, conn) -> dict | None:
         "name": core.get("name") or company_id,
         "ticker": core.get("ticker"),
         "sector": core.get("sector"),
-        "evidenceScore": evidence.get("total"),
-        "pillars": evidence.get("pillars"),
-        "confidence": evidence.get("confidence"),
+        "esgRating": rating.get("total"),
+        "pillars": rating.get("pillars"),
+        "doubleMaterialityComposite": dm.get("composite"),
         "raterConsensus": raters.get("consensus"),
         "raterDivergence": raters.get("divergence"),
         "raterProvenance": raters.get("consensus_provenance"),
         "quadrant": signal.get("quadrant"),
-        "isUnderpricedImprover": signal.get("is_underpriced_improver"),
-        "evidenceGap": signal.get("evidence_gap"),
-        "momentum": signal.get("momentum"),
+        "isDecarbonisingImprover": signal.get("is_underpriced_improver"),
+        "emissionMomentum": signal.get("momentum"),   # annualised %, + = decarbonising
         "news": _load_news(conn, company_id),
     }
 
 
-PROMPT_TEMPLATE = """You are writing the Monday-morning ESG briefing for a portfolio/CGS-I \
-manager who has about 60 seconds before their first meeting. Below is this week's data for \
-every company on the desk's evidence-scoring dashboard (evidenceScore = verified-evidence \
-score 0-100, raterConsensus = mean percentile of MSCI/S&P/Sustainalytics, raterDivergence = \
-how much the raters disagree, quadrant = UNDERPRICED_IMPROVER / OVERRATED / HIDDEN_WINNERS / \
-etc., news.headlines = recent scraped ESG/controversy headlines with a label of \
-stock/positive/neutral).
+PROMPT_TEMPLATE = """You are writing the Monday-morning ESG briefing for a CGS-International \
+equity investor who has about 60 seconds before their first meeting. ESG ratings only update \
+yearly, so the weekly job is spotting the TREND early. Below is this week's data for every \
+company on the desk (esgRating = ESG rating 0-100 — Environmental is objective from CDP + real \
+Climate TRACE emissions, Social/Governance use the rating agencies as a reference; \
+doubleMaterialityComposite = the rating blended with real emission intensity minus a \
+greenwashing penalty; emissionMomentum = annualised % change in REAL owned-asset emissions, \
+POSITIVE = decarbonising, NEGATIVE = emissions rising; raterConsensus/raterDivergence = the \
+real rating agencies' level and disagreement; quadrant = FUTURE_LEADERS (rated well AND \
+decarbonising) / HIDDEN_WINNERS (rated low but decarbonising) / OVERRATED (rated well but \
+emissions rising = transition risk) / VALUE_TRAPS (rated low and emissions rising); \
+news.headlines = recent scraped ESG/controversy headlines).
 
 Write (a) ONE portfolio-level overview across the whole desk, and (b) a per-company briefing. \
 Be specific and use the numbers given — do not invent facts not present in the data. If news is \
 null or headlines are empty, say so plainly rather than fabricating events.
 
-The overview is what the manager reads first and may be the ONLY thing they read: lead with the \
+The overview is what the investor reads first and may be the ONLY thing they read: lead with the \
 single most consequential thing across the desk this week, name the specific companies that \
-drive it, and quantify where you can (how many are overrated, where controversies landed, which \
-way momentum is going).
+drive it, and quantify where you can (how many carry transition risk, where controversies \
+landed, which way real emissions are heading).
 
 Return strict JSON: {{
 "overview": {{
@@ -264,16 +269,17 @@ def _generate(inputs: list[dict]) -> tuple[dict, list[dict]]:
 
 def _fallback_overview(inputs: list[dict]) -> dict:
     total = len(inputs)
-    overrated = sum(1 for i in inputs if i.get("quadrant") == "OVERRATED")
-    improvers = sum(1 for i in inputs if i.get("isUnderpricedImprover"))
+    transition_risk = sum(1 for i in inputs if i.get("quadrant") == "OVERRATED")
+    improvers = sum(1 for i in inputs if i.get("isDecarbonisingImprover"))
     controversies = sum((i.get("news") or {}).get("controversy") or 0 for i in inputs)
-    declining = sum(1 for i in inputs if (i.get("momentum") or 0) < 0)
+    rising = sum(1 for i in inputs if (i.get("emissionMomentum") or 0) < 0)
     return {
-        "headline": f"{total} companies covered · {overrated} overrated · {controversies} controversy flags",
+        "headline": f"{total} companies covered · {transition_risk} overrated (transition risk) · {controversies} controversy flags",
         "summary": (
-            f"Across the {total} covered companies, {overrated} sit in the Overrated quadrant and "
-            f"{declining} show declining evidence momentum. {improvers} currently qualify as "
-            f"Underpriced Improvers. {controversies} controversy headlines were flagged this cycle."
+            f"Across the {total} covered companies, {transition_risk} sit in the Overrated quadrant "
+            f"(rated well but emissions rising) and {rising} show rising real emissions. "
+            f"{improvers} currently qualify as Decarbonising Improvers. {controversies} controversy "
+            f"headlines were flagged this cycle."
         ),
         "watch_items": [],
     }
@@ -291,9 +297,11 @@ def _fallback_briefing(item: dict) -> dict:
         else "neutral"
     )
     headlines = [h.get("title") for h in (news.get("headlines") or [])[:2] if h.get("title")]
+    emom = item.get("emissionMomentum")
+    emom_txt = ("emissions flat" if emom is None
+                else f"emissions {'falling' if emom > 0 else 'rising'} {abs(emom):.1f}%/yr")
     summary = (
-        f"Evidence score {item.get('evidenceScore')}, rater consensus {item.get('raterConsensus')}, "
-        f"quadrant {item.get('quadrant')}. "
+        f"ESG rating {item.get('esgRating')}, {emom_txt}, quadrant {item.get('quadrant')}. "
         + (f"Recent headlines: {'; '.join(headlines)}." if headlines else "No fresh scraped headlines this cycle.")
     )
     return {

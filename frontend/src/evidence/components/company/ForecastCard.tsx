@@ -15,6 +15,9 @@ const DIRECTION_TONE: Record<string, string> = {
 
 export default function ForecastCard({ forecast }: { forecast: Forecast }) {
   const fc = forecast;
+  // The rating forecast rests on the panel's illustrative rating history; unless this
+  // company's own history is fully real, the hypothesis is hidden (no seeded projections).
+  if (fc.provenance !== "real" || fc.baseline_only) return null;
   const maxAbs = Math.max(0.1, ...fc.feature_contributions.map((c) => Math.abs(c.contribution)));
   const tone = DIRECTION_TONE[fc.direction ?? ""] ?? "text-purpose";
   // The backend composes the one sentence that is safe to show: it names the subset every

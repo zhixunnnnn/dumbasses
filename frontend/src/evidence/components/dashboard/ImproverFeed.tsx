@@ -16,7 +16,7 @@ export default function ImproverFeed({ rows }: { rows: CompanyRow[] }) {
         <TrendingUp size={15} className="text-pos" />
         <div>
           <h3 className="text-sm font-semibold text-txt">Improver Alerts</h3>
-          <p className="text-[11px] text-faint">Verified improvement the market hasn't priced</p>
+          <p className="text-[11px] text-faint">Cutting emissions, not yet priced</p>
         </div>
       </div>
       <div className="flex-1 space-y-2 overflow-y-auto p-3">

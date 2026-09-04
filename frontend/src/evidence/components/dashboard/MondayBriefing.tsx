@@ -86,16 +86,25 @@ export function BriefingOverview({ state }: { state: State }) {
 export function BriefingFeed({
   state,
   onSelect,
+  ratingById,
 }: {
   state: State;
   onSelect: (id: string) => void;
+  ratingById?: Map<string, number | null>;
 }) {
-  const companies = useSorted(state.data);
+  const bySentiment = useSorted(state.data);
+  // best company first = highest ESG rating; fall back to sentiment when a rating is N.A.
+  const companies = useMemo(() => {
+    if (!ratingById) return bySentiment;
+    return [...bySentiment].sort(
+      (a, b) => (ratingById.get(b.id) ?? -1) - (ratingById.get(a.id) ?? -1),
+    );
+  }, [bySentiment, ratingById]);
 
   return (
     <div className="rounded-xl border border-hairline bg-surface p-4 shadow-panel">
       <h3 className="text-sm font-semibold text-txt">By company</h3>
-      <p className="mb-3 text-[11px] text-faint">This week's read, worst news first</p>
+      <p className="mb-3 text-[11px] text-faint">This week's read, best-rated first</p>
 
       {state.loading && <p className="text-[12px] text-faint">Loading…</p>}
       {state.error && <p className="text-[12px] text-neg">Couldn't load the briefing.</p>}

@@ -54,9 +54,10 @@ def _bank_dataset(sp_scale: float = 1.0):
 def test_T2_flip_all_raters_rank_strong_above_weak():
     pcts = normalize_raters(_bank_dataset(), YEAR)
     strong, weak = pcts["STRONG"], pcts["WEAK"]
-    # all three must point the same way after inverting Sustainalytics
+    # the active raters must point the same way after inverting Sustainalytics.
+    # S&P is dropped (not publicly obtainable), so it never carries a percentile.
     assert strong.msci_pct > weak.msci_pct, "MSCI inverted"
-    assert strong.sp_pct > weak.sp_pct, "S&P inverted"
+    assert strong.sp_pct is None and weak.sp_pct is None, "S&P should be dropped"
     assert strong.sustainalytics_pct > weak.sustainalytics_pct, "Sustainalytics flip missing!"
     # higher=better everywhere: strong near the top, weak near the bottom
     assert strong.sustainalytics_pct > 80 and weak.sustainalytics_pct < 20
@@ -102,7 +103,8 @@ def test_fallback_mode_computes_but_labels_the_blend(real_channels, fallback_mod
     "mixed", never "real", because seeded percentiles contributed."""
     real_channels("msci")
     strong = normalize_raters(_bank_dataset(), YEAR)["STRONG"]
-    assert set(strong.contributing()) == {"msci", "sp", "sustainalytics"}
+    # S&P is dropped, so the seeded bank dataset contributes MSCI + Sustainalytics only.
+    assert set(strong.contributing()) == {"msci", "sustainalytics"}
     assert consensus(strong) is not None and divergence_index(strong) is not None
     assert strong.provenance() == "mixed"
 
@@ -129,14 +131,15 @@ def test_a_blended_figure_is_never_labelled_real(real_channels, fallback_mode):
 def test_divergence_and_consensus_computed_once_two_raters_are_real(real_channels, strict_mode):
     """The gate is satisfiable, not a permanent off switch: hand-enter a second real
     rating and both numbers come back — over the REAL channels only."""
-    real_channels("msci", "sp", companies=["SPLIT"])
+    real_channels("msci", "sustainalytics", companies=["SPLIT"])
     ds = _bank_dataset()
-    # SPLIT is top-of-scale on MSCI and bottom on S&P — a genuine disagreement
+    # SPLIT is top-of-scale on MSCI and bottom on Sustainalytics (high risk) — a genuine
+    # disagreement. (S&P is dropped, so the second real channel is Sustainalytics.)
     ds.raters.append(RaterRow("SPLIT", YEAR, "AAA", 44.0, 39.0))
     ds.companies["SPLIT"] = make_company("SPLIT")
     split = normalize_raters(ds, YEAR)["SPLIT"]
     real = split.real_available()
-    assert real == [split.msci_pct, split.sp_pct]     # seeded Sustainalytics excluded
+    assert real == [split.msci_pct, split.sustainalytics_pct]
     assert divergence_index(split) == round(max(real) - min(real), 2) > 0
     assert consensus(split) == round(sum(real) / len(real), 2)
 

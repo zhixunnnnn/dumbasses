@@ -19,6 +19,7 @@ from .divergence import divergence_index
 from .llm import get_default_client
 from .normalize import consensus, normalize_raters
 from .predict import data_fingerprint, forecast, train
+from .rating_score import rating_from_pcts, rating_score, rating_series
 from .regulations import compliance_gap
 from .score import claim_table, evidence_score, evidence_series
 from .signal import compute_all
@@ -199,33 +200,235 @@ def _benchmark_block(bench_rows, industry) -> dict:
     }
 
 
+def _impact_block(cid: str) -> Optional[dict]:
+    """Impact materiality (Climate TRACE owned-asset CO2e) for one company, with its rank and
+    share across the covered panel. None when no clean owner match exists (renders N.A.)."""
+    try:
+        from backend.data.climate_trace import cached, cached_impact_for
+    except Exception:
+        return None
+    rec = cached_impact_for(cid)
+    if not rec:
+        return None
+    # drop any partially-elapsed current year from the trajectory (not comparable to full years)
+    rec = {**rec, "annual": [a for a in (rec.get("annual") or []) if a["year"] < config.CURRENT_YEAR]}
+    companies = (cached().get("companies") or {})
+    totals = {c: r.get("total_emissions_tonnes") for c, r in companies.items()
+              if r.get("total_emissions_tonnes")}
+    panel_total = sum(totals.values()) or None
+    ranked = sorted(totals, key=lambda c: -totals[c])
+    mine = rec.get("total_emissions_tonnes")
+    return {
+        **rec,
+        "company_id": cid,
+        "rank": (ranked.index(cid) + 1) if cid in ranked else None,
+        "peers": len(totals),
+        "panel_share": round(mine / panel_total, 3) if (mine and panel_total) else None,
+    }
+
+
+def _panel_intensities() -> dict[str, Optional[float]]:
+    """Carbon intensity (tCO2e per $M revenue) for every company that has both emissions
+    (Climate TRACE) and revenue (Yahoo) — the input to the peer-ranked impact score."""
+    from .double_materiality import carbon_intensity
+    try:
+        from backend.data.climate_trace import cached as ct_cached
+        from backend.data.fundamentals import cached as fund_cached
+    except Exception:
+        return {}
+    emis = {c: r.get("total_emissions_tonnes")
+            for c, r in (ct_cached().get("companies") or {}).items()}
+    funds = fund_cached().get("companies") or {}
+    out: dict[str, Optional[float]] = {}
+    for c in set(emis) | set(funds):
+        fin = (funds.get(c) or {}).get("financials") or {}
+        out[c] = carbon_intensity(emis.get(c), fin.get("market_cap"), fin.get("currency"))
+    return out
+
+
+def _emission_momentum(cid: str) -> Optional[float]:
+    """Redefined ESG momentum: the annualised % change in owned-asset emissions (Climate
+    TRACE), sign-flipped so FALLING emissions read as POSITIVE (a company decarbonising is
+    improving). Real trajectory; None below two full years of coverage."""
+    try:
+        from backend.data.climate_trace import cached_impact_for
+        rec = cached_impact_for(cid)
+    except Exception:
+        return None
+    annual = [a for a in ((rec or {}).get("annual") or []) if a["year"] < config.CURRENT_YEAR]
+    if len(annual) < 2:
+        return None
+    xs = [a["year"] for a in annual]
+    ys = [a["emissions"] for a in annual]
+    n = len(xs)
+    mx, my = sum(xs) / n, sum(ys) / n
+    denom = sum((x - mx) ** 2 for x in xs)
+    if denom == 0 or my <= 0:
+        return None
+    slope = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / denom   # tonnes / yr
+    return round(-(slope / my) * 100, 1)   # falling emissions -> positive momentum
+
+
+def _emission_quadrant(rating: Optional[float], emom: Optional[float]) -> Optional[str]:
+    """Quadrant on ESG rating (x) x emission momentum (y). Keys are kept but their meaning is
+    now: FUTURE_LEADERS = rated well AND decarbonising; HIDDEN_WINNERS = rated low but
+    decarbonising (turnaround); OVERRATED = rated well but emissions rising (transition risk);
+    VALUE_TRAPS = rated low and emissions rising (laggard)."""
+    if rating is None or emom is None:
+        return None
+    x_high = rating >= config.QUADRANT_RATING_SPLIT
+    y_up = emom > 0   # emissions falling = improving
+    return (("FUTURE_LEADERS" if x_high else "HIDDEN_WINNERS") if y_up
+            else ("OVERRATED" if x_high else "VALUE_TRAPS"))
+
+
+def _sg_signal(ds, cid: str, client) -> tuple:
+    """Real Social & Governance pillar signals from the company's OWN report disclosures
+    (the SASB material topics workforce-safety for S, grid-resiliency for G), via the same
+    LLM claim extraction the app already scrapes. Returns
+    (s_signal, s_sources, g_signal, g_sources) — a pillar is real only when the company
+    actually disclosed that topic; otherwise None, so the pillar falls back to the agency
+    reference. No seeded evidence is ever used (guardrail: real claims only)."""
+    try:
+        from backend.data.realclaims import cached_claims_for
+        real = cached_claims_for(cid, year=config.END_YEAR)
+    except Exception:
+        real = None
+    rows = (real or {}).get("claims") or []
+    if not rows:
+        return (None, None, None, None)          # no real extraction -> agency reference
+    pillars_disclosed = {c.get("pillar") for c in rows}
+    es = evidence_score(ds, cid, config.END_YEAR, client)   # computed from the REAL claims
+    p = es.pillars
+    s = p.get("S") if ("S" in pillars_disclosed and p.get("S") is not None) else None
+    g = p.get("G") if ("G" in pillars_disclosed and p.get("G") is not None) else None
+    return (s, ["company report · workforce safety"] if s is not None else None,
+            g, ["company report · grid resiliency"] if g is not None else None)
+
+
+def _environmental_signals(ds) -> dict[str, tuple]:
+    """{cid: (env_score, sources)} — the OBJECTIVE Environmental-pillar signal (CDP grade +
+    Climate TRACE carbon intensity) that overrides the agency headline for E, so the rating
+    reflects measured climate performance instead of agency opinion."""
+    from . import double_materiality as dm
+    from .rating_score import environmental_signal
+
+    cleaned, _flagged = dm.guard_intensities(_panel_intensities())
+    impact = dm.impact_scores(cleaned)
+    return {cid: environmental_signal(ds, cid, impact.get(cid)) for cid in ds.demo_ids()}
+
+
+def _double_materiality_block(cid: str, financial: Optional[float],
+                              financial_prov, intensities: dict) -> dict:
+    """The ESRS composite for one company (financial x impact - greenwashing)."""
+    from . import double_materiality as dm
+
+    cleaned, flagged = dm.guard_intensities(intensities)
+    scores = dm.impact_scores(cleaned)
+    impact = scores.get(cid)
+    my_int = cleaned.get(cid)
+    ranked = sorted([c for c, v in cleaned.items() if v is not None], key=lambda c: cleaned[c])
+    # web-scraped greenwashing reality-check: controversy/accusation headlines from the open web.
+    gw = {}
+    try:
+        from backend.data.greenwashing import cached_greenwashing_for
+        gw = cached_greenwashing_for(cid)
+    except Exception:
+        gw = {}
+    penalty, drivers = dm.greenwashing_penalty(financial, impact,
+                                               controversies=gw.get("controversy_count", 0))
+    comp, note = dm.composite(financial, impact, penalty)
+    if cid in flagged:
+        note = ("Climate TRACE appears to under-attribute this owner's emissions (too few "
+                "assets for its size), so the impact half is excluded and the composite is the "
+                "financial half only.")
+    return {
+        "company_id": cid, "financial": financial, "impact": impact, "composite": comp,
+        "weight_financial": config.DM_WEIGHT_FINANCIAL, "weight_impact": config.DM_WEIGHT_IMPACT,
+        "carbon_intensity": my_int,
+        "intensity_rank": (ranked.index(cid) + 1) if cid in ranked else None,
+        "intensity_peers": len(ranked),
+        "greenwashing_penalty": penalty, "greenwashing_drivers": drivers,
+        "greenwashing_headlines": gw.get("headlines", []),
+        "under_attributed": cid in flagged,
+        "provenance": financial_prov, "note": note,
+    }
+
+
+def _real_only(value, provenance):
+    """Show a rater-derived figure only when it is fully REAL. A "mixed" or "illustrative"
+    consensus/divergence is N.A. for a CGS investor — no seeded numbers on the terminal."""
+    return value if provenance == "real" else None
+
+
+def _fundamentals_block(cid: str) -> Optional[dict]:
+    """Real Yahoo valuation/financials/analyst data for the CGS finance panel. None when
+    Yahoo returned nothing for this ticker (renders N.A.)."""
+    try:
+        from backend.data.fundamentals import fundamentals_for
+    except Exception:
+        return None
+    return fundamentals_for(cid)
+
+
 def _company_detail(ds, cid, sig, model, client, bench_rows) -> dict:
     comp = ds.company(cid)
-    pcts = normalize_raters(ds, config.END_YEAR)[cid]
+    all_pcts = normalize_raters(ds, config.END_YEAR)
+    pcts = all_pcts[cid]
+    envs = _environmental_signals(ds)
+    env = envs.get(cid, (None, None))
     es = evidence_score(ds, cid, config.END_YEAR, client)
+    # the ESG RATING is the headline score. Agencies inform Social & Governance (reference
+    # only — differing black-box methods); the Environmental pillar is driven by the OBJECTIVE
+    # signal (CDP + Climate TRACE) so it reflects measured climate performance.
+    sg = _sg_signal(ds, cid, client)
+    rating = rating_from_pcts(ds, cid, config.END_YEAR, pcts, env_signal=env[0], env_sources=env[1],
+                              s_signal=sg[0], s_sources=sg[1], g_signal=sg[2], g_sources=sg[3])
+    rating_hist = [{"year": r.year, "total": r.total, "pillars": r.pillars,
+                    "provenance": r.provenance} for r in rating_series(ds, cid)]
+    # the latest trajectory point is the headline (E-enhanced), so they never disagree.
+    for pt in rating_hist:
+        if pt["year"] == config.END_YEAR:
+            pt["total"], pt["pillars"] = rating.total, rating.pillars
     series = [{"year": e.year, "total": e.total, "pillars": e.pillars, "confidence": e.confidence}
               for e in evidence_series(ds, cid, client)]
     fc = forecast(ds, cid, model, client)
     peers = [{"id": c.company_id, "name": c.name,
-              "evidence_total": (evidence_score(ds, c.company_id, config.END_YEAR, client).total)}
+              "evidence_total": (evidence_score(ds, c.company_id, config.END_YEAR, client).total),
+              "rating_total": (lambda psg: rating_from_pcts(
+                  ds, c.company_id, config.END_YEAR, all_pcts[c.company_id],
+                  env_signal=envs.get(c.company_id, (None, None))[0],
+                  env_sources=envs.get(c.company_id, (None, None))[1],
+                  s_signal=psg[0], s_sources=psg[1], g_signal=psg[2], g_sources=psg[3]).total
+              )(_sg_signal(ds, c.company_id, client))}
              for c in ds.companies.values()
              if c.scope == "demo" and c.sector == comp.sector and c.company_id != cid]
-    claims = claim_table(ds, cid, config.END_YEAR, client)
+    # Claims/evidence are REAL-only: show only LLM-extracted claims from the company's own
+    # report (realclaims cache). No seeded/illustrative claims — an empty table when we have
+    # no real extraction, never a fabricated one.
+    claims = {"claims": [], "absent": [], "live": False}
     try:
         from backend.data.realclaims import cached_claims_for
 
-        claims = cached_claims_for(cid, absent=claims.get("absent", []),
-                                   year=config.END_YEAR) or claims
+        real_claims = cached_claims_for(cid, year=config.END_YEAR)
+        if real_claims and real_claims.get("claims"):
+            claims = real_claims
     except Exception:
         pass
     return {
         "company": comp.model_dump(),
+        "rating": rating.model_dump(),
+        "rating_series": rating_hist,
+        "impact": _impact_block(cid),
+        "double_materiality": _double_materiality_block(
+            cid, rating.total, rating.provenance, _panel_intensities()),
+        "fundamentals": _fundamentals_block(cid),
         "evidence": es.model_dump(),
         "series": series,
-        "raters": {**pcts.model_dump(), "consensus": consensus(pcts),
-                   "divergence": divergence_index(pcts),
-                   # "real" | "mixed" | "illustrative" for BOTH figures: they run over the
-                   # same contributing set, so one label describes both.
+        "raters": {**pcts.model_dump(),
+                   # real-only: a mixed/illustrative consensus or divergence is N.A.
+                   "consensus": _real_only(consensus(pcts), pcts.provenance()),
+                   "divergence": _real_only(divergence_index(pcts), pcts.provenance()),
                    "consensus_provenance": pcts.provenance(),
                    "divergence_provenance": pcts.provenance(),
                    "contributing": pcts.contributing(),
@@ -235,7 +438,7 @@ def _company_detail(ds, cid, sig, model, client, bench_rows) -> dict:
         "compliance": compliance_gap(ds, cid, config.END_YEAR).model_dump(),
         "forecast": fc.model_dump(),
         "claims": claims,
-        "peers": sorted(peers, key=lambda p: -(p["evidence_total"] or 0)),
+        "peers": sorted(peers, key=lambda p: -(p["rating_total"] or 0)),
         # real observations that sit OUTSIDE the analysis year, shown with their own year
         "latest_real_raters": _latest_real_raters(cid),
         "cdp_disclosure": _cdp_disclosure(cid),
@@ -250,6 +453,7 @@ def build(offline: bool = True, retrain: bool = False) -> dict:
     sigs = compute_all(ds, client)
     pcts = normalize_raters(ds, config.END_YEAR)
     bench_rows = get_benchmarks(ds)   # one panel-wide pass, reused by every company row
+    envs = _environmental_signals(ds)  # objective E signal per company, for the headline rating
 
     sectors_map = {r["reg_id"]: r.get("applies_to_sectors", [])
                    for r in config.load_json("regulations.json")["regulations"]}
@@ -260,7 +464,34 @@ def build(offline: bool = True, retrain: bool = False) -> dict:
         comp = ds.company(cid)
         sig = sigs[cid]
         es = evidence_score(ds, cid, config.END_YEAR, client)
+        _sg = _sg_signal(ds, cid, client)
+        rt = rating_from_pcts(ds, cid, config.END_YEAR, pcts[cid],
+                              env_signal=envs.get(cid, (None, None))[0],
+                              env_sources=envs.get(cid, (None, None))[1],
+                              s_signal=_sg[0], s_sources=_sg[1],
+                              g_signal=_sg[2], g_sources=_sg[3])
         cg = compliance_gap(ds, cid, config.END_YEAR)
+        # finance columns (smartass-style): last price, weekly change, and a recent
+        # close-price spark for the screener trend cell.
+        closes = [c.close for c in ds.prices.get(cid, [])]
+        last_px = closes[-1] if closes else None
+        # week-over-week change, skipping a stale duplicate final bar: the latest weekly
+        # snapshot often just repeats last week's close, which would zero out the change —
+        # so compare against the most recent DIFFERENT prior close (the last real move).
+        cl = list(closes)
+        while len(cl) >= 2 and cl[-1] == cl[-2]:
+            cl.pop()
+        prev_px = cl[-2] if len(cl) >= 2 else None
+        chg_pct = round((last_px - prev_px) / prev_px * 100, 2) if (last_px and prev_px) else None
+        spark = [round(c, 4) for c in closes[-24:]]
+        # REDEFINED ESG momentum = emission trajectory; quadrant = rating x emission momentum.
+        emom = _emission_momentum(cid)
+        quad = _emission_quadrant(rt.total, emom)
+        sig.quadrant = quad
+        sig.quadrant_provenance = rt.provenance   # quadrant now = real rating x real emissions
+        sig.momentum = emom
+        sig.is_underpriced_improver = bool(emom is not None and emom >= config.IMPROVER_MIN_EMOM
+                                           and sig.price_flat)
         fc = forecast(ds, cid, model, client)
         # flatten the applicable regs (+ status) onto the row so the Screener can filter
         # by regulation without an extra round-trip. not_in_force -> status "NA".
@@ -271,12 +502,18 @@ def build(offline: bool = True, retrain: bool = False) -> dict:
         bench = _benchmark_block(bench_rows, comp.sasb_industry)
         row = {
             "id": cid, "name": comp.name, "ticker": comp.ticker, "sector": comp.sector,
-            "country": comp.country, "evidence_total": es.total, "confidence": es.confidence,
-            "consensus": consensus(pcts[cid]), "divergence": divergence_index(pcts[cid]),
+            "country": comp.country,
+            "rating_total": rt.total, "rating_provenance": rt.provenance,
+            "rating_coverage": rt.coverage,
+            "price": last_px, "price_chg": chg_pct, "spark": spark,
+            "evidence_total": es.total, "confidence": es.confidence,
+            "consensus": _real_only(consensus(pcts[cid]), pcts[cid].provenance()),
+            "divergence": _real_only(divergence_index(pcts[cid]), pcts[cid].provenance()),
             "rater_provenance": pcts[cid].provenance(),
             "evidence_pct": sig.evidence_pct, "evidence_basis": sig.evidence_basis,
             "evidence_peers": sig.evidence_peers,
             "evidence_gap": sig.evidence_gap, "momentum": sig.momentum, "quadrant": sig.quadrant,
+            "emission_momentum": emom,
             "is_underpriced_improver": sig.is_underpriced_improver,
             "compliance_score": cg.score, "compliance_provenance": cg.provenance,
             "forecast": fc.predicted_score,
@@ -291,8 +528,9 @@ def build(offline: bool = True, retrain: bool = False) -> dict:
             "regulations": reg_cells,
         }
         companies.append(row)
-        matrix.append({"id": cid, "name": comp.name, "x": sig.esg_today, "y": sig.momentum,
-                       "quadrant": sig.quadrant, "size": es.total,
+        # matrix: x = ESG rating (the score), y = emission momentum (decarbonising = up)
+        matrix.append({"id": cid, "name": comp.name, "x": rt.total, "y": emom,
+                       "quadrant": sig.quadrant, "size": rt.total,
                        "is_underpriced_improver": sig.is_underpriced_improver})
         _dump(config.OUT_DIR / "company" / f"{cid}.json", _company_detail(ds, cid, sig, model, client, bench_rows))
 

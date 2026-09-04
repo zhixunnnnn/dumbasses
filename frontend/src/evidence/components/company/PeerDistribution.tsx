@@ -59,9 +59,9 @@ export default function PeerDistribution({
     return <p className="mt-2 text-[11px] text-faint">No scored profile to place in a distribution.</p>;
   }
 
-  const center = real.reduce((a, c) => a + c.score, 0) / real.length;
-  const synth = illustrativePeers(`${selfId}:${sector}`, center, Math.max(0, COHORT_SIZE - real.length));
-  const total = real.length + synth.length;
+  // real peers only — no illustrative padding on a CGS terminal.
+  const synth: number[] = [];
+  const total = real.length;
 
   const binOf = (score: number) => BINS.findIndex((b) => score >= b.lo && score < b.hi);
   const realBins = BINS.map((_, i) => real.filter((c) => binOf(c.score) === i));
@@ -103,7 +103,7 @@ export default function PeerDistribution({
       </div>
       {rank !== null && (
         <p className="mt-1.5 text-[11px] text-faint">
-          #{rank} of {total} in {sector} · {real.length} real{peers.length === 0 ? " (no scored sector peers)" : ""} · {synth.length} illustrative
+          #{rank} of {total} {sector} peers{peers.length === 0 ? " (no scored sector peers)" : ""} · real ratings only
         </p>
       )}
     </div>

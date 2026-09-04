@@ -116,6 +116,83 @@ class SiteObservation(BaseModel):
 
 
 # --- scores --------------------------------------------------------------------
+class RatingScore(BaseModel):
+    """Agency-consensus ESG rating, SASB-material-weighted, on one 0..100 quality scale
+    (higher = better). This is the smartass method: each rating agency's normalized score
+    feeds the SASB material topics, renormalized over the pillars that actually carry data.
+    CDP is a climate rating, so it informs only the Environmental pillar.
+
+    `total` is None (config.NA) when NO agency rates the company — never a fabricated 0.
+    `provenance` is inherited from the contributing rater set (see RaterPercentiles)."""
+    company_id: str
+    year: int
+    total: Optional[float] = None            # 0..100, None if no agency data
+    pillars: dict[str, Optional[float]] = Field(default_factory=dict)
+    coverage: float = 0.0                    # fraction of material weight backed by data
+    contributions: dict[str, float] = Field(default_factory=dict)   # topic_id -> points
+    # per material topic: weight, agency-derived score, and points contributed. Drives the
+    # SASB materiality-weights panel (which topics the score actually leans on).
+    topic_breakdown: list[dict] = Field(default_factory=list)
+    agencies: list[str] = Field(default_factory=list)               # channels that contributed
+    provenance: Optional[Provenance] = None
+    trace: TraceNode
+
+
+class ImpactAsset(BaseModel):
+    name: Optional[str] = None
+    subsector: Optional[str] = None
+    country: Optional[str] = None
+    emissions: Optional[float] = None        # tCO2e for the year
+
+
+class ImpactMateriality(BaseModel):
+    """The outward half of double materiality: the REAL CO2e of the physical power assets
+    this company owns, from Climate TRACE. None everywhere = no clean owner match (N.A.),
+    never a fabricated zero."""
+    company_id: str
+    owner_id: Optional[str] = None
+    owner_name: Optional[str] = None
+    note: Optional[str] = None
+    year: int
+    gas: str = "co2e_100yr"
+    total_emissions_tonnes: Optional[float] = None
+    asset_count: int = 0
+    top_assets: list[ImpactAsset] = Field(default_factory=list)
+    subsector_mix: list[dict] = Field(default_factory=list)
+    monthly: list[dict] = Field(default_factory=list)
+    annual: list[dict] = Field(default_factory=list)   # [{year, emissions}] real trajectory
+    rank: Optional[int] = None               # 1 = highest emitter among covered peers
+    peers: Optional[int] = None              # how many companies carry an impact figure
+    panel_share: Optional[float] = None      # this owner's share of the covered-panel total
+    provenance: Optional[Provenance] = "real"
+    source: str = "Climate TRACE v7"
+    source_url: Optional[str] = None
+
+
+class DoubleMateriality(BaseModel):
+    """ESRS-style double-materiality composite for one company.
+
+    financial = the ESG rating (outside-in). impact = peer-ranked carbon intensity
+    (inside-out; higher = cleaner). greenwashing = the materiality gap penalty (rated
+    greener than it runs). composite = w_fin*financial + w_imp*impact - greenwashing.
+    Any half that is N.A. is reported as such; the composite is N.A. when the financial
+    half is N.A. (never a fabricated 0)."""
+    company_id: str
+    financial: Optional[float] = None
+    impact: Optional[float] = None
+    composite: Optional[float] = None
+    weight_financial: float = 0.0
+    weight_impact: float = 0.0
+    carbon_intensity: Optional[float] = None   # tCO2e per $M market cap (approx FX)
+    intensity_rank: Optional[int] = None       # 1 = cleanest of the covered peers
+    intensity_peers: Optional[int] = None
+    greenwashing_penalty: float = 0.0
+    greenwashing_drivers: list[dict] = Field(default_factory=list)
+    under_attributed: bool = False             # impact excluded — Climate TRACE missed assets
+    provenance: Optional[Provenance] = None
+    note: Optional[str] = None
+
+
 class EvidenceScore(BaseModel):
     company_id: str
     year: int

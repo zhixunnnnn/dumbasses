@@ -7,16 +7,14 @@ import { api, useApi } from "../../lib/api";
 import { QuadrantBadge, RegBadge } from "../common/badges";
 import { useNavigation } from "../../navigation/NavigationContext";
 
-type Key = "evidence_total" | "consensus" | "divergence" | "evidence_gap" | "momentum" | "compliance_score" | "forecast";
+type Key = "rating_total" | "divergence";
 
+// Trimmed to the investor essentials, all REAL: the ESG rating and how contested it is
+// (divergence = trust, real-only). Finance columns (Last / Chg % / Trend) sit before these.
+// The illustrative surfaces (consensus, evidence, compliance, MSCI forecast) are gone.
 const COLS: { key: Key; label: string; hint: string; lowerBetter?: boolean }[] = [
-  { key: "evidence_total", label: "Evidence", hint: "Verified evidence score (0–100)" },
-  { key: "consensus", label: "Consensus", hint: "Mean rater percentile. A ° marks a figure with illustrative input, ~ one that is fully illustrative" },
-  { key: "divergence", label: "Divergence", hint: "Rater disagreement — higher = less trust. A ° marks a figure with illustrative input, ~ one that is fully illustrative", lowerBetter: true },
-  { key: "evidence_gap", label: "Gap", hint: "Evidence percentile − consensus" },
-  { key: "momentum", label: "Momentum", hint: "Evidence-score slope / yr" },
-  { key: "compliance_score", label: "Compl. gap", hint: "Fraction of in-force regs missing", lowerBetter: true },
-  { key: "forecast", label: "MSCI est.", hint: "Estimated MSCI ESG rating now (HYPOTHESIS)" },
+  { key: "rating_total", label: "ESG Rating", hint: "ESG rating (0–100): Environmental from CDP + Climate TRACE, Social/Governance from real rating agencies. SASB-material-weighted. N.A. when no real input." },
+  { key: "divergence", label: "Divergence", hint: "Real rater disagreement — higher = less trust. N.A. unless computed from real ratings only.", lowerBetter: true },
 ];
 
 const STATUSES: ("ANY" | RegQuality)[] = ["ANY", "MET", "PARTIAL", "MISSING", "NA"];
@@ -28,7 +26,7 @@ function statusFor(r: CompanyRow, regId: string): RegQuality | null {
 export default function ScreenerTable({ rows }: { rows: CompanyRow[] }) {
   const { navigate } = useNavigation();
   const { data: catalog } = useApi(api.regulations, []);
-  const [sort, setSort] = useState<{ key: Key; desc: boolean }>({ key: "evidence_gap", desc: true });
+  const [sort, setSort] = useState<{ key: Key; desc: boolean }>({ key: "rating_total", desc: true });
   const [improversOnly, setImproversOnly] = useState(false);
   const [regId, setRegId] = useState("ALL");
   const [regStatus, setRegStatus] = useState<"ANY" | RegQuality>("ANY");
@@ -147,6 +145,9 @@ export default function ScreenerTable({ rows }: { rows: CompanyRow[] }) {
               <th className="px-4 py-2 text-left font-medium">Company</th>
               <th className="px-3 py-2 text-left font-medium">Quadrant</th>
               {regActive && <th className="px-3 py-2 text-left font-medium">Status</th>}
+              <th className="px-3 py-2 text-right font-medium" title="Last close (local currency)">Last</th>
+              <th className="px-3 py-2 text-right font-medium" title="Last weekly price change">Chg %</th>
+              <th className="px-3 py-2 text-right font-medium" title="Recent close-price trend">Trend</th>
               {COLS.map((c) => (
                 <th key={c.key} title={c.hint}
                   className="cursor-pointer px-3 py-2 text-right font-medium hover:text-txt"
@@ -162,7 +163,7 @@ export default function ScreenerTable({ rows }: { rows: CompanyRow[] }) {
           <tbody>
             {sorted.length === 0 && (
               <tr>
-                <td colSpan={regActive ? COLS.length + 3 : COLS.length + 2}
+                <td colSpan={(regActive ? COLS.length + 3 : COLS.length + 2) + 3}
                   className="px-4 py-8 text-center text-[12px] text-faint">
                   No companies match this filter.
                 </td>
@@ -187,46 +188,46 @@ export default function ScreenerTable({ rows }: { rows: CompanyRow[] }) {
                     {statusFor(r, regId) ? <RegBadge status={statusFor(r, regId)!} /> : <span className="text-faint">—</span>}
                   </td>
                 )}
-                <td className="px-3 py-2.5 text-right font-mono text-txt">{na(r.evidence_total)}</td>
-                {/* Every rater-derived cell carries a provenance mark, so a seeded number
-                    can never be read as a measured one at a glance. */}
-                <td className="px-3 py-2.5 text-right font-mono text-muted"
-                  title={r.consensus === null ? NA_REASON.raters
-                    : r.rater_provenance ? PROVENANCE[r.rater_provenance].hint : undefined}>
-                  {na(r.consensus)}
-                  <ProvMark p={r.rater_provenance} />
-                </td>
+                <td className="px-3 py-2.5 text-right font-mono text-txt">{r.price == null ? "—" : r.price.toFixed(2)}</td>
                 <td className="px-3 py-2.5 text-right font-mono"
-                  title={r.divergence === null ? NA_REASON.raters
-                    : r.rater_provenance ? PROVENANCE[r.rater_provenance].hint : undefined}
+                  style={{ color: r.price_chg == null ? undefined : r.price_chg >= 0 ? "#3ecf8e" : "#ec6a5e" }}>
+                  {r.price_chg == null ? "—" : `${r.price_chg >= 0 ? "+" : ""}${r.price_chg.toFixed(1)}%`}
+                </td>
+                <td className="px-3 py-2.5"><Sparkline data={r.spark ?? []} /></td>
+                <td className="px-3 py-2.5 text-right font-mono text-txt"
+                  title={r.rating_provenance ? PROVENANCE[r.rating_provenance].hint : undefined}>
+                  {na(r.rating_total)}
+                  <ProvMark p={r.rating_provenance} />
+                </td>
+                {/* Divergence is real-only (N.A. unless computed from real ratings). */}
+                <td className="px-3 py-2.5 text-right font-mono"
+                  title={r.divergence === null ? "N.A. — needs 2+ real ratings" : undefined}
                   style={{ color: r.divergence === null ? undefined : r.divergence > 33 ? "#ec6a5e" : "#9a968e" }}>
                   {na(r.divergence)}
-                  <ProvMark p={r.rater_provenance} />
                 </td>
-                <td className="px-3 py-2.5 text-right font-mono"
-                  title={r.evidence_gap === null ? NA_REASON.gap
-                    : r.rater_provenance ? PROVENANCE[r.rater_provenance].hint : undefined}
-                  style={{ color: r.evidence_gap === null ? undefined : r.evidence_gap > 0 ? "#3ecf8e" : "#9a968e" }}>
-                  {signed(r.evidence_gap)}
-                  <ProvMark p={r.rater_provenance} />
-                </td>
-                <td className="px-3 py-2.5 text-right font-mono"
-                  title={r.momentum === null ? NA_REASON.momentum : undefined}
-                  style={{ color: r.momentum === null ? undefined : r.momentum > 0 ? "#3ecf8e" : "#ec6a5e" }}>
-                  {signed(r.momentum)}
-                </td>
-                <td className="px-3 py-2.5 text-right font-mono text-muted"
-                  title={r.compliance_provenance ? PROVENANCE[r.compliance_provenance].hint : undefined}>
-                  {r.compliance_score === null ? "N.A." : `${Math.round(r.compliance_score * 100)}%`}
-                  <ProvMark p={r.compliance_provenance} />
-                </td>
-                <td className="px-3 py-2.5 text-right font-mono text-profit">{r.forecast_label ?? na(r.forecast)}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
     </div>
+  );
+}
+
+
+/** Tiny inline price-trend sparkline (last ~24 weekly closes), green up / red down. */
+function Sparkline({ data }: { data: number[] }) {
+  if (!data || data.length < 2) return <span className="text-faint">—</span>;
+  const w = 56, h = 16, min = Math.min(...data), max = Math.max(...data);
+  const span = max - min || 1;
+  const pts = data
+    .map((v, i) => `${(i / (data.length - 1)) * w},${h - ((v - min) / span) * h}`)
+    .join(" ");
+  const up = data[data.length - 1] >= data[0];
+  return (
+    <svg width={w} height={h} className="inline-block align-middle" aria-hidden>
+      <polyline points={pts} fill="none" stroke={up ? "#3ecf8e" : "#ec6a5e"} strokeWidth={1.2} />
+    </svg>
   );
 }
 

@@ -1,0 +1,16 @@
+{
+  "_comment": "Maps each demo utility to its Climate TRACE OWNER id, resolved via the toolkit's search_owners endpoint and hand-verified against 2023 owned-asset emissions. This is the IMPACT-materiality anchor: Climate TRACE measures the CO2e of the physical power assets an owner controls, i.e. the company's real-world climate impact (the outward half of double materiality), as opposed to the ESG rating, which is how the world's risks price back INTO the company. A company with no clean owner match is omitted here and renders as N.A. — never a fabricated number. Power generators are exactly what Climate TRACE tracks, so coverage is strong; a midstream gas distributor (PGAS) has no matching owner and is intentionally absent.",
+  "source": "Climate TRACE v7 API (api.climatetrace.org) via climate_trace_tools",
+  "resolved_on": "2026-08-29",
+  "owners": {
+    "U96":  { "owner_id": "E100000000909", "owner_name": "Sembcorp Industries Ltd" },
+    "TNB":  { "owner_id": "E100000000706", "owner_name": "Tenaga Nasional Bhd" },
+    "YTLP": { "owner_id": "E100000004352", "owner_name": "YTL PowerSeraya Pte Ltd", "note": "The group's Singapore generation subsidiary; the YTL Power International holding company (E100000004351) carries no directly-attributed assets in Climate TRACE." },
+    "EGCO": { "owner_id": "E100000002130", "owner_name": "Electricity Generating PCL" },
+    "RATCH":{ "owner_id": "E100001011068", "owner_name": "Ratchaburi Electricity Generating Co Ltd" },
+    "BGRIM":{ "owner_id": "E100000001023", "owner_name": "B.Grimm Power PCL" },
+    "GULF": { "owner_id": "E100000001030", "owner_name": "Gulf Development PCL" },
+    "POWR": { "owner_id": "E100000001946", "owner_name": "PT Cikarang Listrindo Tbk" },
+    "POW":  { "owner_id": "E100000003809", "owner_name": "PetroVietnam Power Corporation JSC" }
+  }
+}

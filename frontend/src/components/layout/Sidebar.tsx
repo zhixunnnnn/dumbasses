@@ -82,9 +82,9 @@ export default function Sidebar() {
       </nav>
 
       <div className="mt-auto rounded-lg border border-hairline bg-canvas/40 p-3">
-        <p className="text-xs font-medium text-txt">Q2 2026 universe</p>
+        <p className="text-xs font-medium text-txt">Coverage universe</p>
         <p className="mt-0.5 text-[11px] leading-snug text-faint">
-          95 global companies screened across 10 sectors and 6 regions.
+          10 ASEAN-listed power, energy &amp; utilities companies (SG · MY · TH · ID · VN).
         </p>
       </div>
     </aside>

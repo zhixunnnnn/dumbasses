@@ -120,6 +120,11 @@ PROOF_UP_MIN_SLOPE = 0.5         # evidence-score points/year to count as improv
 MIN_YEARS_FOR_MOMENTUM = 3       # below this, momentum is N.A. (not placeable on matrix)
 FLAT_BAND = 15.0                 # stock-minus-STI return %: above this the market has "reacted" (loosened for demo)
 QUADRANT_X_SPLIT = 50.0          # consensus-percentile midpoint: high vs low ESG "today"
+# Redefined ESG momentum = the real EMISSION trajectory (Climate TRACE), not evidence text.
+# Momentum is the annualised % change in owned-asset emissions, sign-flipped so FALLING
+# emissions read as POSITIVE (improving). The matrix now plots ESG rating (x) vs this (y).
+QUADRANT_RATING_SPLIT = 55.0     # ESG rating midpoint on the 0..100 quality scale
+IMPROVER_MIN_EMOM = 3.0          # cutting emissions >=3%/yr counts as a real improver
 
 # ----- satellite verification --------------------------------------------------
 # Open, keyless services: OSM Overpass for asset coordinates, Element84 Earth Search
@@ -168,6 +173,29 @@ MIN_FORECAST_ROWS = 15
 # A rating "move" on the MSCI 1..7 scale. Predictions are continuous, so a call only
 # counts as an upgrade/downgrade once it crosses half a notch.
 RATING_MOVE_EPS = 0.5
+
+# ----- double materiality (ESRS-style composite) -------------------------------
+# The composite blends FINANCIAL materiality (the ESG rating — outside-in) with IMPACT
+# materiality (peer-ranked carbon intensity — inside-out), then subtracts a greenwashing
+# penalty. Finance-tilted per the investor lens: the value impact outweighs the world impact.
+DM_WEIGHT_FINANCIAL = 0.6
+DM_WEIGHT_IMPACT = 0.4
+# Greenwashing = the materiality GAP: rated greener (financial) than it actually runs
+# (impact). Penalty = K x max(0, financial - impact), capped. A controversy adds to it.
+GREENWASH_GAP_K = 0.30
+GREENWASH_CONTROVERSY_PTS = 3.0
+GREENWASH_CAP = 20.0
+# Approximate FX to USD (mid-2026), used ONLY to put revenue on one scale so carbon
+# intensity is comparable across the ASEAN currencies. Intensity feeds a peer RANK, so the
+# exact rate barely matters; it is labelled approximate wherever the intensity is shown.
+FX_TO_USD = {"SGD": 0.78, "MYR": 0.22, "THB": 0.029, "IDR": 0.0000615, "VND": 0.000039,
+             "USD": 1.0}
+# Under-attribution guard: Climate TRACE misses assets held through JVs, so a fossil/gas
+# generator can show an impossibly clean intensity (Gulf: one 0.4 Mt asset against a $27B cap).
+# An intensity below this fraction of the panel MEDIAN is treated as under-attributed — the
+# impact half becomes N.A. and the Environmental pillar falls back to the agency reference,
+# rather than crowning a data gap the greenest name.
+DM_INTENSITY_GUARD_FRACTION = 0.15
 
 NA = None                        # the single sentinel for "no data" — never a fabricated 0
 

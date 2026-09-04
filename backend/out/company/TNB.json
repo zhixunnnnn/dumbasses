@@ -9,6 +9,489 @@
     "sasb_industry": "Electric Utilities & Power Generators",
     "scope": "demo"
   },
+  "rating": {
+    "company_id": "TNB",
+    "year": 2023,
+    "total": 63.0,
+    "pillars": {
+      "E": 60.7,
+      "S": 70.0,
+      "G": 70.0
+    },
+    "coverage": 1.0,
+    "contributions": {
+      "ghg_emissions": 18.21,
+      "energy_transition": 15.18,
+      "workforce_safety": 10.5,
+      "air_quality": 6.07,
+      "water_management": 6.07,
+      "grid_resiliency": 7.0
+    },
+    "topic_breakdown": [
+      {
+        "topic_id": "ghg_emissions",
+        "name": "GHG emissions",
+        "pillar": "E",
+        "weight": 30.0,
+        "score": 60.7,
+        "contribution": 18.21
+      },
+      {
+        "topic_id": "energy_transition",
+        "name": "Energy transition",
+        "pillar": "E",
+        "weight": 25.0,
+        "score": 60.7,
+        "contribution": 15.18
+      },
+      {
+        "topic_id": "workforce_safety",
+        "name": "Workforce safety",
+        "pillar": "S",
+        "weight": 15.0,
+        "score": 70.0,
+        "contribution": 10.5
+      },
+      {
+        "topic_id": "air_quality",
+        "name": "Air quality",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 60.7,
+        "contribution": 6.07
+      },
+      {
+        "topic_id": "water_management",
+        "name": "Water management",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 60.7,
+        "contribution": 6.07
+      },
+      {
+        "topic_id": "grid_resiliency",
+        "name": "Grid resiliency",
+        "pillar": "G",
+        "weight": 10.0,
+        "score": 70.0,
+        "contribution": 7.0
+      }
+    ],
+    "agencies": [
+      "msci",
+      "sustainalytics"
+    ],
+    "provenance": "real",
+    "trace": {
+      "label": "ESG rating 2023 = SASB-weighted agency consensus",
+      "value": 63.0,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "Agency inputs (normalized 0..100)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "MSCI → 85.7/100 (real, 2023)",
+              "value": 85.7,
+              "contribution": null,
+              "source_sentence": "MSCI rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "Sustainalytics → 72.7/100 (real, 2026)",
+              "value": 72.7,
+              "contribution": null,
+              "source_sentence": "Sustainalytics rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "Material topics (renormalized over covered weight)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "ghg_emissions · pillar E · w=0.3 (from CDP, Climate TRACE intensity)",
+              "value": 60.7,
+              "contribution": 18.21,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "energy_transition · pillar E · w=0.25 (from CDP, Climate TRACE intensity)",
+              "value": 60.7,
+              "contribution": 15.18,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "workforce_safety · pillar S · w=0.15 (from company report · workforce safety)",
+              "value": 70.0,
+              "contribution": 10.5,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "air_quality · pillar E · w=0.1 (from CDP, Climate TRACE intensity)",
+              "value": 60.7,
+              "contribution": 6.07,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "water_management · pillar E · w=0.1 (from CDP, Climate TRACE intensity)",
+              "value": 60.7,
+              "contribution": 6.07,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "grid_resiliency · pillar G · w=0.1 (from company report · grid resiliency)",
+              "value": 70.0,
+              "contribution": 7.0,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "rating_series": [
+    {
+      "year": 2019,
+      "total": 72.7,
+      "pillars": {
+        "E": 72.7,
+        "S": 72.7,
+        "G": 72.7
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2020,
+      "total": 72.7,
+      "pillars": {
+        "E": 72.7,
+        "S": 72.7,
+        "G": 72.7
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2021,
+      "total": 72.7,
+      "pillars": {
+        "E": 72.7,
+        "S": 72.7,
+        "G": 72.7
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2022,
+      "total": 72.7,
+      "pillars": {
+        "E": 72.7,
+        "S": 72.7,
+        "G": 72.7
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2023,
+      "total": 63.0,
+      "pillars": {
+        "E": 60.7,
+        "S": 70.0,
+        "G": 70.0
+      },
+      "provenance": "real"
+    }
+  ],
+  "impact": {
+    "owner_id": "E100000000706",
+    "owner_name": "Tenaga Nasional Bhd",
+    "note": null,
+    "year": 2023,
+    "gas": "co2e_100yr",
+    "total_emissions_tonnes": 19809750,
+    "asset_count": 6,
+    "top_assets": [
+      {
+        "name": "Sultan Aziz power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "MYS",
+        "emissions": 10784300
+      },
+      {
+        "name": "Lumut SEV power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "MYS",
+        "emissions": 2723100
+      },
+      {
+        "name": "Tuanku Jaafar power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "MYS",
+        "emissions": 2170200
+      },
+      {
+        "name": "Putrajaya power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "MYS",
+        "emissions": 1859800
+      },
+      {
+        "name": "Pasir Gudang (TNB) power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "MYS",
+        "emissions": 1821500
+      },
+      {
+        "name": "Gelugor power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "MYS",
+        "emissions": 450850
+      }
+    ],
+    "subsector_mix": [
+      {
+        "subsector": "electricity-generation",
+        "emissions": 19809750.0
+      }
+    ],
+    "monthly": [
+      {
+        "month": 1,
+        "emissions": 1611290
+      },
+      {
+        "month": 2,
+        "emissions": 1431580
+      },
+      {
+        "month": 3,
+        "emissions": 1784600
+      },
+      {
+        "month": 4,
+        "emissions": 1705680
+      },
+      {
+        "month": 5,
+        "emissions": 1791740
+      },
+      {
+        "month": 6,
+        "emissions": 1767820
+      },
+      {
+        "month": 7,
+        "emissions": 1742540
+      },
+      {
+        "month": 8,
+        "emissions": 1692290
+      },
+      {
+        "month": 9,
+        "emissions": 1550200
+      },
+      {
+        "month": 10,
+        "emissions": 1625650
+      },
+      {
+        "month": 11,
+        "emissions": 1542720
+      },
+      {
+        "month": 12,
+        "emissions": 1563640
+      }
+    ],
+    "provenance": "real",
+    "source": "Climate TRACE v7",
+    "source_url": "https://api.climatetrace.org/v7",
+    "annual": [
+      {
+        "year": 2021,
+        "emissions": 18520140
+      },
+      {
+        "year": 2022,
+        "emissions": 19385320
+      },
+      {
+        "year": 2023,
+        "emissions": 19809750
+      },
+      {
+        "year": 2024,
+        "emissions": 20311560
+      },
+      {
+        "year": 2025,
+        "emissions": 20084580
+      }
+    ],
+    "company_id": "TNB",
+    "rank": 1,
+    "peers": 9,
+    "panel_share": 0.31
+  },
+  "double_materiality": {
+    "company_id": "TNB",
+    "financial": 63.0,
+    "impact": 71.4,
+    "composite": 48.4,
+    "weight_financial": 0.6,
+    "weight_impact": 0.4,
+    "carbon_intensity": 1092.5,
+    "intensity_rank": 3,
+    "intensity_peers": 8,
+    "greenwashing_penalty": 18.0,
+    "greenwashing_drivers": [
+      {
+        "label": "Recent controversies",
+        "points": 18.0,
+        "detail": "6 recent ESG controversy headline(s)."
+      }
+    ],
+    "greenwashing_headlines": [
+      {
+        "title": "TNB ready to assist in KLIA power disruption probe",
+        "source": "The Star",
+        "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNX25YcmRlU3JPWGpqZFBabUQyZnFPMVJIX205X1NFcnhZbDBTY0VSeFl4RzNOOWJHS3MxWlNoU1RicDVoWElCOGZtc1lsWXhaVzJOS3pvanB0OW1LVTlMMDVncUdJQk11Tl81S20xRU85RHBnS3owZ1A0YmFFR2JSNm9aemdQZjZ2LXpzODAwb3lqYU9GRTFscHFhVHhNQTZIaUE?oc=5"
+      },
+      {
+        "title": "Knusford’s unit named as fourth-party defendant in lawsuit filed by Tenaga Nasional",
+        "source": "The Malaysian Reserve",
+        "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQd25QT1hDOEpVQjdZTmtYcDFaNW4yWmpacmpMaU50ckFLQzNEU0lqNGpDaVVHUk1NR1dsS0QtdzhkY2UzNEJsY0UzVWJndTJ5VkYxeUFQRnlHazFXMU9lSmZaQlFYLVNqT3lfMkxvTjBRTjFleWRudm1oWVV1dFNEVXI4S21CM18zdDNnYTl6TnloQzBnV2RCWm1VQzUzMWdZNEF3YXNwT1ZhaTc4TWtuaU9URUZqbW5Ed3o2U1Qtc2JDQzFf?oc=5"
+      },
+      {
+        "title": "TNB drops lawsuit in RM1.4b tax dispute, as it shifts strategy and seeks utility incentives",
+        "source": "The Edge Malaysia",
+        "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE1BTWo4Z2FMa2M3QTYtYnU1YXR6VUJVVVg2NEN0UC1Pd2lWV2w2S3V4VGJSWndGc1RXaFNCNTE0d1lub3JCaHdjWEpTbVZFUnFr?oc=5"
+      },
+      {
+        "title": "Tenaga bags High Court win in long-running tax disputes with IRB",
+        "source": "The Edge Malaysia",
+        "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE92MWZGQzZ5WGNQeXA5UXR2amxWWlFLamItLXZELVlpeGp0aGt3UWlFNHJGLUFuRHdCWFJHTU8yYjA0cVJOQmxjdHpybmF3MXdt?oc=5"
+      },
+      {
+        "title": "IRB appeals High Court decision in Tenaga’s Southern Power Generation tax dispute case",
+        "source": "The Edge Malaysia",
+        "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBLVmpaSm9rcW0zWS1WOHhOZXBHeDFhQV9VLVdVd2drQUh6NjRtRFlmSkRHMHdhV1pRbzNJakw3STNJMHFSWHMwMjhIelc5MjFl?oc=5"
+      },
+      {
+        "title": "Probes into claims of TNB overcharged electricity bills",
+        "source": "The Malaysian Reserve",
+        "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQakZON2I1WlI5eFFmY2kxYUdsLUp5WF8ta3ZrZjF0LTRRRWNNNnBJY1FId0MyblEweXB1RDlvQ0ZGdDNoYndybEZXZmtlQTNiSnc4Nzd0a2MxRTlSQzNqR0JVcWp1Y01odm9TWUQ1eG84ZGkzcjFaUkJNenFqak0wWTdzbHhvM3NzVXhOOWg3anAyUnZqQkNuRnRIMzdrU3dX?oc=5"
+      }
+    ],
+    "under_attributed": false,
+    "provenance": "real",
+    "note": null
+  },
+  "fundamentals": {
+    "profile": {
+      "name": "Tenaga Nasional Berhad",
+      "sector": "Utilities",
+      "industry": "Utilities - Regulated Electric",
+      "employees": 31063,
+      "summary": "Tenaga Nasional Berhad engages in the generation, transmission, distribution, and sale of electricity in Malaysia, the United Kingdom, Kuwait, the Republic of Ireland, Australia, and internationally. It operates and maintains thermal and hydroelectric power plants; and operates and manages the National Grid that is connected to Thailand's transmission system, as well as Singapore's transmission system at Senoko. The company also supplies fuel and coal for power generation; generates, distributes, supplies, deals in, and sells various energy sources, as well as provides related technical services; develops district cooling systems; operates and maintains co-generation works; manufactures, sells, and repairs distribution, power, and earthing transformers; and owns, develops, and manages dry bulk terminals. In addition, it provides turnkey contracting services to transmission substations; repair and maintenance services to heavy industries and other related services; operation and maintenance services to telecommunication equipment and data centres; higher education, telecommunication, and IT infrastructure solution and services; research and development services in the areas of engineering, information technology, business, accountancy, and liberal studies; and training courses. Further, the company offers insurance and reinsurance, technical and laboratory, consultancy, and other services; manufactures and distributes power and general cables, and aluminum rods; operates an integrated district cooling systems for air conditioning systems of office buildings; assembles, manufactures, tests, reconditions, and distributes high and medium voltage switchgears and control gears for transmission and distribution of electric power; and operates wind assets. It primarily serves commercial, industrial, and residential customers. The company was founded in 1949 and is headquartered in Kuala Lumpur, Malaysia.",
+      "website": "https://www.tnb.com.my",
+      "city": "Kuala Lumpur",
+      "country": "Malaysia",
+      "ceo": "Mr. Shamsul  Bin Ahmad",
+      "exchange": "Kuala Lumpur"
+    },
+    "financials": {
+      "currency": "MYR",
+      "market_cap": 82424070144,
+      "market_cap_fmt": "82.42B",
+      "enterprise_value": 162064072704,
+      "revenue": 67868200960,
+      "revenue_fmt": "67.87B",
+      "ebitda": 17075300352,
+      "gross_margin": 0.35298002,
+      "operating_margin": 0.1113,
+      "profit_margin": 0.06687,
+      "roe": 0.07814,
+      "roa": 0.024530001,
+      "revenue_growth": 0.154,
+      "debt_to_equity": 172.593,
+      "free_cashflow": -755787520,
+      "current_ratio": 0.91
+    },
+    "valuation": {
+      "trailing_pe": 18.128206,
+      "forward_pe": 15.745401,
+      "price_to_book": 1.6228623,
+      "peg": 1.32,
+      "ev_to_ebitda": 9.491,
+      "eps_trailing": 0.78,
+      "book_value": 8.713,
+      "beta": 0.332,
+      "dividend_yield": 0.0396,
+      "dividend_rate": 0.56,
+      "payout_ratio": 0.6807,
+      "fifty_two_high": 14.9,
+      "fifty_two_low": 12.5
+    },
+    "ratings": {
+      "recommendation": "strong_buy",
+      "recommendation_mean": 1.38095,
+      "n_analysts": 21,
+      "target_mean": 16.54914,
+      "target_high": 18.15,
+      "target_low": 14.18,
+      "current_price": 14.14,
+      "distribution": {
+        "strongBuy": 4,
+        "buy": 15,
+        "hold": 2,
+        "sell": 0,
+        "strongSell": 0
+      }
+    }
+  },
   "evidence": {
     "company_id": "TNB",
     "year": 2023,
@@ -520,21 +1003,22 @@
     "company_id": "TNB",
     "msci_pct": 85.0,
     "sp_pct": null,
-    "sustainalytics_pct": 85.0,
+    "sustainalytics_pct": 56.25,
     "cdp_pct": null,
     "real_raters": [
-      "msci"
+      "msci",
+      "sustainalytics"
     ],
     "rater_years": {
       "msci": 2023,
-      "sustainalytics": 2023
+      "sustainalytics": 2026
     },
     "basis": "Utilities",
     "peers": 10,
-    "consensus": 85.0,
-    "divergence": 0.0,
-    "consensus_provenance": "mixed",
-    "divergence_provenance": "mixed",
+    "consensus": 70.62,
+    "divergence": 28.75,
+    "consensus_provenance": "real",
+    "divergence_provenance": "real",
     "contributing": [
       "msci",
       "sustainalytics"
@@ -582,13 +1066,13 @@
     "evidence_pct": 75.0,
     "evidence_basis": "Electric Utilities & Power Generators",
     "evidence_peers": 10,
-    "evidence_gap": -10.0,
-    "momentum": -5.7,
-    "esg_today": 85.0,
+    "evidence_gap": 4.38,
+    "momentum": -2.1,
+    "esg_today": 70.62,
     "quadrant": "OVERRATED",
-    "esg_today_provenance": "mixed",
-    "evidence_gap_provenance": "mixed",
-    "quadrant_provenance": "mixed",
+    "esg_today_provenance": "real",
+    "evidence_gap_provenance": "real",
+    "quadrant_provenance": "real",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -1048,8 +1532,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=0.0, consensus 82.5->85.0)",
-          "value": 0.0,
+          "label": "opinion_flat=True (divergence=28.75, consensus 73.12->70.62)",
+          "value": 28.75,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -1066,8 +1550,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-10.0 (evidence 75.0 - consensus 85.0)",
-          "value": -10.0,
+          "label": "evidence_gap=4.38 (evidence 75.0 - consensus 70.62)",
+          "value": 4.38,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -8176,16 +8660,7 @@
         "report_year": 2023
       }
     ],
-    "absent": [
-      {
-        "topic_id": "air_quality",
-        "state": "ABSENT"
-      },
-      {
-        "topic_id": "water_management",
-        "state": "ABSENT"
-      }
-    ],
+    "absent": [],
     "live": true,
     "report_year": 2023,
     "source_url": "https://www.tnb.com.my/assets/files/TNB_Sustainability_Statement_2023.pdf",
@@ -8193,49 +8668,58 @@
   },
   "peers": [
     {
-      "id": "U96",
-      "name": "Sembcorp Industries",
-      "evidence_total": 80.0
-    },
-    {
       "id": "YTLP",
       "name": "YTL Power International",
-      "evidence_total": 80.0
+      "evidence_total": 80.0,
+      "rating_total": 87.3
     },
     {
-      "id": "POWR",
-      "name": "Cikarang Listrindo",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "POW",
-      "name": "PetroVietnam Power",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "BGRIM",
-      "name": "B.Grimm Power",
-      "evidence_total": 50.5
+      "id": "U96",
+      "name": "Sembcorp Industries",
+      "evidence_total": 80.0,
+      "rating_total": 81.7
     },
     {
       "id": "PGAS",
       "name": "Perusahaan Gas Negara",
-      "evidence_total": 50.0
+      "evidence_total": 50.0,
+      "rating_total": 72.5
     },
     {
-      "id": "RATCH",
-      "name": "Ratch Group",
-      "evidence_total": 44.0
-    },
-    {
-      "id": "EGCO",
-      "name": "Electricity Generating",
-      "evidence_total": 38.5
+      "id": "BGRIM",
+      "name": "B.Grimm Power",
+      "evidence_total": 50.5,
+      "rating_total": 59.4
     },
     {
       "id": "GULF",
       "name": "Gulf Development",
-      "evidence_total": 30.5
+      "evidence_total": 30.5,
+      "rating_total": 58.3
+    },
+    {
+      "id": "EGCO",
+      "name": "Electricity Generating",
+      "evidence_total": 38.5,
+      "rating_total": 45.8
+    },
+    {
+      "id": "POWR",
+      "name": "Cikarang Listrindo",
+      "evidence_total": 55.0,
+      "rating_total": 36.0
+    },
+    {
+      "id": "RATCH",
+      "name": "Ratch Group",
+      "evidence_total": 44.0,
+      "rating_total": 27.0
+    },
+    {
+      "id": "POW",
+      "name": "PetroVietnam Power",
+      "evidence_total": 55.0,
+      "rating_total": 0.0
     }
   ],
   "latest_real_raters": [

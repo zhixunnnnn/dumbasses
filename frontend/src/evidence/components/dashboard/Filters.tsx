@@ -74,7 +74,7 @@ export function FilterBar({
           onChange={(e) => setFilters({ ...filters, improversOnly: e.target.checked })}
           className="accent-pos"
         />
-        Underpriced Improvers
+        Decarbonising Improvers
       </label>
 
       <span className="ml-auto text-[11px] text-faint">{resultCount} in view</span>

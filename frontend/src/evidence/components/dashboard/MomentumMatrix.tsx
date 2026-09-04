@@ -41,7 +41,8 @@ export default function MomentumMatrix({ points }: { points: MatrixPoint[] }) {
   const px = (x: number) => PAD.l + (x / 100) * (W - PAD.l - PAD.r);
   const py = (y: number) =>
     PAD.t + (1 - (y + yAbs) / (2 * yAbs)) * (H - PAD.t - PAD.b);
-  const radius = (size: number | null) => 5 + (((size ?? 60) - 50) / 50) * 6;
+  // clamp to a positive minimum — a rating of 0 would otherwise give a negative radius.
+  const radius = (size: number | null) => Math.max(4, 5 + (((size ?? 60) - 50) / 50) * 6);
 
   const cx0 = px(X_SPLIT);
   const cy0 = py(0);
@@ -232,7 +233,7 @@ export default function MomentumMatrix({ points }: { points: MatrixPoint[] }) {
           textAnchor="middle"
           className="fill-muted text-[11px] font-medium"
         >
-          Rater consensus today (low to high)
+          ESG rating (low to high)
         </text>
         <text
           x={16}
@@ -241,7 +242,7 @@ export default function MomentumMatrix({ points }: { points: MatrixPoint[] }) {
           className="fill-muted text-[11px] font-medium"
           transform={`rotate(-90 16 ${(PAD.t + H - PAD.b) / 2})`}
         >
-          Evidence momentum (declining to improving)
+          Emission momentum (rising → falling / decarbonising)
         </text>
 
         {!zoomed &&

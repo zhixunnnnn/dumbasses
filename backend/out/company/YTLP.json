@@ -9,6 +9,468 @@
     "sasb_industry": "Electric Utilities & Power Generators",
     "scope": "demo"
   },
+  "rating": {
+    "company_id": "YTLP",
+    "year": 2023,
+    "total": 87.3,
+    "pillars": {
+      "E": 100.0,
+      "S": 49.4,
+      "G": 49.4
+    },
+    "coverage": 1.0,
+    "contributions": {
+      "ghg_emissions": 30.0,
+      "energy_transition": 25.0,
+      "workforce_safety": 7.41,
+      "air_quality": 10.0,
+      "water_management": 10.0,
+      "grid_resiliency": 4.94
+    },
+    "topic_breakdown": [
+      {
+        "topic_id": "ghg_emissions",
+        "name": "GHG emissions",
+        "pillar": "E",
+        "weight": 30.0,
+        "score": 100.0,
+        "contribution": 30.0
+      },
+      {
+        "topic_id": "energy_transition",
+        "name": "Energy transition",
+        "pillar": "E",
+        "weight": 25.0,
+        "score": 100.0,
+        "contribution": 25.0
+      },
+      {
+        "topic_id": "workforce_safety",
+        "name": "Workforce safety",
+        "pillar": "S",
+        "weight": 15.0,
+        "score": 49.4,
+        "contribution": 7.41
+      },
+      {
+        "topic_id": "air_quality",
+        "name": "Air quality",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 100.0,
+        "contribution": 10.0
+      },
+      {
+        "topic_id": "water_management",
+        "name": "Water management",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 100.0,
+        "contribution": 10.0
+      },
+      {
+        "topic_id": "grid_resiliency",
+        "name": "Grid resiliency",
+        "pillar": "G",
+        "weight": 10.0,
+        "score": 49.4,
+        "contribution": 4.94
+      }
+    ],
+    "agencies": [
+      "msci",
+      "sustainalytics"
+    ],
+    "provenance": "real",
+    "trace": {
+      "label": "ESG rating 2023 = SASB-weighted agency consensus",
+      "value": 87.3,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "Agency inputs (normalized 0..100)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "MSCI → 42.9/100 (real, 2023)",
+              "value": 42.9,
+              "contribution": null,
+              "source_sentence": "MSCI rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "Sustainalytics → 55.9/100 (real, 2026)",
+              "value": 55.9,
+              "contribution": null,
+              "source_sentence": "Sustainalytics rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "Material topics (renormalized over covered weight)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "ghg_emissions · pillar E · w=0.3 (from Climate TRACE intensity)",
+              "value": 100.0,
+              "contribution": 30.0,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "energy_transition · pillar E · w=0.25 (from Climate TRACE intensity)",
+              "value": 100.0,
+              "contribution": 25.0,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "workforce_safety · pillar S · w=0.15 (from MSCI, Sustainalytics)",
+              "value": 49.4,
+              "contribution": 7.41,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "air_quality · pillar E · w=0.1 (from Climate TRACE intensity)",
+              "value": 100.0,
+              "contribution": 10.0,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "water_management · pillar E · w=0.1 (from Climate TRACE intensity)",
+              "value": 100.0,
+              "contribution": 10.0,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "grid_resiliency · pillar G · w=0.1 (from MSCI, Sustainalytics)",
+              "value": 49.4,
+              "contribution": 4.94,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "rating_series": [
+    {
+      "year": 2019,
+      "total": 55.9,
+      "pillars": {
+        "E": 55.9,
+        "S": 55.9,
+        "G": 55.9
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2020,
+      "total": 55.9,
+      "pillars": {
+        "E": 55.9,
+        "S": 55.9,
+        "G": 55.9
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2021,
+      "total": 55.9,
+      "pillars": {
+        "E": 55.9,
+        "S": 55.9,
+        "G": 55.9
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2022,
+      "total": 55.9,
+      "pillars": {
+        "E": 55.9,
+        "S": 55.9,
+        "G": 55.9
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2023,
+      "total": 87.3,
+      "pillars": {
+        "E": 100.0,
+        "S": 49.4,
+        "G": 49.4
+      },
+      "provenance": "real"
+    }
+  ],
+  "impact": {
+    "owner_id": "E100000004352",
+    "owner_name": "YTL PowerSeraya Pte Ltd",
+    "note": "The group's Singapore generation subsidiary; the YTL Power International holding company (E100000004351) carries no directly-attributed assets in Climate TRACE.",
+    "year": 2023,
+    "gas": "co2e_100yr",
+    "total_emissions_tonnes": 4502772,
+    "asset_count": 3,
+    "top_assets": [
+      {
+        "name": "Pulau Seraya power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "SGP",
+        "emissions": 3629600
+      },
+      {
+        "name": "Tuaspring Desalinisation power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "SGP",
+        "emissions": 829780
+      },
+      {
+        "name": "Jurong Power Station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "SGP",
+        "emissions": 43392
+      }
+    ],
+    "subsector_mix": [
+      {
+        "subsector": "electricity-generation",
+        "emissions": 4502772.0
+      }
+    ],
+    "monthly": [
+      {
+        "month": 1,
+        "emissions": 355162
+      },
+      {
+        "month": 2,
+        "emissions": 309775
+      },
+      {
+        "month": 3,
+        "emissions": 383466
+      },
+      {
+        "month": 4,
+        "emissions": 400964
+      },
+      {
+        "month": 5,
+        "emissions": 415716
+      },
+      {
+        "month": 6,
+        "emissions": 405538
+      },
+      {
+        "month": 7,
+        "emissions": 405669
+      },
+      {
+        "month": 8,
+        "emissions": 400449
+      },
+      {
+        "month": 9,
+        "emissions": 365088
+      },
+      {
+        "month": 10,
+        "emissions": 359646
+      },
+      {
+        "month": 11,
+        "emissions": 346368
+      },
+      {
+        "month": 12,
+        "emissions": 354931
+      }
+    ],
+    "provenance": "real",
+    "source": "Climate TRACE v7",
+    "source_url": "https://api.climatetrace.org/v7",
+    "annual": [
+      {
+        "year": 2021,
+        "emissions": 4245496
+      },
+      {
+        "year": 2022,
+        "emissions": 4611536
+      },
+      {
+        "year": 2023,
+        "emissions": 4502772
+      },
+      {
+        "year": 2024,
+        "emissions": 4634942
+      },
+      {
+        "year": 2025,
+        "emissions": 4623641
+      }
+    ],
+    "company_id": "YTLP",
+    "rank": 5,
+    "peers": 9,
+    "panel_share": 0.07
+  },
+  "double_materiality": {
+    "company_id": "YTLP",
+    "financial": 87.3,
+    "impact": 100.0,
+    "composite": 74.4,
+    "weight_financial": 0.6,
+    "weight_impact": 0.4,
+    "carbon_intensity": 410.5,
+    "intensity_rank": 1,
+    "intensity_peers": 8,
+    "greenwashing_penalty": 18.0,
+    "greenwashing_drivers": [
+      {
+        "label": "Recent controversies",
+        "points": 18.0,
+        "detail": "6 recent ESG controversy headline(s)."
+      }
+    ],
+    "greenwashing_headlines": [
+      {
+        "title": "YTL Power mulls action over 1BestariNet ‘accusations by irresponsible parties’, says ‘committed to transparency’ in MACC probe",
+        "source": "The Edge Malaysia",
+        "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE16dTFUQS1wYWhjZ1Jja29TUkx6a0E1bUwtOXFfR016UGQ0XzFWMi1OSmRYbmctNXRabk9WdzZvT2lsWU03dDlBbndPVjdEeDIw?oc=5"
+      },
+      {
+        "title": "YTL Power, YTL Corp surge as MACC clears group of wrongdoing in 1BestariNet probe",
+        "source": "The Star",
+        "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOYlVSOUFFRDVCVWNfdkhMMWJKQVdYeGdna3A2Y3hkS0l5azc4NGhKVWZwUU1sbU5md3NraGhCWG9FMEdHRVBwVVBhQ2FxcEpRSF9aV3VnN0F5b294Y2NfR0VRQm81UW9ZMTJMVGYwdHFkMHBBMjZpWjVxZG1FVEpsZzNKbHZOMWZYeTFTNVB0TVBQV1hBN1lJNmRERmNJRGZGVGQ1el8wa3lVS2dCVGF2MFpNemo2aEh2VDlhMzFkb0tVVzY0YV9hNDdZeEdqY09vQ29IZmZ4eWo?oc=5"
+      },
+      {
+        "title": "YTL Counters Tumble Amid MACC Investigation Related To 1Bestarinet",
+        "source": "BernamaBiz",
+        "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBzd2VhNHN0YTlmN2RxNVkwc1NBZWlmUU5yeEh3a0hpOVlqUWNPazdTR2JnOVc1djFRYk5JZ1JfNVBCa0wtSlhpcF9DQTRlNzJvTzYyMDBMV0hJVnc?oc=5"
+      },
+      {
+        "title": "YTL Power denies contractual breach for 1Bestarinet project",
+        "source": "The Malaysian Reserve",
+        "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQOTNjSktRUk5iUDJxOWc5QjY0SURMbkdPTU1VMzBPQ2ptRjFPZEhBVFQ1U1ZRbGxCUWloR3h3MjlKdm5fdm9ZNWhSSmpJUTNNVC1NbktRR0wxeXE5SjZjemkweG4wTTdoaDRVSGp4cExDTVVwWVJZbHdPazdmUm4xbDF4UUFnTHJnT0dtT2FBY1JFbkU2Z3IwMGZMUE9WV2FhUWZCRUFn?oc=5"
+      },
+      {
+        "title": "YTL, related stocks slip amid news reports on 1BestariNet investigation",
+        "source": "The Edge Malaysia",
+        "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9MT0xaMkwxcXBRX0o0UExiVmdkTWI3cUpiM3NUbVhoNUFBNFZIaTVXYVNGMkFFd1hLNnZqV1VQcnlpODliVW1pQXkxS1BnMHpf?oc=5"
+      },
+      {
+        "title": "MACC clears YTL Communications in 1BestariNet probe",
+        "source": "Free Malaysia Today",
+        "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPdGxxSmxvaTMzQUMxTEVmTkc5U2VIV202SVczMW1DS1VHbWtLYTBXdi1nQ0NyYWVXNk5jbnN0UzNMOGZQOFJPSDJIbE8xR2RWcjVDd2I2UDlxbnBMRVYyMnVzSnN0emZVTjdGMzVhbUcxUmZ4RHRvY2lqQ3FnaDJCLXlTaUhyYXBWN3VEZ1JUdzZsSUdscFpRQ0dVWjVGaTh3Y3pfeEktMU9lWXA4VnRmUU1R?oc=5"
+      }
+    ],
+    "under_attributed": false,
+    "provenance": "real",
+    "note": null
+  },
+  "fundamentals": {
+    "profile": {
+      "name": "YTL Power International Berhad",
+      "sector": "Utilities",
+      "industry": "Utilities - Diversified",
+      "employees": null,
+      "summary": "YTL Power International Berhad, an investment holding company, provides electricity, clean water, sewerage system, and telecommunication services in Malaysia, Singapore, the United Kingdom, and internationally. It operates through four segments: Power Generation, Water and Sewerage, Telecommunications, and Investment Holding Activities. The company develops, constructs, owns, and operates solar photovoltaic power plants; constructs telecommunications infrastructure; and generates electricity from green energy sources, as well as provides engineering, procurement, construction, and commissioning services; supplies water and treats sewage; and wastewater services. It also provides consultancy services in energy management and clean energy system; 4G and 5G services under the YES brand; provides wired line and wireless broadband access, and other related services; and oil trading and oil storage tank leasing and bunkering, computer systems integration, housing development, construction management, and consultancy services, as well as engages in financing activities. In addition, the company issues bonds; develops web environment products; operates as a license reseller for virtual learning educational platforms; operates electric vehicle charging station; and designs and constructs power generating facilities. Further, it engages in the transmission, distribution, and sale of electricity; trading of fuel related derivative instruments; hotel and food waste treatment business; processing of digital payments through e-money platform; sale of by-products from the electricity generation process; development, operation, and marketing of data center projects and related infrastructure, services, and activities; cloud computing services; and letting commercial properties, as well as arena development. The company was incorporated in 1996 and is headquartered in Kuala Lumpur, Malaysia.",
+      "website": "https://www.ytlpowerinternational.com",
+      "city": "Kuala Lumpur",
+      "country": "Malaysia",
+      "ceo": "Sir Sock Ping Yeoh B.Sc., CBE, DPMP, DPMS, FICE, Hon LLD, J.P., JMN",
+      "exchange": "Kuala Lumpur"
+    },
+    "financials": {
+      "currency": "MYR",
+      "market_cap": 49853071360,
+      "market_cap_fmt": "49.85B",
+      "enterprise_value": 80690069504,
+      "revenue": 22022809600,
+      "revenue_fmt": "22.02B",
+      "ebitda": 5679874048,
+      "gross_margin": 0.21687001,
+      "operating_margin": 0.15883,
+      "profit_margin": 0.07658,
+      "roe": 0.080170006,
+      "roa": 0.02984,
+      "revenue_growth": 0.14,
+      "debt_to_equity": 181.184,
+      "free_cashflow": -4832485376,
+      "current_ratio": 1.232
+    },
+    "valuation": {
+      "trailing_pe": 30.263159,
+      "forward_pe": 19.281067,
+      "price_to_book": 2.2478497,
+      "peg": 3.38,
+      "ev_to_ebitda": 14.206,
+      "eps_trailing": 0.19,
+      "book_value": 2.558,
+      "beta": -0.01,
+      "dividend_yield": 0.0139,
+      "dividend_rate": 0.08,
+      "payout_ratio": 0.432,
+      "fifty_two_high": 6.02,
+      "fifty_two_low": 2.51
+    },
+    "ratings": {
+      "recommendation": "strong_buy",
+      "recommendation_mean": 1.5,
+      "n_analysts": 14,
+      "target_mean": 6.285,
+      "target_high": 8.01,
+      "target_low": 4.43,
+      "current_price": 5.75,
+      "distribution": {
+        "strongBuy": 1,
+        "buy": 10,
+        "hold": 3,
+        "sell": 0,
+        "strongSell": 0
+      }
+    }
+  },
   "evidence": {
     "company_id": "YTLP",
     "year": 2023,
@@ -214,21 +676,22 @@
     "company_id": "YTLP",
     "msci_pct": 25.0,
     "sp_pct": null,
-    "sustainalytics_pct": 45.0,
+    "sustainalytics_pct": 6.25,
     "cdp_pct": null,
     "real_raters": [
-      "msci"
+      "msci",
+      "sustainalytics"
     ],
     "rater_years": {
       "msci": 2023,
-      "sustainalytics": 2023
+      "sustainalytics": 2026
     },
     "basis": "Utilities",
     "peers": 10,
-    "consensus": 35.0,
-    "divergence": 20.0,
-    "consensus_provenance": "mixed",
-    "divergence_provenance": "mixed",
+    "consensus": 15.62,
+    "divergence": 18.75,
+    "consensus_provenance": "real",
+    "divergence_provenance": "real",
     "contributing": [
       "msci",
       "sustainalytics"
@@ -273,17 +736,17 @@
     "proof_up": true,
     "opinion_flat": true,
     "price_flat": true,
-    "is_underpriced_improver": true,
+    "is_underpriced_improver": false,
     "evidence_pct": 90.0,
     "evidence_basis": "Electric Utilities & Power Generators",
     "evidence_peers": 10,
-    "evidence_gap": 55.0,
-    "momentum": 3.4,
-    "esg_today": 35.0,
-    "quadrant": "HIDDEN_WINNERS",
-    "esg_today_provenance": "mixed",
-    "evidence_gap_provenance": "mixed",
-    "quadrant_provenance": "mixed",
+    "evidence_gap": 74.38,
+    "momentum": -1.7,
+    "esg_today": 15.62,
+    "quadrant": "OVERRATED",
+    "esg_today_provenance": "real",
+    "evidence_gap_provenance": "real",
+    "quadrant_provenance": "real",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -438,8 +901,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=20.0, consensus 32.5->35.0)",
-          "value": 20.0,
+          "label": "opinion_flat=True (divergence=18.75, consensus 18.12->15.62)",
+          "value": 18.75,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -456,8 +919,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=55.0 (evidence 90.0 - consensus 35.0)",
-          "value": 55.0,
+          "label": "evidence_gap=74.38 (evidence 90.0 - consensus 15.62)",
+          "value": 74.38,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -7119,110 +7582,64 @@
     }
   },
   "claims": {
-    "claims": [
-      {
-        "topic_id": "ghg_emissions",
-        "pillar": "E",
-        "state": "VERIFIED",
-        "text": "In FY2023, YTL Power International reduced Scope 1 and Scope 2 carbon emissions intensity.",
-        "source_sentence": "In FY2023, YTL Power International reduced Scope 1 and Scope 2 carbon emissions intensity.",
-        "source_doc": "YTLP-SR2023",
-        "source_page": 1,
-        "weight": 0.3
-      },
-      {
-        "topic_id": "energy_transition",
-        "pillar": "E",
-        "state": "VERIFIED",
-        "text": "In FY2023, YTL Power International grew its renewables and solar capacity as part of its d",
-        "source_sentence": "In FY2023, YTL Power International grew its renewables and solar capacity as part of its decarbonisation transition.",
-        "source_doc": "YTLP-SR2023",
-        "source_page": 1,
-        "weight": 0.25
-      },
-      {
-        "topic_id": "workforce_safety",
-        "pillar": "S",
-        "state": "VERIFIED",
-        "text": "In FY2023, YTL Power International reduced lost-time injuries through occupational health ",
-        "source_sentence": "In FY2023, YTL Power International reduced lost-time injuries through occupational health and safety programmes.",
-        "source_doc": "YTLP-SR2023",
-        "source_page": 1,
-        "weight": 0.15
-      },
-      {
-        "topic_id": "air_quality",
-        "pillar": "E",
-        "state": "ASSERTED",
-        "text": "In FY2023, YTL Power International cut NOx and particulate air quality emissions at its pl",
-        "source_sentence": "In FY2023, YTL Power International cut NOx and particulate air quality emissions at its plants.",
-        "source_doc": "YTLP-SR2023",
-        "source_page": 1,
-        "weight": 0.1
-      },
-      {
-        "topic_id": "grid_resiliency",
-        "pillar": "G",
-        "state": "ASSERTED",
-        "text": "In FY2023, YTL Power International improved grid reliability and supply security.",
-        "source_sentence": "In FY2023, YTL Power International improved grid reliability and supply security.",
-        "source_doc": "YTLP-SR2023",
-        "source_page": 1,
-        "weight": 0.1
-      }
-    ],
-    "absent": [
-      {
-        "topic_id": "water_management",
-        "state": "ABSENT"
-      }
-    ]
+    "claims": [],
+    "absent": [],
+    "live": false
   },
   "peers": [
     {
       "id": "U96",
       "name": "Sembcorp Industries",
-      "evidence_total": 80.0
-    },
-    {
-      "id": "TNB",
-      "name": "Tenaga Nasional",
-      "evidence_total": 56.0
-    },
-    {
-      "id": "POWR",
-      "name": "Cikarang Listrindo",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "POW",
-      "name": "PetroVietnam Power",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "BGRIM",
-      "name": "B.Grimm Power",
-      "evidence_total": 50.5
+      "evidence_total": 80.0,
+      "rating_total": 81.7
     },
     {
       "id": "PGAS",
       "name": "Perusahaan Gas Negara",
-      "evidence_total": 50.0
+      "evidence_total": 50.0,
+      "rating_total": 72.5
     },
     {
-      "id": "RATCH",
-      "name": "Ratch Group",
-      "evidence_total": 44.0
+      "id": "TNB",
+      "name": "Tenaga Nasional",
+      "evidence_total": 56.0,
+      "rating_total": 63.0
     },
     {
-      "id": "EGCO",
-      "name": "Electricity Generating",
-      "evidence_total": 38.5
+      "id": "BGRIM",
+      "name": "B.Grimm Power",
+      "evidence_total": 50.5,
+      "rating_total": 59.4
     },
     {
       "id": "GULF",
       "name": "Gulf Development",
-      "evidence_total": 30.5
+      "evidence_total": 30.5,
+      "rating_total": 58.3
+    },
+    {
+      "id": "EGCO",
+      "name": "Electricity Generating",
+      "evidence_total": 38.5,
+      "rating_total": 45.8
+    },
+    {
+      "id": "POWR",
+      "name": "Cikarang Listrindo",
+      "evidence_total": 55.0,
+      "rating_total": 36.0
+    },
+    {
+      "id": "RATCH",
+      "name": "Ratch Group",
+      "evidence_total": 44.0,
+      "rating_total": 27.0
+    },
+    {
+      "id": "POW",
+      "name": "PetroVietnam Power",
+      "evidence_total": 55.0,
+      "rating_total": 0.0
     }
   ],
   "latest_real_raters": [],

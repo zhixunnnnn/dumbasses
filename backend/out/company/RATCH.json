@@ -9,6 +9,423 @@
     "sasb_industry": "Electric Utilities & Power Generators",
     "scope": "demo"
   },
+  "rating": {
+    "company_id": "RATCH",
+    "year": 2023,
+    "total": 27.0,
+    "pillars": {
+      "E": 14.3,
+      "S": 70.0,
+      "G": 58.0
+    },
+    "coverage": 1.0,
+    "contributions": {
+      "ghg_emissions": 4.29,
+      "energy_transition": 3.58,
+      "workforce_safety": 10.5,
+      "air_quality": 1.43,
+      "water_management": 1.43,
+      "grid_resiliency": 5.8
+    },
+    "topic_breakdown": [
+      {
+        "topic_id": "ghg_emissions",
+        "name": "GHG emissions",
+        "pillar": "E",
+        "weight": 30.0,
+        "score": 14.3,
+        "contribution": 4.29
+      },
+      {
+        "topic_id": "energy_transition",
+        "name": "Energy transition",
+        "pillar": "E",
+        "weight": 25.0,
+        "score": 14.3,
+        "contribution": 3.58
+      },
+      {
+        "topic_id": "workforce_safety",
+        "name": "Workforce safety",
+        "pillar": "S",
+        "weight": 15.0,
+        "score": 70.0,
+        "contribution": 10.5
+      },
+      {
+        "topic_id": "air_quality",
+        "name": "Air quality",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 14.3,
+        "contribution": 1.43
+      },
+      {
+        "topic_id": "water_management",
+        "name": "Water management",
+        "pillar": "E",
+        "weight": 10.0,
+        "score": 14.3,
+        "contribution": 1.43
+      },
+      {
+        "topic_id": "grid_resiliency",
+        "name": "Grid resiliency",
+        "pillar": "G",
+        "weight": 10.0,
+        "score": 58.0,
+        "contribution": 5.8
+      }
+    ],
+    "agencies": [
+      "msci",
+      "sustainalytics"
+    ],
+    "provenance": "real",
+    "trace": {
+      "label": "ESG rating 2023 = SASB-weighted agency consensus",
+      "value": 27.0,
+      "contribution": null,
+      "source_sentence": null,
+      "source_doc": null,
+      "source_page": null,
+      "children": [
+        {
+          "label": "Agency inputs (normalized 0..100)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "MSCI → 42.9/100 (real, 2023)",
+              "value": 42.9,
+              "contribution": null,
+              "source_sentence": "MSCI rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "Sustainalytics → 73.2/100 (real, 2026)",
+              "value": 73.2,
+              "contribution": null,
+              "source_sentence": "Sustainalytics rating normalized to a 0..100 quality scale.",
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "Material topics (renormalized over covered weight)",
+          "value": null,
+          "contribution": null,
+          "source_sentence": null,
+          "source_doc": null,
+          "source_page": null,
+          "children": [
+            {
+              "label": "ghg_emissions · pillar E · w=0.3 (from Climate TRACE intensity)",
+              "value": 14.3,
+              "contribution": 4.29,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "energy_transition · pillar E · w=0.25 (from Climate TRACE intensity)",
+              "value": 14.3,
+              "contribution": 3.58,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "workforce_safety · pillar S · w=0.15 (from company report · workforce safety)",
+              "value": 70.0,
+              "contribution": 10.5,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "air_quality · pillar E · w=0.1 (from Climate TRACE intensity)",
+              "value": 14.3,
+              "contribution": 1.43,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "water_management · pillar E · w=0.1 (from Climate TRACE intensity)",
+              "value": 14.3,
+              "contribution": 1.43,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            },
+            {
+              "label": "grid_resiliency · pillar G · w=0.1 (from MSCI, Sustainalytics)",
+              "value": 58.0,
+              "contribution": 5.8,
+              "source_sentence": null,
+              "source_doc": null,
+              "source_page": null,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "rating_series": [
+    {
+      "year": 2019,
+      "total": 73.2,
+      "pillars": {
+        "E": 73.2,
+        "S": 73.2,
+        "G": 73.2
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2020,
+      "total": 73.2,
+      "pillars": {
+        "E": 73.2,
+        "S": 73.2,
+        "G": 73.2
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2021,
+      "total": 73.2,
+      "pillars": {
+        "E": 73.2,
+        "S": 73.2,
+        "G": 73.2
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2022,
+      "total": 73.2,
+      "pillars": {
+        "E": 73.2,
+        "S": 73.2,
+        "G": 73.2
+      },
+      "provenance": "real"
+    },
+    {
+      "year": 2023,
+      "total": 27.0,
+      "pillars": {
+        "E": 14.3,
+        "S": 70.0,
+        "G": 58.0
+      },
+      "provenance": "real"
+    }
+  ],
+  "impact": {
+    "owner_id": "E100001011068",
+    "owner_name": "Ratchaburi Electricity Generating Co Ltd",
+    "note": null,
+    "year": 2023,
+    "gas": "co2e_100yr",
+    "total_emissions_tonnes": 6933900,
+    "asset_count": 1,
+    "top_assets": [
+      {
+        "name": "Ratchaburi (RATCHGEN) power station",
+        "sector": "power",
+        "subsector": "electricity-generation",
+        "country": "THA",
+        "emissions": 6933900
+      }
+    ],
+    "subsector_mix": [
+      {
+        "subsector": "electricity-generation",
+        "emissions": 6933900.0
+      }
+    ],
+    "monthly": [
+      {
+        "month": 1,
+        "emissions": 517900
+      },
+      {
+        "month": 2,
+        "emissions": 509900
+      },
+      {
+        "month": 3,
+        "emissions": 637800
+      },
+      {
+        "month": 4,
+        "emissions": 641900
+      },
+      {
+        "month": 5,
+        "emissions": 673800
+      },
+      {
+        "month": 6,
+        "emissions": 623400
+      },
+      {
+        "month": 7,
+        "emissions": 579500
+      },
+      {
+        "month": 8,
+        "emissions": 606400
+      },
+      {
+        "month": 9,
+        "emissions": 547200
+      },
+      {
+        "month": 10,
+        "emissions": 555400
+      },
+      {
+        "month": 11,
+        "emissions": 535100
+      },
+      {
+        "month": 12,
+        "emissions": 505600
+      }
+    ],
+    "provenance": "real",
+    "source": "Climate TRACE v7",
+    "source_url": "https://api.climatetrace.org/v7",
+    "annual": [
+      {
+        "year": 2021,
+        "emissions": 6845400
+      },
+      {
+        "year": 2022,
+        "emissions": 6402100
+      },
+      {
+        "year": 2023,
+        "emissions": 6933900
+      },
+      {
+        "year": 2024,
+        "emissions": 6875100
+      },
+      {
+        "year": 2025,
+        "emissions": 6857100
+      }
+    ],
+    "company_id": "RATCH",
+    "rank": 3,
+    "peers": 9,
+    "panel_share": 0.108
+  },
+  "double_materiality": {
+    "company_id": "RATCH",
+    "financial": 27.0,
+    "impact": 14.3,
+    "composite": 18.1,
+    "weight_financial": 0.6,
+    "weight_impact": 0.4,
+    "carbon_intensity": 2892.9,
+    "intensity_rank": 7,
+    "intensity_peers": 8,
+    "greenwashing_penalty": 3.8,
+    "greenwashing_drivers": [
+      {
+        "label": "Materiality gap",
+        "points": 3.8,
+        "detail": "Rated 27/100 on ESG but runs at 14/100 on actual carbon intensity — a 13-point reputation-vs-reality gap."
+      }
+    ],
+    "greenwashing_headlines": [],
+    "under_attributed": false,
+    "provenance": "real",
+    "note": null
+  },
+  "fundamentals": {
+    "profile": {
+      "name": "Ratch Group Public Company Limited",
+      "sector": "Utilities",
+      "industry": "Utilities - Regulated Electric",
+      "employees": null,
+      "summary": "Ratch Group Public Company Limited, an energy and infrastructure company, engages in the generation and sales of electricity and steam in Thailand, Australia, Singapore, Indonesia, and internationally. The company operates through four segments: Domestic Electricity Generating, Domestic Renewable Energy, International Power Projects, and Domestic Related Business and Infrastructure. It generates electricity through natural gas, coal, and fuel oil, as well as invests in renewable power generation including solar, wind, biomass and hydro power. The company also offers power plant operation and maintenance services, as well as invests in the power energy business. Ratch Group Public Company Limited was incorporated in 2000 and is headquartered in Nonthaburi, Thailand.",
+      "website": "https://www.ratch.co.th",
+      "city": "Nonthaburi",
+      "country": "Thailand",
+      "ceo": "Mr. Nitus  Voraphonpiput",
+      "exchange": "Thailand"
+    },
+    "financials": {
+      "currency": "THB",
+      "market_cap": 82650005504,
+      "market_cap_fmt": "82.65B",
+      "enterprise_value": 188341501952,
+      "revenue": 34060904448,
+      "revenue_fmt": "34.06B",
+      "ebitda": 3157214720,
+      "gross_margin": 0.074099995,
+      "operating_margin": -0.011720001,
+      "profit_margin": 0.16357,
+      "roe": 0.06091,
+      "roa": -0.0018600001,
+      "revenue_growth": 0.852,
+      "debt_to_equity": 100.332,
+      "free_cashflow": -5269194240,
+      "current_ratio": 1.104
+    },
+    "valuation": {
+      "trailing_pe": 14.84375,
+      "forward_pe": 11.725753,
+      "price_to_book": 0.82068115,
+      "peg": 6.2,
+      "ev_to_ebitda": 59.654,
+      "eps_trailing": 2.56,
+      "book_value": 46.303,
+      "beta": 0.143,
+      "dividend_yield": 0.0368,
+      "dividend_rate": 1.4,
+      "payout_ratio": 0.625,
+      "fifty_two_high": 39.75,
+      "fifty_two_low": 25.5
+    },
+    "ratings": {
+      "recommendation": "buy",
+      "recommendation_mean": 1.88889,
+      "n_analysts": 9,
+      "target_mean": 39.36667,
+      "target_high": 45.0,
+      "target_low": 32.0,
+      "current_price": 38.0,
+      "distribution": {
+        "strongBuy": 1,
+        "buy": 5,
+        "hold": 2,
+        "sell": 0,
+        "strongSell": 1
+      }
+    }
+  },
   "evidence": {
     "company_id": "RATCH",
     "year": 2023,
@@ -186,21 +603,22 @@
     "company_id": "RATCH",
     "msci_pct": 25.0,
     "sp_pct": null,
-    "sustainalytics_pct": 55.0,
+    "sustainalytics_pct": 68.75,
     "cdp_pct": null,
     "real_raters": [
-      "msci"
+      "msci",
+      "sustainalytics"
     ],
     "rater_years": {
       "msci": 2023,
-      "sustainalytics": 2023
+      "sustainalytics": 2026
     },
     "basis": "Utilities",
     "peers": 10,
-    "consensus": 40.0,
-    "divergence": 30.0,
-    "consensus_provenance": "mixed",
-    "divergence_provenance": "mixed",
+    "consensus": 46.88,
+    "divergence": 43.75,
+    "consensus_provenance": "real",
+    "divergence_provenance": "real",
     "contributing": [
       "msci",
       "sustainalytics"
@@ -249,13 +667,13 @@
     "evidence_pct": 25.0,
     "evidence_basis": "Electric Utilities & Power Generators",
     "evidence_peers": 10,
-    "evidence_gap": -15.0,
-    "momentum": -8.6,
-    "esg_today": 40.0,
+    "evidence_gap": -21.88,
+    "momentum": -0.7,
+    "esg_today": 46.88,
     "quadrant": "VALUE_TRAPS",
-    "esg_today_provenance": "mixed",
-    "evidence_gap_provenance": "mixed",
-    "quadrant_provenance": "mixed",
+    "esg_today_provenance": "real",
+    "evidence_gap_provenance": "real",
+    "quadrant_provenance": "real",
     "trace": {
       "label": "Underpriced Improver signal",
       "value": null,
@@ -380,8 +798,8 @@
           ]
         },
         {
-          "label": "opinion_flat=True (divergence=30.0, consensus 37.5->40.0)",
-          "value": 30.0,
+          "label": "opinion_flat=True (divergence=43.75, consensus 49.38->46.88)",
+          "value": 43.75,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -398,8 +816,8 @@
           "children": []
         },
         {
-          "label": "evidence_gap=-15.0 (evidence 25.0 - consensus 40.0)",
-          "value": -15.0,
+          "label": "evidence_gap=-21.88 (evidence 25.0 - consensus 46.88)",
+          "value": -21.88,
           "contribution": null,
           "source_sentence": null,
           "source_doc": null,
@@ -7080,20 +7498,7 @@
         "report_year": 2023
       }
     ],
-    "absent": [
-      {
-        "topic_id": "air_quality",
-        "state": "ABSENT"
-      },
-      {
-        "topic_id": "water_management",
-        "state": "ABSENT"
-      },
-      {
-        "topic_id": "grid_resiliency",
-        "state": "ABSENT"
-      }
-    ],
+    "absent": [],
     "live": true,
     "report_year": 2023,
     "source_url": "https://www.ratch.co.th/storage/content/investor-relations/downloads/sustainability-report/sustainability-report-2023-th.pdf",
@@ -7101,49 +7506,58 @@
   },
   "peers": [
     {
-      "id": "U96",
-      "name": "Sembcorp Industries",
-      "evidence_total": 80.0
-    },
-    {
       "id": "YTLP",
       "name": "YTL Power International",
-      "evidence_total": 80.0
+      "evidence_total": 80.0,
+      "rating_total": 87.3
     },
     {
-      "id": "TNB",
-      "name": "Tenaga Nasional",
-      "evidence_total": 56.0
-    },
-    {
-      "id": "POWR",
-      "name": "Cikarang Listrindo",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "POW",
-      "name": "PetroVietnam Power",
-      "evidence_total": 55.0
-    },
-    {
-      "id": "BGRIM",
-      "name": "B.Grimm Power",
-      "evidence_total": 50.5
+      "id": "U96",
+      "name": "Sembcorp Industries",
+      "evidence_total": 80.0,
+      "rating_total": 81.7
     },
     {
       "id": "PGAS",
       "name": "Perusahaan Gas Negara",
-      "evidence_total": 50.0
+      "evidence_total": 50.0,
+      "rating_total": 72.5
     },
     {
-      "id": "EGCO",
-      "name": "Electricity Generating",
-      "evidence_total": 38.5
+      "id": "TNB",
+      "name": "Tenaga Nasional",
+      "evidence_total": 56.0,
+      "rating_total": 63.0
+    },
+    {
+      "id": "BGRIM",
+      "name": "B.Grimm Power",
+      "evidence_total": 50.5,
+      "rating_total": 59.4
     },
     {
       "id": "GULF",
       "name": "Gulf Development",
-      "evidence_total": 30.5
+      "evidence_total": 30.5,
+      "rating_total": 58.3
+    },
+    {
+      "id": "EGCO",
+      "name": "Electricity Generating",
+      "evidence_total": 38.5,
+      "rating_total": 45.8
+    },
+    {
+      "id": "POWR",
+      "name": "Cikarang Listrindo",
+      "evidence_total": 55.0,
+      "rating_total": 36.0
+    },
+    {
+      "id": "POW",
+      "name": "PetroVietnam Power",
+      "evidence_total": 55.0,
+      "rating_total": 0.0
     }
   ],
   "latest_real_raters": [],

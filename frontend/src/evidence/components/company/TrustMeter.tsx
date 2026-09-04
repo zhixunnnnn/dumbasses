@@ -1,9 +1,10 @@
 import type { CdpDisclosure, LatestRealRater, RaterKey, Raters } from "../../types";
 import { na, provenanceDetail } from "../../lib/ui";
 
+// S&P dropped — its ESG score pages are not publicly obtainable, so it never carries a
+// real rating and is not shown as a rater channel.
 const RATERS: { key: RaterKey; pct: keyof Raters; label: string; color: string }[] = [
   { key: "msci", pct: "msci_pct", label: "MSCI", color: "#4cc4d4" },
-  { key: "sp", pct: "sp_pct", label: "S&P", color: "#e0b24a" },
   { key: "sustainalytics", pct: "sustainalytics_pct", label: "Sustainalytics", color: "#a78bfa" },
   { key: "cdp", pct: "cdp_pct", label: "CDP", color: "#3ecf8e" },
 ];
@@ -25,9 +26,10 @@ export default function TrustMeter({
 }) {
   const realKeys = new Set<RaterKey>(raters.real_raters ?? []);
   const provenance = raters.rater_provenance;
+  // real-only: illustrative rater percentiles are never plotted (CGS terminal shows no seed).
   const vals = RATERS
     .map((r) => ({ ...r, v: raters[r.pct] as number | null, real: realKeys.has(r.key) }))
-    .filter((r) => r.v !== null);
+    .filter((r) => r.v !== null && r.real);
 
   const div = raters.divergence;
   // Shade the span the spread was ACTUALLY computed over, whatever its provenance —
@@ -91,7 +93,7 @@ export default function TrustMeter({
       </div>
 
       <p className="mt-1.5 flex flex-wrap items-center gap-x-2 text-[10px] leading-snug text-faint">
-        <span><span className="text-muted">●</span> real (sourced) · <span className="text-muted">○</span> illustrative.</span>
+        <span><span className="text-muted">●</span> real, sourced ratings only.</span>
         {div !== null && (
           <span>
             Spread over {provenanceDetail(raters.contributing, raters.real_raters) || "no channels"}.
