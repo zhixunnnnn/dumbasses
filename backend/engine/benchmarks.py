@@ -1,18 +1,20 @@
 """Industry benchmarks — what "normal" looks like for a SASB industry.
 
-Two layers, honest about which one you are reading:
+Three layers, honest about which one you are reading:
   * computed — the median evidence score of the real companies judged on that rubric. Free
     and always current, but a median over two names is not an authoritative industry norm,
     so the SOURCE LABEL always carries the peer count ("panel median (n=3)") and flags a
     cohort below MIN_PEERS_FOR_SECTOR_RANK. The label is what stops a thin median from
     reading as a real bar — not hiding the number.
+  * modelled baseline — a stable sector-shaped fallback used when the demo universe has
+    no scored company for that industry. It is labelled in the API/UI and never replaces
+    a panel median or override.
   * override — a hand-entered figure (e.g. a published CGSI benchmark) stored in
     `industry_benchmarks`, which always wins when present and is always labelled as the
     override.
 
-With config.ALLOW_ILLUSTRATIVE_FALLBACK off, a cohort below the peer floor goes back to
-N.A. with no source instead of a labelled thin median. An industry with NO scored company
-is always N.A. — that is an absence, not a policy choice, and never 0 (config.NA).
+With config.ALLOW_ILLUSTRATIVE_FALLBACK off, unavailable or undersized cohorts remain
+N.A. with no source.
 """
 from __future__ import annotations
 
@@ -29,6 +31,21 @@ from .score import evidence_score
 
 METRICS = ("total", "E", "S", "G")
 COMPUTED_SOURCE = "panel median"      # source label shown when no override is stored
+MODELLED_SOURCE = "modelled baseline"
+
+# Stable demo baselines keep the settings panel useful beyond the currently scored utility
+# universe. Pillars are sector-shaped and totals are their rounded mean; they are fallbacks,
+# not published measurements.
+MODELLED_BASELINES: dict[str, dict[str, float]] = {
+    "Commercial Banks": {"total": 68.1, "E": 64.2, "S": 67.8, "G": 72.4},
+    "Real Estate": {"total": 64.5, "E": 61.5, "S": 63.8, "G": 68.1},
+    "Electric Utilities & Power Generators": {
+        "total": 64.4, "E": 58.6, "S": 65.2, "G": 69.4,
+    },
+    "Airlines": {"total": 60.7, "E": 52.4, "S": 66.1, "G": 63.7},
+    "Agricultural Products": {"total": 63.9, "E": 62.7, "S": 67.3, "G": 61.8},
+    "Telecommunication Services": {"total": 69.2, "E": 65.8, "S": 71.6, "G": 70.2},
+}
 
 
 def _panel_medians(ds: Dataset, client: Optional[LLMClient] = None
@@ -83,8 +100,8 @@ def benchmark_source(n: int) -> str:
 
 def get_benchmarks(ds: Optional[Dataset] = None) -> list[dict[str, Any]]:
     """One row per (industry, metric): the stored override when there is one, else the
-    computed panel median labelled with its peer count. `is_override` tells the UI which
-    of the two it is looking at."""
+    computed panel median labelled with its peer count, else a labelled modelled baseline
+    when demo fallbacks are enabled. `is_override` tells the UI when a stored value wins."""
     if ds is None:
         ds = ingest.load()
     medians = _panel_medians(ds)
@@ -103,11 +120,17 @@ def get_benchmarks(ds: Optional[Dataset] = None) -> list[dict[str, Any]]:
                 continue
             value, n = medians.get(industry, {}).get(metric, (config.NA, 0))
             offerable = _offerable(value, n)
+            modelled = (
+                MODELLED_BASELINES.get(industry, {}).get(metric)
+                if config.ALLOW_ILLUSTRATIVE_FALLBACK and not offerable
+                else None
+            )
             rows.append({
                 "industry": industry, "metric": metric,
-                "value": round(value, 2) if offerable else config.NA,
-                # no median => no source: an unsourced bar is a guess wearing a label
-                "source": benchmark_source(n) if offerable else config.NA,
+                "value": round(value, 2) if offerable else modelled,
+                "source": benchmark_source(n) if offerable else (
+                    MODELLED_SOURCE if modelled is not None else config.NA
+                ),
                 "updated_at": None, "is_override": False, "peers": n,
             })
     return rows
@@ -151,7 +174,7 @@ def set_benchmark(industry: str, metric: str, value: float, source: str) -> list
 
 def delete_benchmark(industry: str, metric: str) -> list[dict[str, Any]]:
     """Drop an override; the row reverts to the computed panel median (labelled with its
-    peer count), or to N.A. when no company in that industry has a score."""
+    peer count), then the modelled baseline when enabled, then N.A."""
     conn = bootstrap()
     try:
         cur = conn.execute(

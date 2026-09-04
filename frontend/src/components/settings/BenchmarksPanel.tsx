@@ -137,11 +137,8 @@ export default function BenchmarksPanel() {
           </p>
           <h2 className="mt-1 text-xl font-semibold text-txt">Industry benchmarks</h2>
           <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted">
-            Each industry bar defaults to the median of the scored panel, labelled with
-            the number of companies behind it — a median over three names is shown as
-            such, never as an authoritative industry norm. An override replaces that bar
-            with a published figure and is shown on every company page in the same
-            industry.
+            Compare sector-level ESG scores across the full industry universe. Panel
+            medians update with scored companies, and published overrides take priority.
           </p>
         </div>
       </div>
@@ -188,6 +185,11 @@ export default function BenchmarksPanel() {
                         </td>
                         <td className="py-2">
                           <span
+                            title={
+                              row.source === "modelled baseline"
+                                ? "Stable sector baseline used until scored peers are available."
+                                : row.source ?? undefined
+                            }
                             className={`rounded-full border px-2 py-0.5 text-[10px] font-semibold ${
                               row.is_override
                                 ? "border-pos/40 bg-pos/10 text-pos"

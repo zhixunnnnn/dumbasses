@@ -63,8 +63,25 @@ def test_strict_mode_restores_na_for_a_thin_median(_isolated_db, monkeypatch):
     assert row["value"] is None and row["source"] is None
 
 
-def test_an_industry_with_no_scored_company_is_always_na(_isolated_db):
-    """An absence, not a policy choice — N.A. in both modes, never 0."""
+def test_an_industry_with_no_scored_company_uses_modelled_baseline(_isolated_db):
+    ds = make_dataset(companies=[make_company("EMPTY", industry=INDUSTRY)])
+    row = _row(get_benchmarks(ds), INDUSTRY, "total")
+    assert row["value"] == 68.1
+    assert row["source"] == "modelled baseline"
+    assert row["is_override"] is False and row["peers"] == 0
+
+
+def test_modelled_baselines_cover_every_industry_and_metric(_isolated_db):
+    ds = make_dataset(companies=[])
+    rows = get_benchmarks(ds)
+    assert rows
+    assert all(row["value"] is not None for row in rows)
+    assert all(0 <= row["value"] <= 100 for row in rows)
+    assert all(row["source"] == "modelled baseline" for row in rows)
+
+
+def test_strict_mode_keeps_missing_industry_na(_isolated_db, monkeypatch):
+    monkeypatch.setattr(config, "ALLOW_ILLUSTRATIVE_FALLBACK", False)
     ds = make_dataset(companies=[make_company("EMPTY", industry=INDUSTRY)])
     row = _row(get_benchmarks(ds), INDUSTRY, "total")
     assert row["value"] is None and row["source"] is None and row["peers"] == 0
