@@ -12,7 +12,7 @@ from __future__ import annotations
 import json
 import sqlite3
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Literal
 
@@ -34,6 +34,101 @@ REASONS = {
     "other": "Other",
 }
 STATUSES: tuple[FeedbackStatus, ...] = ("open", "reviewing", "resolved", "dismissed")
+
+SAMPLE_FEEDBACK: tuple[dict[str, Any], ...] = (
+    {
+        "id": "sample-fb-sembcorp-score",
+        "age_hours": 1,
+        "reason": "inaccurate",
+        "comment": (
+            "The score does not match the current evidence engine, and the "
+            "explanation overstates one driver."
+        ),
+        "prompt": (
+            "What is Sembcorp Industries' latest evidence score, and what supports it?"
+        ),
+        "response": (
+            "Sembcorp Industries has an ESG evidence score of 92/100. The score is "
+            "supported mainly by its renewable capacity additions."
+        ),
+        "status": "open",
+        "sources": [
+            {
+                "title": "Sembcorp Industries corporate site",
+                "url": "https://www.sembcorp.com/",
+                "source": "Company disclosure",
+            }
+        ],
+    },
+    {
+        "id": "sample-fb-tnb-emissions",
+        "age_hours": 5,
+        "reason": "unsupported",
+        "comment": "The precise emissions change is not supported by the cited source.",
+        "prompt": "Why is Tenaga Nasional exposed to transition risk?",
+        "response": (
+            "Tenaga Nasional's emissions rose 18% in 2025 because coal generation "
+            "expanded, making it a clear transition-risk laggard."
+        ),
+        "status": "open",
+        "sources": [
+            {
+                "title": "Tenaga Nasional corporate site",
+                "url": "https://www.tnb.com.my/",
+                "source": "Company disclosure",
+            }
+        ],
+    },
+    {
+        "id": "sample-fb-ytl-gulf-comparison",
+        "age_hours": 11,
+        "reason": "incomplete",
+        "comment": "The comparison omitted emissions direction, confidence, and evidence gaps.",
+        "prompt": "Compare YTL Power and Gulf Development on transition risk.",
+        "response": (
+            "YTL Power has a lower ESG rating than Gulf Development, so Gulf is the "
+            "stronger transition candidate."
+        ),
+        "status": "reviewing",
+        "reviewer": "Research lead",
+        "reviewer_note": "Check like-for-like evidence periods before completing the comparison.",
+    },
+    {
+        "id": "sample-fb-pgas-controversies",
+        "age_hours": 20,
+        "reason": "unsupported",
+        "comment": "An empty controversy feed was treated as evidence that no controversy exists.",
+        "prompt": "Does PGAS have any recent ESG controversies?",
+        "response": (
+            "PGAS has no recent ESG controversies and therefore carries low transition risk."
+        ),
+        "status": "resolved",
+        "reviewer": "ESG reviewer",
+        "reviewer_note": "Absence of a retrieved headline is not proof of absence.",
+        "correction": (
+            "No controversy should be inferred from an empty feed. Review current sourced "
+            "headlines and disclosure evidence before assigning PGAS a transition-risk level."
+        ),
+    },
+    {
+        "id": "sample-fb-bgrim-risk",
+        "age_hours": 29,
+        "reason": "tone",
+        "comment": "The conclusion is too absolute for the available evidence.",
+        "prompt": "Summarise the main ESG risk for B.Grimm Power.",
+        "response": (
+            "B.Grimm is clearly the safest utility in the peer set and has virtually no "
+            "material ESG downside."
+        ),
+        "status": "resolved",
+        "reviewer": "ESG reviewer",
+        "reviewer_note": "Keep the conclusion proportional to coverage and confidence.",
+        "correction": (
+            "B.Grimm's transition profile should be assessed against its generation mix, "
+            "emissions direction, disclosure coverage, and peer-relative evidence confidence."
+        ),
+    },
+)
 
 
 class ApiModel(BaseModel):
@@ -84,10 +179,22 @@ class FeedbackRecord(ApiModel):
 
 
 class FeedbackStore:
-    def __init__(self, path: Path | str = DEFAULT_CHAT_HISTORY_DB) -> None:
+    def __init__(
+        self,
+        path: Path | str = DEFAULT_CHAT_HISTORY_DB,
+        *,
+        seed_examples: bool | None = None,
+    ) -> None:
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._init_db()
+        should_seed = (
+            self.path.resolve() == DEFAULT_CHAT_HISTORY_DB.resolve()
+            if seed_examples is None
+            else seed_examples
+        )
+        if should_seed:
+            self._seed_examples()
 
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.path)
@@ -125,6 +232,50 @@ class FeedbackStore:
                     ON message_feedback(status, created_at DESC);
                 """
             )
+
+    def _seed_examples(self) -> None:
+        with self._connect() as connection:
+            existing = connection.execute(
+                "SELECT COUNT(*) AS n FROM message_feedback"
+            ).fetchone()
+            if existing and int(existing["n"]) > 0:
+                return
+
+            now = datetime.now(timezone.utc)
+            for item in SAMPLE_FEEDBACK:
+                created_at = (now - timedelta(hours=item["age_hours"])).isoformat()
+                reviewed_at = (
+                    (now - timedelta(hours=max(0, item["age_hours"] - 1))).isoformat()
+                    if item["status"] in {"reviewing", "resolved"}
+                    else None
+                )
+                connection.execute(
+                    """
+                    INSERT OR IGNORE INTO message_feedback (
+                        id, session_id, message_id, created_at, rating, reason,
+                        comment, response_text, prompt_text, model, surface,
+                        artifacts_json, page_context_json, status, reviewer,
+                        reviewer_note, corrected_response, reviewed_at
+                    ) VALUES (?, NULL, NULL, ?, 'flag', ?, ?, ?, ?, ?, 'sample',
+                              ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        item["id"],
+                        created_at,
+                        item["reason"],
+                        item["comment"],
+                        item["response"],
+                        item["prompt"],
+                        "Workspace sample",
+                        _dump({"sources": item.get("sources", [])}),
+                        _dump({"route": "assistant", "sample": True}),
+                        item["status"],
+                        item.get("reviewer"),
+                        item.get("reviewer_note", ""),
+                        item.get("correction", ""),
+                        reviewed_at,
+                    ),
+                )
 
     def create(self, payload: FeedbackCreate) -> FeedbackRecord:
         reason = payload.reason if payload.reason in REASONS else "other"

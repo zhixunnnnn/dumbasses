@@ -159,6 +159,11 @@ export default function FeedbackPanel() {
                       {record.comment ? ` — ${record.comment}` : ""}
                     </span>
                   </span>
+                  {record.surface === "sample" && (
+                    <span className="shrink-0 rounded-full border border-profit/30 bg-profit/10 px-2 py-0.5 text-[10px] font-semibold text-profit">
+                      Sample
+                    </span>
+                  )}
                   <span className="shrink-0 rounded-full border border-hairline bg-raised px-2 py-0.5 text-[10px] font-semibold text-muted">
                     {STATUS_LABELS[record.status]}
                   </span>
