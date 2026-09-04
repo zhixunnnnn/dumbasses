@@ -18,6 +18,11 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+# git is needed by pip to install the climate_trace_tools git+https requirement
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY backend/requirements.txt ./backend/requirements.txt
 RUN python -m pip install --upgrade pip \
     && python -m pip install -r backend/requirements.txt
