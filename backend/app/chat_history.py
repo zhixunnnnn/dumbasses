@@ -5,7 +5,7 @@ import os
 import shutil
 import sqlite3
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Literal
 
@@ -25,6 +25,266 @@ DEFAULT_CHAT_HISTORY_DB = Path(
     os.environ.get("CHAT_HISTORY_DB_PATH")
     or (_RUNTIME_DATA_DIR / "chat_history.sqlite3")
 ).expanduser()
+
+LEGACY_SHOWCASE_SESSION_IDS = (
+    "session-8476fde81c0142aeb60fb86cdbab95f4",
+    "session-8b8382a7147a45e69a893a320b9b3878",
+    "session-768c3a0945b74d9d954657f8dc91b118",
+    "session-766ebd0c5c514023ada3e3d95c59a5bb",
+    "session-77b97f00f4c1447ea380ea5724de7748",
+    "session-6ee9c3afadad487a84978b8a72e863d5",
+    "session-46c66ce525144b41b0f0287619ac862c",
+    "session-c8215663231240b6bf63bbd7836c272f",
+    "session-4f885f9ba921404e89bef0e12108f219",
+    "session-e295c3eafd7d4c94b9a79980394f99f1",
+    "session-19f4821f248a4bdfa2b9ae8d456a24ef",
+    "session-e7bf473f0704406f8d269d9fd8fb9940",
+)
+
+SHOWCASE_CHATS: tuple[dict[str, Any], ...] = (
+    {
+        "id": "session-showcase-report",
+        "age_minutes": 5,
+        "title": "Generate a Sembcorp ESG investment report",
+        "prompt": (
+            "Generate an investment-grade ESG report for Sembcorp Industries using "
+            "the current dashboard evidence and latest scraped disclosures."
+        ),
+        "response": """## Sembcorp Industries ESG report
+
+The report is ready. It combines the current evidence engine, the rating outlook, transition targets, regulatory coverage, and source-linked company disclosures.
+
+### Executive view
+
+- **ESG consensus:** 81.7 / 100
+- **Evidence score:** 80.0 / 100 with 60.3% confidence
+- **2026 rating outlook:** AA, likely hold
+- **Transition signal:** renewables capacity reached 15 GW in 2025 against a 25 GW target for 2028
+- **Watchpoint:** Sembcorp expects near-term emissions to rise following the Alinta Energy acquisition and has updated its emissions-intensity pathway
+
+Open the report artifact below to preview it or download it as a PDF.""",
+        "sources": [
+            {
+                "title": "Sembcorp Sustainability Report 2025",
+                "url": "https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf",
+                "snippet": "2025 performance, climate targets, and material ESG disclosures.",
+                "source": "bright_data+pdf",
+            },
+            {
+                "title": "Sembcorp Climate Action Plan",
+                "url": "https://www.sembcorp.com/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/",
+                "snippet": "Current renewable-capacity, emissions-intensity, and net-zero targets.",
+                "source": "bright_data",
+            },
+        ],
+        "tool_results": [
+            {
+                "name": "get_company_esg",
+                "status": "ok",
+                "summary": "Loaded Sembcorp's ratings, evidence pillars, forecast, and compliance signals.",
+                "sourceCount": 1,
+            },
+            {
+                "name": "scrape_url",
+                "status": "ok",
+                "summary": "Scraped Sembcorp's 2025 sustainability disclosures and climate targets.",
+                "sourceCount": 2,
+            },
+        ],
+        "workflow_steps": [
+            {
+                "label": "Loaded ESG evidence",
+                "status": "ok",
+                "detail": "Collected the current rating, evidence, forecast, and compliance record.",
+                "toolName": "get_company_esg",
+            },
+            {
+                "label": "Scraped current disclosures",
+                "status": "ok",
+                "detail": "Extracted transition targets from Sembcorp's 2025 publications.",
+                "toolName": "scrape_url",
+            },
+            {
+                "label": "Generated report",
+                "status": "ok",
+                "detail": "Built a source-linked ESG investment report and PDF-ready artifact.",
+                "toolName": "report_generation",
+            },
+        ],
+        "report": {
+            "title": "Sembcorp Industries ESG Investment Report",
+            "generatedAt": "2026-09-05T00:00:00+08:00",
+            "markdown": """# Sembcorp Industries ESG Investment Report
+
+## Executive summary
+
+Sembcorp Industries combines a strong current ESG consensus with high evidence coverage and a credible renewable-growth programme. The current rating outlook is AA and likely to hold. The central investment tension is between rapid renewable deployment and the near-term emissions effect of a larger thermal portfolio following the Alinta Energy acquisition.
+
+## Current ESG position
+
+| Measure | Current view |
+|---|---:|
+| ESG consensus | 81.7 / 100 |
+| Evidence score | 80.0 / 100 |
+| Evidence confidence | 60.3% |
+| Environmental pillar | 80.0 / 100 |
+| Social pillar | 100.0 / 100 |
+| Governance pillar | 50.0 / 100 |
+| 2026 rating outlook | AA, likely hold |
+
+The evidence engine shows broad disclosure coverage, with water management remaining the principal uncovered material topic in the current record.
+
+## Transition plan
+
+Sembcorp reported 15 GW of gross installed renewable capacity at the end of 2025 and targets 25 GW by 2028. Its updated climate pathway targets emissions intensity of 0.26 tCO2e/MWh by 2035 and net-zero Scope 1 and 2 emissions by 2050.
+
+The company also states that emissions are expected to increase in the near term following the Alinta Energy acquisition. This makes delivery against the revised intensity pathway a key monitoring point.
+
+## Investment interpretation
+
+**Strengths:** high peer-relative ESG consensus, strong environmental and social evidence, expanding renewable capacity, and source-linked transition targets.
+
+**Risks:** governance evidence trails the other pillars, transition execution must absorb a larger thermal portfolio, and evidence confidence is not yet high enough to treat every disclosure as independently verified.
+
+## Monitoring checklist
+
+1. Progress from 15 GW toward the 25 GW renewable-capacity target.
+2. Movement in group emissions intensity following the Alinta consolidation.
+3. New evidence on water management and governance controls.
+4. Any change to the AA rating baseline or evidence confidence.
+
+## Sources
+
+- [Sembcorp Sustainability Report 2025](https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf)
+- [Sembcorp Climate Action Plan](https://www.sembcorp.com/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/)
+""",
+        },
+    },
+    {
+        "id": "session-showcase-prediction",
+        "age_minutes": 12,
+        "title": "Predict Sembcorp's 2026 ESG rating",
+        "prompt": (
+            "Predict Sembcorp Industries' 2026 ESG rating and explain the main drivers."
+        ),
+        "response": """## 2026 ESG rating outlook: Sembcorp Industries
+
+**Rating outlook: AA (6.0 / 7), likely hold.** The interpretability scenario is **5.9 / 7**, which remains in the high A to AA range.
+
+### Main drivers
+
+1. **Evidence strength:** the latest verified evidence score is 80.0 / 100.
+2. **Pillar profile:** Environmental is 80.0, Social is 100.0, and Governance is 50.0.
+3. **Transition execution:** renewable capacity reached 15 GW in 2025, with a 25 GW target for 2028.
+4. **Confidence adjustment:** evidence confidence is 60.3%, so the result should be read as a directional scenario rather than a published rater decision.
+5. **Key watchpoint:** the updated climate pathway acknowledges near-term emissions pressure following the Alinta Energy acquisition.
+
+### Interpretation
+
+The strongest support comes from evidence coverage and renewable deployment. Governance evidence and execution against the revised emissions-intensity pathway are the main factors that could move the outlook.""",
+        "sources": [
+            {
+                "title": "Sembcorp Sustainability Report 2025",
+                "url": "https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf",
+                "snippet": "Current climate performance and targets.",
+                "source": "bright_data+pdf",
+            }
+        ],
+        "tool_results": [
+            {
+                "name": "get_company_esg",
+                "status": "ok",
+                "summary": "Loaded Sembcorp's evidence score, pillars, confidence, and 2026 rating outlook.",
+                "sourceCount": 1,
+            }
+        ],
+        "workflow_steps": [
+            {
+                "label": "Loaded company evidence",
+                "status": "ok",
+                "detail": "Resolved Sembcorp's current score, pillar evidence, and rating baseline.",
+                "toolName": "get_company_esg",
+            },
+            {
+                "label": "Built rating outlook",
+                "status": "ok",
+                "detail": "Produced the 2026 scenario and ranked its material drivers.",
+                "toolName": "get_company_esg",
+            },
+        ],
+        "report": None,
+    },
+    {
+        "id": "session-showcase-web-scrape",
+        "age_minutes": 20,
+        "title": "Scrape Sembcorp's transition targets",
+        "prompt": (
+            "Scrape Sembcorp Industries' latest sustainability disclosures and "
+            "extract its transition targets with source links."
+        ),
+        "response": """## Sembcorp transition-target scan
+
+I searched the current company disclosures and scraped the FY2025 sustainability materials.
+
+| Metric | 2025 position | Current target |
+|---|---:|---:|
+| Gross installed renewable capacity | 15 GW | 25 GW by 2028 |
+| GHG emissions intensity | 0.21 tCO2e/MWh | 0.26 tCO2e/MWh by 2035 |
+| Scope 1 and 2 net zero | In transition | Net zero by 2050 |
+
+### Material update
+
+Sembcorp says the Alinta Energy acquisition will increase emissions in the near term before they decline. The company consequently updated its emissions-intensity pathway while retaining the 25 GW renewables target and 2050 net-zero goal.
+
+### Sources
+
+- [Sustainability Report 2025](https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf)
+- [Climate Action Plan](https://www.sembcorp.com/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/)""",
+        "sources": [
+            {
+                "title": "Sembcorp Sustainability Report 2025",
+                "url": "https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf",
+                "snippet": "15 GW installed renewables in 2025 and a 25 GW target for 2028.",
+                "source": "bright_data+pdf",
+            },
+            {
+                "title": "Sembcorp Climate Action Plan",
+                "url": "https://www.sembcorp.com/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/",
+                "snippet": "Updated 2035 emissions-intensity and 2050 net-zero targets.",
+                "source": "bright_data",
+            },
+        ],
+        "tool_results": [
+            {
+                "name": "web_search",
+                "status": "ok",
+                "summary": "Found Sembcorp's current sustainability report and climate action page.",
+                "sourceCount": 2,
+            },
+            {
+                "name": "scrape_url",
+                "status": "ok",
+                "summary": "Extracted current capacity, emissions-intensity, and net-zero targets.",
+                "sourceCount": 2,
+            },
+        ],
+        "workflow_steps": [
+            {
+                "label": "Searched the web",
+                "status": "ok",
+                "detail": "Located the latest first-party sustainability disclosures.",
+                "toolName": "web_search",
+            },
+            {
+                "label": "Scraped source pages",
+                "status": "ok",
+                "detail": "Extracted transition targets and the latest material update.",
+                "toolName": "scrape_url",
+            },
+        ],
+        "report": None,
+    },
+)
 
 
 def _seed_runtime_chat_history() -> None:
@@ -82,10 +342,22 @@ class CreateChatSessionRequest(ApiModel):
 
 
 class ChatHistoryStore:
-    def __init__(self, path: Path | str = DEFAULT_CHAT_HISTORY_DB) -> None:
+    def __init__(
+        self,
+        path: Path | str = DEFAULT_CHAT_HISTORY_DB,
+        *,
+        curate_showcase: bool | None = None,
+    ) -> None:
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self._init_db()
+        should_curate = (
+            self.path.resolve() == DEFAULT_CHAT_HISTORY_DB.resolve()
+            if curate_showcase is None
+            else curate_showcase
+        )
+        if should_curate:
+            self._curate_showcase_history()
 
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.path)
@@ -126,6 +398,86 @@ class ChatHistoryStore:
                     ON chat_sessions(updated_at DESC);
                 """
             )
+
+    def _curate_showcase_history(self) -> None:
+        placeholders = ",".join("?" for _ in LEGACY_SHOWCASE_SESSION_IDS)
+        now = datetime.now(timezone.utc)
+
+        with self._connect() as connection:
+            connection.execute(
+                f"DELETE FROM chat_messages WHERE session_id IN ({placeholders})",
+                LEGACY_SHOWCASE_SESSION_IDS,
+            )
+            connection.execute(
+                f"DELETE FROM chat_sessions WHERE id IN ({placeholders})",
+                LEGACY_SHOWCASE_SESSION_IDS,
+            )
+
+            for chat in SHOWCASE_CHATS:
+                created_at = now - timedelta(minutes=chat["age_minutes"])
+                updated_at = created_at + timedelta(minutes=1)
+                page_context = {
+                    "route": "assistant",
+                    "showcase": True,
+                    "capability": chat["id"].removeprefix("session-showcase-"),
+                    "company": {
+                        "id": "U96",
+                        "name": "Sembcorp Industries",
+                        "ticker": "U96.SI",
+                    },
+                }
+                connection.execute(
+                    """
+                    INSERT OR IGNORE INTO chat_sessions (
+                        id, title, created_at, updated_at, page_context_json
+                    ) VALUES (?, ?, ?, ?, ?)
+                    """,
+                    (
+                        chat["id"],
+                        chat["title"],
+                        created_at.isoformat(),
+                        updated_at.isoformat(),
+                        json_dump(page_context),
+                    ),
+                )
+                connection.execute(
+                    """
+                    INSERT OR IGNORE INTO chat_messages (
+                        id, session_id, role, content, created_at,
+                        sources_json, reference_articles_json, tool_results_json,
+                        workflow_steps_json, report_json, model, page_context_json
+                    ) VALUES (?, ?, 'user', ?, ?, '[]', '[]', '[]', '[]',
+                              NULL, NULL, ?)
+                    """,
+                    (
+                        f"msg-{chat['id']}-prompt",
+                        chat["id"],
+                        chat["prompt"],
+                        created_at.isoformat(),
+                        json_dump(page_context),
+                    ),
+                )
+                connection.execute(
+                    """
+                    INSERT OR IGNORE INTO chat_messages (
+                        id, session_id, role, content, created_at,
+                        sources_json, reference_articles_json, tool_results_json,
+                        workflow_steps_json, report_json, model, page_context_json
+                    ) VALUES (?, ?, 'assistant', ?, ?, ?, '[]', ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        f"msg-{chat['id']}-response",
+                        chat["id"],
+                        chat["response"],
+                        updated_at.isoformat(),
+                        json_dump(chat["sources"]),
+                        json_dump(chat["tool_results"]),
+                        json_dump(chat["workflow_steps"]),
+                        json_dump(chat["report"]) if chat["report"] else None,
+                        "PolyFintech ESG agent",
+                        json_dump(page_context),
+                    ),
+                )
 
     def create_session(self, title: str | None = None, session_id: str | None = None) -> ChatSessionSummary:
         now = now_iso()

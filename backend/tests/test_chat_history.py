@@ -109,3 +109,63 @@ def test_chat_history_ensures_frontend_supplied_session_id():
 
     assert session.id == "session-from-browser"
     assert session.title == "New ESG chat"
+
+
+def test_showcase_history_has_one_successful_chat_per_capability():
+    TEST_DB_DIR.mkdir(exist_ok=True)
+    path = TEST_DB_DIR / "showcase.sqlite3"
+    if path.exists():
+        path.unlink()
+
+    store = ChatHistoryStore(path, curate_showcase=True)
+    sessions = store.list_sessions()
+
+    assert {session.id for session in sessions} == {
+        "session-showcase-web-scrape",
+        "session-showcase-prediction",
+        "session-showcase-report",
+    }
+    assert all(session.message_count == 2 for session in sessions)
+
+    details = [store.get_session(session.id) for session in sessions]
+    assistant_messages = [detail.messages[-1] for detail in details]
+    assert all(message.role == "assistant" for message in assistant_messages)
+    assert all(
+        result["status"] == "ok"
+        for message in assistant_messages
+        for result in message.tool_results
+    )
+    assert any(message.report for message in assistant_messages)
+    assert any(
+        result["name"] == "scrape_url"
+        for message in assistant_messages
+        for result in message.tool_results
+    )
+    assert any(
+        result["name"] == "get_company_esg"
+        for message in assistant_messages
+        for result in message.tool_results
+    )
+
+    ChatHistoryStore(path, curate_showcase=True)
+    assert len(store.list_sessions()) == 3
+
+
+def test_showcase_cleanup_removes_only_known_legacy_sessions():
+    TEST_DB_DIR.mkdir(exist_ok=True)
+    path = TEST_DB_DIR / "showcase-preserve.sqlite3"
+    if path.exists():
+        path.unlink()
+
+    store = ChatHistoryStore(path)
+    store.create_session(title="Keep me", session_id="user-session")
+    store.create_session(
+        title="Remove me",
+        session_id="session-8476fde81c0142aeb60fb86cdbab95f4",
+    )
+
+    curated = ChatHistoryStore(path, curate_showcase=True)
+    session_ids = {session.id for session in curated.list_sessions()}
+
+    assert "user-session" in session_ids
+    assert "session-8476fde81c0142aeb60fb86cdbab95f4" not in session_ids
