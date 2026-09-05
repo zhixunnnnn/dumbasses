@@ -108,7 +108,7 @@ export default function GovernancePage() {
   const counts = stats?.byStatus ?? {};
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-6xl flex-col px-6 py-6 sm:px-10 lg:px-12">
+    <div className="mx-auto flex min-h-full w-full max-w-6xl flex-col px-6 py-6 sm:px-10 lg:px-12">
       <header className="pb-5">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex items-start gap-2.5">
@@ -191,7 +191,7 @@ export default function GovernancePage() {
       </div>
 
       {view === "overrides" ? (
-        <div className="min-h-0 flex-1 overflow-y-auto">
+        <div>
           <OverridesPanel
             onChanged={() => void loadOverrideStats().then(setOverrideStats)}
           />
@@ -223,7 +223,7 @@ export default function GovernancePage() {
         </p>
       )}
 
-      <div className="min-h-0 flex-1 space-y-3 overflow-y-auto py-4">
+      <div className="space-y-3 py-4">
         {records === null ? (
           <div className="flex items-center gap-2 py-6 text-sm text-muted">
             <LoaderCircle size={16} className="animate-spin" /> Loading review queue
