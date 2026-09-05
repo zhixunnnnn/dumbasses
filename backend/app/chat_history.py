@@ -39,126 +39,78 @@ LEGACY_SHOWCASE_SESSION_IDS = (
     "session-e295c3eafd7d4c94b9a79980394f99f1",
     "session-19f4821f248a4bdfa2b9ae8d456a24ef",
     "session-e7bf473f0704406f8d269d9fd8fb9940",
+    # retired: the report flow never returns, and its answer duplicated the
+    # evidence summary the prediction chat already shows.
+    "session-showcase-report",
 )
 
 SHOWCASE_CHATS: tuple[dict[str, Any], ...] = (
     {
-        "id": "session-showcase-report",
+        "id": "session-showcase-satellite",
         "age_minutes": 5,
-        "title": "Generate a Sembcorp ESG investment report",
+        "title": "Check Sembcorp's assets from orbit",
         "prompt": (
-            "Generate an investment-grade ESG report for Sembcorp Industries using "
-            "the current dashboard evidence and latest scraped disclosures."
+            "Use satellite verification on Sembcorp Industries and list what "
+            "the imagery shows."
         ),
-        "response": """## Sembcorp Industries ESG report
-
-The report is ready. It combines the current evidence engine, the rating outlook, transition targets, regulatory coverage, and source-linked company disclosures.
-
-### Executive view
-
-- **ESG consensus:** 81.7 / 100
-- **Evidence score:** 80.0 / 100 with 60.3% confidence
-- **2026 rating outlook:** AA, likely hold
-- **Transition signal:** renewables capacity reached 15 GW in 2025 against a 25 GW target for 2028
-- **Watchpoint:** Sembcorp expects near-term emissions to rise following the Alinta Energy acquisition and has updated its emissions-intensity pathway
-
-Open the report artifact below to preview it or download it as a PDF.""",
+        # Captured verbatim from the deployed agent answering this exact prompt.
+        # Do not hand-edit: re-run the prompt and paste the new reply instead, so the
+        # showcase stays a real transcript rather than a written-up impression of one.
+        "response": "**Of Sembcorp Industries' 5 assets checked via Sentinel-2 satellite imagery, only 1 shows observable construction — the Banyan Energy Storage System in Singapore. The remaining 4 assets were either not observed or inconclusive, which does not prove any claim false.**\n\n---\n\n### Asset-by-Asset Satellite Findings\n\n| Asset | Type | Verdict | Key Finding |\n|---|---|---|---|\n| **Sembcorp Banyan Energy Storage System** (Singapore) | Battery storage | **OBSERVED** | Vegetation cover fell by 0.65 more than the surrounding area between Dec 2019 and Mar 2023 — consistent with construction. |\n| **Asfordby B** (UK) | Battery storage | NOT OBSERVED | Vegetation cover barely moved (+0.01). No construction visible. |\n| **PLTS IKN** (Indonesia) | Solar | INCONCLUSIVE | No low-cloud Sentinel-2 scene available for the baseline year; cannot confirm or deny. |\n| **Sembcorp EfW Plant Sakra** (Singapore) | Waste-to-energy | NOT OBSERVED | Vegetation cover barely moved (-0.07). No construction visible. |\n| **Sembcorp Sakra Energy Storage System** (Singapore) | Battery storage | NOT OBSERVED | Water cover barely moved (+0.04). No construction visible. |\n\n---\n\n### Interpretation\n\n- **Banyan Energy Storage** is the only asset where satellite change-detection flagged physical ground disturbance consistent with construction. This supports the claim that Sembcorp built this battery system.\n- **NOT OBSERVED** verdicts for Asfordby B, EfW Plant Sakra, and Sakra Energy Storage mean the imagery did not detect ground-cover change. This could reflect phased construction, small footprint, cloud cover, or that the asset was built before the baseline date — **not** that the company misrepresented anything.\n- **PLTS IKN** is inconclusive due to insufficient usable imagery.\n\nYou can view the before/after satellite images for each asset via the detail URLs provided in the tool output.",
         "sources": [
             {
-                "title": "Sembcorp Sustainability Report 2025",
-                "url": "https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf",
-                "snippet": "2025 performance, climate targets, and material ESG disclosures.",
-                "source": "bright_data+pdf",
+                "title": "Asfordby B — OpenStreetMap",
+                "url": "https://www.openstreetmap.org/way/737276205",
+                "snippet": None,
+                "source": "openstreetmap",
+                "sourceClass": "verified"
             },
             {
-                "title": "Sembcorp Climate Action Plan",
-                "url": "https://www.sembcorp.com/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/",
-                "snippet": "Current renewable-capacity, emissions-intensity, and net-zero targets.",
-                "source": "bright_data",
+                "title": "PLTS IKN — OpenStreetMap",
+                "url": "https://www.openstreetmap.org/way/1303917776",
+                "snippet": None,
+                "source": "openstreetmap",
+                "sourceClass": "verified"
             },
+            {
+                "title": "Sembcorp Banyan Energy Storage System — OpenStreetMap",
+                "url": "https://www.openstreetmap.org/way/1147254945",
+                "snippet": None,
+                "source": "openstreetmap",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "Sembcorp EfW Plant Sakra — OpenStreetMap",
+                "url": "https://www.openstreetmap.org/way/1384560210",
+                "snippet": None,
+                "source": "openstreetmap",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "Sembcorp Sakra Energy Storage System — OpenStreetMap",
+                "url": "https://www.openstreetmap.org/way/1147254944",
+                "snippet": None,
+                "source": "openstreetmap",
+                "sourceClass": "verified"
+            }
         ],
         "tool_results": [
             {
-                "name": "get_company_esg",
+                "name": "get_satellite_verification",
                 "status": "ok",
-                "summary": "Loaded Sembcorp's ratings, evidence pillars, forecast, and compliance signals.",
-                "sourceCount": 1,
-            },
-            {
-                "name": "scrape_url",
-                "status": "ok",
-                "summary": "Scraped Sembcorp's 2025 sustainability disclosures and climate targets.",
-                "sourceCount": 2,
-            },
+                "summary": "Sembcorp Industries: 5 asset(s) checked against Sentinel-2, 1 with construction observed.",
+                "sourceCount": 5
+            }
         ],
         "workflow_steps": [
             {
-                "label": "Loaded ESG evidence",
+                "label": "Checked satellite imagery",
                 "status": "ok",
-                "detail": "Collected the current rating, evidence, forecast, and compliance record.",
-                "toolName": "get_company_esg",
-            },
-            {
-                "label": "Scraped current disclosures",
-                "status": "ok",
-                "detail": "Extracted transition targets from Sembcorp's 2025 publications.",
-                "toolName": "scrape_url",
-            },
-            {
-                "label": "Generated report",
-                "status": "ok",
-                "detail": "Built a source-linked ESG investment report and PDF-ready artifact.",
-                "toolName": "report_generation",
-            },
+                "detail": "Sembcorp Industries: 5 asset(s) checked against Sentinel-2, 1 with construction observed.",
+                "toolName": "get_satellite_verification"
+            }
         ],
-        "report": {
-            "title": "Sembcorp Industries ESG Investment Report",
-            "generatedAt": "2026-09-05T00:00:00+08:00",
-            "markdown": """# Sembcorp Industries ESG Investment Report
-
-## Executive summary
-
-Sembcorp Industries combines a strong current ESG consensus with high evidence coverage and a credible renewable-growth programme. The current rating outlook is AA and likely to hold. The central investment tension is between rapid renewable deployment and the near-term emissions effect of a larger thermal portfolio following the Alinta Energy acquisition.
-
-## Current ESG position
-
-| Measure | Current view |
-|---|---:|
-| ESG consensus | 81.7 / 100 |
-| Evidence score | 80.0 / 100 |
-| Evidence confidence | 60.3% |
-| Environmental pillar | 80.0 / 100 |
-| Social pillar | 100.0 / 100 |
-| Governance pillar | 50.0 / 100 |
-| 2026 rating outlook | AA, likely hold |
-
-The evidence engine shows broad disclosure coverage, with water management remaining the principal uncovered material topic in the current record.
-
-## Transition plan
-
-Sembcorp reported 15 GW of gross installed renewable capacity at the end of 2025 and targets 25 GW by 2028. Its updated climate pathway targets emissions intensity of 0.26 tCO2e/MWh by 2035 and net-zero Scope 1 and 2 emissions by 2050.
-
-The company also states that emissions are expected to increase in the near term following the Alinta Energy acquisition. This makes delivery against the revised intensity pathway a key monitoring point.
-
-## Investment interpretation
-
-**Strengths:** high peer-relative ESG consensus, strong environmental and social evidence, expanding renewable capacity, and source-linked transition targets.
-
-**Risks:** governance evidence trails the other pillars, transition execution must absorb a larger thermal portfolio, and evidence confidence is not yet high enough to treat every disclosure as independently verified.
-
-## Monitoring checklist
-
-1. Progress from 15 GW toward the 25 GW renewable-capacity target.
-2. Movement in group emissions intensity following the Alinta consolidation.
-3. New evidence on water management and governance controls.
-4. Any change to the AA rating baseline or evidence confidence.
-
-## Sources
-
-- [Sembcorp Sustainability Report 2025](https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf)
-- [Sembcorp Climate Action Plan](https://www.sembcorp.com/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/)
-""",
-        },
+        "report": None,
     },
     {
         "id": "session-showcase-prediction",
