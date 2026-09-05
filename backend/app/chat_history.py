@@ -168,62 +168,121 @@ The company also states that emissions are expected to increase in the near term
             "What is the current ESG score likely to be for Sembcorp, "
             "based on its current news?"
         ),
-        "response": """**Likely score: 80.0 / 100 — unchanged by the current news.**
-
-The news flow is mildly negative: **14 headlines, 8 controversy against 3 positive**. The drag is a missed sustainability target; the support is a $10.5bn energy-transition programme.
-
-That does not move the score. News tells us where to look, but credit only changes when a claim is verified against evidence — and nothing here has been yet. It does flag where the exposure sits: Governance is the weakest pillar at 50.0, and a missed target lands there.
-
-For context, the rater consensus is 69.4 against our 80.0, on a peer median of 52.8. Confidence is 60.3%, so read this as a direction, not a decimal.
-
-**What would actually move it:** a verified emissions figure for this year, or governance disclosure on the missed target.""",
+        # Captured verbatim from the deployed agent answering this exact prompt.
+        # Do not hand-edit: re-run the prompt and paste the new reply instead, so the
+        # showcase stays a real transcript rather than a written-up impression of one.
+        "response": "**Sembcorp Industries' current ESG evidence score is 80 out of 100, and the news flow strongly supports this level.**\n\nThe app's computed ESG score of **80.0/100** (confidence 60.3%) is built from pillar scores of Environmental 80, Social 100, and Governance 50. The company sits in the **FUTURE_LEADERS** quadrant — high evidence score with positive momentum — and is not flagged as an underpriced improver (the market already prices in its trajectory).\n\n### How current news supports the score\n\nRecent news and validated evidence paint a consistently positive picture, with no material controversies detected:\n\n- **Renewable energy expansion**: Sembcorp completed the S$246 million acquisition of Indian solar company ReNew Sun Bright, secured solar/gas PPAs with Equinix in Singapore, received conditional approval for a renewable power import project from Malaysia, and announced a landmark A$6.5 billion acquisition of Alinta Energy in Australia.\n- **Emissions disclosure & targets**: The company publicly reports Scope 1, 2, and partial Scope 3 emissions under the GHG Protocol, with a target to halve emissions by 2030 (from a 2010 baseline) and reach net-zero by 2050. Total 2024 operational emissions were ~9.3 million tCO2e.\n- **No controversies**: Community sentiment adjustment is zero. No negative ESG incidents, regulatory actions, or social disputes appear in the evidence base.\n- **Governance pillar at 50** is the relative weak point — this reflects the app's assessment of board structure and disclosure practices, not any news-driven controversy.\n\n### MSCI rating context\n\nSembcorp's last disclosed MSCI rating was **AA** (2024). The app's experimental estimate for 2026 is a **likely hold at AA**, though this is a persistence baseline (insufficient panel history for a fitted model) and should be treated as a directional hypothesis only.\n\n### Summary\n\nThe 80/100 evidence score is well-grounded in the current news: aggressive renewables M&A, credible emissions targets, transparent disclosure, and zero controversy signal. The score could edge higher if governance disclosure improves or if the renewable portfolio shift accelerates emissions reductions beyond current \"Stable\" trend.",
         "sources": [
             {
-                "title": "Sembcorp Sustainability Report 2025",
-                "url": "https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf",
-                "snippet": "Current climate performance and targets.",
-                "source": "bright_data+pdf",
+                "title": "SGIPL%20AR%202024 25",
+                "url": "https://www.sembcorpindia.com/public/admin/upload/annual-report/SGIPL%20AR%202024-25.pdf",
+                "snippet": "Reshaping Energy Renewing Possibilities Annual Report 2024-25 Sembcorp Green Infra Private Limited (Formerly, Green Infra Wind Energy Private Limited and Green Infra Wind Energy Limited) Contents Corporate overview 04-59 Highlights of 2025 About Us Excellence in Corporate Social Responsibility Our Transformational Journey Board of Directors Financial Scoreca...",
+                "source": "native_fetch_after_provider_error+pdf",
+                "sourceClass": "non_verified"
             },
             {
-                "title": "Current Sembcorp ESG news — 14 headlines",
-                "url": "https://www.sembcorp.com/en/media/media-releases/",
-                "snippet": "8 controversy, 3 positive, net sentiment -5 in the current window.",
-                "source": "gdelt",
+                "title": "sembcorp ar25",
+                "url": "https://www.sembcorp.com/media/z2ypqfjj/sembcorp-ar25.pdf",
+                "snippet": "Sembcorp Industries Annual Report 2025 As a leading energy player and an established industrial and urban solutions provider in Asia, Sembcorp plays a key role in the transition towards a sustainable and low-carbon future. We believe in building businesses that deliver long-term shareholder value and growth. Overview Group FY2025 Highlights 1 Our Presence 2...",
+                "source": "bright_data+pdf",
+                "sourceClass": "verified"
             },
+            {
+                "title": "Sembcorp AR2024 SinglePages",
+                "url": "https://media.sembcorp.com/data/cms/ar/ar2024/assets/pdf/Sembcorp_AR2024_SinglePages.pdf",
+                "snippet": "Sembcorp Industries Annual Report 2024 As a leading energy player and an established industrial and urban solutions provider in Asia, Sembcorp plays a key role in the transition towards a sustainable and low-carbon future. We believe in building businesses that deliver long-term shareholder value and growth. Overview Group FY2024 Highlights 1 Our Presence 2...",
+                "source": "bright_data+pdf",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "sembcorp ar2023",
+                "url": "https://www.sembcorp.com/media/vhzjfn5u/sembcorp_ar2023.pdf",
+                "snippet": "Sembcorp Industries Annual Report 2023 Sembcorp is a leading renewables player in Asia. We are committed to transforming our portfolio from brown to green and driving energy transition, creating lasting value for our stakeholders. Driving Energy Transition Overview Group FY2023 Highlights 2 Growing Market Opportunities 4 Leveraging Strengths 6 Climate Roadma...",
+                "source": "bright_data+pdf",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "Sembcorp Industries AR2025",
+                "url": "https://ne-cdn.eurolandir.com/press-releases-attachments./4015966/Sembcorp-Industries_AR2025.pdf",
+                "snippet": "Sembcorp Industries Annual Report 2025 As a leading energy player and an established industrial and urban solutions provider in Asia, Sembcorp plays a key role in the transition towards a sustainable and low-carbon future. We believe in building businesses that deliver long-term shareholder value and growth. Overview Group FY2025 Highlights 1 Our Presence 2...",
+                "source": "bright_data+pdf",
+                "sourceClass": "non_verified"
+            },
+            {
+                "title": "Sembcorp Industries",
+                "url": "https://links.sgx.com/1.0.0/corporate-announcements/E3OPH06R1G42R3UK/838159_Sembcorp_Annual%20Report_2024.pdf",
+                "snippet": "Page 1. Sembcorp Industries. Annual Report 2024. Page 2. As a leading ... Environmental, Social and Governance Review. Consolidated.Read more",
+                "source": "bright_data_serp",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "sustainability report",
+                "url": "https://www.sembcorp.com/media/nhlbsvgy/sustainability_report.pdf",
+                "snippet": "Sustainability Report Our Sustainability Framework​ 20 Our Approach to Sustainability​ 21 • Reporting Framework​ • Materiality ​ • Reporting Scope • Assurance • Supporting the Sustainable Development Goals • Sustainability Governance • Sustainability-linked Performance Incentives • Memberships and Associations​ Our Environmental, Social and Governance Priori...",
+                "source": "bright_data+pdf",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "System-Level and Structure-Based Approaches",
+                "url": "https://bschool.nus.edu.sg/cgs/wp-content/uploads/sites/145/2026/03/Cases-in-Sustainability_System-Level-and-Structure-Based-Approaches_2026-Mar.pdf",
+                "snippet": "sustainability through low-carbon growth (Sembcorp Industries, 2025). Page 49. 49. Decarbonisation Solutions. Sembcorp helps companies develop ...Read more",
+                "source": "bright_data_serp",
+                "sourceClass": "non_verified"
+            },
+            {
+                "title": "Sembcorp",
+                "url": "https://sembcorp.com/",
+                "snippet": "Sembcorp Industries 1H2026 Results. August 07, 2026. Sembcorp Receives Conditional Approval for Renewable Power Import Project From Peninsular Malaysia to ...",
+                "source": "bright_data",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "Initial Report: Sembcorp Industries Ltd (U96.SI), 304% 5-yr Potential Upside (EIP, Girvin CHANG)",
+                "url": "https://nextgeninvestors.substack.com/p/initial-report-sembcorp-industries",
+                "snippet": "Initial Report: Sembcorp Industries Ltd (U96.SI), 304% 5-yr ... Its experience and capabilities in renewable energy, water management, and ...",
+                "source": "bright_data",
+                "sourceClass": "non_verified"
+            }
         ],
         "tool_results": [
             {
-                "name": "research_company_esg_news",
-                "status": "ok",
-                "summary": "Collected 14 current Sembcorp headlines — 8 controversy, 3 positive, net sentiment -5.",
-                "sourceCount": 14,
-            },
-            {
                 "name": "get_company_esg",
                 "status": "ok",
-                "summary": "Loaded Sembcorp's evidence score, pillar split, confidence, and rater consensus.",
-                "sourceCount": 1,
+                "summary": "Sembcorp Industries: ESG evidence 80.0; MSCI rating estimate 2026 — likely hold to AA (baseline: ratings persistence (insufficient history for a fitted model — 11 panel rows)).",
+                "sourceCount": 0
             },
+            {
+                "name": "research_company_esg_news",
+                "status": "ok",
+                "summary": "Collected 8 company ESG/news references for: Sembcorp Industries",
+                "sourceCount": 8
+            },
+            {
+                "name": "get_validated_esg_evidence",
+                "status": "ok",
+                "summary": "Loaded 48 grouped claims and 24 sources for Sembcorp Industries.",
+                "sourceCount": 24
+            }
         ],
         "workflow_steps": [
             {
-                "label": "Read the current news",
+                "label": "Get Company Esg",
                 "status": "ok",
-                "detail": "Pulled 14 headlines and classified each as controversy, positive, or neutral.",
-                "toolName": "research_company_esg_news",
+                "detail": "Sembcorp Industries: ESG evidence 80.0; MSCI rating estimate 2026 — likely hold to AA (baseline: ratings persistence (insufficient history for a fitted model — 11 panel rows)).",
+                "toolName": "get_company_esg"
             },
             {
-                "label": "Loaded company evidence",
+                "label": "Collected company ESG news",
                 "status": "ok",
-                "detail": "Resolved Sembcorp's evidence score, pillar evidence, and confidence.",
-                "toolName": "get_company_esg",
+                "detail": "Collected 8 company ESG/news references for: Sembcorp Industries",
+                "toolName": "research_company_esg_news"
             },
             {
-                "label": "Tested the news against the score",
+                "label": "Get Validated Esg Evidence",
                 "status": "ok",
-                "detail": "No headline corroborates a new claim yet, so credit is unchanged at 80.0.",
-                "toolName": "get_company_esg",
-            },
+                "detail": "Loaded 48 grouped claims and 24 sources for Sembcorp Industries.",
+                "toolName": "get_validated_esg_evidence"
+            }
         ],
         "report": None,
     },
