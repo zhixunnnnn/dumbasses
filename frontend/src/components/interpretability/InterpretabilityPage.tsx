@@ -195,7 +195,7 @@ export default function InterpretabilityPage() {
   }, [selected]);
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-7xl flex-col px-6 py-6 sm:px-10 lg:px-12">
+    <div className="mx-auto flex min-h-full w-full max-w-7xl flex-col px-6 py-6 sm:px-10 lg:px-12">
       <header className="pb-5">
         <div className="flex items-start gap-2.5">
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-purpose/15 text-purpose">
@@ -221,14 +221,14 @@ export default function InterpretabilityPage() {
 
       {card && <ModelSummary card={card} />}
 
-      <div className="mt-5 grid min-h-0 flex-1 gap-4 lg:grid-cols-[minmax(260px,0.42fr)_minmax(0,1fr)]">
+      <div className="mt-5 grid items-start gap-4 lg:grid-cols-[minmax(260px,0.42fr)_minmax(0,1fr)]">
         <PredictionList
           rows={rows}
           card={card}
           selected={selected}
           onSelect={setSelected}
         />
-        <div className="min-h-0 overflow-y-auto pb-6">
+        <div className="pb-6">
           {!explanation ? (
             <div className="flex items-center gap-2 rounded-xl border border-hairline bg-surface p-5 text-sm text-muted">
               <LoaderCircle size={16} className="animate-spin" />
@@ -350,11 +350,11 @@ function PredictionList({
     );
   }
   return (
-    <div className="flex min-h-0 flex-col rounded-2xl border border-hairline bg-surface shadow-panel">
+    <div className="flex flex-col rounded-2xl border border-hairline bg-surface shadow-panel">
       <p className="border-b border-hairline px-4 py-3 text-xs font-semibold uppercase tracking-wider text-faint">
         Predictions ({rows.length})
       </p>
-      <div className="min-h-0 flex-1 overflow-y-auto p-2">
+      <div className="max-h-[60vh] overflow-y-auto p-2">
         {rows.map((row) => {
           const active = row.id === selected;
           const useScenario = card?.fitted === false;
