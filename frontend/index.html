@@ -14,8 +14,19 @@
     <script>
       // Apply the theme before first paint to avoid a flash. Light is default;
       // only an explicit saved "dark" preference switches to dark.
+      //
+      // Runs before React, so this is the one place the stored preference is
+      // migrated: the old build wrote "dark" on every mount, so a stored "dark"
+      // does not distinguish a deliberate choice from the old default. Everyone
+      // is moved to light once; the flag means a later choice of dark sticks.
       (function () {
         try {
+          if (!localStorage.getItem("polyfintech-theme-migrated")) {
+            localStorage.setItem("polyfintech-theme-migrated", "light-default-v1");
+            if (localStorage.getItem("polyfintech-theme") === "dark") {
+              localStorage.removeItem("polyfintech-theme");
+            }
+          }
           var saved = localStorage.getItem("polyfintech-theme");
           document.documentElement.dataset.theme = saved === "dark" ? "dark" : "light";
         } catch (e) {
