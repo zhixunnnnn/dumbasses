@@ -168,30 +168,15 @@ The company also states that emissions are expected to increase in the near term
             "What is the current ESG score likely to be for Sembcorp, "
             "based on its current news?"
         ),
-        "response": """## Sembcorp Industries — where the news points the score
+        "response": """**Likely score: 80.0 / 100 — unchanged by the current news.**
 
-**The evidence score stands at 80.0 / 100, and the current news flow does not yet move it.** News changes the score only once a claim is verified against it, so the honest read is: the score holds at 80.0, with the near-term risk skewed slightly down.
+The news flow is mildly negative: **14 headlines, 8 controversy against 3 positive**. The drag is a missed sustainability target; the support is a $10.5bn energy-transition programme.
 
-### What the news actually says
+That does not move the score. News tells us where to look, but credit only changes when a claim is verified against evidence — and nothing here has been yet. It does flag where the exposure sits: Governance is the weakest pillar at 50.0, and a missed target lands there.
 
-Across **14 headlines** in the current window the balance is negative — **8 flagged as controversy against 3 positive**, a net sentiment of **-5**.
+For context, the rater consensus is 69.4 against our 80.0, on a peer median of 52.8. Confidence is 60.3%, so read this as a direction, not a decimal.
 
-- **Pulling up:** a **$10.5bn** investment programme in the energy transition, and an IFC sustainability-linked investment.
-- **Pulling down:** coverage of a **missed sustainability target**, with investors selling on it.
-
-### Why the score does not move on that alone
-
-1. **Evidence, not sentiment, sets the score.** A headline is a signal to go and check something; it earns credit only when it corroborates a claim the company made.
-2. **The pillars say where the exposure is:** Environmental 80.0, Social 100.0, **Governance 50.0** — a missed-target story lands on the weakest pillar.
-3. **Confidence is 60.3%**, with one material topic still undisclosed, so treat this as a direction rather than a decimal.
-
-### Where the raters sit
-
-Consensus is **69.4** against our **80.0** — we read the evidence more favourably than the panel does, and the raters disagree sharply among themselves (**MSCI 95 vs Sustainalytics 44**). The peer median is **52.8**.
-
-### What would actually move it
-
-A verified emissions-intensity figure for the current year, or governance disclosure against the missed target. Either would change credit; more coverage of the same story would not.""",
+**What would actually move it:** a verified emissions figure for this year, or governance disclosure on the missed target.""",
         "sources": [
             {
                 "title": "Sembcorp Sustainability Report 2025",
