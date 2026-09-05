@@ -163,52 +163,80 @@ The company also states that emissions are expected to increase in the near term
     {
         "id": "session-showcase-prediction",
         "age_minutes": 12,
-        "title": "Predict Sembcorp's 2026 ESG rating",
+        "title": "Sembcorp's likely ESG score from current news",
         "prompt": (
-            "Predict Sembcorp Industries' 2026 ESG rating and explain the main drivers."
+            "What is the current ESG score likely to be for Sembcorp, "
+            "based on its current news?"
         ),
-        "response": """## 2026 ESG rating outlook: Sembcorp Industries
+        "response": """## Sembcorp Industries — where the news points the score
 
-**Rating outlook: AA (6.0 / 7), likely hold.** The interpretability scenario is **5.9 / 7**, which remains in the high A to AA range.
+**The evidence score stands at 80.0 / 100, and the current news flow does not yet move it.** News changes the score only once a claim is verified against it, so the honest read is: the score holds at 80.0, with the near-term risk skewed slightly down.
 
-### Main drivers
+### What the news actually says
 
-1. **Evidence strength:** the latest verified evidence score is 80.0 / 100.
-2. **Pillar profile:** Environmental is 80.0, Social is 100.0, and Governance is 50.0.
-3. **Transition execution:** renewable capacity reached 15 GW in 2025, with a 25 GW target for 2028.
-4. **Confidence adjustment:** evidence confidence is 60.3%, so the result should be read as a directional scenario rather than a published rater decision.
-5. **Key watchpoint:** the updated climate pathway acknowledges near-term emissions pressure following the Alinta Energy acquisition.
+Across **14 headlines** in the current window the balance is negative — **8 flagged as controversy against 3 positive**, a net sentiment of **-5**.
 
-### Interpretation
+- **Pulling up:** a **$10.5bn** investment programme in the energy transition, and an IFC sustainability-linked investment.
+- **Pulling down:** coverage of a **missed sustainability target**, with investors selling on it.
 
-The strongest support comes from evidence coverage and renewable deployment. Governance evidence and execution against the revised emissions-intensity pathway are the main factors that could move the outlook.""",
+### Why the score does not move on that alone
+
+1. **Evidence, not sentiment, sets the score.** A headline is a signal to go and check something; it earns credit only when it corroborates a claim the company made.
+2. **The pillars say where the exposure is:** Environmental 80.0, Social 100.0, **Governance 50.0** — a missed-target story lands on the weakest pillar.
+3. **Confidence is 60.3%**, with one material topic still undisclosed, so treat this as a direction rather than a decimal.
+
+### Where the raters sit
+
+Consensus is **69.4** against our **80.0** — we read the evidence more favourably than the panel does, and the raters disagree sharply among themselves (**MSCI 95 vs Sustainalytics 44**). The peer median is **52.8**.
+
+### What would actually move it
+
+A verified emissions-intensity figure for the current year, or governance disclosure against the missed target. Either would change credit; more coverage of the same story would not.""",
         "sources": [
             {
                 "title": "Sembcorp Sustainability Report 2025",
                 "url": "https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf",
                 "snippet": "Current climate performance and targets.",
                 "source": "bright_data+pdf",
-            }
+            },
+            {
+                "title": "Current Sembcorp ESG news — 14 headlines",
+                "url": "https://www.sembcorp.com/en/media/media-releases/",
+                "snippet": "8 controversy, 3 positive, net sentiment -5 in the current window.",
+                "source": "gdelt",
+            },
         ],
         "tool_results": [
             {
+                "name": "research_company_esg_news",
+                "status": "ok",
+                "summary": "Collected 14 current Sembcorp headlines — 8 controversy, 3 positive, net sentiment -5.",
+                "sourceCount": 14,
+            },
+            {
                 "name": "get_company_esg",
                 "status": "ok",
-                "summary": "Loaded Sembcorp's evidence score, pillars, confidence, and 2026 rating outlook.",
+                "summary": "Loaded Sembcorp's evidence score, pillar split, confidence, and rater consensus.",
                 "sourceCount": 1,
-            }
+            },
         ],
         "workflow_steps": [
             {
+                "label": "Read the current news",
+                "status": "ok",
+                "detail": "Pulled 14 headlines and classified each as controversy, positive, or neutral.",
+                "toolName": "research_company_esg_news",
+            },
+            {
                 "label": "Loaded company evidence",
                 "status": "ok",
-                "detail": "Resolved Sembcorp's current score, pillar evidence, and rating baseline.",
+                "detail": "Resolved Sembcorp's evidence score, pillar evidence, and confidence.",
                 "toolName": "get_company_esg",
             },
             {
-                "label": "Built rating outlook",
+                "label": "Tested the news against the score",
                 "status": "ok",
-                "detail": "Produced the 2026 scenario and ranked its material drivers.",
+                "detail": "No headline corroborates a new claim yet, so credit is unchanged at 80.0.",
                 "toolName": "get_company_esg",
             },
         ],
@@ -400,17 +428,24 @@ class ChatHistoryStore:
             )
 
     def _curate_showcase_history(self) -> None:
-        placeholders = ",".join("?" for _ in LEGACY_SHOWCASE_SESSION_IDS)
+        # The curated chats are content, and this module is their only source of truth, so
+        # the current ones are dropped and rebuilt on every boot alongside the retired ids.
+        # Without this the INSERTs below are OR IGNORE against rows that already exist on
+        # the deployed volume, and an edited prompt or answer would never reach production.
+        stale_ids = LEGACY_SHOWCASE_SESSION_IDS + tuple(
+            chat["id"] for chat in SHOWCASE_CHATS
+        )
+        placeholders = ",".join("?" for _ in stale_ids)
         now = datetime.now(timezone.utc)
 
         with self._connect() as connection:
             connection.execute(
                 f"DELETE FROM chat_messages WHERE session_id IN ({placeholders})",
-                LEGACY_SHOWCASE_SESSION_IDS,
+                stale_ids,
             )
             connection.execute(
                 f"DELETE FROM chat_sessions WHERE id IN ({placeholders})",
-                LEGACY_SHOWCASE_SESSION_IDS,
+                stale_ids,
             )
 
             for chat in SHOWCASE_CHATS:
