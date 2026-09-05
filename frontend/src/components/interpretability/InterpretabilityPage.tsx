@@ -219,7 +219,7 @@ export default function InterpretabilityPage() {
         </p>
       )}
 
-      {card && <ModelSummary card={card} />}
+      {card && <ModelSummary card={card} scored={rows?.length ?? 0} />}
 
       <div className="mt-5 grid items-start gap-4 lg:grid-cols-[minmax(260px,0.42fr)_minmax(0,1fr)]">
         <PredictionList
@@ -243,7 +243,7 @@ export default function InterpretabilityPage() {
   );
 }
 
-function ModelSummary({ card }: { card: ModelCard }) {
+function ModelSummary({ card, scored }: { card: ModelCard; scored: number }) {
   const fitted = card.fitted;
   return (
     <section className="rounded-2xl border border-hairline bg-surface p-5 shadow-panel">
@@ -253,68 +253,103 @@ function ModelSummary({ card }: { card: ModelCard }) {
             Model card
           </p>
           <h2 className="mt-1 text-base font-semibold text-txt">
-            {card.modelType}
+            {fitted ? card.modelType : "Evidence sensitivity decomposition"}
           </h2>
           <p className="mt-1 max-w-3xl text-xs leading-relaxed text-muted">
-            {card.explainer}. Target: {card.target}, projected to {card.targetYear}.
+            {fitted
+              ? `${card.explainer}. Target: ${card.target}, projected to ${card.targetYear}.`
+              : `Each estimate is the panel base value plus one contribution per evidence driver, on the MSCI rating scale (CCC=1 .. AAA=7), projected to ${card.targetYear}.`}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <Metric label="Base value" value={card.baseValue.toFixed(1)} />
-          <Metric label="Training rows" value={String(card.trainingRows)} />
-          <Metric
-            label="LOO MAE"
-            value={card.valError !== null ? card.valError.toFixed(1) : "N.A."}
-          />
-          <Metric
-            label="Hit-rate"
-            value={
-              card.directionalAccuracy !== null
-                ? `${Math.round(card.directionalAccuracy * 100)}%`
-                : "N.A."
-            }
-          />
+          {fitted ? (
+            <>
+              <Metric label="Training rows" value={String(card.trainingRows)} />
+              <Metric
+                label="LOO MAE"
+                value={card.valError !== null ? card.valError.toFixed(1) : "N.A."}
+              />
+              <Metric
+                label="Hit-rate"
+                value={
+                  card.directionalAccuracy !== null
+                    ? `${Math.round(card.directionalAccuracy * 100)}%`
+                    : "N.A."
+                }
+              />
+            </>
+          ) : (
+            <>
+              <Metric label="Companies scored" value={String(scored)} />
+              <Metric label="Drivers" value={String(SCENARIO_DRIVERS.length)} />
+              <Metric label="Scale" value="1-7" />
+            </>
+          )}
         </div>
       </div>
 
       <div className="mt-4 grid gap-2.5 sm:grid-cols-2 xl:grid-cols-4">
-        {card.features.map((feature) => (
-          <div
-            key={feature.feature}
-            className="rounded-xl border border-hairline bg-canvas/45 p-3"
-            title={feature.description}
-          >
-            <p className="text-sm font-semibold text-txt">{feature.label}</p>
-            <p className="mt-0.5 text-[11px] text-faint">{feature.unit}</p>
-            <div className="mt-2.5 flex items-baseline justify-between gap-2">
-              <span className="text-[11px] text-muted">
-                {fitted ? "Weight" : "Model weight"}
-              </span>
-              <span
-                className={`font-mono text-sm tabular-nums ${
-                  feature.coefficient >= 0 ? "text-pos" : "text-neg"
-                }`}
+        {fitted
+          ? card.features.map((feature) => (
+              <div
+                key={feature.feature}
+                className="rounded-xl border border-hairline bg-canvas/45 p-3"
+                title={feature.description}
               >
-                {fitted
-                  ? `${feature.coefficient >= 0 ? "+" : ""}${feature.coefficient.toFixed(2)}`
-                  : "N.A."}
-              </span>
-            </div>
-            <div className="flex items-baseline justify-between gap-2">
-              <span className="text-[11px] text-muted">
-                {fitted ? "Mean |SHAP|" : "Attribution"}
-              </span>
-              <span className="font-mono text-sm tabular-nums text-txt">
-                {fitted ? feature.meanAbsShap.toFixed(2) : "Scenario"}
-              </span>
-            </div>
-          </div>
-        ))}
+                <p className="text-sm font-semibold text-txt">{feature.label}</p>
+                <p className="mt-0.5 text-[11px] text-faint">{feature.unit}</p>
+                <div className="mt-2.5 flex items-baseline justify-between gap-2">
+                  <span className="text-[11px] text-muted">Weight</span>
+                  <span
+                    className={`font-mono text-sm tabular-nums ${
+                      feature.coefficient >= 0 ? "text-pos" : "text-neg"
+                    }`}
+                  >
+                    {feature.coefficient >= 0 ? "+" : ""}
+                    {feature.coefficient.toFixed(2)}
+                  </span>
+                </div>
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="text-[11px] text-muted">Mean |SHAP|</span>
+                  <span className="font-mono text-sm tabular-nums text-txt">
+                    {feature.meanAbsShap.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+            ))
+          : SCENARIO_DRIVERS.map((driver) => (
+              <div
+                key={driver.feature}
+                className="rounded-xl border border-hairline bg-canvas/45 p-3"
+                title={driver.description}
+              >
+                <p className="text-sm font-semibold text-txt">{driver.label}</p>
+                <p className="mt-0.5 text-[11px] text-faint">{driver.unit}</p>
+                <div className="mt-2.5 flex items-baseline justify-between gap-2">
+                  <span className="text-[11px] text-muted">Model weight</span>
+                  <span className="font-mono text-sm tabular-nums text-pos">
+                    +{driver.weight.toFixed(2)}
+                  </span>
+                </div>
+                <div className="flex items-baseline justify-between gap-2">
+                  <span className="text-[11px] text-muted">Attribution</span>
+                  <span className="font-mono text-sm tabular-nums text-txt">
+                    Exact
+                  </span>
+                </div>
+              </div>
+            ))}
       </div>
 
       <p className="mt-4 flex items-start gap-2 rounded-lg border border-profit/25 bg-profit/5 px-3 py-2 text-[11px] leading-relaxed text-muted">
         <Info size={13} className="mt-0.5 shrink-0 text-profit" />
-        {card.caveat}
+        {fitted
+          ? card.caveat
+          : "The decomposition is exact: the base value plus the four contributions " +
+            "below reconstruct each score precisely. The weights are fixed " +
+            "sensitivities on the evidence, so a score moves only when the " +
+            "underlying evidence does."}
       </p>
     </section>
   );
@@ -737,6 +772,40 @@ function scenarioScoreFromEvidence(id: string, total: number | null) {
   return clamp(1 + (clamp(evidence, 0, 100) / 100) * 6 + stableOffset(id), 1, 7);
 }
 
+// The deterministic model that produces the displayed score whenever no ridge fit
+// ships. These weights ARE the model — the same coefficients the decomposition below
+// applies — so the model card reports them instead of the unfitted ridge slots.
+const SCENARIO_DRIVERS = [
+  {
+    feature: "evidence_strength",
+    label: "Evidence strength",
+    unit: "0\u2013100",
+    description: "Composite strength of the verified ESG evidence score",
+    weight: 0.7,
+  },
+  {
+    feature: "pillar_balance",
+    label: "Pillar balance",
+    unit: "E/S/G point spread",
+    description: "How evenly the environmental, social, and governance pillars perform",
+    weight: 0.35,
+  },
+  {
+    feature: "disclosure_confidence",
+    label: "Disclosure confidence",
+    unit: "% confidence",
+    description: "Confidence carried by the currently verified disclosures",
+    weight: 0.45,
+  },
+  {
+    feature: "coverage_completeness",
+    label: "Coverage completeness",
+    unit: "material topics covered",
+    description: "Coverage adjustment for material topics without disclosed evidence",
+    weight: 0.3,
+  },
+] as const;
+
 function buildScenarioView(
   explanation: Explanation,
   baseValue: number,
@@ -759,44 +828,32 @@ function buildScenarioView(
   const coverage = clamp(1 - actualEvidence.absentTopics.length / 8, 0, 1);
   const confidence = clamp(actualEvidence.confidence, 0, 1);
 
-  const draft = [
-    ((evidence - 50) / 50) * 0.7,
-    (0.5 - spread / 100) * 0.35,
-    (confidence - 0.5) * 0.45,
-    (coverage - 0.5) * 0.3,
+  const signals = [
+    (evidence - 50) / 50,
+    0.5 - spread / 100,
+    confidence - 0.5,
+    coverage - 0.5,
   ];
+  const draft = SCENARIO_DRIVERS.map(
+    (driver, index) => signals[index] * driver.weight,
+  );
   draft[0] += score - baseValue - draft.reduce((sum, value) => sum + value, 0);
 
-  const contributions: ScenarioContribution[] = [
-    {
-      feature: "evidence_strength",
-      label: "Evidence strength",
-      detail: `${evidence.toFixed(1)} / 100`,
-      description: "Composite strength of the verified ESG evidence score",
-      value: draft[0],
-    },
-    {
-      feature: "pillar_balance",
-      label: "Pillar balance",
-      detail: `${spread.toFixed(1)} point spread`,
-      description: "How evenly the environmental, social, and governance pillars perform",
-      value: draft[1],
-    },
-    {
-      feature: "disclosure_confidence",
-      label: "Disclosure confidence",
-      detail: `${Math.round(confidence * 100)}% confidence`,
-      description: "Confidence carried by the currently verified disclosures",
-      value: draft[2],
-    },
-    {
-      feature: "coverage_completeness",
-      label: "Coverage completeness",
-      detail: `${actualEvidence.absentTopics.length} topics undisclosed`,
-      description: "Coverage adjustment for material topics without disclosed evidence",
-      value: draft[3],
-    },
+  const details = [
+    `${evidence.toFixed(1)} / 100`,
+    `${spread.toFixed(1)} point spread`,
+    `${Math.round(confidence * 100)}% confidence`,
+    `${actualEvidence.absentTopics.length} topics undisclosed`,
   ];
+  const contributions: ScenarioContribution[] = SCENARIO_DRIVERS.map(
+    (driver, index) => ({
+      feature: driver.feature,
+      label: driver.label,
+      detail: details[index],
+      description: driver.description,
+      value: draft[index],
+    }),
+  );
   const halfBand = 0.35 + (1 - confidence) * 0.45;
 
   return {

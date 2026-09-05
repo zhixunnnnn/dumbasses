@@ -21,8 +21,9 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [mode, setMode] = useState<ThemeMode>(() => {
     const saved = window.localStorage.getItem(STORAGE_KEY);
-    // Preserve the original graphite dashboard as the default theme.
-    return saved === "light" ? "light" : "dark";
+    // Light is the default; only an explicit saved "dark" preference switches.
+    // Must match the pre-paint script in index.html or the theme flashes on mount.
+    return saved === "dark" ? "dark" : "light";
   });
 
   useEffect(() => {
