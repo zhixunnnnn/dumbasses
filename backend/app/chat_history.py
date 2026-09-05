@@ -288,71 +288,199 @@ The company also states that emissions are expected to increase in the near term
     },
     {
         "id": "session-showcase-web-scrape",
-        "age_minutes": 20,
+        "age_minutes": 26,
         "title": "Scrape Sembcorp's transition targets",
         "prompt": (
             "Scrape Sembcorp Industries' latest sustainability disclosures and "
             "extract its transition targets with source links."
         ),
-        "response": """## Sembcorp transition-target scan
-
-I searched the current company disclosures and scraped the FY2025 sustainability materials.
-
-| Metric | 2025 position | Current target |
-|---|---:|---:|
-| Gross installed renewable capacity | 15 GW | 25 GW by 2028 |
-| GHG emissions intensity | 0.21 tCO2e/MWh | 0.26 tCO2e/MWh by 2035 |
-| Scope 1 and 2 net zero | In transition | Net zero by 2050 |
-
-### Material update
-
-Sembcorp says the Alinta Energy acquisition will increase emissions in the near term before they decline. The company consequently updated its emissions-intensity pathway while retaining the 25 GW renewables target and 2050 net-zero goal.
-
-### Sources
-
-- [Sustainability Report 2025](https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf)
-- [Climate Action Plan](https://www.sembcorp.com/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/)""",
+        # Captured verbatim from the deployed agent answering this exact prompt.
+        # Do not hand-edit: re-run the prompt and paste the new reply instead, so the
+        # showcase stays a real transcript rather than a written-up impression of one.
+        "response": "**Sembcorp Industries has set a net-zero Scope 1 and 2 emissions target by 2050, with interim targets of 25GW gross installed renewables capacity by 2028 and emissions intensity of 0.26 tCO₂e/MWh by 2035 — though the 2028 intensity and 2030 absolute emissions targets have been withdrawn following the Alinta Energy acquisition.**\n\nBelow is the full set of transition targets extracted from Sembcorp's verified disclosures, with source links.\n\n---\n\n## Current Targets (post-Alinta acquisition, as of mid-2026)\n\n| Target | Metric | Deadline | Status |\n|--------|--------|----------|--------|\n| Gross installed renewables capacity | 25 GW | 2028 | On track (20.4 GW as of FY2025) |\n| Emissions intensity (Scope 1 & 2) | 0.26 tCO₂e/MWh | 2035 | Revised upward from 0.15; Alinta acquisition cited |\n| Net-zero emissions (Scope 1 & 2) | Absolute net-zero | 2050 | Unchanged |\n\n**Source:** [Sembcorp Climate Action Plan](https://www.sembcorp.com/om/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/) (verified, company website)\n\n> *\"In view of this acquisition, Sembcorp expects its emissions to increase in the near-term before declining. As such, Sembcorp will not meet its 2028 emissions intensity and 2030 absolute emissions targets.\"*\n\n---\n\n## Withdrawn / Superseded Targets\n\n| Target | Metric | Original Deadline | Reason for Change |\n|--------|--------|-------------------|-------------------|\n| Absolute emissions (Scope 1 & 2) | 2.7 million tCO₂e | 2030 | Withdrawn — Alinta acquisition increases near-term emissions |\n| Emissions intensity | 0.15 tCO₂e/MWh | 2028 | Revised to 0.26 by 2035 |\n\n**Source:** [Sembcorp Announces 2023-2028 Strategic Plan](https://www.sembcorp.com/news-and-insights/news/2023/sembcorp-announces-2023-2028-strategic-plan-to-drive-energy-transition/) (verified, company press release, November 2023)\n\n---\n\n## Achieved Milestones\n\n| Milestone | Metric | Achievement Year |\n|-----------|--------|------------------|\n| 2025 emissions intensity target (0.40 tCO₂e/MWh) | 0.27 tCO₂e/MWh achieved in 2024 | 2023 (early) |\n| 2025 gross installed renewables target (10 GW) | 13.1 GW achieved in 2024 | 2024 (early) |\n| Sustainable Financing KPI 1 (GHG intensity ≤ 0.40) | 0.27 tCO₂e/MWh | Met in 2023 |\n| Sustainable Financing KPI 3 (renewables ≥ 10 GW) | 13.1 GW | Surpassed in 2024 |\n\n**Source:** [Sembcorp Sustainability Report 2024](https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf) (verified, company PDF), pages 44-45\n\n---\n\n## Capital Allocation Supporting Transition\n\n- **S$10.5 billion** (75% of 2024-2028 total investments) allocated to renewables\n- **10%** to hydrogen-ready assets\n- **10%** to decarbonisation solutions\n- **5%** to Integrated Urban Solutions\n\n**Source:** [Sembcorp Driving Energy Transition page](https://www.sembcorp.com/driving-energy-transition/) (verified, company website)\n\n---\n\n## Target-Setting Methodology\n\nSembcorp uses a country-specific lens with publicly available scenario datasets (IPCC AR6, NGFS, BloombergNEF, PRI Inevitable Policy Response). Country-level trajectories are weighted by Sembcorp's country concentration and aggregated to group level. The 2035 intensity target is set within a \"well below 2°C\" trajectory; the 2050 net-zero target is consistent with 1.5°C. The methodology has been independently assured on a limited basis by ERM CVS Australia.\n\n**Source:** [Sembcorp Climate Action Plan](https://www.sembcorp.com/om/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/)\n\n---\n\n## Key Document Links\n\n| Document | URL |\n|----------|-----|\n| Climate Action Plan (current targets) | https://www.sembcorp.com/om/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/ |\n| Sustainability Report 2024 | https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf |\n| Annual Report 2025 | https://www.sembcorp.com/media/z2ypqfjj/sembcorp-ar25.pdf |\n| Annual Report 2024 | https://links.sgx.com/1.0.0/corporate-announcements/E3OPH06R1G42R3UK/838159_Sembcorp_Annual%20Report_2024.pdf |\n| 2023-2028 Strategic Plan Press Release | https://www.sembcorp.com/news-and-insights/news/2023/sembcorp-announces-2023-2028-strategic-plan-to-drive-energy-transition/ |\n| Driving Energy Transition overview | https://www.sembcorp.com/driving-energy-transition/ |\n| Sustainable Financing Framework (DNV SPO) | https://www.sembcorp.com/media/klgaf030/second-party-opinion-by-dnv.pdf |\n\n---\n\n## Key Takeaway for Analysts\n\nSembcorp's transition pathway has been materially disrupted by the A$6.5 billion Alinta Energy acquisition (completed June 2026). The company has explicitly withdrawn its 2028 intensity target (0.15 tCO₂e/MWh) and 2030 absolute emissions target (2.7 MtCO₂e), replacing them with a less ambitious 2035 intensity target of 0.26 tCO₂e/MWh. The 2050 net-zero commitment remains. The renewables capacity target of 25 GW by 2028 is still in place and on track (20.4 GW as of FY2025). Investors should monitor whether the Alinta integration leads to further target revisions in the next strategic review cycle.",
         "sources": [
             {
-                "title": "Sembcorp Sustainability Report 2025",
-                "url": "https://www.sembcorp.com/media/z4ohu5lz/sembcorp-ar25_sustainability-report.pdf",
-                "snippet": "15 GW installed renewables in 2025 and a 25 GW target for 2028.",
+                "title": "sembcorp ar25",
+                "url": "https://www.sembcorp.com/media/z2ypqfjj/sembcorp-ar25.pdf",
+                "snippet": "Sembcorp Industries Annual Report 2025 As a leading energy player and an established industrial and urban solutions provider in Asia, Sembcorp plays a key role in the transition towards a sustainable and low-carbon future. We believe in building businesses that deliver long-term shareholder value and growth. Overview Group FY2025 Highlights 1 Our Presence 2...",
                 "source": "bright_data+pdf",
+                "sourceClass": "verified"
             },
             {
-                "title": "Sembcorp Climate Action Plan",
-                "url": "https://www.sembcorp.com/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/",
-                "snippet": "Updated 2035 emissions-intensity and 2050 net-zero targets.",
-                "source": "bright_data",
+                "title": "838159 Sembcorp Annual%20Report 2024",
+                "url": "https://links.sgx.com/1.0.0/corporate-announcements/E3OPH06R1G42R3UK/838159_Sembcorp_Annual%20Report_2024.pdf",
+                "snippet": "Sembcorp Industries Annual Report 2024 As a leading energy player and an established industrial and urban solutions provider in Asia, Sembcorp plays a key role in the transition towards a sustainable and low-carbon future. We believe in building businesses that deliver long-term shareholder value and growth. Overview Group FY2024 Highlights 1 Our Presence 2...",
+                "source": "bright_data+pdf",
+                "sourceClass": "verified"
             },
+            {
+                "title": "Consolidated Financial Statements",
+                "url": "https://media.sembcorp.com/data/cms/ar/ar2025/assets/pdf/Consolidated_Financial_Statements.pdf",
+                "snippet": "...onsolidated Statement of Cash Flows 132 • Notes to the Financial Statements 135 Sembcorp and SDIC’s wind energy assets in Yunnan, China Sembcorp Industries Annual Report 2025 110 111 Overview Operating and Financial Review Our Leadership Other Information Consolidated Financial Statements Environmental, Social and Governance Review Consolidated Financial Sta...",
+                "source": "bright_data+pdf",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "Directors Statement",
+                "url": "https://media.sembcorp.com/data/cms/ar/ar2025/assets/pdf/Directors_Statement.pdf",
+                "snippet": "We are pleased to submit this annual report to the members of the Company together with the audited financial statements for the financial year ended December 31, 2025. In our opinion: a. the financial statements set out on pages 124 to 251 are drawn up so as to give a True and fair view of the financial position of the Group and of the Company as at Decembe...",
+                "source": "bright_data+pdf",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "Sembcorp AR2024 SinglePages",
+                "url": "https://media.sembcorp.com/data/cms/ar/ar2024/assets/pdf/Sembcorp_AR2024_SinglePages.pdf",
+                "snippet": "Sembcorp Industries Annual Report 2024 As a leading energy player and an established industrial and urban solutions provider in Asia, Sembcorp plays a key role in the transition towards a sustainable and low-carbon future. We believe in building businesses that deliver long-term shareholder value and growth. Overview Group FY2024 Highlights 1 Our Presence 2...",
+                "source": "bright_data+pdf",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "sci sustainability report 2024",
+                "url": "https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+                "snippet": "Sembcorp’s wind assets located at Gujarat, India Our Sustainability Framework 40 Our Approach 42 • Reporting Framework • Materiality​ • Reporting Scope • Assurance • Supporting the Sustainable Development Goals • Sustainability Governance • Sustainability-linked Performance Incentives • Memberships and Associations Our Environmental, Social and Governance Pr...",
+                "source": "bright_data+pdf",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "sembcorp ar2023",
+                "url": "https://www.sembcorp.com/media/vhzjfn5u/sembcorp_ar2023.pdf",
+                "snippet": "Sembcorp Industries Annual Report 2023 Sembcorp is a leading renewables player in Asia. We are committed to transforming our portfolio from brown to green and driving energy transition, creating lasting value for our stakeholders. Driving Energy Transition Overview Group FY2023 Highlights 2 Growing Market Opportunities 4 Leveraging Strengths 6 Climate Roadma...",
+                "source": "bright_data+pdf",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "sustainability report",
+                "url": "https://www.sembcorp.com/media/nhlbsvgy/sustainability_report.pdf",
+                "snippet": "Sustainability Report Our Sustainability Framework​ 20 Our Approach to Sustainability​ 21 • Reporting Framework​ • Materiality ​ • Reporting Scope • Assurance • Supporting the Sustainable Development Goals • Sustainability Governance • Sustainability-linked Performance Incentives • Memberships and Associations​ Our Environmental, Social and Governance Priori...",
+                "source": "bright_data+pdf",
+                "sourceClass": "verified"
+            },
+            {
+                "title": "Sembcorp Industries",
+                "url": "https://ne-cdn.eurolandir.com/press-releases-attachments./4015966/Sembcorp-Industries_AR2025.pdf",
+                "snippet": "As a leading energy player and an established industrial and urban solutions provider in Asia, Sembcorp plays a key role in the transition.Read more",
+                "source": "bright_data_serp",
+                "sourceClass": "non_verified"
+            },
+            {
+                "title": "Sembcorp Industries Annual Report 2024",
+                "url": "https://media.sembcorp.com/data/cms/ar/ar2024/index.html",
+                "snippet": "Sustainability Report. Sembcorp has long held a strong commitment to sustainability, driven by our purpose to play our part in an inclusive energy transition.Read more",
+                "source": "bright_data_serp",
+                "sourceClass": "verified"
+            }
         ],
         "tool_results": [
             {
+                "name": "research_company_esg_news",
+                "status": "ok",
+                "summary": "Collected 8 company ESG/news references for: Sembcorp Industries",
+                "sourceCount": 8
+            },
+            {
                 "name": "web_search",
                 "status": "ok",
-                "summary": "Found Sembcorp's current sustainability report and climate action page.",
-                "sourceCount": 2,
+                "summary": "Searched web for: Sembcorp Industries sustainability report 2024 transition targets climate",
+                "sourceCount": 5
             },
             {
                 "name": "scrape_url",
                 "status": "ok",
-                "summary": "Extracted current capacity, emissions-intensity, and net-zero targets.",
-                "sourceCount": 2,
+                "summary": "Scraped https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+                "sourceCount": 1
             },
+            {
+                "name": "scrape_url",
+                "status": "ok",
+                "summary": "Scraped https://www.sembcorp.com/media/z2ypqfjj/sembcorp-ar25.pdf",
+                "sourceCount": 1
+            },
+            {
+                "name": "web_search",
+                "status": "ok",
+                "summary": "Searched web for: Sembcorp Industries net zero 2050 2030 emissions reduction target site:sembcorp.com",
+                "sourceCount": 5
+            },
+            {
+                "name": "scrape_url",
+                "status": "ok",
+                "summary": "Scraped https://www.sembcorp.com/om/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/",
+                "sourceCount": 1
+            },
+            {
+                "name": "scrape_url",
+                "status": "ok",
+                "summary": "Scraped https://www.sembcorp.com/driving-energy-transition/",
+                "sourceCount": 1
+            },
+            {
+                "name": "scrape_url",
+                "status": "ok",
+                "summary": "Scraped https://www.sembcorp.com/news-and-insights/news/2023/sembcorp-announces-2023-2028-strategic-plan-to-drive-energy-transition/",
+                "sourceCount": 1
+            },
+            {
+                "name": "get_validated_esg_evidence",
+                "status": "ok",
+                "summary": "Loaded 48 grouped claims and 24 sources for Sembcorp Industries.",
+                "sourceCount": 24
+            }
         ],
         "workflow_steps": [
             {
-                "label": "Searched the web",
+                "label": "Collected company ESG news",
                 "status": "ok",
-                "detail": "Located the latest first-party sustainability disclosures.",
-                "toolName": "web_search",
+                "detail": "Collected 8 company ESG/news references for: Sembcorp Industries",
+                "toolName": "research_company_esg_news"
             },
             {
-                "label": "Scraped source pages",
+                "label": "Searched web",
                 "status": "ok",
-                "detail": "Extracted transition targets and the latest material update.",
-                "toolName": "scrape_url",
+                "detail": "Searched web for: Sembcorp Industries sustainability report 2024 transition targets climate",
+                "toolName": "web_search"
             },
+            {
+                "label": "Scraped page",
+                "status": "ok",
+                "detail": "Scraped https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+                "toolName": "scrape_url"
+            },
+            {
+                "label": "Scraped page",
+                "status": "ok",
+                "detail": "Scraped https://www.sembcorp.com/media/z2ypqfjj/sembcorp-ar25.pdf",
+                "toolName": "scrape_url"
+            },
+            {
+                "label": "Searched web",
+                "status": "ok",
+                "detail": "Searched web for: Sembcorp Industries net zero 2050 2030 emissions reduction target site:sembcorp.com",
+                "toolName": "web_search"
+            },
+            {
+                "label": "Scraped page",
+                "status": "ok",
+                "detail": "Scraped https://www.sembcorp.com/om/driving-energy-transition/our-approach-to-sustainability/climate-action-plan/",
+                "toolName": "scrape_url"
+            },
+            {
+                "label": "Scraped page",
+                "status": "ok",
+                "detail": "Scraped https://www.sembcorp.com/driving-energy-transition/",
+                "toolName": "scrape_url"
+            },
+            {
+                "label": "Scraped page",
+                "status": "ok",
+                "detail": "Scraped https://www.sembcorp.com/news-and-insights/news/2023/sembcorp-announces-2023-2028-strategic-plan-to-drive-energy-transition/",
+                "toolName": "scrape_url"
+            },
+            {
+                "label": "Get Validated Esg Evidence",
+                "status": "ok",
+                "detail": "Loaded 48 grouped claims and 24 sources for Sembcorp Industries.",
+                "toolName": "get_validated_esg_evidence"
+            }
         ],
         "report": None,
     },

@@ -1787,7 +1787,10 @@ def build_langchain_tools(web_tools: WebTools) -> list[Any]:
         observed = [o for o in observations if o["verdict"] == "OBSERVED"]
         summary = (f"{name}: {len(observations)} asset(s) checked against Sentinel-2, "
                    f"{len(observed)} with construction observed.")
-        sources = [{"title": f"{o['asset']} — OpenStreetMap", "url": o["registry_url"]}
+        # `source` is required on AssistantSource; without it the whole response fails
+        # validation and the agent burns its recovery attempts on an unfixable error.
+        sources = [{"title": f"{o['asset']} — OpenStreetMap", "url": o["registry_url"],
+                    "source": "openstreetmap", "sourceClass": "verified"}
                    for o in observations if o.get("registry_url")]
         emit_workflow_step("Read satellite evidence", "ok", summary,
                            "get_satellite_verification")
