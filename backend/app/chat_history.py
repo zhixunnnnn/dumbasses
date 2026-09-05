@@ -39,78 +39,338 @@ LEGACY_SHOWCASE_SESSION_IDS = (
     "session-e295c3eafd7d4c94b9a79980394f99f1",
     "session-19f4821f248a4bdfa2b9ae8d456a24ef",
     "session-e7bf473f0704406f8d269d9fd8fb9940",
-    # retired: the report flow never returns, and its answer duplicated the
-    # evidence summary the prediction chat already shows.
-    "session-showcase-report",
+    # retired: replaced by the report chat.
+    "session-showcase-satellite",
 )
 
 SHOWCASE_CHATS: tuple[dict[str, Any], ...] = (
     {
-        "id": "session-showcase-satellite",
+        "id": "session-showcase-report",
         "age_minutes": 5,
-        "title": "Check Sembcorp's assets from orbit",
+        "title": "Generate a Sembcorp ESG investment report",
         "prompt": (
-            "Use satellite verification on Sembcorp Industries and list what "
-            "the imagery shows."
+            "Generate an investment-grade ESG report for Sembcorp Industries using "
+            "the current dashboard evidence and latest scraped disclosures."
         ),
         # Captured verbatim from the deployed agent answering this exact prompt.
         # Do not hand-edit: re-run the prompt and paste the new reply instead, so the
         # showcase stays a real transcript rather than a written-up impression of one.
-        "response": "**Of Sembcorp Industries' 5 assets checked via Sentinel-2 satellite imagery, only 1 shows observable construction — the Banyan Energy Storage System in Singapore. The remaining 4 assets were either not observed or inconclusive, which does not prove any claim false.**\n\n---\n\n### Asset-by-Asset Satellite Findings\n\n| Asset | Type | Verdict | Key Finding |\n|---|---|---|---|\n| **Sembcorp Banyan Energy Storage System** (Singapore) | Battery storage | **OBSERVED** | Vegetation cover fell by 0.65 more than the surrounding area between Dec 2019 and Mar 2023 — consistent with construction. |\n| **Asfordby B** (UK) | Battery storage | NOT OBSERVED | Vegetation cover barely moved (+0.01). No construction visible. |\n| **PLTS IKN** (Indonesia) | Solar | INCONCLUSIVE | No low-cloud Sentinel-2 scene available for the baseline year; cannot confirm or deny. |\n| **Sembcorp EfW Plant Sakra** (Singapore) | Waste-to-energy | NOT OBSERVED | Vegetation cover barely moved (-0.07). No construction visible. |\n| **Sembcorp Sakra Energy Storage System** (Singapore) | Battery storage | NOT OBSERVED | Water cover barely moved (+0.04). No construction visible. |\n\n---\n\n### Interpretation\n\n- **Banyan Energy Storage** is the only asset where satellite change-detection flagged physical ground disturbance consistent with construction. This supports the claim that Sembcorp built this battery system.\n- **NOT OBSERVED** verdicts for Asfordby B, EfW Plant Sakra, and Sakra Energy Storage mean the imagery did not detect ground-cover change. This could reflect phased construction, small footprint, cloud cover, or that the asset was built before the baseline date — **not** that the company misrepresented anything.\n- **PLTS IKN** is inconclusive due to insufficient usable imagery.\n\nYou can view the before/after satellite images for each asset via the detail URLs provided in the tool output.",
+        "response": "Here is the investment-grade ESG report for Sembcorp Industries (U96.SI).\n\n---\n\n# Sembcorp Industries — Investment-Grade ESG Report\n\n**Date:** August 2026 | **Sector:** Utilities | **Exchange:** SGX (U96.SI)\n\n---\n\n## Executive Summary\n\n**Sembcorp Industries earns a strong ESG Evidence Score of 80.0/100 from the app's dashboard, placing it in the FUTURE_LEADERS quadrant — a company with high ESG performance that the market has not yet fully priced in, supported by an MSCI AAA rating (as of March 2026) and a FTSE4Good Index constituent position.** The company's strategic transformation from a brown energy player to a leading Asian renewables platform is well underway, evidenced by major acquisitions (Alinta Energy A$6.5B, ReNew Solar S$246M), growing renewable PPAs, and a credible net-zero 2050 pathway. However, governance scores a weak 50/100, and the renewable-energy usage claim remains non-verified by independent sources, creating two watch items for investors.\n\n---\n\n## 1. App Dashboard ESG Score & Positioning\n\n| Metric | Value |\n|---|---|\n| **Evidence Score** | **80.0 / 100** |\n| Environmental Pillar | 80.0 |\n| Social Pillar | 100.0 |\n| Governance Pillar | 50.0 |\n| Confidence Level | 0.603 |\n| Quadrant | **FUTURE_LEADERS** |\n| Rater Consensus | 69.38 |\n| Rater Divergence | 51.25 (high dispersion) |\n| Underpriced Improver Signal | No |\n| Evidence Gap vs Price | +20.62 points |\n\n**Interpretation:** The app scores Sembcorp well above the rater consensus (80 vs 69), with a perfect Social pillar score offsetting a below-par Governance pillar. The high rater divergence (51.25) signals that external ESG raters disagree significantly on the company's profile. The FUTURE_LEADERS quadrant means the company's ESG strength is not yet reflected in its market price — a potential alpha signal for long-only ESG-integrated strategies.\n\n**MSCI Rating Estimate (Experimental):** The ML model forecasts a **likely hold at AA** for 2026, based on ratings persistence (insufficient panel history for a fitted model — 11 rows). This is consistent with the company's own disclosure of an **MSCI AAA rating** as of March 23, 2026 (verified from sembcorp.com). The model's baseline-only output means this should be treated as a directional hypothesis, not a precise prediction.\n\n---\n\n## 2. Environmental (E) — Score: 80/100\n\n### Climate Targets & Emissions\n\n- **Net-zero by 2050** target with an interim goal to **halve GHG emissions by 2030** from a 2010 baseline of 5.4m tCO2e (per company reports).\n- **2024 total operational GHG emissions:** 9,287,700 tCO2e (Scope 1, 2, and partial Scope 3), disclosed under GHG Protocol.\n- **Emissions trend:** Stable (per validated evidence engine), with 2 climate targets disclosed as of 2025.\n- **CDP Climate Change score:** B (last received; participated in revamped 2024 questionnaire with non-scoring response).\n\n### Renewable Energy Build-Out\n\n- **Alinta Energy acquisition (A$6.5B)** — landmark entry into Australian energy market, accelerating renewable growth (announced Dec 2025, EGM 2026).\n- **ReNew Sun Bright acquisition (S$246M)** — 100% ownership of Indian solar asset with PPA in Maharashtra (completed Dec 2025).\n- **Equinix PPAs** — dual solar + gas PPAs in Singapore, up to 18-year terms; Equinix's first renewables PPA in Singapore.\n- **Conditional approval** for renewable power import project from Peninsular Malaysia to Singapore (Aug 2026).\n- **Potential IPO** of Indian renewable unit Sembcorp Green Infra (under consideration).\n- **Offshore wind** exploration under consideration.\n- **Historical target:** Quadruple renewable capacity to 10GW by 2025 (per 2021 DBS research — non-verified claim).\n\n**Renewable-energy usage status:** Non-verified by independent sources. While 12 mentions of renewable energy appear in the evidence base, no verified third-party audit of actual renewable energy share in the generation mix was found. The emissions trend is stable, not declining — a falling emissions trend has not yet been independently confirmed.\n\n---\n\n## 3. Social (S) — Score: 100/100\n\nThe app's Social pillar registers a perfect score, reflecting:\n\n- **ISO 45001** Occupational Health and Safety certifications across 10+ operating subsidiaries (verified from company website, accurate as of March 2026).\n- **Integrated Urban Solutions** business providing water, waste-to-resource, and urban development — directly contributing to social infrastructure in Asia.\n- **MoU with FPT** (June 2026) exploring AI, digital infrastructure, and sustainable development across APAC — signals workforce upskilling and digital inclusion focus.\n- No material social controversies, labor disputes, or community opposition identified in the evidence base.\n\n---\n\n## 4. Governance (G) — Score: 50/100\n\nGovernance is the **weakest pillar** and a key watch item:\n\n- **Board governance** disclosures exist via SEC NPX filings (remuneration report, governance structure) and HKEX supply-chain governance references.\n- **Sustainability-linked performance incentives** are disclosed in the sustainability report framework.\n- **Whistleblowing policy** in place.\n- **Temasek backing** (majority shareholder) provides stability but also raises related-party governance questions.\n- The low G score (50) likely reflects limited board independence disclosures, potential concentration risk from Temasek ownership, and less granular governance metric reporting compared to peers.\n\n**Specific governance data points from filings:**\n- SEC filing (2023) references remuneration report approval and governance structure.\n- HKEX filing (2026) references supply-chain governance policies and board interlocks with Chinese entities.\n\n---\n\n## 5. External Ratings & Recognition (Verified from Company Website)\n\n| Rating Body | Score / Status | Date |\n|---|---|---|\n| **MSCI ESG Rating** |",
         "sources": [
             {
-                "title": "Asfordby B — OpenStreetMap",
-                "url": "https://www.openstreetmap.org/way/737276205",
-                "snippet": None,
-                "source": "openstreetmap",
+                "title": "Sembcorp",
+                "url": "https://sembcorp.com/",
+                "snippet": "Sembcorp Industries 1H2026 Results. August 07, 2026. Sembcorp Receives Conditional Approval for Renewable Power Import Project From Peninsular Malaysia to ...",
+                "source": "bright_data",
                 "sourceClass": "verified"
             },
             {
-                "title": "PLTS IKN — OpenStreetMap",
-                "url": "https://www.openstreetmap.org/way/1303917776",
-                "snippet": None,
-                "source": "openstreetmap",
-                "sourceClass": "verified"
+                "title": "Initial Report: Sembcorp Industries Ltd (U96.SI), 304% 5-yr Potential Upside (EIP, Girvin CHANG)",
+                "url": "https://nextgeninvestors.substack.com/p/initial-report-sembcorp-industries",
+                "snippet": "Initial Report: Sembcorp Industries Ltd (U96.SI), 304% 5-yr ... Its experience and capabilities in renewable energy, water management, and ...",
+                "source": "bright_data",
+                "sourceClass": "non_verified"
             },
             {
-                "title": "Sembcorp Banyan Energy Storage System — OpenStreetMap",
-                "url": "https://www.openstreetmap.org/way/1147254945",
-                "snippet": None,
-                "source": "openstreetmap",
-                "sourceClass": "verified"
+                "title": "https://facebook.com/RenewablesNowMedia/posts/singapores-sembcorp-industries-ltd-sgxu96-is-getting-ready-for-another-attempt-t/1669323428528015",
+                "url": "https://facebook.com/RenewablesNowMedia/posts/singapores-sembcorp-industries-ltd-sgxu96-is-getting-ready-for-another-attempt-t/1669323428528015",
+                "snippet": "Singapore's Sembcorp Industries Ltd (SGX:U96) is getting ready for another attempt to list its Indian renewable energy unit Sembcorp Green ...",
+                "source": "bright_data",
+                "sourceClass": "non_verified"
             },
             {
-                "title": "Sembcorp EfW Plant Sakra — OpenStreetMap",
-                "url": "https://www.openstreetmap.org/way/1384560210",
-                "snippet": None,
-                "source": "openstreetmap",
-                "sourceClass": "verified"
+                "title": "Sembcorp Industries - Climate Targets: Emissions Pathways, Scope Coverage &amp; Progress",
+                "url": "https://tracenable.com/company/sembcorp-industries/climate-targets",
+                "snippet": "As of 2025, Sembcorp Industries has set a target to reduce its operational greenhouse gas (GHG) emissions, specifically those from Scope 1 and Scope 2 sources.",
+                "source": "bright_data",
+                "sourceClass": "non_verified"
             },
             {
-                "title": "Sembcorp Sakra Energy Storage System — OpenStreetMap",
-                "url": "https://www.openstreetmap.org/way/1147254944",
-                "snippet": None,
-                "source": "openstreetmap",
-                "sourceClass": "verified"
+                "title": "Sembcorp Industries - Greenhouse Gas Emissions: Scope 1, 2 &amp; 3 Data",
+                "url": "https://tracenable.com/company/sembcorp-industries/ghg-emissions",
+                "snippet": "In 2024, the total operational greenhouse gas (GHG) emissions of Sembcorp Industries amounted to 9,287,700 metric tons of CO2 equivalent. This figure includes ...",
+                "source": "bright_data",
+                "sourceClass": "non_verified"
+            },
+            {
+                "title": "https://sec.gov/Archives/edgar/data/826686/000119312523221505/d513259dnpx.htm",
+                "url": "https://sec.gov/Archives/edgar/data/826686/000119312523221505/d513259dnpx.htm",
+                "snippet": "... Governance Structure 2.d Approve Remuneration Report For For Management 3 ... SEMBCORP INDUSTRIES LTD. Ticker: U96 Security ID: Y79711159 Meeting Date ...Read more",
+                "source": "bright_data",
+                "sourceClass": "non_verified"
+            },
+            {
+                "title": "Emerging Market Links + The Week Ahead (August 19, 2025)",
+                "url": "https://emergingmarketskeptic.substack.com/p/emerging-markets-week-august-19-2025",
+                "snippet": "Sembcorp Industries (SGX: U96 / FRA: SBOA / OTCMKTS: SCRPF), or SCI, is an energy and urban solutions provider with a balanced energy portfolio ...Read more",
+                "source": "bright_data",
+                "sourceClass": "non_verified"
+            },
+            {
+                "title": "Sembcorp to acquire India&#039;s ReNew solar unit to boost renewables portfolio | MarketScreener",
+                "url": "https://marketscreener.com/news/sembcorp-to-acquire-india-s-renew-solar-unit-to-boost-renewables-portfolio-ce7d5bd2d080f325",
+                "snippet": "Singapore's Temasek-backed Sembcorp Industries said on Wednesday its subsidiary has signed a share purchase agreement to acquire ReNew Pvt ...",
+                "source": "bright_data",
+                "sourceClass": "non_verified"
+            },
+            {
+                "title": "Sembcorp Industries (SGX:U96) - Stock Analysis - Simply Wall St",
+                "url": "https://simplywall.st/stocks/sg/utilities/sgx-u96/sembcorp-industries-shares",
+                "snippet": "U96: India Renewables M&A Pipeline Will Sustain Balanced Returns Into 2026. Analysts have adjusted their SGD price target for Sembcorp Industries slightly, ...Read more",
+                "source": "bright_data",
+                "sourceClass": "non_verified"
+            },
+            {
+                "title": "https://sharejunction.com/sharejunction/listMessage.htm?directAccessMessageID=2766850",
+                "url": "https://sharejunction.com/sharejunction/listMessage.htm?directAccessMessageID=2766850",
+                "snippet": "This figure reflects the absolute emissions (Scope 1 and Scope 2) associated with Temasek? ... Singapore Airlines (SIA), Sembcorp Industries U96 - ... Scope 3 ...",
+                "source": "bright_data",
+                "sourceClass": "non_verified"
             }
         ],
         "tool_results": [
             {
-                "name": "get_satellite_verification",
+                "name": "get_company_esg",
                 "status": "ok",
-                "summary": "Sembcorp Industries: 5 asset(s) checked against Sentinel-2, 1 with construction observed.",
-                "sourceCount": 5
+                "summary": "Sembcorp Industries: ESG evidence 80.0; MSCI rating estimate 2026 — likely hold to AA (baseline: ratings persistence (insufficient history for a fitted model — 11 panel rows)).",
+                "sourceCount": 0
+            },
+            {
+                "name": "get_validated_esg_evidence",
+                "status": "ok",
+                "summary": "Loaded 48 grouped claims and 24 sources for Sembcorp Industries.",
+                "sourceCount": 24
+            },
+            {
+                "name": "research_company_esg_news",
+                "status": "ok",
+                "summary": "Collected 10 company ESG/news references for: Sembcorp Industries",
+                "sourceCount": 10
+            },
+            {
+                "name": "research_esg_scoring",
+                "status": "ok",
+                "summary": "Collected ESG methodology and article references for: Sembcorp Industries",
+                "sourceCount": 4
+            },
+            {
+                "name": "scrape_url",
+                "status": "ok",
+                "summary": "Scraped https://www.sembcorp.com/driving-energy-transition/our-approach-to-sustainability/memberships-certifications-and-ratings/",
+                "sourceCount": 1
+            },
+            {
+                "name": "scrape_url",
+                "status": "ok",
+                "summary": "Scraped https://www.sembcorp.com/creating-shareholder-value/investing-in-sembcorp/esg/",
+                "sourceCount": 1
             }
         ],
         "workflow_steps": [
             {
-                "label": "Checked satellite imagery",
-                "status": "ok",
-                "detail": "Sembcorp Industries: 5 asset(s) checked against Sentinel-2, 1 with construction observed.",
-                "toolName": "get_satellite_verification"
+                "label": "Reading the ESG engine",
+                "status": "running",
+                "detail": "Loading our computed ESG score + forecast for Sembcorp Industries",
+                "toolName": "get_company_esg"
+            },
+            {
+                "label": "Reading validated evidence",
+                "status": "running",
+                "detail": "Loading cross-referenced sources for Sembcorp Industries",
+                "toolName": "get_validated_esg_evidence"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: \"Sembcorp Industries\" sustainability report 2024 filetype:pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: \"Sembcorp Industries\" ESG report filetype:pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: \"Sembcorp Industries\" ESG news sustainability controversy 2025 2026",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: \"Sembcorp Industries\" sustainability report ESG climate emissions governance",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: \"Sembcorp Industries\" ESG controversy climate governance news",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: \"Sembcorp Industries\" net zero emissions sustainability targets",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: Sembcorp Industries ESG rating news controversy sustainability article",
+                "toolName": "research_esg_scoring"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: Sembcorp Industries sustainability report ESG score analysis",
+                "toolName": "research_esg_scoring"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: ESG score methodology ESG scoring methodology",
+                "toolName": "research_esg_scoring"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: how ESG ratings are calculated methodology sector materiality controversies",
+                "toolName": "research_esg_scoring"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: MSCI ESG ratings methodology",
+                "toolName": "research_esg_scoring"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: S&P Global ESG Scores methodology",
+                "toolName": "research_esg_scoring"
+            },
+            {
+                "label": "Searching the web",
+                "status": "running",
+                "detail": "Searching: Sustainalytics ESG Risk Ratings methodology",
+                "toolName": "research_esg_scoring"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading www.sembcorp.com — https://www.sembcorp.com/media/z2ypqfjj/sembcorp-ar25.pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading media.sembcorp.com — https://media.sembcorp.com/data/cms/ar/ar2024/assets/pdf/Sembcorp_AR2024_SinglePages.pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading media.sembcorp.com — https://media.sembcorp.com/data/cms/ar/ar2025/assets/pdf/Consolidated_Financial_Statements.pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading media.sembcorp.com — https://media.sembcorp.com/data/cms/ar/ar2025/assets/pdf/Directors_Statement.pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading www.temasek.com.sg — https://www.temasek.com.sg/content/dam/temasek-corporate/sustainability/2024/temasek-sustainability-report-2024.pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading links.sgx.com — https://links.sgx.com/1.0.0/corporate-announcements/E3OPH06R1G42R3UK/838159_Sembcorp_Annual%20Report_2024.pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading www.sembcorp.com — https://www.sembcorp.com/media/vhzjfn5u/sembcorp_ar2023.pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading www.temasek.com.sg — https://www.temasek.com.sg/content/dam/temasek-corporate/sustainability/2026/temasek-sustainability-report-2026.pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading www.sembcorp.com — https://www.sembcorp.com/media/jc3bwis3/sci-sustainability-report-2024.pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading www.sembcorp.com — https://www.sembcorp.com/media/nhlbsvgy/sustainability_report.pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading bschool.nus.edu.sg — https://bschool.nus.edu.sg/cgs/wp-content/uploads/sites/145/2026/03/Cases-in-Sustainability_System-Level-and-Structure-Based-Approaches_2026-Mar.pdf",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading media.sembcorp.com — https://media.sembcorp.com/data/cms/ar/ar2025/index.html",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Read failed",
+                "status": "error",
+                "detail": "media.sembcorp.com: TimeoutError",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading source",
+                "status": "running",
+                "detail": "Reading www.sustainabilityreports.com — https://www.sustainabilityreports.com/sembcorp-industries",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Read failed",
+                "status": "error",
+                "detail": "www.temasek.com.sg: TimeoutError",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Read failed",
+                "status": "error",
+                "detail": "bschool.nus.edu.sg: TimeoutError",
+                "toolName": "research_company_esg_news"
+            },
+            {
+                "label": "Reading page",
+                "status": "running",
+                "detail": "Reading https://www.sembcorp.com/driving-energy-transition/our-approach-to-sustainability/memberships-certifications-and-ratings/",
+                "toolName": "scrape_url"
+            },
+            {
+                "label": "Reading page",
+                "status": "running",
+                "detail": "Reading https://www.sembcorp.com/creating-shareholder-value/investing-in-sembcorp/esg/",
+                "toolName": "scrape_url"
             }
         ],
-        "report": None,
+        "report": {
+            "title": "Sembcorp Industries — Investment-Grade ESG Report",
+            "markdown": "Here is the investment-grade ESG report for Sembcorp Industries (U96.SI).\n\n---\n\n# Sembcorp Industries — Investment-Grade ESG Report\n\n**Date:** August 2026 | **Sector:** Utilities | **Exchange:** SGX (U96.SI)\n\n---\n\n## Executive Summary\n\n**Sembcorp Industries earns a strong ESG Evidence Score of 80.0/100 from the app's dashboard, placing it in the FUTURE_LEADERS quadrant — a company with high ESG performance that the market has not yet fully priced in, supported by an MSCI AAA rating (as of March 2026) and a FTSE4Good Index constituent position.** The company's strategic transformation from a brown energy player to a leading Asian renewables platform is well underway, evidenced by major acquisitions (Alinta Energy A$6.5B, ReNew Solar S$246M), growing renewable PPAs, and a credible net-zero 2050 pathway. However, governance scores a weak 50/100, and the renewable-energy usage claim remains non-verified by independent sources, creating two watch items for investors.\n\n---\n\n## 1. App Dashboard ESG Score & Positioning\n\n| Metric | Value |\n|---|---|\n| **Evidence Score** | **80.0 / 100** |\n| Environmental Pillar | 80.0 |\n| Social Pillar | 100.0 |\n| Governance Pillar | 50.0 |\n| Confidence Level | 0.603 |\n| Quadrant | **FUTURE_LEADERS** |\n| Rater Consensus | 69.38 |\n| Rater Divergence | 51.25 (high dispersion) |\n| Underpriced Improver Signal | No |\n| Evidence Gap vs Price | +20.62 points |\n\n**Interpretation:** The app scores Sembcorp well above the rater consensus (80 vs 69), with a perfect Social pillar score offsetting a below-par Governance pillar. The high rater divergence (51.25) signals that external ESG raters disagree significantly on the company's profile. The FUTURE_LEADERS quadrant means the company's ESG strength is not yet reflected in its market price — a potential alpha signal for long-only ESG-integrated strategies.\n\n**MSCI Rating Estimate (Experimental):** The ML model forecasts a **likely hold at AA** for 2026, based on ratings persistence (insufficient panel history for a fitted model — 11 rows). This is consistent with the company's own disclosure of an **MSCI AAA rating** as of March 23, 2026 (verified from sembcorp.com). The model's baseline-only output means this should be treated as a directional hypothesis, not a precise prediction.\n\n---\n\n## 2. Environmental (E) — Score: 80/100\n\n### Climate Targets & Emissions\n\n- **Net-zero by 2050** target with an interim goal to **halve GHG emissions by 2030** from a 2010 baseline of 5.4m tCO2e (per company reports).\n- **2024 total operational GHG emissions:** 9,287,700 tCO2e (Scope 1, 2, and partial Scope 3), disclosed under GHG Protocol.\n- **Emissions trend:** Stable (per validated evidence engine), with 2 climate targets disclosed as of 2025.\n- **CDP Climate Change score:** B (last received; participated in revamped 2024 questionnaire with non-scoring response).\n\n### Renewable Energy Build-Out\n\n- **Alinta Energy acquisition (A$6.5B)** — landmark entry into Australian energy market, accelerating renewable growth (announced Dec 2025, EGM 2026).\n- **ReNew Sun Bright acquisition (S$246M)** — 100% ownership of Indian solar asset with PPA in Maharashtra (completed Dec 2025).\n- **Equinix PPAs** — dual solar + gas PPAs in Singapore, up to 18-year terms; Equinix's first renewables PPA in Singapore.\n- **Conditional approval** for renewable power import project from Peninsular Malaysia to Singapore (Aug 2026).\n- **Potential IPO** of Indian renewable unit Sembcorp Green Infra (under consideration).\n- **Offshore wind** exploration under consideration.\n- **Historical target:** Quadruple renewable capacity to 10GW by 2025 (per 2021 DBS research — non-verified claim).\n\n**Renewable-energy usage status:** Non-verified by independent sources. While 12 mentions of renewable energy appear in the evidence base, no verified third-party audit of actual renewable energy share in the generation mix was found. The emissions trend is stable, not declining — a falling emissions trend has not yet been independently confirmed.\n\n---\n\n## 3. Social (S) — Score: 100/100\n\nThe app's Social pillar registers a perfect score, reflecting:\n\n- **ISO 45001** Occupational Health and Safety certifications across 10+ operating subsidiaries (verified from company website, accurate as of March 2026).\n- **Integrated Urban Solutions** business providing water, waste-to-resource, and urban development — directly contributing to social infrastructure in Asia.\n- **MoU with FPT** (June 2026) exploring AI, digital infrastructure, and sustainable development across APAC — signals workforce upskilling and digital inclusion focus.\n- No material social controversies, labor disputes, or community opposition identified in the evidence base.\n\n---\n\n## 4. Governance (G) — Score: 50/100\n\nGovernance is the **weakest pillar** and a key watch item:\n\n- **Board governance** disclosures exist via SEC NPX filings (remuneration report, governance structure) and HKEX supply-chain governance references.\n- **Sustainability-linked performance incentives** are disclosed in the sustainability report framework.\n- **Whistleblowing policy** in place.\n- **Temasek backing** (majority shareholder) provides stability but also raises related-party governance questions.\n- The low G score (50) likely reflects limited board independence disclosures, potential concentration risk from Temasek ownership, and less granular governance metric reporting compared to peers.\n\n**Specific governance data points from filings:**\n- SEC filing (2023) references remuneration report approval and governance structure.\n- HKEX filing (2026) references supply-chain governance policies and board interlocks with Chinese entities.\n\n---\n\n## 5. External Ratings & Recognition (Verified from Company Website)\n\n| Rating Body | Score / Status | Date |\n|---|---|---|\n| **MSCI ESG Rating** |",
+            "generatedAt": "2026-09-05T03:16:29.585461+00:00"
+        },
     },
     {
         "id": "session-showcase-prediction",
