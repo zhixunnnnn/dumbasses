@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { api, useApi } from "../../lib/api";
+import { api, useCachedApi } from "../../lib/api";
 import { useNavigation } from "../../navigation/NavigationContext";
 import MomentumMatrix from "./MomentumMatrix";
 import { BriefingFeed, BriefingOverview } from "./MondayBriefing";
@@ -12,10 +12,10 @@ import { usePublishAssistantPageContext } from "../../../components/chat/PageCon
 
 export default function DashboardPage() {
   const { openCompany } = useNavigation();
-  const companies = useApi(api.companies, []);
-  const matrix = useApi(api.matrix, []);
-  const news = useApi(api.news, []);
-  const briefing = useApi(api.briefing, []);
+  const companies = useCachedApi("companies", api.companies, []);
+  const matrix = useCachedApi("matrix", api.matrix, []);
+  const news = useCachedApi("news", api.news, []);
+  const briefing = useCachedApi("dashboard-briefing", api.briefing, []);
   const [filters, setFilters] = useState<DashFilters>(defaultDashFilters);
 
   const rows = useMemo(() => companies.data ?? [], [companies.data]);

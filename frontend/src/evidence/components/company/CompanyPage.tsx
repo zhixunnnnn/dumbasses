@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Activity, ArrowLeft, Check, Leaf, Minus, X } from "lucide-react";
-import { api, useApi } from "../../lib/api";
+import { api, useCachedApi } from "../../lib/api";
 import type { TraceNode } from "../../types";
 import { na, PILLAR_COLOR } from "../../lib/ui";
 import ProvenanceBadge from "../common/ProvenanceBadge";
@@ -41,7 +41,7 @@ function Leg({ ok, label }: { ok: boolean | null; label: string }) {
 
 export default function CompanyPage({ id }: { id: string }) {
   const { goBack } = useNavigation();
-  const { data, loading, error } = useApi(() => api.company(id), [id]);
+  const { data, loading, error } = useCachedApi(`company:${id}`, () => api.company(id), [id]);
   const pageContext = useMemo(() => data ? ({
     route: "evidenceCompany",
     title: `${data.company.name} ESG evidence profile`,
